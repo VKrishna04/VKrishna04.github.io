@@ -1,0 +1,133 @@
+/* Custom Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+    background: #0a0a0a !important;
+    color: #ffffff !important;
+    line-height: 1.6 !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #c770f0 0%, #7c3aed 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c770f0;
+}
+
+/* Selection */
+::selection {
+    background: #c770f0;
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: #c770f0;
+    color: #ffffff;
+}
+
+/* Custom Component Classes */
+@layer components {
+    .btn-primary {
+        @apply bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-1;
+    }
+
+    .btn-secondary {
+        @apply border-2 border-primary-500 text-primary-500 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-primary-500 hover:text-white hover:-translate-y-1;
+    }
+
+    .card-glass {
+        @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:bg-white/10 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10;
+    }
+
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent;
+    }
+
+    .section-padding {
+        @apply py-20 px-4 sm:px-6 lg:px-8;
+    }
+}
+
+/* Custom Animations for Performance */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in-up {
+    animation: slideInUp 0.8s ease-out forwards;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-fade-in,
+    .animate-slide-in-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
