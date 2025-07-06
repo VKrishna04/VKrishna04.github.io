@@ -1,10 +1,31 @@
 {
-  "name": "vkrishna04",
-  "private": true,
+	"name": "vkrishna04.github.io",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
+	"homepage": "https://vkrishna04.github.io",
+	"description": "Personal portfolio website showcasing skills, projects, and experiences.",
+	"keywords": [
+		"portfolio",
+		"personal website",
+		"react",
+		"vite",
+		"tailwindcss"
+	],
+	"author": "VKrishna04",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/VKrishna04/VKrishna04.github.io"
+	},
+	"bugs": {
+		"url": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"main": "dist/index.js",
+	"browser": "dist/index.js",
+"scripts": {
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -32,8 +53,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+		"react-router-dom": "^6.23.0",
     "@vitejs/plugin-react": "^4.5.2",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
