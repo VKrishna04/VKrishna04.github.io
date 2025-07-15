@@ -160,15 +160,14 @@ const Home = () => {
 
 				{/* Name with Gradient */}
 				<motion.h1
-					className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+					className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text"
 					variants={fadeInUp}
 					style={{
-						background:
+						backgroundImage:
 							settings.home?.nameGradient ||
 							"linear-gradient(to right, #c770f0, #ec4899, #ef4444)",
-						WebkitBackgroundClip: "text",
-						WebkitTextFillColor: "transparent",
-						backgroundClip: "text",
+						backgroundSize: "100%",
+						backgroundRepeat: "no-repeat",
 					}}
 				>
 					{settings.home?.name || settings.display?.officialName || "Your Name"}

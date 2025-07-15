@@ -1,10 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
 	FunnelIcon,
 	MagnifyingGlassIcon,
 	AdjustmentsHorizontalIcon,
+	StarIcon,
+	EyeIcon,
+	CodeBracketIcon,
+	ArrowTopRightOnSquareIcon,
+	CalendarIcon,
 } from "@heroicons/react/24/outline";
 import {
 	FaJs,
@@ -17,6 +22,104 @@ import {
 	FaRust,
 	FaHtml5,
 	FaCss3Alt,
+	FaGithub,
+	FaNodeJs,
+	FaLock,
+	FaUserShield,
+	FaUsers,
+	FaSignInAlt,
+	FaTicketAlt,
+	FaParking,
+	FaDesktop,
+	FaExclamationTriangle,
+	FaEnvelopeOpenText,
+	FaKey,
+	FaImage,
+	FaBrain,
+	FaVideo,
+	FaSmile,
+	FaMeh,
+	FaWaveSquare,
+	FaHandsHelping,
+	FaCamera,
+	FaUserFriends,
+	FaSmileBeam,
+	FaRobot,
+	FaLink,
+	FaBitcoin,
+	FaCube,
+	FaNetworkWired,
+	FaHive,
+	FaSignature,
+	FaPlug,
+	FaShareAlt,
+	FaDatabase,
+	FaGlobe,
+	FaBoxOpen,
+	FaEdit,
+	FaClock,
+	FaTerminal,
+	FaLaptopCode,
+	FaUserGraduate,
+	FaUndo,
+	FaBook,
+	FaUserSecret,
+	FaFileCode,
+	FaMemory,
+	FaFileExport,
+	FaCogs,
+	FaUnlockAlt,
+	FaUserLock,
+	FaBookOpen,
+	FaTachometerAlt,
+	FaFileArchive,
+	FaFileSignature,
+	FaHammer,
+	FaCode,
+	FaSave,
+	FaFlag,
+	FaCodeBranch,
+	FaLightbulb,
+	FaUndoAlt,
+	FaStream,
+	FaChrome,
+	FaSpider,
+	FaFileDownload,
+	FaLanguage,
+	FaChalkboardTeacher,
+	FaTasks,
+	FaQuestionCircle,
+	FaUserClock,
+	FaSchool,
+	FaDraftingCompass,
+	FaPlusSquare,
+	FaWrench,
+	FaMobileAlt,
+	FaApple,
+	FaAndroid,
+	FaBell,
+	FaMapMarkerAlt,
+	FaMapMarkedAlt,
+	FaMap,
+	FaRegCommentDots,
+	FaComments,
+	FaCog,
+	FaMobile,
+	FaUserCircle,
+	FaUser,
+	FaPaintBrush,
+	FaMoon,
+	FaBriefcase,
+	FaSync,
+	FaTruckLoading,
+	FaPlayCircle,
+	FaCloudUploadAlt,
+	FaTools,
+	FaBox,
+	FaCheckCircle,
+	FaRocket,
+	FaRandom,
+	FaSyncAlt,
 } from "react-icons/fa";
 import {
 	SiTypescript,
@@ -27,35 +130,298 @@ import {
 	SiC,
 	SiRuby,
 	SiShell,
+	SiTailwindcss,
+	SiMongodb,
+	SiNextdotjs,
+	SiExpress,
+	SiPostgresql,
+	SiRedis,
+	SiStripe,
+	SiVuedotjs,
+	SiJavascript,
+	SiSocketdotio,
+	SiPrisma,
+	SiMarkdown,
+	SiFramer,
+	SiVite,
+	SiGithub,
 } from "react-icons/si";
-import GitHubRepoCard from "../components/GitHubRepoCard/GitHubRepoCard.jsx.backup";
+import ProjectCard from "../components/ProjectCard/ProjectCard";
 import useGitHubRepos from "../hooks/useGitHubRepos";
 
 const Projects = () => {
-	const { repos, loading, error, getSettings } = useGitHubRepos();
+	const { repos, loading, error } = useGitHubRepos();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedLanguages, setSelectedLanguages] = useState([]);
 	const [sortBy, setSortBy] = useState("updated");
 	const [showFilters, setShowFilters] = useState(false);
-	const settings = getSettings();
+	const [settings, setSettings] = useState({});
+
+	// Fetch settings
+	useEffect(() => {
+		fetch("/settings.json")
+			.then((response) => response.json())
+			.then((data) => setSettings(data))
+			.catch((error) => console.warn("Could not fetch settings:", error));
+	}, []);
+
+	// Determine which projects to use based on mode
+	const projectsData = useMemo(() => {
+		const mode = settings.projects?.mode || "github";
+
+		if (mode === "static") {
+			// Use static projects from settings
+			const staticProjects = settings.projects?.staticProjects || [];
+			return staticProjects;
+		} else if (mode === "hybrid") {
+			// For hybrid mode, combine both sources or fallback to static if repos are empty/error
+			if (repos && repos.length > 0) {
+				// Combine GitHub repos with static projects
+				const staticProjects = settings.projects?.staticProjects || [];
+				const combined = [...repos, ...staticProjects];
+				return combined;
+			} else {
+				// Fallback to static projects if GitHub repos are not available
+				const staticProjects = settings.projects?.staticProjects || [];
+				return staticProjects;
+			}
+		} else {
+			// Use GitHub repos only
+			const githubRepos = repos || [];
+			return githubRepos;
+		}
+	}, [settings.projects, repos]);
+	// Convert static projects to match repo format for consistency
+	const normalizedProjects = useMemo(() => {
+		if (!projectsData || projectsData.length === 0) {
+			return [];
+		}
+
+		return projectsData.map((project) => {
+			// Check if this is a static project (has id as string and other static properties)
+			const isStaticProject =
+				project.id &&
+				(typeof project.id === "string" || project.category || project.status);
+
+			if (isStaticProject) {
+				const normalized = {
+					id: project.id,
+					name: project.name,
+					description: project.description,
+					html_url: project.githubUrl,
+					homepage: project.liveUrl || project.demoUrl,
+					topics: project.tags || project.technologies || [],
+					language: project.technologies?.[0] || project.category || "Unknown",
+					languages:
+						project.technologies?.map((tech) => ({
+							name: tech,
+							// Add icon and color if available from mapping - will be computed later
+							icon: null,
+							color: null,
+						})) || [],
+					stargazers_count: project.stats?.stars || 0,
+					forks_count: project.stats?.forks || 0,
+					watchers_count: project.stats?.watchers || 0,
+					open_issues_count: project.stats?.issues || 0,
+					updated_at:
+						project.endDate || project.startDate || new Date().toISOString(),
+					created_at: project.startDate || new Date().toISOString(),
+					// Additional static project fields
+					category: project.category,
+					featured: project.featured,
+					status: project.status,
+					startDate: project.startDate,
+					endDate: project.endDate,
+					liveUrl: project.liveUrl,
+					demoUrl: project.demoUrl,
+					documentationUrl: project.documentationUrl,
+					imageUrl: project.imageUrl,
+					highlights: project.highlights || [],
+					isStatic: true,
+				};
+				return normalized;
+			} else {
+				// This is a GitHub repo
+				const normalized = {
+					...project,
+					isStatic: false,
+				};
+				return normalized;
+			}
+		});
+	}, [projectsData]);
 
 	// Get unique languages from repositories
 	const availableLanguages = useMemo(() => {
 		const languages = new Set();
-		repos.forEach((repo) => {
-			if (repo.language) {
-				languages.add(repo.language);
+		normalizedProjects.forEach((project) => {
+			if (project.language) {
+				languages.add(project.language);
+			}
+			// For static projects, also add all technologies
+			if (project.isStatic && project.languages) {
+				project.languages.forEach((lang) => {
+					if (lang.name) languages.add(lang.name);
+				});
 			}
 		});
 		return Array.from(languages).sort();
-	}, [repos]);
+	}, [normalizedProjects]);
 
-	// Language icon mapping
+	// Language icon mapping - comprehensive version from ProjectsStatic.jsx
 	const getLanguageIcon = (language) => {
 		const iconMap = {
-			JavaScript: FaJs,
+			React: FaReact,
+			"Node.js": FaNodeJs,
+			MongoDB: SiMongodb,
+			Stripe: SiStripe,
+			JWT: FaKey,
+			"Tailwind CSS": SiTailwindcss,
+			"Vue.js": SiVuedotjs,
+			"Express.js": SiExpress,
+			PostgreSQL: SiPostgresql,
+			"Socket.io": SiSocketdotio,
+			Redis: SiRedis,
+			JavaScript: SiJavascript,
 			TypeScript: SiTypescript,
+			"Next.js": SiNextdotjs,
+			Prisma: SiPrisma,
+			Markdown: SiMarkdown,
+			Vite: SiVite,
+			"Framer Motion": SiFramer,
+			"GitHub Pages": SiGithub,
 			Python: FaPython,
+			HTML: FaHtml5,
+			CSS: FaCss3Alt,
+			"Chart.js": FaJs,
+			"OpenWeather API": FaJs,
+			Geolocation: FaJs,
+			django: FaPython,
+			streamlit: FaPython,
+			flask: FaPython,
+			python: FaPython,
+			"pure-python": FaPython,
+			"access-control": FaLock,
+			"role-based-access-control": FaUserShield,
+			"user-management": FaUsers,
+			"login-system": FaSignInAlt,
+			"ticket-management": FaTicketAlt,
+			"parking-management": FaParking,
+			"user-interface": FaDesktop,
+			"breach-check": FaExclamationTriangle,
+			"email-phishing": FaEnvelopeOpenText,
+			"password-safety": FaKey,
+			"unsplash-api": FaImage,
+			"machine-learning": FaBrain,
+			"deep-learning": FaBrain,
+			"computer-vision": FaVideo,
+			"facial-recognition": FaSmile,
+			"emotion-detection": FaMeh,
+			"real-time-detection": FaWaveSquare,
+			mediapipe: FaHandsHelping,
+			opencv: FaCamera,
+			"human-computer-interaction": FaUserFriends,
+			"facial-landmarks": FaSmileBeam,
+			ai: FaRobot,
+			blockchain: FaLink,
+			cryptocurrency: FaBitcoin,
+			dapp: FaCube,
+			decentralized: FaNetworkWired,
+			"hive-blockchain": FaHive,
+			hivesigner: FaSignature,
+			keychain: FaKey,
+			"restful-api": FaPlug,
+			"social-media": FaShareAlt,
+			sqlite: FaDatabase,
+			"web-application": FaGlobe,
+			caching: FaBoxOpen,
+			"content-platform": FaEdit,
+			"real-time": FaClock,
+			"command-line-tool": FaTerminal,
+			"cross-platform": FaLaptopCode,
+			"cybersecurity-education": FaUserGraduate,
+			"data-recovery": FaUndo,
+			"dictionary-attack": FaBook,
+			"ethical-hacking": FaUserSecret,
+			"file-processing": FaFileCode,
+			"memory-efficient": FaMemory,
+			"multi-format-support": FaFileExport,
+			multithreading: FaCogs,
+			"password-analysis": FaUnlockAlt,
+			"password-cracking": FaUserLock,
+			"password-dictionary": FaBookOpen,
+			"performance-optimization": FaTachometerAlt,
+			"zip-cracker": FaFileArchive,
+			"archive-extraction": FaFileArchive,
+			"archive-password-recovery": FaFileSignature,
+			"brute-force": FaHammer,
+			"vscode-extension": FaCode,
+			backup: FaSave,
+			checkpoint: FaFlag,
+			develo: FaCodeBranch,
+			productivity: FaLightbulb,
+			restore: FaUndoAlt,
+			"save-state": FaSave,
+			timeline: FaStream,
+			vscode: FaCode,
+			"browser-extension": FaChrome,
+			"web-scraping": FaSpider,
+			"data-extraction": FaFileDownload,
+			"content-translation": FaLanguage,
+			"ai-powered": FaRobot,
+			"natural-language-processing": FaLanguage,
+			"llm-api": FaRobot,
+			"interactive-learning": FaChalkboardTeacher,
+			"progress-tracking": FaTasks,
+			"video-tutorials": FaVideo,
+			quizzes: FaQuestionCircle,
+			"self-paced-learning": FaUserClock,
+			"educational-platform": FaSchool,
+			"code-scaffolding": FaDraftingCompass,
+			"project-templates": FaFileCode,
+			"developer-tools": FaTools,
+			"build-automation": FaCogs,
+			"project-generation": FaPlusSquare,
+			"yeoman-generator": FaPlusSquare,
+			"cli-app": FaTerminal,
+			"template-engine": FaCode,
+			"dynamic-content": FaRandom,
+			"code-generation": FaCode,
+			"project-customization": FaWrench,
+			"command-line-interface": FaTerminal,
+			"react-native": FaReact,
+			"mobile-app": FaMobileAlt,
+			"ios-app": FaApple,
+			"android-app": FaAndroid,
+			"push-notifications": FaBell,
+			"location-based-services": FaMapMarkerAlt,
+			"live-tracking": FaMapMarkedAlt,
+			"google-maps-api": FaMap,
+			"socket-io": FaRegCommentDots,
+			"real-time-communication": FaComments,
+			"background-services": FaCog,
+			"mobile-development": FaMobile,
+			"cross-platform-development": FaMobileAlt,
+			"portfolio-website": FaUserCircle,
+			"personal-website": FaUser,
+			"web-development": FaLaptopCode,
+			"front-end-development": FaPaintBrush,
+			"responsive-design": FaMobileAlt,
+			"dark-mode": FaMoon,
+			"github-api": FaGithub,
+			"project-showcase": FaBriefcase,
+			"dynamic-portfolio": FaSync,
+			"ci-cd": FaTruckLoading,
+			"github-actions": FaPlayCircle,
+			"automated-workflows": FaRobot,
+			"continuous-integration": FaSyncAlt,
+			"continuous-deployment": FaCloudUploadAlt,
+			"devops-tools": FaTools,
+			"workflow-automation": FaCogs,
+			"repository-management": FaBox,
+			"code-quality": FaCheckCircle,
+			"release-automation": FaRocket,
+			// Basic programming languages
 			Java: FaJava,
 			PHP: FaPhp,
 			Go: SiGo,
@@ -63,60 +429,211 @@ const Projects = () => {
 			Swift: FaSwift,
 			Kotlin: SiKotlin,
 			Dart: SiDart,
-			HTML: FaHtml5,
-			CSS: FaCss3Alt,
 			"C++": SiCplusplus,
 			C: SiC,
 			Ruby: SiRuby,
 			Shell: SiShell,
 			Vue: FaVuejs,
-			React: FaReact,
 		};
 
-		return iconMap[language];
+		return iconMap[language] || FaJs;
 	};
 
 	const getLanguageColor = (language) => {
-		const colors = {
+		const colorMap = {
+			React: "#61dafb",
+			"Node.js": "#339933",
+			MongoDB: "#47A248",
+			Stripe: "#635bff",
+			JWT: "#000000",
+			"Tailwind CSS": "#06b6d4",
+			"Vue.js": "#4FC08D",
+			"Express.js": "#000000",
+			PostgreSQL: "#336791",
+			"Socket.io": "#010101",
+			Redis: "#DC382D",
 			JavaScript: "#f1e05a",
 			TypeScript: "#2b7489",
+			"Next.js": "#000000",
+			Prisma: "#2D3748",
+			Markdown: "#083fa1",
+			Vite: "#646CFF",
+			"Framer Motion": "#0055FF",
+			"GitHub Pages": "#222",
 			Python: "#3572a5",
 			HTML: "#e34c26",
 			CSS: "#563d7c",
+			"Chart.js": "#ff6384",
+			"OpenWeather API": "#f1e05a",
+			Geolocation: "#f1e05a",
+			django: "#092e20",
+			streamlit: "#ff4b4b",
+			flask: "#000000",
+			python: "#3572a5",
+			"pure-python": "#3572a5",
+			"access-control": "#f0ad4e",
+			"role-based-access-control": "#5bc0de",
+			"user-management": "#5cb85c",
+			"login-system": "#5bc0de",
+			"ticket-management": "#f0ad4e",
+			"parking-management": "#5cb85c",
+			"user-interface": "#5bc0de",
+			"breach-check": "#d9534f",
+			"email-phishing": "#f0ad4e",
+			"password-safety": "#5cb85c",
+			"unsplash-api": "#000000",
+			"machine-learning": "#f0ad4e",
+			"deep-learning": "#f0ad4e",
+			"computer-vision": "#5bc0de",
+			"facial-recognition": "#5cb85c",
+			"emotion-detection": "#f0ad4e",
+			"real-time-detection": "#d9534f",
+			mediapipe: "#007bff",
+			opencv: "#5cb85c",
+			"human-computer-interaction": "#5bc0de",
+			"facial-landmarks": "#f0ad4e",
+			ai: "#d9534f",
+			blockchain: "#f0ad4e",
+			cryptocurrency: "#f7931a",
+			dapp: "#5bc0de",
+			decentralized: "#5cb85c",
+			"hive-blockchain": "#e31337",
+			hivesigner: "#007bff",
+			keychain: "#f0ad4e",
+			"restful-api": "#5bc0de",
+			"social-media": "#1da1f2",
+			sqlite: "#003b57",
+			"web-application": "#5cb85c",
+			caching: "#f0ad4e",
+			"content-platform": "#5bc0de",
+			"real-time": "#d9534f",
+			"command-line-tool": "#000000",
+			"cross-platform": "#5cb85c",
+			"cybersecurity-education": "#f0ad4e",
+			"data-recovery": "#5bc0de",
+			"dictionary-attack": "#d9534f",
+			"ethical-hacking": "#000000",
+			"file-processing": "#5cb85c",
+			"file-security": "#f0ad4e",
+			"memory-efficient": "#5bc0de",
+			"multi-format-support": "#d9534f",
+			multithreading: "#007bff",
+			"password-analysis": "#5cb85c",
+			"password-cracking": "#d9534f",
+			"password-dictionary": "#f0ad4e",
+			"performance-optimization": "#5cb85c",
+			"zip-cracker": "#d9534f",
+			"archive-extraction": "#f0ad4e",
+			"archive-password-recovery": "#5bc0de",
+			"brute-force": "#d9534f",
+			"vscode-extension": "#007acc",
+			backup: "#5cb85c",
+			checkpoint: "#f0ad4e",
+			develo: "#5bc0de",
+			productivity: "#5cb85c",
+			restore: "#f0ad4e",
+			"save-state": "#5cb85c",
+			timeline: "#5bc0de",
+			vscode: "#007acc",
+			"browser-extension": "#4285f4",
+			"web-scraping": "#f0ad4e",
+			"data-extraction": "#5bc0de",
+			"content-translation": "#5cb85c",
+			"ai-powered": "#d9534f",
+			"natural-language-processing": "#f0ad4e",
+			"llm-api": "#d9534f",
+			"interactive-learning": "#5bc0de",
+			"progress-tracking": "#5cb85c",
+			"video-tutorials": "#d9534f",
+			quizzes: "#f0ad4e",
+			"self-paced-learning": "#5cb85c",
+			"educational-platform": "#5bc0de",
+			"code-scaffolding": "#f0ad4e",
+			"project-templates": "#5bc0de",
+			"developer-tools": "#5cb85c",
+			"build-automation": "#d9534f",
+			"project-generation": "#f0ad4e",
+			"yeoman-generator": "#f0ad4e",
+			"cli-app": "#000000",
+			"template-engine": "#5bc0de",
+			"dynamic-content": "#5cb85c",
+			"code-generation": "#d9534f",
+			"project-customization": "#f0ad4e",
+			"command-line-interface": "#000000",
+			"react-native": "#61dafb",
+			"mobile-app": "#5cb85c",
+			"ios-app": "#000000",
+			"android-app": "#a4c639",
+			"push-notifications": "#f0ad4e",
+			"location-based-services": "#d9534f",
+			"live-tracking": "#d9534f",
+			"google-maps-api": "#4285f4",
+			"socket-io": "#010101",
+			"real-time-communication": "#5cb85c",
+			"background-services": "#5bc0de",
+			"mobile-development": "#5cb85c",
+			"cross-platform-development": "#5cb85c",
+			"portfolio-website": "#5bc0de",
+			"personal-website": "#5bc0de",
+			"web-development": "#f0ad4e",
+			"front-end-development": "#5bc0de",
+			"responsive-design": "#5cb85c",
+			"dark-mode": "#000000",
+			"github-api": "#24292e",
+			"project-showcase": "#5bc0de",
+			"dynamic-portfolio": "#5cb85c",
+			"ci-cd": "#d9534f",
+			"github-actions": "#2088ff",
+			"automated-workflows": "#5cb85c",
+			"continuous-integration": "#f0ad4e",
+			"continuous-deployment": "#5bc0de",
+			"devops-tools": "#5cb85c",
+			"workflow-automation": "#d9534f",
+			"repository-management": "#f0ad4e",
+			"code-quality": "#5cb85c",
+			"release-automation": "#d9534f",
+			// Basic programming languages
 			Java: "#b07219",
-			"C++": "#f34b7d",
-			C: "#555555",
 			PHP: "#4f5d95",
-			Ruby: "#701516",
 			Go: "#00add8",
 			Rust: "#dea584",
 			Swift: "#ffac45",
 			Kotlin: "#f18e33",
 			Dart: "#00b4ab",
+			"C++": "#f34b7d",
+			C: "#555555",
+			Ruby: "#701516",
 			Shell: "#89e051",
 			Vue: "#2c3e50",
-			React: "#61dafb",
 		};
-		return colors[language] || "#6366f1";
+		return colorMap[language] || "#6366f1";
 	};
 
 	// Filter and sort repositories
 	const filteredRepos = useMemo(() => {
-		let filtered = repos.filter((repo) => {
+		let filtered = normalizedProjects.filter((project) => {
 			// Search filter
 			const matchesSearch =
-				repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-				(repo.description &&
-					repo.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-				(repo.topics &&
-					repo.topics.some((topic) =>
+				project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				(project.description &&
+					project.description
+						.toLowerCase()
+						.includes(searchTerm.toLowerCase())) ||
+				(project.topics &&
+					project.topics.some((topic) =>
 						topic.toLowerCase().includes(searchTerm.toLowerCase())
-					));
+					)) ||
+				(project.category &&
+					project.category.toLowerCase().includes(searchTerm.toLowerCase()));
 
 			// Language filter
 			const matchesLanguage =
 				selectedLanguages.length === 0 ||
-				selectedLanguages.includes(repo.language);
+				selectedLanguages.includes(project.language) ||
+				(project.languages &&
+					project.languages.some((lang) =>
+						selectedLanguages.includes(lang.name)
+					));
 
 			return matchesSearch && matchesLanguage;
 		});
@@ -138,7 +655,7 @@ const Projects = () => {
 		});
 
 		return filtered;
-	}, [repos, searchTerm, selectedLanguages, sortBy]);
+	}, [normalizedProjects, searchTerm, selectedLanguages, sortBy]);
 
 	const toggleLanguageFilter = (language) => {
 		setSelectedLanguages((prev) =>
@@ -180,6 +697,10 @@ const Projects = () => {
 					<div className="text-center">
 						<div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-purple-500 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
 						<p className="mt-4 text-gray-300">Loading projects...</p>
+						<p className="mt-2 text-sm text-gray-500">
+							Debug: Loading={loading.toString()}, Error={error?.toString()},
+							ReposLength={repos?.length || 0}
+						</p>
 					</div>
 				</div>
 			</div>
@@ -204,13 +725,35 @@ const Projects = () => {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-20">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+				{/* Debug Info */}
+				<div className="mb-4 p-4 bg-gray-800 rounded text-sm text-gray-300">
+					<p>Debug Info:</p>
+					<p>Loading: {loading.toString()}</p>
+					<p>Error: {error?.toString() || "none"}</p>
+					<p>Raw Repos: {repos?.length || 0}</p>
+					<p>Projects Data: {projectsData?.length || 0}</p>
+					<p>Normalized Projects: {normalizedProjects?.length || 0}</p>
+					<p>Filtered Projects: {filteredRepos?.length || 0}</p>
+					<p>Settings Mode: {settings.projects?.mode || "none"}</p>
+				</div>
+
 				{/* Header */}
 				<motion.div className="text-center mb-16" {...fadeInUp}>
 					<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
 						My Projects
 					</h1>
 					<p className="text-xl text-gray-300 max-w-3xl mx-auto">
-						{settings.github?.type === "org" ? (
+						{settings.projects?.mode === "static" ? (
+							<>A curated collection of my featured projects and experiments</>
+						) : settings.projects?.mode === "hybrid" ? (
+							<>
+								Showcasing both live projects from{" "}
+								<span className="text-purple-400 font-semibold">
+									{settings.github?.username}
+								</span>{" "}
+								and curated featured projects
+							</>
+						) : settings.github?.type === "org" ? (
 							<>
 								Showcasing projects from{" "}
 								<span className="text-purple-400 font-semibold">
@@ -223,8 +766,16 @@ const Projects = () => {
 						)}
 					</p>
 					<div className="mt-4 text-sm text-gray-400">
-						{repos.length} project{repos.length !== 1 ? "s" : ""} •{" "}
+						{normalizedProjects.length} project
+						{normalizedProjects.length !== 1 ? "s" : ""} •{" "}
 						{filteredRepos.length} shown
+						{settings.projects?.mode === "hybrid" && (
+							<>
+								{" "}
+								• {normalizedProjects.filter((p) => p.isStatic).length} static +{" "}
+								{normalizedProjects.filter((p) => !p.isStatic).length} dynamic
+							</>
+						)}
 					</div>
 				</motion.div>
 
@@ -361,11 +912,13 @@ const Projects = () => {
 						initial="initial"
 						animate="animate"
 					>
-						{filteredRepos.map((repo, index) => (
-							<motion.div key={repo.id} variants={staggerChild}>
-								<GitHubRepoCard repo={repo} index={index} settings={settings} />
-							</motion.div>
-						))}
+						{filteredRepos.map((repo) => {
+							return (
+								<motion.div key={repo.id} variants={staggerChild}>
+									<ProjectCard project={repo} />
+								</motion.div>
+							);
+						})}
 					</motion.div>
 				) : (
 					<motion.div
@@ -400,20 +953,48 @@ const Projects = () => {
 					transition={{ duration: 0.5, delay: 0.5 }}
 				>
 					<p>
-						Projects fetched from{" "}
-						<span className="text-purple-400">
-							{settings.github?.type === "org"
-								? "GitHub Organization"
-								: "GitHub User"}
-						</span>
-						{" • "}
-						<span className="text-purple-400">{settings.github?.username}</span>
+						{settings.projects?.mode === "static" ? (
+							<>
+								Projects configured from{" "}
+								<span className="text-purple-400">Static Settings</span>
+							</>
+						) : settings.projects?.mode === "hybrid" ? (
+							<>
+								Projects from{" "}
+								<span className="text-purple-400">
+									{settings.github?.type === "org"
+										? "GitHub Organization"
+										: "GitHub User"}
+								</span>
+								{" + "}
+								<span className="text-purple-400">Static Settings</span>
+								{" • "}
+								<span className="text-purple-400">
+									{settings.github?.username}
+								</span>
+							</>
+						) : (
+							<>
+								Projects fetched from{" "}
+								<span className="text-purple-400">
+									{settings.github?.type === "org"
+										? "GitHub Organization"
+										: "GitHub User"}
+								</span>
+								{" • "}
+								<span className="text-purple-400">
+									{settings.github?.username}
+								</span>
+							</>
+						)}
 					</p>
-					{settings.projects?.ignore && settings.projects.ignore.length > 0 && (
-						<p className="mt-1">
-							Excluding: {settings.projects.ignore.join(", ")}
-						</p>
-					)}
+					{settings.projects?.mode !== "static" &&
+						settings.projects?.ignore &&
+						settings.projects.ignore.length > 0 && (
+							<p className="mt-1">
+								Excluding: {settings.projects.ignore.join(", ")}
+							</p>
+						)}
 				</motion.div>
 			</div>
 		</div>

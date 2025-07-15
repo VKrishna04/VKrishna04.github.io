@@ -10,9 +10,10 @@ import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Projects from "./pages/ProjectsStatic";
+import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 import ParticleBackground from "./components/ParticleBackground/ParticleBackground";
 import "./App.css";
 
@@ -121,6 +122,7 @@ const AppContent = memo(() => {
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/resume" element={<Resume />} />
 					<Route path="/contact" element={<Contact />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</main>
 

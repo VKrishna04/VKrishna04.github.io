@@ -58,3 +58,31 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(139, 92, 246, 0.7);
 }
+/* Enhanced gradient text support */
+.gradient-text-fallback {
+    /* Fallback for browsers that don't support background-clip: text */
+    background: linear-gradient(to right, #c770f0, #ec4899, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+}
+
+/* Force gradient text to work */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .gradient-text-supported {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+}
+
+/* Fallback for older browsers */
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+    .gradient-text-fallback {
+        color: #c770f0;
+        /* Fallback to solid color */
+    }
+}

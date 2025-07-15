@@ -1,13 +1,21 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://vkrishna04.github.io/settings.schema.json",
-	"title": "Portfolio Settings Configuration",
-	"description": "Configuration schema for Krishna GSVV's portfolio website",
+	"title": "Portfolio Website Configuration Schema",
+	"description": "Comprehensive JSON Schema for portfolio website configuration including GitHub integration, project management, social media, resume sections, and UI customization. This schema provides validation, IntelliSense support, and documentation for all configuration options.\n\nFEATURES:\n- Dynamic GitHub project fetching with fallback to static projects\n- Comprehensive social media integration\n- Resume/CV management with multiple sections\n- Customizable UI themes and animations\n- SEO-optimized project metadata\n- Mobile-responsive configuration options\n- Accessibility features and validation\n\nBEST PRACTICES:\n- Use semantic technology tags (lowercase kebab-case)\n- Include comprehensive project descriptions (50+ characters)\n- Provide multiple project URLs (live, demo, documentation)\n- Maintain consistent color schemes across social platforms\n- Optimize images for web (prefer CDN URLs)\n- Include accessibility labels for all interactive elements\n\nTECHNOLOGY RECOMMENDATIONS:\n- Frontend: React, Vue.js, Angular, Svelte\n- Styling: Tailwind CSS, Styled Components, CSS Modules\n- Backend: Node.js, Python, Java, Go, Rust\n- Databases: PostgreSQL, MongoDB, Redis, Firebase\n- Cloud: AWS, Azure, GCP, Vercel, Netlify\n- DevOps: Docker, Kubernetes, GitHub Actions, CI/CD",
+	"version": "2.0.0",
 	"type": "object",
+	"additionalProperties": true,
 	"properties": {
+		"$schema": {
+			"type": "string",
+			"description": "JSON Schema reference for validation",
+			"default": "./settings.schema.json"
+		},
 		"github": {
 			"type": "object",
-			"description": "GitHub API configuration for fetching repositories",
+			"description": "GitHub API configuration for dynamic repository fetching. This enables automatic project discovery and keeps your portfolio synchronized with your latest work.\n\nSETUP GUIDE:\n1. Choose 'org' for organization repos or 'user' for personal repos\n2. Set username to your GitHub username or organization name\n3. Construct apiUrl: https://api.github.com/{orgs|users}/{username}/repos\n4. Use descriptive userAgent for API identification\n\nRATE LIMITS:\n- Unauthenticated: 60 requests/hour\n- Authenticated: 5000 requests/hour\n- Consider caching for production use",
+			"additionalProperties": false,
 			"properties": {
 				"type": {
 					"type": "string",
@@ -15,20 +23,65 @@
 						"org",
 						"user"
 					],
-					"description": "Type of GitHub account - 'org' for organization, 'user' for individual user"
+					"description": "GitHub account type:\n- 'org': Organization account (e.g., company, team, project group)\n- 'user': Individual user account (personal repositories)\n\nThis affects the API endpoint structure and available repository types.",
+					"examples": [
+						"org",
+						"user"
+					]
 				},
 				"username": {
 					"type": "string",
-					"description": "GitHub organization or username"
+					"minLength": 1,
+					"maxLength": 39,
+					"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+					"description": "GitHub username or organization name. Must follow GitHub naming conventions:\n- 1-39 characters long\n- Alphanumeric characters and hyphens only\n- Cannot start or end with hyphen\n- Cannot contain consecutive hyphens",
+					"examples": [
+						"Life-Experimentalist",
+						"VKrishna04",
+						"microsoft",
+						"facebook",
+						"your-org-name"
+					]
 				},
 				"apiUrl": {
 					"type": "string",
 					"format": "uri",
-					"description": "GitHub API endpoint for repositories"
+					"pattern": "^https://api\\.github\\.com/(orgs|users)/[^/]+/repos$",
+					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos\n- For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
+					"examples": [
+						"https://api.github.com/orgs/Life-Experimentalist/repos",
+						"https://api.github.com/users/VKrishna04/repos",
+						"https://api.github.com/orgs/microsoft/repos",
+						"https://api.github.com/orgs/Life-Experimentalist/repos"
+					]
 				},
 				"userAgent": {
 					"type": "string",
-					"description": "Custom user agent for API requests"
+					"minLength": 1,
+					"maxLength": 100,
+					"pattern": "^[a-zA-Z0-9._-]+$",
+					"description": "Custom user agent string for API requests. This helps with:\n- API rate limiting and identification\n- Analytics and usage tracking\n- Debugging and monitoring\n\nUse a descriptive name that identifies your portfolio site.",
+					"examples": [
+						"VKrishna04-Portfolio",
+						"Portfolio-Website",
+						"MyName-Resume-Site",
+						"Developer-Showcase"
+					]
+				},
+				"accessToken": {
+					"type": "string",
+					"pattern": "^(ghp_|gho_|ghu_|ghs_|ghr_|github_pat_)[a-zA-Z0-9_]+$",
+					"description": "Optional GitHub Personal Access Token for higher rate limits and private repository access. Format: ghp_xxxxxxxxxxxx\n\nSecurity: Store in environment variables, not in committed code!",
+					"examples": [
+						"ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+					]
+				},
+				"cacheTimeout": {
+					"type": "integer",
+					"minimum": 300,
+					"maximum": 86400,
+					"description": "Cache timeout for API responses in seconds (5 minutes to 24 hours). Helps with rate limiting and performance.",
+					"default": 3600
 				}
 			},
 			"required": [
@@ -40,20 +93,48 @@
 		},
 		"projects": {
 			"type": "object",
-			"description": "Project display configuration",
+			"description": "Project display and data source configuration",
+			"additionalProperties": false,
 			"properties": {
+				"mode": {
+					"type": "string",
+					"enum": [
+						"api",
+						"static",
+						"hybrid"
+					],
+					"description": "Data source mode for projects:\n- 'api': Fetch projects dynamically from GitHub API\n- 'static': Use only manually configured staticProjects array\n- 'hybrid': Use API with staticProjects as fallback when API fails\n\nRecommendation: Use 'api' for active developers with public repositories, 'static' for curated project showcases, or 'hybrid' for reliability.",
+					"default": "api"
+				},
 				"ignore": {
 					"type": "array",
+					"uniqueItems": true,
+					"maxItems": 50,
 					"items": {
-						"type": "string"
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100,
+						"pattern": "^[a-zA-Z0-9._-]+$"
 					},
-					"description": "Array of repository names to exclude from display"
+					"description": "Repository names to exclude from display (case-sensitive). Common excludes:\n- Portfolio websites: 'username.github.io'\n- Config repositories: '.github', 'dotfiles'\n- Private/work projects: 'company-internal', 'client-work'\n- Learning repositories: 'practice', 'tutorials', 'sandbox'\n- Archived projects: 'deprecated-*', 'old-*'",
+					"examples": [
+						[
+							"VKrishna04.github.io",
+							".github",
+							"private-config",
+							"company-internal",
+							"learning-sandbox",
+							"deprecated-app",
+							"test-repository"
+						]
+					]
 				},
 				"maxProjects": {
 					"type": "integer",
 					"minimum": 1,
-					"maximum": 50,
-					"description": "Maximum number of projects to display"
+					"maximum": 100,
+					"description": "Maximum number of projects to display on the portfolio. Recommendations:\n- 6-12 projects: Ideal for focused showcase\n- 15-25 projects: Good for active developers\n- 25+ projects: For comprehensive portfolios\n\nConsider user experience and page load times when setting this value.",
+					"default": 15
 				},
 				"sortBy": {
 					"type": "string",
@@ -61,9 +142,11 @@
 						"updated",
 						"created",
 						"stars",
-						"name"
+						"name",
+						"forks"
 					],
-					"description": "Sort criteria for repositories"
+					"description": "Sort criteria for repositories",
+					"default": "updated"
 				},
 				"sortOrder": {
 					"type": "string",
@@ -71,22 +154,334 @@
 						"asc",
 						"desc"
 					],
-					"description": "Sort order - ascending or descending"
+					"description": "Sort order - 'asc' for ascending, 'desc' for descending",
+					"default": "desc"
 				},
 				"showForks": {
 					"type": "boolean",
-					"description": "Whether to show forked repositories"
+					"description": "Whether to include forked repositories in the display",
+					"default": false
 				},
 				"showPrivate": {
 					"type": "boolean",
-					"description": "Whether to show private repositories"
+					"description": "Whether to include private repositories (requires authentication)",
+					"default": false
 				},
 				"fallbackMode": {
 					"type": "boolean",
-					"description": "Enable fallback projects if API fails"
+					"description": "Enable fallback to staticProjects if GitHub API fails or is unavailable",
+					"default": true
+				},
+				"staticProjects": {
+					"type": "array",
+					"description": "Manually curated project data used when mode is 'static' or as fallback",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"id": {
+								"type": "string",
+								"pattern": "^[0-9]+$",
+								"description": "Unique identifier for the project (GitHub repository ID or custom ID)",
+								"examples": [
+									"767672764",
+									"custom-001"
+								]
+							},
+							"name": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Project name (should match repository name for consistency)",
+								"examples": [
+									"ParkMeter",
+									"BreachCheck"
+								]
+							},
+							"description": {
+								"type": "string",
+								"minLength": 10,
+								"maxLength": 500,
+								"description": "Detailed project description explaining purpose and functionality",
+								"examples": [
+									"A parking ticket management system with payment processing"
+								]
+							},
+							"technologies": {
+								"type": "array",
+								"uniqueItems": true,
+								"maxItems": 20,
+								"items": {
+									"$ref": "#/definitions/technologyTag"
+								},
+								"description": "Array of technologies, frameworks, tools, and programming languages used in the project. Use lowercase kebab-case for consistency (e.g., 'react', 'node-js', 'typescript')",
+								"examples": [
+									[
+										"django",
+										"python",
+										"postgresql",
+										"redis",
+										"docker",
+										"javascript",
+										"tailwind-css"
+									]
+								]
+							},
+							"category": {
+								"type": "string",
+								"enum": [
+									"Web App",
+									"Mobile App",
+									"Desktop App",
+									"CLI Tool",
+									"Library",
+									"Framework",
+									"API",
+									"Machine Learning",
+									"Data Science",
+									"Game",
+									"Browser Extension",
+									"VS Code Extension",
+									"Tool",
+									"Educational",
+									"Personal",
+									"Blockchain",
+									"IoT",
+									"DevOps",
+									"Security",
+									"AI/ML",
+									"Backend Service",
+									"Frontend Component",
+									"Full Stack",
+									"Microservice",
+									"Open Source",
+									"Research",
+									"Prototype",
+									"Production",
+									"Other"
+								],
+								"description": "Project category for filtering, organization, and display grouping. Choose the most appropriate category that best describes the project's primary purpose or domain.",
+								"default": "Other"
+							},
+							"featured": {
+								"type": "boolean",
+								"description": "Whether this project should be highlighted as featured",
+								"default": false
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"Planning",
+									"In Development",
+									"Beta",
+									"Completed",
+									"Maintenance",
+									"Deprecated",
+									"On Hold",
+									"Cancelled",
+									"Live",
+									"Under Review",
+									"Testing",
+									"Deployed",
+									"Archived",
+									"Active Development",
+									"Stable",
+									"Experimental",
+									"Ongoing"
+								],
+								"description": "Current development and deployment status of the project. This helps visitors understand the project's maturity and availability.",
+								"default": "Completed"
+							},
+							"startDate": {
+								"$ref": "#/definitions/dateString",
+								"description": "Project start date in YYYY-MM-DD format for timeline tracking",
+								"examples": [
+									"2024-03-05",
+									"2025-01-15"
+								]
+							},
+							"endDate": {
+								"anyOf": [
+									{
+										"$ref": "#/definitions/dateString"
+									},
+									{
+										"type": "null"
+									}
+								],
+								"description": "Project completion date in YYYY-MM-DD format. Use null for ongoing projects.",
+								"examples": [
+									"2024-11-25",
+									"2025-06-30",
+									null
+								]
+							},
+							"githubUrl": {
+								"$ref": "#/definitions/githubUrl",
+								"description": "GitHub repository URL for the project",
+								"examples": [
+									"https://github.com/Life-Experimentalist/ParkMeter"
+								]
+							},
+							"liveUrl": {
+								"$ref": "#/definitions/url",
+								"description": "Live deployment URL where the project is hosted and accessible to users (production website/app)",
+								"examples": [
+									"https://vkrishna04.github.io/ParkMeter/",
+									"https://myapp.vercel.app",
+									"https://api.myservice.com"
+								]
+							},
+							"demoUrl": {
+								"$ref": "#/definitions/url",
+								"description": "Demo or preview URL for testing the project (separate from live deployment)",
+								"examples": [
+									"https://demo.example.com",
+									"https://staging.myapp.com"
+								]
+							},
+							"documentationUrl": {
+								"$ref": "#/definitions/url",
+								"description": "Project documentation URL with setup instructions, API docs, or user guides",
+								"examples": [
+									"https://docs.example.com",
+									"https://github.com/user/repo/wiki"
+								]
+							},
+							"imageUrl": {
+								"$ref": "#/definitions/url",
+								"description": "Project thumbnail, screenshot, or preview image URL for visual representation",
+								"examples": [
+									"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+									"https://via.placeholder.com/400x200",
+									"https://github.com/user/repo/blob/main/screenshot.png"
+								]
+							},
+							"tags": {
+								"type": "array",
+								"uniqueItems": true,
+								"maxItems": 30,
+								"items": {
+									"$ref": "#/definitions/technologyTag"
+								},
+								"description": "SEO and filtering tags for the project. Use descriptive keywords that help categorize and discover the project. Tags should be lowercase kebab-case for consistency.",
+								"examples": [
+									[
+										"web-development",
+										"full-stack",
+										"responsive-design",
+										"api-integration",
+										"user-authentication",
+										"data-visualization",
+										"real-time",
+										"mobile-friendly"
+									]
+								]
+							},
+							"highlights": {
+								"type": "array",
+								"maxItems": 5,
+								"items": {
+									"type": "string",
+									"minLength": 10,
+									"maxLength": 150
+								},
+								"description": "Key features, achievements, or notable aspects of the project to showcase to visitors. Focus on unique selling points, technical innovations, or impact metrics.",
+								"examples": [
+									[
+										"Real-time payment processing with 99.9% uptime",
+										"Mobile-responsive design supporting all devices",
+										"AI-powered recommendations with 85% accuracy",
+										"Supports 10,000+ concurrent users",
+										"Open source with 500+ GitHub stars"
+									]
+								]
+							},
+							"stats": {
+								"type": "object",
+								"description": "GitHub repository statistics and social proof metrics to showcase project popularity and community engagement",
+								"additionalProperties": false,
+								"properties": {
+									"stars": {
+										"type": "integer",
+										"minimum": 0,
+										"maximum": 999999,
+										"description": "Number of GitHub stars indicating project popularity"
+									},
+									"forks": {
+										"type": "integer",
+										"minimum": 0,
+										"maximum": 999999,
+										"description": "Number of repository forks showing community contributions"
+									},
+									"watchers": {
+										"type": "integer",
+										"minimum": 0,
+										"maximum": 999999,
+										"description": "Number of repository watchers tracking project updates"
+									},
+									"issues": {
+										"type": "integer",
+										"minimum": 0,
+										"maximum": 99999,
+										"description": "Number of open GitHub issues for bug tracking and feature requests"
+									},
+									"downloads": {
+										"type": "integer",
+										"minimum": 0,
+										"description": "Total downloads for packages, releases, or apps (optional)"
+									},
+									"contributors": {
+										"type": "integer",
+										"minimum": 0,
+										"description": "Number of project contributors (optional)"
+									}
+								},
+								"required": [
+									"stars",
+									"forks",
+									"watchers",
+									"issues"
+								]
+							}
+						},
+						"required": [
+							"id",
+							"name",
+							"description",
+							"category",
+							"status",
+							"githubUrl",
+							"stats"
+						]
+					}
+				},
+				"staticProjectsNote": {
+					"type": "string",
+					"description": "Documentation note explaining how to configure static projects. This field serves as inline help for developers configuring the portfolio.",
+					"maxLength": 500,
+					"default": "Configure static projects when mode is set to 'static' or as fallback when GitHub API is unavailable. Each project should include comprehensive metadata including technologies, URLs, statistics, and descriptive content for optimal presentation."
+				},
+				"officialName": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 100,
+					"description": "Official display name of the portfolio owner"
+				},
+				"devUsername": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 50,
+					"description": "Developer username or handle"
+				},
+				"profileImage": {
+					"type": "string",
+					"format": "uri",
+					"description": "URL to profile image"
 				}
 			},
 			"required": [
+				"mode",
 				"ignore",
 				"maxProjects",
 				"sortBy",
@@ -96,124 +491,227 @@
 				"fallbackMode"
 			]
 		},
-		"display": {
-			"type": "object",
-			"description": "Basic display information",
-			"properties": {
-				"officialName": {
-					"type": "string",
-					"description": "Full official name displayed across the site"
-				},
-				"devUsername": {
-					"type": "string",
-					"description": "Developer username/handle"
-				},
-				"profileImage": {
-					"type": "string",
-					"format": "uri",
-					"description": "URL to profile image"
-				}
-			},
-			"required": [
-				"officialName",
-				"devUsername",
-				"profileImage"
-			]
-		},
 		"home": {
 			"type": "object",
-			"description": "Home page configuration",
+			"description": "Home page content and styling configuration",
+			"additionalProperties": true,
 			"properties": {
 				"greeting": {
 					"type": "string",
-					"description": "Greeting text displayed before name"
+					"minLength": 1,
+					"maxLength": 50,
+					"description": "Greeting text displayed before the main name",
+					"examples": [
+						"Hello, I'm",
+						"Hi there! I'm",
+						"Welcome! I'm"
+					]
 				},
 				"name": {
 					"type": "string",
-					"description": "Name displayed prominently on home page"
+					"minLength": 1,
+					"maxLength": 100,
+					"description": "Main name displayed prominently on the home page",
+					"examples": [
+						"Krishna GSVV",
+						"John Doe"
+					]
 				},
 				"nameGradient": {
 					"type": "string",
-					"description": "CSS gradient for name text"
+					"description": "CSS gradient or Tailwind CSS gradient classes for the name text styling. Supports both linear-gradient() CSS syntax and Tailwind gradient classes.",
+					"examples": [
+						"linear-gradient(to right, #c770f0, #ec4999, #ef4444)",
+						"from-blue-400 to-purple-600",
+						"from-green-400 via-blue-500 to-purple-600"
+					]
 				},
 				"typewriterStrings": {
 					"type": "array",
+					"minItems": 1,
+					"maxItems": 10,
+					"uniqueItems": true,
 					"items": {
-						"type": "string"
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100
 					},
-					"description": "Array of strings for typewriter effect"
+					"description": "Array of strings for the typewriter animation effect",
+					"examples": [
+						[
+							"Full Stack Developer",
+							"AI Enthusiast",
+							"Open Source Contributor"
+						]
+					]
 				},
 				"description": {
 					"type": "string",
-					"description": "Short description about yourself"
+					"minLength": 50,
+					"maxLength": 300,
+					"description": "Brief personal description displayed on the home page",
+					"examples": [
+						"I'm a passionate full-stack developer with expertise in modern web technologies and AI."
+					]
 				},
 				"location": {
 					"type": "object",
+					"description": "Location display configuration",
+					"additionalProperties": false,
 					"properties": {
 						"show": {
 							"type": "boolean",
-							"description": "Whether to show location on home page"
+							"description": "Whether to display location information on the home page",
+							"default": true
 						},
 						"text": {
 							"type": "string",
-							"description": "Custom location text with emoji"
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Location display text with optional emoji/icon",
+							"examples": [
+								"📍 Bengaluru, India",
+								"🌍 Remote Worldwide",
+								"New York, USA"
+							]
+						},
+						"customText": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Custom location text (overrides city/country if provided)",
+							"examples": [
+								"Based in New York",
+								"Remote Worldwide"
+							]
 						},
 						"icon": {
 							"type": "string",
-							"description": "Location icon/emoji"
+							"description": "Icon identifier for the location (usually a map or location icon)",
+							"examples": [
+								"MapPinIcon",
+								"GlobeIcon"
+							]
 						},
 						"city": {
 							"type": "string",
-							"description": "City name"
+							"minLength": 1,
+							"maxLength": 50,
+							"description": "City name",
+							"examples": [
+								"New York",
+								"London",
+								"Tokyo"
+							]
 						},
 						"country": {
 							"type": "string",
-							"description": "Country name"
+							"minLength": 1,
+							"maxLength": 50,
+							"description": "Country name",
+							"examples": [
+								"United States",
+								"United Kingdom",
+								"Japan"
+							]
 						}
-					}
+					},
+					"required": [
+						"show"
+					]
 				},
 				"profileImage": {
 					"type": "object",
+					"description": "Profile image configuration for the home page",
+					"additionalProperties": true,
 					"properties": {
 						"type": {
 							"type": "string",
 							"enum": [
 								"github",
-								"display",
 								"custom"
 							],
-							"description": "Source of profile image"
+							"description": "Source type for profile image - 'github' uses GitHub avatar, 'custom' uses customUrl"
 						},
 						"customUrl": {
-							"type": "string",
-							"description": "Custom image URL (when type is 'custom'). Leave empty if not using custom image."
+							"$ref": "#/definitions/url",
+							"description": "Custom image URL (required when type is 'custom') or empty string",
+							"examples": [
+								"https://example.com/profile.jpg",
+								""
+							]
 						},
 						"altText": {
 							"type": "string",
-							"description": "Alt text for profile image"
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Alternative text for accessibility",
+							"examples": [
+								"Profile picture of Krishna GSVV"
+							]
 						},
 						"borderColor": {
 							"type": "string",
-							"description": "Tailwind CSS border color class"
+							"description": "Tailwind CSS border color class with optional opacity",
+							"examples": [
+								"border-purple-500",
+								"border-blue-400",
+								"border-purple-500/30"
+							]
 						},
 						"shadowColor": {
 							"type": "string",
-							"description": "Tailwind CSS shadow color class"
+							"description": "Tailwind CSS shadow color class with optional opacity",
+							"examples": [
+								"shadow-purple-500/50",
+								"shadow-blue-400/30",
+								"shadow-purple-500/20"
+							]
 						}
+					},
+					"required": [
+						"type",
+						"altText"
+					],
+					"if": {
+						"properties": {
+							"type": {
+								"const": "custom"
+							}
+						}
+					},
+					"then": {
+						"required": [
+							"customUrl"
+						]
 					}
 				},
 				"buttons": {
 					"type": "array",
+					"maxItems": 5,
 					"items": {
 						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"text": {
 								"type": "string",
-								"description": "Button text"
+								"minLength": 1,
+								"maxLength": 30,
+								"description": "Button text displayed to users",
+								"examples": [
+									"View Resume",
+									"Contact Me"
+								]
 							},
 							"link": {
 								"type": "string",
-								"description": "Button link (internal route or external URL)"
+								"format": "uri-reference",
+								"description": "URL or path the button links to",
+								"examples": [
+									"/resume",
+									"mailto:contact@example.com",
+									"#contact"
+								]
 							},
 							"type": {
 								"type": "string",
@@ -221,43 +719,86 @@
 									"primary",
 									"outline"
 								],
-								"description": "Button style type"
+								"description": "Button style type - 'primary' for filled, 'outline' for bordered"
 							},
 							"gradient": {
 								"type": "string",
-								"description": "Tailwind gradient classes (for primary buttons)"
+								"description": "Tailwind CSS gradient classes for primary buttons",
+								"examples": [
+									"from-blue-500 to-purple-600",
+									"from-purple-600 to-pink-600"
+								]
 							},
 							"hoverGradient": {
 								"type": "string",
-								"description": "Tailwind hover gradient classes"
+								"description": "Tailwind CSS gradient classes for hover state",
+								"examples": [
+									"from-blue-600 to-purple-700",
+									"from-purple-700 to-pink-700"
+								]
 							},
-							"shadowColor": {
+							"shadow": {
 								"type": "string",
-								"description": "Tailwind shadow color class"
+								"pattern": "^shadow-[a-z-]+$",
+								"description": "Tailwind CSS shadow class",
+								"examples": [
+									"shadow-lg",
+									"shadow-xl"
+								]
 							},
 							"borderColor": {
 								"type": "string",
-								"description": "Tailwind border color class (for outline buttons)"
+								"description": "Tailwind CSS border color class for outline buttons",
+								"examples": [
+									"border-purple-500",
+									"border-blue-400"
+								]
 							},
 							"textColor": {
 								"type": "string",
-								"description": "Tailwind text color class"
+								"description": "Tailwind CSS text color class",
+								"examples": [
+									"text-purple-500",
+									"text-white",
+									"text-purple-400"
+								]
 							},
 							"hoverBg": {
 								"type": "string",
-								"description": "Tailwind hover background class"
+								"description": "Tailwind CSS background color class for hover state (with hover: prefix)",
+								"examples": [
+									"hover:bg-purple-500",
+									"hover:bg-blue-500/10",
+									"bg-purple-500"
+								]
 							},
 							"hoverText": {
 								"type": "string",
-								"description": "Tailwind hover text color class"
+								"description": "Tailwind CSS text color class for hover state (with hover: prefix)",
+								"examples": [
+									"hover:text-white",
+									"hover:text-purple-500",
+									"text-white"
+								]
+							},
+							"shadowColor": {
+								"type": "string",
+								"description": "Tailwind CSS shadow color class with optional opacity",
+								"examples": [
+									"shadow-purple-500/25",
+									"shadow-cyan-500/25",
+									"shadow-blue-500/30"
+								]
 							},
 							"icon": {
 								"type": "string",
 								"enum": [
 									"ArrowDownIcon",
-									"DocumentArrowDownIcon"
+									"DocumentArrowDownIcon",
+									"EnvelopeIcon",
+									"PhoneIcon"
 								],
-								"description": "Heroicon name for button icon"
+								"description": "Icon component name to display in the button"
 							}
 						},
 						"required": [
@@ -269,33 +810,49 @@
 				},
 				"showScrollIndicator": {
 					"type": "boolean",
-					"description": "Whether to show scroll indicator at bottom"
+					"description": "Whether to show the scroll indicator at the bottom of the page",
+					"default": true
 				},
 				"animations": {
 					"type": "object",
+					"description": "Animation configuration for home page elements",
+					"additionalProperties": false,
 					"properties": {
 						"typewriterSettings": {
 							"type": "object",
+							"description": "Configuration for the typewriter effect animation",
+							"additionalProperties": false,
 							"properties": {
+								"speed": {
+									"type": "integer",
+									"minimum": 1,
+									"maximum": 200,
+									"description": "Typing speed in milliseconds between characters",
+									"default": 50
+								},
 								"deleteSpeed": {
 									"type": "integer",
 									"minimum": 1,
 									"maximum": 200,
-									"description": "Speed of text deletion (ms)"
+									"description": "Deletion speed in milliseconds between characters",
+									"default": 50
 								},
 								"delay": {
 									"type": "integer",
-									"minimum": 1,
-									"maximum": 500,
-									"description": "Delay between characters (ms)"
+									"minimum": 100,
+									"maximum": 5000,
+									"description": "Delay between strings in milliseconds",
+									"default": 1000
 								},
 								"autoStart": {
 									"type": "boolean",
-									"description": "Whether to auto-start typewriter"
+									"description": "Whether to start the animation automatically",
+									"default": true
 								},
 								"loop": {
 									"type": "boolean",
-									"description": "Whether to loop typewriter animation"
+									"description": "Whether to loop the animation continuously",
+									"default": true
 								}
 							}
 						},
@@ -303,40 +860,68 @@
 							"type": "number",
 							"minimum": 0.1,
 							"maximum": 3.0,
-							"description": "Duration of fade-in animation (seconds)"
+							"description": "Duration of fade-in animations in seconds",
+							"default": 0.8
 						},
 						"staggerDelay": {
 							"type": "number",
 							"minimum": 0.01,
 							"maximum": 1.0,
-							"description": "Delay between staggered animations (seconds)"
+							"description": "Delay between staggered animations in seconds",
+							"default": 0.2
 						}
 					}
 				}
-			}
+			},
+			"required": [
+				"greeting",
+				"name",
+				"typewriterStrings",
+				"description",
+				"location",
+				"profileImage"
+			]
 		},
 		"social": {
 			"type": "object",
-			"description": "Social media configuration",
+			"description": "Social media platforms and contact information configuration",
+			"additionalProperties": true,
 			"properties": {
 				"platforms": {
 					"type": "array",
+					"maxItems": 15,
 					"items": {
 						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"name": {
 								"type": "string",
-								"description": "Platform display name"
+								"minLength": 1,
+								"maxLength": 30,
+								"description": "Display name of the social platform",
+								"examples": [
+									"LinkedIn",
+									"GitHub",
+									"Twitter"
+								]
 							},
 							"key": {
 								"type": "string",
-								"description": "Unique identifier for platform"
+								"minLength": 1,
+								"maxLength": 20,
+								"pattern": "^[a-z0-9-]+$",
+								"description": "Unique key identifier for the platform (lowercase, no spaces)",
+								"examples": [
+									"linkedin",
+									"github",
+									"twitter"
+								]
 							},
 							"icon": {
 								"type": "string",
 								"enum": [
-									"FaGithub",
 									"FaLinkedin",
+									"FaGithub",
 									"FaTwitter",
 									"FaInstagram",
 									"FaDiscord",
@@ -346,43 +931,77 @@
 									"FaMedium",
 									"FaDev",
 									"FaStackOverflow",
-									"FaDribbble",
 									"FaBehance",
-									"FaCodepen"
+									"FaDribbble",
+									"FaCodepen",
+									"FaFacebook",
+									"FaWhatsapp",
+									"FaTelegram",
+									"FaSlack",
+									"FaReddit"
 								],
-								"description": "React icon component name"
+								"description": "React Icons identifier for the platform icon"
 							},
 							"url": {
-								"type": "string",
-								"description": "Platform URL. Leave empty to disable this platform."
+								"$ref": "#/definitions/url",
+								"description": "Full URL to the social media profile or empty string if not used",
+								"examples": [
+									"https://linkedin.com/in/username",
+									"https://github.com/username",
+									""
+								]
 							},
 							"label": {
 								"type": "string",
-								"description": "Accessibility label"
+								"minLength": 1,
+								"maxLength": 50,
+								"description": "Accessible label for screen readers",
+								"examples": [
+									"LinkedIn Profile",
+									"GitHub Repository"
+								]
 							},
 							"color": {
 								"type": "string",
-								"description": "Tailwind text color class"
+								"description": "Color for the platform - hex color code or Tailwind CSS class",
+								"examples": [
+									"#0077b5",
+									"#24292e",
+									"#1da1f2",
+									"text-white",
+									"text-blue-500"
+								]
 							},
 							"hoverColor": {
 								"type": "string",
-								"description": "Tailwind hover text color class"
+								"description": "Color for hover state - hex color code or Tailwind CSS class",
+								"examples": [
+									"#005885",
+									"#1a1a1a",
+									"#1991db",
+									"hover:text-gray-300",
+									"hover:text-blue-400"
+								]
 							},
 							"showInHome": {
 								"type": "boolean",
-								"description": "Show on home page"
+								"description": "Whether to display this platform on the home page",
+								"default": true
 							},
 							"showInFooter": {
 								"type": "boolean",
-								"description": "Show in footer"
+								"description": "Whether to display this platform in the footer",
+								"default": true
 							},
 							"showInContact": {
 								"type": "boolean",
-								"description": "Show on contact page"
+								"description": "Whether to display this platform on the contact page",
+								"default": true
 							},
 							"enabled": {
 								"type": "boolean",
-								"description": "Whether platform is enabled"
+								"description": "Whether this platform is active and should be displayed",
+								"default": true
 							}
 						},
 						"required": [
@@ -402,49 +1021,109 @@
 				},
 				"contact": {
 					"type": "object",
+					"description": "Direct contact information",
+					"additionalProperties": false,
 					"properties": {
 						"email": {
 							"type": "string",
 							"format": "email",
-							"description": "Contact email address"
+							"description": "Primary contact email address",
+							"examples": [
+								"contact@example.com"
+							]
 						},
 						"phone": {
-							"type": "string",
-							"description": "Contact phone number"
+							"oneOf": [
+								{
+									"type": "string",
+									"const": "",
+									"description": "Empty string for no phone number"
+								},
+								{
+									"type": "string",
+									"pattern": "^\\+?[1-9]\\d{1,14}$",
+									"description": "Phone number in international format"
+								}
+							],
+							"description": "Phone number in international format or empty string",
+							"examples": [
+								"+1234567890",
+								"1234567890",
+								""
+							]
 						},
 						"location": {
 							"type": "string",
-							"description": "Contact location"
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Current location or preferred meeting location",
+							"examples": [
+								"New York, NY",
+								"Remote",
+								"San Francisco Bay Area"
+							]
 						}
 					}
 				}
-			}
+			},
+			"required": [
+				"platforms"
+			]
 		},
 		"about": {
 			"type": "object",
-			"description": "About page configuration",
+			"description": "About page content and skills configuration",
+			"additionalProperties": true,
 			"properties": {
 				"heading": {
 					"type": "string",
-					"description": "Main heading for about page"
+					"minLength": 1,
+					"maxLength": 100,
+					"description": "Main heading for the about page",
+					"examples": [
+						"About Me",
+						"Get to Know Me"
+					]
 				},
 				"subheading": {
 					"type": "string",
-					"description": "Subheading for about page"
+					"minLength": 1,
+					"maxLength": 150,
+					"description": "Subheading or tagline for the about page",
+					"examples": [
+						"Passionate Developer & Problem Solver"
+					]
 				},
 				"title": {
 					"type": "string",
-					"description": "Title section content"
+					"minLength": 1,
+					"maxLength": 100,
+					"description": "Professional title or role",
+					"examples": [
+						"Full Stack Developer",
+						"Software Engineer"
+					]
 				},
 				"paragraphs": {
 					"type": "array",
+					"minItems": 1,
+					"maxItems": 5,
 					"items": {
-						"type": "string"
+						"type": "string",
+						"minLength": 50,
+						"maxLength": 500
 					},
-					"description": "Array of paragraphs for about section"
+					"description": "Array of paragraphs describing background, experience, and interests",
+					"examples": [
+						[
+							"I'm a passionate full-stack developer with 5 years of experience..."
+						]
+					]
 				},
 				"image": {
 					"type": "object",
+					"description": "About page image configuration",
+					"additionalProperties": true,
 					"properties": {
 						"type": {
 							"type": "string",
@@ -453,30 +1132,70 @@
 								"home",
 								"custom"
 							],
-							"description": "Source of about page image"
+							"description": "Image source type - 'github' for GitHub avatar, 'home' reuses home image, 'custom' for customUrl"
 						},
 						"customUrl": {
-							"type": "string",
-							"description": "Custom image URL. Leave empty if not using custom image."
+							"$ref": "#/definitions/url",
+							"description": "Custom image URL (required when type is 'custom') or empty string",
+							"examples": [
+								"https://example.com/about-photo.jpg"
+							]
 						},
 						"altText": {
 							"type": "string",
-							"description": "Alt text for about image"
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Alternative text for accessibility",
+							"examples": [
+								"Professional photo of Krishna GSVV"
+							]
 						}
+					},
+					"required": [
+						"type",
+						"altText"
+					],
+					"if": {
+						"properties": {
+							"type": {
+								"const": "custom"
+							}
+						}
+					},
+					"then": {
+						"required": [
+							"customUrl"
+						]
 					}
 				},
 				"skillsHeading": {
 					"type": "string",
-					"description": "Heading for skills section"
+					"minLength": 1,
+					"maxLength": 50,
+					"description": "Heading for the skills section",
+					"examples": [
+						"Skills & Expertise",
+						"Technical Skills"
+					]
 				},
 				"skills": {
 					"type": "array",
+					"minItems": 1,
+					"maxItems": 10,
 					"items": {
 						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"category": {
 								"type": "string",
-								"description": "Skill category name"
+								"minLength": 1,
+								"maxLength": 50,
+								"description": "Skill category name",
+								"examples": [
+									"Frontend Development",
+									"Backend Development",
+									"Mobile Development"
+								]
 							},
 							"icon": {
 								"type": "string",
@@ -484,55 +1203,97 @@
 									"DevicePhoneMobileIcon",
 									"ServerIcon",
 									"CpuChipIcon",
-									"CodeBracketIcon"
+									"CodeBracketIcon",
+									"DatabaseIcon",
+									"CloudIcon",
+									"BugAntIcon",
+									"PaintBrushIcon",
+									"ChartBarIcon",
+									"CubeIcon",
+									"CommandLineIcon"
 								],
-								"description": "Heroicon for category"
+								"description": "Heroicons identifier for the category icon"
 							},
 							"items": {
 								"type": "array",
+								"minItems": 1,
+								"maxItems": 15,
 								"items": {
 									"type": "object",
+									"additionalProperties": false,
 									"properties": {
 										"name": {
 											"type": "string",
-											"description": "Skill name"
+											"minLength": 1,
+											"maxLength": 30,
+											"description": "Technology or skill name",
+											"examples": [
+												"React",
+												"Node.js",
+												"Python"
+											]
 										},
 										"icon": {
 											"type": "string",
-											"description": "React icon component name"
+											"description": "React Icons identifier for the technology icon",
+											"examples": [
+												"FaReact",
+												"FaNodeJs",
+												"FaPython"
+											]
 										},
 										"color": {
 											"type": "string",
-											"description": "Tailwind text color class"
+											"description": "Color for the technology - hex code or Tailwind CSS class",
+											"examples": [
+												"#61dafb",
+												"#339933",
+												"#3572a5",
+												"text-blue-400",
+												"text-green-500"
+											]
 										}
 									},
 									"required": [
 										"name",
-										"icon",
-										"color"
+										"icon"
 									]
 								}
 							}
 						},
 						"required": [
 							"category",
-							"icon",
 							"items"
 						]
 					}
 				},
 				"stats": {
 					"type": "array",
+					"maxItems": 6,
 					"items": {
 						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"number": {
 								"type": "string",
-								"description": "Statistic number (e.g., '3+', '50+')"
+								"pattern": "^[0-9]+[+]?$",
+								"description": "Statistical number (can include + for 'or more')",
+								"examples": [
+									"50+",
+									"100",
+									"5"
+								]
 							},
 							"label": {
 								"type": "string",
-								"description": "Statistic label"
+								"minLength": 1,
+								"maxLength": 30,
+								"description": "Label describing what the number represents",
+								"examples": [
+									"Projects Completed",
+									"Years Experience",
+									"Happy Clients"
+								]
 							}
 						},
 						"required": [
@@ -541,11 +1302,20 @@
 						]
 					}
 				}
-			}
+			},
+			"required": [
+				"heading",
+				"title",
+				"paragraphs",
+				"image",
+				"skillsHeading",
+				"skills"
+			]
 		},
 		"resume": {
 			"type": "object",
-			"description": "Resume configuration",
+			"description": "Resume configuration and content management",
+			"additionalProperties": true,
 			"properties": {
 				"type": {
 					"type": "string",
@@ -553,28 +1323,43 @@
 						"file",
 						"external"
 					],
-					"description": "Resume serving method"
+					"description": "Resume source type - 'file' for local PDF, 'external' for external URL"
 				},
 				"url": {
 					"type": "string",
-					"description": "Local file path (for type 'file')"
+					"description": "Resume URL - can be relative path (for local files) or full URL (for external)",
+					"examples": [
+						"https://example.com/resume.pdf",
+						"/resume.pdf",
+						"./assets/resume.pdf"
+					]
 				},
 				"filename": {
 					"type": "string",
-					"description": "Download filename"
+					"pattern": "^[a-zA-Z0-9._-]+\\.(pdf|docx)$",
+					"description": "Local resume filename (required when type is 'file')",
+					"examples": [
+						"resume.pdf",
+						"john-doe-resume.pdf"
+					]
 				},
 				"alternativeUrl": {
-					"type": "string",
-					"description": "External URL (for type 'external'). Leave empty if using local file."
+					"$ref": "#/definitions/url",
+					"description": "Alternative or backup resume URL or empty string",
+					"examples": [
+						"https://vkrishna04.github.io/resume.pdf",
+						""
+					]
 				},
 				"sectionOrder": {
 					"type": "array",
+					"uniqueItems": true,
 					"items": {
 						"type": "string",
 						"enum": [
 							"experiences",
-							"skills",
 							"education",
+							"skills",
 							"awards",
 							"certifications",
 							"personalProjects",
@@ -583,186 +1368,841 @@
 							"volunteerExperience"
 						]
 					},
-					"description": "Order of resume sections"
-				}
-			}
-		},
-		"navbar": {
-			"type": "object",
-			"description": "Navigation bar configuration",
-			"properties": {
-				"logo": {
-					"type": "object",
-					"properties": {
-						"type": {
-							"type": "string",
-							"enum": [
-								"text",
-								"image",
-								"github"
-							],
-							"description": "Logo type"
-						},
-						"text": {
-							"type": "string",
-							"description": "Logo text (for type 'text')"
-						},
-						"name": {
-							"type": "string",
-							"description": "Full name to display with logo"
-						},
-						"showName": {
-							"type": "boolean",
-							"description": "Whether to show name with logo"
-						},
-						"showNameOnMobile": {
-							"type": "boolean",
-							"description": "Whether to show name on mobile"
-						},
-						"gradient": {
-							"type": "string",
-							"description": "Tailwind gradient classes for logo"
-						},
-						"customImageUrl": {
-							"type": "string",
-							"description": "Custom image URL (for type 'image'). Leave empty if not using custom image."
-						}
-					}
+					"description": "Order of sections to display on the resume page",
+					"examples": [
+						[
+							"experiences",
+							"education",
+							"skills",
+							"certifications"
+						]
+					]
 				},
-				"navigation": {
+				"experiences": {
 					"type": "array",
 					"items": {
 						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"title": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Job title or position",
+								"examples": [
+									"Senior Software Engineer",
+									"Full Stack Developer"
+								]
+							},
+							"company": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Company or organization name",
+								"examples": [
+									"Google",
+									"Microsoft",
+									"Startup Inc."
+								]
+							},
+							"period": {
+								"type": "string",
+								"pattern": "^(\\d{4}|Present) - (\\d{4}|Present)$",
+								"description": "Employment period in YYYY - YYYY format",
+								"examples": [
+									"2020 - 2023",
+									"2021 - Present"
+								]
+							},
+							"location": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Work location",
+								"examples": [
+									"San Francisco, CA",
+									"Remote",
+									"New York, NY"
+								]
+							},
+							"description": {
+								"type": "array",
+								"minItems": 1,
+								"maxItems": 10,
+								"items": {
+									"type": "string",
+									"minLength": 10,
+									"maxLength": 200
+								},
+								"description": "Array of job responsibilities and achievements"
+							}
+						},
+						"required": [
+							"title",
+							"company",
+							"period",
+							"description"
+						]
+					}
+				},
+				"education": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"degree": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Degree type and name",
+								"examples": [
+									"Bachelor of Science",
+									"Master of Computer Science"
+								]
+							},
+							"field": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Field of study or major",
+								"examples": [
+									"Computer Science",
+									"Software Engineering"
+								]
+							},
+							"school": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Institution name",
+								"examples": [
+									"Stanford University",
+									"MIT"
+								]
+							},
+							"period": {
+								"type": "string",
+								"pattern": "^\\d{4} - \\d{4}$",
+								"description": "Study period in YYYY - YYYY format",
+								"examples": [
+									"2016 - 2020"
+								]
+							},
+							"gpa": {
+								"type": "string",
+								"description": "Grade Point Average in various formats",
+								"examples": [
+									"3.85/4.0",
+									"3.7",
+									"95%",
+									"First Class",
+									"Magna Cum Laude"
+								]
+							},
+							"achievements": {
+								"type": "array",
+								"maxItems": 5,
+								"items": {
+									"type": "string",
+									"minLength": 5,
+									"maxLength": 150
+								},
+								"description": "Academic achievements and honors"
+							}
+						},
+						"required": [
+							"degree",
+							"field",
+							"school",
+							"period"
+						]
+					}
+				},
+				"certifications": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
 						"properties": {
 							"name": {
 								"type": "string",
-								"description": "Navigation item name"
+								"minLength": 1,
+								"maxLength": 150,
+								"description": "Certification name",
+								"examples": [
+									"AWS Certified Solutions Architect"
+								]
 							},
-							"path": {
+							"issuer": {
 								"type": "string",
-								"description": "Navigation item path"
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Issuing organization",
+								"examples": [
+									"Amazon Web Services",
+									"Microsoft"
+								]
+							},
+							"date": {
+								"type": "string",
+								"description": "Certification date in YYYY-MM-DD format or just YYYY for year only",
+								"examples": [
+									"2023-06-15",
+									"2023"
+								]
+							},
+							"credentialId": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 100,
+								"description": "Unique credential identifier"
+							},
+							"certificateUrl": {
+								"type": "string",
+								"format": "uri",
+								"description": "URL to the certificate"
+							},
+							"verificationUrl": {
+								"type": "string",
+								"format": "uri",
+								"description": "URL for verification"
 							}
 						},
 						"required": [
 							"name",
-							"path"
+							"issuer",
+							"date"
+						]
+					}
+				}
+			},
+			"required": [
+				"type"
+			],
+			"if": {
+				"properties": {
+					"type": {
+						"const": "file"
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"filename"
+				]
+			},
+			"else": {
+				"required": [
+					"url"
+				]
+			}
+		},
+		"awards": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"organization": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publications": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"publisher": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"languages": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"proficiency": {
+						"type": "string"
+					},
+					"level": {
+						"type": "string",
+						"enum": [
+							"A1",
+							"A2",
+							"B1",
+							"B2",
+							"C1",
+							"C2"
 						]
 					}
 				}
 			}
 		},
-		"footer": {
-			"type": "object",
-			"description": "Footer configuration",
-			"properties": {
-				"copyright": {
+		"volunteerExperience": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"role": {
+						"type": "string"
+					},
+					"organization": {
+						"type": "string"
+					},
+					"period": {
+						"type": "string"
+					},
+					"description": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"personalProjects": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"technologies": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"icon": {
+									"type": "string"
+								},
+								"color": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"period": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"githubUrl": {
+						"type": "string"
+					},
+					"liveUrl": {
+						"type": "string"
+					},
+					"demoUrl": {
+						"type": "string"
+					},
+					"documentationUrl": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"navbar": {
+		"type": "object",
+		"description": "Navigation bar configuration and styling",
+		"additionalProperties": false,
+		"properties": {
+			"logo": {
+				"type": "object",
+				"description": "Logo configuration for the navigation bar",
+				"additionalProperties": false,
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": [
+							"text",
+							"image",
+							"github"
+						],
+						"description": "Logo type - 'text' for text-based, 'image' for custom image, 'github' for GitHub avatar"
+					},
+					"text": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 20,
+						"description": "Text to display as logo (when type is 'text')",
+						"examples": [
+							"KG",
+							"Krishna"
+						]
+					},
+					"name": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50,
+						"description": "Full name to display alongside logo",
+						"examples": [
+							"Krishna GSVV"
+						]
+					},
+					"showName": {
+						"type": "boolean",
+						"description": "Whether to show the name on desktop",
+						"default": true
+					},
+					"showNameOnMobile": {
+						"type": "boolean",
+						"description": "Whether to show the name on mobile devices",
+						"default": false
+					},
+					"gradient": {
+						"type": "string",
+						"pattern": "^(from|to)-[a-z-]+(\\s+(from|to|via)-[a-z-]+)*$",
+						"description": "Tailwind CSS gradient classes for text logo",
+						"examples": [
+							"from-blue-400 to-purple-600"
+						]
+					},
+					"customImageUrl": {
+						"type": "string",
+						"format": "uri",
+						"description": "Custom image URL (when type is 'image')",
+						"examples": [
+							"https://example.com/logo.png"
+						]
+					}
+				},
+				"required": [
+					"type"
+				]
+			},
+			"navigation": {
+				"type": "array",
+				"minItems": 1,
+				"maxItems": 8,
+				"items": {
 					"type": "object",
+					"additionalProperties": false,
 					"properties": {
 						"name": {
 							"type": "string",
-							"description": "Copyright holder name"
+							"minLength": 1,
+							"maxLength": 20,
+							"description": "Display name for the navigation item",
+							"examples": [
+								"Home",
+								"About",
+								"Projects"
+							]
 						},
-						"showYear": {
-							"type": "boolean",
-							"description": "Whether to show current year"
-						},
-						"text": {
+						"href": {
 							"type": "string",
-							"description": "Copyright text"
-						},
-						"customText": {
-							"type": "string",
-							"description": "Custom copyright text (overrides default)"
+							"description": "URL path or anchor for the navigation item",
+							"examples": [
+								"/",
+								"/about",
+								"/projects",
+								"#contact"
+							]
 						}
-					}
-				},
-				"madeWith": {
-					"type": "object",
-					"properties": {
-						"show": {
-							"type": "boolean",
-							"description": "Whether to show 'made with' section"
-						},
-						"text": {
-							"type": "string",
-							"description": "'Made with' text"
-						},
-						"icon": {
-							"type": "string",
-							"description": "React icon for 'made with'"
-						},
-						"iconColor": {
-							"type": "string",
-							"description": "Tailwind color class for icon"
-						},
-						"by": {
-							"type": "string",
-							"description": "Creator attribution"
-						}
-					}
-				}
-			}
-		},
-		"favicon": {
-			"type": "object",
-			"description": "Favicon configuration",
-			"properties": {
-				"type": {
-					"type": "string",
-					"enum": [
-						"github",
-						"custom",
-						"default"
-					],
-					"description": "Favicon source type"
-				},
-				"customUrl": {
-					"type": "string",
-					"description": "Custom favicon URL. Leave empty if not using custom favicon."
-				},
-				"sizes": {
-					"type": "array",
-					"items": {
-						"type": "string"
 					},
-					"description": "Favicon sizes"
-				},
-				"appleTouchIcon": {
-					"type": "boolean",
-					"description": "Whether to generate Apple touch icon"
+					"required": [
+						"name",
+						"href"
+					]
+				}
+			},
+			"styling": {
+				"type": "object",
+				"description": "Visual styling options for the navbar",
+				"additionalProperties": false,
+				"properties": {
+					"mobileMenuBg": {
+						"type": "string",
+						"pattern": "^bg-[a-z-]+(-[0-9]+)?(/[0-9]+)?$",
+						"description": "Tailwind CSS background class for mobile menu",
+						"examples": [
+							"bg-gray-900/95",
+							"bg-black/90"
+						]
+					}
+				}
+			},
+			"animations": {
+				"type": "object",
+				"description": "Animation settings for navbar interactions",
+				"additionalProperties": false,
+				"properties": {
+					"springDamping": {
+						"type": "number",
+						"minimum": 0.1,
+						"maximum": 1.0,
+						"description": "Spring damping for animations (0.1 to 1.0)",
+						"default": 0.6
+					}
 				}
 			}
 		},
-		"counterAPI": {
-			"type": "object",
-			"description": "Project counter API configuration",
-			"properties": {
-				"enabled": {
-					"type": "boolean",
-					"description": "Whether to enable view counter"
+		"required": [
+			"logo",
+			"navigation"
+		]
+	},
+	"footer": {
+		"type": "object",
+		"description": "Footer configuration and content",
+		"additionalProperties": false,
+		"properties": {
+			"copyright": {
+				"type": "object",
+				"description": "Copyright information configuration",
+				"additionalProperties": false,
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100,
+						"description": "Name to display in copyright notice",
+						"examples": [
+							"Krishna GSVV"
+						]
+					},
+					"showYear": {
+						"type": "boolean",
+						"description": "Whether to show the current year",
+						"default": true
+					},
+					"text": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50,
+						"description": "Copyright text template",
+						"examples": [
+							"© {year} {name}. All rights reserved."
+						]
+					},
+					"customText": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100,
+						"description": "Custom copyright text (overrides template if provided)",
+						"examples": [
+							"© 2025 Krishna GSVV. Built with ❤️"
+						]
+					}
 				},
-				"baseUrl": {
+				"required": [
+					"name"
+				]
+			},
+			"madeWith": {
+				"type": "object",
+				"description": "Made with technology attribution",
+				"additionalProperties": false,
+				"properties": {
+					"show": {
+						"type": "boolean",
+						"description": "Whether to show the 'made with' section",
+						"default": true
+					},
+					"text": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50,
+						"description": "Text before the technology name",
+						"examples": [
+							"Made with",
+							"Built with",
+							"Powered by"
+						]
+					},
+					"icon": {
+						"type": "string",
+						"description": "Icon to display (usually a heart or tech icon)",
+						"examples": [
+							"❤️",
+							"⚡",
+							"🚀"
+						]
+					},
+					"color": {
+						"type": "string",
+						"pattern": "^#[0-9A-Fa-f]{6}$",
+						"description": "Hex color for the icon",
+						"examples": [
+							"#ff0000",
+							"#3b82f6"
+						]
+					},
+					"by": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 30,
+						"description": "Technology or framework name",
+						"examples": [
+							"React",
+							"Vite",
+							"Next.js"
+						]
+					}
+				}
+			},
+			"socialLinks": {
+				"type": "object",
+				"description": "Social media links in footer",
+				"additionalProperties": false,
+				"properties": {
+					"show": {
+						"type": "boolean",
+						"description": "Whether to show social links in footer",
+						"default": true
+					}
+				}
+			},
+			"styling": {
+				"type": "object",
+				"description": "Footer visual styling options",
+				"additionalProperties": false,
+				"properties": {
+					"copyrightColor": {
+						"type": "string",
+						"pattern": "^text-[a-z-]+(-[0-9]+)?$",
+						"description": "Tailwind CSS text color class for copyright",
+						"examples": [
+							"text-gray-400",
+							"text-slate-500"
+						]
+					}
+				}
+			}
+		},
+		"required": [
+			"copyright"
+		]
+	},
+	"favicon": {
+		"type": "object",
+		"description": "Website favicon configuration",
+		"additionalProperties": false,
+		"properties": {
+			"type": {
+				"type": "string",
+				"enum": [
+					"github",
+					"custom",
+					"default"
+				],
+				"description": "Favicon source type - 'github' uses GitHub avatar, 'custom' uses customUrl, 'default' uses browser default"
+			},
+			"customUrl": {
+				"type": "string",
+				"format": "uri",
+				"description": "Custom favicon URL (required when type is 'custom')",
+				"examples": [
+					"https://example.com/favicon.ico"
+				]
+			},
+			"sizes": {
+				"type": "array",
+				"uniqueItems": true,
+				"items": {
 					"type": "string",
-					"format": "uri",
-					"description": "Counter API base URL"
+					"pattern": "^[0-9]+x[0-9]+$"
 				},
-				"timeout": {
-					"type": "integer",
-					"minimum": 1000,
-					"maximum": 30000,
-					"description": "API timeout in milliseconds"
-				},
-				"fallbackOnError": {
-					"type": "boolean",
-					"description": "Whether to continue if API fails"
+				"description": "Array of favicon sizes to generate",
+				"examples": [
+					[
+						"16x16",
+						"32x32",
+						"192x192",
+						"512x512"
+					]
+				]
+			},
+			"appleTouchIcon": {
+				"type": "boolean",
+				"description": "Whether to generate Apple touch icons",
+				"default": true
+			}
+		},
+		"required": [
+			"type"
+		]
+	},
+	"counterAPI": {
+		"type": "object",
+		"description": "Project visitor counter API configuration",
+		"additionalProperties": false,
+		"properties": {
+			"enabled": {
+				"type": "boolean",
+				"description": "Whether to enable project view counters",
+				"default": false
+			},
+			"baseUrl": {
+				"type": "string",
+				"format": "uri",
+				"description": "Base URL for the counter API service",
+				"examples": [
+					"https://api.counterapi.dev/v1"
+				]
+			},
+			"timeout": {
+				"type": "integer",
+				"minimum": 1000,
+				"maximum": 30000,
+				"description": "API request timeout in milliseconds",
+				"default": 5000
+			},
+			"fallbackOnError": {
+				"type": "boolean",
+				"description": "Whether to show fallback counters if API fails",
+				"default": true
+			},
+			"projectMapping": {
+				"type": "object",
+				"description": "Configuration for mapping projects to counter endpoints",
+				"additionalProperties": false,
+				"properties": {
+					"autoGenerate": {
+						"type": "boolean",
+						"description": "Whether to automatically generate project mappings from repository names",
+						"default": true
+					},
+					"customMappings": {
+						"type": "object",
+						"patternProperties": {
+							"^[a-zA-Z0-9._-]+$": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 50
+							}
+						},
+						"description": "Custom mappings from repository names to CounterAPI project names",
+						"examples": [
+							{
+								"ParkMeter": "parking-system",
+								"BreachCheck": "security-tool"
+							}
+						]
+					}
 				}
 			}
 		}
 	},
 	"required": [
+		"$schema",
 		"github",
 		"projects",
-		"display",
-		"social"
-	]
+		"home",
+		"social",
+		"about",
+		"navbar",
+		"footer"
+	],
+	"definitions": {
+		"url": {
+			"oneOf": [
+				{
+					"type": "string",
+					"const": "",
+					"description": "Empty string for no URL"
+				},
+				{
+					"type": "string",
+					"format": "uri",
+					"minLength": 1,
+					"description": "A valid URL string"
+				}
+			],
+			"description": "A valid URL string or empty string"
+		},
+		"color": {
+			"type": "string",
+			"pattern": "^#[0-9A-Fa-f]{6}$",
+			"description": "A valid hex color code (e.g., #ff0000)"
+		},
+		"tailwindColor": {
+			"type": "string",
+			"pattern": "^(text|bg|border)-[a-z-]+(-[0-9]+)?$",
+			"description": "A valid Tailwind CSS color class"
+		},
+		"iconName": {
+			"type": "string",
+			"pattern": "^[A-Z][a-zA-Z0-9]*$",
+			"description": "A valid React Icons component name"
+		},
+		"githubUrl": {
+			"oneOf": [
+				{
+					"type": "string",
+					"const": "",
+					"description": "Empty string for no GitHub URL"
+				},
+				{
+					"type": "string",
+					"format": "uri",
+					"pattern": "^https://github\\.com/[^/]+/[^/]+/?$",
+					"description": "A valid GitHub repository URL"
+				}
+			],
+			"description": "A valid GitHub repository URL or empty string"
+		},
+		"dateString": {
+			"type": "string",
+			"format": "date",
+			"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+			"description": "A date in YYYY-MM-DD format"
+		},
+		"technologyTag": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 50,
+			"pattern": "^[a-zA-Z0-9._-]+$",
+			"description": "A technology tag using lowercase kebab-case format. Common examples include: react, vue, angular, node-js, python, django, flask, java, spring, typescript, javascript, html, css, tailwind-css, bootstrap, mongodb, postgresql, mysql, redis, docker, kubernetes, aws, azure, gcp, git, github-actions, ci-cd, api, rest, graphql, websockets, microservices, serverless, machine-learning, ai, blockchain, iot, mobile, android, ios, react-native, flutter, desktop, electron, cli, testing, jest, cypress, selenium, webpack, vite, babel, eslint, prettier",
+			"examples": [
+				"react",
+				"node-js",
+				"typescript",
+				"tailwind-css",
+				"postgresql",
+				"docker",
+				"aws",
+				"machine-learning"
+			]
+		}
+	},
+	"$comment": "Portfolio Website Configuration Schema v2.0.0 - This comprehensive schema validates all configuration options for a modern portfolio website including GitHub integration, project management, social media links, resume sections, and UI customization. It provides detailed validation rules, helpful examples, and inline documentation to ensure proper configuration and optimal user experience."
 }

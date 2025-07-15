@@ -7,8 +7,8 @@
 		"userAgent": "VKrishna04-Portfolio"
 	},
 	"projects": {
+		"mode": "hybrid",
 		"ignore": [
-			"VKrishna04.github.io",
 			".github",
 			"financial_assist",
 			"VKrishna04"
@@ -18,82 +18,527 @@
 		"sortOrder": "desc",
 		"showForks": false,
 		"showPrivate": false,
-		"fallbackMode": true
-	},
-	"display": {
+		"fallbackMode": true,
+		"staticProjects": [
+			{
+				"id": "767672764",
+				"name": "ParkMeter",
+				"description": "Parking Ticket Management System: Develop a system for tracking and managing parking tickets, including features for payment processing, ticket history, and notifications.",
+				"technologies": [
+					"access-control",
+					"django",
+					"login-system",
+					"parking-management",
+					"role-based-access-control",
+					"ticket-management",
+					"user-interface",
+					"user-management"
+				],
+				"category": "Web App",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2024-03-05",
+				"endDate": "2024-11-25",
+				"githubUrl": "https://github.com/Life-Experimentalist/ParkMeter",
+				"liveUrl": "https://vkrishna04.github.io/ParkMeter/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"access-control",
+					"django",
+					"login-system",
+					"parking-management",
+					"role-based-access-control",
+					"ticket-management",
+					"user-interface",
+					"user-management"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 1,
+					"forks": 2,
+					"watchers": 1,
+					"issues": 0
+				}
+			},
+			{
+				"id": "893461325",
+				"name": "BreachCheck",
+				"description": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach databases aggregators to provide users with information about their potential exposure.",
+				"technologies": [
+					"breach-check",
+					"email-phishing",
+					"password-safety",
+					"pure-python",
+					"streamlit",
+					"unsplash-api"
+				],
+				"category": "Web App",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2024-11-24",
+				"endDate": "2025-02-13",
+				"githubUrl": "https://github.com/Life-Experimentalist/BreachCheck",
+				"liveUrl": "https://breachcheck-sagittarius.streamlit.app/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"breach-check",
+					"email-phishing",
+					"password-safety",
+					"pure-python",
+					"streamlit",
+					"unsplash-api"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 2,
+					"forks": 1,
+					"watchers": 2,
+					"issues": 0
+				}
+			},
+			{
+				"id": "939606364",
+				"name": "SignLanguageDetector",
+				"description": "Sign Language Detector is a real-time ISL 🇮🇳 recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
+				"technologies": [],
+				"category": "Machine Learning",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-02-26",
+				"endDate": "2025-03-01",
+				"githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				}
+			},
+			{
+				"id": "945109137",
+				"name": "HiveXplore",
+				"description": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. With simplified authentication, intuitive posting tools, and guided experiences, it serves as an educational gateway for blockchain beginners while making participation in the ecosystem accessible.",
+				"technologies": [
+					"blockchain",
+					"caching",
+					"content-platform",
+					"cryptocurrency",
+					"dapp",
+					"decentralized",
+					"flask",
+					"hive-blockchain",
+					"hivesigner",
+					"keychain",
+					"markdown",
+					"python",
+					"real-time",
+					"restful-api",
+					"social-media",
+					"sqlite",
+					"web-application"
+				],
+				"category": "Web App",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-03-08",
+				"endDate": "2025-03-11",
+				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
+				"liveUrl": "https://hivebuzz.onrender.com/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"blockchain",
+					"caching",
+					"content-platform",
+					"cryptocurrency",
+					"dapp",
+					"decentralized",
+					"flask",
+					"hive-blockchain",
+					"hivesigner",
+					"keychain",
+					"markdown",
+					"python",
+					"real-time",
+					"restful-api",
+					"social-media",
+					"sqlite",
+					"web-application"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				}
+			},
+			{
+				"id": "946823206",
+				"name": "zipCracker",
+				"description": "A Python-based tool for cracking protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
+				"technologies": [
+					"archive-extraction",
+					"archive-password-recovery",
+					"brute-force",
+					"command-line-tool",
+					"cross-platform",
+					"cybersecurity-education",
+					"data-recovery",
+					"dictionary-attack",
+					"ethical-hacking",
+					"file-processing",
+					"file-security",
+					"memory-efficient",
+					"multi-format-support",
+					"multithreading",
+					"password-analysis",
+					"password-cracking",
+					"password-dictionary",
+					"performance-optimization",
+					"python",
+					"zip-cracker"
+				],
+				"category": "Tool",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-03-11",
+				"endDate": "2025-03-11",
+				"githubUrl": "https://github.com/Life-Experimentalist/zipCracker",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"archive-extraction",
+					"archive-password-recovery",
+					"brute-force",
+					"command-line-tool",
+					"cross-platform",
+					"cybersecurity-education",
+					"data-recovery",
+					"dictionary-attack",
+					"ethical-hacking",
+					"file-processing",
+					"file-security",
+					"memory-efficient",
+					"multi-format-support",
+					"multithreading",
+					"password-analysis",
+					"password-cracking",
+					"password-dictionary",
+					"performance-optimization",
+					"python",
+					"zip-cracker"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				}
+			},
+			{
+				"id": "947691990",
+				"name": "cspell-sync",
+				"description": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
+				"technologies": [],
+				"category": "VS Code Extension",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-03-13",
+				"endDate": "2025-03-26",
+				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
+				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [],
+				"highlights": [],
+				"stats": {
+					"stars": 1,
+					"forks": 0,
+					"watchers": 1,
+					"issues": 0
+				}
+			},
+			{
+				"id": "950862006",
+				"name": "FacialEmotionDetector",
+				"description": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
+				"technologies": [
+					"ai",
+					"computer-vision",
+					"emotion-detection",
+					"facial-landmarks",
+					"facial-recognition",
+					"human-computer-interaction",
+					"machine-learning",
+					"mediapipe",
+					"opencv",
+					"python",
+					"real-time-detection"
+				],
+				"category": "Machine Learning",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-03-18",
+				"endDate": "2025-03-19",
+				"githubUrl": "https://github.com/Life-Experimentalist/FacialEmotionDetector",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"ai",
+					"computer-vision",
+					"emotion-detection",
+					"facial-landmarks",
+					"facial-recognition",
+					"human-computer-interaction",
+					"machine-learning",
+					"mediapipe",
+					"opencv",
+					"python",
+					"real-time-detection"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				}
+			},
+			{
+				"id": "960053038",
+				"name": "RanobeGemini",
+				"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
+				"technologies": [],
+				"category": "Browser Extension",
+				"featured": false,
+				"status": "Ongoing",
+				"startDate": "2025-04-03",
+				"endDate": "2025-05-25",
+				"githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
+				"liveUrl": "https://addons.mozilla.org/en-US/firefox/addon/ranobegemini/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [],
+				"highlights": [],
+				"stats": {
+					"stars": 3,
+					"forks": 0,
+					"watchers": 3,
+					"issues": 0
+				}
+			},
+			{
+				"id": "961510517",
+				"name": "eVidya",
+				"description": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
+				"technologies": [],
+				"category": "Web App",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-04-06",
+				"endDate": "2025-05-25",
+				"githubUrl": "https://github.com/Life-Experimentalist/eVidya",
+				"liveUrl": "https://life-experimentalist.github.io/eVidya/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				}
+			},
+			{
+				"id": "991336813",
+				"name": "Global-Save-State",
+				"description": "VS Code Extension to dave your project at working save points.",
+				"technologies": [
+					"backup",
+					"checkpoint",
+					"develo",
+					"productivity",
+					"restore",
+					"save-state",
+					"timeline",
+					"vscode",
+					"vscode-extension"
+				],
+				"category": "VS Code Extension",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-05-27",
+				"endDate": "2025-05-31",
+				"githubUrl": "https://github.com/Life-Experimentalist/Global-Save-State",
+				"liveUrl": "https://life-experimentalist.github.io/Global-Save-State/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"backup",
+					"checkpoint",
+					"develo",
+					"productivity",
+					"restore",
+					"save-state",
+					"timeline",
+					"vscode",
+					"vscode-extension"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 1,
+					"forks": 0,
+					"watchers": 1,
+					"issues": 0
+				}
+			},
+			{
+				"id": "1009677674",
+				"name": "CounterAPI",
+				"description": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
+				"technologies": [
+					"api",
+					"backend",
+					"counter",
+					"developer-tools",
+					"fastapi",
+					"free-tier",
+					"open-source",
+					"postgresql",
+					"project-stats",
+					"render",
+					"self-hosted",
+					"usage-tracking"
+				],
+				"category": "Web App",
+				"featured": false,
+				"status": "Completed",
+				"startDate": "2025-06-27",
+				"endDate": "2025-07-04",
+				"githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
+				"liveUrl": "https://life-experimentalist.github.io/CounterAPI/",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+				"tags": [
+					"api",
+					"backend",
+					"counter",
+					"developer-tools",
+					"fastapi",
+					"free-tier",
+					"open-source",
+					"postgresql",
+					"project-stats",
+					"render",
+					"self-hosted",
+					"usage-tracking"
+				],
+				"highlights": [],
+				"stats": {
+					"stars": 0,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				}
+			}
+		],
+		"staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
 		"officialName": "Krishna GSVV",
 		"devUsername": "VKrishna04",
 		"profileImage": "https://github.com/VKrishna04.png"
 	},
-		"home": {
-			"greeting": "Hi There! 👋🏻 I'm",
-			"name": "Krishna GSVV",
-			"nameGradient": "linear-gradient(to right, #c770f0, #ec4899, #ef4444)",
-			"typewriterStrings": [
-				"Full Stack Developer",
-				"Problem Solver",
-				"Tech Enthusiast",
-				"Open Source Contributor"
-			],
-			"description": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. Always eager to learn new technologies and contribute to meaningful projects.",
-			"location": {
-				"show": true,
-				"text": "📍 Bengaluru, India",
-				"icon": "📍",
-				"city": "Bengaluru",
-				"country": "India"
-			},
-			"profileImage": {
-				"type": "github",
-				"customUrl": "",
-				"altText": "Krishna GSVV",
-				"borderColor": "border-purple-500/30",
-				"shadowColor": "shadow-purple-500/20",
-				"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl"
-			},
-			"buttons": [
-				{
-					"text": "About Me",
-					"link": "/about",
-					"type": "primary",
-					"gradient": "from-purple-600 to-pink-600",
-					"hoverGradient": "from-purple-700 to-pink-700",
-					"shadowColor": "shadow-purple-500/25",
-					"icon": "ArrowDownIcon"
-				},
-				{
-					"text": "Projects",
-					"link": "/projects",
-					"type": "primary",
-					"gradient": "from-cyan-600 to-blue-600",
-					"hoverGradient": "from-cyan-700 to-blue-700",
-					"shadowColor": "shadow-cyan-500/25",
-					"icon": "ArrowDownIcon"
-				},
-				{
-					"text": "Resume",
-					"link": "/resume",
-					"type": "outline",
-					"borderColor": "border-purple-500",
-					"textColor": "text-purple-400",
-					"hoverBg": "hover:bg-purple-500",
-					"hoverText": "hover:text-white",
-					"icon": "DocumentArrowDownIcon"
-				}
-			],
-			"showScrollIndicator": true,
-			"animations": {
-				"typewriterSettings": {
-					"deleteSpeed": 50,
-					"delay": 100,
-					"autoStart": true,
-					"loop": true
-				},
-				"fadeInDuration": 0.6,
-				"staggerDelay": 0.1
-			},
-			"note": "Configure the home page content - greeting, name, typewriter strings, description, profile image settings, buttons, social links, and animations"
+	"home": {
+		"greeting": "Hi There! 👋🏻 I'm",
+		"name": "Krishna GSVV",
+		"nameGradient": "linear-gradient(to right, #c770f0, #ec4999, #ef4444)",
+		"typewriterStrings": [
+			"Full Stack Developer",
+			"Problem Solver",
+			"Tech Enthusiast",
+			"Open Source Contributor"
+		],
+		"description": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. Always eager to learn new technologies and contribute to meaningful projects.",
+		"location": {
+			"show": true,
+			"text": "📍 Bengaluru, India",
+			"icon": "📍",
+			"city": "Bengaluru",
+			"country": "India"
 		},
+		"profileImage": {
+			"type": "github",
+			"customUrl": "",
+			"altText": "Krishna GSVV",
+			"borderColor": "border-purple-500/30",
+			"shadowColor": "shadow-purple-500/20",
+			"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl"
+		},
+		"buttons": [
+			{
+				"text": "About Me",
+				"link": "/about",
+				"type": "primary",
+				"gradient": "from-purple-600 to-pink-600",
+				"hoverGradient": "from-purple-700 to-pink-700",
+				"shadowColor": "shadow-purple-500/25",
+				"icon": "ArrowDownIcon"
+			},
+			{
+				"text": "Projects",
+				"link": "/projects",
+				"type": "primary",
+				"gradient": "from-cyan-600 to-blue-600",
+				"hoverGradient": "from-cyan-700 to-blue-700",
+				"shadowColor": "shadow-cyan-500/25",
+				"icon": "ArrowDownIcon"
+			},
+			{
+				"text": "Resume",
+				"link": "/resume",
+				"type": "outline",
+				"borderColor": "border-purple-500",
+				"textColor": "text-purple-400",
+				"hoverBg": "hover:bg-purple-500",
+				"hoverText": "hover:text-white",
+				"icon": "DocumentArrowDownIcon"
+			}
+		],
+		"showScrollIndicator": true,
+		"animations": {
+			"typewriterSettings": {
+				"deleteSpeed": 50,
+				"delay": 100,
+				"autoStart": true,
+				"loop": true
+			},
+			"fadeInDuration": 0.6,
+			"staggerDelay": 0.1
+		},
+		"note": "Configure the home page content - greeting, name, typewriter strings, description, profile image settings, buttons, social links, and animations"
+	},
 	"social": {
 		"platforms": [
 			{
@@ -284,7 +729,7 @@
 			"phone": "",
 			"location": "Bengaluru, India"
 		},
-		"note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags."
+		"note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags. Available icons: FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch, FaTiktok, FaMedium, FaDev, FaStackOverflow, FaDribbble, FaBehance, FaCodepen, ArrowUpIcon, Bars3Icon, XMarkIcon"
 	},
 	"about": {
 		"heading": "About Me",
