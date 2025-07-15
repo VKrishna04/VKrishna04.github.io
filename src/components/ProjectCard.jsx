@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
 	StarIcon,
-	EyeIcon,
 	CodeBracketIcon,
-	ArrowTopRightOnSquareIcon,
 	CalendarIcon,
-	TagIcon,
+	ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import {
 	FaGithub,
@@ -31,10 +28,10 @@ import {
 	FaNodeJs,
 	FaPython,
 	FaJava,
-	FaPhp,
 	FaHtml5,
 	FaCss3Alt,
 	FaAws,
+	FaPhp,
 	FaJsSquare,
 	FaVuejs,
 	FaAngular,
@@ -42,38 +39,27 @@ import {
 	FaGitAlt,
 	FaDatabase,
 	FaMobile,
-	FaGlobe,
 	FaCode,
+	FaGlobe,
 } from "react-icons/fa";
 import {
+	SiJavascript,
 	SiTypescript,
-	SiNextdotjs,
-	SiTailwindcss,
 	SiMongodb,
 	SiPostgresql,
+	SiTailwindcss,
 	SiExpress,
+	SiNextdotjs,
 	SiNestjs,
-	SiDjango,
-	SiFlask,
-	SiSpring,
-	SiKotlin,
-	SiSwift,
-	SiFlutter,
-	SiReact,
-	SiVuedotjs,
-	SiAngular,
-	SiSvelte,
-	SiNuxtdotjs,
-	SiVite,
-	SiWebpack,
-	SiElectron,
-	SiFirebase,
-	SiSupabase,
 	SiRedis,
 	SiGraphql,
-	SiPrisma,
-	SiMysql,
-	SiSqlite,
+	SiKubernetes,
+	SiFirebase,
+	SiVercel,
+	SiNetlify,
+	SiVuedotjs,
+	SiSvelte,
+	SiNuxtdotjs,
 	SiGo,
 	SiRust,
 	SiCplusplus,
@@ -81,10 +67,20 @@ import {
 	SiRuby,
 	SiElixir,
 	SiScala,
-	SiKubernetes,
+	SiKotlin,
+	SiSwift,
+	SiFlutter,
+	SiElectron,
+	SiMysql,
+	SiSqlite,
+	SiDjango,
+	SiFlask,
+	SiSpring,
+	SiSupabase,
+	SiPrisma,
+	SiVite,
+	SiWebpack,
 	SiGooglecloud,
-	SiVercel,
-	SiNetlify,
 	SiHeroku,
 } from "react-icons/si";
 
@@ -93,17 +89,14 @@ const ProjectCard = ({ project, index = 0 }) => {
 	const cardVariants = {
 		hidden: {
 			opacity: 0,
-			y: 50,
-			scale: 0.9,
+			y: 20,
 		},
 		visible: {
 			opacity: 1,
 			y: 0,
-			scale: 1,
 			transition: {
 				duration: 0.5,
 				delay: index * 0.1,
-				ease: "easeOut",
 			},
 		},
 	};
@@ -123,33 +116,29 @@ const ProjectCard = ({ project, index = 0 }) => {
 
 	const getLanguageColor = (language) => {
 		const colors = {
-			JavaScript: "#f7df1e",
+			JavaScript: "#f1e05a",
 			TypeScript: "#3178c6",
-			Python: "#3572a5",
-			Java: "#ed8b00",
-			React: "#61dafb",
-			Vue: "#4fc08d",
-			Angular: "#dd0031",
-			Node: "#339933",
+			Python: "#3572A5",
+			Java: "#b07219",
 			HTML: "#e34c26",
-			CSS: "#1572b6",
-			SCSS: "#cf649a",
-			PHP: "#777bb4",
-			Go: "#00add8",
-			Rust: "#000000",
-			C: "#a8b9cc",
+			CSS: "#1572B6",
+			React: "#61dafb",
+			Vue: "#4FC08D",
+			Angular: "#dd1b16",
 			"C++": "#f34b7d",
-			"C#": "#239120",
-			Swift: "#fa7343",
-			Kotlin: "#7f52ff",
-			Dart: "#0175c2",
+			C: "#555555",
+			Go: "#00ADD8",
+			Rust: "#dea584",
+			PHP: "#4F5D95",
+			Ruby: "#701516",
+			Swift: "#FA7343",
+			Kotlin: "#A97BFF",
+			Dart: "#00B4AB",
 		};
-		return colors[language] || "#6b7280";
+		return colors[language] || "#8b5cf6";
 	};
 
 	const getTechnologyIcon = (tech) => {
-		if (!tech) return CodeBracketIcon;
-
 		const techLower = tech.toLowerCase();
 		const iconMap = {
 			// Frontend Languages & Frameworks
@@ -176,8 +165,6 @@ const ProjectCard = ({ project, index = 0 }) => {
 			nuxtjs: SiNuxtdotjs,
 			tailwind: SiTailwindcss,
 			tailwindcss: SiTailwindcss,
-
-			// Backend Languages & Frameworks
 			python: FaPython,
 			java: FaJava,
 			php: FaPhp,
@@ -203,16 +190,12 @@ const ProjectCard = ({ project, index = 0 }) => {
 			scala: SiScala,
 			kotlin: SiKotlin,
 			swift: SiSwift,
-
-			// Mobile & Desktop
 			flutter: SiFlutter,
 			dart: SiFlutter,
 			electron: SiElectron,
 			mobile: FaMobile,
 			android: FaMobile,
 			ios: FaMobile,
-
-			// Databases
 			mongodb: SiMongodb,
 			mongo: SiMongodb,
 			postgresql: SiPostgresql,
@@ -222,8 +205,6 @@ const ProjectCard = ({ project, index = 0 }) => {
 			redis: SiRedis,
 			database: FaDatabase,
 			db: FaDatabase,
-
-			// Tools & Others
 			docker: FaDocker,
 			git: FaGitAlt,
 			github: FaGithub,
@@ -235,16 +216,12 @@ const ProjectCard = ({ project, index = 0 }) => {
 			webpack: SiWebpack,
 			kubernetes: SiKubernetes,
 			k8s: SiKubernetes,
-
-			// Cloud & Deployment
 			aws: FaAws,
 			gcp: SiGooglecloud,
 			google: SiGooglecloud,
 			vercel: SiVercel,
 			netlify: SiNetlify,
 			heroku: SiHeroku,
-
-			// Web & General
 			web: FaGlobe,
 			website: FaGlobe,
 			webapp: FaGlobe,
@@ -257,27 +234,12 @@ const ProjectCard = ({ project, index = 0 }) => {
 		return iconMap[techLower] || CodeBracketIcon;
 	};
 
-	const getProjectIcon = () => {
-		// Priority order: check main language first, then first technology, then fallback
-		if (project.language) {
-			const icon = getTechnologyIcon(project.language);
-			if (icon !== CodeBracketIcon) return icon;
-		}
-
-		if (project.technologies && project.technologies.length > 0) {
-			const icon = getTechnologyIcon(project.technologies[0]);
-			if (icon !== CodeBracketIcon) return icon;
-		}
-
-		if (project.topics && project.topics.length > 0) {
-			const icon = getTechnologyIcon(project.topics[0]);
-			if (icon !== CodeBracketIcon) return icon;
-		}
-
-		return CodeBracketIcon;
-	};
-
-	const ProjectIcon = getProjectIcon();
+	const ProjectIcon = getTechnologyIcon(
+		project.language ||
+			project.technologies?.[0] ||
+			project.topics?.[0] ||
+			"code"
+	);
 
 	return (
 		<motion.div
@@ -311,7 +273,6 @@ const ProjectCard = ({ project, index = 0 }) => {
 					</div>
 				</div>
 
-				{/* Stars */}
 				{typeof project.stargazers_count === "number" && (
 					<div className="flex items-center space-x-1 text-yellow-400 flex-shrink-0">
 						<StarIcon className="w-4 h-4" />
@@ -359,16 +320,20 @@ const ProjectCard = ({ project, index = 0 }) => {
 				<div className="mb-4">
 					<div className="flex flex-wrap gap-2">
 						{project.technologies.slice(0, 4).map((tech, idx) => {
-							const TechIcon = getTechnologyIcon(tech);
+							const TechIcon = getTechnologyIcon(
+								typeof tech === "string" ? tech : tech.name
+							);
+							const techName = typeof tech === "string" ? tech : tech.name;
+							const showIcon = TechIcon !== CodeBracketIcon;
 							return (
-								<div
+								<span
 									key={idx}
-									className="flex items-center space-x-1 px-2 py-1 bg-blue-600/20 text-blue-300 rounded-full border border-blue-500/30 hover:bg-blue-600/30 transition-colors"
-									title={tech}
+									className="flex items-center space-x-1 px-2 py-1 text-xs bg-blue-600/20 text-blue-300 rounded-full border border-blue-500/30"
+									title={techName}
 								>
-									<TechIcon className="w-3 h-3" />
-									<span className="text-xs">{tech}</span>
-								</div>
+									{showIcon && <TechIcon className="w-3 h-3" />}
+									<span>{techName}</span>
+								</span>
 							);
 						})}
 						{project.technologies.length > 4 && (
@@ -406,10 +371,14 @@ const ProjectCard = ({ project, index = 0 }) => {
 
 			{/* Action Buttons */}
 			<div className="flex space-x-3 mt-auto">
-				{/* GitHub Link */}
-				{project.html_url && (
+				{/* GitHub Code Button - Always show for GitHub projects */}
+				{(project.html_url || project.githubUrl || project.name) && (
 					<a
-						href={project.html_url}
+						href={
+							project.html_url ||
+							project.githubUrl ||
+							`https://github.com/Life-Experimentalist/${project.name}`
+						}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-lg hover:from-gray-600 hover:to-gray-500 transition-all duration-300 text-sm font-medium hover:scale-105 flex-1 justify-center"
@@ -419,7 +388,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 					</a>
 				)}
 
-				{/* Live Demo Link */}
+				{/* Live Demo Button */}
 				{(project.homepage || project.liveUrl || project.demoUrl) && (
 					<a
 						href={project.homepage || project.liveUrl || project.demoUrl}

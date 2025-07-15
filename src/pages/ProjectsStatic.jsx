@@ -149,7 +149,7 @@ import {
 	SiVite,
 	SiGithub,
 } from "react-icons/si";
-import ProjectCard from "../components/ProjectCard/ProjectCard";
+import ProjectCard from "../components/ProjectCard";
 
 const ProjectsTemp = () => {
 	const [projects, setProjects] = useState([]);

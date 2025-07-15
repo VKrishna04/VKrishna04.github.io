@@ -21,8 +21,8 @@ import {
 	Route,
 	useLocation,
 } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 // import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -30,7 +30,8 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import ParticleBackground from "./components/ParticleBackground/ParticleBackground";
+import ParticleBackground from "./components/ParticleBackground";
+import FaviconManager from "./components/FaviconManager";
 import "./App.css";
 
 // Custom hook for managing page titles and favicon
@@ -78,10 +79,10 @@ const usePageConfiguration = (location) => {
 						faviconUrl = settings.favicon.customUrl;
 						break;
 					default:
-						faviconUrl = "/vite.svg"; // fallback
+						faviconUrl = "https://github.com/VKrishna04.png"; // fallback
 				}
 
-				if (faviconUrl && faviconUrl !== "/vite.svg") {
+				if (faviconUrl && faviconUrl !== "https://github.com/VKrishna04.png") {
 					// Add different sizes
 					const sizes = settings.favicon.sizes || ["16x16", "32x32", "96x96"];
 					sizes.forEach((size) => {

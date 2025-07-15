@@ -89,7 +89,12 @@ const Home = () => {
 
 		switch (imageConfig.type) {
 			case "github":
-				return settings.display?.profileImage;
+				return (
+					imageConfig.customUrl ||
+					`https://github.com/${
+						settings.home?.profileImage?.devUsername || "VKrishna04"
+					}.png`
+				);
 			case "display":
 				return settings.display?.profileImage;
 			case "custom":
@@ -136,7 +141,7 @@ const Home = () => {
 			transition={{ duration: 0.5 }}
 		>
 			<motion.div
-				className="relative z-50 text-center px-4 max-w-6xl mx-auto"
+				className="relative z-10 text-center px-4 max-w-6xl mx-auto"
 				variants={staggerContainer}
 				initial="initial"
 				animate="animate"

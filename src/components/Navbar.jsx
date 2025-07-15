@@ -19,22 +19,6 @@ import { Link, useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import {
-	FaGithub,
-	FaLinkedin,
-	FaTwitter,
-	FaInstagram,
-	FaDiscord,
-	FaYoutube,
-	FaTwitch,
-	FaTiktok,
-	FaMedium,
-	FaDev,
-	FaStackOverflow,
-	FaDribbble,
-	FaBehance,
-	FaCodepen,
-} from "react-icons/fa";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -91,19 +75,23 @@ const Navbar = () => {
 				};
 			case "github":
 				return {
-					imageUrl: settings.display?.profileImage,
+					imageUrl: `https://github.com/${
+						logoConfig.githubUsername || "VKrishna04"
+					}.png`,
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
 			case "auto":
 				return {
-					imageUrl: settings.display?.profileImage,
+					imageUrl: logoConfig.githubUsername
+						? `https://github.com/${logoConfig.githubUsername}.png`
+						: settings.display?.profileImage,
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
 			default:
 				return {
-					text: logoConfig.text || "VK",
+					text: logoConfig.text || "VK04",
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
