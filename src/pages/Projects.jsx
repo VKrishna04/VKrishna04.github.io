@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Krishna GSVV
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import React, { useState, useMemo, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -155,7 +170,17 @@ const Projects = () => {
 	const [selectedLanguages, setSelectedLanguages] = useState([]);
 	const [sortBy, setSortBy] = useState("updated");
 	const [showFilters, setShowFilters] = useState(false);
+	const [layoutMode, setLayoutMode] = useState(() => {
+		// Get saved layout mode from localStorage or default to masonry
+		return localStorage.getItem("projectsLayoutMode") || "masonry";
+	});
+	const [currentColumns, setCurrentColumns] = useState(1);
 	const [settings, setSettings] = useState({});
+
+	// Save layout mode preference
+	useEffect(() => {
+		localStorage.setItem("projectsLayoutMode", layoutMode);
+	}, [layoutMode]);
 
 	// Fetch settings
 	useEffect(() => {
@@ -174,16 +199,99 @@ const Projects = () => {
 			const staticProjects = settings.projects?.staticProjects || [];
 			return staticProjects;
 		} else if (mode === "hybrid") {
-			// For hybrid mode, combine both sources or fallback to static if repos are empty/error
+			// For hybrid mode, intelligently merge GitHub repos with static projects
 			if (repos && repos.length > 0) {
-				// Combine GitHub repos with static projects
 				const staticProjects = settings.projects?.staticProjects || [];
-				const combined = [...repos, ...staticProjects];
-				return combined;
+
+				// Create a map of GitHub repos by normalized name for easy lookup
+				const githubProjectsMap = new Map();
+				repos.forEach((repo) => {
+					const normalizedName = repo.name.toLowerCase().replace(/[-_\s]/g, "");
+					githubProjectsMap.set(normalizedName, repo);
+				});
+
+				// Process static projects and merge with GitHub data if available
+				const mergedProjects = [];
+				const usedGithubProjects = new Set();
+
+				staticProjects.forEach((staticProject) => {
+					const normalizedStaticName = staticProject.name
+						.toLowerCase()
+						.replace(/[-_\s]/g, "");
+					const matchingGithubProject =
+						githubProjectsMap.get(normalizedStaticName);
+
+					if (matchingGithubProject) {
+						// Merge the projects - GitHub data takes precedence for core fields
+						const mergedProject = {
+							// GitHub data (base)
+							...matchingGithubProject,
+							// Static project enhancements (non-conflicting or supplementary)
+							category:
+								staticProject.category || matchingGithubProject.category,
+							featured:
+								staticProject.featured !== undefined
+									? staticProject.featured
+									: false,
+							status: staticProject.status || "active",
+							startDate:
+								staticProject.startDate || matchingGithubProject.created_at,
+							endDate:
+								staticProject.endDate || matchingGithubProject.updated_at,
+							liveUrl: staticProject.liveUrl || matchingGithubProject.homepage,
+							demoUrl: staticProject.demoUrl || matchingGithubProject.homepage,
+							documentationUrl: staticProject.documentationUrl,
+							imageUrl: staticProject.imageUrl,
+							highlights: staticProject.highlights || [],
+							// Enhanced description - combine if static has more detail
+							description:
+								staticProject.description &&
+								staticProject.description.length >
+									(matchingGithubProject.description?.length || 0)
+									? staticProject.description
+									: matchingGithubProject.description,
+							// Enhanced topics/tags - merge both sources
+							topics: [
+								...(matchingGithubProject.topics || []),
+								...(staticProject.tags || staticProject.technologies || []),
+							].filter((item, index, arr) => arr.indexOf(item) === index), // Remove duplicates
+							// Mark as merged
+							isMerged: true,
+							isStatic: false,
+						};
+						mergedProjects.push(mergedProject);
+						usedGithubProjects.add(normalizedStaticName);
+					} else {
+						// No matching GitHub project, add static project as-is
+						mergedProjects.push({
+							...staticProject,
+							isMerged: false,
+							isStatic: true,
+						});
+					}
+				});
+
+				// Add remaining GitHub projects that weren't merged
+				repos.forEach((repo) => {
+					const normalizedName = repo.name.toLowerCase().replace(/[-_\s]/g, "");
+					if (!usedGithubProjects.has(normalizedName)) {
+						mergedProjects.push({
+							...repo,
+							isMerged: false,
+							isStatic: false,
+						});
+					}
+				});
+
+				return mergedProjects;
 			} else {
 				// Fallback to static projects if GitHub repos are not available
 				const staticProjects = settings.projects?.staticProjects || [];
-				return staticProjects;
+				return staticProjects.map((project) => ({
+					...project,
+					isMerged: false,
+					isStatic: true,
+				}));
 			}
 		} else {
 			// Use GitHub repos only
@@ -198,20 +306,49 @@ const Projects = () => {
 		}
 
 		return projectsData.map((project) => {
+			// Check if this is a merged project (has isMerged flag)
+			if (project.isMerged === true) {
+				// Merged project - already has GitHub structure with static enhancements
+				return {
+					...project,
+					// Ensure consistent format for merged projects
+					topics: project.topics || [],
+					language: project.language || project.technologies?.[0] || "Unknown",
+					languages:
+						project.technologies?.map((tech) => ({
+							name: tech,
+							icon: null,
+							color: null,
+						})) ||
+						(project.language
+							? [{ name: project.language, icon: null, color: null }]
+							: []),
+					isMerged: true,
+					isStatic: false,
+				};
+			}
+
 			// Check if this is a static project (has id as string and other static properties)
 			const isStaticProject =
-				project.id &&
-				(typeof project.id === "string" || project.category || project.status);
+				project.isStatic === true ||
+				(project.id &&
+					(typeof project.id === "string" ||
+						project.category ||
+						project.status));
 
 			if (isStaticProject) {
 				const normalized = {
 					id: project.id,
 					name: project.name,
 					description: project.description,
-					html_url: project.githubUrl,
-					homepage: project.liveUrl || project.demoUrl,
-					topics: project.tags || project.technologies || [],
-					language: project.technologies?.[0] || project.category || "Unknown",
+					html_url: project.githubUrl || project.html_url,
+					homepage: project.liveUrl || project.demoUrl || project.homepage,
+					topics: project.tags || project.technologies || project.topics || [],
+					language:
+						project.technologies?.[0] ||
+						project.category ||
+						project.language ||
+						"Unknown",
 					languages:
 						project.technologies?.map((tech) => ({
 							name: tech,
@@ -219,13 +356,20 @@ const Projects = () => {
 							icon: null,
 							color: null,
 						})) || [],
-					stargazers_count: project.stats?.stars || 0,
-					forks_count: project.stats?.forks || 0,
-					watchers_count: project.stats?.watchers || 0,
-					open_issues_count: project.stats?.issues || 0,
+					stargazers_count:
+						project.stats?.stars || project.stargazers_count || 0,
+					forks_count: project.stats?.forks || project.forks_count || 0,
+					watchers_count:
+						project.stats?.watchers || project.watchers_count || 0,
+					open_issues_count:
+						project.stats?.issues || project.open_issues_count || 0,
 					updated_at:
-						project.endDate || project.startDate || new Date().toISOString(),
-					created_at: project.startDate || new Date().toISOString(),
+						project.endDate ||
+						project.startDate ||
+						project.updated_at ||
+						new Date().toISOString(),
+					created_at:
+						project.startDate || project.created_at || new Date().toISOString(),
 					// Additional static project fields
 					category: project.category,
 					featured: project.featured,
@@ -237,6 +381,7 @@ const Projects = () => {
 					documentationUrl: project.documentationUrl,
 					imageUrl: project.imageUrl,
 					highlights: project.highlights || [],
+					isMerged: false,
 					isStatic: true,
 				};
 				return normalized;
@@ -244,6 +389,7 @@ const Projects = () => {
 				// This is a GitHub repo
 				const normalized = {
 					...project,
+					isMerged: false,
 					isStatic: false,
 				};
 				return normalized;
@@ -657,12 +803,61 @@ const Projects = () => {
 		return filtered;
 	}, [normalizedProjects, searchTerm, selectedLanguages, sortBy]);
 
+	// Update current columns on resize and project count change
+	useEffect(() => {
+		const getCurrentColumnsLocal = () => {
+			const projectCount = filteredRepos.length;
+			if (typeof window === "undefined") return Math.min(3, projectCount);
+
+			const width = window.innerWidth;
+			if (width >= 1024) return Math.min(3, projectCount); // Large screens: max 3 columns
+			if (width >= 640) return Math.min(2, projectCount); // Medium screens: max 2 columns
+			return 1; // Small screens: 1 column
+		};
+
+		const updateColumns = () => {
+			setCurrentColumns(getCurrentColumnsLocal());
+		};
+
+		updateColumns();
+		window.addEventListener("resize", updateColumns);
+		return () => window.removeEventListener("resize", updateColumns);
+	}, [filteredRepos.length]);
+
 	const toggleLanguageFilter = (language) => {
 		setSelectedLanguages((prev) =>
 			prev.includes(language)
 				? prev.filter((l) => l !== language)
 				: [...prev, language]
 		);
+	};
+
+	// Generate dynamic masonry styles based on project count
+	const getMasonryStyles = () => {
+		const projectCount = filteredRepos.length;
+		if (projectCount === 0) return {};
+
+		return {
+			"--masonry-columns-sm": Math.min(1, projectCount),
+			"--masonry-columns-md": Math.min(2, projectCount),
+			"--masonry-columns-lg": Math.min(3, projectCount),
+		};
+	};
+
+	// Generate dynamic grid classes based on project count
+	const getGridClasses = () => {
+		const projectCount = filteredRepos.length;
+		if (projectCount === 0) return "grid grid-cols-1 gap-8";
+
+		// Base classes
+		let classes =
+			"grid gap-8 grid-cols-1 transition-all duration-300 ease-in-out";
+
+		// Add responsive classes based on project count to avoid empty columns (max 3 columns)
+		if (projectCount >= 2) classes += " md:grid-cols-2";
+		if (projectCount >= 3) classes += " lg:grid-cols-3";
+
+		return classes;
 	};
 
 	const clearFilters = () => {
@@ -680,14 +875,21 @@ const Projects = () => {
 	const staggerContainer = {
 		animate: {
 			transition: {
-				staggerChildren: 0.1,
+				staggerChildren: 0.05, // Reduced stagger for masonry
 			},
 		},
 	};
 
 	const staggerChild = {
-		initial: { opacity: 0, y: 30 },
-		animate: { opacity: 1, y: 0 },
+		initial: { opacity: 0, y: 20 }, // Reduced initial transform for masonry
+		animate: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.4,
+				ease: "easeOut",
+			},
+		},
 	};
 
 	if (loading) {
@@ -726,7 +928,7 @@ const Projects = () => {
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-20">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 				{/* Debug Info */}
-				<div className="mb-4 p-4 bg-gray-800 rounded text-sm text-gray-300">
+				{/* <div className="mb-4 p-4 bg-gray-800 rounded text-sm text-gray-300">
 					<p>Debug Info:</p>
 					<p>Loading: {loading.toString()}</p>
 					<p>Error: {error?.toString() || "none"}</p>
@@ -735,11 +937,11 @@ const Projects = () => {
 					<p>Normalized Projects: {normalizedProjects?.length || 0}</p>
 					<p>Filtered Projects: {filteredRepos?.length || 0}</p>
 					<p>Settings Mode: {settings.projects?.mode || "none"}</p>
-				</div>
+				</div> */}
 
 				{/* Header */}
-				<motion.div className="text-center mb-16" {...fadeInUp}>
-					<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+				<motion.div className="text-center mb-16 relative z-10" {...fadeInUp}>
+					<h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 relative z-20">
 						My Projects
 					</h1>
 					<p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -769,6 +971,9 @@ const Projects = () => {
 						{normalizedProjects.length} project
 						{normalizedProjects.length !== 1 ? "s" : ""} •{" "}
 						{filteredRepos.length} shown
+						{layoutMode === "masonry" && filteredRepos.length > 0 && (
+							<> • {currentColumns} columns</>
+						)}
 						{settings.projects?.mode === "hybrid" && (
 							<>
 								{" "}
@@ -799,19 +1004,21 @@ const Projects = () => {
 					</div>
 
 					{/* Filter Controls */}
-					<div className="flex flex-wrap items-center justify-center gap-4">
+					<div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-2">
 						<button
 							onClick={() => setShowFilters(!showFilters)}
-							className="flex items-center space-x-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 hover:bg-white/10 transition-colors backdrop-blur-sm"
+							className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 hover:bg-white/10 transition-colors backdrop-blur-sm text-sm"
 						>
-							<FunnelIcon className="w-4 h-4" />
-							<span>Languages ({selectedLanguages.length})</span>
+							<FunnelIcon className="w-4 h-4 flex-shrink-0" />
+							<span className="whitespace-nowrap">
+								Languages ({selectedLanguages.length})
+							</span>
 						</button>
 
 						<select
 							value={sortBy}
 							onChange={(e) => setSortBy(e.target.value)}
-							className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm"
+							className="px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm text-sm min-w-0"
 						>
 							<option value="updated">Recently Updated</option>
 							<option value="created">Recently Created</option>
@@ -819,15 +1026,50 @@ const Projects = () => {
 							<option value="name">Name (A-Z)</option>
 						</select>
 
+						{/* Layout Toggle */}
+						<button
+							onClick={() =>
+								setLayoutMode(layoutMode === "masonry" ? "grid" : "masonry")
+							}
+							className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 hover:bg-white/10 transition-colors backdrop-blur-sm text-sm"
+							title={`Switch to ${
+								layoutMode === "masonry" ? "grid" : "masonry"
+							} layout`}
+						>
+							{layoutMode === "masonry" ? (
+								<>
+									<svg
+										className="w-4 h-4 flex-shrink-0"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+									>
+										<path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+									</svg>
+									<span className="hidden sm:inline">Grid</span>
+								</>
+							) : (
+								<>
+									<svg
+										className="w-4 h-4 flex-shrink-0"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+									>
+										<path d="M4 3a1 1 0 000 2h12a1 1 0 100-2H4zM4 7a1 1 0 000 2h6a1 1 0 100-2H4zM4 11a1 1 0 100 2h4a1 1 0 100-2H4zM12 11a1 1 0 100 2h4a1 1 0 100-2h-4zM4 15a1 1 0 100 2h8a1 1 0 100-2H4z" />
+									</svg>
+									<span className="hidden sm:inline">Masonry</span>
+								</>
+							)}
+						</button>
+
 						{(searchTerm ||
 							selectedLanguages.length > 0 ||
 							sortBy !== "updated") && (
 							<button
 								onClick={clearFilters}
-								className="flex items-center space-x-2 px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 hover:bg-red-500/30 transition-colors backdrop-blur-sm"
+								className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 hover:bg-red-500/30 transition-colors backdrop-blur-sm text-sm"
 							>
-								<AdjustmentsHorizontalIcon className="w-4 h-4" />
-								<span>Clear</span>
+								<AdjustmentsHorizontalIcon className="w-4 h-4 flex-shrink-0" />
+								<span className="hidden sm:inline">Clear</span>
 							</button>
 						)}
 					</div>
@@ -904,17 +1146,28 @@ const Projects = () => {
 					</motion.div>
 				)}
 
-				{/* Projects Grid */}
+				{/* Projects Grid/Masonry */}
 				{filteredRepos.length > 0 ? (
 					<motion.div
-						className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+						key={layoutMode} // Force re-render on layout change
+						className={
+							layoutMode === "masonry"
+								? "masonry-grid-dynamic"
+								: getGridClasses()
+						}
+						style={layoutMode === "masonry" ? getMasonryStyles() : {}}
+						data-project-count={filteredRepos.length}
 						variants={staggerContainer}
 						initial="initial"
 						animate="animate"
 					>
 						{filteredRepos.map((repo) => {
 							return (
-								<motion.div key={repo.id} variants={staggerChild}>
+								<motion.div
+									key={repo.id}
+									variants={staggerChild}
+									className={layoutMode === "masonry" ? "masonry-item" : ""}
+								>
 									<ProjectCard project={repo} />
 								</motion.div>
 							);

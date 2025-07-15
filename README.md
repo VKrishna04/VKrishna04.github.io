@@ -2,6 +2,115 @@
 
 A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.
 
+## 🏗️ System Architecture Overview
+
+```mermaid
+graph TB
+    subgraph "Frontend Layer"
+        React[React 18 SPA]
+        Router[React Router]
+        UI[Tailwind CSS UI]
+        Animations[Framer Motion]
+    end
+
+    subgraph "Configuration System"
+        Settings[settings.json]
+        Schema[JSON Schema]
+        Validation[Runtime Validation]
+    end
+
+    subgraph "Data Sources"
+        GitHub[GitHub API]
+        Static[Static Projects]
+        Resume[Resume Files]
+    end
+
+    subgraph "Core Features"
+        Projects[Projects Display]
+        About[About Page]
+        Contact[Contact Form]
+        Home[Home Page]
+    end
+
+    React --> Router
+    React --> UI
+    React --> Animations
+    React --> Projects
+    React --> About
+    React --> Contact
+    React --> Home
+
+    Settings --> Schema
+    Settings --> Validation
+    Settings --> Projects
+    Settings --> Home
+    Settings --> Contact
+
+    GitHub --> Projects
+    Static --> Projects
+    Resume --> About
+
+    classDef primary fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef secondary fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef data fill:#10b981,stroke:#059669,color:#fff
+    classDef feature fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class React,Router,UI,Animations primary
+    class Settings,Schema,Validation secondary
+    class GitHub,Static,Resume data
+    class Projects,About,Contact,Home feature
+```
+
+## 🎯 Application Flow Diagram
+
+```mermaid
+flowchart TD
+    Start([User Visits Portfolio]) --> Load[Load Application]
+    Load --> Config[Fetch settings.json]
+    Config --> Validate[Validate Configuration]
+
+    Validate --> |Valid| Init[Initialize Components]
+    Validate --> |Invalid| Fallback[Use Fallback Config]
+    Fallback --> Init
+
+    Init --> Route{Route Detection}
+
+    Route --> |/| Home[Home Page]
+    Route --> |/about| About[About Page]
+    Route --> |/projects| Projects[Projects Page]
+    Route --> |/contact| Contact[Contact Page]
+    Route --> |/*| NotFound[404 Page]
+
+    Home --> HomeData[Load Home Config]
+    About --> AboutData[Load About & Resume]
+    Projects --> ProjectsFlow[Projects Flow]
+    Contact --> ContactData[Load Contact Config]
+
+    ProjectsFlow --> ProjectMode{Project Mode}
+    ProjectMode --> |GitHub| GitHubAPI[Fetch GitHub Repos]
+    ProjectMode --> |Static| StaticData[Load Static Projects]
+    ProjectMode --> |Hybrid| HybridFlow[Merge GitHub + Static]
+
+    GitHubAPI --> Filter[Apply Filters]
+    StaticData --> Filter
+    HybridFlow --> Filter
+
+    Filter --> Display[Display Projects]
+    Display --> Interact[User Interaction]
+    Interact --> |Search/Filter| Filter
+    Interact --> |Navigation| Route
+
+    classDef process fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef decision fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef data fill:#10b981,stroke:#059669,color:#fff
+    classDef endpoint fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class Load,Config,Validate,Init process
+    class Route,ProjectMode decision
+    class HomeData,AboutData,ContactData,GitHubAPI,StaticData,HybridFlow data
+    class Home,About,Projects,Contact,NotFound,Display endpoint
+```
+
 ## 🚀 Features
 
 - **📱 Fully Responsive**: Perfect display on all devices with mobile-first design
@@ -16,7 +125,250 @@ A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
 - **🔍 SEO Optimized**: Proper meta tags and structured data
 - **⚡ Fast Performance**: Optimized build with Vite for lightning-fast loading
 
+## 📁 Project Structure
+
+```mermaid
+graph TD
+    subgraph "Root Directory"
+        Public[public/]
+        Src[src/]
+        Docs[docs/]
+        Config[Config Files]
+    end
+
+    subgraph "Public Assets"
+        Settings[settings.json]
+        Schema[settings.schema.json]
+        Resume[resume.pdf]
+        NotFound[404.html]
+    end
+
+    subgraph "Source Code"
+        Components[components/]
+        Pages[pages/]
+        Hooks[hooks/]
+        Utils[utils/]
+        Styles[styles/]
+    end
+
+    subgraph "Components Structure"
+        Navbar[Navbar/]
+        Footer[Footer/]
+        ProjectCard[ProjectCard/]
+        ParticlesBG[ParticleBackground/]
+        ScrollTop[ScrollToTop/]
+        GitHubCard[GitHubRepoCard/]
+    end
+
+    subgraph "Pages Structure"
+        HomePage[Home.jsx]
+        AboutPage[About.jsx]
+        ProjectsPage[Projects.jsx]
+        ContactPage[Contact.jsx]
+        NotFoundPage[NotFound.jsx]
+        ResumePage[Resume.jsx]
+    end
+
+    subgraph "Hooks & Utils"
+        GitHubHook[useGitHubRepos.js]
+        ProjectsHook[useProjectsData.js]
+        DarkReader[darkReaderDisable.js]
+    end
+
+    Public --> Settings
+    Public --> Schema
+    Public --> Resume
+    Public --> NotFound
+
+    Src --> Components
+    Src --> Pages
+    Src --> Hooks
+    Src --> Utils
+    Src --> Styles
+
+    Components --> Navbar
+    Components --> Footer
+    Components --> ProjectCard
+    Components --> ParticlesBG
+    Components --> ScrollTop
+    Components --> GitHubCard
+
+    Pages --> HomePage
+    Pages --> AboutPage
+    Pages --> ProjectsPage
+    Pages --> ContactPage
+    Pages --> NotFoundPage
+    Pages --> ResumePage
+
+    Hooks --> GitHubHook
+    Hooks --> ProjectsHook
+    Utils --> DarkReader
+
+    classDef directory fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef file fill:#10b981,stroke:#059669,color:#fff
+    classDef component fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef page fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class Public,Src,Docs,Components,Pages,Hooks,Utils directory
+    class Settings,Schema,Resume,NotFound,GitHubHook,ProjectsHook,DarkReader file
+    class Navbar,Footer,ProjectCard,ParticlesBG,ScrollTop,GitHubCard component
+    class HomePage,AboutPage,ProjectsPage,ContactPage,NotFoundPage,ResumePage page
+```
+
+## 🔧 Component Hierarchy
+
+```mermaid
+graph TD
+    App[App.jsx] --> Router[React Router]
+    Router --> Navbar[Navbar Component]
+    Router --> Pages[Page Components]
+    Router --> Footer[Footer Component]
+    Router --> ScrollTop[ScrollToTop Component]
+
+    Pages --> Home[Home.jsx]
+    Pages --> About[About.jsx]
+    Pages --> Projects[Projects.jsx]
+    Pages --> Contact[Contact.jsx]
+    Pages --> NotFound[NotFound.jsx]
+    Pages --> Resume[Resume.jsx]
+
+    Home --> ParticlesBG[ParticleBackground]
+    Home --> TypeWriter[Typewriter Effect]
+    Home --> SocialLinks[Social Media Links]
+
+    Projects --> ProjectCard[ProjectCard Component]
+    Projects --> Filters[Filter Components]
+    Projects --> GitHubRepos[GitHub Integration]
+
+    ProjectCard --> TechIcons[Technology Icons]
+    ProjectCard --> ActionButtons[Action Buttons]
+    ProjectCard --> ProjectMeta[Project Metadata]
+
+    About --> SkillsGrid[Skills Grid]
+    About --> ExperienceTimeline[Experience Timeline]
+    About --> ResumeSection[Resume Section]
+
+    Contact --> ContactForm[Contact Form]
+    Contact --> SocialSection[Social Media Section]
+
+    GitHubRepos --> useGitHubRepos[GitHub Hooks]
+    Filters --> useProjectsData[Projects Hooks]
+
+    classDef main fill:#ef4444,stroke:#dc2626,color:#fff
+    classDef layout fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef page fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef component fill:#10b981,stroke:#059669,color:#fff
+    classDef hook fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class App main
+    class Router,Navbar,Footer,ScrollTop layout
+    class Home,About,Projects,Contact,NotFound,Resume page
+    class ProjectCard,ParticlesBG,TypeWriter,SocialLinks,Filters,SkillsGrid,ExperienceTimeline,ResumeSection,ContactForm,SocialSection component
+    class useGitHubRepos,useProjectsData hook
+```
+
 ## 🛠️ Tech Stack
+
+```mermaid
+graph LR
+    subgraph "Frontend Framework"
+        React[React 18]
+        Router[React Router 6]
+        Hooks[React Hooks]
+    end
+
+    subgraph "Build & Development"
+        Vite[Vite 5]
+        ESLint[ESLint 9]
+        PostCSS[PostCSS]
+        DevServer[Dev Server]
+    end
+
+    subgraph "Styling & Animation"
+        Tailwind[Tailwind CSS 3]
+        Framer[Framer Motion]
+        Icons[React Icons]
+        Heroicons[Heroicons]
+    end
+
+    subgraph "Configuration"
+        JSON[JSON Schema]
+        Settings[settings.json]
+        Validation[Runtime Validation]
+        IntelliSense[VS Code IntelliSense]
+    end
+
+    subgraph "External APIs"
+        GitHub[GitHub API]
+        Resume[Resume Files]
+        Social[Social Media]
+    end
+
+    React --> Router
+    React --> Hooks
+    Vite --> DevServer
+    Vite --> ESLint
+    Vite --> PostCSS
+
+    Tailwind --> Icons
+    Tailwind --> Heroicons
+    Framer --> React
+
+    JSON --> Settings
+    JSON --> Validation
+    JSON --> IntelliSense
+
+    GitHub --> React
+    Resume --> React
+    Social --> React
+
+    classDef framework fill:#61dafb,stroke:#21a0c4,color:#000
+    classDef build fill:#646cff,stroke:#535bf2,color:#fff
+    classDef styling fill:#06b6d4,stroke:#0891b2,color:#fff
+    classDef config fill:#10b981,stroke:#059669,color:#fff
+    classDef external fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class React,Router,Hooks framework
+    class Vite,ESLint,PostCSS,DevServer build
+    class Tailwind,Framer,Icons,Heroicons styling
+    class JSON,Settings,Validation,IntelliSense config
+    class GitHub,Resume,Social external
+```
+
+## ⚙️ Configuration System Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant VSCode as VS Code
+    participant Schema as JSON Schema
+    participant App as React App
+    participant GitHub as GitHub API
+
+    User->>VSCode: Edit settings.json
+    VSCode->>Schema: Request IntelliSense
+    Schema-->>VSCode: Provide autocomplete & validation
+    VSCode-->>User: Show suggestions & errors
+
+    User->>App: Save configuration
+    App->>App: Load settings.json
+    App->>App: Validate configuration
+
+    alt Valid Configuration
+        App->>GitHub: Fetch repositories (if GitHub mode)
+        GitHub-->>App: Return repository data
+        App->>App: Process & merge data
+        App-->>User: Display portfolio
+    else Invalid Configuration
+        App->>App: Use fallback configuration
+        App-->>User: Display with defaults
+        App-->>User: Log configuration errors
+    end
+
+    User->>App: Navigate or interact
+    App->>App: Apply real-time filters
+    App-->>User: Update display
+```
 
 - **React 18** - Modern React with hooks and concurrent features
 - **Vite** - Fast build tool and development server

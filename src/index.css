@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Krishna GSVV
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /* Basic CSS Reset and Tailwind Imports */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -41,4 +56,161 @@ body {
 .text-transparent {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
+}
+
+/* Masonry Grid Styles */
+.masonry-grid {
+	column-count: 1;
+	column-gap: 2rem;
+	column-fill: balance;
+	transition: all 0.3s ease-in-out;
+}
+
+@media (min-width: 640px) {
+	.masonry-grid {
+		column-count: 2;
+	}
+}
+
+@media (min-width: 1024px) {
+	.masonry-grid {
+		column-count: 3;
+		column-gap: 2rem;
+	}
+}
+
+@media (min-width: 1536px) {
+	.masonry-grid {
+		column-count: 4;
+		column-gap: 2rem;
+	}
+}
+
+/* Alternative grid approach for very large screens */
+@media (min-width: 1920px) {
+	.masonry-grid {
+		column-count: 5;
+	}
+}
+
+/* Dynamic masonry grid that adapts to project count */
+.masonry-grid-dynamic {
+	column-gap: 1rem;
+	/* Reduced gap for smaller screens */
+	column-fill: balance;
+	transition: all 0.3s ease-in-out;
+	column-count: var(--masonry-columns-sm, 1);
+	width: 100%;
+	overflow-x: hidden;
+	/* Prevent horizontal overflow */
+}
+
+@media (min-width: 640px) {
+	.masonry-grid-dynamic {
+		column-count: var(--masonry-columns-md, 2);
+		column-gap: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.masonry-grid-dynamic {
+		column-count: var(--masonry-columns-lg, 3);
+		column-gap: 2rem;
+	}
+}
+
+/* Special handling for very few projects */
+.masonry-grid-dynamic[data-project-count="1"] {
+	column-count: 1 !important;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.masonry-grid-dynamic[data-project-count="2"] {
+	column-count: 1 !important;
+}
+
+@media (min-width: 640px) {
+	.masonry-grid-dynamic[data-project-count="2"] {
+		column-count: 2 !important;
+	}
+}
+
+/* Dynamic column count classes */
+.masonry-cols-1 {
+	column-count: 1;
+}
+
+.masonry-cols-2 {
+	column-count: 2;
+}
+
+.masonry-cols-3 {
+	column-count: 3;
+}
+
+.masonry-cols-5 {
+	column-count: 5;
+}
+
+.masonry-item {
+	break-inside: avoid;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 2rem;
+	vertical-align: top;
+	transition: all 0.3s ease-in-out;
+}
+
+/* Prevent breaking inside cards and smooth transitions */
+.masonry-item>* {
+	break-inside: avoid;
+	transition: transform 0.2s ease-in-out;
+}
+
+.masonry-item:hover>* {
+	transform: translateY(-2px);
+}
+
+/* Grid layout transition support */
+.grid {
+	transition: all 0.3s ease-in-out;
+}
+
+.grid>div {
+	transition: all 0.3s ease-in-out;
+}
+
+/* Optimize for print and avoid orphans */
+@media print {
+	.masonry-item {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+}
+
+/* Alternative CSS Grid Masonry (for browsers that support it) */
+@supports (grid-template-rows: masonry) {
+	.masonry-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		grid-template-rows: masonry;
+		gap: 2rem;
+		column-count: unset;
+		column-gap: unset;
+	}
+
+	.masonry-item {
+		break-inside: unset;
+		display: block;
+		margin-bottom: 0;
+	}
+}
+
+/* Fallback for older browsers without CSS Grid masonry */
+@supports not (grid-template-rows: masonry) {
+	.masonry-grid {
+		/* Column-based masonry as fallback */
+		display: block;
+	}
 }

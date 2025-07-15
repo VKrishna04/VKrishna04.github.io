@@ -2,6 +2,152 @@
 
 This guide provides comprehensive documentation for configuring your portfolio through the `settings.json` file.
 
+## 🏗️ Configuration Architecture
+
+```mermaid
+graph TB
+    subgraph "Configuration System"
+        Schema[JSON Schema]
+        Settings[settings.json]
+        Validation[Runtime Validation]
+        IntelliSense[VS Code IntelliSense]
+    end
+
+    subgraph "Core Sections"
+        GitHub[GitHub Integration]
+        Projects[Projects Display]
+        Display[Site Display]
+        Home[Home Page]
+        Social[Social Media]
+        About[About Page]
+        Resume[Resume Config]
+        Nav[Navigation]
+        Footer[Footer Config]
+    end
+
+    subgraph "Application Layers"
+        UI[User Interface]
+        Components[React Components]
+        Hooks[Data Hooks]
+        API[External APIs]
+    end
+
+    Schema --> Settings
+    Schema --> IntelliSense
+    Settings --> Validation
+
+    Settings --> GitHub
+    Settings --> Projects
+    Settings --> Display
+    Settings --> Home
+    Settings --> Social
+    Settings --> About
+    Settings --> Resume
+    Settings --> Nav
+    Settings --> Footer
+
+    GitHub --> API
+    Projects --> Hooks
+    Display --> Components
+    Home --> UI
+    Social --> UI
+    About --> UI
+    Resume --> UI
+    Nav --> UI
+    Footer --> UI
+
+    classDef config fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef section fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef app fill:#10b981,stroke:#059669,color:#fff
+
+    class Schema,Settings,Validation,IntelliSense config
+    class GitHub,Projects,Display,Home,Social,About,Resume,Nav,Footer section
+    class UI,Components,Hooks,API app
+```
+
+## ⚙️ Configuration Flow
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant VSCode as VS Code
+    participant Schema as JSON Schema
+    participant App as React App
+    participant GitHub as GitHub API
+
+    Dev->>VSCode: Open settings.json
+    VSCode->>Schema: Load schema
+    Schema-->>VSCode: Provide IntelliSense
+
+    Dev->>VSCode: Edit configuration
+    VSCode->>Schema: Validate syntax
+    Schema-->>VSCode: Show errors/suggestions
+    VSCode-->>Dev: Real-time feedback
+
+    Dev->>App: Save & reload
+    App->>App: Parse settings.json
+    App->>App: Validate configuration
+
+    alt GitHub Mode
+        App->>GitHub: Fetch repositories
+        GitHub-->>App: Return repo data
+        App->>App: Apply filters & sorting
+    else Static Mode
+        App->>App: Use static projects
+    else Hybrid Mode
+        App->>GitHub: Fetch repositories
+        GitHub-->>App: Return repo data
+        App->>App: Merge with static data
+    end
+
+    App-->>Dev: Render portfolio
+```
+
+## 📋 Configuration Categories
+
+```mermaid
+mindmap
+  root((settings.json))
+    GitHub Integration
+      API Configuration
+      Repository Fetching
+      Authentication
+    Projects
+      Display Settings
+      Filtering Options
+      Sorting Configuration
+      Static Projects
+    Site Display
+      Personal Information
+      Profile Images
+      Branding
+    Home Page
+      Hero Section
+      Typewriter Effect
+      Call-to-Action Buttons
+      Social Links
+    Social Media
+      Platform Configuration
+      Visibility Settings
+      Custom Links
+    About Page
+      Skills Configuration
+      Experience Timeline
+      Personal Story
+    Resume
+      File Configuration
+      Download Options
+      External Links
+    Navigation
+      Menu Structure
+      Custom Pages
+      Routing
+    Footer
+      Content Configuration
+      Social Links
+      Copyright Info
+```
+
 ## 📋 Table of Contents
 
 1. [Getting Started](#getting-started)
@@ -31,6 +177,54 @@ The `settings.json` file includes JSON Schema support for IntelliSense in VS Cod
 
 Configure how your portfolio fetches and displays GitHub repositories.
 
+```mermaid
+graph LR
+    subgraph "GitHub Configuration"
+        Config[settings.json]
+        Type[type: org/user]
+        Username[username]
+        API[apiUrl]
+        UserAgent[userAgent]
+    end
+
+    subgraph "API Integration"
+        GitHub[GitHub API]
+        Repos[Repository Data]
+        Metadata[Repository Metadata]
+    end
+
+    subgraph "Data Processing"
+        Filter[Apply Filters]
+        Sort[Apply Sorting]
+        Display[Display Projects]
+    end
+
+    Config --> Type
+    Config --> Username
+    Config --> API
+    Config --> UserAgent
+
+    Type --> GitHub
+    Username --> GitHub
+    API --> GitHub
+    UserAgent --> GitHub
+
+    GitHub --> Repos
+    Repos --> Metadata
+    Metadata --> Filter
+    Filter --> Sort
+    Sort --> Display
+
+    classDef config fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef api fill:#10b981,stroke:#059669,color:#fff
+    classDef process fill:#8b5cf6,stroke:#7c3aed,color:#fff
+
+    class Config,Type,Username,API,UserAgent config
+    class GitHub,Repos,Metadata api
+    class Filter,Sort,Display process
+```
+
+### Configuration Example
 ```json
 {
   "github": {
@@ -42,16 +236,92 @@ Configure how your portfolio fetches and displays GitHub repositories.
 }
 ```
 
-### Options:
-- **type**: `"org"` for GitHub organization, `"user"` for individual user
-- **username**: Your GitHub organization name or username
-- **apiUrl**: GitHub API endpoint (auto-generated based on type and username)
-- **userAgent**: Custom identifier for API requests
+### Configuration Options
+| **Property** | **Type** | **Description**                    | **Example**              |
+| ------------ | -------- | ---------------------------------- | ------------------------ |
+| `type`       | `string` | API endpoint type: "org" or "user" | `"org"`                  |
+| `username`   | `string` | GitHub organization/username       | `"Life-Experimentalist"` |
+| `apiUrl`     | `string` | Full GitHub API endpoint URL       | Auto-generated           |
+| `userAgent`  | `string` | Custom identifier for API requests | `"Portfolio-v1.0"`       |
 
 ## 📊 Project Settings
 
 Control which repositories are displayed and how they're sorted.
 
+```mermaid
+graph TD
+    subgraph "Project Configuration"
+        Settings[Project Settings]
+        Ignore[ignore: Array]
+        MaxProjects[maxProjects: Number]
+        SortBy[sortBy: String]
+        SortOrder[sortOrder: String]
+        ShowForks[showForks: Boolean]
+        ShowPrivate[showPrivate: Boolean]
+        Fallback[fallbackMode: Boolean]
+    end
+
+    subgraph "Filtering Process"
+        AllRepos[All GitHub Repos]
+        FilterIgnored[Remove Ignored Repos]
+        FilterForks[Filter Forks]
+        FilterPrivate[Filter Private]
+        FilteredSet[Filtered Repository Set]
+    end
+
+    subgraph "Sorting & Display"
+        SortProcess[Apply Sorting]
+        LimitResults[Apply Max Limit]
+        FinalDisplay[Final Project Display]
+    end
+
+    subgraph "Fallback System"
+        APIFail[API Failure]
+        FallbackCheck{Fallback Enabled?}
+        StaticProjects[Show Static Projects]
+        EmptyState[Show Empty State]
+    end
+
+    Settings --> Ignore
+    Settings --> MaxProjects
+    Settings --> SortBy
+    Settings --> SortOrder
+    Settings --> ShowForks
+    Settings --> ShowPrivate
+    Settings --> Fallback
+
+    AllRepos --> FilterIgnored
+    Ignore --> FilterIgnored
+    FilterIgnored --> FilterForks
+    ShowForks --> FilterForks
+    FilterForks --> FilterPrivate
+    ShowPrivate --> FilterPrivate
+    FilterPrivate --> FilteredSet
+
+    FilteredSet --> SortProcess
+    SortBy --> SortProcess
+    SortOrder --> SortProcess
+    SortProcess --> LimitResults
+    MaxProjects --> LimitResults
+    LimitResults --> FinalDisplay
+
+    APIFail --> FallbackCheck
+    FallbackCheck --> |Yes| StaticProjects
+    FallbackCheck --> |No| EmptyState
+    Fallback --> FallbackCheck
+
+    classDef config fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef process fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef result fill:#10b981,stroke:#059669,color:#fff
+    classDef fallback fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class Settings,Ignore,MaxProjects,SortBy,SortOrder,ShowForks,ShowPrivate,Fallback config
+    class AllRepos,FilterIgnored,FilterForks,FilterPrivate,FilteredSet,SortProcess,LimitResults process
+    class FinalDisplay result
+    class APIFail,FallbackCheck,StaticProjects,EmptyState fallback
+```
+
+### Configuration Example
 ```json
 {
   "projects": {
@@ -70,9 +340,16 @@ Control which repositories are displayed and how they're sorted.
 }
 ```
 
-### Sort Options:
-- **sortBy**: `"updated"`, `"created"`, `"stars"`, `"name"`
-- **sortOrder**: `"desc"` (newest/highest first) or `"asc"` (oldest/lowest first)
+### Configuration Options
+| **Property**   | **Type**  | **Options**                                   | **Description**                  |
+| -------------- | --------- | --------------------------------------------- | -------------------------------- |
+| `ignore`       | `array`   | Repository names                              | Exclude specific repositories    |
+| `maxProjects`  | `number`  | 1-50                                          | Maximum projects to display      |
+| `sortBy`       | `string`  | `"updated"`, `"created"`, `"stars"`, `"name"` | Sort criteria                    |
+| `sortOrder`    | `string`  | `"desc"`, `"asc"`                             | Sort direction                   |
+| `showForks`    | `boolean` | `true`/`false`                                | Include forked repositories      |
+| `showPrivate`  | `boolean` | `true`/`false`                                | Include private repositories     |
+| `fallbackMode` | `boolean` | `true`/`false`                                | Enable fallback for API failures |
 
 ## 👤 Display Configuration
 

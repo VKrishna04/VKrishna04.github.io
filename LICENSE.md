@@ -1,4 +1,173 @@
 
+# License Information
+
+## 📋 License Overview
+
+This project is licensed under the **Apache License 2.0**, which provides extensive permissions for use, modification, and distribution while maintaining appropriate attribution requirements.
+
+## 🎯 License Flow Diagram
+
+```mermaid
+graph TD
+    subgraph "Apache 2.0 Permissions"
+        Use[✅ Commercial Use]
+        Modify[✅ Modification]
+        Distribute[✅ Distribution]
+        Patent[✅ Patent Use]
+        Private[✅ Private Use]
+    end
+
+    subgraph "Requirements"
+        License[📄 Include License]
+        Copyright[©️ Include Copyright]
+        Changes[📝 State Changes]
+        Notice[📢 Include NOTICE]
+    end
+
+    subgraph "Limitations"
+        Liability[❌ No Liability]
+        Warranty[❌ No Warranty]
+        Trademark[❌ No Trademark Use]
+    end
+
+    subgraph "Usage Scenarios"
+        Fork[Fork Repository]
+        Clone[Clone for Personal Use]
+        Deploy[Deploy Portfolio]
+        Contribute[Contribute Code]
+        Commercial[Commercial Usage]
+    end
+
+    Fork --> License
+    Fork --> Copyright
+    Fork --> Changes
+    Clone --> License
+    Deploy --> License
+    Deploy --> Copyright
+    Contribute --> License
+    Commercial --> License
+    Commercial --> Copyright
+    Commercial --> Changes
+
+    License --> Use
+    License --> Modify
+    License --> Distribute
+
+    classDef permission fill:#10b981,stroke:#059669,color:#fff
+    classDef requirement fill:#f59e0b,stroke:#d97706,color:#fff
+    classDef limitation fill:#ef4444,stroke:#dc2626,color:#fff
+    classDef scenario fill:#3b82f6,stroke:#1e40af,color:#fff
+
+    class Use,Modify,Distribute,Patent,Private permission
+    class License,Copyright,Changes,Notice requirement
+    class Liability,Warranty,Trademark limitation
+    class Fork,Clone,Deploy,Contribute,Commercial scenario
+```
+
+## 🚀 Quick Start for Users
+
+```mermaid
+flowchart LR
+    Start([Want to use this portfolio?]) --> Decision{Usage Type}
+
+    Decision --> Personal[Personal Portfolio]
+    Decision --> Fork[Fork & Customize]
+    Decision --> Commercial[Commercial Use]
+    Decision --> Contribute[Contribute Back]
+
+    Personal --> Steps1[1. Clone Repository<br/>2. Keep LICENSE file<br/>3. Update settings.json<br/>4. Deploy]
+
+    Fork --> Steps2[1. Fork on GitHub<br/>2. Keep LICENSE & Copyright<br/>3. Document changes<br/>4. Customize freely]
+
+    Commercial --> Steps3[1. Include Apache 2.0 License<br/>2. Maintain copyright notices<br/>3. Document modifications<br/>4. Use commercially]
+
+    Contribute --> Steps4[1. Fork repository<br/>2. Make improvements<br/>3. Submit pull request<br/>4. Follow contribution guidelines]
+
+    Steps1 --> Success[✅ Ready to Go!]
+    Steps2 --> Success
+    Steps3 --> Success
+    Steps4 --> Success
+
+    classDef decision fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef usage fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef steps fill:#10b981,stroke:#059669,color:#fff
+    classDef success fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class Decision decision
+    class Personal,Fork,Commercial,Contribute usage
+    class Steps1,Steps2,Steps3,Steps4 steps
+    class Success success
+```
+
+## 📝 What You Can Do
+
+| **Permission**       | **Description**               | **Example Use Case**                              |
+| -------------------- | ----------------------------- | ------------------------------------------------- |
+| ✅ **Commercial Use** | Use for commercial projects   | Build client portfolios, sell customized versions |
+| ✅ **Modification**   | Modify the source code        | Add new features, change design, integrate APIs   |
+| ✅ **Distribution**   | Share your modified version   | Release on GitHub, package for others             |
+| ✅ **Patent Use**     | Use any patents in the code   | Full legal protection for implementation          |
+| ✅ **Private Use**    | Use privately without sharing | Internal company portfolios, personal projects    |
+
+## 📋 What You Must Do
+
+| **Requirement**         | **Description**                | **How to Comply**                           |
+| ----------------------- | ------------------------------ | ------------------------------------------- |
+| 📄 **Include License**   | Keep the Apache 2.0 license    | Don't remove `LICENSE.md` file              |
+| ©️ **Include Copyright** | Maintain copyright notices     | Keep existing copyright headers in files    |
+| 📝 **State Changes**     | Document your modifications    | Add comments or changelog for major changes |
+| 📢 **Include NOTICE**    | Include NOTICE file if present | Keep any NOTICE file from original project  |
+
+## ❌ What You Cannot Do
+
+| **Limitation**         | **Description**                       | **Explanation**                             |
+| ---------------------- | ------------------------------------- | ------------------------------------------- |
+| ❌ **No Liability**     | Authors not responsible for damages   | Use at your own risk                        |
+| ❌ **No Warranty**      | No guarantee the code works perfectly | Test thoroughly before production use       |
+| ❌ **No Trademark Use** | Cannot use project/author trademarks  | Don't claim endorsement by original authors |
+
+## 🎯 Common Usage Examples
+
+### 1. **Personal Portfolio** (Most Common)
+```bash
+# Simple case - just customize and deploy
+git clone https://github.com/VKrishna04/VKrishna04.github.io.git my-portfolio
+cd my-portfolio
+# Edit settings.json with your information
+# Keep LICENSE.md file
+npm install && npm run build
+```
+
+### 2. **Fork for Customization**
+```bash
+# Fork on GitHub first, then:
+git clone https://github.com/YOUR_USERNAME/YOUR_PORTFOLIO_FORK.git
+cd YOUR_PORTFOLIO_FORK
+# Make your changes
+# Keep LICENSE.md and add changelog
+git commit -m "Customized for my portfolio - added new sections"
+```
+
+### 3. **Commercial/Client Use**
+```bash
+# For building client portfolios
+git clone https://github.com/VKrishna04/VKrishna04.github.io.git client-portfolio
+cd client-portfolio
+# Customize for client
+# Keep LICENSE.md file
+# Document major changes in README or CHANGELOG
+```
+
+## 📞 Questions About Licensing?
+
+- **Can I remove the license?** No, Apache 2.0 requires keeping the license
+- **Can I sell this?** Yes, commercial use is explicitly allowed
+- **Can I modify anything?** Yes, full modification rights
+- **Do I need to share my changes?** No, but it's appreciated
+- **Can I use this for clients?** Yes, perfect for commercial client work
+
+---
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/

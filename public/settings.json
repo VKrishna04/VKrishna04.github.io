@@ -1,4 +1,19 @@
 {
+	"//": [
+		"Copyright 2025 Krishna GSVV",
+		"",
+		"Licensed under the Apache License, Version 2.0 (the \"License\");",
+		"you may not use this file except in compliance with the License.",
+		"You may obtain a copy of the License at",
+		"",
+		"    http://www.apache.org/licenses/LICENSE-2.0",
+		"",
+		"Unless required by applicable law or agreed to in writing, software",
+		"distributed under the License is distributed on an \"AS IS\" BASIS,",
+		"WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+		"See the License for the specific language governing permissions and",
+		"limitations under the License."
+	],
 	"$schema": "./settings.schema.json",
 	"github": {
 		"type": "org",
@@ -6,12 +21,201 @@
 		"apiUrl": "https://api.github.com/orgs/Life-Experimentalist/repos",
 		"userAgent": "VKrishna04-Portfolio"
 	},
+	"home": {
+		"greeting": "Hi There! 👋🏻 I'm",
+		"name": "Krishna GSVV",
+		"nameGradient": "linear-gradient(to right, #c770f0, #ec4999, #ef4444)",
+		"typewriterStrings": [
+			"Full Stack Developer",
+			"Problem Solver",
+			"Tech Enthusiast",
+			"Open Source Contributor"
+		],
+		"description": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. Always eager to learn new technologies and contribute to meaningful projects.",
+		"location": {
+			"show": true,
+			"text": "📍 Bengaluru, India",
+			"icon": "📍",
+			"city": "Bengaluru",
+			"country": "India"
+		},
+		"profileImage": {
+			"type": "github",
+			"customUrl": "",
+			"altText": "Krishna GSVV",
+			"borderColor": "border-purple-500/30",
+			"shadowColor": "shadow-purple-500/20",
+			"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl"
+		},
+		"buttons": [
+			{
+				"text": "About Me",
+				"link": "/about",
+				"type": "primary",
+				"gradient": "from-purple-600 to-pink-600",
+				"hoverGradient": "from-purple-700 to-pink-700",
+				"shadowColor": "shadow-purple-500/25",
+				"icon": "ArrowDownIcon"
+			},
+			{
+				"text": "Projects",
+				"link": "/projects",
+				"type": "primary",
+				"gradient": "from-cyan-600 to-blue-600",
+				"hoverGradient": "from-cyan-700 to-blue-700",
+				"shadowColor": "shadow-cyan-500/25",
+				"icon": "ArrowDownIcon"
+			},
+			{
+				"text": "Resume",
+				"link": "/resume",
+				"type": "outline",
+				"borderColor": "border-purple-500",
+				"textColor": "text-purple-400",
+				"hoverBg": "hover:bg-purple-500",
+				"hoverText": "hover:text-white",
+				"icon": "DocumentArrowDownIcon"
+			}
+		],
+		"showScrollIndicator": true,
+		"animations": {
+			"typewriterSettings": {
+				"deleteSpeed": 50,
+				"delay": 100,
+				"autoStart": true,
+				"loop": true
+			},
+			"fadeInDuration": 0.6,
+			"staggerDelay": 0.1
+		},
+		"note": "Configure the home page content - greeting, name, typewriter strings, description, profile image settings, buttons, social links, and animations"
+	},
+	"about": {
+		"heading": "About Me",
+		"subheading": "Get to know me better",
+		"title": "I'm Krishna GSVV, a passionate developer",
+		"paragraphs": [
+			"I'm a dedicated full-stack developer with a passion for creating innovative web applications and solving complex problems through code. My journey in technology began with curiosity and has evolved into a professional pursuit of excellence.",
+			"I specialize in modern web technologies, with expertise in React, Node.js, and various databases. I enjoy working on both frontend and backend development, always striving to create seamless user experiences backed by robust server-side architecture.",
+			"When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge with the developer community. I believe in continuous learning and staying updated with the latest industry trends."
+		],
+		"image": {
+			"type": "github",
+			"customUrl": "",
+			"altText": "Krishna GSVV",
+			"note": "Set type to 'github' to use GitHub profile image, 'home' to use same as home page, or 'custom' to use customUrl"
+		},
+		"note": "Configure the About page content - heading, subheading, title, paragraphs, image settings, skills section heading, and skills categories with items",
+		"skillsHeading": "Technical Skills",
+		"skills": [
+			{
+				"category": "Frontend",
+				"icon": "DevicePhoneMobileIcon",
+				"items": [
+					{
+						"name": "React",
+						"icon": "FaReact",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "JavaScript",
+						"icon": "SiJavascript",
+						"color": "text-yellow-400"
+					},
+					{
+						"name": "TypeScript",
+						"icon": "SiTypescript",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "Tailwind CSS",
+						"icon": "SiTailwindcss",
+						"color": "text-cyan-400"
+					}
+				]
+			},
+			{
+				"category": "Backend",
+				"icon": "ServerIcon",
+				"items": [
+					{
+						"name": "Node.js",
+						"icon": "FaNodeJs",
+						"color": "text-green-400"
+					},
+					{
+						"name": "Express.js",
+						"icon": "SiExpress",
+						"color": "text-gray-400"
+					},
+					{
+						"name": "Python",
+						"icon": "FaPython",
+						"color": "text-yellow-400"
+					},
+					{
+						"name": "MongoDB",
+						"icon": "SiMongodb",
+						"color": "text-green-500"
+					},
+					{
+						"name": "PostgreSQL",
+						"icon": "SiPostgresql",
+						"color": "text-blue-400"
+					}
+				]
+			},
+			{
+				"category": "Tools & DevOps",
+				"icon": "CpuChipIcon",
+				"items": [
+					{
+						"name": "Git",
+						"icon": "FaGitAlt",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Docker",
+						"icon": "FaDocker",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "AWS",
+						"icon": "FaAws",
+						"color": "text-yellow-500"
+					}
+				]
+			}
+		],
+		"skillsNote": "Available category icons: DevicePhoneMobileIcon, ServerIcon, CpuChipIcon, CodeBracketIcon. Available skill icons: FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws, FaHtml5, FaCss3Alt, FaJsSquare, FaVuejs, FaAngular, FaPhp, FaJava, FaDatabase, SiJavascript, SiTypescript, SiMongodb, SiPostgresql, SiTailwindcss, SiExpress, SiNextdotjs, SiNestjs, SiRedis, SiGraphql, SiKubernetes, SiLinux, SiGit, SiFirebase, SiVercel, SiNetlify, and more.",
+		"stats": [
+			{
+				"number": "3+",
+				"label": "Years Experience"
+			},
+			{
+				"number": "50+",
+				"label": "Projects Completed"
+			},
+			{
+				"number": "100+",
+				"label": "GitHub Commits"
+			},
+			{
+				"number": "10+",
+				"label": "Technologies"
+			}
+		],
+		"statsNote": "Configure the stats section - each stat should have a 'number' and 'label' field. You can add/remove stats as needed. Examples: { \"number\": \"3+\", \"label\": \"Years Experience\" }, { \"number\": \"75+\", \"label\": \"Projects Completed\" }, { \"number\": \"500+\", \"label\": \"GitHub Commits\" }, { \"number\": \"15+\", \"label\": \"Technologies\" }"
+	},
 	"projects": {
 		"mode": "hybrid",
 		"ignore": [
 			".github",
-			"financial_assist",
-			"VKrishna04"
+			"VKrishna04",
+			"Tredence",
+			"Life-Experimentalist.github.io",
+			"Template"
 		],
 		"maxProjects": 15,
 		"sortBy": "updated",
@@ -470,74 +674,361 @@
 		"devUsername": "VKrishna04",
 		"profileImage": "https://github.com/VKrishna04.png"
 	},
-	"home": {
-		"greeting": "Hi There! 👋🏻 I'm",
-		"name": "Krishna GSVV",
-		"nameGradient": "linear-gradient(to right, #c770f0, #ec4999, #ef4444)",
-		"typewriterStrings": [
-			"Full Stack Developer",
-			"Problem Solver",
-			"Tech Enthusiast",
-			"Open Source Contributor"
+	"resume": {
+		"type": "file",
+		"url": "/resume.pdf",
+		"filename": "Krishna_GSVV_Resume.pdf",
+		"alternativeUrl": "",
+		"note": "Set type to 'file' to serve from public folder, or 'external' to use alternativeUrl (Google Drive, Dropbox, etc.)",
+		"sectionOrder": [
+			"experiences",
+			"education",
+			"skills",
+			"awards",
+			"certifications",
+			"personalProjects",
+			"publications",
+			"languages",
+			"volunteerExperience"
 		],
-		"description": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. Always eager to learn new technologies and contribute to meaningful projects.",
-		"location": {
-			"show": true,
-			"text": "📍 Bengaluru, India",
-			"icon": "📍",
-			"city": "Bengaluru",
-			"country": "India"
-		},
-		"profileImage": {
-			"type": "github",
-			"customUrl": "",
-			"altText": "Krishna GSVV",
-			"borderColor": "border-purple-500/30",
-			"shadowColor": "shadow-purple-500/20",
-			"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl"
-		},
-		"buttons": [
+		"sectionOrderNote": "Configure the order in which resume sections appear. Available sections: experiences, education, skills, personalProjects, certifications, awards, publications, languages, volunteerExperience",
+		"experiences": [
+		],
+		"experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
+		"experiencesHeading": "Work Experience",
+		"education": [
 			{
-				"text": "About Me",
-				"link": "/about",
-				"type": "primary",
-				"gradient": "from-purple-600 to-pink-600",
-				"hoverGradient": "from-purple-700 to-pink-700",
-				"shadowColor": "shadow-purple-500/25",
-				"icon": "ArrowDownIcon"
-			},
-			{
-				"text": "Projects",
-				"link": "/projects",
-				"type": "primary",
-				"gradient": "from-cyan-600 to-blue-600",
-				"hoverGradient": "from-cyan-700 to-blue-700",
-				"shadowColor": "shadow-cyan-500/25",
-				"icon": "ArrowDownIcon"
-			},
-			{
-				"text": "Resume",
-				"link": "/resume",
-				"type": "outline",
-				"borderColor": "border-purple-500",
-				"textColor": "text-purple-400",
-				"hoverBg": "hover:bg-purple-500",
-				"hoverText": "hover:text-white",
-				"icon": "DocumentArrowDownIcon"
+				"degree": "Bachelor of Technology",
+				"field": "Computer Science",
+				"school": "Amrita Vishwa Vidyapeetham",
+				"period": "2022 - 2026",
+				"gpa": "8.6/10",
+				"achievements": [
+
+				]
 			}
 		],
-		"showScrollIndicator": true,
-		"animations": {
-			"typewriterSettings": {
-				"deleteSpeed": 50,
-				"delay": 100,
-				"autoStart": true,
-				"loop": true
+		"educationNote": "Configure education entries - each should have degree, field, school, period, gpa, and achievements array",
+		"educationHeading": "Education",
+		"skills": [
+			{
+				"category": "Programming Languages",
+				"items": [
+					{
+						"name": "Python",
+						"icon": "FaPython",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "JavaScript",
+						"icon": "SiJavascript",
+						"color": "text-yellow-400"
+					},
+					{
+						"name": "SQL",
+						"icon": "FaDatabase",
+						"color": "text-blue-400"
+					}
+				]
 			},
-			"fadeInDuration": 0.6,
-			"staggerDelay": 0.1
-		},
-		"note": "Configure the home page content - greeting, name, typewriter strings, description, profile image settings, buttons, social links, and animations"
+			{
+				"category": "Frontend Technologies",
+				"items": [
+					{
+						"name": "React",
+						"icon": "FaReact",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "HTML5",
+						"icon": "FaHtml5",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "CSS3",
+						"icon": "FaCss3Alt",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "Tailwind CSS",
+						"icon": "SiTailwindcss",
+						"color": "text-cyan-400"
+					},
+					{
+						"name": "Bootstrap",
+						"icon": "SiBootstrap",
+						"color": "text-purple-500"
+					}
+				]
+			},
+			{
+				"category": "Backend Technologies",
+				"items": [
+					{
+						"name": "Node.js",
+						"icon": "FaNodeJs",
+						"color": "text-green-400"
+					},
+					{
+						"name": "Express.js",
+						"icon": "SiExpress",
+						"color": "text-gray-400"
+					},
+					{
+						"name": "REST APIs",
+						"icon": "CodeBracketIcon",
+						"color": "text-purple-400"
+					},
+					{
+						"name": "Flask",
+						"icon": "SiFlask",
+						"color": "text-pink-400"
+					}
+				]
+			},
+			{
+				"category": "Databases",
+				"items": [
+					{
+						"name": "MongoDB",
+						"icon": "SiMongodb",
+						"color": "text-green-500"
+					},
+					{
+						"name": "PostgreSQL",
+						"icon": "SiPostgresql",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "MySQL",
+						"icon": "FaDatabase",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "SQLite",
+						"icon": "SiSqlite",
+						"color": "text-gray-400"
+					}
+				]
+			},
+			{
+				"category": "Tools & Platforms",
+				"items": [
+					{
+						"name": "Git",
+						"icon": "FaGitAlt",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Docker",
+						"icon": "FaDocker",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "AWS",
+						"icon": "FaAws",
+						"color": "text-yellow-500"
+					},
+					{
+						"name": "Render",
+						"icon": "SiRender",
+						"color": "text-white"
+					},
+					{
+						"name": "OCI",
+						"icon": "SiOracle",
+						"color": "text-blue-400"
+					}
+				]
+			}
+		],
+		"skillsNote": "Configure skills with categories and items. Each item should have name, icon, and color. Available icons: same as About page skill icons.",
+		"skillsHeading": "Technical Skills",
+		"certifications": [
+		],
+		"certificationsNote": "Configure certifications - each should have name, issuer, date, credentialId, certificateUrl (to view certificate), and verificationUrl (to verify certificate). Links are optional and will only show if provided.",
+		"certificationsHeading": "Certifications",
+		"awards": [
+			{
+				"name": "2nd Runner-up at Corporate Hackathon - 2 Lakhs INR Prize",
+				"organization": "InfinityAI 2025, Tredence Inc.",
+				"date": "March 2025",
+				"location": "Bengaluru, India",
+				"description": "Recognized for developing an innovative web application based on Facial Emotion Detection using MediaPipe and machine learning, showcasing technical expertise and problem-solving skills in a competitive environment"
+			},
+			{
+				"name": "1st Runner-up at IIT Delhi CodeHive Hackathon - 1 Lakh INR Prize",
+				"organization": "IIT Delhi Tryst Event & Hive blockchain",
+				"date": "March 2025",
+				"description": "Outstanding performance in delivering high-quality software solutions for real-world scenarios, and utilizing advanced technologies like blockchain and AI to create impactful applications"
+			},
+			{
+				"name": "1st rank at IIT Hyderabad Pathway Hackathon",
+				"organization": "IIT Hyderabad & Pathway.com",
+				"date": "2025",
+				"description": "Awarded for scoring the highest points in the hackathon, demonstrating exceptional coding skills and innovative problem-solving abilities in a new technology."
+			},
+			{
+				"name": "1st rank at Microsoft Imagine Cup Campus Hackathon",
+				"organization": "Microsoft Learn & Amrita Vishwa Vidyapeetham",
+				"date": "2024",
+				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity"
+			}
+		],
+		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, and description",
+		"awardsHeading": "Awards & Recognition",
+		"publications": [
+			{
+				"title": "Predicting Sevearity of Type 2 Diabetic Retinopathy Using Retinal Fundus Images with new DeepLearning Architectures from the Inception and Resnet Families",
+				"type": "Conference Paper",
+				"publisher": "IEEE",
+				"date": "12 May 2025",
+				"url": "https://ieeexplore.ieee.org/document/10987517",
+				"description": "Due to its high morbidity and medical expenses, DR mellitus (T2DM) is a serious global health concern. Its burden can be lessened with effective early prognosis, but the available treatments are not enough. Predictive modelling of Retina Images (fundus) can enhance early diagnosis and care quality. Advanced convolutional neural networks (Inception-V4, ResNet V1, and ResNet V2) are used in this study to assess the severity of Diabetic Retinopathy caused by T2DM. Using de-identified fundus data from 9,948 individuals (1,904 with a T2DM diagnosed), we used transfer learning to train these models. We have performed simple data augmentation to rectify the class imbalance. The accuracy and AUC of the ensemble model were 94.21% and 98.53%, respectively. The findings imply that the combination of ResNet and Inception-V4 enhances classification power, providing a viable approach for early T2DM identification from fundus data that may find use in clinical settings. Future research still needs to focus on improving sensitivity and integrating real-time."
+			}
+		],
+		"publicationsNote": "Configure publications - each should have title, type, publisher, date, url (optional), and description",
+		"publicationsHeading": "Publications",
+		"languages": [
+			{
+				"name": "English",
+				"proficiency": "Professional"
+			},
+			{
+				"name": "Telugu",
+				"proficiency": "Native"
+			},
+			{
+				"name": "Hindi",
+				"proficiency": "Conversational"
+			}
+		],
+		"languagesNote": "Configure languages - each should have name, proficiency, and level (A1, A2, B1, B2, C1, C2)",
+		"languagesHeading": "Languages",
+		"volunteerExperience": [
+		],
+		"volunteerExperienceNote": "Configure volunteer experience - each should have role, organization, period, and description array",
+		"volunteerExperienceHeading": "Volunteer Experience",
+		"personalProjects": [
+			{
+				"name": "CounterAPI",
+				"technologies": [
+					{
+						"name": "FastAPI",
+						"icon": "SiFlask",
+						"color": "text-green-400"
+					},
+					{
+						"name": "PostgreSQL",
+						"icon": "SiPostgresql",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "Render",
+						"icon": "SiRender",
+						"color": "text-white"
+					},
+					{
+						"name": "REST API",
+						"icon": "CodeBracketIcon",
+						"color": "text-purple-400"
+					}
+				],
+				"description": "Developed FastAPI analytics microservice with PostgreSQL for zero-code visitor tracking, featuring real-time dashboards and few-click cloud deployment. Automated CI/CD pipeline, optimizing for high performance and reliability.",
+				"githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
+				"liveUrl": "https://life-experimentalist.github.io/CounterAPI/"
+			},
+			{
+				"name": "cSpell Sync",
+				"technologies": [
+					{
+						"name": "TypeScript",
+						"icon": "SiTypescript",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "VS Code API",
+						"icon": "SiVisualstudiocode",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "Node.js",
+						"icon": "FaNodeJs",
+						"color": "text-green-400"
+					}
+				],
+				"description": "Created VS Code extension for bidirectional cSpell dictionary sync, supporting custom dictionaries, project settings, and global configurations. Gained 500+ installs on VS Code Marketplace, driven by features like automatic sync, keyboard shortcuts, and status bar integration.",
+				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
+				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
+			},
+			{
+				"name": "HiveXplore",
+				"technologies": [
+					{
+						"name": "Flask",
+						"icon": "SiFlask",
+						"color": "text-pink-400"
+					},
+					{
+						"name": "SQLite3",
+						"icon": "SiSqlite",
+						"color": "text-gray-400"
+					},
+					{
+						"name": "Hive Blockchain",
+						"icon": "SiBlockchaindotcom",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "RESTful APIs",
+						"icon": "CodeBracketIcon",
+						"color": "text-purple-400"
+					}
+				],
+				"description": "Developed user-friendly web application (Flask, JavaScript) as a gateway to decentralized social media blockchain, featuring intuitive content creation, multi-method authentication (Hive Keychain, HiveSigner, HiveAuth), and a robust demo mode for easy onboarding to blockchain technology.",
+				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
+				"liveUrl": "https://hivebuzz.onrender.com/"
+			},
+			{
+				"name": "Indian Sign Language Detector",
+				"technologies": [
+					{
+						"name": "Flask",
+						"icon": "SiFlask",
+						"color": "text-pink-400"
+					},
+					{
+						"name": "MediaPipe",
+						"icon": "SiTensorflow",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "OpenCV",
+						"icon": "SiOpencv",
+						"color": "text-green-400"
+					},
+					{
+						"name": "scikit-learn",
+						"icon": "SiScikitlearn",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "NumPy",
+						"icon": "SiNumpy",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "JavaScript",
+						"icon": "SiJavascript",
+						"color": "text-yellow-400"
+					}
+				],
+				"description": "Built real-time sign language translator using Python, OpenCV, MediaPipe achieving 98% accuracy with interactive web UI and custom model training for accessibility communication.",
+				"githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector"
+			}
+		],
+		"personalProjectsNote": "Configure personal projects - each should have name, technologies array (with icon and color), period, description, githubUrl (optional), liveUrl (optional), demoUrl (optional), documentationUrl (optional)",
+		"personalProjectsHeading": "Personal Projects"
 	},
 	"social": {
 		"platforms": [
@@ -547,6 +1038,19 @@
 				"icon": "FaGithub",
 				"url": "https://github.com/VKrishna04",
 				"label": "GitHub Profile",
+				"color": "text-white",
+				"hoverColor": "hover:text-gray-300",
+				"showInHome": true,
+				"showInFooter": true,
+				"showInContact": true,
+				"enabled": true
+			},
+			{
+				"name": "GitHub Org",
+				"key": "github",
+				"icon": "FaGithub",
+				"url": "https://github.com/Life-Experimentalist",
+				"label": "GitHub Org",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": true,
@@ -578,7 +1082,7 @@
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
-				"enabled": true
+				"enabled": false
 			},
 			{
 				"name": "Instagram",
@@ -730,522 +1234,6 @@
 			"location": "Bengaluru, India"
 		},
 		"note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags. Available icons: FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch, FaTiktok, FaMedium, FaDev, FaStackOverflow, FaDribbble, FaBehance, FaCodepen, ArrowUpIcon, Bars3Icon, XMarkIcon"
-	},
-	"about": {
-		"heading": "About Me",
-		"subheading": "Get to know me better",
-		"title": "I'm Krishna GSVV, a passionate developer",
-		"paragraphs": [
-			"I'm a dedicated full-stack developer with a passion for creating innovative web applications and solving complex problems through code. My journey in technology began with curiosity and has evolved into a professional pursuit of excellence.",
-			"I specialize in modern web technologies, with expertise in React, Node.js, and various databases. I enjoy working on both frontend and backend development, always striving to create seamless user experiences backed by robust server-side architecture.",
-			"When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge with the developer community. I believe in continuous learning and staying updated with the latest industry trends."
-		],
-		"image": {
-			"type": "github",
-			"customUrl": "",
-			"altText": "Krishna GSVV",
-			"note": "Set type to 'github' to use GitHub profile image, 'home' to use same as home page, or 'custom' to use customUrl"
-		},
-		"note": "Configure the About page content - heading, subheading, title, paragraphs, image settings, skills section heading, and skills categories with items",
-		"skillsHeading": "Technical Skills",
-		"skills": [
-			{
-				"category": "Frontend",
-				"icon": "DevicePhoneMobileIcon",
-				"items": [
-					{
-						"name": "React",
-						"icon": "FaReact",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "JavaScript",
-						"icon": "SiJavascript",
-						"color": "text-yellow-400"
-					},
-					{
-						"name": "TypeScript",
-						"icon": "SiTypescript",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "Tailwind CSS",
-						"icon": "SiTailwindcss",
-						"color": "text-cyan-400"
-					}
-				]
-			},
-			{
-				"category": "Backend",
-				"icon": "ServerIcon",
-				"items": [
-					{
-						"name": "Node.js",
-						"icon": "FaNodeJs",
-						"color": "text-green-400"
-					},
-					{
-						"name": "Express.js",
-						"icon": "SiExpress",
-						"color": "text-gray-400"
-					},
-					{
-						"name": "Python",
-						"icon": "FaPython",
-						"color": "text-yellow-400"
-					},
-					{
-						"name": "MongoDB",
-						"icon": "SiMongodb",
-						"color": "text-green-500"
-					},
-					{
-						"name": "PostgreSQL",
-						"icon": "SiPostgresql",
-						"color": "text-blue-400"
-					}
-				]
-			},
-			{
-				"category": "Tools & DevOps",
-				"icon": "CpuChipIcon",
-				"items": [
-					{
-						"name": "Git",
-						"icon": "FaGitAlt",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "Docker",
-						"icon": "FaDocker",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "AWS",
-						"icon": "FaAws",
-						"color": "text-yellow-500"
-					}
-				]
-			}
-		],
-		"skillsNote": "Available category icons: DevicePhoneMobileIcon, ServerIcon, CpuChipIcon, CodeBracketIcon. Available skill icons: FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws, FaHtml5, FaCss3Alt, FaJsSquare, FaVuejs, FaAngular, FaPhp, FaJava, FaDatabase, SiJavascript, SiTypescript, SiMongodb, SiPostgresql, SiTailwindcss, SiExpress, SiNextdotjs, SiNestjs, SiRedis, SiGraphql, SiKubernetes, SiLinux, SiGit, SiFirebase, SiVercel, SiNetlify, and more.",
-		"stats": [
-			{
-				"number": "2+",
-				"label": "Years Experience"
-			},
-			{
-				"number": "50+",
-				"label": "Projects Completed"
-			},
-			{
-				"number": "100+",
-				"label": "GitHub Commits"
-			},
-			{
-				"number": "10+",
-				"label": "Technologies"
-			}
-		],
-		"statsNote": "Configure the stats section - each stat should have a 'number' and 'label' field. You can add/remove stats as needed. Examples: { \"number\": \"3+\", \"label\": \"Years Experience\" }, { \"number\": \"75+\", \"label\": \"Projects Completed\" }, { \"number\": \"500+\", \"label\": \"GitHub Commits\" }, { \"number\": \"15+\", \"label\": \"Technologies\" }"
-	},
-	"resume": {
-		"type": "file",
-		"url": "/resume.pdf",
-		"filename": "Krishna_GSVV_Resume.pdf",
-		"alternativeUrl": "",
-		"note": "Set type to 'file' to serve from public folder, or 'external' to use alternativeUrl (Google Drive, Dropbox, etc.)",
-		"sectionOrder": [
-			"experiences",
-			"skills",
-			"education",
-			"awards",
-			"certifications",
-			"personalProjects",
-			"publications",
-			"languages",
-			"volunteerExperience"
-		],
-		"sectionOrderNote": "Configure the order in which resume sections appear. Available sections: experiences, education, skills, personalProjects, certifications, awards, publications, languages, volunteerExperience",
-		"experiences": [
-			{
-				"title": "Full Stack Developer",
-				"company": "Tech Solutions Inc.",
-				"period": "2023 - Present",
-				"location": "Remote",
-				"description": [
-					"Developed and maintained web applications using React, Node.js, and MongoDB",
-					"Collaborated with cross-functional teams to deliver high-quality software solutions",
-					"Implemented RESTful APIs and integrated third-party services",
-					"Optimized application performance and improved user experience"
-				]
-			},
-			{
-				"title": "Frontend Developer",
-				"company": "Digital Agency",
-				"period": "2022 - 2023",
-				"location": "Hybrid",
-				"description": [
-					"Built responsive web interfaces using React and modern CSS frameworks",
-					"Worked closely with designers to implement pixel-perfect designs",
-					"Implemented state management solutions and API integrations",
-					"Mentored junior developers and conducted code reviews"
-				]
-			},
-			{
-				"title": "Web Developer Intern",
-				"company": "StartupXYZ",
-				"period": "2021 - 2022",
-				"location": "On-site",
-				"description": [
-					"Assisted in developing company website and internal tools",
-					"Learned modern web development practices and version control",
-					"Participated in daily standups and sprint planning meetings",
-					"Contributed to documentation and testing procedures"
-				]
-			}
-		],
-		"experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
-		"experiencesHeading": "Work Experience",
-		"education": [
-			{
-				"degree": "Bachelor of Technology",
-				"field": "Computer Science",
-				"school": "University of Technology",
-				"period": "2018 - 2022",
-				"gpa": "3.8/4.0",
-				"achievements": [
-					"Dean's List for 4 semesters",
-					"Computer Science Society President",
-					"Hackathon Winner - Best Innovation Award"
-				]
-			},
-			{
-				"degree": "High School Diploma",
-				"field": "Science Stream",
-				"school": "City High School",
-				"period": "2016 - 2018",
-				"gpa": "95%",
-				"achievements": [
-					"Valedictorian",
-					"National Science Olympiad Gold Medal",
-					"Mathematics Competition State Champion"
-				]
-			}
-		],
-		"educationNote": "Configure education entries - each should have degree, field, school, period, gpa, and achievements array",
-		"educationHeading": "Education",
-		"skills": [
-			{
-				"category": "Programming Languages",
-				"items": [
-					{
-						"name": "JavaScript",
-						"icon": "SiJavascript",
-						"color": "text-yellow-400"
-					},
-					{
-						"name": "TypeScript",
-						"icon": "SiTypescript",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "Python",
-						"icon": "FaPython",
-						"color": "text-yellow-400"
-					},
-					{
-						"name": "Java",
-						"icon": "FaJava",
-						"color": "text-red-500"
-					},
-					{
-						"name": "SQL",
-						"icon": "FaDatabase",
-						"color": "text-blue-400"
-					}
-				]
-			},
-			{
-				"category": "Frontend Technologies",
-				"items": [
-					{
-						"name": "React",
-						"icon": "FaReact",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Vue.js",
-						"icon": "FaVuejs",
-						"color": "text-green-400"
-					},
-					{
-						"name": "HTML5",
-						"icon": "FaHtml5",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "CSS3",
-						"icon": "FaCss3Alt",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "Tailwind CSS",
-						"icon": "SiTailwindcss",
-						"color": "text-cyan-400"
-					}
-				]
-			},
-			{
-				"category": "Backend Technologies",
-				"items": [
-					{
-						"name": "Node.js",
-						"icon": "FaNodeJs",
-						"color": "text-green-400"
-					},
-					{
-						"name": "Express.js",
-						"icon": "SiExpress",
-						"color": "text-gray-400"
-					},
-					{
-						"name": "REST APIs",
-						"icon": "CodeBracketIcon",
-						"color": "text-purple-400"
-					},
-					{
-						"name": "GraphQL",
-						"icon": "SiGraphql",
-						"color": "text-pink-400"
-					}
-				]
-			},
-			{
-				"category": "Databases",
-				"items": [
-					{
-						"name": "MongoDB",
-						"icon": "SiMongodb",
-						"color": "text-green-500"
-					},
-					{
-						"name": "PostgreSQL",
-						"icon": "SiPostgresql",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Redis",
-						"icon": "SiRedis",
-						"color": "text-red-400"
-					},
-					{
-						"name": "Firebase",
-						"icon": "SiFirebase",
-						"color": "text-orange-400"
-					}
-				]
-			},
-			{
-				"category": "Tools & Platforms",
-				"items": [
-					{
-						"name": "Git",
-						"icon": "FaGitAlt",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "Docker",
-						"icon": "FaDocker",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "AWS",
-						"icon": "FaAws",
-						"color": "text-yellow-500"
-					},
-					{
-						"name": "Vercel",
-						"icon": "SiVercel",
-						"color": "text-white"
-					}
-				]
-			}
-		],
-		"skillsNote": "Configure skills with categories and items. Each item should have name, icon, and color. Available icons: same as About page skill icons.",
-		"skillsHeading": "Technical Skills",
-		"certifications": [
-			{
-				"name": "AWS Certified Solutions Architect",
-				"issuer": "Amazon Web Services",
-				"date": "2023",
-				"credentialId": "AWS-CSA-2023-001",
-				"certificateUrl": "https://www.credly.com/badges/example-aws-cert",
-				"verificationUrl": "https://aws.amazon.com/certification/verify/"
-			},
-			{
-				"name": "React Developer Certification",
-				"issuer": "Meta",
-				"date": "2022",
-				"credentialId": "META-REACT-2022-456",
-				"certificateUrl": "https://www.coursera.org/account/accomplishments/certificate/example-meta-cert",
-				"verificationUrl": "https://www.coursera.org/verify/example-meta-cert"
-			},
-			{
-				"name": "MongoDB Developer Certification",
-				"issuer": "MongoDB University",
-				"date": "2022",
-				"credentialId": "MONGO-DEV-2022-789",
-				"certificateUrl": "https://university.mongodb.com/course_completion/example-mongo-cert"
-			},
-			{
-				"name": "Local Workshop Certificate",
-				"issuer": "Tech Community",
-				"date": "2021",
-				"credentialId": "LOCAL-2021-001"
-			}
-		],
-		"certificationsNote": "Configure certifications - each should have name, issuer, date, credentialId, certificateUrl (to view certificate), and verificationUrl (to verify certificate). Links are optional and will only show if provided.",
-		"certificationsHeading": "Certifications",
-		"awards": [
-			{
-				"name": "Best Innovation Award",
-				"organization": "Tech Innovation Summit",
-				"date": "2023",
-				"location": "",
-				"description": "Recognized for developing an innovative web application that improved user engagement by 40%"
-			},
-			{
-				"name": "Employee of the Month",
-				"organization": "Tech Solutions Inc.",
-				"date": "March 2023",
-				"description": "Outstanding performance in delivering high-quality software solutions ahead of schedule"
-			}
-		],
-		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, and description",
-		"awardsHeading": "Awards & Recognition",
-		"publications": [
-			{
-				"title": "Modern Web Development Practices: A Comprehensive Guide",
-				"type": "Article",
-				"publisher": "Tech Blog",
-				"date": "2023",
-				"url": "https://example.com/article/modern-web-dev",
-				"description": "An in-depth analysis of current web development trends and best practices"
-			},
-			{
-				"title": "Building Scalable React Applications",
-				"type": "Conference Paper",
-				"publisher": "Web Development Conference",
-				"date": "2022",
-				"url": "https://example.com/paper/scalable-react",
-				"description": "Research on scalability patterns in React applications with performance optimizations"
-			}
-		],
-		"publicationsNote": "Configure publications - each should have title, type, publisher, date, url (optional), and description",
-		"publicationsHeading": "Publications",
-		"languages": [
-			{
-				"name": "English",
-				"proficiency": "Native",
-				"level": "C2"
-			},
-			{
-				"name": "Spanish",
-				"proficiency": "Conversational",
-				"level": "B2"
-			},
-			{
-				"name": "Hindi",
-				"proficiency": "Professional",
-				"level": "C1"
-			}
-		],
-		"languagesNote": "Configure languages - each should have name, proficiency, and level (A1, A2, B1, B2, C1, C2)",
-		"languagesHeading": "Languages",
-		"volunteerExperience": [
-			{
-				"role": "Web Development Mentor",
-				"organization": "Code for Community",
-				"period": "2022 - Present",
-				"description": [
-					"Mentored aspiring developers in web development fundamentals",
-					"Conducted weekly coding workshops for underprivileged students",
-					"Helped 20+ students transition to tech careers"
-				]
-			},
-			{
-				"role": "Technical Volunteer",
-				"organization": "Local Tech Meetup",
-				"period": "2021 - 2022",
-				"description": [
-					"Organized technical presentations and workshops",
-					"Managed event logistics and community outreach",
-					"Built and maintained the meetup website"
-				]
-			}
-		],
-		"volunteerExperienceNote": "Configure volunteer experience - each should have role, organization, period, and description array",
-		"volunteerExperienceHeading": "Volunteer Experience",
-		"personalProjects": [
-			{
-				"name": "E-Commerce Platform",
-				"technologies": [
-					{
-						"name": "React",
-						"icon": "FaReact",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Node.js",
-						"icon": "FaNodeJs",
-						"color": "text-green-400"
-					},
-					{
-						"name": "MongoDB",
-						"icon": "SiMongodb",
-						"color": "text-green-500"
-					},
-					{
-						"name": "Stripe",
-						"icon": "SiStripe",
-						"color": "text-purple-400"
-					}
-				],
-				"period": "2023",
-				"description": "Full-stack e-commerce application with payment integration and admin dashboard",
-				"githubUrl": "https://github.com/example/ecommerce-platform",
-				"liveUrl": "https://ecommerce-demo.example.com",
-				"demoUrl": "https://demo.ecommerce-platform.com",
-				"documentationUrl": "https://docs.ecommerce-platform.com"
-			},
-			{
-				"name": "Task Management App",
-				"technologies": [
-					{
-						"name": "Vue.js",
-						"icon": "FaVuejs",
-						"color": "text-green-400"
-					},
-					{
-						"name": "Express.js",
-						"icon": "SiExpress",
-						"color": "text-gray-400"
-					},
-					{
-						"name": "PostgreSQL",
-						"icon": "SiPostgresql",
-						"color": "text-blue-400"
-					}
-				],
-				"period": "2022",
-				"description": "Collaborative task management application with real-time updates and team features",
-				"githubUrl": "https://github.com/example/task-manager",
-				"liveUrl": "https://task-manager-demo.com"
-			}
-		],
-		"personalProjectsNote": "Configure personal projects - each should have name, technologies array (with icon and color), period, description, githubUrl (optional), liveUrl (optional), demoUrl (optional), documentationUrl (optional)",
-		"personalProjectsHeading": "Personal Projects"
 	},
 	"navbar": {
 		"logo": {

@@ -1,8 +1,156 @@
-# Dynamic ProjectsStatic Component
+# Projects: Static vs Dynamic vs Hybrid Modes
 
-## Overview
+## 🏗️ Project System Architecture
 
-The `ProjectsStatic.jsx` component has been made dynamic and now fetches project data from `settings.json` instead of using hardcoded values. This allows you to easily manage your projects through configuration without touching the code.
+```mermaid
+graph TB
+    subgraph "Configuration Layer"
+        Settings[settings.json]
+        Mode[projects.mode]
+        GitHubConfig[GitHub Config]
+        StaticConfig[Static Projects]
+    end
+
+    subgraph "Data Sources"
+        GitHub[GitHub API]
+        Static[Static Projects Array]
+        Hybrid[Hybrid Merge Logic]
+    end
+
+    subgraph "Processing Pipeline"
+        Fetch[Data Fetching]
+        Transform[Data Transformation]
+        Merge[Data Merging]
+        Filter[Filtering & Sorting]
+        Display[Final Display]
+    end
+
+    subgraph "Display Modes"
+        GitHubMode[GitHub Mode]
+        StaticMode[Static Mode]
+        HybridMode[Hybrid Mode]
+    end
+
+    Settings --> Mode
+    Settings --> GitHubConfig
+    Settings --> StaticConfig
+
+    Mode --> GitHubMode
+    Mode --> StaticMode
+    Mode --> HybridMode
+
+    GitHubMode --> GitHub
+    StaticMode --> Static
+    HybridMode --> GitHub
+    HybridMode --> Static
+    HybridMode --> Hybrid
+
+    GitHub --> Fetch
+    Static --> Transform
+    Hybrid --> Merge
+
+    Fetch --> Filter
+    Transform --> Filter
+    Merge --> Filter
+    Filter --> Display
+
+    classDef config fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef source fill:#10b981,stroke:#059669,color:#fff
+    classDef process fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef mode fill:#f59e0b,stroke:#d97706,color:#fff
+
+    class Settings,Mode,GitHubConfig,StaticConfig config
+    class GitHub,Static,Hybrid source
+    class Fetch,Transform,Merge,Filter,Display process
+    class GitHubMode,StaticMode,HybridMode mode
+```
+
+## 🔄 Project Mode Comparison
+
+```mermaid
+graph LR
+    subgraph "GitHub Mode"
+        G1[Fetch from GitHub API]
+        G2[Apply Filters]
+        G3[Display Dynamic Projects]
+    end
+
+    subgraph "Static Mode"
+        S1[Load from settings.json]
+        S2[Transform Data Format]
+        S3[Display Static Projects]
+    end
+
+    subgraph "Hybrid Mode"
+        H1[Fetch GitHub Data]
+        H2[Load Static Projects]
+        H3[Smart Merge Logic]
+        H4[Enhanced Display]
+    end
+
+    G1 --> G2 --> G3
+    S1 --> S2 --> S3
+    H1 --> H3
+    H2 --> H3
+    H3 --> H4
+
+    classDef github fill:#10b981,stroke:#059669,color:#fff
+    classDef static fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef hybrid fill:#8b5cf6,stroke:#7c3aed,color:#fff
+
+    class G1,G2,G3 github
+    class S1,S2,S3 static
+    class H1,H2,H3,H4 hybrid
+```
+
+## 📊 Data Flow Detailed Diagram
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant App
+    participant Settings
+    participant GitHub
+    participant Transform
+    participant Display
+
+    User->>App: Navigate to Projects
+    App->>Settings: Load configuration
+    Settings-->>App: Return project mode & config
+
+    alt GitHub Mode
+        App->>GitHub: Fetch repositories
+        GitHub-->>App: Return repository data
+        App->>Transform: Convert GitHub format
+        Transform-->>App: Standardized project data
+    else Static Mode
+        App->>Settings: Load static projects
+        Settings-->>App: Static project array
+        App->>Transform: Convert static format
+        Transform-->>App: Standardized project data
+    else Hybrid Mode
+        par
+            App->>GitHub: Fetch repositories
+            GitHub-->>App: GitHub data
+        and
+            App->>Settings: Load static projects
+            Settings-->>App: Static data
+        end
+        App->>Transform: Merge & enhance data
+        Transform-->>App: Enhanced project data
+    end
+
+    App->>Display: Render projects
+    Display-->>User: Show project grid
+```
+
+## 🎯 Mode Selection Guide
+
+| **Mode**   | **Best For**                  | **Pros**                                                                 | **Cons**                                                                     |
+| ---------- | ----------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| **GitHub** | Developers with active GitHub | ✅ Always up-to-date<br/>✅ No manual maintenance<br/>✅ Rich metadata      | ❌ Limited customization<br/>❌ Requires internet<br/>❌ API rate limits        |
+| **Static** | Full control over content     | ✅ Complete customization<br/>✅ Works offline<br/>✅ Stable content        | ❌ Manual updates required<br/>❌ No GitHub integration<br/>❌ More maintenance |
+| **Hybrid** | Best of both worlds           | ✅ GitHub convenience<br/>✅ Custom enhancements<br/>✅ Intelligent merging | ❌ More complex setup<br/>❌ Potential conflicts<br/>❌ Higher maintenance      |
 
 ## How It Works
 
