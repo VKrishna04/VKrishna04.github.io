@@ -1348,6 +1348,16 @@
 						"Professional Experience"
 					]
 				},
+				"experiencesIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the experiences section icon",
+					"examples": [
+						"BriefcaseIcon",
+						"BuildingOfficeIcon",
+						"UserGroupIcon"
+					]
+				},
 				"educationHeading": {
 					"type": "string",
 					"minLength": 1,
@@ -1356,6 +1366,16 @@
 					"examples": [
 						"Education",
 						"Academic Background"
+					]
+				},
+				"educationIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the education section icon",
+					"examples": [
+						"AcademicCapIcon",
+						"BookOpenIcon",
+						"BuildingLibraryIcon"
 					]
 				},
 				"skillsHeading": {
@@ -1368,6 +1388,16 @@
 						"Skills & Expertise"
 					]
 				},
+				"skillsIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the skills section icon",
+					"examples": [
+						"CpuChipIcon",
+						"CodeBracketIcon",
+						"WrenchScrewdriverIcon"
+					]
+				},
 				"awardsHeading": {
 					"type": "string",
 					"minLength": 1,
@@ -1376,6 +1406,16 @@
 					"examples": [
 						"Awards & Recognition",
 						"Achievements"
+					]
+				},
+				"awardsIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the awards section icon",
+					"examples": [
+						"TrophyIcon",
+						"StarIcon",
+						"ShieldCheckIcon"
 					]
 				},
 				"certificationsHeading": {
@@ -1388,6 +1428,16 @@
 						"Professional Certifications"
 					]
 				},
+				"certificationsIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the certifications section icon",
+					"examples": [
+						"ShieldCheckIcon",
+						"AcademicCapIcon",
+						"DocumentCheckIcon"
+					]
+				},
 				"publicationsHeading": {
 					"type": "string",
 					"minLength": 1,
@@ -1396,6 +1446,16 @@
 					"examples": [
 						"Publications",
 						"Research Publications"
+					]
+				},
+				"publicationsIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the publications section icon",
+					"examples": [
+						"DocumentTextIcon",
+						"BookOpenIcon",
+						"NewspaperIcon"
 					]
 				},
 				"languagesHeading": {
@@ -1408,6 +1468,16 @@
 						"Language Proficiency"
 					]
 				},
+				"languagesIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the languages section icon",
+					"examples": [
+						"GlobeAltIcon",
+						"LanguageIcon",
+						"ChatBubbleLeftRightIcon"
+					]
+				},
 				"volunteerExperienceHeading": {
 					"type": "string",
 					"minLength": 1,
@@ -1418,6 +1488,16 @@
 						"Community Service"
 					]
 				},
+				"volunteerExperienceIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the volunteer experience section icon",
+					"examples": [
+						"HeartIcon",
+						"HandRaisedIcon",
+						"UserGroupIcon"
+					]
+				},
 				"personalProjectsHeading": {
 					"type": "string",
 					"minLength": 1,
@@ -1426,6 +1506,16 @@
 					"examples": [
 						"Personal Projects",
 						"Notable Projects"
+					]
+				},
+				"personalProjectsIcon": {
+					"type": "string",
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icons identifier for the personal projects section icon",
+					"examples": [
+						"CubeIcon",
+						"RocketLaunchIcon",
+						"CodeBracketIcon"
 					]
 				},
 				"experiences": {
@@ -1609,9 +1699,30 @@
 								"description": "Unique credential identifier"
 							},
 							"certificateUrl": {
-								"type": "string",
-								"format": "uri",
-								"description": "URL to the certificate"
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no certificate URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"description": "Remote URL to the certificate"
+									},
+									{
+										"type": "string",
+										"pattern": "^(assets|public|\\./|\\.\\./).*\\.(pdf|docx|jpg|jpeg|png|gif)$",
+										"description": "Local file path relative to public folder (e.g., assets/certificates/cert.pdf)"
+									}
+								],
+								"description": "URL to the certificate - can be remote URL or local file path relative to public folder",
+								"examples": [
+									"https://example.com/certificate.pdf",
+									"assets/certificates/aws-cert.pdf",
+									"./documents/certification.pdf",
+									""
+								]
 							},
 							"verificationUrl": {
 								"type": "string",
@@ -1622,7 +1733,8 @@
 						"required": [
 							"name",
 							"issuer",
-							"date"
+							"date",
+							"certificateUrl"
 						]
 					}
 				},
@@ -1763,7 +1875,7 @@
 							"description": {
 								"type": "string",
 								"minLength": 50,
-								"maxLength": 1000,
+								"maxLength": 1500,
 								"description": "Abstract or detailed description of the publication",
 								"examples": [
 									"Due to its high morbidity and medical expenses, DR mellitus (T2DM) is a serious global health concern..."
@@ -2042,7 +2154,19 @@
 								]
 							},
 							"githubUrl": {
-								"$ref": "#/definitions/githubUrl",
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no GitHub URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"pattern": "^https://github\\.com/[^/]+/[^/]+/?$",
+										"description": "A valid GitHub repository URL"
+									}
+								],
 								"description": "GitHub repository URL for the project",
 								"examples": [
 									"https://github.com/Life-Experimentalist/CounterAPI",
@@ -2050,26 +2174,77 @@
 								]
 							},
 							"liveUrl": {
-								"$ref": "#/definitions/url",
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no live URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"description": "Remote URL where the project is accessible"
+									},
+									{
+										"type": "string",
+										"pattern": "^(assets|public|\\./|\\.\\./).*",
+										"description": "Local file path relative to public folder"
+									}
+								],
 								"description": "Live deployment URL where the project is accessible",
 								"examples": [
 									"https://life-experimentalist.github.io/CounterAPI/",
+									"assets/projects/demo.html",
 									""
 								]
 							},
 							"demoUrl": {
-								"$ref": "#/definitions/url",
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no demo URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"description": "Remote demo or preview URL"
+									},
+									{
+										"type": "string",
+										"pattern": "^(assets|public|\\./|\\.\\./).*",
+										"description": "Local demo file path relative to public folder"
+									}
+								],
 								"description": "Demo or preview URL for the project",
 								"examples": [
 									"https://demo.example.com",
+									"assets/demos/project-demo.html",
 									""
 								]
 							},
 							"documentationUrl": {
-								"$ref": "#/definitions/url",
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no documentation URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"description": "Remote documentation URL"
+									},
+									{
+										"type": "string",
+										"pattern": "^(assets|public|\\./|\\.\\./).*\\.(html|pdf|md)$",
+										"description": "Local documentation file path relative to public folder"
+									}
+								],
 								"description": "Project documentation URL",
 								"examples": [
 									"https://docs.example.com",
+									"assets/docs/project-docs.pdf",
 									""
 								]
 							}
@@ -2631,7 +2806,7 @@
 						},
 						"customText": {
 							"type": "string",
-							"minLength": 1,
+							"minLength": 0,
 							"maxLength": 100,
 							"description": "Custom copyright text (overrides template if provided)",
 							"examples": [
@@ -2879,6 +3054,10 @@
 					"description": "Configuration for mapping projects to counter endpoints",
 					"additionalProperties": false,
 					"properties": {
+						"note": {
+							"type": "string",
+							"description": "Documentation note for project mapping configuration"
+						},
 						"autoGenerate": {
 							"type": "boolean",
 							"description": "Whether to automatically generate project mappings from repository names",

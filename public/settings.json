@@ -218,13 +218,64 @@
 			"Life-Experimentalist.github.io",
 			"Template"
 		],
-		"maxProjects": 15,
+		"maxProjects": 20,
 		"sortBy": "updated",
 		"sortOrder": "desc",
 		"showForks": false,
 		"showPrivate": false,
 		"fallbackMode": true,
 		"staticProjects": [
+			{
+				"id": "1",
+				"name": "Krishna GSVV Portfolio",
+				"description": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
+				"technologies": [
+					"React",
+					"Vite",
+					"TailwindCSS",
+					"FramerMotion",
+					"JavaScript",
+					"ReactRouter",
+					"ReactIcons",
+					"JSONSchema"
+				],
+				"category": "Full Stack",
+				"featured": true,
+				"status": "Live",
+				"startDate": "2024-01-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/VKrishna04/VKrishna04.github.io",
+				"liveUrl": "https://vkrishna04.github.io",
+				"demoUrl": "https://vkrishna04.me",
+				"documentationUrl": "https://github.com/VKrishna04/VKrishna04.github.io#readme",
+				"imageUrl": "https://opengraph.githubassets.com/1/VKrishna04/VKrishna04.github.io",
+				"tags": [
+					"portfolio",
+					"personal-website",
+					"react",
+					"vite",
+					"tailwindcss",
+					"framer-motion",
+					"responsive-design",
+					"github-api",
+					"configuration-driven",
+					"modern-ui",
+					"animation"
+				],
+				"highlights": [
+					"Fully responsive design with mobile-first approach",
+					"Dynamic GitHub repository integration with real-time fetching",
+					"Comprehensive configuration system - no code changes needed",
+					"Beautiful animations powered by Framer Motion",
+					"JSON Schema support for IntelliSense in VS Code"
+				],
+				"stats": {
+					"stars": 2,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				}
+			}
 		],
 		"staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
 		"officialName": "Krishna GSVV",
@@ -253,6 +304,7 @@
 		],
 		"experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
 		"experiencesHeading": "Work Experience",
+		"experiencesIcon": "BriefcaseIcon",
 		"education": [
 			{
 				"degree": "Bachelor of Technology",
@@ -267,6 +319,7 @@
 		],
 		"educationNote": "Configure education entries - each should have degree, field, school, period, gpa, and achievements array",
 		"educationHeading": "Education",
+		"educationIcon": "AcademicCapIcon",
 		"skills": [
 			{
 				"category": "Programming Languages",
@@ -401,10 +454,42 @@
 		],
 		"skillsNote": "Configure skills with categories and items. Each item should have name, icon, and color. Available icons: same as About page skill icons.",
 		"skillsHeading": "Technical Skills",
+		"skillsIcon": "CpuChipIcon",
 		"certifications": [
+			{
+				"name": "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
+				"certificateUrl": "https://drive.google.com/file/d/1wMEJIXJvo9mqDRl8qwCzm77HUelJk5Ru/view?usp=sharing",
+				"credentialId": "321011846OCI25CAA",
+				"date": "July 16, 2025",
+				"issuer": "Oracle University",
+				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=D7A5B1169CBBF5293E9E216E889A16D9E28346FC8CC006E736CAE94691F767F4"
+			},
+			{
+				"name": "AWS Cloud Practitioner",
+				"certificateUrl": "https://drive.google.com/file/d/1S0YHD-RkG5w2r-iZwEOiq4EkrJIqDnfy/view?usp=sharing",
+				"date": "March 20, 2025",
+				"issuer": "Corporate and Industry Relations (CIR), Amrita Vishwa Vidyapeetham, Coimbatore."
+			},
+			{
+				"name": "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
+				"certificateUrl": "https://drive.google.com/file/d/1g03w4xyfmwqlIzUT2JDPrZgkHbgGM7AK/view?usp=sharing",
+				"credentialId": "321011846OCI25CAA",
+				"date": "June 2025",
+				"issuer": "Oracle University",
+				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=8F7882AF5335917AF532785D4A37504361F573F994774F8543319A454B3579F3"
+			},
+			{
+				"name": "HackerRank Python (Basic) Certificate",
+				"certificateUrl": "https://drive.google.com/file/d/1cNH4dJ5LC0CwPEbnxK-jr4NXJXJ27TM-/view?usp=sharing",
+				"credentialId": "870619ABC876",
+				"date": "30 Sep, 2024",
+				"issuer": "HackerRank",
+				"verificationUrl": "https://www.hackerrank.com/certificates/870619abc876"
+			}
 		],
 		"certificationsNote": "Configure certifications - each should have name, issuer, date, credentialId, certificateUrl (to view certificate), and verificationUrl (to verify certificate). Links are optional and will only show if provided.",
 		"certificationsHeading": "Certifications",
+		"certificationsIcon": "ShieldCheckIcon",
 		"awards": [
 			{
 				"name": "2nd Runner-up at Corporate Hackathon - 2 Lakhs INR Prize",
@@ -434,6 +519,7 @@
 		],
 		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, and description",
 		"awardsHeading": "Awards & Recognition",
+		"awardsIcon": "TrophyIcon",
 		"publications": [
 			{
 				"title": "Predicting Sevearity of Type 2 Diabetic Retinopathy Using Retinal Fundus Images with new DeepLearning Architectures from the Inception and Resnet Families",
@@ -446,6 +532,7 @@
 		],
 		"publicationsNote": "Configure publications - each should have title, type, publisher, date, url (optional), and description",
 		"publicationsHeading": "Publications",
+		"publicationsIcon": "DocumentTextIcon",
 		"languages": [
 			{
 				"name": "English",
@@ -462,10 +549,12 @@
 		],
 		"languagesNote": "Configure languages - each should have name, proficiency, and level (A1, A2, B1, B2, C1, C2)",
 		"languagesHeading": "Languages",
+		"languagesIcon": "GlobeAltIcon",
 		"volunteerExperience": [
 		],
 		"volunteerExperienceNote": "Configure volunteer experience - each should have role, organization, period, and description array",
 		"volunteerExperienceHeading": "Volunteer Experience",
+		"volunteerExperienceIcon": "HeartIcon",
 		"personalProjects": [
 			{
 				"name": "CounterAPI",
@@ -585,7 +674,8 @@
 			}
 		],
 		"personalProjectsNote": "Configure personal projects - each should have name, technologies array (with icon and color), period, description, githubUrl (optional), liveUrl (optional), demoUrl (optional), documentationUrl (optional)",
-		"personalProjectsHeading": "Personal Projects"
+		"personalProjectsHeading": "Personal Projects",
+		"personalProjectsIcon": "CubeIcon"
 	},
 	"social": {
 		"platforms": [

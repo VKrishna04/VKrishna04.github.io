@@ -132,3 +132,7 @@ firebase.json
 
 # Netlify
 .netlify
+
+
+.vscode/
+.vscode/settings.json
