@@ -96,8 +96,8 @@
 		"subheading": "Get to know me better",
 		"title": "I'm Krishna GSVV, a passionate developer",
 		"paragraphs": [
-			"I'm a dedicated full-stack developer with a passion for creating innovative web applications and solving complex problems through code. My journey in technology began with curiosity and has evolved into a professional pursuit of excellence.",
-			"I specialize in modern web technologies, with expertise in React, Node.js, and various databases. I enjoy working on both frontend and backend development, always striving to create seamless user experiences backed by robust server-side architecture.",
+			"I'm a dedicated software developer with a passion for creating innovative web applications and solving complex problems through code. My journey in technology began with curiosity and has evolved into a professional pursuit of excellence.",
+			"I specialize in modern web technologies, with expertise in React, Node.js, Python frameworks and various databases. I enjoy working on both frontend and backend development, always striving to create seamless user experiences backed by robust server-side architecture.",
 			"When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge with the developer community. I believe in continuous learning and staying updated with the latest industry trends."
 		],
 		"image": {
@@ -192,14 +192,14 @@
 		"stats": [
 			{
 				"number": "3+",
-				"label": "Years Experience"
+				"label": "Years of Dev Experience"
 			},
 			{
-				"number": "50+",
+				"number": "12+",
 				"label": "Projects Completed"
 			},
 			{
-				"number": "100+",
+				"number": "750+",
 				"label": "GitHub Commits"
 			},
 			{
@@ -513,7 +513,7 @@
 			{
 				"name": "1st rank at Microsoft Imagine Cup Campus Hackathon",
 				"organization": "Microsoft Learn & Amrita Vishwa Vidyapeetham",
-				"date": "2024",
+				"date": "2025",
 				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity"
 			}
 		],
