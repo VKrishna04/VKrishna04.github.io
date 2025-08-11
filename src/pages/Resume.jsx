@@ -75,15 +75,63 @@ const Resume = () => {
 
 	const getResumeUrl = () => {
 		const resumeConfig = settings.resume || {};
+		let url;
+
 		if (resumeConfig.type === "external" && resumeConfig.alternativeUrl) {
-			return resumeConfig.alternativeUrl;
+			url = resumeConfig.alternativeUrl;
+		} else {
+			url = resumeConfig.url || "/resume.pdf";
 		}
-		return resumeConfig.url || "/resume.pdf";
+
+		// Sanitize URL to prevent XSS
+		try {
+			// For external URLs, validate they start with http/https
+			if (url.startsWith("http://") || url.startsWith("https://")) {
+				// Additional validation for external URLs
+				const urlObj = new URL(url);
+				return urlObj.href;
+			}
+			// For relative URLs, ensure they don't contain dangerous protocols
+			if (url.startsWith("/") || !url.includes(":")) {
+				// Ensure no script injection in relative URLs
+				if (
+					url.includes("javascript:") ||
+					url.includes("data:") ||
+					url.includes("vbscript:")
+				) {
+					return "/resume.pdf";
+				}
+				return url;
+			}
+			// Fallback to default if URL seems suspicious
+			return "/resume.pdf";
+		} catch {
+			console.warn("Invalid resume URL:", url);
+			return "/resume.pdf";
+		}
 	};
 
 	const getResumeFilename = () => {
 		const resumeConfig = settings.resume || {};
-		return resumeConfig.filename;
+		const filename = resumeConfig.filename;
+
+		// Sanitize filename to prevent XSS and ensure it's a valid filename
+		if (!filename || typeof filename !== "string") {
+			return undefined; // Let browser handle default naming
+		}
+
+		// Remove any dangerous characters and ensure it's a safe filename
+		const sanitizedFilename = filename
+			.replace(/[<>:"/\\|?*]/g, "") // Remove invalid filename characters
+			.replace(/\.\./g, "") // Remove directory traversal attempts
+			.trim();
+
+		// Ensure filename is not empty after sanitization
+		if (sanitizedFilename.length === 0) {
+			return undefined;
+		}
+
+		return sanitizedFilename;
 	};
 
 	// Get work experience from settings
@@ -187,6 +235,48 @@ const Resume = () => {
 	const languages = getLanguages();
 	const volunteerExperience = getVolunteerExperience();
 	const personalProjects = getPersonalProjects();
+
+	// Calculate total rewards from awards
+	const calculateTotalRewards = () => {
+		const totalRewardsConfig = settings.resume?.totalRewards;
+		if (!totalRewardsConfig?.show) return null;
+
+		const total = awards.reduce((sum, award) => {
+			if (
+				award.rewardAmount &&
+				award.rewardAmount.currency === totalRewardsConfig.currency
+			) {
+				return sum + (award.rewardAmount.amount || 0);
+			}
+			return sum;
+		}, 0);
+
+		if (total === 0) return null;
+
+		// Format the total amount
+		const formatAmount = (amount, currency) => {
+			switch (currency) {
+				case "INR":
+					return `₹${amount.toLocaleString("en-IN")}`;
+				case "USD":
+					return `$${amount.toLocaleString("en-US")}`;
+				case "EUR":
+					return `€${amount.toLocaleString("en-EU")}`;
+				case "GBP":
+					return `£${amount.toLocaleString("en-GB")}`;
+				default:
+					return `${amount.toLocaleString()} ${currency}`;
+			}
+		};
+
+		return {
+			total,
+			displayText: formatAmount(total, totalRewardsConfig.currency),
+			config: totalRewardsConfig,
+		};
+	};
+
+	const totalRewards = calculateTotalRewards();
 
 	// Get section order from settings
 	const getSectionOrder = () => {
@@ -595,7 +685,7 @@ const Resume = () => {
 										whileHover={{ scale: 1.01 }}
 									>
 										<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-											<div>
+											<div className="flex-1">
 												{award.name && (
 													<h3 className="text-xl font-bold text-white">
 														{award.name}
@@ -606,15 +696,56 @@ const Resume = () => {
 														{award.organization}
 													</p>
 												)}
+												{award.location && (
+													<p className="text-gray-400 text-sm mt-1">
+														📍 {award.location}
+													</p>
+												)}
 											</div>
-											{award.date && (
-												<p className="text-gray-300 font-semibold">
-													{award.date}
-												</p>
-											)}
+											<div className="flex flex-col md:items-end mt-3 md:mt-0">
+												{award.date && (
+													<p className="text-gray-300 font-semibold">
+														{award.date}
+													</p>
+												)}
+												{award.rewardAmount && (
+													<div className="flex items-center mt-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+														<TrophyIcon className="w-4 h-4 mr-1" />
+														{award.rewardAmount.displayText}
+													</div>
+												)}
+											</div>
 										</div>
 										{award.description && (
-											<p className="text-gray-300">{award.description}</p>
+											<p className="text-gray-300 mb-3">{award.description}</p>
+										)}
+
+										{/* Award Links */}
+										{(award.verificationUrl || award.certificateUrl) && (
+											<div className="flex flex-wrap gap-2 mt-3">
+												{award.verificationUrl && (
+													<a
+														href={award.verificationUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="inline-flex items-center px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-xs border border-blue-500/30 hover:bg-blue-600/30 transition-colors duration-300"
+													>
+														<ShieldCheckIcon className="w-3 h-3 mr-1" />
+														Verify Award
+													</a>
+												)}
+												{award.certificateUrl && (
+													<a
+														href={award.certificateUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="inline-flex items-center px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs border border-purple-500/30 hover:bg-purple-600/30 transition-colors duration-300"
+													>
+														<EyeIcon className="w-3 h-3 mr-1" />
+														View Certificate
+													</a>
+												)}
+											</div>
 										)}
 									</motion.div>
 								))}
@@ -830,6 +961,7 @@ const Resume = () => {
 							My professional journey and qualifications
 						</p>
 						<motion.a
+							// URL is sanitized in getResumeUrl() function to prevent XSS
 							href={getResumeUrl()}
 							download={getResumeFilename()}
 							target={
@@ -850,6 +982,27 @@ const Resume = () => {
 								: "Download PDF"}
 						</motion.a>
 					</motion.div>
+
+					{/* Total Rewards Section */}
+					{totalRewards && (
+						<motion.div className="text-center mb-12" variants={fadeInUp}>
+							<div className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white rounded-2xl p-6 max-w-md mx-auto shadow-lg hover:shadow-yellow-500/25 transition-all duration-300">
+								<div className="flex items-center justify-center mb-2">
+									<TrophyIcon className="w-8 h-8 mr-2" />
+									<h2 className="text-2xl font-bold">
+										{totalRewards.config.heading}
+									</h2>
+								</div>
+								<p className="text-3xl font-extrabold">
+									{totalRewards.displayText}
+								</p>
+								<p className="text-yellow-100 text-sm mt-2">
+									Across {awards.filter((award) => award.rewardAmount).length}{" "}
+									competitions
+								</p>
+							</div>
+						</motion.div>
+					)}
 
 					{/* Dynamic Sections based on configuration */}
 					{getSectionOrder().map((sectionName) => renderSection(sectionName))}

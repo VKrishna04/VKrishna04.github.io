@@ -105,6 +105,28 @@ const useProjectsData = () => {
 		return [];
 	};
 
+	// Generate stats URLs for GitHub repositories
+	const generateStatsUrls = (githubUrl, repoName, owner) => {
+		if (!githubUrl && !repoName && !owner) return null;
+
+		let baseUrl;
+		if (githubUrl) {
+			// Extract base URL from github URL
+			baseUrl = githubUrl.replace(/\/$/, ""); // Remove trailing slash
+		} else if (repoName && owner) {
+			baseUrl = `https://github.com/${owner}/${repoName}`;
+		} else {
+			return null;
+		}
+
+		return {
+			starsUrl: `${baseUrl}/stargazers`,
+			forksUrl: `${baseUrl}/network/members`,
+			watchersUrl: `${baseUrl}/watchers`,
+			issuesUrl: `${baseUrl}/issues`,
+		};
+	};
+
 	// Fetch CounterAPI data
 	const fetchCounterData = async (config) => {
 		if (!config.counterAPI?.enabled) return {};
@@ -247,12 +269,18 @@ const useProjectsData = () => {
 						languages: languages,
 						stargazers_count: repo.stargazers_count,
 						forks_count: repo.forks_count,
+						watchers_count: repo.watchers_count || repo.subscribers_count || 0,
 						updated_at: repo.updated_at,
 						created_at: repo.created_at,
 						size: repo.size,
 						default_branch: repo.default_branch,
 						open_issues_count: repo.open_issues_count,
 						counterValue: getCounterValue(repo.name, config),
+						statsUrls: generateStatsUrls(
+							repo.html_url,
+							repo.name,
+							repo.owner.login
+						),
 					};
 				})
 			);

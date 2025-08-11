@@ -1224,6 +1224,45 @@
 									"watchers",
 									"issues"
 								]
+							},
+							"statsUrls": {
+								"type": "object",
+								"description": "Direct URLs to GitHub repository statistics pages for clickable links",
+								"additionalProperties": false,
+								"properties": {
+									"starsUrl": {
+										"$ref": "#/definitions/githubStatsUrl",
+										"description": "Direct URL to the repository's stargazers page",
+										"examples": [
+											"https://github.com/VKrishna04/VKrishna04.github.io/stargazers",
+											""
+										]
+									},
+									"forksUrl": {
+										"$ref": "#/definitions/githubStatsUrl",
+										"description": "Direct URL to the repository's network/forks page",
+										"examples": [
+											"https://github.com/VKrishna04/VKrishna04.github.io/network/members",
+											""
+										]
+									},
+									"watchersUrl": {
+										"$ref": "#/definitions/githubStatsUrl",
+										"description": "Direct URL to the repository's watchers page",
+										"examples": [
+											"https://github.com/VKrishna04/VKrishna04.github.io/watchers",
+											""
+										]
+									},
+									"issuesUrl": {
+										"$ref": "#/definitions/githubStatsUrl",
+										"description": "Direct URL to the repository's issues page",
+										"examples": [
+											"https://github.com/VKrishna04/VKrishna04.github.io/issues",
+											""
+										]
+									}
+								}
 							}
 						},
 						"required": [
@@ -1337,6 +1376,59 @@
 							"certifications"
 						]
 					]
+				},
+				"totalRewards": {
+					"type": "object",
+					"description": "Configuration for displaying total rewards/prize money won across all competitions and hackathons",
+					"additionalProperties": false,
+					"properties": {
+						"show": {
+							"type": "boolean",
+							"description": "Whether to display the total rewards section",
+							"default": true
+						},
+						"heading": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 50,
+							"description": "Heading for the total rewards section",
+							"examples": [
+								"Total Prize Money Won",
+								"Competition Earnings",
+								"Hackathon Rewards"
+							],
+							"default": "Total Prize Money Won"
+						},
+						"currency": {
+							"type": "string",
+							"enum": [
+								"INR",
+								"USD",
+								"EUR",
+								"GBP",
+								"JPY",
+								"CAD",
+								"AUD",
+								"CNY",
+								"KRW",
+								"SGD",
+								"Other"
+							],
+							"description": "Primary currency for total calculation",
+							"default": "INR"
+						},
+						"icon": {
+							"type": "string",
+							"pattern": "^[A-Z][a-zA-Z0-9]*$",
+							"description": "React Icons identifier for the total rewards icon",
+							"examples": [
+								"TrophyIcon",
+								"BanknotesIcon",
+								"CurrencyRupeeIcon"
+							],
+							"default": "TrophyIcon"
+						}
+					}
 				},
 				"experiencesHeading": {
 					"type": "string",
@@ -1793,6 +1885,75 @@
 								"description": "Detailed description of the award and achievements",
 								"examples": [
 									"Recognized for developing an innovative web application based on Facial Emotion Detection using MediaPipe and machine learning"
+								]
+							},
+							"rewardAmount": {
+								"type": "object",
+								"description": "Monetary reward or prize amount for the award",
+								"additionalProperties": false,
+								"properties": {
+									"amount": {
+										"type": "number",
+										"minimum": 0,
+										"description": "Numerical value of the reward amount",
+										"examples": [
+											200000,
+											100000,
+											50000
+										]
+									},
+									"currency": {
+										"type": "string",
+										"enum": [
+											"INR",
+											"USD",
+											"EUR",
+											"GBP",
+											"JPY",
+											"CAD",
+											"AUD",
+											"CNY",
+											"KRW",
+											"SGD",
+											"Other"
+										],
+										"description": "Currency code for the reward amount",
+										"default": "INR"
+									},
+									"displayText": {
+										"type": "string",
+										"minLength": 1,
+										"maxLength": 50,
+										"description": "Formatted display text for the reward amount",
+										"examples": [
+											"₹2,00,000",
+											"$10,000",
+											"€5,000"
+										]
+									}
+								},
+								"required": [
+									"amount",
+									"currency",
+									"displayText"
+								]
+							},
+							"verificationUrl": {
+								"$ref": "#/definitions/url",
+								"description": "URL to verify the award or view official announcement",
+								"examples": [
+									"https://company.com/awards/winner-2025",
+									"https://university.edu/news/competition-results",
+									""
+								]
+							},
+							"certificateUrl": {
+								"$ref": "#/definitions/url",
+								"description": "Direct URL to the award certificate or documentation",
+								"examples": [
+									"https://drive.google.com/file/certificate-pdf",
+									"https://awards.org/certificates/123456",
+									""
 								]
 							}
 						},
@@ -2285,7 +2446,7 @@
 			"properties": {
 				"platforms": {
 					"type": "array",
-					"maxItems": 15,
+					"maxItems": 30,
 					"items": {
 						"type": "object",
 						"additionalProperties": false,
@@ -2420,6 +2581,17 @@
 									"GitHub Repository"
 								]
 							},
+							"description": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 200,
+								"description": "Optional description for the platform (used on contact page)",
+								"examples": [
+									"Connect with me professionally",
+									"Check out my repositories and contributions",
+									"Follow for tech updates and insights"
+								]
+							},
 							"color": {
 								"type": "string",
 								"description": "Color for the platform - hex color code or Tailwind CSS class",
@@ -2442,6 +2614,24 @@
 									"hover:text-blue-400"
 								]
 							},
+							"backgroundColor": {
+								"type": "string",
+								"description": "Background color for the platform icon - Tailwind CSS class",
+								"examples": [
+									"bg-white",
+									"bg-gray-800",
+									"bg-blue-500"
+								]
+							},
+							"borderRadius": {
+								"type": "string",
+								"description": "Border radius for the platform icon - Tailwind CSS class",
+								"examples": [
+									"rounded-lg",
+									"rounded-full",
+									"rounded-md"
+								]
+							},
 							"showInHome": {
 								"type": "boolean",
 								"description": "Whether to display this platform on the home page",
@@ -2456,6 +2646,17 @@
 								"type": "boolean",
 								"description": "Whether to display this platform on the contact page",
 								"default": true
+							},
+							"contactSection": {
+								"type": "number",
+								"minimum": 1,
+								"maximum": 10,
+								"description": "Section number for grouping platforms on contact page. Platforms with same number will be grouped together under the corresponding section heading.",
+								"examples": [
+									1,
+									2,
+									3
+								]
 							},
 							"enabled": {
 								"type": "boolean",
@@ -2527,6 +2728,499 @@
 			},
 			"required": [
 				"platforms"
+			]
+		},
+		"contact": {
+			"type": "object",
+			"description": "Contact page configuration and content settings",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 100,
+					"description": "Main heading for the contact page",
+					"default": "Let's Connect",
+					"examples": [
+						"Let's Connect",
+						"Get In Touch",
+						"Contact Me"
+					]
+				},
+				"subtitle": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 500,
+					"description": "Subtitle or description for the contact page",
+					"default": "I'm always interested in new opportunities and collaborations. Let's build something amazing together!",
+					"examples": [
+						"I'm always interested in new opportunities and collaborations.",
+						"Let's discuss your next project or just say hello!"
+					]
+				},
+				"timeZone": {
+					"type": "string",
+					"description": "Timezone for displaying current local time",
+					"default": "Asia/Kolkata",
+					"examples": [
+						"Asia/Kolkata",
+						"America/New_York",
+						"Europe/London",
+						"America/Los_Angeles"
+					]
+				},
+				"timeFormat": {
+					"type": "string",
+					"enum": [
+						"12-hour",
+						"24-hour"
+					],
+					"description": "Time format for displaying current time",
+					"default": "12-hour"
+				},
+				"status": {
+					"type": "object",
+					"description": "Current availability status configuration",
+					"additionalProperties": false,
+					"properties": {
+						"show": {
+							"type": "boolean",
+							"description": "Whether to display current status",
+							"default": true
+						},
+						"available": {
+							"type": "boolean",
+							"description": "Current availability status",
+							"default": true
+						},
+						"message": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 200,
+							"description": "Status message to display",
+							"default": "Available for new opportunities",
+							"examples": [
+								"Available for new opportunities",
+								"Currently open for collaborations",
+								"Taking on new projects"
+							]
+						},
+						"lastUpdated": {
+							"type": "string",
+							"format": "date",
+							"description": "Last updated date in YYYY-MM-DD format"
+						}
+					},
+					"required": [
+						"show",
+						"available",
+						"message"
+					]
+				},
+				"responseInfo": {
+					"type": "object",
+					"description": "Response time and availability information",
+					"additionalProperties": false,
+					"properties": {
+						"show": {
+							"type": "boolean",
+							"description": "Whether to display response information",
+							"default": true
+						},
+						"timeframe": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Expected response timeframe",
+							"default": "Usually within 24 hours",
+							"examples": [
+								"Usually within 24 hours",
+								"Within 2-3 business days",
+								"Same day response"
+							]
+						},
+						"workingHours": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Working hours in your timezone",
+							"examples": [
+								"9:00 AM - 6:00 PM IST",
+								"Monday to Friday, 9-5 EST"
+							]
+						}
+					},
+					"required": [
+						"show",
+						"timeframe"
+					]
+				},
+				"currentFocus": {
+					"type": "object",
+					"description": "What you're currently working on section",
+					"additionalProperties": false,
+					"properties": {
+						"show": {
+							"type": "boolean",
+							"description": "Whether to display current focus section",
+							"default": true
+						},
+						"title": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Title for the current focus section",
+							"default": "What I'm Working On",
+							"examples": [
+								"What I'm Working On",
+								"Current Projects",
+								"My Focus"
+							]
+						},
+						"description": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 500,
+							"description": "Description of what you're currently working on",
+							"examples": [
+								"Building AI-powered web applications and contributing to open source projects.",
+								"Developing modern React applications with focus on user experience."
+							]
+						}
+					},
+					"required": [
+						"show",
+						"title",
+						"description"
+					]
+				},
+				"collaborationInterests": {
+					"type": "array",
+					"description": "List of collaboration interests or project types",
+					"items": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100
+					},
+					"examples": [
+						[
+							"Full-stack web applications",
+							"AI/ML integration projects",
+							"Open source contributions"
+						],
+						[
+							"React development",
+							"Node.js APIs",
+							"Mobile app development"
+						]
+					]
+				},
+				"quickActions": {
+					"type": "object",
+					"description": "Quick action buttons configuration",
+					"additionalProperties": false,
+					"properties": {
+						"show": {
+							"type": "boolean",
+							"description": "Whether to display quick actions section",
+							"default": true
+						},
+						"title": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 100,
+							"description": "Title for the quick actions section",
+							"default": "Quick Actions"
+						},
+						"actions": {
+							"type": "array",
+							"description": "List of quick action buttons",
+							"items": {
+								"type": "object",
+								"additionalProperties": false,
+								"properties": {
+									"label": {
+										"type": "string",
+										"minLength": 1,
+										"maxLength": 50,
+										"description": "Display text for the action button"
+									},
+									"icon": {
+										"type": "string",
+										"description": "Icon name for the action (Heroicons)",
+										"examples": [
+											"EnvelopeIcon",
+											"CalendarDaysIcon",
+											"DocumentIcon"
+										]
+									},
+									"url": {
+										"type": "string",
+										"description": "URL or action for the button. Use {email} and {calendly} placeholders"
+									},
+									"colorTheme": {
+										"type": "string",
+										"description": "Color theme for the action button",
+										"enum": [
+											"blue",
+											"green",
+											"purple",
+											"red",
+											"yellow",
+											"indigo",
+											"pink",
+											"gray"
+										],
+										"default": "blue"
+									},
+									"enabled": {
+										"type": "boolean",
+										"description": "Whether this action is enabled",
+										"default": true
+									}
+								},
+								"required": [
+									"label",
+									"icon",
+									"url",
+									"colorTheme",
+									"enabled"
+								]
+							}
+						}
+					},
+					"required": [
+						"show",
+						"title",
+						"actions"
+					]
+				},
+				"sections": {
+					"type": "object",
+					"description": "Layout configuration for contact page sections",
+					"additionalProperties": false,
+					"properties": {
+						"platformSorting": {
+							"type": "object",
+							"description": "Configuration for sorting platforms within sections",
+							"additionalProperties": false,
+							"properties": {
+								"iconOnlyFirst": {
+									"type": "boolean",
+									"description": "Whether to display icon-only platforms before platforms with descriptions",
+									"default": true
+								},
+								"enabled": {
+									"type": "boolean",
+									"description": "Whether to enable custom sorting",
+									"default": true
+								}
+							},
+							"required": [
+								"iconOnlyFirst",
+								"enabled"
+							]
+						},
+						"sectionHeadings": {
+							"type": "object",
+							"description": "Mapping of section numbers to section headings for grouping social platforms",
+							"additionalProperties": false,
+							"patternProperties": {
+								"^[1-9]$|^10$": {
+									"type": "string",
+									"minLength": 1,
+									"maxLength": 50,
+									"description": "Section heading for the corresponding section number",
+									"examples": [
+										"Development",
+										"Professional",
+										"Creative",
+										"Music & Entertainment"
+									]
+								}
+							},
+							"examples": [
+								{
+									"1": "Development & Code",
+									"2": "Professional Networks",
+									"3": "Creative & Design"
+								}
+							]
+						},
+						"leftColumn": {
+							"type": "object",
+							"description": "Left column configuration",
+							"additionalProperties": false,
+							"properties": {
+								"title": {
+									"type": "string",
+									"description": "Title for the left column"
+								},
+								"sections": {
+									"type": "array",
+									"description": "Sections to display in left column",
+									"items": {
+										"type": "object",
+										"additionalProperties": false,
+										"properties": {
+											"type": {
+												"type": "string",
+												"enum": [
+													"contactInfo",
+													"currentFocus",
+													"quickActions",
+													"collaboration",
+													"github",
+													"social",
+													"platforms"
+												],
+												"description": "Type of section to display"
+											},
+											"show": {
+												"type": "boolean",
+												"description": "Whether to show this section",
+												"default": true
+											},
+											"title": {
+												"type": "string",
+												"description": "Custom title for this section"
+											}
+										},
+										"required": [
+											"type",
+											"show"
+										]
+									}
+								}
+							},
+							"required": [
+								"title",
+								"sections"
+							]
+						},
+						"rightColumn": {
+							"type": "object",
+							"description": "Right column configuration",
+							"additionalProperties": false,
+							"properties": {
+								"title": {
+									"type": "string",
+									"description": "Title for the right column"
+								},
+								"sections": {
+									"type": "array",
+									"description": "Sections to display in right column",
+									"items": {
+										"type": "object",
+										"additionalProperties": false,
+										"properties": {
+											"type": {
+												"type": "string",
+												"enum": [
+													"github",
+													"social",
+													"collaboration",
+													"platforms",
+													"contactInfo",
+													"currentFocus",
+													"quickActions"
+												],
+												"description": "Type of section to display"
+											},
+											"show": {
+												"type": "boolean",
+												"description": "Whether to show this section",
+												"default": true
+											},
+											"title": {
+												"type": "string",
+												"description": "Custom title for this section"
+											}
+										},
+										"required": [
+											"type",
+											"show"
+										]
+									}
+								}
+							},
+							"required": [
+								"title",
+								"sections"
+							]
+						}
+					},
+					"required": [
+						"leftColumn",
+						"rightColumn"
+					]
+				},
+				"faq": {
+					"type": "array",
+					"description": "Frequently asked questions for the contact page",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"question": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 200,
+								"description": "The question text"
+							},
+							"answer": {
+								"type": "string",
+								"minLength": 1,
+								"maxLength": 1000,
+								"description": "The answer text"
+							}
+						},
+						"required": [
+							"question",
+							"answer"
+						]
+					},
+					"examples": [
+						[
+							{
+								"question": "What's your typical response time?",
+								"answer": "I usually respond within 24 hours during weekdays."
+							}
+						]
+					]
+				},
+				"calendly": {
+					"oneOf": [
+						{
+							"type": "string",
+							"const": "",
+							"description": "Empty string for no Calendly integration"
+						},
+						{
+							"type": "string",
+							"format": "uri",
+							"pattern": "^https://calendly\\.com/",
+							"description": "Calendly scheduling URL"
+						}
+					],
+					"description": "Calendly URL for scheduling meetings or empty string",
+					"examples": [
+						"https://calendly.com/your-username",
+						""
+					]
+				},
+				"note": {
+					"type": "string",
+					"description": "Configuration notes and instructions for the contact page setup"
+				}
+			},
+			"required": [
+				"title",
+				"subtitle",
+				"timeZone",
+				"timeFormat",
+				"status",
+				"responseInfo"
 			]
 		},
 		"navbar": {
@@ -3145,6 +3839,22 @@
 				}
 			],
 			"description": "A valid GitHub repository URL or empty string"
+		},
+		"githubStatsUrl": {
+			"oneOf": [
+				{
+					"type": "string",
+					"const": "",
+					"description": "Empty string for no GitHub stats URL"
+				},
+				{
+					"type": "string",
+					"format": "uri",
+					"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+					"description": "A valid GitHub repository statistics page URL"
+				}
+			],
+			"description": "A valid GitHub repository statistics URL (stargazers, forks, watchers, issues) or empty string"
 		},
 		"dateString": {
 			"type": "string",

@@ -20,7 +20,13 @@ import {
 	EnvelopeIcon,
 	PhoneIcon,
 	MapPinIcon,
-	PaperAirplaneIcon,
+	ClockIcon,
+	CheckCircleIcon,
+	DocumentDuplicateIcon,
+	CalendarDaysIcon,
+	GlobeAltIcon,
+	DocumentIcon,
+	ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import {
 	FaGithub,
@@ -28,27 +34,484 @@ import {
 	FaTwitter,
 	FaInstagram,
 	FaDiscord,
-	FaYoutube,
-	FaTwitch,
-	FaTiktok,
 	FaMedium,
 	FaDev,
 	FaStackOverflow,
 	FaDribbble,
 	FaBehance,
 	FaCodepen,
+	FaPinterest,
+	FaReddit,
+	FaSpotify,
+	FaAws,
 } from "react-icons/fa";
+import {
+	SiLeetcode,
+	SiHackerrank,
+	SiKaggle,
+	SiYoutubemusic,
+	SiVercel,
+	SiHeroku,
+} from "react-icons/si";
 
 const Contact = () => {
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		subject: "",
-		message: "",
-	});
-
-	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [settings, setSettings] = useState({});
+	const [currentTime, setCurrentTime] = useState(new Date());
+	const [copiedText, setCopiedText] = useState("");
+
+	// Icon mapping for dynamic icon rendering
+	const iconMap = {
+		FaGithub,
+		FaLinkedin,
+		FaTwitter,
+		FaInstagram,
+		FaDiscord,
+		FaMedium,
+		FaDev,
+		FaStackOverflow,
+		FaDribbble,
+		FaBehance,
+		FaCodepen,
+		FaPinterest,
+		FaReddit,
+		FaSpotify,
+		FaAws,
+		SiLeetcode,
+		SiHackerrank,
+		SiKaggle,
+		SiYoutubemusic,
+		SiVercel,
+		SiHeroku,
+	};
+
+	// Safe color mapping to prevent XSS
+	const colorMap = {
+		blue: "text-blue-400 hover:bg-blue-900/20",
+		green: "text-green-400 hover:bg-green-900/20",
+		purple: "text-purple-400 hover:bg-purple-900/20",
+		red: "text-red-400 hover:bg-red-900/20",
+		yellow: "text-yellow-400 hover:bg-yellow-900/20",
+		indigo: "text-indigo-400 hover:bg-indigo-900/20",
+		pink: "text-pink-400 hover:bg-pink-900/20",
+		gray: "text-gray-400 hover:bg-gray-900/20",
+	};
+
+	// Hero icon mapping for dynamic icon rendering
+	const heroIconMap = {
+		EnvelopeIcon,
+		PhoneIcon,
+		MapPinIcon,
+		ClockIcon,
+		CheckCircleIcon,
+		DocumentDuplicateIcon,
+		CalendarDaysIcon,
+		GlobeAltIcon,
+		DocumentIcon,
+		ArrowDownTrayIcon,
+	};
+
+	// Helper function to get icon component
+	const getIconComponent = (iconName) => {
+		return iconMap[iconName] || FaGithub;
+	};
+
+	// Helper function to get Heroicon component
+	const getHeroIcon = (iconName) => {
+		return heroIconMap[iconName] || EnvelopeIcon;
+	};
+
+	// Helper function to render section by type
+	const renderSection = (sectionConfig, sectionType) => {
+		if (!sectionConfig.show) return null;
+
+		switch (sectionType) {
+			case "contactInfo":
+				return (
+					<div className="space-y-4">
+						{contactInfo.map((info, index) => (
+							<div
+								key={index}
+								className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-4 hover:border-purple-500/50 transition-all duration-300"
+							>
+								<div className="flex items-center justify-between">
+									<div className="flex items-center">
+										<info.icon className="h-5 w-5 text-purple-400 mr-3" />
+										<div>
+											<p className="text-sm text-gray-400">{info.label}</p>
+											{info.href ? (
+												<a
+													href={sanitizeUrl(info.href)}
+													className="text-white hover:text-purple-400 transition-colors"
+												>
+													{info.value}
+												</a>
+											) : (
+												<p className="text-white">{info.value}</p>
+											)}
+										</div>
+									</div>
+									{(info.type === "email" || info.type === "phone") && (
+										<button
+											onClick={() => copyToClipboard(info.value, info.label)}
+											className="p-2 text-gray-400 hover:text-purple-400 transition-colors"
+											title={`Copy ${info.label}`}
+										>
+											{copiedText === info.label ? (
+												<CheckCircleIcon className="h-4 w-4 text-green-400" />
+											) : (
+												<DocumentDuplicateIcon className="h-4 w-4" />
+											)}
+										</button>
+									)}
+								</div>
+							</div>
+						))}
+
+						{/* Response Time */}
+						{contactConfig.responseInfo?.show && (
+							<div className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-4">
+								<div className="flex items-center mb-2">
+									<ClockIcon className="h-5 w-5 text-blue-400 mr-2" />
+									<h3 className="font-semibold text-blue-200">Response Time</h3>
+								</div>
+								<p className="text-blue-300 text-sm">
+									{contactConfig.responseInfo.timeframe ||
+										"Usually within 5 business days"}
+								</p>
+								<div className="flex items-center mt-2">
+									<GlobeAltIcon className="h-4 w-4 text-blue-400 mr-2" />
+									<span className="text-blue-300 text-sm">
+										{formatCurrentTime()} local time
+									</span>
+								</div>
+							</div>
+						)}
+					</div>
+				);
+
+			case "currentFocus":
+				return contactConfig.currentFocus?.show ? (
+					<div className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-4">
+						<h3 className="font-semibold text-white mb-3">
+							{contactConfig.currentFocus.title || "What I'm Working On"}
+						</h3>
+						<p className="text-gray-300">
+							{contactConfig.currentFocus.description ||
+								"Building innovative web applications"}
+						</p>
+					</div>
+				) : null;
+
+			case "Open to Collaborate On":
+				return;
+
+			case "quickActions":
+				return contactConfig.quickActions?.show ? (
+					<div className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-4">
+						<h3 className="font-semibold text-white mb-3">
+							{contactConfig.quickActions.title || "Quick Actions"}
+						</h3>
+						<div className="space-y-2">
+							{contactConfig.quickActions.actions
+								?.filter((action) => action.enabled)
+								.map((action, index) => {
+									const IconComponent = getHeroIcon(action.icon);
+									let url = action.url;
+
+									// Replace placeholders
+									if (
+										url.includes("{email}") &&
+										settings.social?.contact?.email
+									) {
+										url = url.replace("{email}", settings.social.contact.email);
+									}
+									if (url.includes("{calendly}") && contactConfig.calendly) {
+										url = url.replace("{calendly}", contactConfig.calendly);
+									}
+
+									return (
+										<a
+											key={index}
+											href={sanitizeUrl(url)}
+											target={url.startsWith("http") ? "_blank" : undefined}
+											rel={
+												url.startsWith("http")
+													? "noopener noreferrer"
+													: undefined
+											}
+											className={`flex items-center p-2 ${
+												colorMap[action.colorTheme] ||
+												"text-gray-400 hover:bg-gray-900/20"
+											} rounded transition-colors`}
+										>
+											<IconComponent className="h-4 w-4 mr-2" />
+											{action.label}
+										</a>
+									);
+								})}
+						</div>
+					</div>
+				) : null;
+
+			case "collaboration":
+				return collaborationInterests.length > 0 ? (
+					<div className="space-y-2">
+						{collaborationInterests.map((interest, index) => (
+							<div
+								key={index}
+								className="flex items-center p-3 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50"
+							>
+								<CheckCircleIcon className="h-4 w-4 text-green-400 mr-3" />
+								<span className="text-gray-300">{interest}</span>
+							</div>
+						))}
+					</div>
+				) : null;
+
+			case "github":
+				// GitHub platforms are now handled in the social section
+				return null;
+
+			case "social": {
+				const allPlatforms =
+					settings.social?.platforms?.filter(
+						(platform) => platform.enabled && platform.showInContact
+					) || [];
+
+				const emailPlatform = settings.social?.contact?.email
+					? {
+							name: "Gmail",
+							key: "gmail",
+							icon: "EnvelopeIcon",
+							url: `mailto:${settings.social.contact.email}`,
+							label: "Email",
+							description: "Send me a direct email",
+							contactSection: 2,
+					  }
+					: null;
+
+				const platformsToShow = [
+					...allPlatforms,
+					...(emailPlatform ? [emailPlatform] : []),
+				];
+
+				// Group platforms by contactSection
+				const groupedPlatforms = {};
+				platformsToShow.forEach((platform) => {
+					const section = platform.contactSection || 1;
+					if (!groupedPlatforms[section]) {
+						groupedPlatforms[section] = [];
+					}
+					groupedPlatforms[section].push(platform);
+				});
+
+				// Get section headings from settings
+				const sectionHeadings =
+					settings.contact?.sections?.sectionHeadings || {};
+
+				// Get platform sorting configuration
+				const platformSorting = settings.contact?.sections?.platformSorting || {
+					iconOnlyFirst: true,
+					enabled: true,
+				};
+
+				// Sort sections by number
+				const sortedSections = Object.keys(groupedPlatforms).sort(
+					(a, b) => parseInt(a) - parseInt(b)
+				);
+
+				return (
+					<div className="space-y-8">
+						{sortedSections.map((sectionNumber) => {
+							const platforms = groupedPlatforms[sectionNumber];
+							const sectionHeading = sectionHeadings[sectionNumber];
+
+							if (!platforms || platforms.length === 0) return null;
+
+							// Separate platforms with and without descriptions within each section
+							const platformsWithText = platforms.filter(
+								(platform) =>
+									platform.description && platform.description.trim() !== ""
+							);
+							const iconOnlyPlatforms = platforms.filter(
+								(platform) =>
+									!platform.description || platform.description.trim() === ""
+							);
+
+							// Determine the order based on sorting configuration
+							const shouldShowIconOnlyFirst =
+								platformSorting.enabled && platformSorting.iconOnlyFirst;
+
+							return (
+								<div key={sectionNumber} className="space-y-4">
+									{/* Section Heading */}
+									{sectionHeading && (
+										<h4 className="text-lg font-semibold text-white border-b border-gray-700 pb-2">
+											{sectionHeading}
+										</h4>
+									)}
+
+									{/* Conditional rendering based on sorting preference */}
+									{shouldShowIconOnlyFirst ? (
+										<>
+											{/* Icon-only platforms first */}
+											{iconOnlyPlatforms.length > 0 && (
+												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+													{iconOnlyPlatforms.map((platform, index) => {
+														const IconComponent = getIconComponent(
+															platform.icon
+														);
+
+														return (
+															<a
+																key={`${sectionNumber}-icon-${index}`}
+																href={sanitizeUrl(platform.url)}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex flex-col items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group"
+															>
+																<div className="w-12 h-12 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
+																	<IconComponent
+																		className="text-2xl"
+																		style={{
+																			color: platform.brandColor || "#ffffff",
+																		}}
+																	/>
+																</div>
+																<span className="text-sm text-gray-300 text-center font-medium">
+																	{platform.label || platform.name}
+																</span>
+															</a>
+														);
+													})}
+												</div>
+											)}
+
+											{/* Platforms with descriptions after */}
+											{platformsWithText.length > 0 && (
+												<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+													{platformsWithText.map((platform, index) => {
+														const IconComponent =
+															platform.icon === "EnvelopeIcon"
+																? EnvelopeIcon
+																: getIconComponent(platform.icon);
+
+														return (
+															<a
+																key={`${sectionNumber}-text-${index}`}
+																href={sanitizeUrl(platform.url)}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
+															>
+																<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
+																	<IconComponent
+																		className="text-2xl"
+																		style={{
+																			color: platform.brandColor || "#ffffff",
+																		}}
+																	/>
+																</div>
+																<div className="flex-1 min-w-0">
+																	<h5 className="font-medium text-white group-hover:text-purple-300 transition-colors">
+																		{platform.label || platform.name}
+																	</h5>
+																	<p className="text-sm text-gray-400 truncate">
+																		{platform.description}
+																	</p>
+																</div>
+															</a>
+														);
+													})}
+												</div>
+											)}
+										</>
+									) : (
+										<>
+											{/* Platforms with descriptions first */}
+											{platformsWithText.length > 0 && (
+												<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+													{platformsWithText.map((platform, index) => {
+														const IconComponent =
+															platform.icon === "EnvelopeIcon"
+																? EnvelopeIcon
+																: getIconComponent(platform.icon);
+
+														return (
+															<a
+																key={`${sectionNumber}-text-${index}`}
+																href={sanitizeUrl(platform.url)}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
+															>
+																<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
+																	<IconComponent
+																		className="text-2xl"
+																		style={{
+																			color: platform.brandColor || "#ffffff",
+																		}}
+																	/>
+																</div>
+																<div className="flex-1 min-w-0">
+																	<h5 className="font-medium text-white group-hover:text-purple-300 transition-colors">
+																		{platform.label || platform.name}
+																	</h5>
+																	<p className="text-sm text-gray-400 truncate">
+																		{platform.description}
+																	</p>
+																</div>
+															</a>
+														);
+													})}
+												</div>
+											)}
+
+											{/* Icon-only platforms after */}
+											{iconOnlyPlatforms.length > 0 && (
+												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+													{iconOnlyPlatforms.map((platform, index) => {
+														const IconComponent = getIconComponent(
+															platform.icon
+														);
+
+														return (
+															<a
+																key={`${sectionNumber}-icon-${index}`}
+																href={sanitizeUrl(platform.url)}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex flex-col items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group"
+															>
+																<div className="w-12 h-12 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
+																	<IconComponent
+																		className="text-2xl"
+																		style={{
+																			color: platform.brandColor || "#ffffff",
+																		}}
+																	/>
+																</div>
+																<span className="text-sm text-gray-300 text-center font-medium">
+																	{platform.label || platform.name}
+																</span>
+															</a>
+														);
+													})}
+												</div>
+											)}
+										</>
+									)}
+								</div>
+							);
+						})}
+					</div>
+				);
+			}
+
+			default:
+				return null;
+		}
+	};
 
 	useEffect(() => {
 		// Fetch settings for contact information
@@ -56,299 +519,234 @@ const Contact = () => {
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error));
+
+		// Update time every minute
+		const timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 60000);
+
+		return () => clearInterval(timer);
 	}, []);
 
-	// Icon mapping for social links
-	const iconMap = {
-		FaGithub,
-		FaLinkedin,
-		FaTwitter,
-		FaInstagram,
-		FaDiscord,
-		FaYoutube,
-		FaTwitch,
-		FaTiktok,
-		FaMedium,
-		FaDev,
-		FaStackOverflow,
-		FaDribbble,
-		FaBehance,
-		FaCodepen,
+	// Copy to clipboard functionality
+	const copyToClipboard = async (text, label) => {
+		try {
+			await navigator.clipboard.writeText(text);
+			setCopiedText(label);
+			setTimeout(() => setCopiedText(""), 2000);
+		} catch (err) {
+			console.error("Failed to copy: ", err);
+		}
 	};
 
-	const getIconComponent = (iconName) => {
-		return iconMap[iconName];
+	// URL sanitization helper
+	const sanitizeUrl = (url) => {
+		if (!url || typeof url !== "string") return "#";
+
+		// Only allow http, https, mailto, and tel protocols
+		const allowedProtocols = ["http:", "https:", "mailto:", "tel:"];
+
+		try {
+			const urlObj = new URL(url);
+			if (allowedProtocols.includes(urlObj.protocol)) {
+				return url;
+			}
+		} catch {
+			// If URL parsing fails, treat as relative/invalid
+			return "#";
+		}
+
+		return "#";
 	};
 
-	const handleChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value,
-		});
+	// Get contact configuration
+	const contactConfig = settings.contact || {};
+
+	// Get collaboration interests
+	const getCollaborationInterests = () => {
+		return contactConfig.collaborationInterests || [];
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setIsSubmitting(true);
-
-		// Simulate form submission
-		setTimeout(() => {
-			setIsSubmitting(false);
-			alert("Thank you for your message! I'll get back to you soon.");
-			setFormData({ name: "", email: "", subject: "", message: "" });
-		}, 2000);
+	// Get FAQ items
+	const getFAQItems = () => {
+		return contactConfig.faq || [];
 	};
 
-	const contactInfo = [
-		{
-			icon: EnvelopeIcon,
-			label: "Email",
-			value: settings.social?.contact?.email || "contact@vkrishna04.dev",
-			href: `mailto:${
-				settings.social?.contact?.email || "contact@vkrishna04.dev"
-			}`,
-			show: true, // Always show email
-		},
-		{
-			icon: PhoneIcon,
-			label: "Phone",
-			value: settings.social?.contact?.phone || "+1 (555) 123-4567",
-			href: `tel:${settings.social?.contact?.phone || "+15551234567"}`,
-			show:
-				settings.social?.contact?.phone &&
-				settings.social.contact.phone.trim() !== "",
-		},
-		{
-			icon: MapPinIcon,
-			label: "Location",
-			value: settings.social?.contact?.location || "San Francisco, CA",
-			href: "#",
-			show:
-				settings.social?.contact?.location &&
-				settings.social.contact.location.trim() !== "",
-		},
-	].filter((item) => item.show);
+	// Format current time for user's timezone
+	const formatCurrentTime = () => {
+		const timeZone = contactConfig.timeZone || "Asia/Kolkata";
+		const timeFormat = contactConfig.timeFormat || "12-hour";
 
-	const getSocialLinks = () => {
-		if (!settings.social?.platforms) return [];
+		const options = {
+			timeZone,
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: timeFormat === "12-hour",
+		};
 
-		return settings.social.platforms.filter(
-			(platform) =>
-				platform.enabled &&
-				platform.url &&
-				platform.url.trim() !== "" &&
-				platform.showInContact
-		);
+		return currentTime.toLocaleTimeString("en-US", options);
 	};
 
-	const socialLinks = getSocialLinks();
+	// Get contact information with proper mapping
+	const getContactInfo = () => {
+		if (!settings.social?.contact) return [];
 
-	const fadeInUp = {
-		initial: { opacity: 0, y: 60 },
-		animate: { opacity: 1, y: 0 },
-		transition: { duration: 0.6 },
-	};
-
-	const staggerContainer = {
-		animate: {
-			transition: {
-				staggerChildren: 0.1,
+		return [
+			{
+				type: "email",
+				label: "Email",
+				value: settings.social.contact.email,
+				icon: EnvelopeIcon,
+				href: `mailto:${settings.social.contact.email}`,
 			},
-		},
+			{
+				type: "phone",
+				label: "Phone",
+				value: settings.social.contact.phone,
+				icon: PhoneIcon,
+				href: `tel:${settings.social.contact.phone}`,
+			},
+			{
+				type: "location",
+				label: "Location",
+				value: settings.social.contact.location,
+				icon: MapPinIcon,
+				href: null,
+			},
+		].filter((item) => item.value && item.value.trim() !== "");
 	};
+
+	const collaborationInterests = getCollaborationInterests();
+	const faqItems = getFAQItems();
+	const contactInfo = getContactInfo();
 
 	return (
-		<div className="min-h-screen py-20 px-4">
-			<div className="max-w-6xl mx-auto">
-				<motion.div
-					variants={staggerContainer}
-					initial="initial"
-					animate="animate"
-				>
-					{/* Header */}
-					<motion.div className="text-center mb-16" variants={fadeInUp}>
-						<h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-							Get In Touch
-						</h1>
-						<p className="text-xl text-gray-300">
-							Let's discuss your next project or just say hello!
-						</p>
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.6 }}
+				className="max-w-7xl mx-auto"
+			>
+				{/* Header */}
+				<div className="text-center mb-16">
+					<h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+						{contactConfig.title || "Let's Connect"}
+					</h1>
+					<p className="text-xl text-gray-300 max-w-3xl mx-auto">
+						{contactConfig.subtitle ||
+							"I'm always interested in new opportunities and collaborations. Let's build something amazing together!"}
+					</p>
+				</div>
+
+				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					{/* Current Status */}
+					{contactConfig.status?.show && (
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.1 }}
+							className="lg:col-span-3"
+						>
+							<div className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-gray-700/50 border-l-4 border-l-green-500">
+								<div className="flex items-center">
+									<CheckCircleIcon className="h-6 w-6 text-green-400 mr-3" />
+									<div>
+										<h3 className="font-semibold text-green-200">
+											{contactConfig.status.title || "Current Status"}
+										</h3>
+										<p className="text-gray-300">
+											{contactConfig.status.message ||
+												"Available for new opportunities"}
+										</p>
+									</div>
+								</div>
+							</div>
+						</motion.div>
+					)}
+
+					{/* Left Column - Configurable Sections */}
+					<motion.div
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.2 }}
+						className="space-y-6"
+					>
+						<h2 className="text-2xl font-bold text-white">
+							{contactConfig.sections?.leftColumn?.title || "Get In Touch"}
+						</h2>
+
+						{contactConfig.sections?.leftColumn?.sections?.map(
+							(section, index) =>
+								section.show && (
+									<div key={index} className="space-y-4">
+										{section.title && section.type !== "contactInfo" && (
+											<h3 className="text-lg font-semibold text-purple-300">
+												{section.title}
+											</h3>
+										)}
+										{renderSection(section, section.type)}
+									</div>
+								)
+						)}
 					</motion.div>
 
-					<div className="grid lg:grid-cols-2 gap-12">
-						{/* Contact Information */}
-						<motion.div variants={fadeInUp}>
-							<h2 className="text-2xl font-bold text-white mb-8">
-								Contact Information
-							</h2>
+					{/* Right Column - Configurable Sections */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.3 }}
+						className="lg:col-span-2 space-y-6"
+					>
+						<h2 className="text-2xl font-bold text-white">
+							{contactConfig.sections?.rightColumn?.title ||
+								"Let's Connect and Chat!"}
+						</h2>
 
-							<div className="space-y-6 mb-8">
-								{contactInfo.map((info, index) => (
-									<motion.div
-										key={index}
-										className="flex items-center space-x-4 p-4 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
-										whileHover={{ scale: 1.02 }}
-									>
-										<div className="w-12 h-12 bg-purple-600/20 rounded-full flex items-center justify-center">
-											<info.icon className="w-6 h-6 text-purple-400" />
-										</div>
-										<div>
-											<p className="text-gray-400 text-sm">{info.label}</p>
-											{info.href !== "#" ? (
-												<a
-													href={info.href}
-													className="text-white font-semibold hover:text-purple-400 transition-colors"
-												>
-													{info.value}
-												</a>
-											) : (
-												<p className="text-white font-semibold">{info.value}</p>
-											)}
-										</div>
-									</motion.div>
-								))}
-							</div>
-
-							{/* Social Links */}
-							<div>
-								<h3 className="text-xl font-bold text-white mb-4">Follow Me</h3>
-								<div className="flex space-x-4">
-									{socialLinks.map((social, index) => {
-										const IconComponent = getIconComponent(social.icon);
-										return IconComponent ? (
-											<motion.a
-												key={index}
-												href={social.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className={`w-12 h-12 bg-gray-800/50 backdrop-blur-sm rounded-full flex items-center justify-center border border-gray-700/50 transition-all duration-300 ${
-													social.color || "text-gray-400"
-												} ${social.hoverColor || "hover:text-purple-400"}`}
-												whileHover={{ scale: 1.1, y: -5 }}
-												whileTap={{ scale: 0.9 }}
-												aria-label={social.label}
-											>
-												<IconComponent className="w-5 h-5" />
-											</motion.a>
-										) : null;
-									})}
-								</div>
-							</div>
-						</motion.div>
-
-						{/* Contact Form */}
-						<motion.div variants={fadeInUp}>
-							<h2 className="text-2xl font-bold text-white mb-8">
-								Send Message
-							</h2>
-
-							<form onSubmit={handleSubmit} className="space-y-6">
-								<div className="grid md:grid-cols-2 gap-6">
-									<div>
-										<label
-											htmlFor="name"
-											className="block text-gray-300 font-semibold mb-2"
-										>
-											Name *
-										</label>
-										<input
-											type="text"
-											id="name"
-											name="name"
-											value={formData.name}
-											onChange={handleChange}
-											required
-											className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-											placeholder="Your Name"
-										/>
+						{contactConfig.sections?.rightColumn?.sections?.map(
+							(section, index) =>
+								section.show && (
+									<div key={index} className="space-y-4">
+										<h3 className="text-lg font-semibold text-purple-300">
+											{section.title}
+										</h3>
+										{renderSection(section, section.type)}
 									</div>
+								)
+						)}
+					</motion.div>
+				</div>
 
-									<div>
-										<label
-											htmlFor="email"
-											className="block text-gray-300 font-semibold mb-2"
-										>
-											Email *
-										</label>
-										<input
-											type="email"
-											id="email"
-											name="email"
-											value={formData.email}
-											onChange={handleChange}
-											required
-											className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-											placeholder="your.email@example.com"
-										/>
-									</div>
-								</div>
-
-								<div>
-									<label
-										htmlFor="subject"
-										className="block text-gray-300 font-semibold mb-2"
-									>
-										Subject *
-									</label>
-									<input
-										type="text"
-										id="subject"
-										name="subject"
-										value={formData.subject}
-										onChange={handleChange}
-										required
-										className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-										placeholder="What's this about?"
-									/>
-								</div>
-
-								<div>
-									<label
-										htmlFor="message"
-										className="block text-gray-300 font-semibold mb-2"
-									>
-										Message *
-									</label>
-									<textarea
-										id="message"
-										name="message"
-										rows={6}
-										value={formData.message}
-										onChange={handleChange}
-										required
-										className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
-										placeholder="Your message here..."
-									/>
-								</div>
-
-								<motion.button
-									type="submit"
-									disabled={isSubmitting}
-									className={`w-full inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 ${
-										isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-									}`}
-									whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-									whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+				{/* FAQ Section */}
+				{faqItems.length > 0 && (
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.5 }}
+						className="mt-16"
+					>
+						<h2 className="text-3xl font-bold text-white text-center mb-12">
+							Frequently Asked Questions
+						</h2>
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+							{faqItems.map((faq, index) => (
+								<div
+									key={index}
+									className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-6"
 								>
-									{isSubmitting ? (
-										<>
-											<div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-											Sending...
-										</>
-									) : (
-										<>
-											Send Message
-											<PaperAirplaneIcon className="ml-2 w-5 h-5" />
-										</>
-									)}
-								</motion.button>
-							</form>
-						</motion.div>
-					</div>
-				</motion.div>
-			</div>
+									<h3 className="font-semibold text-white mb-2">
+										{faq.question}
+									</h3>
+									<p className="text-gray-300">{faq.answer}</p>
+								</div>
+							))}
+						</div>
+					</motion.div>
+				)}
+			</motion.div>
 		</div>
 	);
 };
 
 export default Contact;
+

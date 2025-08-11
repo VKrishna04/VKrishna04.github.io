@@ -21,6 +21,8 @@ import {
 	CodeBracketIcon,
 	CalendarIcon,
 	ArrowTopRightOnSquareIcon,
+	EyeIcon,
+	ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
 import {
 	FaGithub,
@@ -350,14 +352,86 @@ const ProjectCard = ({ project, index = 0 }) => {
 				<div className="flex items-center gap-4">
 					{typeof project.stargazers_count === "number" && (
 						<div className="flex items-center space-x-1">
-							<StarIcon className="w-4 h-4" />
-							<span>{project.stargazers_count}</span>
+							{project.statsUrls?.starsUrl ? (
+								<a
+									href={project.statsUrls.starsUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center space-x-1 hover:text-yellow-400 transition-colors"
+									title="View stargazers"
+								>
+									<StarIcon className="w-4 h-4" />
+									<span>{project.stargazers_count}</span>
+								</a>
+							) : (
+								<>
+									<StarIcon className="w-4 h-4" />
+									<span>{project.stargazers_count}</span>
+								</>
+							)}
 						</div>
 					)}
 					{typeof project.forks_count === "number" && (
 						<div className="flex items-center space-x-1">
-							<CodeBracketIcon className="w-4 h-4" />
-							<span>{project.forks_count}</span>
+							{project.statsUrls?.forksUrl ? (
+								<a
+									href={project.statsUrls.forksUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center space-x-1 hover:text-blue-400 transition-colors"
+									title="View forks"
+								>
+									<CodeBracketIcon className="w-4 h-4" />
+									<span>{project.forks_count}</span>
+								</a>
+							) : (
+								<>
+									<CodeBracketIcon className="w-4 h-4" />
+									<span>{project.forks_count}</span>
+								</>
+							)}
+						</div>
+					)}
+					{typeof project.watchers_count === "number" && (
+						<div className="flex items-center space-x-1">
+							{project.statsUrls?.watchersUrl ? (
+								<a
+									href={project.statsUrls.watchersUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center space-x-1 hover:text-green-400 transition-colors"
+									title="View watchers"
+								>
+									<EyeIcon className="w-4 h-4" />
+									<span>{project.watchers_count}</span>
+								</a>
+							) : (
+								<>
+									<EyeIcon className="w-4 h-4" />
+									<span>{project.watchers_count}</span>
+								</>
+							)}
+						</div>
+					)}
+					{typeof project.open_issues_count === "number" && (
+						<div className="flex items-center space-x-1">
+							{project.statsUrls?.issuesUrl ? (
+								<a
+									href={project.statsUrls.issuesUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex items-center space-x-1 hover:text-red-400 transition-colors"
+									title="View issues"
+								>
+									<ExclamationTriangleIcon className="w-4 h-4" />
+									<span>{project.open_issues_count}</span>
+								</a>
+							) : (
+								<>
+									<ExclamationTriangleIcon className="w-4 h-4" />
+									<span>{project.open_issues_count}</span>
+								</>
+							)}
 						</div>
 					)}
 					{project.updated_at && (

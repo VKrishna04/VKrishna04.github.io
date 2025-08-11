@@ -274,6 +274,12 @@
 					"forks": 1,
 					"watchers": 0,
 					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/VKrishna04/VKrishna04.github.io/stargazers",
+					"forksUrl": "https://github.com/VKrishna04/VKrishna04.github.io/network/members",
+					"watchersUrl": "https://github.com/VKrishna04/VKrishna04.github.io/watchers",
+					"issuesUrl": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
 				}
 			}
 		],
@@ -284,7 +290,7 @@
 	},
 	"resume": {
 		"type": "file",
-		"url": "/resume.pdf",
+		"url": "https://drive.google.com/file/d/1ZlGEECwaC-q7mGAhXqF6nLgpgYYgUroQ/view?usp=sharing",
 		"filename": "Krishna_GSVV_Resume.pdf",
 		"alternativeUrl": "",
 		"note": "Set type to 'file' to serve from public folder, or 'external' to use alternativeUrl (Google Drive, Dropbox, etc.)",
@@ -300,6 +306,12 @@
 			"volunteerExperience"
 		],
 		"sectionOrderNote": "Configure the order in which resume sections appear. Available sections: experiences, education, skills, personalProjects, certifications, awards, publications, languages, volunteerExperience",
+		"totalRewards": {
+			"show": true,
+			"heading": "Total Prize Money Won",
+			"currency": "INR",
+			"icon": "TrophyIcon"
+		},
 		"experiences": [
 		],
 		"experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
@@ -457,6 +469,14 @@
 		"skillsIcon": "CpuChipIcon",
 		"certifications": [
 			{
+				"name": "Oracle Cloud Infrastructure 2025 Certified DevOps Professional",
+				"certificateUrl": "https://drive.google.com/file/d/1agdxuPZMtTZKG2EATzEp_WKyLCkbx4uL/view?usp=drive_link",
+				"credentialId": "321011846OCI25DOPOCP",
+				"date": "August 01, 2025",
+				"issuer": "Oracle University",
+				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=036D4F15C7CE2DBFDA848564556DC1AC0DD279E215B4C84E699CC51AFA72D953"
+			},
+			{
 				"name": "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
 				"certificateUrl": "https://drive.google.com/file/d/1wMEJIXJvo9mqDRl8qwCzm77HUelJk5Ru/view?usp=sharing",
 				"credentialId": "321011846OCI25CAA",
@@ -496,28 +516,58 @@
 				"organization": "InfinityAI 2025, Tredence Inc.",
 				"date": "March 2025",
 				"location": "Bengaluru, India",
-				"description": "Recognized for developing an innovative web application based on Facial Emotion Detection using MediaPipe and machine learning, showcasing technical expertise and problem-solving skills in a competitive environment"
+				"description": "Recognized for developing an innovative web application based on Facial Emotion Detection using MediaPipe and machine learning, showcasing technical expertise and problem-solving skills in a competitive environment",
+				"rewardAmount": {
+					"amount": 200000,
+					"currency": "INR",
+					"displayText": "₹2,00,000"
+				},
+				"verificationUrl": "",
+				"certificateUrl": ""
 			},
 			{
 				"name": "1st Runner-up at IIT Delhi CodeHive Hackathon - 1 Lakh INR Prize",
 				"organization": "IIT Delhi Tryst Event & Hive blockchain",
 				"date": "March 2025",
-				"description": "Outstanding performance in delivering high-quality software solutions for real-world scenarios, and utilizing advanced technologies like blockchain and AI to create impactful applications"
+				"location": "IIT Delhi, India",
+				"description": "Outstanding performance in delivering high-quality software solutions for real-world scenarios, and utilizing advanced technologies like blockchain and AI to create impactful applications",
+				"rewardAmount": {
+					"amount": 100000,
+					"currency": "INR",
+					"displayText": "₹1,00,000"
+				},
+				"verificationUrl": "https://unstop.com/p/tryst25-iitd-code-hive-india-hackathon-blockchain-and-web3-hybrid-hackathon-2025-iit-delhi-1411972/offline-round/1057623?d=eyJwYWdlIjoxfQ==",
+				"certificateUrl": ""
 			},
 			{
 				"name": "1st rank at IIT Hyderabad Pathway Hackathon",
 				"organization": "IIT Hyderabad & Pathway.com",
+				"location": "IIT Hyderabad, India",
 				"date": "2025",
-				"description": "Awarded for scoring the highest points in the hackathon, demonstrating exceptional coding skills and innovative problem-solving abilities in a new technology."
+				"description": "Awarded for scoring the highest points in the hackathon, demonstrating exceptional coding skills and innovative problem-solving abilities in a new technology.",
+				"rewardAmount": {
+					"amount": 50000,
+					"currency": "INR",
+					"displayText": "₹50,000"
+				},
+				"verificationUrl": "",
+				"certificateUrl": ""
 			},
 			{
 				"name": "1st rank at Microsoft Imagine Cup Campus Hackathon",
 				"organization": "Microsoft Learn & Amrita Vishwa Vidyapeetham",
 				"date": "2025",
-				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity"
+				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity",
+				"rewardAmount": {
+					"amount": 25000,
+					"currency": "INR",
+					"displayText": "₹25,000"
+				},
+				"verificationUrl": "",
+				"certificateUrl": ""
 			}
 		],
-		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, and description",
+		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, description, and optional rewardAmount. URLs are optional: verificationUrl (to verify the award) and certificateUrl (to view certificate). Links will only show if provided.",
 		"awardsHeading": "Awards & Recognition",
 		"awardsIcon": "TrophyIcon",
 		"publications": [
@@ -684,12 +734,14 @@
 				"key": "github",
 				"icon": "FaGithub",
 				"url": "https://github.com/VKrishna04",
-				"label": "GitHub Profile",
+				"label": "GitHub",
+				"description": "Check out my repositories and open source contributions",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
+				"contactSection": 1,
 				"enabled": true
 			},
 			{
@@ -698,11 +750,13 @@
 				"icon": "FaGithub",
 				"url": "https://github.com/Life-Experimentalist",
 				"label": "GitHub Org",
+				"description": "My organization where I store working projects",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
+				"contactSection": 1,
 				"enabled": true
 			},
 			{
@@ -710,12 +764,14 @@
 				"key": "linkedin",
 				"icon": "FaLinkedin",
 				"url": "https://linkedin.com/in/krishnagsvv",
-				"label": "LinkedIn Profile",
+				"label": "LinkedIn",
+				"description": "Connect with me professionally and see my career journey",
 				"color": "text-blue-500",
 				"hoverColor": "hover:text-blue-400",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
+				"contactSection": 2,
 				"enabled": true
 			},
 			{
@@ -729,6 +785,7 @@
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
+				"contactSection": 3,
 				"enabled": false
 			},
 			{
@@ -736,26 +793,29 @@
 				"key": "instagram",
 				"icon": "FaInstagram",
 				"url": "https://instagram.com/vkrishna04",
-				"label": "Instagram Profile",
+				"label": "Instagram",
 				"color": "text-pink-500",
 				"hoverColor": "hover:text-pink-400",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
+				"contactSection": 3,
 				"enabled": true
 			},
 			{
 				"name": "Discord",
 				"key": "discord",
 				"icon": "FaDiscord",
-				"url": "",
-				"label": "Discord Profile",
+				"url": "https://discordapp.com/users/vkrishna04",
+				"label": "Discord",
+				"description": "Join me for tech discussions and collaborations",
 				"color": "text-indigo-500",
 				"hoverColor": "hover:text-indigo-400",
 				"showInHome": false,
 				"showInFooter": false,
 				"showInContact": true,
-				"enabled": false
+				"contactSection": 3,
+				"enabled": true
 			},
 			{
 				"name": "YouTube",
@@ -767,7 +827,8 @@
 				"hoverColor": "hover:text-red-400",
 				"showInHome": false,
 				"showInFooter": false,
-				"showInContact": false,
+				"showInContact": true,
+				"contactSection": 3,
 				"enabled": false
 			},
 			{
@@ -781,19 +842,7 @@
 				"showInHome": false,
 				"showInFooter": false,
 				"showInContact": false,
-				"enabled": false
-			},
-			{
-				"name": "TikTok",
-				"key": "tiktok",
-				"icon": "FaTiktok",
-				"url": "",
-				"label": "TikTok Profile",
-				"color": "text-black",
-				"hoverColor": "hover:text-gray-800",
-				"showInHome": false,
-				"showInFooter": false,
-				"showInContact": false,
+				"contactSection": 3,
 				"enabled": false
 			},
 			{
@@ -813,14 +862,16 @@
 				"name": "Dev.to",
 				"key": "dev",
 				"icon": "FaDev",
-				"url": "",
-				"label": "Dev.to Profile",
+				"url": "https://dev.to/vkrishna04",
+				"label": "Dev.to",
+				"description": "Read my technical articles and programming insights",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": false,
 				"showInFooter": false,
-				"showInContact": false,
-				"enabled": false
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": true
 			},
 			{
 				"name": "Stack Overflow",
@@ -833,6 +884,167 @@
 				"showInHome": false,
 				"showInFooter": false,
 				"showInContact": false,
+				"enabled": false
+			},
+			{
+				"name": "Pinterest",
+				"key": "pinterest",
+				"icon": "FaPinterest",
+				"url": "https://in.pinterest.com/VKrishna04/",
+				"label": "Pinterest",
+				"description": "Follow my creative boards and design inspiration",
+				"color": "text-red-600",
+				"hoverColor": "hover:text-red-500",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 3,
+				"enabled": true
+			},
+			{
+				"name": "Reddit",
+				"key": "reddit",
+				"icon": "FaReddit",
+				"url": "https://www.reddit.com/user/Krishnalsh04/",
+				"label": "Reddit",
+				"color": "text-orange-500",
+				"hoverColor": "hover:text-orange-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 3,
+				"enabled": true
+			},
+			{
+				"name": "LeetCode",
+				"key": "leetcode",
+				"icon": "SiLeetcode",
+				"url": "https://leetcode.com/u/VKrishna04/",
+				"label": "LeetCode",
+				"description": "Check out my coding solutions and progress",
+				"color": "text-orange-400",
+				"hoverColor": "hover:text-orange-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "HackerRank",
+				"key": "hackerrank",
+				"icon": "SiHackerrank",
+				"url": "https://www.hackerrank.com/profile/VKrishna04",
+				"label": "HackerRank",
+				"description": "View my coding certifications and achievements",
+				"color": "text-green-500",
+				"hoverColor": "hover:text-green-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "Kaggle",
+				"key": "kaggle",
+				"icon": "SiKaggle",
+				"url": "https://www.kaggle.com/krishnagsvv",
+				"label": "Kaggle",
+				"description": "Explore my data science projects and competitions",
+				"color": "text-blue-400",
+				"hoverColor": "hover:text-blue-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "Spotify",
+				"key": "spotify",
+				"icon": "FaSpotify",
+				"url": "https://open.spotify.com/user/drz1bknr8dy7yo88gwzi9nl3d?si=86da6e56d31d4ea0",
+				"label": "Spotify",
+				"color": "text-green-500",
+				"hoverColor": "hover:text-green-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 4,
+				"enabled": true
+			},
+			{
+				"name": "YouTube Music",
+				"key": "youtube-music",
+				"icon": "SiYoutubemusic",
+				"url": "https://music.youtube.com/channel/UCh918uhzsqX-D32Etxq61eQ?si=Uvyy7e6Pg0Ye7BSK",
+				"label": "YouTube Music",
+				"color": "text-red-500",
+				"hoverColor": "hover:text-red-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 4,
+				"enabled": true
+			},
+			{
+				"name": "GitHub Pages",
+				"key": "github-pages",
+				"icon": "FaGithub",
+				"url": "https://Life-Experimentalist.github.io/",
+				"description": "My GitHub Pages site for the Life Experimentalist organization",
+				"label": "GitHub Pages - Orgs",
+				"color": "text-white",
+				"hoverColor": "hover:text-gray-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "Vercel",
+				"key": "vercel",
+				"icon": "SiVercel",
+				"url": "",
+				"label": "Vercel Profile",
+				"color": "text-white",
+				"hoverColor": "hover:text-gray-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": false
+			},
+			{
+				"name": "AWS",
+				"key": "aws",
+				"icon": "FaAws",
+				"url": "",
+				"label": "AWS Profile",
+				"description": "Cloud computing and architecture projects",
+				"color": "text-orange-400",
+				"hoverColor": "hover:text-orange-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": false
+			},
+			{
+				"name": "Heroku",
+				"key": "heroku",
+				"icon": "SiHeroku",
+				"url": "",
+				"label": "Heroku Profile",
+				"description": "My deployed applications and services",
+				"color": "text-purple-600",
+				"hoverColor": "hover:text-purple-500",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": false,
+				"contactSection": 2,
 				"enabled": false
 			},
 			{
@@ -882,9 +1094,141 @@
 		},
 		"note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags. Available icons: FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch, FaTiktok, FaMedium, FaDev, FaStackOverflow, FaDribbble, FaBehance, FaCodepen, ArrowUpIcon, Bars3Icon, XMarkIcon"
 	},
+	"contact": {
+		"title": "Let's Connect",
+		"subtitle": "I'm always interested in new opportunities and collaborations. Let's build something amazing together!",
+		"timeZone": "Asia/Kolkata",
+		"timeFormat": "12-hour",
+		"status": {
+			"show": true,
+			"available": true,
+			"message": "Available for new opportunities and collaborations",
+			"lastUpdated": "2025-01-15"
+		},
+		"responseInfo": {
+			"show": true,
+			"timeframe": "Usually within 5 business days",
+			"workingHours": "9:00 AM - 6:00 PM IST"
+		},
+		"currentFocus": {
+			"show": true,
+			"title": "What I'm Working On",
+			"description": "Building AI-powered web applications, contributing to open source projects, and exploring new technologies in web development and machine learning."
+		},
+		"collaborationInterests": [
+			"Full-stack web applications",
+			"AI/ML integration projects",
+			"Open source contributions",
+			"Hackathons and competitions",
+			"Technical mentoring",
+			"Freelance development projects"
+		],
+		"quickActions": {
+			"show": true,
+			"title": "Quick Actions",
+			"actions": [
+				{
+					"label": "Send Email",
+					"icon": "EnvelopeIcon",
+					"url": "mailto:{email}?subject=Let's Collaborate",
+					"colorTheme": "blue",
+					"enabled": true
+				},
+				{
+					"label": "View Resume",
+					"icon": "DocumentIcon",
+					"url": "./resume.pdf",
+					"colorTheme": "purple",
+					"enabled": true
+				},
+				{
+					"label": "Schedule Meeting",
+					"icon": "CalendarDaysIcon",
+					"url": "{calendly}",
+					"colorTheme": "green",
+					"enabled": false
+				},
+				{
+					"label": "Download Portfolio",
+					"icon": "DocumentIcon",
+					"url": "./portfolio.pdf",
+					"colorTheme": "purple",
+					"enabled": false
+				}
+			]
+		},
+		"sections": {
+			"platformSorting": {
+				"iconOnlyFirst": true,
+				"enabled": true
+			},
+			"sectionHeadings": {
+				"1": "Development & Code",
+				"2": "Professional Networks",
+				"3": "Creative & Design",
+				"4": "Music & Entertainment"
+			},
+			"leftColumn": {
+				"title": "Get In Touch",
+				"sections": [
+					{
+						"type": "contactInfo",
+						"show": true,
+						"title": "Contact Information"
+					},
+					{
+						"type": "quickActions",
+						"show": true,
+						"title": "Quick Actions"
+					},
+					{
+						"type": "collaboration",
+						"show": true,
+						"title": "Open to Collaborate On"
+					}
+
+				]
+			},
+			"rightColumn": {
+				"title": "Let's Connect and Chat!",
+				"sections": [
+					{
+						"type": "currentFocus",
+						"show": true,
+						"title": "What I'm Working On"
+					},
+					{
+						"type": "social",
+						"show": true,
+						"title": "Social & Communication"
+					}
+				]
+			}
+		},
+		"faq": [
+			{
+				"question": "What's your typical response time?",
+				"answer": "I usually respond to emails and messages within 5 business days at max. For urgent matters, feel free to mention it in the subject line."
+			},
+			{
+				"question": "What types of projects do you work on?",
+				"answer": "I specialize in full-stack web development, AI integration, and modern React applications. I'm open to both short-term consulting and longer-term collaborations."
+			},
+			{
+				"question": "Are you available for freelance work?",
+				"answer": "Yes! I'm always interested in discussing interesting projects. Feel free to reach out with your project details and timeline."
+			},
+			{
+				"question": "Do you mentor or teach?",
+				"answer": "Absolutely! I enjoy helping others learn programming and web development. I'm available for mentoring sessions and code reviews."
+			}
+		],
+		"calendly": "",
+		"note": "Configure the contact page layout, sections, and content. The contact page supports a flexible two-column layout with configurable sections. You can rearrange sections, change titles, add/remove sections, and control what content appears where. Available section types: 'contactInfo' (email, phone, location), 'currentFocus' (what you're working on), 'quickActions' (action buttons with icons), 'github' (GitHub profiles), 'social' (social media platforms), 'collaboration' (collaboration interests). Each section can be shown/hidden and have custom titles. The 'github' and 'social' sections automatically pull from the configured platforms and will display in a grid layout. Platforms with descriptions will be displayed horizontally with text, while simple platforms will show as icon-only cards. Social platforms can be filtered to show only on contact page by setting showInContact: true and other show flags to false."
+	},
 	"navbar": {
 		"logo": {
-			"type": "auto",
+			"type": "github",
 			"text": "VK",
 			"name": "Krishna GSVV",
 			"showName": true,
