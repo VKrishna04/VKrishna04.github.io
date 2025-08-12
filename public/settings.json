@@ -749,7 +749,7 @@
 				"key": "github",
 				"icon": "FaGithub",
 				"url": "https://github.com/Life-Experimentalist",
-				"label": "GitHub Org",
+				"label": "GitHub Organization",
 				"description": "My organization where I store working projects",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
@@ -835,15 +835,16 @@
 				"name": "Twitch",
 				"key": "twitch",
 				"icon": "FaTwitch",
-				"url": "",
+				"url": "https://twitch.tv/vkrishna04",
 				"label": "Twitch Channel",
+				"description": "Watch me code live and gaming streams",
 				"color": "text-purple-500",
 				"hoverColor": "hover:text-purple-400",
 				"showInHome": false,
 				"showInFooter": false,
-				"showInContact": false,
-				"contactSection": 3,
-				"enabled": false
+				"showInContact": true,
+				"contactSection": 5,
+				"enabled": true
 			},
 			{
 				"name": "Medium",
@@ -1077,13 +1078,15 @@
 				"name": "CodePen",
 				"key": "codepen",
 				"icon": "FaCodepen",
-				"url": "",
-				"label": "CodePen Profile",
+				"url": "https://codepen.io/vkrishna04",
+				"label": "CodePen",
+				"description": "Interactive code examples and experiments",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": false,
 				"showInFooter": false,
-				"showInContact": false,
+				"showInContact": true,
+				"contactSection": 2,
 				"enabled": false
 			}
 		],
@@ -1162,12 +1165,6 @@
 				"iconOnlyFirst": true,
 				"enabled": true
 			},
-			"sectionHeadings": {
-				"1": "Development & Code",
-				"2": "Professional Networks",
-				"3": "Creative & Design",
-				"4": "Music & Entertainment"
-			},
 			"leftColumn": {
 				"title": "Get In Touch",
 				"sections": [
@@ -1182,11 +1179,15 @@
 						"title": "Quick Actions"
 					},
 					{
+						"type": "section4",
+						"show": true,
+						"title": "Music & Entertainment"
+					},
+					{
 						"type": "collaboration",
 						"show": true,
 						"title": "Open to Collaborate On"
 					}
-
 				]
 			},
 			"rightColumn": {
@@ -1198,9 +1199,19 @@
 						"title": "What I'm Working On"
 					},
 					{
-						"type": "social",
+						"type": "section1",
 						"show": true,
-						"title": "Social & Communication"
+						"title": "Development & Code"
+					},
+					{
+						"type": "section2",
+						"show": true,
+						"title": "Professional Networks"
+					},
+					{
+						"type": "section3",
+						"show": true,
+						"title": "Creative & Design"
 					}
 				]
 			}
@@ -1263,7 +1274,7 @@
 			}
 		],
 		"styling": {
-			"scrolledBg": "bg-black/80 backdrop-blur-md border-b border-white/10",
+			"scrolledBg": "bg-transparent backdrop-blur-md border-b border-white/10",
 			"transparentBg": "bg-transparent",
 			"activeColor": "text-primary-400",
 			"inactiveColor": "text-white hover:text-primary-400",
@@ -1294,13 +1305,48 @@
 		"socialLinks": {
 			"show": true
 		},
+		"about": {
+			"show": true,
+			"title": "",
+			"description": "Full-stack developer passionate about creating innovative web applications and contributing to open source projects. Always learning, always building."
+		},
+		"stats": {
+			"show": true,
+			"countProjectsFromData": true,
+			"items": [
+				{
+					"key": "projects",
+					"label": "Projects",
+					"value": "auto",
+					"color": "text-purple-400",
+					"show": true
+				},
+				{
+					"key": "experience",
+					"label": "Years Experience",
+					"value": "3+",
+					"color": "text-blue-400",
+					"show": true
+				},
+				{
+					"key": "status",
+					"label": "to Work",
+					"value": "Open",
+					"color": "text-green-400",
+					"show": true
+				}
+			]
+		},
+		"quickLinks": {
+			"show": false
+		},
 		"styling": {
-			"backgroundColor": "bg-gray-900/50 backdrop-blur-sm",
-			"borderColor": "border-gray-800/50",
+			"backgroundColor": "bg-gradient-to-b from-gray-900/80 to-black/90 backdrop-blur-sm",
+			"borderColor": "border-purple-500/20",
 			"textColor": "text-gray-400",
 			"copyrightColor": "text-gray-500"
 		},
-		"note": "Configure footer content, social links, and styling"
+		"note": "Enhanced footer with configurable stats, optional quick links (disabled since navbar is always visible), dynamic project counting, and improved layout"
 	},
 	"favicon": {
 		"type": "github",

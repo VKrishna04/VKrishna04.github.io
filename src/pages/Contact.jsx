@@ -121,7 +121,21 @@ const Contact = () => {
 	};
 
 	// Helper function to render section by type
-	const renderSection = (sectionConfig, sectionType) => {
+	const renderSection = (sectionConfig, sectionType, columnType = "right") => {
+		// Grid classes based on column type
+		const getIconGridClasses = (columnType) => {
+			if (columnType === "left") {
+				return "grid grid-cols-2 gap-4"; // Only 2 icons per row in left column
+			}
+			return "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"; // Default for right column
+		};
+
+		const getTextGridClasses = (columnType) => {
+			if (columnType === "left") {
+				return "grid grid-cols-1 gap-4"; // Only 1 platform with description per row in left column
+			}
+			return "grid grid-cols-1 lg:grid-cols-2 gap-4"; // Default for right column
+		};
 		if (!sectionConfig.show) return null;
 
 		switch (sectionType) {
@@ -272,7 +286,27 @@ const Contact = () => {
 				// GitHub platforms are now handled in the social section
 				return null;
 
-			case "social": {
+			case "social":
+			case "section1":
+			case "section2":
+			case "section3":
+			case "section4":
+			case "section5":
+			case "section6":
+			case "section7":
+			case "section8":
+			case "section9":
+			case "section10": {
+				// Determine which section to render
+				let targetSectionNumber;
+				if (sectionType === "social") {
+					// For backward compatibility, show all sections
+					targetSectionNumber = null;
+				} else if (sectionType.startsWith("section")) {
+					// Extract section number from sectionType (e.g., "section1" -> 1)
+					targetSectionNumber = parseInt(sectionType.replace("section", ""));
+				}
+
 				const allPlatforms =
 					settings.social?.platforms?.filter(
 						(platform) => platform.enabled && platform.showInContact
@@ -295,9 +329,16 @@ const Contact = () => {
 					...(emailPlatform ? [emailPlatform] : []),
 				];
 
+				// Filter platforms by section if targetSectionNumber is specified
+				const filteredPlatforms = targetSectionNumber
+					? platformsToShow.filter(
+							(platform) => platform.contactSection === targetSectionNumber
+					  )
+					: platformsToShow;
+
 				// Group platforms by contactSection
 				const groupedPlatforms = {};
-				platformsToShow.forEach((platform) => {
+				filteredPlatforms.forEach((platform) => {
 					const section = platform.contactSection || 1;
 					if (!groupedPlatforms[section]) {
 						groupedPlatforms[section] = [];
@@ -356,7 +397,7 @@ const Contact = () => {
 										<>
 											{/* Icon-only platforms first */}
 											{iconOnlyPlatforms.length > 0 && (
-												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+												<div className={getIconGridClasses(columnType)}>
 													{iconOnlyPlatforms.map((platform, index) => {
 														const IconComponent = getIconComponent(
 															platform.icon
@@ -389,7 +430,7 @@ const Contact = () => {
 
 											{/* Platforms with descriptions after */}
 											{platformsWithText.length > 0 && (
-												<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+												<div className={getTextGridClasses(columnType)}>
 													{platformsWithText.map((platform, index) => {
 														const IconComponent =
 															platform.icon === "EnvelopeIcon"
@@ -430,7 +471,7 @@ const Contact = () => {
 										<>
 											{/* Platforms with descriptions first */}
 											{platformsWithText.length > 0 && (
-												<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+												<div className={getTextGridClasses(columnType)}>
 													{platformsWithText.map((platform, index) => {
 														const IconComponent =
 															platform.icon === "EnvelopeIcon"
@@ -469,7 +510,7 @@ const Contact = () => {
 
 											{/* Icon-only platforms after */}
 											{iconOnlyPlatforms.length > 0 && (
-												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+												<div className={getIconGridClasses(columnType)}>
 													{iconOnlyPlatforms.map((platform, index) => {
 														const IconComponent = getIconComponent(
 															platform.icon
@@ -685,7 +726,7 @@ const Contact = () => {
 												{section.title}
 											</h3>
 										)}
-										{renderSection(section, section.type)}
+										{renderSection(section, section.type, "left")}
 									</div>
 								)
 						)}
@@ -710,7 +751,7 @@ const Contact = () => {
 										<h3 className="text-lg font-semibold text-purple-300">
 											{section.title}
 										</h3>
-										{renderSection(section, section.type)}
+										{renderSection(section, section.type, "right")}
 									</div>
 								)
 						)}
