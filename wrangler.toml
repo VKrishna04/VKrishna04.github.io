@@ -1,4 +1,4 @@
-name = "krishnagsvv"
+name = "me"
 compatibility_date = "2025-08-27"
 
 [assets]
@@ -7,10 +7,22 @@ directory = "./dist"
 [build]
 command = "npm run build"
 
+[vars]
+NODE_VERSION = "20"
+NPM_FLAGS = "--production=false"
+
 # Production environment
 [env.production]
-name = "krishnagsvv"
+name = "me"
+
+[env.production.vars]
+NODE_VERSION = "20"
+NPM_FLAGS = "--production=false"
 
 # Preview environment for feature branches
 [env.preview]
-name = "krishnagsvv-preview"
+name = "me-preview"
+
+[env.preview.vars]
+NODE_VERSION = "20"
+NPM_FLAGS = "--production=false"

@@ -137,3 +137,4 @@ firebase.json
 .vscode/
 .vscode/settings.json
 .vscode/settings.json
+package-lock.json
