@@ -1,6 +1,6 @@
 {
 	"name": "vkrishna04.github.io",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"type": "module",
 	"homepage": "https://vkrishna04.me",
 	"description": "Personal portfolio website showcasing skills, projects, and experiences.",
@@ -30,7 +30,9 @@
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"validate-settings": "node scripts/validate-json.js public/settings.json"
+		"validate-settings": "node scripts/validate-json.js public/settings.json",
+		"deploy:cloudflare": "npx wrangler deploy",
+		"deploy:cloudflare:preview": "npx wrangler deploy --env preview"
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.2.0",
