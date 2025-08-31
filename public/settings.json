@@ -290,10 +290,10 @@
 	},
 	"resume": {
 		"type": "file",
-		"url": "https://drive.google.com/file/d/1ZlGEECwaC-q7mGAhXqF6nLgpgYYgUroQ/view?usp=sharing",
+		"url": "https://drive.google.com/file/d/1a7av243LfnlHaVpSRzXciy0Kv1FfYPVP/view?usp=sharing",
 		"filename": "Krishna_GSVV_Resume.pdf",
-		"alternativeUrl": "",
-		"note": "Set type to 'file' to serve from public folder, or 'external' to use alternativeUrl (Google Drive, Dropbox, etc.)",
+		"alternativeUrl": "https://drive.google.com/file/d/1a7av243LfnlHaVpSRzXciy0Kv1FfYPVP/view?usp=sharing",
+		"note": "Resume URL - can be a relative path (for local files) or a full URL (for external). If the RESUME_LINK environment variable is set, it will override this value.",
 		"sectionOrder": [
 			"experiences",
 			"education",
@@ -469,6 +469,14 @@
 		"skillsIcon": "CpuChipIcon",
 		"certifications": [
 			{
+				"name": "AWS Certified Cloud Practitioner",
+				"certificateUrl": "https://drive.google.com/file/d/1RoyflDxiOjvilKKqSdrkdduH85YeMIs1/view?usp=sharing",
+				"credentialId": "a6d782dae67d4865980a627800cd6a14",
+				"date": "August 27, 2025 - 2028",
+				"issuer": "Amazon Web Services",
+				"verificationUrl": "https://cp.certmetrics.com/amazon/en/public/verify/credential/a6d782dae67d4865980a627800cd6a14"
+			},
+			{
 				"name": "Oracle Cloud Infrastructure 2025 Certified DevOps Professional",
 				"certificateUrl": "https://drive.google.com/file/d/1agdxuPZMtTZKG2EATzEp_WKyLCkbx4uL/view?usp=drive_link",
 				"credentialId": "321011846OCI25DOPOCP",
@@ -483,12 +491,6 @@
 				"date": "July 16, 2025",
 				"issuer": "Oracle University",
 				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=D7A5B1169CBBF5293E9E216E889A16D9E28346FC8CC006E736CAE94691F767F4"
-			},
-			{
-				"name": "AWS Cloud Practitioner",
-				"certificateUrl": "https://drive.google.com/file/d/1S0YHD-RkG5w2r-iZwEOiq4EkrJIqDnfy/view?usp=sharing",
-				"date": "March 20, 2025",
-				"issuer": "Corporate and Industry Relations (CIR), Amrita Vishwa Vidyapeetham, Coimbatore."
 			},
 			{
 				"name": "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",

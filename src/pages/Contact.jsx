@@ -53,6 +53,7 @@ import {
 	SiVercel,
 	SiHeroku,
 } from "react-icons/si";
+import { getResumeUrl } from "../utils/resume";
 
 const Contact = () => {
 	const [settings, setSettings] = useState({});
@@ -155,6 +156,8 @@ const Contact = () => {
 											{info.href ? (
 												<a
 													href={sanitizeUrl(info.href)}
+													target="_blank"
+													rel="noopener noreferrer"
 													className="text-white hover:text-purple-400 transition-colors"
 												>
 													{info.value}
@@ -232,27 +235,37 @@ const Contact = () => {
 									const IconComponent = getHeroIcon(action.icon);
 									let url = action.url;
 
-									// Replace placeholders
+									// If this is the Resume quick action and mode is 'auto', use shared resume URL
+									const isResumeAction =
+										action.key === "resume" ||
+										action.label?.toLowerCase().includes("resume");
 									if (
-										url.includes("{email}") &&
-										settings.social?.contact?.email
+										isResumeAction &&
+										settings.contact?.quickActions?.resumeMode === "auto"
 									) {
-										url = url.replace("{email}", settings.social.contact.email);
-									}
-									if (url.includes("{calendly}") && contactConfig.calendly) {
-										url = url.replace("{calendly}", contactConfig.calendly);
+										url = resumeUrl;
+									} else {
+										// Replace placeholders as before
+										if (
+											url.includes("{email}") &&
+											settings.social?.contact?.email
+										) {
+											url = url.replace(
+												"{email}",
+												settings.social.contact.email
+											);
+										}
+										if (url.includes("{calendly}") && contactConfig.calendly) {
+											url = url.replace("{calendly}", contactConfig.calendly);
+										}
 									}
 
 									return (
 										<a
 											key={index}
 											href={sanitizeUrl(url)}
-											target={url.startsWith("http") ? "_blank" : undefined}
-											rel={
-												url.startsWith("http")
-													? "noopener noreferrer"
-													: undefined
-											}
+											target="_blank"
+											rel="noopener noreferrer"
 											className={`flex items-center p-2 ${
 												colorMap[action.colorTheme] ||
 												"text-gray-400 hover:bg-gray-900/20"
@@ -660,6 +673,7 @@ const Contact = () => {
 	const collaborationInterests = getCollaborationInterests();
 	const faqItems = getFAQItems();
 	const contactInfo = getContactInfo();
+	const resumeUrl = getResumeUrl(settings);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">

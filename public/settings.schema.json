@@ -1313,7 +1313,7 @@
 		},
 		"resume": {
 			"type": "object",
-			"description": "Resume configuration and content management",
+			"description": "Resume configuration and content management. The resume URL can be set via the 'url' property, 'alternativeUrl', or by setting the RESUME_LINK environment variable. If RESUME_LINK is set, it takes priority.",
 			"additionalProperties": true,
 			"properties": {
 				"type": {
@@ -1322,11 +1322,11 @@
 						"file",
 						"external"
 					],
-					"description": "Resume source type - 'file' for local PDF, 'external' for external URL"
+					"description": "Resume source type - 'file' for local PDF, 'external' for external URL."
 				},
 				"url": {
 					"type": "string",
-					"description": "Resume URL - can be relative path (for local files) or full URL (for external)",
+					"description": "Resume URL - can be a relative path (for local files) or a full URL (for external). If the RESUME_LINK environment variable is set, it will override this value.",
 					"examples": [
 						"https://example.com/resume.pdf",
 						"/resume.pdf",
@@ -1336,7 +1336,7 @@
 				"filename": {
 					"type": "string",
 					"pattern": "^[a-zA-Z0-9._-]+\\.(pdf|docx)$",
-					"description": "Local resume filename (required when type is 'file')",
+					"description": "Local resume filename (required when type is 'file').",
 					"examples": [
 						"resume.pdf",
 						"john-doe-resume.pdf"

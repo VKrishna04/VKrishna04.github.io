@@ -1,6 +1,6 @@
 /*
  * Example configuration for dynamic favicon and navbar logo
- * 
+ *
  * This file shows how to configure the new dynamic favicon and navbar features
  */
 
@@ -10,14 +10,14 @@
     "type": "github",
     "customUrl": "https://github.com/VKrishna04.png",
     "githubUsername": "VKrishna04",
-    "sizes": ["16x16", "32x32", "96x96", "192x192", "512x512"],
+    "sizes": ["16x16", "32x32", "96x96", "192x192", "512x512"](),
     "appleTouchIcon": true
   },
   "navbar": {
     "logo": {
       "type": "github",
       "text": "VK",
-      "name": "Krishna GSVV", 
+      "name": "Krishna GSVV",
       "showName": true,
       "showNameOnMobile": false,
       "gradient": "from-purple-500 to-pink-500",
@@ -34,7 +34,7 @@
   "favicon": {
     "type": "custom",
     "customUrl": "/custom-favicon.png",
-    "sizes": ["16x16", "32x32", "96x96"],
+    "sizes": ["16x16", "32x32", "96x96"](),
     "appleTouchIcon": true
   },
   "navbar": {

@@ -74,26 +74,48 @@ const Resume = () => {
 	}, []);
 
 	const getResumeUrl = () => {
+		// 1. Check for environment variable (RESUME_LINK)
+		const envResumeUrl = import.meta.env.RESUME_LINK;
+		if (
+			envResumeUrl &&
+			typeof envResumeUrl === "string" &&
+			envResumeUrl.trim() !== ""
+		) {
+			try {
+				if (
+					envResumeUrl.startsWith("http://") ||
+					envResumeUrl.startsWith("https://")
+				) {
+					return new URL(envResumeUrl).href;
+				}
+				if (envResumeUrl.startsWith("/") || !envResumeUrl.includes(":")) {
+					if (
+						envResumeUrl.includes("javascript:") ||
+						envResumeUrl.includes("data:") ||
+						envResumeUrl.includes("vbscript:")
+					) {
+						return "/resume.pdf";
+					}
+					return envResumeUrl;
+				}
+				return "/resume.pdf";
+			} catch {
+				return "/resume.pdf";
+			}
+		}
+		// 2. Fallback to settings.json logic
 		const resumeConfig = settings.resume || {};
 		let url;
-
 		if (resumeConfig.type === "external" && resumeConfig.alternativeUrl) {
 			url = resumeConfig.alternativeUrl;
 		} else {
 			url = resumeConfig.url || "/resume.pdf";
 		}
-
-		// Sanitize URL to prevent XSS
 		try {
-			// For external URLs, validate they start with http/https
 			if (url.startsWith("http://") || url.startsWith("https://")) {
-				// Additional validation for external URLs
-				const urlObj = new URL(url);
-				return urlObj.href;
+				return new URL(url).href;
 			}
-			// For relative URLs, ensure they don't contain dangerous protocols
 			if (url.startsWith("/") || !url.includes(":")) {
-				// Ensure no script injection in relative URLs
 				if (
 					url.includes("javascript:") ||
 					url.includes("data:") ||
@@ -103,10 +125,8 @@ const Resume = () => {
 				}
 				return url;
 			}
-			// Fallback to default if URL seems suspicious
 			return "/resume.pdf";
 		} catch {
-			console.warn("Invalid resume URL:", url);
 			return "/resume.pdf";
 		}
 	};

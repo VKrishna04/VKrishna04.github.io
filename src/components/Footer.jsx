@@ -238,6 +238,8 @@ const Footer = () => {
 										<a
 											key={link.path}
 											href={link.path}
+											target="_blank"
+											rel="noopener noreferrer"
 											className={`block text-sm transition-colors duration-300 ${
 												styling.textColor || "text-gray-400"
 											} hover:text-purple-400 hover:translate-x-1 transform transition-transform`}
