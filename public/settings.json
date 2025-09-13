@@ -79,6 +79,36 @@
 			}
 		],
 		"showScrollIndicator": true,
+		"background": {
+			"type": "animated-network",
+			"enabled": true,
+			"particles": {
+				"count": 150,
+				"size": 2,
+				"color": "rgba(147, 51, 234, 0.3)",
+				"speed": 0.5,
+				"connections": {
+					"enabled": true,
+					"distance": 120,
+					"color": "rgba(147, 51, 234, 0.2)",
+					"width": 1
+				}
+			},
+			"animation": {
+				"speed": 1,
+				"smoothness": 60
+			},
+			"gradient": {
+				"enabled": false,
+				"colors": [
+					"rgba(15, 23, 42, 1)",
+					"rgba(30, 41, 59, 0.8)",
+					"rgba(51, 65, 85, 0.6)"
+				],
+				"direction": "to bottom right"
+			},
+			"note": "Configure animated background. Types: 'animated-network', 'gradient', 'particles', 'none'. Network creates moving nodes with connections."
+		},
 		"animations": {
 			"typewriterSettings": {
 				"deleteSpeed": 50,
@@ -94,11 +124,12 @@
 	"about": {
 		"heading": "About Me",
 		"subheading": "Get to know me better",
-		"title": "I'm Krishna GSVV, a passionate developer",
+		"title": "I'm Krishna GSVV, a passionate developer and AI researcher",
 		"paragraphs": [
-			"I'm a dedicated software developer with a passion for creating innovative web applications and solving complex problems through code. My journey in technology began with curiosity and has evolved into a professional pursuit of excellence.",
-			"I specialize in modern web technologies, with expertise in React, Node.js, Python frameworks and various databases. I enjoy working on both frontend and backend development, always striving to create seamless user experiences backed by robust server-side architecture.",
-			"When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge with the developer community. I believe in continuous learning and staying updated with the latest industry trends."
+			"I'm a dedicated software engineer and AI researcher with a passion for creating innovative solutions that bridge the gap between cutting-edge technology and real-world applications. My journey began with curiosity about how computers work and has evolved into a professional pursuit of building impactful software.",
+			"I specialize in full-stack development with expertise in React, Python, and modern web technologies. My recent focus includes AI bias detection systems like EquiLens, computer vision applications for emotion detection, and blockchain technologies such as HiveXplore. I've successfully developed everything from VS Code extensions to complex machine learning pipelines, always prioritizing clean code and user experience.",
+			"Beyond coding, I'm deeply involved in AI research, particularly in bias detection and ethical AI systems. I've published research papers on diabetic retinopathy prediction using deep learning, won hackathons worth ₹3.75 lakhs including recent victories at IIT Delhi and Tredence Inc.",
+			"I've contributed to open-source projects that help make technology more accessible and fair. I believe in continuous learning and sharing knowledge with the developer community through my 15+ open source projects and developer tools including VS Code extensions with 2K+ downloads."
 		],
 		"image": {
 			"type": "github",
@@ -107,15 +138,15 @@
 			"note": "Set type to 'github' to use GitHub profile image, 'home' to use same as home page, or 'custom' to use customUrl"
 		},
 		"note": "Configure the About page content - heading, subheading, title, paragraphs, image settings, skills section heading, and skills categories with items",
-		"skillsHeading": "Technical Skills",
+		"skillsHeading": "Technical Expertise",
 		"skills": [
 			{
-				"category": "Frontend",
-				"icon": "DevicePhoneMobileIcon",
+				"category": "Programming Languages",
+				"icon": "CodeBracketIcon",
 				"items": [
 					{
-						"name": "React",
-						"icon": "FaReact",
+						"name": "Python",
+						"icon": "FaPython",
 						"color": "text-blue-400"
 					},
 					{
@@ -129,14 +160,60 @@
 						"color": "text-blue-500"
 					},
 					{
-						"name": "Tailwind CSS",
-						"icon": "SiTailwindcss",
-						"color": "text-cyan-400"
+						"name": "HTML5",
+						"icon": "FaHtml5",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "CSS3",
+						"icon": "FaCss3Alt",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "SQL",
+						"icon": "FaDatabase",
+						"color": "text-gray-400"
 					}
 				]
 			},
 			{
-				"category": "Backend",
+				"category": "Frontend Development",
+				"icon": "DevicePhoneMobileIcon",
+				"items": [
+					{
+						"name": "React",
+						"icon": "FaReact",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "Vite",
+						"icon": "SiVite",
+						"color": "text-purple-400"
+					},
+					{
+						"name": "Tailwind CSS",
+						"icon": "SiTailwindcss",
+						"color": "text-cyan-400"
+					},
+					{
+						"name": "Framer Motion",
+						"icon": "SiFramer",
+						"color": "text-pink-400"
+					},
+					{
+						"name": "Bootstrap",
+						"icon": "SiBootstrap",
+						"color": "text-purple-500"
+					},
+					{
+						"name": "Responsive Design",
+						"icon": "DevicePhoneMobileIcon",
+						"color": "text-green-400"
+					}
+				]
+			},
+			{
+				"category": "Backend & APIs",
 				"icon": "ServerIcon",
 				"items": [
 					{
@@ -150,9 +227,71 @@
 						"color": "text-gray-400"
 					},
 					{
-						"name": "Python",
-						"icon": "FaPython",
-						"color": "text-yellow-400"
+						"name": "Flask",
+						"icon": "SiFlask",
+						"color": "text-gray-300"
+					},
+					{
+						"name": "FastAPI",
+						"icon": "SiFastapi",
+						"color": "text-green-500"
+					},
+					{
+						"name": "Django",
+						"icon": "SiDjango",
+						"color": "text-green-600"
+					},
+					{
+						"name": "REST APIs",
+						"icon": "CodeBracketIcon",
+						"color": "text-purple-400"
+					}
+				]
+			},
+			{
+				"category": "AI & Machine Learning",
+				"icon": "CpuChipIcon",
+				"items": [
+					{
+						"name": "TensorFlow",
+						"icon": "SiTensorflow",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "OpenCV",
+						"icon": "SiOpencv",
+						"color": "text-green-400"
+					},
+					{
+						"name": "MediaPipe",
+						"icon": "SiGoogle",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "scikit-learn",
+						"icon": "SiScikitlearn",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Pandas",
+						"icon": "SiPandas",
+						"color": "text-blue-600"
+					},
+					{
+						"name": "NumPy",
+						"icon": "SiNumpy",
+						"color": "text-blue-500"
+					}
+				]
+			},
+			{
+				"category": "Databases & Storage",
+				"icon": "FaDatabase",
+				"items": [
+					{
+						"name": "PostgreSQL",
+						"icon": "SiPostgresql",
+						"color": "text-blue-400"
 					},
 					{
 						"name": "MongoDB",
@@ -160,14 +299,75 @@
 						"color": "text-green-500"
 					},
 					{
-						"name": "PostgreSQL",
-						"icon": "SiPostgresql",
-						"color": "text-blue-400"
+						"name": "SQLite",
+						"icon": "SiSqlite",
+						"color": "text-gray-400"
+					},
+					{
+						"name": "Redis",
+						"icon": "SiRedis",
+						"color": "text-red-500"
+					},
+					{
+						"name": "Firebase",
+						"icon": "SiFirebase",
+						"color": "text-yellow-500"
 					}
 				]
 			},
 			{
-				"category": "Tools & DevOps",
+				"category": "Cloud & DevOps",
+				"icon": "ServerIcon",
+				"items": [
+					{
+						"name": "AWS",
+						"icon": "FaAws",
+						"color": "text-yellow-500"
+					},
+					{
+						"name": "Oracle Cloud",
+						"icon": "SiOracle",
+						"color": "text-red-500"
+					},
+					{
+						"name": "Cloudflare",
+						"icon": "SiCloudflare",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Cloudflare Pages",
+						"icon": "SiCloudflare",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Cloudflare D1",
+						"icon": "SiCloudflare",
+						"color": "text-orange-600"
+					},
+					{
+						"name": "Render",
+						"icon": "SiRender",
+						"color": "text-white"
+					},
+					{
+						"name": "Vercel",
+						"icon": "SiVercel",
+						"color": "text-white"
+					},
+					{
+						"name": "Docker",
+						"icon": "FaDocker",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "GitHub Actions",
+						"icon": "SiGithubactions",
+						"color": "text-blue-600"
+					}
+				]
+			},
+			{
+				"category": "Tools & Platforms",
 				"icon": "CpuChipIcon",
 				"items": [
 					{
@@ -176,38 +376,82 @@
 						"color": "text-orange-500"
 					},
 					{
-						"name": "Docker",
-						"icon": "FaDocker",
-						"color": "text-blue-500"
+						"name": "GitHub",
+						"icon": "FaGithub",
+						"color": "text-white"
 					},
 					{
-						"name": "AWS",
-						"icon": "FaAws",
+						"name": "VS Code",
+						"icon": "BiLogoVisualStudio",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "Jupyter",
+						"icon": "SiJupyter",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Postman",
+						"icon": "SiPostman",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Linux",
+						"icon": "SiLinux",
+						"color": "text-gray-300"
+					}
+				]
+			},
+			{
+				"category": "Blockchain & Web3",
+				"icon": "CodeBracketIcon",
+				"items": [
+					{
+						"name": "Hive Blockchain",
+						"icon": "SiHiveBlockchain",
+						"color": "text-red-500"
+					},
+					{
+						"name": "Web3 APIs",
+						"icon": "SiWeb3Dotjs",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Cryptocurrency",
+						"icon": "SiBitcoin",
 						"color": "text-yellow-500"
 					}
 				]
 			}
 		],
-		"skillsNote": "Available category icons: DevicePhoneMobileIcon, ServerIcon, CpuChipIcon, CodeBracketIcon. Available skill icons: FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws, FaHtml5, FaCss3Alt, FaJsSquare, FaVuejs, FaAngular, FaPhp, FaJava, FaDatabase, SiJavascript, SiTypescript, SiMongodb, SiPostgresql, SiTailwindcss, SiExpress, SiNextdotjs, SiNestjs, SiRedis, SiGraphql, SiKubernetes, SiLinux, SiGit, SiFirebase, SiVercel, SiNetlify, and more.",
+		"skillsNote": "Comprehensive skills showcase covering programming languages, frameworks, AI/ML tools, cloud platforms, and emerging technologies. Each skill includes relevant icons and color coding for better visual representation.",
 		"stats": [
 			{
-				"number": "3+",
-				"label": "Years of Dev Experience"
+				"number": "15+",
+				"label": "Open Source Projects"
 			},
 			{
-				"number": "12+",
-				"label": "Projects Completed"
+				"number": "₹375k+",
+				"label": "Prize Money Won (INR)"
 			},
 			{
-				"number": "750+",
-				"label": "GitHub Commits"
+				"number": "1000+",
+				"label": "GitHub Contributions"
 			},
 			{
-				"number": "10+",
-				"label": "Technologies"
+				"number": "25+",
+				"label": "Technologies Mastered"
+			},
+			{
+				"number": "2+",
+				"label": "Research Publications"
+			},
+			{
+				"number": "5+",
+				"label": "Cloud Certifications"
 			}
 		],
-		"statsNote": "Configure the stats section - each stat should have a 'number' and 'label' field. You can add/remove stats as needed. Examples: { \"number\": \"3+\", \"label\": \"Years Experience\" }, { \"number\": \"75+\", \"label\": \"Projects Completed\" }, { \"number\": \"500+\", \"label\": \"GitHub Commits\" }, { \"number\": \"15+\", \"label\": \"Technologies\" }"
+		"statsNote": "Updated statistics reflecting real achievements including hackathon winnings, research publications, and technical certifications. Numbers are based on actual portfolio data and accomplishments."
 	},
 	"projects": {
 		"mode": "hybrid",
@@ -452,6 +696,21 @@
 						"color": "text-yellow-500"
 					},
 					{
+						"name": "Cloudflare",
+						"icon": "SiCloudflare",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Cloudflare Pages",
+						"icon": "SiCloudflare",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Cloudflare D1",
+						"icon": "SiCloudflare",
+						"color": "text-orange-600"
+					},
+					{
 						"name": "Render",
 						"icon": "SiRender",
 						"color": "text-white"
@@ -580,6 +839,18 @@
 				"date": "12 May 2025",
 				"url": "https://ieeexplore.ieee.org/document/10987517",
 				"description": "Due to its high morbidity and medical expenses, DR mellitus (T2DM) is a serious global health concern. Its burden can be lessened with effective early prognosis, but the available treatments are not enough. Predictive modelling of Retina Images (fundus) can enhance early diagnosis and care quality. Advanced convolutional neural networks (Inception-V4, ResNet V1, and ResNet V2) are used in this study to assess the severity of Diabetic Retinopathy caused by T2DM. Using de-identified fundus data from 9,948 individuals (1,904 with a T2DM diagnosed), we used transfer learning to train these models. We have performed simple data augmentation to rectify the class imbalance. The accuracy and AUC of the ensemble model were 94.21% and 98.53%, respectively. The findings imply that the combination of ResNet and Inception-V4 enhances classification power, providing a viable approach for early T2DM identification from fundus data that may find use in clinical settings. Future research still needs to focus on improving sensitivity and integrating real-time."
+			},
+			{
+				"title": "EquiLens CorpusGen v1.0.0 — Gender Bias Audit Corpus",
+				"type": "Other",
+				"publisher": "Zenodo",
+				"date": "1 September 2025",
+				"url": "https://zenodo.org/record/17014104",
+				"description": "The EquiLens Corpus Generator is an open-source tool for creating balanced, reproducible datasets for bias auditing in Small Language Models (SLMs).",
+				"authors": [
+					"Krishna GSVV"
+				],
+				"doi": "10.5281/zenodo.17014104"
 			}
 		],
 		"publicationsNote": "Configure publications - each should have title, type, publisher, date, url (optional), and description",
@@ -646,7 +917,7 @@
 					},
 					{
 						"name": "VS Code API",
-						"icon": "SiVisualstudiocode",
+						"icon": "BiLogoVisualStudio",
 						"color": "text-blue-400"
 					},
 					{
@@ -749,7 +1020,7 @@
 			{
 				"name": "GitHub Org",
 				"key": "github",
-				"icon": "FaGithub",
+				"icon": "SiGithubcopilot",
 				"url": "https://github.com/Life-Experimentalist",
 				"label": "GitHub Organization",
 				"description": "My organization where I store working projects",
@@ -1090,6 +1361,21 @@
 				"showInContact": true,
 				"contactSection": 2,
 				"enabled": false
+			},
+			{
+				"name": "Calendly",
+				"key": "calendly",
+				"icon": "SiCalendly",
+				"url": "https://calendly.com/vkrishna04/30min",
+				"label": "Schedule Meeting",
+				"description": "Book a time slot to discuss opportunities and collaborations",
+				"color": "text-blue-500",
+				"hoverColor": "hover:text-blue-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": false
 			}
 		],
 		"contact": {
@@ -1365,7 +1651,7 @@
 		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, or 'default' for default favicon. githubUsername overrides projects.devUsername for favicon only."
 	},
 	"counterAPI": {
-		"enabled": true,
+		"enabled": false,
 		"baseUrl": "https://projectcounter.onrender.com/",
 		"timeout": 10000,
 		"fallbackOnError": true,

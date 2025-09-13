@@ -836,7 +836,7 @@
 						"properties": {
 							"number": {
 								"type": "string",
-								"pattern": "^[0-9]+[+]?$",
+								"pattern": "^(\\S+?)([a-zA-Z])?(\\+?)$",
 								"description": "Statistical number (can include + for 'or more')",
 								"examples": [
 									"50+",
@@ -2568,6 +2568,7 @@
 								"examples": [
 									"https://linkedin.com/in/username",
 									"https://github.com/username",
+									"./resume.pdf",
 									""
 								]
 							},

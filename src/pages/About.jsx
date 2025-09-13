@@ -38,7 +38,9 @@ import {
 	FaPhp,
 	FaJava,
 	FaDatabase,
+	FaGithub,
 } from "react-icons/fa";
+import { BiLogoVisualStudio } from "react-icons/bi";
 import {
 	SiJavascript,
 	SiTypescript,
@@ -56,6 +58,28 @@ import {
 	SiFirebase,
 	SiVercel,
 	SiNetlify,
+	SiVite,
+	SiFramer,
+	SiBootstrap,
+	SiTensorflow,
+	SiOpencv,
+	SiGoogle,
+	SiScikitlearn,
+	SiPandas,
+	SiNumpy,
+	SiSqlite,
+	SiRender,
+	SiDjango,
+	SiFastapi,
+	SiOracle,
+	SiJupyter,
+	SiPostman,
+	SiHiveBlockchain,
+	SiEthereum,
+	SiWeb3Dotjs,
+	SiBitcoin,
+	SiGithubactions,
+	SiFlask,
 } from "react-icons/si";
 
 const About = () => {
@@ -109,6 +133,9 @@ const About = () => {
 		FaPhp,
 		FaJava,
 		FaDatabase,
+		FaGithub,
+		// React Icons - BI
+		BiLogoVisualStudio,
 		// React Icons - SI
 		SiJavascript,
 		SiTypescript,
@@ -126,6 +153,28 @@ const About = () => {
 		SiFirebase,
 		SiVercel,
 		SiNetlify,
+		SiVite,
+		SiFramer,
+		SiBootstrap,
+		SiTensorflow,
+		SiOpencv,
+		SiGoogle,
+		SiScikitlearn,
+		SiPandas,
+		SiNumpy,
+		SiSqlite,
+		SiRender,
+		SiDjango,
+		SiFastapi,
+		SiOracle,
+		SiJupyter,
+		SiPostman,
+		SiHiveBlockchain,
+		SiEthereum,
+		SiWeb3Dotjs,
+		SiBitcoin,
+		SiGithubactions,
+		SiFlask,
 	};
 
 	// Get icon component from string name
@@ -155,8 +204,14 @@ const About = () => {
 		return settings.about?.stats || [];
 	};
 
+	// Get featured projects from settings or use default
+	const getFeaturedProjects = () => {
+		return settings.about?.featuredProjects || [];
+	};
+
 	const skills = getSkills();
 	const stats = getStats();
+	const featuredProjects = getFeaturedProjects();
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
@@ -244,17 +299,19 @@ const About = () => {
 							<h2 className="text-3xl font-bold text-center text-white mb-12">
 								{settings.about?.skillsHeading || "Technical Skills"}
 							</h2>
-							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+							<div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 								{skills.map((skillCategory, index) => (
 									<motion.div
 										key={index}
-										className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
+										className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group"
 										variants={fadeInUp}
-										whileHover={{ scale: 1.02 }}
+										whileHover={{ scale: 1.02, y: -5 }}
 									>
 										<div className="flex items-center mb-4">
-											<skillCategory.icon className="w-8 h-8 text-purple-400 mr-3" />
-											<h3 className="text-xl font-semibold text-white">
+											<div className="p-2 bg-purple-500/20 rounded-lg mr-3 group-hover:bg-purple-500/30 transition-colors">
+												<skillCategory.icon className="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors" />
+											</div>
+											<h3 className="text-lg font-semibold text-white group-hover:text-purple-300 transition-colors">
 												{skillCategory.category}
 											</h3>
 										</div>
@@ -262,10 +319,14 @@ const About = () => {
 											{skillCategory.items.map((skill, skillIndex) => (
 												<div
 													key={skillIndex}
-													className="flex items-center space-x-2 p-2 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-colors"
+													className="flex items-center space-x-2 p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-300 group/skill"
 												>
-													<skill.icon className={`w-5 h-5 ${skill.color}`} />
-													<span className="text-gray-300 text-sm">
+													<div className="flex-shrink-0">
+														<skill.icon
+															className={`w-5 h-5 ${skill.color} group-hover/skill:scale-110 transition-transform`}
+														/>
+													</div>
+													<span className="text-gray-300 text-sm font-medium truncate group-hover/skill:text-white transition-colors">
 														{skill.name}
 													</span>
 												</div>
@@ -277,6 +338,168 @@ const About = () => {
 						</motion.div>
 					)}
 
+					{/* Achievements Section */}
+					<motion.div className="mt-20" variants={fadeInUp}>
+						<h2 className="text-3xl font-bold text-center text-white mb-12">
+							{settings.about?.featuredProjectsHeading ||
+								"Featured Projects & Achievements"}
+						</h2>
+						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{featuredProjects.length > 0 ? (
+								featuredProjects.map((project, index) => {
+									const IconComponent = getIconComponent(project.icon);
+									return (
+										<motion.div
+											key={index}
+											className={`${project.gradient} backdrop-blur-sm rounded-xl p-6 border ${project.borderColor} ${project.hoverBorderColor} transition-all duration-300 group`}
+											variants={fadeInUp}
+											whileHover={{ scale: 1.02, y: -5 }}
+										>
+											<div className="text-center">
+												<div
+													className={`w-16 h-16 ${project.bgColor} rounded-full flex items-center justify-center mx-auto mb-4 ${project.hoverBgColor} transition-colors`}
+												>
+													<IconComponent
+														className={`w-8 h-8 ${project.iconColor}`}
+													/>
+												</div>
+												<h3 className="text-xl font-bold text-white mb-2">
+													{project.title}
+												</h3>
+												<p className={`${project.textColor} text-sm`}>
+													{project.description}
+												</p>
+											</div>
+										</motion.div>
+									);
+								})
+							) : (
+								// Default projects if not configured
+								<>
+									<motion.div
+										className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-colors">
+												<SiTensorflow className="w-8 h-8 text-purple-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												EquiLens - AI Bias Detection
+											</h3>
+											<p className="text-purple-200 text-sm">
+												AI Bias Detection Platform for LLMs via Ollama.
+												Interactive CLI with corpus generation, multi-metric
+												auditing, statistical analysis & visualization.
+											</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="bg-gradient-to-br from-green-600/20 to-blue-600/20 backdrop-blur-sm rounded-xl p-6 border border-green-500/30 hover:border-green-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500/30 transition-colors">
+												<SiOpencv className="w-8 h-8 text-green-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												Facial Emotion Detection
+											</h3>
+											<p className="text-green-200 text-sm">
+												Real-time emotion detection using MediaPipe and machine
+												learning. Extract facial landmarks, train models, and
+												classify emotions from images and videos.
+											</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30 hover:border-orange-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-500/30 transition-colors">
+												<SiHiveBlockchain className="w-8 h-8 text-orange-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												HiveXplore - Blockchain Gateway
+											</h3>
+											<p className="text-orange-200 text-sm">
+												Beginner-friendly app for Hive blockchain with
+												simplified authentication, intuitive posting tools, and
+												guided experiences for blockchain newcomers.
+											</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-cyan-500/30 transition-colors">
+												<BiLogoVisualStudio className="w-8 h-8 text-cyan-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												VS Code Extensions
+											</h3>
+											<p className="text-cyan-200 text-sm">
+												Published extensions including cSpell Sync and Global
+												Save State, improving developer productivity with 2K+
+												total downloads on VS Code Marketplace.
+											</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-500/30 transition-colors">
+												<SiGoogle className="w-8 h-8 text-yellow-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												RanobeGemini Extension
+											</h3>
+											<p className="text-yellow-200 text-sm">
+												Browser extension enhancing web novel translations using
+												Google's Gemini AI. Transforms poorly translated content
+												with intelligent processing.
+											</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="bg-gradient-to-br from-pink-600/20 to-purple-600/20 backdrop-blur-sm rounded-xl p-6 border border-pink-500/30 hover:border-pink-400/50 transition-all duration-300 group"
+										variants={fadeInUp}
+										whileHover={{ scale: 1.02, y: -5 }}
+									>
+										<div className="text-center">
+											<div className="w-16 h-16 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-500/30 transition-colors">
+												<FaAws className="w-8 h-8 text-pink-400" />
+											</div>
+											<h3 className="text-xl font-bold text-white mb-2">
+												Cloud Infrastructure
+											</h3>
+											<p className="text-pink-200 text-sm">
+												Achieved multiple cloud certifications including AWS
+												Cloud Practitioner and Oracle Cloud DevOps Professional,
+												with hands-on deployment experience.
+											</p>
+										</div>
+									</motion.div>
+								</>
+							)}
+						</div>
+					</motion.div>
+
 					{/* Stats Section */}
 					{stats.length > 0 && (
 						<motion.div
@@ -285,20 +508,27 @@ const About = () => {
 									? "grid-cols-1 md:grid-cols-2"
 									: stats.length === 3
 									? "grid-cols-1 md:grid-cols-3"
-									: "grid-cols-2 md:grid-cols-4"
+									: stats.length === 4
+									? "grid-cols-2 md:grid-cols-4"
+									: stats.length === 5
+									? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+									: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
 							}`}
 							variants={fadeInUp}
 						>
 							{stats.map((stat, index) => (
 								<motion.div
 									key={index}
-									className="text-center p-6 bg-gray-800/30 rounded-xl border border-gray-700/50"
-									whileHover={{ scale: 1.05 }}
+									className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group"
+									whileHover={{ scale: 1.05, y: -5 }}
+									transition={{ duration: 0.2 }}
 								>
-									<div className="text-3xl font-bold text-purple-400 mb-2">
+									<div className="text-3xl lg:text-4xl font-bold text-purple-400 mb-2 group-hover:text-purple-300 transition-colors">
 										{stat.number}
 									</div>
-									<div className="text-gray-300">{stat.label}</div>
+									<div className="text-gray-300 group-hover:text-white transition-colors font-medium">
+										{stat.label}
+									</div>
 								</motion.div>
 							))}
 						</motion.div>

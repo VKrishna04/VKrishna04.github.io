@@ -30,7 +30,6 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import ParticleBackground from "./components/ParticleBackground";
 import FaviconManager from "./components/FaviconManager";
 import "./App.css";
 
@@ -129,7 +128,6 @@ const AppContent = memo(() => {
 
 	return (
 		<div className="App">
-			<ParticleBackground />
 			<Navbar />
 
 			<main className="page-transition">

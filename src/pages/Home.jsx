@@ -39,6 +39,7 @@ import {
 	FaBehance,
 	FaCodepen,
 } from "react-icons/fa";
+import AnimatedBackground from "../components/AnimatedBackground";
 
 const Home = () => {
 	const [settings, setSettings] = useState({});
@@ -134,12 +135,17 @@ const Home = () => {
 
 	return (
 		<motion.div
-			className="relative min-h-screen flex items-center justify-center overflow-hidden"
+			className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}
 			transition={{ duration: 0.5 }}
 		>
+			{/* Animated Background */}
+			<div className="absolute inset-0">
+				<AnimatedBackground config={settings.home?.background} />
+			</div>
+
 			<motion.div
 				className="relative z-10 text-center px-4 max-w-6xl mx-auto"
 				variants={staggerContainer}
@@ -151,9 +157,9 @@ const Home = () => {
 					<div
 						className={`w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 ${
 							settings.home?.profileImage?.borderColor || "border-purple-500/30"
-						} shadow-lg ${
+						} shadow-2xl ${
 							settings.home?.profileImage?.shadowColor || "shadow-purple-500/20"
-						}`}
+						} hover:scale-105 transition-transform duration-300`}
 					>
 						<img
 							src={getProfileImageUrl()}
@@ -162,9 +168,11 @@ const Home = () => {
 								settings.display?.officialName ||
 								"Profile"
 							}
-							className="w-full h-full object-cover"
+							className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
 						/>
 					</div>
+					{/* Subtle pulse ring effect */}
+					<div className="absolute inset-0 w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full border-2 border-purple-400/20 animate-pulse"></div>
 				</motion.div>
 
 				{/* Greeting */}
@@ -293,10 +301,16 @@ const Home = () => {
 								href={social.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`transition-colors duration-300 ${
+								className={`transition-all duration-300 ${
 									social.color || "text-gray-400"
-								} ${social.hoverColor || "hover:text-purple-400"}`}
-								whileHover={{ scale: 1.2, y: -5 }}
+								} ${
+									social.hoverColor || "hover:text-purple-400"
+								} hover:scale-110`}
+								whileHover={{
+									scale: 1.2,
+									y: -5,
+									rotate: [0, -10, 10, 0],
+								}}
 								whileTap={{ scale: 0.9 }}
 								aria-label={social.label}
 							>
@@ -308,9 +322,9 @@ const Home = () => {
 			</motion.div>
 
 			{/* Scroll Indicator */}
-			{/* {settings.home?.showScrollIndicator !== false && (
+			{settings.home?.showScrollIndicator !== false && (
 				<motion.div
-					className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+					className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 1, duration: 0.6 }}
@@ -318,12 +332,12 @@ const Home = () => {
 					<motion.div
 						animate={{ y: [0, 10, 0] }}
 						transition={{ duration: 2, repeat: Infinity }}
-						className="text-gray-400"
+						className="text-gray-400 hover:text-purple-400 transition-colors cursor-pointer"
 					>
 						<ArrowDownIcon className="w-6 h-6" />
 					</motion.div>
 				</motion.div>
-			)} */}
+			)}
 		</motion.div>
 	);
 };

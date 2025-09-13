@@ -34,7 +34,6 @@ import {
 	FaCss3Alt,
 	FaAws,
 	FaPhp,
-	FaJsSquare,
 	FaVuejs,
 	FaAngular,
 	FaDocker,
@@ -52,6 +51,7 @@ import {
 	SiTailwindcss,
 	SiExpress,
 	SiNextdotjs,
+	SiGithubcopilot,
 	SiNestjs,
 	SiRedis,
 	SiGraphql,
@@ -144,8 +144,8 @@ const ProjectCard = ({ project, index = 0 }) => {
 		const techLower = tech.toLowerCase();
 		const iconMap = {
 			// Frontend Languages & Frameworks
-			javascript: FaJsSquare,
-			js: FaJsSquare,
+			javascript: SiJavascript,
+			js: SiJavascript,
 			typescript: SiTypescript,
 			ts: SiTypescript,
 			html: FaHtml5,
@@ -166,6 +166,10 @@ const ProjectCard = ({ project, index = 0 }) => {
 			nuxt: SiNuxtdotjs,
 			nuxtjs: SiNuxtdotjs,
 			tailwind: SiTailwindcss,
+			copilot: SiGithubcopilot,
+			copilotx: SiGithubcopilot,
+			githubcopilot: SiGithubcopilot,
+			githuborg: SiGithubcopilot,
 			tailwindcss: SiTailwindcss,
 			python: FaPython,
 			java: FaJava,

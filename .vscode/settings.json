@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
 		"Archlinux",
+		"aspnet",
 		"Buymeacoffee",
 		"codacy",
 		"colab",
@@ -8,15 +9,23 @@
 		"DOPOCP",
 		"edtech",
 		"eslintcache",
+		"fastly",
 		"firebaserc",
+		"FNDCFA",
 		"Heroicon",
 		"hotjar",
+		"ICCV",
+		"Intellijidea",
 		"Leetcode",
 		"njsproj",
+		"rabbitmq",
 		"Scikitlearn",
 		"Sevearity",
+		"solidworks",
 		"Tredence",
 		"vite",
-		"Youtubemusic"
+		"Youtubemusic",
+		"zenodo",
+		"zigbee"
 	]
 }
