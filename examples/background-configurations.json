@@ -1,0 +1,150 @@
+{
+    "//": "Example background configurations for the AnimatedBackground component",
+    "examples": {
+        "animated-network-default": {
+            "type": "animated-network",
+            "enabled": true,
+            "particles": {
+                "count": 150,
+                "size": 2,
+                "color": "#ef4444",
+                "speed": 0.5,
+                "glow": true,
+                "glowSize": 8,
+                "pulseIntensity": 0.3,
+                "pulseSpeed": 0.002,
+                "mouseInfluence": 120,
+                "mouseForce": 3,
+                "returnSpeed": 0.05,
+                "connections": {
+                    "enabled": true,
+                    "distance": 200,
+                    "color": "rgba(147, 51, 234, 0.2)",
+                    "width": 2,
+                    "maxOpacity": 0.5
+                }
+            },
+            "animation": {
+                "speed": 1,
+                "smoothness": 60
+            },
+            "gradient": {
+                "enabled": false,
+                "colors": [
+                    "rgba(15, 23, 42, 1)",
+                    "rgba(30, 41, 59, 0.8)",
+                    "rgba(51, 65, 85, 0.6)"
+                ],
+                "direction": "to bottom right"
+            }
+        },
+        "particles-only": {
+            "type": "particles",
+            "enabled": true,
+            "particles": {
+                "count": 200,
+                "size": 3,
+                "color": "#3b82f6",
+                "speed": 0.8,
+                "glow": true,
+                "glowSize": 12,
+                "pulseIntensity": 0.5,
+                "mouseInfluence": 150,
+                "mouseForce": 2,
+                "connections": {
+                    "enabled": false
+                }
+            },
+            "animation": {
+                "speed": 1.5,
+                "smoothness": 60
+            }
+        },
+        "gradient-only": {
+            "type": "gradient",
+            "enabled": true,
+            "gradient": {
+                "enabled": true,
+                "colors": [
+                    "rgba(15, 23, 42, 1)",
+                    "rgba(30, 41, 59, 0.8)",
+                    "rgba(51, 65, 85, 0.6)"
+                ],
+                "direction": "to bottom right"
+            }
+        },
+        "subtle-network": {
+            "type": "animated-network",
+            "enabled": true,
+            "particles": {
+                "count": 75,
+                "size": 1.5,
+                "color": "rgba(255, 255, 255, 0.3)",
+                "speed": 0.3,
+                "glow": false,
+                "connections": {
+                    "enabled": true,
+                    "distance": 150,
+                    "color": "rgba(255, 255, 255, 0.05)",
+                    "width": 1,
+                    "maxOpacity": 0.2
+                }
+            },
+            "animation": {
+                "speed": 0.8,
+                "smoothness": 30
+            }
+        },
+        "high-energy": {
+            "type": "animated-network",
+            "enabled": true,
+            "particles": {
+                "count": 300,
+                "size": 2.5,
+                "color": "#f59e0b",
+                "speed": 1.5,
+                "mouseInfluence": 250,
+                "mouseForce": 6,
+                "pulseIntensity": 0.8,
+                "pulseSpeed": 0.008,
+                "connections": {
+                    "enabled": true,
+                    "distance": 180,
+                    "color": "rgba(245, 158, 11, 0.4)",
+                    "width": 2.5,
+                    "maxOpacity": 0.8
+                }
+            },
+            "animation": {
+                "speed": 2,
+                "smoothness": 90
+            }
+        },
+        "performance-optimized": {
+            "type": "animated-network",
+            "enabled": true,
+            "particles": {
+                "count": 50,
+                "size": 2,
+                "color": "#10b981",
+                "speed": 0.4,
+                "glow": false,
+                "connections": {
+                    "enabled": true,
+                    "distance": 120,
+                    "color": "rgba(16, 185, 129, 0.2)",
+                    "width": 1,
+                    "maxOpacity": 0.3
+                }
+            },
+            "animation": {
+                "speed": 1,
+                "smoothness": 30
+            }
+        },
+        "disabled": {
+            "type": "none",
+            "enabled": false
+        }
+    }
+}

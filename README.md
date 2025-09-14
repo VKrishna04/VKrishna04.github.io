@@ -118,6 +118,7 @@ flowchart TD
 - **⚙️ Completely Configurable**: Everything customizable through `settings.json` - no code changes needed
 - **🔗 Dynamic GitHub Integration**: Automatically fetches and displays repositories from any GitHub organization or user
 - **🎭 Beautiful Animations**: Powered by Framer Motion for fluid interactions
+- **✨ Animated Backgrounds**: Customizable particle networks, gradients, and interactive effects
 - **📊 Technology Recognition**: Displays relevant technology icons based on repository languages and topics
 - **📄 Resume Integration**: Configurable resume download (local file or external link)
 - **🌐 Social Media Integration**: Centralized social media configuration with per-section visibility

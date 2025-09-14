@@ -533,6 +533,233 @@
 					"description": "Whether to show the scroll indicator at the bottom of the page",
 					"default": true
 				},
+				"background": {
+					"type": "object",
+					"description": "Background configuration for the home page. Supports multiple background types including animated networks, gradients, particles, and static backgrounds.",
+					"additionalProperties": false,
+					"properties": {
+						"type": {
+							"type": "string",
+							"enum": [
+								"animated-network",
+								"gradient",
+								"particles",
+								"none"
+							],
+							"description": "Type of background to display:\n- 'animated-network': Moving particles with connecting lines\n- 'gradient': Static or animated gradient background\n- 'particles': Simple particle animation without connections\n- 'none': No background effect",
+							"default": "animated-network"
+						},
+						"enabled": {
+							"type": "boolean",
+							"description": "Whether the background effect is enabled",
+							"default": true
+						},
+						"particles": {
+							"type": "object",
+							"description": "Configuration for particle-based backgrounds (animated-network and particles types)",
+							"additionalProperties": false,
+							"properties": {
+								"count": {
+									"type": "integer",
+									"minimum": 10,
+									"maximum": 500,
+									"description": "Number of particles to render",
+									"default": 150
+								},
+								"size": {
+									"type": "number",
+									"minimum": 0.5,
+									"maximum": 10,
+									"description": "Base size of particles in pixels",
+									"default": 2
+								},
+								"color": {
+									"type": "string",
+									"pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\)|[a-zA-Z]+)$",
+									"description": "Color of particles (hex, rgb, rgba, or CSS color name)",
+									"default": "#ef4444",
+									"examples": [
+										"#ef4444",
+										"rgba(239, 68, 68, 0.8)",
+										"blue"
+									]
+								},
+								"speed": {
+									"type": "number",
+									"minimum": 0.1,
+									"maximum": 5,
+									"description": "Movement speed of particles",
+									"default": 0.5
+								},
+								"glow": {
+									"type": "boolean",
+									"description": "Whether particles should have a glow effect",
+									"default": true
+								},
+								"glowSize": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 50,
+									"description": "Size of the glow effect around particles",
+									"default": 8
+								},
+								"pulseIntensity": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 1,
+									"description": "Intensity of the pulsing opacity effect (0 = no pulse, 1 = maximum pulse)",
+									"default": 0.3
+								},
+								"pulseSpeed": {
+									"type": "number",
+									"minimum": 0.001,
+									"maximum": 0.01,
+									"description": "Speed of the pulsing animation",
+									"default": 0.002
+								},
+								"mouseInfluence": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 300,
+									"description": "Distance in pixels that mouse cursor affects particles",
+									"default": 120
+								},
+								"mouseForce": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 10,
+									"description": "Strength of mouse influence on particle movement",
+									"default": 3
+								},
+								"returnSpeed": {
+									"type": "number",
+									"minimum": 0.01,
+									"maximum": 1,
+									"description": "Speed at which particles return to normal movement after mouse influence",
+									"default": 0.05
+								},
+								"connections": {
+									"type": "object",
+									"description": "Configuration for connections between particles (animated-network type only)",
+									"additionalProperties": false,
+									"properties": {
+										"enabled": {
+											"type": "boolean",
+											"description": "Whether to draw connections between nearby particles",
+											"default": true
+										},
+										"distance": {
+											"type": "number",
+											"minimum": 50,
+											"maximum": 400,
+											"description": "Maximum distance between particles to draw a connection",
+											"default": 200
+										},
+										"color": {
+											"type": "string",
+											"pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\)|[a-zA-Z]+)$",
+											"description": "Color of connection lines (hex, rgb, rgba, or CSS color name)",
+											"default": "rgba(147, 51, 234, 0.2)",
+											"examples": [
+												"rgba(147, 51, 234, 0.2)",
+												"#9333ea33",
+												"purple"
+											]
+										},
+										"width": {
+											"type": "number",
+											"minimum": 0.1,
+											"maximum": 10,
+											"description": "Width of connection lines in pixels",
+											"default": 2
+										},
+										"maxOpacity": {
+											"type": "number",
+											"minimum": 0,
+											"maximum": 1,
+											"description": "Maximum opacity of connection lines",
+											"default": 0.5
+										}
+									}
+								}
+							}
+						},
+						"animation": {
+							"type": "object",
+							"description": "Animation configuration for the background",
+							"additionalProperties": false,
+							"properties": {
+								"speed": {
+									"type": "number",
+									"minimum": 0.1,
+									"maximum": 5,
+									"description": "Overall animation speed multiplier",
+									"default": 1
+								},
+								"smoothness": {
+									"type": "integer",
+									"minimum": 15,
+									"maximum": 120,
+									"description": "Target frames per second for animations (higher = smoother but more CPU intensive)",
+									"default": 60
+								}
+							}
+						},
+						"gradient": {
+							"type": "object",
+							"description": "Configuration for gradient backgrounds",
+							"additionalProperties": false,
+							"properties": {
+								"enabled": {
+									"type": "boolean",
+									"description": "Whether to show gradient background (can be combined with particles)",
+									"default": false
+								},
+								"colors": {
+									"type": "array",
+									"minItems": 2,
+									"maxItems": 5,
+									"items": {
+										"type": "string",
+										"pattern": "^(#[0-9a-fA-F]{3,8}|rgba?\\([^)]+\\)|[a-zA-Z]+)$"
+									},
+									"description": "Array of colors for the gradient (minimum 2, maximum 5)",
+									"default": [
+										"rgba(15, 23, 42, 1)",
+										"rgba(30, 41, 59, 0.8)",
+										"rgba(51, 65, 85, 0.6)"
+									],
+									"examples": [
+										[
+											"rgba(15, 23, 42, 1)",
+											"rgba(30, 41, 59, 0.8)"
+										],
+										[
+											"#1e293b",
+											"#334155",
+											"#475569"
+										]
+									]
+								},
+								"direction": {
+									"type": "string",
+									"enum": [
+										"to bottom",
+										"to top",
+										"to left",
+										"to right",
+										"to bottom right",
+										"to bottom left",
+										"to top right",
+										"to top left"
+									],
+									"description": "Direction of the gradient",
+									"default": "to bottom right"
+								}
+							}
+						}
+					}
+				},
 				"animations": {
 					"type": "object",
 					"description": "Animation configuration for home page elements",
