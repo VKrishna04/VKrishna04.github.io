@@ -533,7 +533,7 @@ const Resume = () => {
 															// Handle both string and object formats for backward compatibility
 															const techName =
 																typeof tech === "string" ? tech : tech.name;
-															const techIcon =
+															const TechIcon =
 																typeof tech === "object"
 																	? getIconComponent(tech.icon)
 																	: null;
@@ -547,8 +547,8 @@ const Resume = () => {
 																	key={techIndex}
 																	className="flex items-center px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs border border-purple-500/30 hover:bg-purple-600/30 transition-colors duration-300"
 																>
-																	{techIcon && (
-																		<techIcon
+																	{TechIcon && (
+																		<TechIcon
 																			className={`w-3 h-3 mr-1 ${techColor}`}
 																		/>
 																	)}

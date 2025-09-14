@@ -150,17 +150,64 @@ mindmap
 
 ## 📋 Table of Contents
 
-1. [Getting Started](#getting-started)
-2. [GitHub Configuration](#github-configuration)
-3. [Project Settings](#project-settings)
-4. [Display Configuration](#display-configuration)
-5. [Home Page Configuration](#home-page-configuration)
-6. [Social Media Configuration](#social-media-configuration)
-7. [About Page Configuration](#about-page-configuration)
-8. [Resume Configuration](#resume-configuration)
-9. [Navigation Configuration](#navigation-configuration)
-10. [Footer Configuration](#footer-configuration)
-11. [Advanced Configuration](#advanced-configuration)
+1. [Getting Started](- [Settings.json Configuration Guide](#settingsjson-configuration-guide)
+	- [🏗️ Configuration Architecture](#️-configuration-architecture)
+	- [⚙️ Configuration Flow](#️-configuration-flow)
+	- [📋 Configuration Categories](#-configuration-categories)
+	- [📋 Table of Contents](#-table-of-contents)
+	- [🚀 Getting Started](#-getting-started)
+		- [Schema Reference](#schema-reference)
+	- [🔗 GitHub Configuration](#-github-configuration)
+		- [Configuration Example](#configuration-example)
+		- [Configuration Options](#configuration-options)
+	- [📊 Project Settings](#-project-settings)
+		- [Configuration Example](#configuration-example-1)
+		- [Configuration Options](#configuration-options-1)
+	- [👤 Display Configuration](#-display-configuration)
+	- [🏠 Home Page Configuration](#-home-page-configuration)
+		- [Basic Information](#basic-information)
+		- [Typewriter Effect](#typewriter-effect)
+		- [Location Display](#location-display)
+		- [Profile Image Configuration](#profile-image-configuration)
+		- [Action Buttons](#action-buttons)
+		- [Animation Settings](#animation-settings)
+	- [📱 Social Media Configuration](#-social-media-configuration)
+		- [Available Social Icons](#available-social-icons)
+		- [Color Examples](#color-examples)
+	- [📖 About Page Configuration](#-about-page-configuration)
+		- [Basic Information](#basic-information-1)
+		- [Profile Image](#profile-image)
+		- [Skills Configuration](#skills-configuration)
+		- [Available Category Icons](#available-category-icons)
+		- [Available Skill Icons](#available-skill-icons)
+		- [Statistics Section](#statistics-section)
+	- [📄 Resume Configuration](#-resume-configuration)
+		- [File Serving Options](#file-serving-options)
+		- [Section Ordering](#section-ordering)
+		- [Work Experience](#work-experience)
+		- [Education](#education)
+		- [Skills (Resume Format)](#skills-resume-format)
+		- [Certifications](#certifications)
+		- [Personal Projects](#personal-projects)
+		- [Publications](#publications)
+		- [Languages](#languages)
+		- [Volunteer Experience](#volunteer-experience)
+	- [🧭 Navigation Configuration](#-navigation-configuration)
+		- [Logo Configuration](#logo-configuration)
+		- [Navigation Items](#navigation-items)
+		- [Styling Options](#styling-options)
+	- [🦶 Footer Configuration](#-footer-configuration)
+	- [⚙️ Advanced Configuration](#️-advanced-configuration)
+		- [Favicon Settings](#favicon-settings)
+			- [**React Icons Support**](#react-icons-support)
+		- [Counter API (Optional)](#counter-api-optional)
+	- [🎨 Color and Styling Guide](#-color-and-styling-guide)
+		- [Tailwind Color Classes](#tailwind-color-classes)
+		- [Responsive Breakpoints](#responsive-breakpoints)
+	- [🚨 Common Mistakes to Avoid](#-common-mistakes-to-avoid)
+	- [🔧 Debugging Tips](#-debugging-tips)
+	- [📝 Additional Notes](#-additional-notes)
+)
 
 ## 🚀 Getting Started
 
@@ -909,13 +956,28 @@ SiLinux, SiGit, SiFirebase, SiVercel, SiNetlify, and many more...
 ```json
 {
   "favicon": {
-    "type": "github",                // "github", "custom", or "default"
+    "type": "github",                // "github", "custom", "icon", or "default"
     "customUrl": "",                 // Custom favicon URL
+    "githubUsername": "VKrishna04",  // GitHub username for profile image
+    "iconName": "FaReact",           // React Icon name from react-icons.github.io
+    "iconColor": "#61DAFB",          // Icon color (hex)
+    "backgroundColor": "transparent", // Background color or "transparent"
+    "iconSize": 32,                  // Icon size in pixels
     "sizes": ["16x16", "32x32", "96x96"], // Icon sizes
     "appleTouchIcon": true           // Generate Apple touch icon
   }
 }
 ```
+
+#### **React Icons Support**
+Visit [react-icons.github.io](https://react-icons.github.io/react-icons) to browse thousands of available icons. Simply copy the icon name (e.g., `FaReact`, `SiJavascript`, `MdHome`) and use it in your configuration.
+
+**Popular Icons:**
+- `FaReact` - React logo
+- `SiJavascript` - JavaScript
+- `FaGithub` - GitHub
+- `MdHome` - Home icon
+- `HiUser` - User icon
 
 ### Counter API (Optional)
 ```json

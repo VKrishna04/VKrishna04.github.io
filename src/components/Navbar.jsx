@@ -14,11 +14,27 @@
  * limitations under the License.
  */
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+	FaGithub,
+	FaLinkedin,
+	FaTwitter,
+	FaInstagram,
+	FaDiscord,
+	FaYoutube,
+	FaTwitch,
+	FaTiktok,
+	FaMedium,
+	FaDev,
+	FaStackOverflow,
+	FaDribbble,
+	FaBehance,
+	FaCodepen,
+} from "react-icons/fa";
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -75,23 +91,19 @@ const Navbar = () => {
 				};
 			case "github":
 				return {
-					imageUrl: `https://github.com/${
-						logoConfig.githubUsername || "VKrishna04"
-					}.png`,
+					imageUrl: settings.display?.profileImage,
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
 			case "auto":
 				return {
-					imageUrl: logoConfig.githubUsername
-						? `https://github.com/${logoConfig.githubUsername}.png`
-						: settings.display?.profileImage,
+					imageUrl: settings.display?.profileImage,
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
 			default:
 				return {
-					text: logoConfig.text || "VK04",
+					text: logoConfig.text || "VK",
 					name:
 						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
 				};
@@ -229,14 +241,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-/*
-Enhanced navbar logo to support dynamic types:
-- github: Use GitHub profile image with fallback
-- image: Use custom image URL
-- auto: Match home page profile image settings
-- text: Use text logo (default)
-
-The logo section needs to be updated to handle these cases
-with proper error handling and fallbacks
-*/

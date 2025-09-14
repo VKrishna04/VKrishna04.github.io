@@ -3775,9 +3775,10 @@
 					"enum": [
 						"github",
 						"custom",
+						"icon",
 						"default"
 					],
-					"description": "Favicon source type:\n- 'github': Uses GitHub profile avatar as favicon\n- 'custom': Uses custom image from customUrl\n- 'default': Uses browser default favicon"
+					"description": "Favicon source type:\n- 'github': Uses GitHub profile avatar as favicon\n- 'custom': Uses custom image from customUrl\n- 'icon': Uses React Icon as favicon (from react-icons.github.io)\n- 'default': Uses browser default favicon"
 				},
 				"customUrl": {
 					"type": "string",
@@ -3797,6 +3798,54 @@
 					"examples": [
 						"VKrishna04",
 						"Life-Experimentalist"
+					]
+				},
+				"iconName": {
+					"type": "string",
+					"minLength": 2,
+					"maxLength": 50,
+					"pattern": "^[A-Z][a-zA-Z0-9]*$",
+					"description": "React Icon name from react-icons.github.io (e.g., FaReact, SiJavascript, MdHome). Visit https://react-icons.github.io/react-icons for available icons.",
+					"examples": [
+						"FaReact",
+						"SiJavascript",
+						"MdHome",
+						"AiFillStar",
+						"BiCodeAlt"
+					]
+				},
+				"iconColor": {
+					"type": "string",
+					"pattern": "^#[0-9A-Fa-f]{6}$",
+					"description": "Hex color for the icon (when type is 'icon')",
+					"examples": [
+						"#3b82f6",
+						"#8b5cf6",
+						"#ef4444"
+					],
+					"default": "#3b82f6"
+				},
+				"backgroundColor": {
+					"type": "string",
+					"pattern": "^(#[0-9A-Fa-f]{6}|transparent)$",
+					"description": "Background color for the icon favicon (hex color or 'transparent')",
+					"examples": [
+						"#ffffff",
+						"#000000",
+						"transparent"
+					],
+					"default": "transparent"
+				},
+				"iconSize": {
+					"type": "integer",
+					"minimum": 16,
+					"maximum": 512,
+					"description": "Size of the generated icon favicon in pixels",
+					"default": 32,
+					"examples": [
+						32,
+						64,
+						128
 					]
 				},
 				"sizes": {
@@ -3830,18 +3879,36 @@
 			"required": [
 				"type"
 			],
-			"if": {
-				"properties": {
-					"type": {
-						"const": "custom"
+			"allOf": [
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "custom"
+							}
+						}
+					},
+					"then": {
+						"required": [
+							"customUrl"
+						]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "icon"
+							}
+						}
+					},
+					"then": {
+						"required": [
+							"iconName"
+						]
 					}
 				}
-			},
-			"then": {
-				"required": [
-					"customUrl"
-				]
-			}
+			]
 		},
 		"counterAPI": {
 			"type": "object",

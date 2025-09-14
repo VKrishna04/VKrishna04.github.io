@@ -15,6 +15,7 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
+import { cachedFetch } from "../utils/githubCache";
 
 const useProjectsData = () => {
 	const [repositories, setRepositories] = useState([]);
@@ -77,7 +78,7 @@ const useProjectsData = () => {
 	// Fetch repository languages (top 3)
 	const fetchRepositoryLanguages = async (owner, repo, apiHeaders) => {
 		try {
-			const response = await fetch(
+			const response = await cachedFetch(
 				`https://api.github.com/repos/${owner}/${repo}/languages`,
 				{ headers: apiHeaders }
 			);
@@ -223,7 +224,7 @@ const useProjectsData = () => {
 				},
 			};
 
-			const response = await fetch(apiUrl, apiOptions);
+			const response = await cachedFetch(apiUrl, apiOptions);
 
 			if (!response.ok) {
 				throw new Error(`GitHub API Error: ${response.status}`);

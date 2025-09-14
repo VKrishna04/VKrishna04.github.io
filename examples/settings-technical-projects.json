@@ -1,0 +1,173 @@
+{
+	"about": {
+		"technicalExperience": {
+			"title": "Technical Experience",
+			"subtitle": "Technologies and tools I work with regularly",
+			"maxColumns": 4,
+			"fixedColumns": false,
+			"showProficiency": true,
+			"animateOnHover": true,
+			"categories": [
+				{
+					"name": "Languages & Frameworks",
+					"skills": [
+						{
+							"name": "JavaScript",
+							"level": 90,
+							"levelText": "Expert",
+							"color": "text-yellow-400",
+							"levelColor": "bg-yellow-400",
+							"description": "Modern ES6+ JavaScript development"
+						},
+						{
+							"name": "React",
+							"level": 85,
+							"levelText": "Advanced",
+							"color": "text-blue-400",
+							"levelColor": "bg-blue-400",
+							"description": "React with hooks, context, and modern patterns"
+						},
+						{
+							"name": "Python",
+							"level": 80,
+							"levelText": "Advanced",
+							"color": "text-green-400",
+							"levelColor": "bg-green-400",
+							"description": "Backend development and data science"
+						}
+					]
+				},
+				{
+					"name": "Tools & Technologies",
+					"skills": [
+						{
+							"name": "Docker",
+							"level": 75,
+							"levelText": "Proficient",
+							"color": "text-blue-500",
+							"levelColor": "bg-blue-500",
+							"description": "Containerization and orchestration"
+						},
+						{
+							"name": "AWS",
+							"level": 70,
+							"levelText": "Proficient",
+							"color": "text-orange-400",
+							"levelColor": "bg-orange-400",
+							"description": "Cloud infrastructure and services"
+						}
+					]
+				}
+			]
+		}
+	},
+	"home": {
+		"featuredProjects": {
+			"title": "Featured Projects & Achievements",
+			"subtitle": "Showcase of my latest work and accomplishments",
+			"maxProjects": 6,
+			"layout": "grid",
+			"showStats": true,
+			"showTechStack": true,
+			"animateOnScroll": true,
+			"showViewAllLink": true,
+			"projects": [
+				{
+					"id": "equilens",
+					"name": "EquiLens",
+					"subtitle": "AI Bias Detection",
+					"description": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization.",
+					"github": "https://github.com/VKrishna04/EquiLens",
+					"demo": "https://equilens.demo.com",
+					"technologies": [
+						"Python",
+						"AI/ML",
+						"Ollama",
+						"Statistics",
+						"CLI"
+					],
+					"stars": 45,
+					"forks": 12,
+					"featured": true
+				},
+				{
+					"id": "facial-emotion",
+					"name": "Facial Emotion Detection",
+					"subtitle": "Real-time ML Processing",
+					"description": "Real-time emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions from images and videos.",
+					"github": "https://github.com/VKrishna04/facial-emotion-detection",
+					"technologies": [
+						"Python",
+						"MediaPipe",
+						"OpenCV",
+						"Machine Learning"
+					],
+					"stars": 23,
+					"forks": 8,
+					"featured": true
+				},
+				{
+					"id": "hivexplore",
+					"name": "HiveXplore",
+					"subtitle": "Blockchain Gateway",
+					"description": "Beginner-friendly app for Hive blockchain with simplified authentication, intuitive posting tools, and guided experiences for blockchain newcomers.",
+					"github": "https://github.com/VKrishna04/HiveXplore",
+					"demo": "https://hivexplore.app",
+					"technologies": [
+						"JavaScript",
+						"Blockchain",
+						"Hive",
+						"Web3"
+					],
+					"stars": 18,
+					"forks": 5,
+					"featured": true
+				},
+				{
+					"id": "vscode-extensions",
+					"name": "VS Code Extensions",
+					"subtitle": "Developer Productivity",
+					"description": "Published extensions including cSpell Sync and Global Save State, improving developer productivity with 2K+ total downloads on VS Code Marketplace.",
+					"github": "https://github.com/VKrishna04/vscode-extensions",
+					"demo": "https://marketplace.visualstudio.com/publishers/VKrishna04",
+					"technologies": [
+						"TypeScript",
+						"VS Code API",
+						"Node.js"
+					],
+					"downloads": "2K+",
+					"featured": true
+				},
+				{
+					"id": "ranobe-gemini",
+					"name": "RanobeGemini Extension",
+					"subtitle": "AI Translation Enhancement",
+					"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content with intelligent processing.",
+					"github": "https://github.com/VKrishna04/RanobeGemini",
+					"technologies": [
+						"JavaScript",
+						"Browser Extension",
+						"Gemini AI",
+						"NLP"
+					],
+					"stars": 32,
+					"forks": 7,
+					"featured": true
+				},
+				{
+					"id": "cloud-certs",
+					"name": "Cloud Infrastructure",
+					"subtitle": "Professional Certifications",
+					"description": "Achieved multiple cloud certifications including AWS Cloud Practitioner and Oracle Cloud DevOps Professional, with hands-on deployment experience.",
+					"technologies": [
+						"AWS",
+						"Oracle Cloud",
+						"DevOps",
+						"Infrastructure"
+					],
+					"featured": true
+				}
+			]
+		}
+	}
+}

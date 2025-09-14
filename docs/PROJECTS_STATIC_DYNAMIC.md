@@ -1,5 +1,28 @@
 # Projects: Static vs Dynamic vs Hybrid Modes
 
+## Table of Contents
+- [Projects: Static vs Dynamic vs Hybrid Modes](#projects-static-vs-dynamic-vs-hybrid-modes)
+	- [Table of Contents](#table-of-contents)
+	- [🏗️ Project System Architecture](#️-project-system-architecture)
+	- [🔄 Project Mode Comparison](#-project-mode-comparison)
+	- [📊 Data Flow Detailed Diagram](#-data-flow-detailed-diagram)
+	- [🎯 Mode Selection Guide](#-mode-selection-guide)
+	- [How It Works](#how-it-works)
+		- [1. Data Source](#1-data-source)
+		- [2. Data Transformation](#2-data-transformation)
+		- [3. Technology Icons \& Colors](#3-technology-icons--colors)
+		- [4. Loading States](#4-loading-states)
+	- [Configuration](#configuration)
+		- [Adding New Projects](#adding-new-projects)
+		- [Supported Technology Icons](#supported-technology-icons)
+	- [Features](#features)
+		- [Visual Enhancements](#visual-enhancements)
+		- [Data Features](#data-features)
+	- [Usage in App](#usage-in-app)
+	- [Benefits](#benefits)
+	- [Comparison with Main Projects Component](#comparison-with-main-projects-component)
+
+
 ## 🏗️ Project System Architecture
 
 ```mermaid

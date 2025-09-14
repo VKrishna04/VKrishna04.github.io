@@ -15,17 +15,17 @@
  */
 
 import { useEffect } from "react";
-import { initializeFavicons } from "../utils/favicon";
+import { initializeFavicons } from "../utils/faviconEnhanced";
 
-// Component to automatically manage favicons
+// Enhanced Component to automatically manage favicons with React Icons support
 const FaviconManager = ({ settings, children }) => {
 	useEffect(() => {
-		if (settings) {
+		if (settings?.favicon) {
 			initializeFavicons(settings);
 		}
 	}, [settings]);
 
-	return children;
+	return children || null;
 };
 
 export default FaviconManager;

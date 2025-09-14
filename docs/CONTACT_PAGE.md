@@ -4,14 +4,41 @@
 
 The contact page has been completely revamped to eliminate the redundant message form and provide a more valuable, engaging experience for visitors. The new design focuses on making it easy to connect while providing useful information about availability, response times, and collaboration interests.
 
-## 🚀 **What Changed**
+## Table of Contents
+- [Contact Page Revamp Documentation](#contact-page-revamp-documentation)
+	- [🎯 **Overview**](#-overview)
+	- [Table of Contents](#table-of-contents)
+	- [**New Features**](#new-features)
+			- [**1. Availability Status**](#1-availability-status)
+			- [**2. Response Information**](#2-response-information)
+			- [**3. Current Focus Section**](#3-current-focus-section)
+			- [**4. Collaboration Interests**](#4-collaboration-interests)
+			- [**5. Enhanced Social Integration**](#5-enhanced-social-integration)
+			- [**6. Interactive Elements**](#6-interactive-elements)
+			- [**7. FAQ Section**](#7-faq-section)
+	- [📋 **Configuration Structure**](#-configuration-structure)
+		- [**Settings.json Contact Section**](#settingsjson-contact-section)
+		- [**Schema Validation**](#schema-validation)
+	- [🎨 **Design Features**](#-design-features)
+		- [**Layout Structure**](#layout-structure)
+		- [**Key Design Elements**](#key-design-elements)
+	- [🛠 **Technical Implementation**](#-technical-implementation)
+		- [**React Components**](#react-components)
+		- [**Key Functions**](#key-functions)
+		- [**Performance Optimizations**](#performance-optimizations)
+	- [📱 **User Experience Improvements**](#-user-experience-improvements)
+		- [**Before (Problems)**](#before-problems)
+		- [**After (Solutions)**](#after-solutions)
+	- [🎯 **Benefits**](#-benefits)
+	- [🔧 **Configuration Guide**](#-configuration-guide)
+		- [**To Update Status**](#to-update-status)
+		- [**To Add FAQ Items**](#to-add-faq-items)
+		- [**To Update Social Descriptions**](#to-update-social-descriptions)
+	- [🚀 **Future Enhancements**](#-future-enhancements)
+	- [✨ **Summary**](#-summary)
 
-### ❌ **Removed (Redundant Elements)**
-- **Contact Form**: Removed the message form that had no backend integration
-- **Form submission logic**: Eliminated unnecessary form handling code
-- **Static layout**: Replaced with dynamic, configurable content
 
-### ✅ **Added (Value-Driven Features)**
+## **New Features**
 
 #### **1. Availability Status**
 ```json

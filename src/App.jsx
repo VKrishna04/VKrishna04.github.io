@@ -62,50 +62,6 @@ const usePageConfiguration = (location) => {
 
 		document.title = getPageTitle();
 
-		// Update favicon if configured
-		if (settings.favicon) {
-			const updateFavicon = () => {
-				// Remove existing favicons
-				const existingFavicons = document.querySelectorAll('link[rel*="icon"]');
-				existingFavicons.forEach((favicon) => favicon.remove());
-
-				let faviconUrl;
-				switch (settings.favicon.type) {
-					case "github":
-						faviconUrl = settings.display.profileImage;
-						break;
-					case "custom":
-						faviconUrl = settings.favicon.customUrl;
-						break;
-					default:
-						faviconUrl = "https://github.com/VKrishna04.png"; // fallback
-				}
-
-				if (faviconUrl && faviconUrl !== "https://github.com/VKrishna04.png") {
-					// Add different sizes
-					const sizes = settings.favicon.sizes || ["16x16", "32x32", "96x96"];
-					sizes.forEach((size) => {
-						const link = document.createElement("link");
-						link.rel = "icon";
-						link.type = "image/png";
-						link.sizes = size;
-						link.href = faviconUrl;
-						document.head.appendChild(link);
-					});
-
-					// Add apple touch icon if enabled
-					if (settings.favicon.appleTouchIcon) {
-						const appleLink = document.createElement("link");
-						appleLink.rel = "apple-touch-icon";
-						appleLink.href = faviconUrl;
-						document.head.appendChild(appleLink);
-					}
-				}
-			};
-
-			updateFavicon();
-		}
-
 		// Update meta description
 		const metaDescription = document.querySelector('meta[name="description"]');
 		if (metaDescription && settings.display.officialName) {
@@ -124,10 +80,11 @@ const usePageConfiguration = (location) => {
 
 const AppContent = memo(() => {
 	const location = useLocation();
-	usePageConfiguration(location); // Use the hook to manage page configuration
+	const settings = usePageConfiguration(location); // Use the hook to manage page configuration
 
 	return (
 		<div className="App">
+			<FaviconManager settings={settings} />
 			<Navbar />
 
 			<main className="page-transition">

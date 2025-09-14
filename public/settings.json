@@ -85,13 +85,13 @@
 			"particles": {
 				"count": 150,
 				"size": 2,
-				"color": "rgba(147, 51, 234, 0.3)",
+				"color": "#ef4444",
 				"speed": 0.5,
 				"connections": {
 					"enabled": true,
-					"distance": 120,
+					"distance": 200,
 					"color": "rgba(147, 51, 234, 0.2)",
-					"width": 1
+					"width": 2
 				}
 			},
 			"animation": {
@@ -451,7 +451,134 @@
 				"label": "Cloud Certifications"
 			}
 		],
-		"statsNote": "Updated statistics reflecting real achievements including hackathon winnings, research publications, and technical certifications. Numbers are based on actual portfolio data and accomplishments."
+		"statsNote": "Updated statistics reflecting real achievements including hackathon winnings, research publications, and technical certifications. Numbers are based on actual portfolio data and accomplishments.",
+		"technicalExperience": {
+			"title": "Technical Experience",
+			"subtitle": "Technologies and tools I work with",
+			"maxColumns": 4,
+			"fixedColumns": false,
+			"showProficiency": true,
+			"animateOnHover": true,
+			"categories": [
+				{
+					"name": "Core Technologies",
+					"icon": "FaCode",
+					"skills": [
+						{
+							"name": "React",
+							"icon": "FaReact",
+							"color": "text-blue-400",
+							"level": 90,
+							"description": "Building modern web applications with React hooks and context"
+						},
+						{
+							"name": "JavaScript",
+							"icon": "SiJavascript",
+							"color": "text-yellow-400",
+							"level": 85,
+							"description": "ES6+ features, async/await, DOM manipulation"
+						},
+						{
+							"name": "Python",
+							"icon": "FaPython",
+							"color": "text-green-400",
+							"level": 88,
+							"description": "Machine learning, web scraping, data analysis"
+						},
+						{
+							"name": "Node.js",
+							"icon": "FaNodeJs",
+							"color": "text-green-500",
+							"level": 75,
+							"description": "Backend development and API creation"
+						},
+						{
+							"name": "TypeScript",
+							"icon": "SiTypescript",
+							"color": "text-blue-500",
+							"level": 80,
+							"description": "Type-safe JavaScript development"
+						},
+						{
+							"name": "Git",
+							"icon": "FaGitAlt",
+							"color": "text-orange-500",
+							"level": 85,
+							"description": "Version control and collaborative development"
+						}
+					]
+				},
+				{
+					"name": "AI & Machine Learning",
+					"icon": "FaBrain",
+					"skills": [
+						{
+							"name": "TensorFlow",
+							"icon": "SiTensorflow",
+							"color": "text-orange-400",
+							"level": 82,
+							"description": "Deep learning model development and training"
+						},
+						{
+							"name": "PyTorch",
+							"icon": "SiPytorch",
+							"color": "text-red-400",
+							"level": 78,
+							"description": "Neural networks and computer vision"
+						},
+						{
+							"name": "Scikit-learn",
+							"icon": "SiScikitlearn",
+							"color": "text-blue-400",
+							"level": 85,
+							"description": "Traditional machine learning algorithms"
+						},
+						{
+							"name": "OpenCV",
+							"icon": "SiOpencv",
+							"color": "text-green-400",
+							"level": 80,
+							"description": "Computer vision and image processing"
+						}
+					]
+				},
+				{
+					"name": "Development Tools",
+					"icon": "FaTools",
+					"skills": [
+						{
+							"name": "VS Code",
+							"icon": "SiVisualstudiocode",
+							"color": "text-blue-400",
+							"level": 95,
+							"description": "Primary development environment with extensions"
+						},
+						{
+							"name": "Docker",
+							"icon": "FaDocker",
+							"color": "text-blue-500",
+							"level": 70,
+							"description": "Containerization and deployment"
+						},
+						{
+							"name": "Vite",
+							"icon": "SiVite",
+							"color": "text-purple-400",
+							"level": 80,
+							"description": "Fast build tool for modern web development"
+						},
+						{
+							"name": "Postman",
+							"icon": "SiPostman",
+							"color": "text-orange-500",
+							"level": 85,
+							"description": "API testing and development"
+						}
+					]
+				}
+			],
+			"note": "Configure technical experience section with customizable columns. maxColumns: maximum grid columns (1-6), fixedColumns: true for fixed layout, false for dynamic. On mobile, always shows 1 column. Each skill can have name, icon, color, level (0-100), and description for tooltips."
+		}
 	},
 	"projects": {
 		"mode": "hybrid",
@@ -1507,7 +1634,7 @@
 		"faq": [
 			{
 				"question": "What's your typical response time?",
-				"answer": "I usually respond to emails and messages within 5 business days at max. For urgent matters, feel free to mention it in the subject line."
+				"answer": "I usually respond to emails and messages within"
 			},
 			{
 				"question": "What types of projects do you work on?",
@@ -1640,6 +1767,10 @@
 		"type": "github",
 		"customUrl": "https://github.com/VKrishna04.png",
 		"githubUsername": "VKrishna04",
+		"iconName": "FaReact",
+		"iconColor": "#61DAFB",
+		"backgroundColor": "transparent",
+		"iconSize": 32,
 		"sizes": [
 			"16x16",
 			"32x32",
@@ -1648,7 +1779,7 @@
 			"512x512"
 		],
 		"appleTouchIcon": true,
-		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, or 'default' for default favicon. githubUsername overrides projects.devUsername for favicon only."
+		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, 'icon' to use React Icons from react-icons.github.io, or 'default' for default favicon. For 'icon' type, visit https://react-icons.github.io/react-icons and use any icon name (e.g., FaReact, SiJavascript, MdHome). githubUsername overrides projects.devUsername for favicon only."
 	},
 	"counterAPI": {
 		"enabled": false,

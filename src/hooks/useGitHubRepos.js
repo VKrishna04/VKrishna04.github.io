@@ -15,6 +15,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { cachedFetch } from "../utils/githubCache";
 
 const useGitHubRepos = () => {
 	const [repositories, setRepositories] = useState([]);
@@ -89,7 +90,7 @@ const useGitHubRepos = () => {
 						};
 
 						console.log("Fetching from GitHub API:", apiUrl);
-						const response = await fetch(apiUrl, apiOptions);
+						const response = await cachedFetch(apiUrl, apiOptions);
 
 						if (!response.ok) {
 							throw new Error(`GitHub API Error: ${response.status}`);
@@ -180,7 +181,7 @@ const useGitHubRepos = () => {
 				};
 
 				console.log("Fetching from GitHub API (regular mode):", apiUrl);
-				const response = await fetch(apiUrl, apiOptions);
+				const response = await cachedFetch(apiUrl, apiOptions);
 
 				if (!response.ok) {
 					throw new Error(`GitHub API Error: ${response.status}`);
