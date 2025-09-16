@@ -13,6 +13,8 @@ The AnimatedBackground component now supports multiple background types and exte
     "enabled": true,
     "particles": {
       "count": 150,
+      "minParticles": 30,
+      "maxParticles": 400,
       "size": 2,
       "color": "#ef4444",
       "speed": 0.5,
@@ -187,6 +189,29 @@ The AnimatedBackground component now supports multiple background types and exte
 ```
 
 ## Configuration Options
+
+### Density-Based Particle System
+
+The animated background now uses an intelligent **density-based particle system** that automatically adjusts the number of particles based on screen size:
+
+- **Consistent Visual Density**: Maintains the same visual "fullness" across all devices
+- **Performance Optimization**: Fewer particles on mobile, more on large screens
+- **Dynamic Adjustment**: Particle count updates when window is resized
+- **Configurable Bounds**: Set minimum and maximum particle limits
+
+#### Key Properties:
+- `count`: Base particle count for 1920x1080 screen (density reference)
+- `minParticles`: Minimum particles for small screens (default: 30)
+- `maxParticles`: Maximum particles for large screens (default: 400)
+
+#### Screen Size Examples:
+- **Mobile Portrait (375x667)**: ~35 particles
+- **Mobile Landscape (667x375)**: ~30 particles
+- **Tablet (768x1024)**: ~90 particles
+- **Laptop (1366x768)**: ~115 particles
+- **Desktop (1920x1080)**: 150 particles (base)
+- **4K Display (3840x2160)**: 300 particles (capped)
+- **Ultrawide (3440x1440)**: ~280 particles
 
 ### Particle Properties
 - `count`: Number of particles (10-500)

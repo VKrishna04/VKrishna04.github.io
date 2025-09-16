@@ -31,15 +31,6 @@ const AnimatedBackground = ({ config }) => {
 		const ctx = canvas.getContext("2d");
 		let particles = [];
 
-		// Set canvas size
-		const resizeCanvas = () => {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
-		};
-
-		resizeCanvas();
-		window.addEventListener("resize", resizeCanvas);
-
 		// Mouse tracking for interactive effects
 		const handleMouseMove = (event) => {
 			mouseRef.current.x = event.clientX;
@@ -97,6 +88,59 @@ const AnimatedBackground = ({ config }) => {
 		const particleConfig = config.particles || {};
 		const animationConfig = config.animation || {};
 		const gradientConfig = config.gradient || {};
+
+		// Particle count calculation function
+		const calculateParticleCount = () => {
+			const screenArea = canvas.width * canvas.height;
+			const baseArea = 1920 * 1080; // Reference screen size (Full HD)
+			const baseDensity = particleConfig.count || 150; // Base particle count for reference screen
+
+			// Calculate density factor based on screen area ratio
+			const densityFactor = Math.sqrt(screenArea / baseArea);
+
+			// Apply density factor with min/max bounds
+			const calculatedCount = Math.round(baseDensity * densityFactor);
+			const minParticles = particleConfig.minParticles || 20;
+			const maxParticles = particleConfig.maxParticles || 500;
+
+			return Math.max(minParticles, Math.min(maxParticles, calculatedCount));
+		};
+
+		// Initialize particles array
+		const initializeParticles = () => {
+			const particleCount = calculateParticleCount();
+			particles = [];
+			for (let i = 0; i < particleCount; i++) {
+				particles.push(new Particle());
+			}
+			particlesRef.current = particles;
+		};
+
+		// Update resize function to handle dynamic particle count adjustment
+		const resizeCanvas = () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+
+			// Recalculate particle count based on new screen size
+			if (particles.length > 0) {
+				const newParticleCount = calculateParticleCount();
+				const currentCount = particles.length;
+
+				// Adjust particle count if screen size changed significantly
+				if (Math.abs(newParticleCount - currentCount) > 5) {
+					if (newParticleCount > currentCount) {
+						// Add more particles
+						for (let i = currentCount; i < newParticleCount; i++) {
+							particles.push(new Particle());
+						}
+					} else {
+						// Remove excess particles
+						particles.splice(newParticleCount);
+					}
+					particlesRef.current = particles;
+				}
+			}
+		};
 
 		// Particle class
 		class Particle {
@@ -180,13 +224,12 @@ const AnimatedBackground = ({ config }) => {
 			}
 		}
 
-		// Initialize particles
-		const particleCount = particleConfig.count || 150;
-		for (let i = 0; i < particleCount; i++) {
-			particles.push(new Particle());
-		}
+		// Initialize canvas and set up event listeners
+		resizeCanvas();
+		window.addEventListener("resize", resizeCanvas);
 
-		particlesRef.current = particles;
+		// Initialize particles after defining the class
+		initializeParticles();
 
 		// Animation loop with configurable smoothness
 		let lastTime = 0;

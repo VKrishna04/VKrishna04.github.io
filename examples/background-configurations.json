@@ -2,28 +2,30 @@
     "//": "Example background configurations for the AnimatedBackground component",
     "examples": {
         "animated-network-default": {
-            "type": "animated-network",
-            "enabled": true,
-            "particles": {
-                "count": 150,
-                "size": 2,
-                "color": "#ef4444",
-                "speed": 0.5,
-                "glow": true,
-                "glowSize": 8,
-                "pulseIntensity": 0.3,
-                "pulseSpeed": 0.002,
-                "mouseInfluence": 120,
-                "mouseForce": 3,
-                "returnSpeed": 0.05,
-                "connections": {
-                    "enabled": true,
-                    "distance": 200,
-                    "color": "rgba(147, 51, 234, 0.2)",
-                    "width": 2,
-                    "maxOpacity": 0.5
-                }
-            },
+			"type": "animated-network",
+			"enabled": true,
+			"particles": {
+				"count": 150,
+				"minParticles": 30,
+				"maxParticles": 400,
+				"size": 2,
+				"color": "#ef4444",
+				"speed": 0.5,
+				"glow": true,
+				"glowSize": 8,
+				"pulseIntensity": 0.3,
+				"pulseSpeed": 0.002,
+				"mouseInfluence": 120,
+				"mouseForce": 3,
+				"returnSpeed": 0.05,
+				"connections": {
+					"enabled": true,
+					"distance": 200,
+					"color": "rgba(147, 51, 234, 0.2)",
+					"width": 2,
+					"maxOpacity": 0.5
+				}
+			},
             "animation": {
                 "speed": 1,
                 "smoothness": 60
@@ -39,27 +41,29 @@
             }
         },
         "particles-only": {
-            "type": "particles",
-            "enabled": true,
-            "particles": {
-                "count": 200,
-                "size": 3,
-                "color": "#3b82f6",
-                "speed": 0.8,
-                "glow": true,
-                "glowSize": 12,
-                "pulseIntensity": 0.5,
-                "mouseInfluence": 150,
-                "mouseForce": 2,
-                "connections": {
-                    "enabled": false
-                }
-            },
-            "animation": {
-                "speed": 1.5,
-                "smoothness": 60
-            }
-        },
+			"type": "particles",
+			"enabled": true,
+			"particles": {
+				"count": 200,
+				"minParticles": 40,
+				"maxParticles": 500,
+				"size": 3,
+				"color": "#3b82f6",
+				"speed": 0.8,
+				"glow": true,
+				"glowSize": 12,
+				"pulseIntensity": 0.5,
+				"mouseInfluence": 150,
+				"mouseForce": 2,
+				"connections": {
+					"enabled": false
+				}
+			},
+			"animation": {
+				"speed": 1.5,
+				"smoothness": 60
+			}
+		},
         "gradient-only": {
             "type": "gradient",
             "enabled": true,

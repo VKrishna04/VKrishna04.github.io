@@ -84,21 +84,23 @@
 			"enabled": true,
 			"particles": {
 				"count": 150,
-				"size": 2,
-				"color": "#ec4999",
-				"speed": 0.5,
+				"minParticles": 30,
+				"maxParticles": 400,
+				"size": 1,
+				"color": "#c770f0",
+				"speed": 1.25,
 				"glow": true,
-				"glowSize": 8,
+				"glowSize": 6,
 				"pulseIntensity": 0.3,
 				"pulseSpeed": 0.002,
 				"mouseInfluence": 120,
-				"mouseForce": 3,
+				"mouseForce": 4,
 				"returnSpeed": 0.05,
 				"connections": {
 					"enabled": true,
 					"distance": 200,
 					"color": "rgba(147, 51, 234, 0.2)",
-					"width": 2,
+					"width": 1.25,
 					"maxOpacity": 0.5
 				}
 			},
@@ -668,7 +670,7 @@
 	},
 	"resume": {
 		"type": "file",
-		"url": "https://drive.google.com/file/d/1a7av243LfnlHaVpSRzXciy0Kv1FfYPVP/view?usp=sharing",
+		"url": "https://drive.google.com/drive/folders/1imZo4n8XbGaumFlnAvTzI-F7XzKS9kW4?usp=sharing",
 		"filename": "Krishna_GSVV_Resume.pdf",
 		"alternativeUrl": "https://drive.google.com/file/d/1a7av243LfnlHaVpSRzXciy0Kv1FfYPVP/view?usp=sharing",
 		"note": "Resume URL - can be a relative path (for local files) or a full URL (for external). If the RESUME_LINK environment variable is set, it will override this value.",

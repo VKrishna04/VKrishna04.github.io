@@ -66,7 +66,9 @@ All particle-based backgrounds support these options:
 ```json
 {
   "particles": {
-    "count": 150,              // Number of particles (10-500)
+    "count": 150,              // Base particle count for 1920x1080 screen (density reference)
+    "minParticles": 30,        // Minimum particles for small screens (smartphones)
+    "maxParticles": 400,       // Maximum particles for large screens (4K displays)
     "size": 2,                 // Base particle size in pixels (0.5-10)
     "color": "#ef4444",        // Particle color (hex, rgb, rgba, or CSS color)
     "speed": 0.5,              // Movement speed (0.1-5)
@@ -80,6 +82,32 @@ All particle-based backgrounds support these options:
   }
 }
 ```
+
+#### Density-Based Particle Count
+
+The particle system now uses **density-based scaling** to maintain consistent visual density across different screen sizes:
+
+- **`count`**: Base particle count for a 1920x1080 (Full HD) reference screen
+- **`minParticles`**: Minimum particles for very small screens (phones in portrait mode)
+- **`maxParticles`**: Maximum particles for very large screens (4K, ultrawide displays)
+
+**How it works:**
+1. Calculates screen area ratio compared to Full HD (1920x1080)
+2. Applies square root scaling to maintain visual density
+3. Enforces min/max bounds for performance and visual quality
+4. **Dynamically adjusts on window resize** - particle count updates when window size changes significantly
+
+**Examples:**
+- **Phone (375x667)**: ~30-40 particles
+- **Tablet (768x1024)**: ~80-100 particles
+- **Laptop (1366x768)**: ~110-130 particles
+- **Desktop (1920x1080)**: 150 particles (base)
+- **4K (3840x2160)**: ~300 particles (capped by maxParticles)
+
+**Responsive Behavior:**
+- Particles are added when window expands (e.g., mobile → desktop)
+- Particles are removed when window shrinks (e.g., desktop → mobile)
+- Changes only occur when difference is significant (>5 particles) to avoid constant adjustments
 
 ### Connection Configuration (Animated Network Only)
 

@@ -563,8 +563,22 @@
 									"type": "integer",
 									"minimum": 10,
 									"maximum": 500,
-									"description": "Number of particles to render",
+									"description": "Base number of particles for reference screen size (1920x1080). Actual count will be calculated proportionally based on screen area to maintain consistent density.",
 									"default": 150
+								},
+								"minParticles": {
+									"type": "integer",
+									"minimum": 5,
+									"maximum": 100,
+									"description": "Minimum number of particles for very small screens",
+									"default": 30
+								},
+								"maxParticles": {
+									"type": "integer",
+									"minimum": 100,
+									"maximum": 1000,
+									"description": "Maximum number of particles for very large screens",
+									"default": 400
 								},
 								"size": {
 									"type": "number",

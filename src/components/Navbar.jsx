@@ -81,31 +81,45 @@ const Navbar = () => {
 				return {
 					text: logoConfig.text || "VK",
 					name:
-						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
+						logoConfig.name || settings.home?.name || "Krishna GSVV",
 				};
 			case "image":
 				return {
 					imageUrl: logoConfig.customImageUrl,
-					name:
-						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
+					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
 				};
-			case "github":
+			case "github": {
+				// Use the GitHub profile image URL
+				const githubUsername = logoConfig.githubUsername || settings.github?.username || "VKrishna04";
 				return {
-					imageUrl: settings.display?.profileImage,
-					name:
-						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
+					imageUrl: `https://github.com/${githubUsername}.png`,
+					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
 				};
-			case "auto":
+			}
+			case "auto": {
+				// Match the home page profile image settings
+				const homeProfile = settings.home?.profileImage;
+				let imageUrl = null;
+
+				if (homeProfile?.type === "github") {
+					const username =
+						homeProfile.devUsername ||
+						settings.github?.username ||
+						"VKrishna04";
+					imageUrl = `https://github.com/${username}.png`;
+				} else if (homeProfile?.type === "custom") {
+					imageUrl = homeProfile.customUrl;
+				}
+
 				return {
-					imageUrl: settings.display?.profileImage,
-					name:
-						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
+					imageUrl,
+					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
 				};
+			}
 			default:
 				return {
 					text: logoConfig.text || "VK",
-					name:
-						logoConfig.name || settings.display?.officialName || "Krishna GSVV",
+					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
 				};
 		}
 	};
@@ -131,19 +145,46 @@ const Navbar = () => {
 					{/* Logo */}
 					<Link to="/" className="flex items-center space-x-2">
 						{logoContent.imageUrl ? (
-							<div className="w-10 h-10 rounded-lg overflow-hidden">
+							<div
+								className={`${
+									settings.navbar?.logo?.imageSize || "w-10 h-10"
+								} ${
+									settings.navbar?.logo?.borderRadius || "rounded-lg"
+								} overflow-hidden`}
+							>
 								<img
 									src={logoContent.imageUrl}
 									alt={logoContent.name}
 									className="w-full h-full object-cover"
+									onError={(e) => {
+										// Fallback to text logo if image fails to load
+										e.target.style.display = "none";
+										e.target.nextSibling.style.display = "flex";
+									}}
 								/>
+								<div
+									className={`w-full h-full bg-gradient-to-r ${
+										settings.navbar?.logo?.gradient ||
+										"from-primary-500 to-accent-500"
+									} ${
+										settings.navbar?.logo?.borderRadius || "rounded-lg"
+									} items-center justify-center hidden`}
+								>
+									<span className="text-white font-bold text-lg">
+										{logoContent.text || "VK"}
+									</span>
+								</div>
 							</div>
 						) : (
 							<div
-								className={`w-10 h-10 bg-gradient-to-r ${
+								className={`${
+									settings.navbar?.logo?.imageSize || "w-10 h-10"
+								} bg-gradient-to-r ${
 									settings.navbar?.logo?.gradient ||
 									"from-primary-500 to-accent-500"
-								} rounded-lg flex items-center justify-center`}
+								} ${
+									settings.navbar?.logo?.borderRadius || "rounded-lg"
+								} flex items-center justify-center`}
 							>
 								<span className="text-white font-bold text-lg">
 									{logoContent.text}
