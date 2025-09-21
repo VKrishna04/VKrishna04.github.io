@@ -3,7 +3,7 @@
 	"$id": "https://vkrishna04.github.io/settings.schema.json",
 	"title": "Portfolio Website Configuration Schema",
 	"description": "Comprehensive JSON Schema for portfolio website configuration including GitHub integration, project management, social media, resume sections, and UI customization. This schema provides validation, IntelliSense support, and documentation for all configuration options.\n\nCopyright 2025 Krishna GSVV\nLicensed under the Apache License, Version 2.0\nYou may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0\n\nFEATURES:\n- Dynamic GitHub project fetching with fallback to static projects\n- Comprehensive social media integration\n- Resume/CV management with multiple sections\n- Customizable UI themes and animations\n- SEO-optimized project metadata\n- Mobile-responsive configuration options\n- Accessibility features and validation\n\nBEST PRACTICES:\n- Use semantic technology tags (lowercase kebab-case)\n- Include comprehensive project descriptions (50+ characters)\n- Provide multiple project URLs (live, demo, documentation)\n- Maintain consistent color schemes across social platforms\n- Optimize images for web (prefer CDN URLs)\n- Include accessibility labels for all interactive elements\n\nTECHNOLOGY RECOMMENDATIONS:\n- Frontend: React, Vue.js, Angular, Svelte\n- Styling: Tailwind CSS, Styled Components, CSS Modules\n- Backend: Node.js, Python, Java, Go, Rust\n- Databases: PostgreSQL, MongoDB, Redis, Firebase\n- Cloud: AWS, Azure, GCP, Vercel, Netlify\n- DevOps: Docker, Kubernetes, GitHub Actions, CI/CD",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"type": "object",
 	"additionalProperties": true,
 	"properties": {
@@ -1584,10 +1584,11 @@
 					]
 				},
 				"alternativeUrl": {
-					"$ref": "#/definitions/url",
+					"type": "string",
 					"description": "Alternative or backup resume URL or empty string",
 					"examples": [
 						"https://vkrishna04.github.io/resume.pdf",
+						"/resume.pdf",
 						""
 					]
 				},
