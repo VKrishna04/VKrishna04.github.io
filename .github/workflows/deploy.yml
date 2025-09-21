@@ -38,6 +38,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_RESUME_LINK: ${{ secrets.VITE_RESUME_LINK }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

@@ -670,9 +670,9 @@
 	},
 	"resume": {
 		"type": "file",
-		"url": "https://drive.google.com/drive/folders/1imZo4n8XbGaumFlnAvTzI-F7XzKS9kW4?usp=sharing",
+		"url": "https://drive.google.com/drive/folders/1pLvckiL1bPmbkMn3BI1pqp3ud2z79DcN?usp=sharing",
 		"filename": "Krishna_GSVV_Resume.pdf",
-		"alternativeUrl": "https://drive.google.com/file/d/1a7av243LfnlHaVpSRzXciy0Kv1FfYPVP/view?usp=sharing",
+		"alternativeUrl": "/resume.pdf",
 		"note": "Resume URL - can be a relative path (for local files) or a full URL (for external). If the RESUME_LINK environment variable is set, it will override this value.",
 		"sectionOrder": [
 			"experiences",

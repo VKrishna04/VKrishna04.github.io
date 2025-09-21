@@ -31,6 +31,7 @@ import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import FaviconManager from "./components/FaviconManager";
+import PrivacyNotice from "./components/PrivacyNotice";
 import "./App.css";
 
 // Custom hook for managing page titles and favicon
@@ -99,6 +100,7 @@ const AppContent = memo(() => {
 			</main>
 
 			<Footer />
+			<PrivacyNotice />
 			{/* <ScrollToTop /> */}
 		</div>
 	);

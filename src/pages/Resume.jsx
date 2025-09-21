@@ -74,17 +74,19 @@ const Resume = () => {
 	}, []);
 
 	const getResumeUrl = () => {
-		// 1. Check for environment variable (RESUME_LINK)
-		const envResumeUrl = import.meta.env.RESUME_LINK;
+		// 1. Check for environment variable (VITE_RESUME_LINK)
+		// Works with GitHub Actions, Cloudflare Pages, Vercel, Netlify
+		const envResumeUrl = import.meta.env.VITE_RESUME_LINK;
 		if (
 			envResumeUrl &&
 			typeof envResumeUrl === "string" &&
 			envResumeUrl.trim() !== ""
 		) {
+			console.log("Using environment resume URL:", envResumeUrl);
 			try {
 				if (
-					envResumeUrl.startsWith("http://") ||
-					envResumeUrl.startsWith("https://")
+					envResumeUrl.startsWith("https://") ||
+					envResumeUrl.startsWith("http://")
 				) {
 					return new URL(envResumeUrl).href;
 				}
@@ -94,12 +96,15 @@ const Resume = () => {
 						envResumeUrl.includes("data:") ||
 						envResumeUrl.includes("vbscript:")
 					) {
+						console.warn("Blocked dangerous URL scheme in env var");
 						return "/resume.pdf";
 					}
 					return envResumeUrl;
 				}
+				console.warn("Invalid URL format in env var, using fallback");
 				return "/resume.pdf";
-			} catch {
+			} catch (error) {
+				console.warn("Error parsing env resume URL:", error);
 				return "/resume.pdf";
 			}
 		}
@@ -107,9 +112,9 @@ const Resume = () => {
 		const resumeConfig = settings.resume || {};
 		let url;
 		if (resumeConfig.type === "external" && resumeConfig.alternativeUrl) {
-			url = resumeConfig.alternativeUrl;
-		} else {
 			url = resumeConfig.url || "/resume.pdf";
+		} else {
+			url = resumeConfig.alternativeUrl;
 		}
 		try {
 			if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -980,27 +985,49 @@ const Resume = () => {
 						<p className="text-xl text-gray-300 mb-8">
 							My professional journey and qualifications
 						</p>
-						<motion.a
-							// URL is sanitized in getResumeUrl() function to prevent XSS
-							href={getResumeUrl()}
-							download={getResumeFilename()}
-							target={
-								settings.resume?.type === "external" ? "_blank" : undefined
-							}
-							rel={
-								settings.resume?.type === "external"
-									? "noopener noreferrer"
-									: undefined
-							}
-							className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-						>
-							<DocumentArrowDownIcon className="w-5 h-5 mr-2" />
-							{settings.resume?.type === "external"
-								? "View Resume"
-								: "Download PDF"}
-						</motion.a>
+						{settings.resume?.type === "external" ? (
+							// Single button for external links
+							<motion.a
+								href={getResumeUrl()}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<EyeIcon className="w-5 h-5 mr-2" />
+								View Resume
+							</motion.a>
+						) : (
+							// Split button for local files
+							<div className="inline-flex rounded-full overflow-hidden shadow-lg">
+								{/* Left side - View button (major) */}
+								<motion.a
+									href={getResumeUrl()}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-all duration-300"
+									whileHover={{ scale: 1.02 }}
+									whileTap={{ scale: 0.98 }}
+								>
+									<EyeIcon className="w-5 h-5 mr-2" />
+									View PDF
+								</motion.a>
+								{/* Right side - Download button (minor) */}
+								<motion.a
+									href="/resume.pdf"
+									download={getResumeFilename()}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex items-center px-4 py-3 bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-all duration-300"
+									whileHover={{ scale: 1.02 }}
+									whileTap={{ scale: 0.98 }}
+									title="Download PDF"
+								>
+									<DocumentArrowDownIcon className="w-5 h-5" />
+								</motion.a>
+							</div>
+						)}
 					</motion.div>
 
 					{/* Total Rewards Section */}
