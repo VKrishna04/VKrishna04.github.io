@@ -16,10 +16,11 @@
 
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { injectSeoPlugin } from "./scripts/inject-seo.js";
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [react()],
+	plugins: [react(), injectSeoPlugin()],
 	// base: "/VKrishna04.github.io/",
 	build: {
 		outDir: "dist",

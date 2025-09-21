@@ -1,68 +1,76 @@
 {
-	"name": "vkrishna04.github.io",
-	"version": "1.3.0",
-	"type": "module",
-	"homepage": "https://vkrishna04.me",
-	"description": "Personal portfolio website showcasing skills, projects, and experiences.",
-	"keywords": [
-		"portfolio",
-		"personal website",
-		"react",
-		"vite",
-		"tailwindcss"
-	],
-	"markdown": "github",
-	"author": "VKrishna04",
-	"license": "Apache-2.0",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/VKrishna04/VKrishna04.github.io"
-	},
-	"bugs": {
-		"url": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
-	},
-	"engines": {
-		"node": ">=16.0.0"
-	},
-	"main": "dist/index.js",
-	"browser": "dist/index.js",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"lint": "eslint .",
-		"preview": "vite preview",
-		"validate-settings": "node scripts/validate-json.js public/settings.json",
-		"deploy:cloudflare": "npx wrangler deploy",
-		"deploy:cloudflare:preview": "npx wrangler deploy --env preview"
-	},
-	"dependencies": {
-		"@heroicons/react": "^2.2.0",
-		"@tailwindcss/typography": "^0.5.16",
-		"@tsparticles/engine": "^3.8.1",
-		"@tsparticles/react": "^3.0.0",
-		"@tsparticles/slim": "^3.8.1",
-		"autoprefixer": "^10.4.21",
-		"clsx": "^2.1.1",
-		"framer-motion": "^12.23.0",
-		"lucide-react": "^0.525.0",
-		"nodemon": "^3.1.10",
-		"postcss": "^8.5.6",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"react-icons": "^5.5.0",
-		"react-router-dom": "^7.6.3",
-		"tailwind-merge": "^3.3.1",
-		"tailwindcss": "^3.4.17",
-		"typewriter-effect": "^2.22.0"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.29.0",
-		"@vitejs/plugin-react": "^4.5.2",
-		"eslint": "^9.29.0",
-		"eslint-plugin-react-hooks": "^5.2.0",
-		"eslint-plugin-react-refresh": "^0.4.20",
-		"globals": "^16.2.0",
-		"react-router-dom": "^6.23.0",
-		"vite": "^7.0.0"
-	}
+		"name": "vkrishna04.github.io",
+		"version": "1.3.0",
+		"type": "module",
+		"homepage": "https://vkrishna04.me",
+		"description": "Personal portfolio website showcasing skills, projects, and experiences.",
+		"keywords": [
+			"portfolio",
+			"personal website",
+			"react",
+			"vite",
+			"tailwindcss"
+		],
+		"markdown": "github",
+		"author": "VKrishna04",
+		"license": "Apache-2.0",
+		"repository": {
+			"type": "git",
+			"url": "https://github.com/VKrishna04/VKrishna04.github.io"
+		},
+		"bugs": {
+			"url": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
+		},
+		"engines": {
+			"node": ">=16.0.0"
+		},
+		"main": "dist/index.js",
+		"browser": "dist/index.js",
+		"scripts": {
+			"dev": "vite",
+				"build": "node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
+				"lint": "eslint .",
+				"preview": "vite preview",
+				"validate-settings": "node scripts/validate-json.js public/settings.json",
+				"generate-cname": "node scripts/generate-cname.js",
+				"generate-manifest": "node scripts/generate-manifest.js",
+				"generate-hashes": "node scripts/generate-hashes.js",
+				"deploy:cloudflare": "npx wrangler deploy",
+				"deploy:cloudflare:preview": "npx wrangler deploy --env preview",
+				"validate": "node scripts/validate-build-integrity.js",
+				"secure-build": "npm run validate && npm run build",
+				"setup-dev": "node scripts/setup-dev-env.js",
+				"test-protection": "node scripts/protection-system-demo.js"
+			},
+			"dependencies": {
+				"@heroicons/react": "^2.2.0",
+				"@tailwindcss/typography": "^0.5.16",
+				"@tsparticles/engine": "^3.8.1",
+				"@tsparticles/react": "^3.0.0",
+				"@tsparticles/slim": "^3.8.1",
+				"autoprefixer": "^10.4.21",
+				"clsx": "^2.1.1",
+				"framer-motion": "^12.23.0",
+				"lucide-react": "^0.525.0",
+				"nodemon": "^3.1.10",
+				"postcss": "^8.5.6",
+				"react": "^19.1.0",
+				"react-dom": "^19.1.0",
+				"react-icons": "^5.5.0",
+				"react-router-dom": "^7.6.3",
+				"tailwind-merge": "^3.3.1",
+				"tailwindcss": "^3.4.17",
+				"typewriter-effect": "^2.22.0"
+			},
+			"devDependencies": {
+				"@eslint/js": "^9.29.0",
+				"@vitejs/plugin-react": "^4.5.2",
+				"eslint": "^9.29.0",
+				"eslint-plugin-react-hooks": "^5.2.0",
+				"eslint-plugin-react-refresh": "^0.4.20",
+				"globals": "^16.2.0",
+				"jsonc-parser": "^3.3.1",
+				"react-router-dom": "^6.23.0",
+				"vite": "^7.0.0"
+			}
 }

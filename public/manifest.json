@@ -1,0 +1,59 @@
+{
+    "name": "Krishna GSVV - Portfolio",
+    "short_name": "Krishna Portfolio",
+    "description": "Personal portfolio website of Krishna GSVV - Full Stack Developer & AI Researcher",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#3b82f6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "https://github.com/VKrishna04.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "https://github.com/VKrishna04.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "categories": [
+        "portfolio",
+        "personal",
+        "developer"
+    ],
+    "lang": "en",
+    "dir": "ltr",
+    "scope": "/",
+    "id": "krishna-portfolio",
+    "shortcuts": [
+        {
+            "name": "About",
+            "short_name": "About",
+            "description": "Learn more about Krishna GSVV",
+            "url": "/about",
+            "icons": [
+                {
+                    "src": "https://github.com/VKrishna04.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Projects",
+            "short_name": "Projects",
+            "description": "View portfolio projects",
+            "url": "/projects",
+            "icons": [
+                {
+                    "src": "https://github.com/VKrishna04.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

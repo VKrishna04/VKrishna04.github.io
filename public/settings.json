@@ -15,6 +15,65 @@
 		"limitations under the License."
 	],
 	"$schema": "./settings.schema.json",
+	"seo": {
+		"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+		"description": "Passionate developer specializing in React, Python, and AI. Hackathon winner with ₹3.75L+ prize money. Building innovative solutions.",
+		"keywords": [
+			"Full Stack Developer",
+			"React",
+			"Python",
+			"AI",
+			"Machine Learning",
+			"Portfolio",
+			"Open Source",
+			"JavaScript",
+			"Node.js",
+			"Web Development",
+			"Software Engineer",
+			"Hackathon Winner",
+			"VKrishna04",
+			"Krishna GSVV",
+			"Life Experimentalists"
+		],
+		"author": "Krishna GSVV",
+		"canonical": "https://vkrishna04.me/",
+		"openGraph": {
+			"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions with 15+ open source projects.",
+			"image": "https://github.com/VKrishna04.png",
+			"imageWidth": 1200,
+			"imageHeight": 630,
+			"siteName": "Krishna GSVV Portfolio"
+		},
+		"twitter": {
+			"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions.",
+			"image": "https://github.com/VKrishna04.png",
+			"creator": "@VKrishna04"
+		},
+		"structuredData": {
+			"enabled": true,
+			"type": "Person",
+			"jobTitle": "Full Stack Developer",
+			"worksFor": "Independent",
+			"sameAs": [
+				"https://github.com/VKrishna04",
+				"https://linkedin.com/in/vkrishna04",
+				"https://vkrishna04.me"
+			],
+			"knowsAbout": [
+				"React",
+				"Python",
+				"JavaScript",
+				"Machine Learning",
+				"Full Stack Development",
+				"Node.js",
+				"AI Research",
+				"Web Development"
+			]
+		},
+		"customDomain": "vkrishna04.me"
+	},
 	"github": {
 		"type": "org",
 		"username": "Life-Experimentalist",
@@ -692,8 +751,7 @@
 			"currency": "INR",
 			"icon": "TrophyIcon"
 		},
-		"experiences": [
-		],
+		"experiences": [],
 		"experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
 		"experiencesHeading": "Work Experience",
 		"experiencesIcon": "BriefcaseIcon",
@@ -704,9 +762,7 @@
 				"school": "Amrita Vishwa Vidyapeetham",
 				"period": "2022 - 2026",
 				"gpa": "8.6/10",
-				"achievements": [
-
-				]
+				"achievements": []
 			}
 		],
 		"educationNote": "Configure education entries - each should have degree, field, school, period, gpa, and achievements array",
@@ -1009,8 +1065,7 @@
 		"languagesNote": "Configure languages - each should have name, proficiency, and level (A1, A2, B1, B2, C1, C2)",
 		"languagesHeading": "Languages",
 		"languagesIcon": "GlobeAltIcon",
-		"volunteerExperience": [
-		],
+		"volunteerExperience": [],
 		"volunteerExperienceNote": "Configure volunteer experience - each should have role, organization, period, and description array",
 		"volunteerExperienceHeading": "Volunteer Experience",
 		"volunteerExperienceIcon": "HeartIcon",
@@ -1515,7 +1570,7 @@
 			}
 		],
 		"contact": {
-			"email": "krishnagsvv@gmail.com",
+			"email": "me@vkrishna04.me",
 			"phone": "",
 			"location": "Bengaluru, India"
 		},

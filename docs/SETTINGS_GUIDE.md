@@ -545,7 +545,7 @@ Centralized social media management with per-section visibility control.
       }
     ],
     "contact": {
-      "email": "krishnagsvv@gmail.com", // Contact email
+      "email": "me@vkrishna04.me", // Contact email
       "phone": "",                   // Contact phone (optional)
       "location": "Bengaluru, India" // Contact location
     }

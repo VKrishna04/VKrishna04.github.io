@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-09-21T11:50:19.315Z",
+  "files": {
+    "src/utils/integrity-guard.js": {
+      "sha256": "3be79c1e8fae676139239fee1406155413d893da7cf58f44477639a2666e8299",
+      "simple": "27848910",
+      "size": 4707,
+      "lastModified": "2025-09-21T11:39:36.965Z"
+    },
+    "src/utils/stealth-validator.js": {
+      "sha256": "a2a21bb88369bb30585364898e29cafb0beefafd1a8665028f70e5718f2a17af",
+      "simple": "44a337fc",
+      "size": 4838,
+      "lastModified": "2025-09-21T10:14:09.651Z"
+    },
+    "src/utils/origin-tracker.js": {
+      "sha256": "960c58bb71f2dc7b58f46623f58a534a4260b97debe41b5467da91ba71ff3013",
+      "simple": "1e0f93db",
+      "size": 6699,
+      "lastModified": "2025-09-21T10:14:09.647Z"
+    },
+    "src/utils/advanced-obfuscation.js": {
+      "sha256": "b2545eabfd80eeb4c743218658213fdff5fad79b5cabff7242fc0a8ce822ebe4",
+      "simple": "53b59469",
+      "size": 5311,
+      "lastModified": "2025-09-21T11:41:04.351Z"
+    },
+    "src/utils/build-time-protection.js": {
+      "sha256": "90f67dd877c706cc3ec84f0e3125dd86cd32237e0e5d6839c032ab672e6784dc",
+      "simple": "399204d2",
+      "size": 1261,
+      "lastModified": "2025-09-21T11:39:17.632Z"
+    }
+  }
+}

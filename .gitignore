@@ -4,11 +4,14 @@ node_modules_backup
 .pnp
 .pnp.js
 
+# Local development
+.workspace-config
+
 # Production builds
 /dist
 /build
 dist-ssr
-*.local
+*.local*
 
 # Runtime data
 pids
@@ -38,6 +41,7 @@ coverage/
 .nyc_output
 
 # Environment variables
+*.key
 .env
 .env.local
 .env.development.local

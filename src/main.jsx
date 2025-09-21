@@ -20,6 +20,9 @@ import "./index.css";
 import "./styles.css";
 import App from "./App.jsx";
 
+// Initialize build-time verified protection system
+import "./utils/build-time-protection.js";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<App />

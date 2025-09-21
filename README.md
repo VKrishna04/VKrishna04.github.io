@@ -849,7 +849,7 @@ This project is open source and available under the [Apache License, Version 2.0
 - 💼 GitHub: [@VKrishna04](https://github.com/VKrishna04)
 - 🏢 Organization: [@Life-Experimentalists](https://github.com/orgs/Life-Experimentalists)
 - 💼 LinkedIn: [krishnagsvv](https://linkedin.com/in/krishnagsvv)
-- 📧 Email: krishnagsvv@gmail.com
+- 📧 Email: me@vkrishna04.me
 
 ### Acknowledgments
 - **React Team** - For the amazing React framework
