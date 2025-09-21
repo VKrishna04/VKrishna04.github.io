@@ -669,7 +669,7 @@
 		"profileImage": "https://github.com/VKrishna04.png"
 	},
 	"resume": {
-		"type": "file",
+		"type": "external",
 		"url": "https://drive.google.com/drive/folders/1pLvckiL1bPmbkMn3BI1pqp3ud2z79DcN?usp=sharing",
 		"filename": "Krishna_GSVV_Resume.pdf",
 		"alternativeUrl": "/resume.pdf",
