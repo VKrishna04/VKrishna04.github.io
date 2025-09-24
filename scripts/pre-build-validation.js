@@ -11,7 +11,7 @@ import process from "process";
 
 // Expected build script configurations
 const EXPECTED_BUILD_CONFIG = {
-	// Expected package.json build script
+	// Expected package.json build-core script (to avoid circular dependency)
 	expectedBuildScript:
 		"node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
 
@@ -49,23 +49,23 @@ function validatePackageJsonBuildScript() {
 		}
 
 		const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-		const currentBuildScript = packageJson.scripts?.build;
+		const currentBuildCoreScript = packageJson.scripts?.["build-core"];
 
-		if (!currentBuildScript) {
-			console.error("❌ No build script found in package.json");
+		if (!currentBuildCoreScript) {
+			console.error("❌ No build-core script found in package.json");
 			return false;
 		}
 
-		if (currentBuildScript !== EXPECTED_BUILD_CONFIG.expectedBuildScript) {
+		if (currentBuildCoreScript !== EXPECTED_BUILD_CONFIG.expectedBuildScript) {
 			console.error("❌ Build script has been tampered with!");
 			console.error(
 				`   Expected: ${EXPECTED_BUILD_CONFIG.expectedBuildScript}`
 			);
-			console.error(`   Actual:   ${currentBuildScript}`);
+			console.error(`   Actual:   ${currentBuildCoreScript}`);
 			return false;
 		}
 
-		console.log("✅ Package.json build script validated");
+		console.log("✅ Package.json build-core script validated");
 		return true;
 	} catch (error) {
 		console.error("❌ Failed to validate package.json:", error.message);
@@ -231,9 +231,30 @@ async function validateCriticalFilesAgainstGitHub() {
 		missing: 0,
 	};
 
-	// Check if we're in a CI environment (GitHub Actions)
+	// Comprehensive CI/hosting platform detection (matches settings-guard.js)
 	const isCI =
-		process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
+		process.env.CI === "true" || // Generic CI indicator
+		process.env.GITHUB_ACTIONS === "true" || // GitHub Actions
+		process.env.VERCEL === "1" || // Vercel
+		process.env.NETLIFY === "true" || // Netlify
+		process.env.CF_PAGES === "1" || // Cloudflare Pages
+		process.env.RENDER === "true" || // Render
+		process.env.RAILWAY_ENVIRONMENT_NAME || // Railway
+		process.env.HEROKU_APP_NAME || // Heroku
+		process.env.NOW_REGION || // Vercel (legacy)
+		process.env.DEPLOY_URL || // Netlify build
+		process.env.CF_PAGES_URL || // Cloudflare Pages
+		process.env.VERCEL_URL || // Vercel deployment
+		process.env.BUILD_ID || // Generic build system
+		process.env.DRONE === "true" || // Drone CI
+		process.env.TRAVIS === "true" || // Travis CI
+		process.env.CIRCLECI === "true" || // CircleCI
+		process.env.JENKINS_URL || // Jenkins
+		process.env.GITLAB_CI === "true" || // GitLab CI
+		process.env.BUILDKITE === "true" || // Buildkite
+		process.env.AZURE_HTTP_USER_AGENT || // Azure DevOps
+		process.env.GITHUB_WORKSPACE || // GitHub Actions (alt)
+		process.env.BITBUCKET_BUILD_NUMBER; // Bitbucket Pipelines
 
 	for (const filePath of criticalFiles) {
 		try {
@@ -265,12 +286,12 @@ async function validateCriticalFilesAgainstGitHub() {
 			const localNormalized = normalize(localContent);
 
 			if (githubNormalized !== localNormalized) {
-				// For package.json, check if only development changes
-				if (filePath === "package.json" && !isCI) {
+				// In development mode, be more lenient about file differences
+				if (!isCI) {
 					console.warn(
 						`⚠️ ${filePath} differs from GitHub (may include development changes)`
 					);
-					validationResults.validated++; // Allow package.json changes during development
+					validationResults.validated++; // Allow differences during development
 				} else {
 					console.error(`❌ ${filePath} differs from GitHub repository`);
 					validationResults.failed++;

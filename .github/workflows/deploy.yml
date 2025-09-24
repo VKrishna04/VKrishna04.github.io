@@ -33,14 +33,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate build system integrity
-        run: npm run validate
-
       - name: Lint code
         run: npm run lint
 
-      - name: Build project with verification
-        run: npm run secure-build
+      - name: Build project
+        run: npm run build
         env:
           VITE_RESUME_LINK: ${{ secrets.VITE_RESUME_LINK }}
 

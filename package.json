@@ -28,7 +28,8 @@
 		"browser": "dist/index.js",
 		"scripts": {
 			"dev": "vite",
-				"build": "node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
+				"build": "node scripts/validate-build-integrity.js && node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
+				"build-core": "node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
 				"lint": "eslint .",
 				"preview": "vite preview",
 				"validate-settings": "node scripts/validate-json.js public/settings.json",
@@ -38,7 +39,7 @@
 				"deploy:cloudflare": "npx wrangler deploy",
 				"deploy:cloudflare:preview": "npx wrangler deploy --env preview",
 				"validate": "node scripts/validate-build-integrity.js",
-				"secure-build": "npm run validate && npm run build",
+				"secure-build": "npm run build",
 				"setup-dev": "node scripts/setup-dev-env.js",
 				"test-protection": "node scripts/protection-system-demo.js"
 			},

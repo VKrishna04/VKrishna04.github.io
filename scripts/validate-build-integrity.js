@@ -11,8 +11,9 @@ import process from "process";
 
 /**
  * Expected build script configuration - this is the source of truth
+ * We check the build-core script to avoid circular dependency
  */
-const EXPECTED_BUILD_SCRIPT =
+const EXPECTED_BUILD_CORE_SCRIPT =
 	"node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js";
 
 /**
@@ -39,27 +40,27 @@ function validateBuildScriptIntegrity() {
 		}
 
 		const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-		const currentBuildScript = packageJson.scripts?.build;
+		const currentBuildCoreScript = packageJson.scripts?.["build-core"];
 
-		if (!currentBuildScript) {
-			console.error("❌ No build script found in package.json");
+		if (!currentBuildCoreScript) {
+			console.error("❌ No build-core script found in package.json");
 			return false;
 		}
 
-		if (currentBuildScript !== EXPECTED_BUILD_SCRIPT) {
-			console.error("🚫 BUILD SCRIPT HAS BEEN TAMPERED WITH!");
+		if (currentBuildCoreScript !== EXPECTED_BUILD_CORE_SCRIPT) {
+			console.error("🚫 BUILD CORE SCRIPT HAS BEEN TAMPERED WITH!");
 			console.error(
 				"   This indicates an attempt to bypass the validation system."
 			);
 			console.error("");
-			console.error("   Expected build script:");
-			console.error(`   "${EXPECTED_BUILD_SCRIPT}"`);
+			console.error("   Expected build-core script:");
+			console.error(`   "${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			console.error("");
-			console.error("   Current build script:");
-			console.error(`   "${currentBuildScript}"`);
+			console.error("   Current build-core script:");
+			console.error(`   "${currentBuildCoreScript}"`);
 			console.error("");
 			console.error(
-				"🔒 Security Note: The build script must include pre-build validation"
+				"🔒 Security Note: The build-core script must include pre-build validation"
 			);
 			console.error(
 				"   to ensure code integrity. Bypassing this validation could"
@@ -67,25 +68,25 @@ function validateBuildScriptIntegrity() {
 			console.error("   allow malicious code to be built and deployed.");
 			console.error("");
 			console.error(
-				"💡 To fix this issue, restore the correct build script in package.json:"
+				"💡 To fix this issue, restore the correct build-core script in package.json:"
 			);
-			console.error(`   npm pkg set scripts.build="${EXPECTED_BUILD_SCRIPT}"`);
+			console.error(`   npm pkg set scripts.build-core="${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			return false;
 		}
 
 		// Check for forbidden bypass scripts
-		if (FORBIDDEN_BUILD_SCRIPTS.includes(currentBuildScript)) {
+		if (FORBIDDEN_BUILD_SCRIPTS.includes(currentBuildCoreScript)) {
 			console.error("🚫 FORBIDDEN BUILD SCRIPT DETECTED!");
 			console.error("   This build script bypasses the validation system.");
 			console.error("");
 			console.error("   Forbidden build script:");
-			console.error(`   "${currentBuildScript}"`);
+			console.error(`   "${currentBuildCoreScript}"`);
 			console.error("");
 			console.error("   Required build script:");
-			console.error(`   "${EXPECTED_BUILD_SCRIPT}"`);
+			console.error(`   "${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			console.error("");
 			console.error("💡 To fix this issue, restore the correct build script:");
-			console.error(`   npm pkg set scripts.build="${EXPECTED_BUILD_SCRIPT}"`);
+			console.error(`   npm pkg set scripts.build-core="${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			return false;
 		}
 
@@ -156,7 +157,7 @@ function validateCompleteIntegrity() {
 export {
 	validateBuildScriptIntegrity,
 	validateCompleteIntegrity,
-	EXPECTED_BUILD_SCRIPT,
+	EXPECTED_BUILD_CORE_SCRIPT,
 };
 
 // Auto-run when called directly

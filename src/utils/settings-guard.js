@@ -16,10 +16,33 @@ import process from "process";
  * @returns {boolean} True if legitimate development environment
  */
 function isLegitimateDevEnvironment() {
+	// Comprehensive CI/hosting platform detection
 	const isCI =
-		process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
+		process.env.CI === "true" || // Generic CI indicator
+		process.env.GITHUB_ACTIONS === "true" || // GitHub Actions
+		process.env.VERCEL === "1" || // Vercel
+		process.env.NETLIFY === "true" || // Netlify
+		process.env.CF_PAGES === "1" || // Cloudflare Pages
+		process.env.RENDER === "true" || // Render
+		process.env.RAILWAY_ENVIRONMENT_NAME || // Railway
+		process.env.HEROKU_APP_NAME || // Heroku
+		process.env.NOW_REGION || // Vercel (legacy)
+		process.env.DEPLOY_URL || // Netlify build
+		process.env.CF_PAGES_URL || // Cloudflare Pages
+		process.env.VERCEL_URL || // Vercel deployment
+		process.env.BUILD_ID || // Generic build system
+		process.env.DRONE === "true" || // Drone CI
+		process.env.TRAVIS === "true" || // Travis CI
+		process.env.CIRCLECI === "true" || // CircleCI
+		process.env.JENKINS_URL || // Jenkins
+		process.env.GITLAB_CI === "true" || // GitLab CI
+		process.env.BUILDKITE === "true" || // Buildkite
+		process.env.AZURE_HTTP_USER_AGENT || // Azure DevOps
+		process.env.GITHUB_WORKSPACE || // GitHub Actions (alt)
+		process.env.BITBUCKET_BUILD_NUMBER || // Bitbucket Pipelines
+		typeof window === "undefined"; // Server-side rendering
 
-	// Never allow bypass in CI
+	// Never allow bypass in any CI/hosting environment
 	if (isCI) {
 		return false;
 	}
@@ -38,9 +61,17 @@ function isLegitimateDevEnvironment() {
 			fs.existsSync("node_modules/.bin/vite") ||
 			fs.existsSync("package-lock.json");
 
-		// Check 3: Git repository in development state
+		// Check 3: Git repository in local development state
 		const hasGitDev =
-			fs.existsSync(".git/config") && !process.env.GITHUB_WORKSPACE; // Not in GitHub Actions
+			fs.existsSync(".git/config") &&
+			!process.env.GITHUB_WORKSPACE && // Not GitHub Actions
+			!process.env.VERCEL && // Not Vercel
+			!process.env.NETLIFY && // Not Netlify
+			!process.env.CF_PAGES && // Not Cloudflare Pages
+			!process.env.RENDER && // Not Render
+			!process.env.RAILWAY_ENVIRONMENT_NAME && // Not Railway
+			!process.env.HEROKU_APP_NAME && // Not Heroku
+			!process.env.BUILD_ID; // Not generic build system
 
 		// Check 4: Local workspace configuration (with content validation)
 		let hasWorkspaceConfig = false;

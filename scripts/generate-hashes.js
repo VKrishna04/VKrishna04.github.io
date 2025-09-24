@@ -21,6 +21,7 @@ const PROTECTION_FILES = [
 	"src/utils/origin-tracker.js",
 	"src/utils/advanced-obfuscation.js",
 	"src/utils/build-time-protection.js",
+	"src/utils/settings-guard.js", // CRITICAL: Protect the core bypass logic
 ];
 
 /**
