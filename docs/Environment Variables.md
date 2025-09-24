@@ -1,10 +1,39 @@
 # Environment Variables Guide
 
-This project supports environment variables for customizing behavior during build and deployment. This guide covers all supported variables and platform-specific configuration.
+See also: [Deployment Guide](./Deployment.md) for platform-specific Deployment instructions.
+
+This project supports Environment Variables for customizing behavior during build and Deployment. This guide covers all supported variables and platform-specific configuration.
+
+## Table of Contents
+- [Environment Variables Guide](#environment-variables-guide)
+	- [Table of Contents](#table-of-contents)
+	- [Overview](#overview)
+	- [Supported Variables](#supported-variables)
+		- [VITE\_RESUME\_LINK](#vite_resume_link)
+	- [Platform Configuration](#platform-configuration)
+		- [GitHub Actions](#github-actions)
+		- [Cloudflare Pages](#cloudflare-pages)
+		- [Cloudflare Workers (if using Wrangler)](#cloudflare-workers-if-using-wrangler)
+		- [Local Development](#local-development)
+	- [Security Considerations](#security-considerations)
+	- [Validation and Testing](#validation-and-testing)
+	- [Troubleshooting](#troubleshooting)
+		- [Environment Variable Not Working](#environment-variable-not-working)
+		- [URL Not Opening](#url-not-opening)
+		- [Platform-Specific Issues](#platform-specific-issues)
+	- [Examples](#examples)
+		- [Google Drive Integration](#google-drive-integration)
+		- [Local File with CDN Fallback](#local-file-with-cdn-fallback)
+		- [Development vs Production](#development-vs-production)
+	- [Best Practices](#best-practices)
+	- [Support](#support)
+	- [Security](#security)
+	- [CI/CD](#cicd)
+
 
 ## Overview
 
-The project uses Vite's environment variable system, which requires the `VITE_` prefix for client-side variables. Environment variables take priority over configuration files.
+The project uses Vite's environment variable system, which requires the `VITE_` prefix for client-side variables. Environment Variables take priority over configuration files.
 
 ## Supported Variables
 
@@ -36,6 +65,8 @@ VITE_RESUME_LINK="https://cdn.example.com/files/resume.pdf"
 1. Environment variable (VITE_RESUME_LINK) - Highest priority
 2. settings.json configuration - Fallback
 3. Default local file (/resume.pdf) - Last resort
+
+If no environment variable is set, the app will fallback to the value in `settings.json` or `/resume.pdf`.
 
 ## Platform Configuration
 
@@ -92,7 +123,7 @@ jobs:
 **Method 1: Environment Variables in Dashboard**
 1. Go to Cloudflare Dashboard → Pages
 2. Select your project
-3. Go to Settings → Environment variables
+3. Go to Settings → Environment Variables
 4. Add variable:
    - Name: `VITE_RESUME_LINK`
    - Value: Your resume URL
@@ -107,7 +138,7 @@ npm run build
 # Build output directory
 dist
 
-# Environment variables (set in dashboard)
+# Environment Variables (set in dashboard)
 VITE_RESUME_LINK=https://drive.google.com/file/d/YOUR_FILE_ID/view
 ```
 
@@ -137,7 +168,7 @@ VITE_RESUME_LINK="https://drive.google.com/file/d/YOUR_FILE_ID/view"
 ## Security Considerations
 
 1. **URL Validation:** The application validates URLs to prevent XSS attacks
-2. **No Sensitive Data:** Only use public resume links in environment variables
+2. **No Sensitive Data:** Only use public resume links in Environment Variables
 3. **HTTPS Only:** External links should use HTTPS for security
 4. **Access Control:** Ensure resume links are publicly accessible
 
@@ -159,7 +190,7 @@ VITE_RESUME_LINK="https://drive.google.com/file/d/YOUR_FILE_ID/view"
 
 1. **Check the prefix:** Must be `VITE_RESUME_LINK` (not `RESUME_LINK`)
 2. **Rebuild the project:** Changes require a rebuild to take effect
-3. **Check platform settings:** Verify the variable is set in your deployment platform
+3. **Check platform settings:** Verify the variable is set in your Deployment platform
 4. **Case sensitivity:** Variable names are case-sensitive
 
 ### URL Not Opening
@@ -176,7 +207,7 @@ VITE_RESUME_LINK="https://drive.google.com/file/d/YOUR_FILE_ID/view"
 - Verify the secret is accessible to the workflow
 
 **Cloudflare Pages:**
-- Environment variables take effect on next deployment
+- Environment Variables take effect on next Deployment
 - Check build logs for environment variable loading
 - Ensure variable is set for correct environment (production/preview)
 
@@ -200,7 +231,7 @@ VITE_RESUME_LINK="https://cdn.mywebsite.com/resume.pdf"
 # .env.development
 VITE_RESUME_LINK="/resume.pdf"
 
-# .env.production (set in deployment platform)
+# .env.production (set in Deployment platform)
 VITE_RESUME_LINK="https://drive.google.com/file/d/YOUR_ID/view"
 ```
 
@@ -214,7 +245,7 @@ VITE_RESUME_LINK="https://drive.google.com/file/d/YOUR_ID/view"
 
 ## Support
 
-If you encounter issues with environment variables:
+If you encounter issues with Environment Variables:
 1. Check the troubleshooting section above
 2. Verify your platform-specific configuration
 3. Test with a simple URL first (like a local file)
@@ -235,13 +266,13 @@ If you encounter issues with environment variables:
 
 ## Security
 
-- Environment variables are validated for security
+- Environment Variables are validated for security
 - Dangerous URL schemes (javascript:, data:, vbscript:) are blocked
 - Invalid URLs fallback to default resume.pdf
 
 ## CI/CD
 
-Set environment variables in your deployment platform:
+Set Environment Variables in your Deployment platform:
 - **Vercel**: Project Settings → Environment Variables
 - **Netlify**: Site Settings → Environment Variables
 - **GitHub Pages**: Repository Settings → Secrets and Variables

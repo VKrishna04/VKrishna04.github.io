@@ -1,5 +1,38 @@
 # Settings.json Configuration Reference
 
+See also:
+- [Settings Guide](./SETTINGS%20GUIDE.md) for full documentation
+- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md) for project configuration modes
+- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md) for background options
+
+## Table of Contents
+- [Settings.json Configuration Reference](#settingsjson-configuration-reference)
+	- [Table of Contents](#table-of-contents)
+	- [🎯 Quick Reference Guide](#-quick-reference-guide)
+	- [🏗️ Configuration Structure Overview](#️-configuration-structure-overview)
+	- [📊 Configuration Priority Hierarchy](#-configuration-priority-hierarchy)
+		- [🔗 GitHub Configuration](#-github-configuration)
+		- [📊 Projects Configuration](#-projects-configuration)
+		- [💻 Display Configuration](#-display-configuration)
+		- [📊 Projects Configuration](#-projects-configuration-1)
+		- [🏠 Home Page Configuration](#-home-page-configuration)
+		- [📱 Social Media Configuration](#-social-media-configuration)
+		- [📖 About Page Configuration](#-about-page-configuration)
+		- [📄 Resume Configuration](#-resume-configuration)
+	- [Available Icons](#available-icons)
+		- [Social Media Icons](#social-media-icons)
+		- [Technology Icons](#technology-icons)
+		- [Button Icons](#button-icons)
+		- [Category Icons](#category-icons)
+	- [Color Examples](#color-examples)
+		- [Text Colors](#text-colors)
+		- [Gradients](#gradients)
+		- [Hover States](#hover-states)
+	- [Common Patterns](#common-patterns)
+		- [Adding a New Social Platform](#adding-a-new-social-platform)
+		- [Customizing Colors](#customizing-colors)
+		- [Adding Resume Sections](#adding-resume-sections)
+
 ## 🎯 Quick Reference Guide
 
 This file provides a quick reference for all configuration options in `settings.json`.
@@ -355,4 +388,4 @@ hover:text-blue-300, hover:text-gray-300
 2. Create corresponding data array (e.g., `experiences`)
 3. Include heading field (e.g., `experiencesHeading`)
 
-For complete documentation, see the full [Settings Guide](SETTINGS_GUIDE.md).
+For complete documentation, see the full [Settings Guide](SETTINGS%20GUIDE.md).

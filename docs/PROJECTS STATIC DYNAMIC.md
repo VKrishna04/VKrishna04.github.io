@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Projects: Static vs Dynamic vs Hybrid Modes](#projects-static-vs-dynamic-vs-hybrid-modes)
 	- [Table of Contents](#table-of-contents)
+	- [Quick Reference Table](#quick-reference-table)
 	- [🏗️ Project System Architecture](#️-project-system-architecture)
 	- [🔄 Project Mode Comparison](#-project-mode-comparison)
 	- [📊 Data Flow Detailed Diagram](#-data-flow-detailed-diagram)
@@ -21,6 +22,24 @@
 	- [Usage in App](#usage-in-app)
 	- [Benefits](#benefits)
 	- [Comparison with Main Projects Component](#comparison-with-main-projects-component)
+
+## Quick Reference Table
+
+| Key            | Type    | Description                            |
+| -------------- | ------- | -------------------------------------- |
+| mode           | string  | 'static', 'github', 'hybrid'           |
+| staticProjects | array   | Manually curated projects              |
+| github         | object  | GitHub API configuration               |
+| ignore         | array   | Repositories to exclude                |
+| maxProjects    | number  | Maximum projects to display            |
+| sortBy         | string  | Sorting criteria                       |
+| sortOrder      | string  | Sort direction                         |
+| showForks      | boolean | Include forked repositories            |
+| showPrivate    | boolean | Include private repositories           |
+| mergeStrategy  | string  | Hybrid mode merge strategy             |
+| ...            | ...     | See below for all sub-keys and options |
+
+All configuration is managed under the `projects` key in your `settings.json` file.
 
 
 ## 🏗️ Project System Architecture
@@ -278,11 +297,23 @@ Simply add new project objects to the `staticProjects` array in `settings.json`:
 
 ### Supported Technology Icons
 The component automatically detects and assigns icons for these technologies:
-- **Frontend**: React, Vue.js, Angular, JavaScript, TypeScript, HTML, CSS
-- **Backend**: Node.js, Express.js, Python, Java
-- **Databases**: MongoDB, PostgreSQL, Redis
-- **Tools**: Vite, Next.js, Tailwind CSS, GitHub Pages
-- **And more...**
+| Technology   | Icon          | Color   |
+| ------------ | ------------- | ------- |
+| React        | FaReact       | #61dafb |
+| Vue.js       | FaVuejs       | #4fc08d |
+| Angular      | FaAngular     | #dd0031 |
+| Node.js      | FaNodeJs      | #339933 |
+| Python       | FaPython      | #3776ab |
+| TypeScript   | SiTypescript  | #3178c6 |
+| JavaScript   | FaJs          | #f7df1e |
+| MongoDB      | SiMongodb     | #47a248 |
+| PostgreSQL   | SiPostgresql  | #336791 |
+| Tailwind CSS | SiTailwindcss | #38bdf8 |
+| Next.js      | SiNextdotjs   | #000000 |
+| Vite         | SiVite        | #646cff |
+| Express.js   | SiExpress     | #000000 |
+| Redis        | SiRedis       | #dc382d |
+| ...          | ...           | ...     |
 
 If a technology isn't recognized, it defaults to a JavaScript icon.
 
@@ -319,7 +350,7 @@ import ProjectsStatic from './pages/ProjectsStatic';
 
 1. **No Code Changes**: Add/remove projects via configuration
 2. **Consistent Design**: All projects use the same card layout
-3. **Technology Recognition**: Automatic icons and colors
+3. **Technology Recognition**: Automatic icons and colors (see table above)
 4. **Error Handling**: Graceful fallbacks for missing data
 5. **Performance**: Efficient data transformation
 6. **Maintainable**: Clean separation of data and presentation

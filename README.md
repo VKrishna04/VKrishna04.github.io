@@ -428,8 +428,8 @@ The portfolio is fully configurable through a single `settings.json` file with I
 3. Modify any setting and see changes instantly
 
 ### 📚 Documentation
-- [**🚀 Quick Reference**](docs/SETTINGS_REFERENCE.md) - Fast lookup for all configuration options
-- [**📖 Complete Guide**](docs/SETTINGS_GUIDE.md) - Comprehensive configuration documentation
+- [**🚀 Quick Reference**](docs/SETTINGS%20REFERENCE.md) - Fast lookup for all configuration options
+- [**📖 Complete Guide**](docs/SETTINGS%20GUIDE.md) - Comprehensive configuration documentation
 - [**🎯 JSON Schema**](public/settings.schema.json) - IntelliSense support for VS Code
 
 ### 🎯 IntelliSense Support
@@ -618,7 +618,7 @@ The resume page is fully configurable with:
 │   │   ├── About.jsx         # About page
 │   │   ├── Projects.jsx      # Project showcase
 │   │   ├── Resume.jsx        # Resume page
-│   │   └── Contact.jsx       # Contact page
+│   │   └── Contact.jsx       # Contact Page
 │   └── utils/
 ├── tailwind.config.js        # Tailwind configuration
 ├── vite.config.js           # Vite configuration
@@ -655,27 +655,27 @@ The resume page is fully configurable with:
    - Enable GitHub Pages in repository settings
    - Set source to "GitHub Actions"
 
-2. **Automatic deployment** (using included workflow):
+2. **Automatic Deployment** (using included workflow):
    ```powershell
    git add .
    git commit -m "Update portfolio"
    git push origin main
    ```
 
-3. **Manual deployment**:
+3. **Manual Deployment**:
    ```powershell
    npm run build
    # Deploy dist/ folder to GitHub Pages
    ```
 
-### Vercel (One-click deployment)
+### Vercel (One-click Deployment)
 1. Import repository to Vercel
 2. Vercel auto-detects Vite configuration
 3. Deploy with zero configuration
 
 ### Netlify
 1. Drag and drop `dist/` folder after `npm run build`
-2. Or connect repository for automatic deployments
+2. Or connect repository for automatic Deployments
 
 ### Other Platforms
 Compatible with any static hosting service:

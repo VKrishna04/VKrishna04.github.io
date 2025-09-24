@@ -2,11 +2,50 @@
 
 ## Overview
 
-The AnimatedBackground component provides highly customizable background effects for your portfolio's home page. It supports multiple background types with extensive configuration options, all controllable through the `settings.json` file.
+The AnimatedBackground component provides highly customizable background effects for your portfolio's home page. All configuration is managed under the `background` key in your `settings.json` file. For full examples and advanced use cases, see [ANIMATED%20BACKGROUND%20GUIDE.md](./ANIMATED%20BACKGROUND%20GUIDE.md).
+
+## Table of Contents
+- [Animated Background Configuration Guide](#animated-background-configuration-guide)
+	- [Overview](#overview)
+	- [Table of Contents](#table-of-contents)
+	- [Accessibility](#accessibility)
+	- [Quick Start](#quick-start)
+	- [Background Types](#background-types)
+		- [1. Animated Network (`animated-network`)](#1-animated-network-animated-network)
+		- [2. Particles Only (`particles`)](#2-particles-only-particles)
+		- [3. Gradient (`gradient`)](#3-gradient-gradient)
+		- [4. None (`none`)](#4-none-none)
+	- [Configuration Options](#configuration-options)
+		- [Core Settings](#core-settings)
+		- [Particle Configuration](#particle-configuration)
+			- [Density-Based Particle Count](#density-based-particle-count)
+		- [Connection Configuration (Animated Network Only)](#connection-configuration-animated-network-only)
+		- [Animation Settings](#animation-settings)
+		- [Gradient Configuration](#gradient-configuration)
+	- [Performance Optimization](#performance-optimization)
+		- [For Lower-End Devices](#for-lower-end-devices)
+		- [For High-End Devices](#for-high-end-devices)
+	- [Color Schemes](#color-schemes)
+		- [Tech/Modern Theme](#techmodern-theme)
+		- [Warm/Creative Theme](#warmcreative-theme)
+		- [Minimalist Theme](#minimalist-theme)
+	- [Accessibility Considerations](#accessibility-considerations)
+	- [Troubleshooting](#troubleshooting)
+		- [Performance Issues](#performance-issues)
+		- [Visual Issues](#visual-issues)
+		- [Interactive Issues](#interactive-issues)
+	- [Examples](#examples)
+	- [Schema Support](#schema-support)
+
+
+## Accessibility
+
+- To disable animated backgrounds for accessibility, set `"type": "none", "enabled": false` in your config.
+- Consider providing a UI toggle for users with motion sensitivity.
 
 ## Quick Start
 
-The animated background is configured in the `home.background` section of your `settings.json` file:
+The animated background is configured in the `background` section of your `settings.json` file:
 
 ```json
 {
@@ -248,7 +287,7 @@ The particle system now uses **density-based scaling** to maintain consistent vi
 
 ## Examples
 
-See `examples/background-configurations.json` for complete configuration examples and `docs/ANIMATED_BACKGROUND_GUIDE.md` for additional examples and use cases.
+See `examples/background-configurations.json` for complete configuration examples and `docs/ANIMATED%20BACKGROUND%20GUIDE.md` for additional examples and use cases.
 
 ## Schema Support
 

@@ -1,5 +1,5 @@
 {
-    "//": "Example background configurations for the AnimatedBackground component",
+    "//": "Example Background Configurations for the AnimatedBackground component",
     "examples": {
         "animated-network-default": {
 			"type": "animated-network",

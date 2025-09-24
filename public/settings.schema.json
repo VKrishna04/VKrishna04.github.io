@@ -71,7 +71,7 @@
 				"accessToken": {
 					"type": "string",
 					"pattern": "^(ghp_|gho_|ghu_|ghs_|ghr_|github_pat_)[a-zA-Z0-9_]+$",
-					"description": "Optional GitHub Personal Access Token for higher rate limits and private repository access. Format: ghp_xxxxxxxxxxxx\n\nSecurity: Store in environment variables, not in committed code!",
+					"description": "Optional GitHub Personal Access Token for higher rate limits and private repository access. Format: ghp_xxxxxxxxxxxx\n\nSecurity: Store in Environment Variables, not in committed code!",
 					"examples": [
 						"ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 					]
@@ -535,7 +535,7 @@
 				},
 				"background": {
 					"type": "object",
-					"description": "Background configuration for the home page. Supports multiple background types including animated networks, gradients, particles, and static backgrounds.",
+					"description": "Background Configuration for the home page. Supports multiple background types including animated networks, gradients, particles, and static backgrounds.",
 					"additionalProperties": false,
 					"properties": {
 						"type": {
@@ -1311,7 +1311,7 @@
 									"Experimental",
 									"Ongoing"
 								],
-								"description": "Current development and deployment status of the project. This helps visitors understand the project's maturity and availability.",
+								"description": "Current development and Deployment status of the project. This helps visitors understand the project's maturity and availability.",
 								"default": "Completed"
 							},
 							"startDate": {
@@ -1347,7 +1347,7 @@
 							},
 							"liveUrl": {
 								"$ref": "#/definitions/url",
-								"description": "Live deployment URL where the project is hosted and accessible to users (production website/app)",
+								"description": "Live Deployment URL where the project is hosted and accessible to users (production website/app)",
 								"examples": [
 									"https://vkrishna04.github.io/ParkMeter/",
 									"https://myapp.vercel.app",
@@ -2594,7 +2594,7 @@
 										"description": "Local file path relative to public folder"
 									}
 								],
-								"description": "Live deployment URL where the project is accessible",
+								"description": "Live Deployment URL where the project is accessible",
 								"examples": [
 									"https://life-experimentalist.github.io/CounterAPI/",
 									"assets/projects/demo.html",
@@ -2828,7 +2828,7 @@
 								"type": "string",
 								"minLength": 1,
 								"maxLength": 200,
-								"description": "Optional description for the platform (used on contact page)",
+								"description": "Optional description for the platform (used on Contact Page)",
 								"examples": [
 									"Connect with me professionally",
 									"Check out my repositories and contributions",
@@ -2887,14 +2887,14 @@
 							},
 							"showInContact": {
 								"type": "boolean",
-								"description": "Whether to display this platform on the contact page",
+								"description": "Whether to display this platform on the Contact Page",
 								"default": true
 							},
 							"contactSection": {
 								"type": "number",
 								"minimum": 1,
 								"maximum": 10,
-								"description": "Section number for grouping platforms on contact page. Platforms with same number will be grouped together under the corresponding section heading.",
+								"description": "Section number for grouping platforms on Contact Page. Platforms with same number will be grouped together under the corresponding section heading.",
 								"examples": [
 									1,
 									2,
@@ -2975,14 +2975,14 @@
 		},
 		"contact": {
 			"type": "object",
-			"description": "Contact page configuration and content settings",
+			"description": "Contact Page configuration and content settings",
 			"additionalProperties": false,
 			"properties": {
 				"title": {
 					"type": "string",
 					"minLength": 1,
 					"maxLength": 100,
-					"description": "Main heading for the contact page",
+					"description": "Main heading for the Contact Page",
 					"default": "Let's Connect",
 					"examples": [
 						"Let's Connect",
@@ -2994,7 +2994,7 @@
 					"type": "string",
 					"minLength": 1,
 					"maxLength": 500,
-					"description": "Subtitle or description for the contact page",
+					"description": "Subtitle or description for the Contact Page",
 					"default": "I'm always interested in new opportunities and collaborations. Let's build something amazing together!",
 					"examples": [
 						"I'm always interested in new opportunities and collaborations.",
@@ -3240,7 +3240,7 @@
 				},
 				"sections": {
 					"type": "object",
-					"description": "Layout configuration for contact page sections",
+					"description": "Layout configuration for Contact Page sections",
 					"additionalProperties": false,
 					"properties": {
 						"platformSorting": {
@@ -3420,7 +3420,7 @@
 				},
 				"faq": {
 					"type": "array",
-					"description": "Frequently asked questions for the contact page",
+					"description": "Frequently asked questions for the Contact Page",
 					"items": {
 						"type": "object",
 						"additionalProperties": false,
@@ -3474,7 +3474,7 @@
 				},
 				"note": {
 					"type": "string",
-					"description": "Configuration notes and instructions for the contact page setup"
+					"description": "Configuration notes and instructions for the Contact Page setup"
 				}
 			},
 			"required": [

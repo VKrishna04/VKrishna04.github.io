@@ -1,6 +1,35 @@
 # GitHub Pages & Cloudflare Pages Deployment Guide
 
+See also: [Environment Variables Guide](./ENVIRONMENT%20VARIABLES.md) for details on configuring Environment Variables for Deployment.
+
 This repository is configured to deploy to both GitHub Pages and Cloudflare Pages with environment variable support.
+
+## Table of Contents
+- [GitHub Pages \& Cloudflare Pages Deployment Guide](#github-pages--cloudflare-pages-deployment-guide)
+	- [Table of Contents](#table-of-contents)
+	- [GitHub Actions Setup](#github-actions-setup)
+		- [1. Enable GitHub Pages](#1-enable-github-pages)
+		- [2. Set Environment Variables](#2-set-environment-variables)
+		- [3. Workflow Configuration](#3-workflow-configuration)
+	- [Cloudflare Pages Setup](#cloudflare-pages-setup)
+		- [1. Connect Repository](#1-connect-repository)
+		- [2. Build Configuration](#2-build-configuration)
+		- [3. Environment Variables](#3-environment-variables)
+		- [4. Custom Domain (Optional)](#4-custom-domain-optional)
+	- [Environment Variable Examples](#environment-variable-examples)
+		- [Google Drive Resume](#google-drive-resume)
+		- [OneDrive Resume](#onedrive-resume)
+		- [CDN Hosted Resume](#cdn-hosted-resume)
+		- [Local File (fallback)](#local-file-fallback)
+	- [Verification](#verification)
+	- [Troubleshooting](#troubleshooting)
+		- [GitHub Actions Issues](#github-actions-issues)
+		- [Cloudflare Pages Issues](#cloudflare-pages-issues)
+		- [Environment Variable Not Working](#environment-variable-not-working)
+	- [Performance Optimization](#performance-optimization)
+	- [Security Features](#security-features)
+	- [Monitoring](#monitoring)
+
 
 ## GitHub Actions Setup
 
@@ -22,7 +51,7 @@ The `.github/workflows/deploy.yml` file is already configured with:
 - Dependency installation and caching
 - Linting and building
 - Environment variable injection
-- GitHub Pages deployment
+- GitHub Pages Deployment
 
 ## Cloudflare Pages Setup
 
@@ -40,7 +69,7 @@ Set these build settings:
 - **Node.js version:** 18 or 20
 
 ### 3. Environment Variables
-1. In Cloudflare Pages → Settings → Environment variables
+1. In Cloudflare Pages → Settings → Environment Variables
 2. Add variable:
    - **Variable name:** `VITE_RESUME_LINK`
    - **Value:** Your resume URL
@@ -57,6 +86,8 @@ Set these build settings:
 ```bash
 VITE_RESUME_LINK="https://drive.google.com/drive/folders/1pLvckiL1bPmbkMn3BI1pqp3ud2z79DcN?usp=sharing"
 ```
+
+If the environment variable is not set, the app will fallback to the value in `settings.json` or `/resume.pdf`.
 
 ### OneDrive Resume
 ```bash
@@ -75,7 +106,7 @@ VITE_RESUME_LINK="/resume.pdf"
 
 ## Verification
 
-After deployment, verify the setup:
+After Deployment, verify the setup:
 
 1. **Check build logs** for environment variable loading
 2. **Open browser console** on your site
@@ -92,7 +123,7 @@ After deployment, verify the setup:
 ### Cloudflare Pages Issues
 - Check build logs in Cloudflare dashboard
 - Verify environment variable is set for correct environment
-- Redeploy after adding environment variables
+- Redeploy after adding Environment Variables
 
 ### Environment Variable Not Working
 - Ensure the variable name has `VITE_` prefix
@@ -118,8 +149,8 @@ Both platforms provide:
 
 ## Monitoring
 
-Track your deployment:
+Track your Deployment:
 - **GitHub Actions:** Check workflow status and logs
-- **Cloudflare Pages:** Monitor build and deployment status
+- **Cloudflare Pages:** Monitor build and Deployment status
 - **Analytics:** Use Cloudflare Web Analytics or Google Analytics
 - **Error Tracking:** Monitor browser console for errors

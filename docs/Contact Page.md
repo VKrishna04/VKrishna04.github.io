@@ -2,12 +2,13 @@
 
 ## 🎯 **Overview**
 
-The contact page has been completely revamped to eliminate the redundant message form and provide a more valuable, engaging experience for visitors. The new design focuses on making it easy to connect while providing useful information about availability, response times, and collaboration interests.
+The Contact Page has been completely revamped to eliminate the redundant message form and provide a more valuable, engaging experience for visitors. The new design focuses on making it easy to connect while providing useful information about availability, response times, and collaboration interests.
 
 ## Table of Contents
 - [Contact Page Revamp Documentation](#contact-page-revamp-documentation)
 	- [🎯 **Overview**](#-overview)
 	- [Table of Contents](#table-of-contents)
+	- [Table of Contents](#table-of-contents-1)
 	- [**New Features**](#new-features)
 			- [**1. Availability Status**](#1-availability-status)
 			- [**2. Response Information**](#2-response-information)
@@ -17,7 +18,42 @@ The contact page has been completely revamped to eliminate the redundant message
 			- [**6. Interactive Elements**](#6-interactive-elements)
 			- [**7. FAQ Section**](#7-faq-section)
 	- [📋 **Configuration Structure**](#-configuration-structure)
-		- [**Settings.json Contact Section**](#settingsjson-contact-section)
+		- [Quick Reference Table](#quick-reference-table)
+		- [**Schema Validation**](#schema-validation)
+	- [🎨 **Design Features**](#-design-features)
+		- [**Layout Structure**](#layout-structure)
+		- [**Key Design Elements**](#key-design-elements)
+	- [🛠 **Technical Implementation**](#-technical-implementation)
+		- [**React Components**](#react-components)
+		- [**Key Functions**](#key-functions)
+		- [**Performance Optimizations**](#performance-optimizations)
+	- [📱 **User Experience Improvements**](#-user-experience-improvements)
+		- [**Before (Problems)**](#before-problems)
+		- [**After (Solutions)**](#after-solutions)
+	- [🎯 **Benefits**](#-benefits)
+	- [🔧 **Configuration Guide**](#-configuration-guide)
+		- [**To Update Status**](#to-update-status)
+		- [**To Add FAQ Items**](#to-add-faq-items)
+		- [**To Update Social Descriptions**](#to-update-social-descriptions)
+	- [🚀 **Future Enhancements**](#-future-enhancements)
+	- [✨ **Summary**](#-summary)
+
+
+## Table of Contents
+- [Contact Page Revamp Documentation](#contact-page-revamp-documentation)
+	- [🎯 **Overview**](#-overview)
+	- [Table of Contents](#table-of-contents)
+	- [Table of Contents](#table-of-contents-1)
+	- [**New Features**](#new-features)
+			- [**1. Availability Status**](#1-availability-status)
+			- [**2. Response Information**](#2-response-information)
+			- [**3. Current Focus Section**](#3-current-focus-section)
+			- [**4. Collaboration Interests**](#4-collaboration-interests)
+			- [**5. Enhanced Social Integration**](#5-enhanced-social-integration)
+			- [**6. Interactive Elements**](#6-interactive-elements)
+			- [**7. FAQ Section**](#7-faq-section)
+	- [📋 **Configuration Structure**](#-configuration-structure)
+		- [Quick Reference Table](#quick-reference-table)
 		- [**Schema Validation**](#schema-validation)
 	- [🎨 **Design Features**](#-design-features)
 		- [**Layout Structure**](#layout-structure)
@@ -108,7 +144,7 @@ The contact page has been completely revamped to eliminate the redundant message
 "faq": [
   {
     "question": "What's your typical response time?",
-    "answer": "I usually respond to emails and messages within 24 hours during weekdays..."
+    "answer": "I usually respond to emails and messages within 24 hours during weekdays. If it's a weekend or holiday, it might take a bit longer."
   }
 ]
 ```
@@ -118,23 +154,23 @@ The contact page has been completely revamped to eliminate the redundant message
 
 ## 📋 **Configuration Structure**
 
-### **Settings.json Contact Section**
-```json
-{
-  "contact": {
-    "title": "Let's Connect",
-    "subtitle": "I'm always interested in new opportunities...",
-    "timeZone": "Asia/Kolkata",
-    "timeFormat": "12-hour",
-    "status": { /* availability status */ },
-    "responseInfo": { /* response expectations */ },
-    "currentFocus": { /* what you're working on */ },
-    "collaborationInterests": [ /* array of interests */ ],
-    "faq": [ /* frequently asked questions */ ],
-    "calendly": "" /* optional scheduling integration */
-  }
-}
-```
+
+### Quick Reference Table
+
+| Key                    | Type   | Description                       |
+| ---------------------- | ------ | --------------------------------- |
+| title                  | string | Main heading                      |
+| subtitle               | string | Subheading                        |
+| timeZone               | string | User's timezone                   |
+| timeFormat             | string | '12-hour' or '24-hour'            |
+| status                 | object | Availability status               |
+| responseInfo           | object | Response expectations             |
+| currentFocus           | object | What you're working on            |
+| collaborationInterests | array  | Collaboration interests           |
+| faq                    | array  | Frequently asked questions        |
+| calendly               | string | Scheduling integration (optional) |
+
+All configuration is managed under the `contact` key in your `settings.json` file.
 
 ### **Schema Validation**
 - Complete JSON schema validation for all new fields
@@ -212,7 +248,7 @@ The contact page has been completely revamped to eliminate the redundant message
 // Get contact information from settings
 const getContactInfo = () => { /* ... */ }
 
-// Get social links for contact page
+// Get social links for Contact Page
 const getSocialLinks = () => { /* ... */ }
 
 // Format current time for user's timezone
@@ -299,7 +335,7 @@ Potential additions for future versions:
 
 ## ✨ **Summary**
 
-The contact page revamp successfully transforms a redundant form-based page into a valuable, informative hub that:
+The Contact Page revamp successfully transforms a redundant form-based page into a valuable, informative hub that:
 - Provides immediate value to visitors
 - Sets clear expectations for communication
 - Showcases current focus and collaboration interests

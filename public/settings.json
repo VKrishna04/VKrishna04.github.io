@@ -626,7 +626,7 @@
 							"icon": "FaDocker",
 							"color": "text-blue-500",
 							"level": 70,
-							"description": "Containerization and deployment"
+							"description": "Containerization and Deployment"
 						},
 						{
 							"name": "Vite",
@@ -1094,7 +1094,7 @@
 						"color": "text-purple-400"
 					}
 				],
-				"description": "Developed FastAPI analytics microservice with PostgreSQL for zero-code visitor tracking, featuring real-time dashboards and few-click cloud deployment. Automated CI/CD pipeline, optimizing for high performance and reliability.",
+				"description": "Developed FastAPI analytics microservice with PostgreSQL for zero-code visitor tracking, featuring real-time dashboards and few-click cloud Deployment. Automated CI/CD pipeline, optimizing for high performance and reliability.",
 				"githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
 				"liveUrl": "https://life-experimentalist.github.io/CounterAPI/"
 			},
@@ -1698,7 +1698,7 @@
 		"faq": [
 			{
 				"question": "What's your typical response time?",
-				"answer": "I usually respond to emails and messages within"
+				"answer": "I usually respond to emails and messages within 24 hours during weekdays. If it's a weekend or holiday, it might take a bit longer."
 			},
 			{
 				"question": "What types of projects do you work on?",
@@ -1714,7 +1714,7 @@
 			}
 		],
 		"calendly": "",
-		"note": "Configure the contact page layout, sections, and content. The contact page supports a flexible two-column layout with configurable sections. You can rearrange sections, change titles, add/remove sections, and control what content appears where. Available section types: 'contactInfo' (email, phone, location), 'currentFocus' (what you're working on), 'quickActions' (action buttons with icons), 'github' (GitHub profiles), 'social' (social media platforms), 'collaboration' (collaboration interests). Each section can be shown/hidden and have custom titles. The 'github' and 'social' sections automatically pull from the configured platforms and will display in a grid layout. Platforms with descriptions will be displayed horizontally with text, while simple platforms will show as icon-only cards. Social platforms can be filtered to show only on contact page by setting showInContact: true and other show flags to false."
+		"note": "Configure the Contact Page layout, sections, and content. The Contact Page supports a flexible two-column layout with configurable sections. You can rearrange sections, change titles, add/remove sections, and control what content appears where. Available section types: 'contactInfo' (email, phone, location), 'currentFocus' (what you're working on), 'quickActions' (action buttons with icons), 'github' (GitHub profiles), 'social' (social media platforms), 'collaboration' (collaboration interests). Each section can be shown/hidden and have custom titles. The 'github' and 'social' sections automatically pull from the configured platforms and will display in a grid layout. Platforms with descriptions will be displayed horizontally with text, while simple platforms will show as icon-only cards. Social platforms can be filtered to show only on Contact Page by setting showInContact: true and other show flags to false."
 	},
 	"navbar": {
 		"logo": {

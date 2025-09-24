@@ -40,7 +40,7 @@ coverage/
 # Instrumentation
 .nyc_output
 
-# Environment variables
+# Environment Variables
 *.key
 .env
 .env.local
@@ -100,7 +100,7 @@ Thumbs.db
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv Environment Variables file
 .env
 .env.test
 .env.production
@@ -136,7 +136,6 @@ firebase.json
 
 # Netlify
 .netlify
-
 
 .vscode/
 .vscode/settings.json

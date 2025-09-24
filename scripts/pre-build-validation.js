@@ -244,7 +244,7 @@ async function validateCriticalFilesAgainstGitHub() {
 		process.env.NOW_REGION || // Vercel (legacy)
 		process.env.DEPLOY_URL || // Netlify build
 		process.env.CF_PAGES_URL || // Cloudflare Pages
-		process.env.VERCEL_URL || // Vercel deployment
+		process.env.VERCEL_URL || // Vercel Deployment
 		process.env.BUILD_ID || // Generic build system
 		process.env.DRONE === "true" || // Drone CI
 		process.env.TRAVIS === "true" || // Travis CI

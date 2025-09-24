@@ -351,7 +351,7 @@ graph LR
 │   │   └── 📄 useProjectsDataFixed.js # Fixed project data
 │   ├── 📁 pages/              # Page components
 │   │   ├── 📄 About.jsx       # About page
-│   │   ├── 📄 Contact.jsx     # Contact page
+│   │   ├── 📄 Contact.jsx     # Contact Page
 │   │   ├── 📄 Home.jsx        # Landing page
 │   │   ├── 📄 NotFound.jsx    # 404 error page
 │   │   ├── 📄 Projects.jsx    # Projects showcase
@@ -367,9 +367,9 @@ graph LR
 │   ├── 📄 main.jsx            # Application entry point
 │   └── 📄 styles.css          # Additional styles
 ├── 📁 docs/                   # Documentation
-│   ├── 📄 SETTINGS_GUIDE.md   # Configuration guide
-│   ├── 📄 SETTINGS_REFERENCE.md # Settings reference
-│   └── 📄 PROJECTS_STATIC_DYNAMIC.md # Project modes
+│   ├── 📄 SETTINGS GUIDE.md   # Configuration guide
+│   ├── 📄 SETTINGS REFERENCE.md # Settings reference
+│   └── 📄 PROJECTS STATIC DYNAMIC.md # Project modes
 ├── 📄 ARCHITECTURE.md         # This file
 ├── 📄 LICENSE.md              # License information
 ├── 📄 README.md               # Project overview
@@ -408,7 +408,7 @@ graph LR
 - **Trade-offs**: API rate limits, network dependency
 
 ### 6. **Static Site Generation**
-- **Rationale**: Fast loading, excellent SEO, simple deployment
+- **Rationale**: Fast loading, excellent SEO, simple Deployment
 - **Benefits**: CDN cacheable, secure, cost-effective hosting
 - **Trade-offs**: No server-side processing, build-time data
 

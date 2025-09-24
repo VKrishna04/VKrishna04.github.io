@@ -1,7 +1,50 @@
 # Animated Background Configuration Examples
 
 ## Overview
-The AnimatedBackground component now supports multiple background types and extensive customization options. Below are examples of different configurations you can use.
+The AnimatedBackground component supports multiple background types and extensive customization options, all configured via the `background` key in your `settings.json` file. Below are examples and a quick reference for all options.
+
+## Table of Contents
+- [Animated Background Configuration Examples](#animated-background-configuration-examples)
+	- [Overview](#overview)
+	- [Table of Contents](#table-of-contents)
+	- [Quick Reference Table](#quick-reference-table)
+	- [Accessibility](#accessibility)
+	- [Background Types](#background-types)
+		- [1. Animated Network (Default)](#1-animated-network-default)
+		- [2. Particles Only (No Connections)](#2-particles-only-no-connections)
+		- [3. Gradient Background](#3-gradient-background)
+		- [4. Combined Gradient + Animated Network](#4-combined-gradient--animated-network)
+		- [5. High Performance Mode (Fewer Particles)](#5-high-performance-mode-fewer-particles)
+		- [6. Intense Interactive Mode](#6-intense-interactive-mode)
+		- [7. No Background](#7-no-background)
+	- [Configuration Options](#configuration-options)
+		- [Density-Based Particle System](#density-based-particle-system)
+			- [Key Properties:](#key-properties)
+			- [Screen Size Examples:](#screen-size-examples)
+		- [Particle Properties](#particle-properties)
+		- [Connection Properties (animated-network only)](#connection-properties-animated-network-only)
+		- [Animation Properties](#animation-properties)
+		- [Gradient Properties](#gradient-properties)
+	- [Tips for Optimization](#tips-for-optimization)
+	- [Current Configuration](#current-configuration)
+
+
+## Quick Reference Table
+
+| Key       | Type    | Description                                                          |
+| --------- | ------- | -------------------------------------------------------------------- |
+| type      | string  | Background type: 'animated-network', 'particles', 'gradient', 'none' |
+| enabled   | boolean | Enable/disable the background effect                                 |
+| particles | object  | Particle system configuration                                        |
+| animation | object  | Animation speed and smoothness                                       |
+| gradient  | object  | Gradient Background Configuration                                    |
+| ...       | ...     | See below for all sub-keys and options                               |
+
+## Accessibility
+
+- To disable animated backgrounds for accessibility, set `"type": "none", "enabled": false` in your config.
+- Consider providing a UI toggle for users with motion sensitivity.
+- The system respects density-based scaling for performance and accessibility.
 
 ## Background Types
 
@@ -194,15 +237,14 @@ The AnimatedBackground component now supports multiple background types and exte
 
 The animated background now uses an intelligent **density-based particle system** that automatically adjusts the number of particles based on screen size:
 
-- **Consistent Visual Density**: Maintains the same visual "fullness" across all devices
-- **Performance Optimization**: Fewer particles on mobile, more on large screens
-- **Dynamic Adjustment**: Particle count updates when window is resized
-- **Configurable Bounds**: Set minimum and maximum particle limits
+The animated background uses a **density-based particle system** that automatically adjusts the number of particles based on screen size. All configuration is managed under the `background` key in your `settings.json` file.
 
 #### Key Properties:
-- `count`: Base particle count for 1920x1080 screen (density reference)
-- `minParticles`: Minimum particles for small screens (default: 30)
-- `maxParticles`: Maximum particles for large screens (default: 400)
+| Property     | Type   | Description                                                  |
+| ------------ | ------ | ------------------------------------------------------------ |
+| count        | number | Base particle count for 1920x1080 screen (density reference) |
+| minParticles | number | Minimum particles for small screens (default: 30)            |
+| maxParticles | number | Maximum particles for large screens (default: 400)           |
 
 #### Screen Size Examples:
 - **Mobile Portrait (375x667)**: ~35 particles

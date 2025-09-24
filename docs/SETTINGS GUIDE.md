@@ -1,6 +1,70 @@
 # Settings.json Configuration Guide
 
+See also:
+- [Settings Reference](./SETTINGS%20REFERENCE.md) for a quick reference of all config keys
+- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md) for project configuration modes
+- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md) for background options
+
 This guide provides comprehensive documentation for configuring your portfolio through the `settings.json` file.
+
+## Table of Contents
+- [Settings.json Configuration Guide](#settingsjson-configuration-guide)
+	- [Table of Contents](#table-of-contents)
+	- [🏗️ Configuration Architecture](#️-configuration-architecture)
+	- [⚙️ Configuration Flow](#️-configuration-flow)
+	- [📋 Configuration Categories](#-configuration-categories)
+	- [🚀 Getting Started](#-getting-started)
+		- [Schema Reference](#schema-reference)
+	- [🔗 GitHub Configuration](#-github-configuration)
+		- [Configuration Example](#configuration-example)
+		- [Configuration Options](#configuration-options)
+	- [📊 Project Settings](#-project-settings)
+		- [Configuration Example](#configuration-example-1)
+		- [Configuration Options](#configuration-options-1)
+	- [👤 Display Configuration](#-display-configuration)
+	- [🏠 Home Page Configuration](#-home-page-configuration)
+		- [Basic Information](#basic-information)
+		- [Typewriter Effect](#typewriter-effect)
+		- [Location Display](#location-display)
+		- [Profile Image Configuration](#profile-image-configuration)
+		- [Action Buttons](#action-buttons)
+		- [Animation Settings](#animation-settings)
+	- [📱 Social Media Configuration](#-social-media-configuration)
+		- [Available Social Icons](#available-social-icons)
+		- [Color Examples](#color-examples)
+	- [📖 About Page Configuration](#-about-page-configuration)
+		- [Basic Information](#basic-information-1)
+		- [Profile Image](#profile-image)
+		- [Skills Configuration](#skills-configuration)
+		- [Available Category Icons](#available-category-icons)
+		- [Available Skill Icons](#available-skill-icons)
+		- [Statistics Section](#statistics-section)
+	- [📄 Resume Configuration](#-resume-configuration)
+		- [File Serving Options](#file-serving-options)
+		- [Section Ordering](#section-ordering)
+		- [Work Experience](#work-experience)
+		- [Education](#education)
+		- [Skills (Resume Format)](#skills-resume-format)
+		- [Certifications](#certifications)
+		- [Personal Projects](#personal-projects)
+		- [Publications](#publications)
+		- [Languages](#languages)
+		- [Volunteer Experience](#volunteer-experience)
+	- [🧭 Navigation Configuration](#-navigation-configuration)
+		- [Logo Configuration](#logo-configuration)
+		- [Navigation Items](#navigation-items)
+		- [Styling Options](#styling-options)
+	- [🦶 Footer Configuration](#-footer-configuration)
+	- [⚙️ Advanced Configuration](#️-advanced-configuration)
+		- [Favicon Settings](#favicon-settings)
+			- [**React Icons Support**](#react-icons-support)
+		- [Counter API (Optional)](#counter-api-optional)
+	- [🎨 Color and Styling Guide](#-color-and-styling-guide)
+		- [Tailwind Color Classes](#tailwind-color-classes)
+		- [Responsive Breakpoints](#responsive-breakpoints)
+	- [🚨 Common Mistakes to Avoid](#-common-mistakes-to-avoid)
+	- [🔧 Debugging Tips](#-debugging-tips)
+	- [📝 Additional Notes](#-additional-notes)
 
 ## 🏗️ Configuration Architecture
 
@@ -147,67 +211,6 @@ mindmap
       Social Links
       Copyright Info
 ```
-
-## 📋 Table of Contents
-
-1. [Getting Started](- [Settings.json Configuration Guide](#settingsjson-configuration-guide)
-	- [🏗️ Configuration Architecture](#️-configuration-architecture)
-	- [⚙️ Configuration Flow](#️-configuration-flow)
-	- [📋 Configuration Categories](#-configuration-categories)
-	- [📋 Table of Contents](#-table-of-contents)
-	- [🚀 Getting Started](#-getting-started)
-		- [Schema Reference](#schema-reference)
-	- [🔗 GitHub Configuration](#-github-configuration)
-		- [Configuration Example](#configuration-example)
-		- [Configuration Options](#configuration-options)
-	- [📊 Project Settings](#-project-settings)
-		- [Configuration Example](#configuration-example-1)
-		- [Configuration Options](#configuration-options-1)
-	- [👤 Display Configuration](#-display-configuration)
-	- [🏠 Home Page Configuration](#-home-page-configuration)
-		- [Basic Information](#basic-information)
-		- [Typewriter Effect](#typewriter-effect)
-		- [Location Display](#location-display)
-		- [Profile Image Configuration](#profile-image-configuration)
-		- [Action Buttons](#action-buttons)
-		- [Animation Settings](#animation-settings)
-	- [📱 Social Media Configuration](#-social-media-configuration)
-		- [Available Social Icons](#available-social-icons)
-		- [Color Examples](#color-examples)
-	- [📖 About Page Configuration](#-about-page-configuration)
-		- [Basic Information](#basic-information-1)
-		- [Profile Image](#profile-image)
-		- [Skills Configuration](#skills-configuration)
-		- [Available Category Icons](#available-category-icons)
-		- [Available Skill Icons](#available-skill-icons)
-		- [Statistics Section](#statistics-section)
-	- [📄 Resume Configuration](#-resume-configuration)
-		- [File Serving Options](#file-serving-options)
-		- [Section Ordering](#section-ordering)
-		- [Work Experience](#work-experience)
-		- [Education](#education)
-		- [Skills (Resume Format)](#skills-resume-format)
-		- [Certifications](#certifications)
-		- [Personal Projects](#personal-projects)
-		- [Publications](#publications)
-		- [Languages](#languages)
-		- [Volunteer Experience](#volunteer-experience)
-	- [🧭 Navigation Configuration](#-navigation-configuration)
-		- [Logo Configuration](#logo-configuration)
-		- [Navigation Items](#navigation-items)
-		- [Styling Options](#styling-options)
-	- [🦶 Footer Configuration](#-footer-configuration)
-	- [⚙️ Advanced Configuration](#️-advanced-configuration)
-		- [Favicon Settings](#favicon-settings)
-			- [**React Icons Support**](#react-icons-support)
-		- [Counter API (Optional)](#counter-api-optional)
-	- [🎨 Color and Styling Guide](#-color-and-styling-guide)
-		- [Tailwind Color Classes](#tailwind-color-classes)
-		- [Responsive Breakpoints](#responsive-breakpoints)
-	- [🚨 Common Mistakes to Avoid](#-common-mistakes-to-avoid)
-	- [🔧 Debugging Tips](#-debugging-tips)
-	- [📝 Additional Notes](#-additional-notes)
-)
 
 ## 🚀 Getting Started
 
@@ -540,7 +543,7 @@ Centralized social media management with per-section visibility control.
         "hoverColor": "hover:text-gray-300", // Hover color
         "showInHome": true,          // Show on home page
         "showInFooter": true,        // Show in footer
-        "showInContact": true,       // Show on contact page
+        "showInContact": true,       // Show on Contact Page
         "enabled": true              // Enable this platform
       }
     ],
@@ -1048,6 +1051,13 @@ shadow-purple-500/25, shadow-cyan-500/25, shadow-lg
 This comprehensive guide covers all aspects of the `settings.json` configuration. For additional help, check the in section notes in the settings file or refer to the main README.md file.
 
 ## 📝 Additional Notes
+**Related Guides:**
+- [Settings Reference](./SETTINGS%20REFERENCE.md)
+- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md)
+- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md)
+- [Favicon Guide](./FAVICON%20GUIDE.md)
+
+**Best Practices:**
 - Ensure all URLs are valid and accessible.
 - Use the provided schema for IntelliSense support in VS Code.
 - For any issues, refer to the project's GitHub repository for troubleshooting and support.

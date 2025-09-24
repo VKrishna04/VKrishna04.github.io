@@ -4,7 +4,41 @@
  * This file shows how to configure the new dynamic favicon and navbar features
  */
 
-// Example 1: GitHub-based favicon and navbar
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Quick Reference Table](#quick-reference-table)
+	- [Example 1: GitHub-based favicon and navbar](#example-1-github-based-favicon-and-navbar)
+	- [Example 2: Custom image favicon and navbar](#example-2-custom-image-favicon-and-navbar)
+	- [Example 3: Auto-match home profile settings](#example-3-auto-match-home-profile-settings)
+	- [Example 4: Text-only logo (default)](#example-4-text-only-logo-default)
+
+
+## Quick Reference Table
+
+| Key                        | Type    | Description                                |
+| -------------------------- | ------- | ------------------------------------------ |
+| favicon.type               | string  | 'github', 'custom', 'icon', 'default'      |
+| favicon.customUrl          | string  | Custom favicon URL                         |
+| favicon.githubUsername     | string  | GitHub username for profile image          |
+| favicon.iconName           | string  | React Icon name from react-icons.github.io |
+| favicon.iconColor          | string  | Icon color (hex)                           |
+| favicon.backgroundColor    | string  | Background color or 'transparent'          |
+| favicon.iconSize           | number  | Icon size in pixels                        |
+| favicon.sizes              | array   | Icon sizes                                 |
+| favicon.appleTouchIcon     | boolean | Generate Apple touch icon                  |
+| navbar.logo.type           | string  | 'text', 'image', 'github', 'auto'          |
+| navbar.logo.text           | string  | Logo text                                  |
+| navbar.logo.name           | string  | Full name                                  |
+| navbar.logo.showName       | boolean | Show name with logo                        |
+| navbar.logo.gradient       | string  | Logo gradient                              |
+| navbar.logo.customImageUrl | string  | Custom image URL                           |
+| navbar.logo.githubUsername | string  | GitHub username for logo                   |
+| navbar.logo.imageSize      | string  | Tailwind size classes                      |
+| navbar.logo.borderRadius   | string  | Tailwind border radius                     |
+
+All configuration is managed under the `favicon` and `navbar.logo` keys in your `settings.json` file.
+
+### Example 1: GitHub-based favicon and navbar
 {
   "favicon": {
     "type": "github",
@@ -29,7 +63,7 @@
   }
 }
 
-// Example 2: Custom image favicon and navbar
+### Example 2: Custom image favicon and navbar
 {
   "favicon": {
     "type": "custom",
@@ -49,7 +83,7 @@
   }
 }
 
-// Example 3: Auto-match home profile settings
+### Example 3: Auto-match home profile settings
 {
   "navbar": {
     "logo": {
@@ -62,7 +96,7 @@
   }
 }
 
-// Example 4: Text-only logo (default)
+### Example 4: Text-only logo (default)
 {
   "navbar": {
     "logo": {

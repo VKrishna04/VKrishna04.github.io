@@ -1,14 +1,9 @@
 # Dynamic Favicon Manager with React Icons
 
-This favicon system allows you to dynamically generate favicons from:
-- **GitHub profile images**
-- **Custom image URLs**
-- **Any React Icon from react-icons.github.io**
-- **Browser default favicon**
-
 ## Table of Contents
 - [Dynamic Favicon Manager with React Icons](#dynamic-favicon-manager-with-react-icons)
 	- [Table of Contents](#table-of-contents)
+	- [Quick Reference Table](#quick-reference-table)
 	- [🎨 **React Icons Support**](#-react-icons-support)
 		- [**Icon Libraries Supported:**](#icon-libraries-supported)
 	- [⚙️ **Configuration Examples**](#️-configuration-examples)
@@ -24,6 +19,29 @@ This favicon system allows you to dynamically generate favicons from:
 	- [🎨 **Color Examples**](#-color-examples)
 	- [🏃‍♂️ **Dynamic Loading**](#️-dynamic-loading)
 	- [🔄 **Automatic Updates**](#-automatic-updates)
+
+
+## Quick Reference Table
+
+| Key             | Type    | Description                                |
+| --------------- | ------- | ------------------------------------------ |
+| type            | string  | 'github', 'custom', 'icon', 'default'      |
+| customUrl       | string  | Custom favicon URL                         |
+| githubUsername  | string  | GitHub username for profile image          |
+| iconName        | string  | React Icon name from react-icons.github.io |
+| iconColor       | string  | Icon color (hex)                           |
+| backgroundColor | string  | Background color or 'transparent'          |
+| iconSize        | number  | Icon size in pixels                        |
+| sizes           | array   | Icon sizes                                 |
+| appleTouchIcon  | boolean | Generate Apple touch icon                  |
+
+All configuration is managed under the `favicon` key in your `settings.json` file.
+
+This favicon system allows you to dynamically generate favicons from:
+- **GitHub profile images**
+- **Custom image URLs**
+- **Any React Icon from react-icons.github.io**
+- **Browser default favicon**
 
 
 ## 🎨 **React Icons Support**
@@ -166,7 +184,7 @@ Visit [react-icons.github.io](https://react-icons.github.io/react-icons) to brow
 
 ## 🏃‍♂️ **Dynamic Loading**
 
-The favicon manager dynamically loads only the icon library needed, ensuring optimal performance. No need to import all icons - just specify the name and it will be loaded automatically!
+The favicon manager dynamically loads only the icon library needed, ensuring optimal performance. No need to import all icons—just specify the name and it will be loaded automatically! If you use `type: auto` for the navbar logo, it will match the home profile image settings automatically.
 
 ## 🔄 **Automatic Updates**
 
