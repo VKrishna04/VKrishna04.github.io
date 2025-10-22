@@ -14,16 +14,39 @@
  * limitations under the License.
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { initializeFavicons } from "../utils/faviconEnhanced";
 
 // Enhanced Component to automatically manage favicons with React Icons support
 const FaviconManager = ({ settings, children }) => {
+	const initializedRef = useRef(false);
+	const lastSettingsRef = useRef(null);
+
 	useEffect(() => {
-		if (settings?.favicon) {
-			initializeFavicons(settings);
+		// Only initialize once on mount or when favicon settings actually change
+		const faviconSettings = settings?.favicon;
+		if (!faviconSettings) return;
+
+		// Check if favicon settings have actually changed
+		const faviconKey = JSON.stringify(faviconSettings);
+		if (lastSettingsRef.current === faviconKey && initializedRef.current) {
+			return;
 		}
-	}, [settings]);
+
+		// Debounce initialization to avoid performance issues
+		const timeoutId = setTimeout(() => {
+			try {
+				initializeFavicons(settings);
+				initializedRef.current = true;
+				lastSettingsRef.current = faviconKey;
+			} catch (error) {
+				console.warn("Failed to initialize favicons:", error);
+			}
+		}, 100);
+
+		return () => clearTimeout(timeoutId);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [settings?.favicon?.default, settings?.favicon?.darkMode]); // Only depend on actual favicon values
 
 	return children || null;
 };

@@ -951,6 +951,55 @@
 						"Technical Skills"
 					]
 				},
+				"skillsLayout": {
+					"type": "string",
+					"enum": [
+						"grid",
+						"masonry"
+					],
+					"description": "Layout mode for skills section:\n- 'grid': Traditional responsive grid layout\n- 'masonry': Pinterest-style masonry layout (items flow vertically to fill gaps)\n\nMasonry layout looks best with varying content heights.",
+					"default": "grid"
+				},
+				"skillsGridColumns": {
+					"type": "object",
+					"description": "Responsive grid column configuration for skills section across different screen sizes",
+					"additionalProperties": false,
+					"properties": {
+						"mobile": {
+							"type": "string",
+							"pattern": "^grid-cols-[1-6]$",
+							"description": "Number of grid columns for mobile devices (default screen size). Use Tailwind CSS grid-cols classes.",
+							"default": "grid-cols-1",
+							"examples": [
+								"grid-cols-1",
+								"grid-cols-2"
+							]
+						},
+						"tablet": {
+							"type": "string",
+							"pattern": "^(sm|md):grid-cols-[1-6]$",
+							"description": "Number of grid columns for tablet devices (md breakpoint and above). Use Tailwind CSS responsive grid-cols classes.",
+							"default": "md:grid-cols-2",
+							"examples": [
+								"md:grid-cols-2",
+								"md:grid-cols-3",
+								"sm:grid-cols-2"
+							]
+						},
+						"desktop": {
+							"type": "string",
+							"pattern": "^(lg|xl|2xl):grid-cols-[1-6]$",
+							"description": "Number of grid columns for desktop devices (lg breakpoint and above). Use Tailwind CSS responsive grid-cols classes.",
+							"default": "lg:grid-cols-3",
+							"examples": [
+								"lg:grid-cols-3",
+								"lg:grid-cols-4",
+								"xl:grid-cols-4",
+								"2xl:grid-cols-5"
+							]
+						}
+					}
+				},
 				"skills": {
 					"type": "array",
 					"minItems": 1,
@@ -1128,6 +1177,11 @@
 					"description": "Data source mode for projects:\n- 'api': Fetch projects dynamically from GitHub API\n- 'static': Use only manually configured staticProjects array\n- 'hybrid': Use API with staticProjects as fallback when API fails\n\nRecommendation: Use 'api' for active developers with public repositories, 'static' for curated project showcases, or 'hybrid' for reliability.",
 					"default": "api"
 				},
+				"useGitHubDescription": {
+					"type": "boolean",
+					"description": "Controls description source for merged projects on the Projects page:\n- true: Use GitHub's description when merging repos with static projects\n- false: Use static project's description when merging\n\nNote: The About page ALWAYS uses static descriptions from 'staticProjects', regardless of this setting.\n\nOnly applies to 'hybrid' mode when a project exists in both GitHub and staticProjects.",
+					"default": true
+				},
 				"ignore": {
 					"type": "array",
 					"uniqueItems": true,
@@ -1289,6 +1343,16 @@
 								"type": "boolean",
 								"description": "Whether this project should be highlighted as featured",
 								"default": false
+							},
+							"showInAbout": {
+								"type": "boolean",
+								"description": "Whether this project should appear in the About page's Featured Projects section. Projects with showInAbout: true will be displayed with custom styling from featuredProjectsConfig.",
+								"default": false
+							},
+							"showInProjects": {
+								"type": "boolean",
+								"description": "Whether this project should appear in the Projects page. Set to false for items that are only achievements/certifications meant for the About page showcase.",
+								"default": true
 							},
 							"status": {
 								"type": "string",
@@ -1522,6 +1586,152 @@
 					"description": "Documentation note explaining how to configure static projects. This field serves as inline help for developers configuring the portfolio.",
 					"maxLength": 500,
 					"default": "Configure static projects when mode is set to 'static' or as fallback when GitHub API is unavailable. Each project should include comprehensive metadata including technologies, URLs, statistics, and descriptive content for optimal presentation."
+				},
+				"featuredProjectsConfig": {
+					"type": "object",
+					"description": "Styling configuration for projects displayed in the About page's Featured Projects section. Maps project names/IDs to their visual presentation settings including colors, gradients, icons, and hover effects. This allows fine-grained control over how each featured project appears on the About page.",
+					"additionalProperties": false,
+					"patternProperties": {
+						"^[a-zA-Z0-9._-]+$": {
+							"type": "object",
+							"description": "Styling configuration for a specific project. Use project name as the key (matching the 'name' field in staticProjects).",
+							"additionalProperties": false,
+							"properties": {
+								"icon": {
+									"type": "string",
+									"description": "React icon component name from react-icons library (e.g., 'SiTensorflow', 'FaReact', 'BiLogoVisualStudio'). Visit https://react-icons.github.io/ to browse available icons. Prefixes: Fa (Font Awesome), Si (Simple Icons), Bi (BoxIcons), Md (Material Design), Ai (Ant Design), etc.",
+									"pattern": "^(Fa|Si|Bi|Md|Ai|Bs|Cg|Di|Fi|Fc|Gi|Go|Gr|Hi|Im|Io|Io5|Lu|Md|Pi|Ri|Rx|Sl|Tb|Ti|Vsc|Wi)[A-Z][a-zA-Z0-9]*$",
+									"examples": [
+										"SiTensorflow",
+										"FaReact",
+										"BiLogoVisualStudio",
+										"SiOpencv",
+										"SiGoogle",
+										"FaAws",
+										"SiHiveBlockchain",
+										"MdCloud",
+										"AiFillRobot"
+									]
+								},
+								"gradient": {
+									"type": "string",
+									"description": "Tailwind CSS gradient background class for the card (e.g., 'bg-gradient-to-br from-purple-600/20 to-pink-600/20'). Use semi-transparent colors (/10, /20, /30) for subtle backgrounds that work with backdrop-blur.",
+									"pattern": "^bg-gradient-to-[a-z]{1,2}\\s+from-[a-z]+-[0-9]{3}/[0-9]{1,2}\\s+to-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+									"examples": [
+										"bg-gradient-to-br from-purple-600/20 to-pink-600/20",
+										"bg-gradient-to-br from-green-600/20 to-blue-600/20",
+										"bg-gradient-to-br from-orange-600/20 to-red-600/20",
+										"bg-gradient-to-br from-cyan-600/20 to-blue-600/20"
+									]
+								},
+								"borderColor": {
+									"type": "string",
+									"description": "Tailwind CSS border color class (e.g., 'border-purple-500/30'). Use semi-transparent colors for subtle borders.",
+									"pattern": "^border-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+									"examples": [
+										"border-purple-500/30",
+										"border-green-500/30",
+										"border-orange-500/30",
+										"border-cyan-500/30"
+									]
+								},
+								"hoverBorderColor": {
+									"type": "string",
+									"description": "Tailwind CSS hover border color class (e.g., 'hover:border-purple-400/50'). Slightly brighter/more opaque than borderColor for visual feedback.",
+									"pattern": "^hover:border-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+									"examples": [
+										"hover:border-purple-400/50",
+										"hover:border-green-400/50",
+										"hover:border-orange-400/50",
+										"hover:border-cyan-400/50"
+									]
+								},
+								"bgColor": {
+									"type": "string",
+									"description": "Tailwind CSS background color class for the icon container (e.g., 'bg-purple-500/20'). Creates a colored circle behind the icon.",
+									"pattern": "^bg-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+									"examples": [
+										"bg-purple-500/20",
+										"bg-green-500/20",
+										"bg-orange-500/20",
+										"bg-cyan-500/20"
+									]
+								},
+								"hoverBgColor": {
+									"type": "string",
+									"description": "Tailwind CSS hover background color class for the icon container (e.g., 'group-hover:bg-purple-500/30'). Brightens on hover.",
+									"pattern": "^group-hover:bg-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+									"examples": [
+										"group-hover:bg-purple-500/30",
+										"group-hover:bg-green-500/30",
+										"group-hover:bg-orange-500/30",
+										"group-hover:bg-cyan-500/30"
+									]
+								},
+								"iconColor": {
+									"type": "string",
+									"description": "Tailwind CSS text color class for the icon (e.g., 'text-purple-400'). Should complement the background gradient and border colors.",
+									"pattern": "^text-[a-z]+-[0-9]{3}$",
+									"examples": [
+										"text-purple-400",
+										"text-green-400",
+										"text-orange-400",
+										"text-cyan-400"
+									]
+								},
+								"textColor": {
+									"type": "string",
+									"description": "Tailwind CSS text color class for the project description (e.g., 'text-purple-200'). Lighter shade for readability on dark backgrounds.",
+									"pattern": "^text-[a-z]+-[0-9]{3}$",
+									"examples": [
+										"text-purple-200",
+										"text-green-200",
+										"text-orange-200",
+										"text-cyan-200"
+									]
+								}
+							},
+							"required": [
+								"icon",
+								"gradient",
+								"borderColor",
+								"hoverBorderColor",
+								"bgColor",
+								"hoverBgColor",
+								"iconColor",
+								"textColor"
+							]
+						}
+					},
+					"examples": [
+						{
+							"EquiLens": {
+								"icon": "SiTensorflow",
+								"gradient": "bg-gradient-to-br from-purple-600/20 to-pink-600/20",
+								"borderColor": "border-purple-500/30",
+								"hoverBorderColor": "hover:border-purple-400/50",
+								"bgColor": "bg-purple-500/20",
+								"hoverBgColor": "group-hover:bg-purple-500/30",
+								"iconColor": "text-purple-400",
+								"textColor": "text-purple-200"
+							},
+							"Facial-Emotion-Detection": {
+								"icon": "SiOpencv",
+								"gradient": "bg-gradient-to-br from-green-600/20 to-blue-600/20",
+								"borderColor": "border-green-500/30",
+								"hoverBorderColor": "hover:border-green-400/50",
+								"bgColor": "bg-green-500/20",
+								"hoverBgColor": "group-hover:bg-green-500/30",
+								"iconColor": "text-green-400",
+								"textColor": "text-green-200"
+							}
+						}
+					]
+				},
+				"featuredProjectsConfigNote": {
+					"type": "string",
+					"description": "Documentation for featuredProjectsConfig usage and best practices",
+					"default": "Configure visual styling for projects that appear in the About page (projects with showInAbout: true). Each project's name should match a key in featuredProjectsConfig. Use cohesive color schemes that align with your brand. Visit https://react-icons.github.io/ to find appropriate icons."
 				},
 				"officialName": {
 					"type": "string",
@@ -3767,7 +3977,7 @@
 							"maxLength": 100,
 							"description": "Custom copyright text (overrides template if provided)",
 							"examples": [
-								"© 2025 Krishna GSVV. Built with ❤️"
+								"© Krishna GSVV. Built with ❤️"
 							]
 						}
 					},
@@ -4228,7 +4438,7 @@
 					"maxLength": 60,
 					"description": "Primary page title for SEO",
 					"examples": [
-						"Krishna GSVV - Full Stack Developer & AI Researcher",
+						"Krishna GSVV - Developer",
 						"John Doe - Frontend Developer Portfolio"
 					]
 				},
@@ -4292,7 +4502,7 @@
 							"maxLength": 60,
 							"description": "Open Graph title",
 							"examples": [
-								"Krishna GSVV - Full Stack Developer & AI Researcher"
+								"Krishna GSVV - Developer"
 							]
 						},
 						"description": {
@@ -4355,7 +4565,7 @@
 							"maxLength": 70,
 							"description": "Twitter card title",
 							"examples": [
-								"Krishna GSVV - Full Stack Developer & AI Researcher"
+								"Krishna GSVV - Developer"
 							]
 						},
 						"description": {

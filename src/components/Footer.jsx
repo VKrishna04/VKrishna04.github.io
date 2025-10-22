@@ -255,7 +255,7 @@ const Footer = () => {
 
 						{/* Contact Info & Social */}
 						{socialLinks.length > 0 && (
-							<div className="space-y-4">
+							<div className="space-y-4 text-right">
 								<h3 className="text-lg font-semibold text-white">
 									Let's Connect
 								</h3>
@@ -286,7 +286,7 @@ const Footer = () => {
 									<div className="text-sm font-medium text-white">
 										Follow Me
 									</div>
-									<div className="flex flex-wrap gap-3">
+									<div className="flex flex-wrap gap-3 justify-end">
 										{socialLinks.map((social, index) => {
 											const IconComponent = getIconComponent(social.icon);
 											return IconComponent ? (

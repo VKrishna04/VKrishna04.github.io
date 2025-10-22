@@ -1,7 +1,7 @@
 {
     "name": "Krishna GSVV - Portfolio",
     "short_name": "Krishna Portfolio",
-    "description": "Personal portfolio website of Krishna GSVV - Full Stack Developer & AI Researcher",
+		"description": "Personal portfolio website of Krishna GSVV - Developer",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#0a0a0a",

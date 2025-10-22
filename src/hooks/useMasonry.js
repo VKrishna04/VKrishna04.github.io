@@ -15,9 +15,13 @@
  */
 import { useEffect, useRef } from "react";
 
+/**
+ * Enhanced masonry hook with intelligent column calculation
+ * Automatically determines optimal columns based on item count and viewport
+ */
 const useMasonry = (
-	itemSelector = ".masonry-item",
-	containerSelector = ".masonry-grid"
+	itemSelector = ".masonry-item-about",
+	containerSelector = ".masonry-grid-about"
 ) => {
 	const containerRef = useRef(null);
 
@@ -25,75 +29,71 @@ const useMasonry = (
 		const container = containerRef.current;
 		if (!container) return;
 
-		const resizeObserver = new ResizeObserver(() => {
-			layoutMasonry();
-		});
-
-		const layoutMasonry = () => {
+		const calculateOptimalColumns = () => {
 			const items = container.querySelectorAll(itemSelector);
-			if (items.length === 0) return;
+			const itemCount = items.length;
+			if (itemCount === 0) return 1;
 
-			// Get container width and calculate columns
-			const containerWidth = container.offsetWidth;
-			const itemWidth = items[0].offsetWidth;
-			const gap = 32; // 2rem = 32px
-			const columns = Math.floor((containerWidth + gap) / (itemWidth + gap));
+			// Get viewport width
+			const viewportWidth = window.innerWidth;
 
-			if (columns <= 1) {
-				// Single column layout - reset any transforms
-				items.forEach((item) => {
-					item.style.transform = "";
-					item.style.position = "";
-				});
-				return;
+			// Define optimal columns based on item count and viewport
+			let optimalColumns = 1;
+
+			if (viewportWidth < 640) {
+				// Mobile: 1-2 columns max
+				optimalColumns = Math.min(itemCount, 2);
+			} else if (viewportWidth < 1024) {
+				// Tablet: 2-3 columns
+				optimalColumns = Math.min(itemCount, 3);
+			} else if (viewportWidth < 1536) {
+				// Desktop: 3-4 columns
+				optimalColumns = Math.min(itemCount, 4);
+			} else if (viewportWidth < 1920) {
+				// Large desktop: 4-5 columns
+				optimalColumns = Math.min(itemCount, 5);
+			} else {
+				// Ultra-wide: up to 6 columns
+				optimalColumns = Math.min(itemCount, 6);
 			}
 
-			// Calculate column heights
-			const columnHeights = new Array(columns).fill(0);
-			const columnWidth = itemWidth;
-
-			items.forEach((item) => {
-				// Find the shortest column
-				const shortestColumnIndex = columnHeights.indexOf(
-					Math.min(...columnHeights)
-				);
-
-				// Position the item
-				const x = shortestColumnIndex * (columnWidth + gap);
-				const y = columnHeights[shortestColumnIndex];
-
-				item.style.position = "absolute";
-				item.style.transform = `translate(${x}px, ${y}px)`;
-				item.style.transition = "transform 0.3s ease-in-out";
-
-				// Update column height
-				columnHeights[shortestColumnIndex] += item.offsetHeight + gap;
-			});
-
-			// Set container height
-			const maxHeight = Math.max(...columnHeights);
-			container.style.height = `${maxHeight}px`;
-			container.style.position = "relative";
+			// Ensure we never have more columns than items
+			return Math.min(optimalColumns, itemCount);
 		};
 
-		// Initial layout
-		const timer = setTimeout(layoutMasonry, 100);
+		const updateMasonryColumns = () => {
+			const optimalColumns = calculateOptimalColumns();
+			container.style.setProperty("--about-masonry-columns", optimalColumns);
+		};
 
-		// Observe container for size changes
+		// Initial calculation
+		updateMasonryColumns();
+
+		// Update on window resize with debounce
+		let resizeTimeout;
+		const handleResize = () => {
+			if (resizeTimeout) clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(updateMasonryColumns, 150);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		// Observe container for content changes
+		const resizeObserver = new ResizeObserver(() => {
+			requestAnimationFrame(updateMasonryColumns);
+		});
+
 		resizeObserver.observe(container);
 
-		// Observe all items for size changes
+		// Observe all items for changes
 		const items = container.querySelectorAll(itemSelector);
 		items.forEach((item) => resizeObserver.observe(item));
 
-		// Listen for window resize
-		window.addEventListener("resize", layoutMasonry);
-
 		// Cleanup
 		return () => {
-			clearTimeout(timer);
+			if (resizeTimeout) clearTimeout(resizeTimeout);
+			window.removeEventListener("resize", handleResize);
 			resizeObserver.disconnect();
-			window.removeEventListener("resize", layoutMasonry);
 		};
 	}, [itemSelector, containerSelector]);
 

@@ -162,10 +162,15 @@ import {
 	SiGithub,
 } from "react-icons/si";
 import ProjectCard from "../components/ProjectCard";
-import useGitHubRepos from "../hooks/useGitHubRepos";
+import useMergedProjects from "../hooks/useMergedProjects";
 
 const Projects = () => {
-	const { repos, loading, error } = useGitHubRepos();
+	const {
+		projects: mergedProjects,
+		loading,
+		error,
+		settings,
+	} = useMergedProjects();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedLanguages, setSelectedLanguages] = useState([]);
 	const [sortBy, setSortBy] = useState("updated");
@@ -175,244 +180,32 @@ const Projects = () => {
 		return localStorage.getItem("projectsLayoutMode") || "masonry";
 	});
 	const [currentColumns, setCurrentColumns] = useState(1);
-	const [settings, setSettings] = useState({});
 
 	// Save layout mode preference
 	useEffect(() => {
 		localStorage.setItem("projectsLayoutMode", layoutMode);
 	}, [layoutMode]);
 
-	// Fetch settings
-	useEffect(() => {
-		fetch("/settings.json")
-			.then((response) => response.json())
-			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
-
-	// Determine which projects to use based on mode
-	const projectsData = useMemo(() => {
-		const mode = settings.projects?.mode || "github";
-
-		if (mode === "static") {
-			// Use static projects from settings
-			const staticProjects = settings.projects?.staticProjects || [];
-			return staticProjects;
-		} else if (mode === "hybrid") {
-			// For hybrid mode, intelligently merge GitHub repos with static projects
-			if (repos && repos.length > 0) {
-				const staticProjects = settings.projects?.staticProjects || [];
-
-				// Create a map of GitHub repos by normalized name for easy lookup
-				const githubProjectsMap = new Map();
-				repos.forEach((repo) => {
-					const normalizedName = repo.name.toLowerCase().replace(/[-_\s]/g, "");
-					githubProjectsMap.set(normalizedName, repo);
-				});
-
-				// Process static projects and merge with GitHub data if available
-				const mergedProjects = [];
-				const usedGithubProjects = new Set();
-
-				staticProjects.forEach((staticProject) => {
-					const normalizedStaticName = staticProject.name
-						.toLowerCase()
-						.replace(/[-_\s]/g, "");
-					const matchingGithubProject =
-						githubProjectsMap.get(normalizedStaticName);
-
-					if (matchingGithubProject) {
-						// Merge the projects - GitHub data takes precedence for core fields
-						const mergedProject = {
-							// GitHub data (base)
-							...matchingGithubProject,
-							// Static project enhancements (non-conflicting or supplementary)
-							category:
-								staticProject.category || matchingGithubProject.category,
-							featured:
-								staticProject.featured !== undefined
-									? staticProject.featured
-									: false,
-							status: staticProject.status || "active",
-							startDate:
-								staticProject.startDate || matchingGithubProject.created_at,
-							endDate:
-								staticProject.endDate || matchingGithubProject.updated_at,
-							liveUrl: staticProject.liveUrl || matchingGithubProject.homepage,
-							demoUrl: staticProject.demoUrl || matchingGithubProject.homepage,
-							documentationUrl: staticProject.documentationUrl,
-							imageUrl: staticProject.imageUrl,
-							highlights: staticProject.highlights || [],
-							// Enhanced description - combine if static has more detail
-							description:
-								staticProject.description &&
-								staticProject.description.length >
-									(matchingGithubProject.description?.length || 0)
-									? staticProject.description
-									: matchingGithubProject.description,
-							// Enhanced topics/tags - merge both sources
-							topics: [
-								...(matchingGithubProject.topics || []),
-								...(staticProject.tags || staticProject.technologies || []),
-							].filter((item, index, arr) => arr.indexOf(item) === index), // Remove duplicates
-							// Mark as merged
-							isMerged: true,
-							isStatic: false,
-						};
-						mergedProjects.push(mergedProject);
-						usedGithubProjects.add(normalizedStaticName);
-					} else {
-						// No matching GitHub project, add static project as-is
-						mergedProjects.push({
-							...staticProject,
-							isMerged: false,
-							isStatic: true,
-						});
-					}
-				});
-
-				// Add remaining GitHub projects that weren't merged
-				repos.forEach((repo) => {
-					const normalizedName = repo.name.toLowerCase().replace(/[-_\s]/g, "");
-					if (!usedGithubProjects.has(normalizedName)) {
-						mergedProjects.push({
-							...repo,
-							isMerged: false,
-							isStatic: false,
-						});
-					}
-				});
-
-				return mergedProjects;
-			} else {
-				// Fallback to static projects if GitHub repos are not available
-				const staticProjects = settings.projects?.staticProjects || [];
-				return staticProjects.map((project) => ({
-					...project,
-					isMerged: false,
-					isStatic: true,
-				}));
-			}
-		} else {
-			// Use GitHub repos only
-			const githubRepos = repos || [];
-			return githubRepos;
-		}
-	}, [settings.projects, repos]);
-	// Convert static projects to match repo format for consistency
-	const normalizedProjects = useMemo(() => {
-		if (!projectsData || projectsData.length === 0) {
-			return [];
-		}
-
-		return projectsData.map((project) => {
-			// Check if this is a merged project (has isMerged flag)
-			if (project.isMerged === true) {
-				// Merged project - already has GitHub structure with static enhancements
-				return {
-					...project,
-					// Ensure consistent format for merged projects
-					topics: project.topics || [],
-					language: project.language || project.technologies?.[0] || "Unknown",
-					languages:
-						project.technologies?.map((tech) => ({
-							name: tech,
-							icon: null,
-							color: null,
-						})) ||
-						(project.language
-							? [{ name: project.language, icon: null, color: null }]
-							: []),
-					isMerged: true,
-					isStatic: false,
-				};
-			}
-
-			// Check if this is a static project (has id as string and other static properties)
-			const isStaticProject =
-				project.isStatic === true ||
-				(project.id &&
-					(typeof project.id === "string" ||
-						project.category ||
-						project.status));
-
-			if (isStaticProject) {
-				const normalized = {
-					id: project.id,
-					name: project.name,
-					description: project.description,
-					html_url: project.githubUrl || project.html_url,
-					homepage: project.liveUrl || project.demoUrl || project.homepage,
-					topics: project.tags || project.technologies || project.topics || [],
-					language:
-						project.technologies?.[0] ||
-						project.category ||
-						project.language ||
-						"Unknown",
-					languages:
-						project.technologies?.map((tech) => ({
-							name: tech,
-							// Add icon and color if available from mapping - will be computed later
-							icon: null,
-							color: null,
-						})) || [],
-					stargazers_count:
-						project.stats?.stars || project.stargazers_count || 0,
-					forks_count: project.stats?.forks || project.forks_count || 0,
-					watchers_count:
-						project.stats?.watchers || project.watchers_count || 0,
-					open_issues_count:
-						project.stats?.issues || project.open_issues_count || 0,
-					updated_at:
-						project.endDate ||
-						project.startDate ||
-						project.updated_at ||
-						new Date().toISOString(),
-					created_at:
-						project.startDate || project.created_at || new Date().toISOString(),
-					// Additional static project fields
-					category: project.category,
-					featured: project.featured,
-					status: project.status,
-					startDate: project.startDate,
-					endDate: project.endDate,
-					liveUrl: project.liveUrl,
-					demoUrl: project.demoUrl,
-					documentationUrl: project.documentationUrl,
-					imageUrl: project.imageUrl,
-					highlights: project.highlights || [],
-					isMerged: false,
-					isStatic: true,
-				};
-				return normalized;
-			} else {
-				// This is a GitHub repo
-				const normalized = {
-					...project,
-					isMerged: false,
-					isStatic: false,
-				};
-				return normalized;
-			}
-		});
-	}, [projectsData]);
+	// Use merged projects directly - the hook handles all merging logic
+	const projectsData = mergedProjects;
 
 	// Get unique languages from repositories
 	const availableLanguages = useMemo(() => {
 		const languages = new Set();
-		normalizedProjects.forEach((project) => {
+		projectsData.forEach((project) => {
 			if (project.language) {
 				languages.add(project.language);
 			}
 			// For static projects, also add all technologies
-			if (project.isStatic && project.languages) {
-				project.languages.forEach((lang) => {
-					if (lang.name) languages.add(lang.name);
+			if (project.technologies) {
+				project.technologies.forEach((tech) => {
+					const techName = typeof tech === "string" ? tech : tech.name;
+					if (techName) languages.add(techName);
 				});
 			}
 		});
 		return Array.from(languages).sort();
-	}, [normalizedProjects]);
+	}, [projectsData]);
 
 	// Language icon mapping - comprehensive version from ProjectsStatic.jsx
 	const getLanguageIcon = (language) => {
@@ -757,7 +550,7 @@ const Projects = () => {
 
 	// Filter and sort repositories
 	const filteredRepos = useMemo(() => {
-		let filtered = normalizedProjects.filter((project) => {
+		let filtered = projectsData.filter((project) => {
 			// Search filter
 			const matchesSearch =
 				project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -776,10 +569,11 @@ const Projects = () => {
 			const matchesLanguage =
 				selectedLanguages.length === 0 ||
 				selectedLanguages.includes(project.language) ||
-				(project.languages &&
-					project.languages.some((lang) =>
-						selectedLanguages.includes(lang.name)
-					));
+				(project.technologies &&
+					project.technologies.some((tech) => {
+						const techName = typeof tech === "string" ? tech : tech.name;
+						return selectedLanguages.includes(techName);
+					}));
 
 			return matchesSearch && matchesLanguage;
 		});
@@ -790,7 +584,7 @@ const Projects = () => {
 				case "name":
 					return a.name.localeCompare(b.name);
 				case "stars":
-					return b.stargazers_count - a.stargazers_count;
+					return (b.stargazers_count || 0) - (a.stargazers_count || 0);
 				case "updated":
 					return new Date(b.updated_at) - new Date(a.updated_at);
 				case "created":
@@ -801,7 +595,7 @@ const Projects = () => {
 		});
 
 		return filtered;
-	}, [normalizedProjects, searchTerm, selectedLanguages, sortBy]);
+	}, [projectsData, searchTerm, selectedLanguages, sortBy]);
 
 	// Update current columns on resize and project count change
 	useEffect(() => {
@@ -838,9 +632,9 @@ const Projects = () => {
 		if (projectCount === 0) return {};
 
 		return {
-			"--masonry-columns-sm": Math.min(1, projectCount),
-			"--masonry-columns-md": Math.min(2, projectCount),
-			"--masonry-columns-lg": Math.min(3, projectCount),
+			"--projects-masonry-columns-sm": Math.min(1, projectCount),
+			"--projects-masonry-columns-md": Math.min(2, projectCount),
+			"--projects-masonry-columns-lg": Math.min(3, projectCount),
 		};
 	};
 
@@ -849,13 +643,16 @@ const Projects = () => {
 		const projectCount = filteredRepos.length;
 		if (projectCount === 0) return "grid grid-cols-1 gap-8";
 
-		// Base classes
+		// Base classes for left-to-right, top-to-bottom flow
 		let classes =
-			"grid gap-8 grid-cols-1 transition-all duration-300 ease-in-out";
+			"grid gap-8 grid-cols-1 transition-all duration-300 ease-in-out grid-flow-row";
 
 		// Add responsive classes based on project count to avoid empty columns (max 3 columns)
 		if (projectCount >= 2) classes += " md:grid-cols-2";
 		if (projectCount >= 3) classes += " lg:grid-cols-3";
+
+		// Note: grid-flow-row ensures left-to-right, then top-to-bottom filling
+		// This is the default behavior, but we explicitly set it for clarity
 
 		return classes;
 	};
@@ -901,7 +698,7 @@ const Projects = () => {
 						<p className="mt-4 text-gray-300">Loading projects...</p>
 						<p className="mt-2 text-sm text-gray-500">
 							Debug: Loading={loading.toString()}, Error={error?.toString()},
-							ReposLength={repos?.length || 0}
+							ProjectsLength={projectsData?.length || 0}
 						</p>
 					</div>
 				</div>
@@ -932,9 +729,7 @@ const Projects = () => {
 					<p>Debug Info:</p>
 					<p>Loading: {loading.toString()}</p>
 					<p>Error: {error?.toString() || "none"}</p>
-					<p>Raw Repos: {repos?.length || 0}</p>
 					<p>Projects Data: {projectsData?.length || 0}</p>
-					<p>Normalized Projects: {normalizedProjects?.length || 0}</p>
 					<p>Filtered Projects: {filteredRepos?.length || 0}</p>
 					<p>Settings Mode: {settings.projects?.mode || "none"}</p>
 				</div> */}
@@ -968,17 +763,17 @@ const Projects = () => {
 						)}
 					</p>
 					<div className="mt-4 text-sm text-gray-400">
-						{normalizedProjects.length} project
-						{normalizedProjects.length !== 1 ? "s" : ""} •{" "}
-						{filteredRepos.length} shown
+						{projectsData.length} project
+						{projectsData.length !== 1 ? "s" : ""} • {filteredRepos.length}{" "}
+						shown
 						{layoutMode === "masonry" && filteredRepos.length > 0 && (
 							<> • {currentColumns} columns</>
 						)}
 						{settings.projects?.mode === "hybrid" && (
 							<>
 								{" "}
-								• {normalizedProjects.filter((p) => p.isStatic).length} static +{" "}
-								{normalizedProjects.filter((p) => !p.isStatic).length} dynamic
+								• {projectsData.filter((p) => p.isStatic).length} static +{" "}
+								{projectsData.filter((p) => !p.isStatic).length} dynamic
 							</>
 						)}
 					</div>
@@ -1152,7 +947,7 @@ const Projects = () => {
 						key={layoutMode} // Force re-render on layout change
 						className={
 							layoutMode === "masonry"
-								? "masonry-grid-dynamic"
+								? "masonry-grid-projects"
 								: getGridClasses()
 						}
 						style={layoutMode === "masonry" ? getMasonryStyles() : {}}
@@ -1163,11 +958,7 @@ const Projects = () => {
 					>
 						{filteredRepos.map((repo) => {
 							return (
-								<motion.div
-									key={repo.id}
-									variants={staggerChild}
-									className={layoutMode === "masonry" ? "masonry-item" : ""}
-								>
+								<motion.div key={repo.id} variants={staggerChild}>
 									<ProjectCard project={repo} />
 								</motion.div>
 							);

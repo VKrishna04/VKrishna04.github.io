@@ -16,7 +16,8 @@
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import useMasonry from "../hooks/useMasonry";
 import {
 	CodeBracketIcon,
 	CpuChipIcon,
@@ -84,6 +85,9 @@ import {
 
 const About = () => {
 	const [settings, setSettings] = useState({});
+	const [truncatedSkills, setTruncatedSkills] = useState(new Set());
+	const skillRefs = useRef({});
+	const masonryRef = useMasonry(".masonry-item", ".masonry-grid");
 
 	useEffect(() => {
 		// Fetch settings for about page configuration
@@ -92,6 +96,24 @@ const About = () => {
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error));
 	}, []);
+
+	// Check for text truncation
+	useEffect(() => {
+		const checkTruncation = () => {
+			const truncated = new Set();
+			Object.entries(skillRefs.current).forEach(([key, ref]) => {
+				if (ref && ref.scrollWidth > ref.clientWidth) {
+					truncated.add(key);
+				}
+			});
+			setTruncatedSkills(truncated);
+		};
+
+		// Check initially and on window resize
+		checkTruncation();
+		window.addEventListener("resize", checkTruncation);
+		return () => window.removeEventListener("resize", checkTruncation);
+	}, [settings]);
 
 	// Get image URL based on settings
 	const getImageUrl = () => {
@@ -206,7 +228,35 @@ const About = () => {
 
 	// Get featured projects from settings or use default
 	const getFeaturedProjects = () => {
-		return settings.about?.featuredProjects || [];
+		// Get projects with showInAbout: true from staticProjects
+		const projects =
+			settings.projects?.staticProjects?.filter(
+				(project) => project.showInAbout === true
+			) || [];
+
+		// Get styling config
+		const stylingConfig = settings.projects?.featuredProjectsConfig || {};
+
+		// Map projects to include their styling
+		return projects.map((project) => {
+			const styling = stylingConfig[project.name] || {};
+			return {
+				name: project.name,
+				title: project.name,
+				description: project.description,
+				icon: styling.icon || "CodeBracketIcon",
+				gradient:
+					styling.gradient ||
+					"bg-gradient-to-br from-gray-600/20 to-gray-600/20",
+				borderColor: styling.borderColor || "border-gray-500/30",
+				hoverBorderColor:
+					styling.hoverBorderColor || "hover:border-gray-400/50",
+				bgColor: styling.bgColor || "bg-gray-500/20",
+				hoverBgColor: styling.hoverBgColor || "group-hover:bg-gray-500/30",
+				iconColor: styling.iconColor || "text-gray-400",
+				textColor: styling.textColor || "text-gray-200",
+			};
+		});
 	};
 
 	const skills = getSkills();
@@ -250,7 +300,6 @@ const About = () => {
 							)}
 						</motion.div>
 					)}
-
 					{/* Main Content */}
 					{(settings.about?.title ||
 						settings.about?.paragraphs?.length > 0 ||
@@ -292,18 +341,37 @@ const About = () => {
 							)}
 						</div>
 					)}
-
 					{/* Skills Section */}
 					{skills.length > 0 && (
 						<motion.div variants={fadeInUp}>
 							<h2 className="text-3xl font-bold text-center text-white mb-12">
 								{settings.about?.skillsHeading || "Technical Skills"}
 							</h2>
-							<div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+							<div
+								ref={masonryRef}
+								className={
+									settings.about?.skillsLayout === "masonry"
+										? "masonry-grid-about"
+										: `grid gap-6 ${
+												settings.about?.skillsGridColumns?.mobile ||
+												"grid-cols-1"
+										  } ${
+												settings.about?.skillsGridColumns?.tablet ||
+												"md:grid-cols-2"
+										  } ${
+												settings.about?.skillsGridColumns?.desktop ||
+												"lg:grid-cols-3"
+										  }`
+								}
+							>
 								{skills.map((skillCategory, index) => (
 									<motion.div
 										key={index}
-										className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group"
+										className={`bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group ${
+											settings.about?.skillsLayout === "masonry"
+												? "masonry-item-about"
+												: ""
+										}`}
 										variants={fadeInUp}
 										whileHover={{ scale: 1.02, y: -5 }}
 									>
@@ -316,28 +384,45 @@ const About = () => {
 											</h3>
 										</div>
 										<div className="grid grid-cols-2 gap-3">
-											{skillCategory.items.map((skill, skillIndex) => (
-												<div
-													key={skillIndex}
-													className="flex items-center space-x-2 p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-300 group/skill"
-												>
-													<div className="flex-shrink-0">
-														<skill.icon
-															className={`w-5 h-5 ${skill.color} group-hover/skill:scale-110 transition-transform`}
-														/>
+											{skillCategory.items.map((skill, skillIndex) => {
+												const skillKey = `${index}-${skillIndex}`;
+												const isTruncated = truncatedSkills.has(skillKey);
+
+												return (
+													<div
+														key={skillIndex}
+														className="relative flex items-center space-x-2 p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-300 group/skill cursor-pointer"
+													>
+														<div className="flex-shrink-0">
+															<skill.icon
+																className={`w-5 h-5 ${skill.color} group-hover/skill:scale-110 transition-transform`}
+															/>
+														</div>
+														<span
+															ref={(el) => (skillRefs.current[skillKey] = el)}
+															className="text-gray-300 text-sm font-medium truncate group-hover/skill:text-white transition-colors"
+														>
+															{skill.name}
+														</span>
+														{/* Enhanced tooltip - only show when text is truncated */}
+														{isTruncated && (
+															<div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover/skill:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-10 border border-purple-500/30 flex items-center gap-2">
+																<skill.icon
+																	className={`w-4 h-4 ${skill.color}`}
+																/>
+																<span>{skill.name}</span>
+																<div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+															</div>
+														)}
 													</div>
-													<span className="text-gray-300 text-sm font-medium truncate group-hover/skill:text-white transition-colors">
-														{skill.name}
-													</span>
-												</div>
-											))}
+												);
+											})}
 										</div>
 									</motion.div>
 								))}
 							</div>
 						</motion.div>
-					)}
-
+					)}{" "}
 					{/* Achievements Section */}
 					<motion.div className="mt-20" variants={fadeInUp}>
 						<h2 className="text-3xl font-bold text-center text-white mb-12">
@@ -499,7 +584,6 @@ const About = () => {
 							)}
 						</div>
 					</motion.div>
-
 					{/* Stats Section */}
 					{stats.length > 0 && (
 						<motion.div

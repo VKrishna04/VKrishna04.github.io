@@ -1,6 +1,6 @@
 {
 	"//": [
-		"Copyright 2025 Krishna GSVV",
+		"Copyright Krishna GSVV",
 		"",
 		"Licensed under the Apache License, Version 2.0 (the \"License\");",
 		"you may not use this file except in compliance with the License.",
@@ -16,7 +16,7 @@
 	],
 	"$schema": "./settings.schema.json",
 	"seo": {
-		"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+		"title": "Krishna GSVV - Developer",
 		"description": "Passionate developer specializing in React, Python, and AI. Hackathon winner with ₹3.75L+ prize money. Building innovative solutions.",
 		"keywords": [
 			"Full Stack Developer",
@@ -38,7 +38,7 @@
 		"author": "Krishna GSVV",
 		"canonical": "https://vkrishna04.me/",
 		"openGraph": {
-			"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+			"title": "Krishna GSVV - Developer",
 			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions with 15+ open source projects.",
 			"image": "https://github.com/VKrishna04.png",
 			"imageWidth": 1200,
@@ -46,7 +46,7 @@
 			"siteName": "Krishna GSVV Portfolio"
 		},
 		"twitter": {
-			"title": "Krishna GSVV - Full Stack Developer & AI Researcher",
+			"title": "Krishna GSVV - Developer",
 			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions.",
 			"image": "https://github.com/VKrishna04.png",
 			"creator": "@VKrishna04"
@@ -192,7 +192,7 @@
 	"about": {
 		"heading": "About Me",
 		"subheading": "Get to know me better",
-		"title": "I'm Krishna GSVV, a passionate developer and AI researcher",
+		"title": "I'm Krishna GSVV, a passionate Developer",
 		"paragraphs": [
 			"I'm a dedicated software engineer and AI researcher with a passion for creating innovative solutions that bridge the gap between cutting-edge technology and real-world applications. My journey began with curiosity about how computers work and has evolved into a professional pursuit of building impactful software.",
 			"I specialize in full-stack development with expertise in React, Python, and modern web technologies. My recent focus includes AI bias detection systems like EquiLens, computer vision applications for emotion detection, and blockchain technologies such as HiveXplore. I've successfully developed everything from VS Code extensions to complex machine learning pipelines, always prioritizing clean code and user experience.",
@@ -207,6 +207,12 @@
 		},
 		"note": "Configure the About page content - heading, subheading, title, paragraphs, image settings, skills section heading, and skills categories with items",
 		"skillsHeading": "Technical Expertise",
+		"skillsLayout": "grid",
+		"skillsGridColumns": {
+			"mobile": "grid-cols-1",
+			"tablet": "md:grid-cols-2",
+			"desktop": "lg:grid-cols-3"
+		},
 		"skills": [
 			{
 				"category": "Programming Languages",
@@ -650,6 +656,7 @@
 	},
 	"projects": {
 		"mode": "hybrid",
+		"useGitHubDescription": true,
 		"ignore": [
 			".github",
 			"VKrishna04",
@@ -679,9 +686,11 @@
 					"JSONSchema"
 				],
 				"category": "Full Stack",
-				"featured": true,
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
 				"status": "Live",
-				"startDate": "2024-01-01",
+				"startDate": "2025-10-23",
 				"endDate": null,
 				"githubUrl": "https://github.com/VKrishna04/VKrishna04.github.io",
 				"liveUrl": "https://vkrishna04.github.io",
@@ -720,9 +729,358 @@
 					"watchersUrl": "https://github.com/VKrishna04/VKrishna04.github.io/watchers",
 					"issuesUrl": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
 				}
+			},
+			{
+				"id": "2",
+				"name": "EquiLens",
+				"description": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization.",
+				"technologies": [
+					"Python",
+					"Ollama",
+					"TensorFlow",
+					"Scikit-learn",
+					"Pandas",
+					"Matplotlib"
+				],
+				"category": "AI/ML",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2024-09-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/EquiLens",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/EquiLens#readme",
+				"imageUrl": "",
+				"tags": [
+					"ai-bias",
+					"machine-learning",
+					"llm",
+					"fairness",
+					"ethics"
+				],
+				"highlights": [
+					"Multi-metric bias detection across demographics",
+					"Interactive CLI for easy auditing",
+					"Statistical analysis with visualization",
+					"Supports multiple LLM providers"
+				],
+				"stats": {
+					"stars": 5,
+					"forks": 2,
+					"watchers": 1,
+					"issues": 3
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/EquiLens/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/EquiLens/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/EquiLens/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/EquiLens/issues"
+				}
+			},
+			{
+				"id": "3",
+				"name": "Facial-Emotion-Detection",
+				"description": "Real-time emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions from images and videos.",
+				"technologies": [
+					"Python",
+					"OpenCV",
+					"MediaPipe",
+					"TensorFlow",
+					"NumPy",
+					"Scikit-learn"
+				],
+				"category": "AI/ML",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2024-05-01",
+				"endDate": "2024-08-15",
+				"githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection#readme",
+				"imageUrl": "",
+				"tags": [
+					"computer-vision",
+					"emotion-detection",
+					"facial-recognition",
+					"deep-learning"
+				],
+				"highlights": [
+					"Real-time emotion classification",
+					"MediaPipe facial landmark extraction",
+					"High accuracy emotion models",
+					"Support for images and video streams"
+				],
+				"stats": {
+					"stars": 8,
+					"forks": 3,
+					"watchers": 2,
+					"issues": 1
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/issues"
+				}
+			},
+			{
+				"id": "4",
+				"name": "HiveXplore",
+				"description": "Beginner-friendly app for Hive blockchain with simplified authentication, intuitive posting tools, and guided experiences for blockchain newcomers.",
+				"technologies": [
+					"Python",
+					"Flask",
+					"Hive",
+					"Blockchain",
+					"JavaScript",
+					"Bootstrap"
+				],
+				"category": "Blockchain",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2024-03-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
+				"liveUrl": "https://hivebuzz.onrender.com/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/HiveXplore#readme",
+				"imageUrl": "",
+				"tags": [
+					"blockchain",
+					"hive",
+					"web3",
+					"decentralized",
+					"social-media"
+				],
+				"highlights": [
+					"Simplified Hive blockchain authentication",
+					"Intuitive posting and content creation",
+					"Beginner-friendly guided experience",
+					"Real-time blockchain interactions"
+				],
+				"stats": {
+					"stars": 4,
+					"forks": 1,
+					"watchers": 1,
+					"issues": 2
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/HiveXplore/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/HiveXplore/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/HiveXplore/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/HiveXplore/issues"
+				}
+			},
+			{
+				"id": "5",
+				"name": "cspell-sync",
+				"description": "VS Code extension that synchronizes cSpell dictionaries across workspace and user settings. Improves developer productivity with 1K+ downloads on VS Code Marketplace.",
+				"technologies": [
+					"TypeScript",
+					"VS-Code-API",
+					"Node.js",
+					"JSON"
+				],
+				"category": "VS Code Extension",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Maintenance",
+				"startDate": "2023-11-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/VKrishna04/cspell-sync",
+				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/VKrishna04/cspell-sync#readme",
+				"imageUrl": "",
+				"tags": [
+					"vscode-extension",
+					"developer-tools",
+					"productivity",
+					"spell-check"
+				],
+				"highlights": [
+					"1K+ downloads on VS Code Marketplace",
+					"Automatic dictionary synchronization",
+					"Workspace and user settings support",
+					"Improves team consistency"
+				],
+				"stats": {
+					"stars": 3,
+					"forks": 0,
+					"watchers": 1,
+					"issues": 0,
+					"downloads": 1000
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/VKrishna04/cspell-sync/stargazers",
+					"forksUrl": "https://github.com/VKrishna04/cspell-sync/network/members",
+					"watchersUrl": "https://github.com/VKrishna04/cspell-sync/watchers",
+					"issuesUrl": "https://github.com/VKrishna04/cspell-sync/issues"
+				}
+			},
+			{
+				"id": "6",
+				"name": "RanobeGemini",
+				"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content with intelligent processing.",
+				"technologies": [
+					"JavaScript",
+					"Gemini-AI",
+					"Chrome-Extension-API",
+					"HTML",
+					"CSS"
+				],
+				"category": "Browser Extension",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2024-06-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/VKrishna04/RanobeGemini",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/VKrishna04/RanobeGemini#readme",
+				"imageUrl": "",
+				"tags": [
+					"browser-extension",
+					"ai-translation",
+					"web-novels",
+					"gemini-ai",
+					"content-enhancement"
+				],
+				"highlights": [
+					"AI-powered translation enhancement",
+					"Real-time content processing",
+					"Supports multiple web novel sites",
+					"Context-aware translations"
+				],
+				"stats": {
+					"stars": 6,
+					"forks": 2,
+					"watchers": 1,
+					"issues": 3
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/VKrishna04/RanobeGemini/stargazers",
+					"forksUrl": "https://github.com/VKrishna04/RanobeGemini/network/members",
+					"watchersUrl": "https://github.com/VKrishna04/RanobeGemini/watchers",
+					"issuesUrl": "https://github.com/VKrishna04/RanobeGemini/issues"
+				}
+			},
+			{
+				"id": "7",
+				"name": "Cloud-Certifications",
+				"description": "Achieved multiple cloud certifications including AWS Cloud Practitioner and Oracle Cloud DevOps Professional, with hands-on deployment experience.",
+				"technologies": [
+					"AWS",
+					"Oracle-Cloud",
+					"Docker",
+					"Kubernetes",
+					"Terraform",
+					"CICD"
+				],
+				"category": "DevOps",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": false,
+				"status": "Ongoing",
+				"startDate": "2023-01-01",
+				"endDate": null,
+				"githubUrl": "",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "",
+				"imageUrl": "",
+				"tags": [
+					"cloud",
+					"aws",
+					"oracle-cloud",
+					"certifications",
+					"devops"
+				],
+				"highlights": [
+					"AWS Certified Cloud Practitioner",
+					"Oracle Cloud DevOps Professional",
+					"Multiple cloud certifications achieved",
+					"Hands-on deployment experience"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "",
+					"forksUrl": "",
+					"watchersUrl": "",
+					"issuesUrl": ""
+				}
 			}
 		],
-		"staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
+		"staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), showInAbout (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
+		"featuredProjectsConfig": {
+			"EquiLens": {
+				"icon": "SiTensorflow",
+				"gradient": "bg-gradient-to-br from-purple-600/20 to-pink-600/20",
+				"borderColor": "border-purple-500/30",
+				"hoverBorderColor": "hover:border-purple-400/50",
+				"bgColor": "bg-purple-500/20",
+				"hoverBgColor": "group-hover:bg-purple-500/30",
+				"iconColor": "text-purple-400",
+				"textColor": "text-purple-200"
+			},
+			"Facial-Emotion-Detection": {
+				"icon": "SiOpencv",
+				"gradient": "bg-gradient-to-br from-green-600/20 to-blue-600/20",
+				"borderColor": "border-green-500/30",
+				"hoverBorderColor": "hover:border-green-400/50",
+				"bgColor": "bg-green-500/20",
+				"hoverBgColor": "group-hover:bg-green-500/30",
+				"iconColor": "text-green-400",
+				"textColor": "text-green-200"
+			},
+			"HiveXplore": {
+				"icon": "SiHiveBlockchain",
+				"gradient": "bg-gradient-to-br from-orange-600/20 to-red-600/20",
+				"borderColor": "border-orange-500/30",
+				"hoverBorderColor": "hover:border-orange-400/50",
+				"bgColor": "bg-orange-500/20",
+				"hoverBgColor": "group-hover:bg-orange-500/30",
+				"iconColor": "text-orange-400",
+				"textColor": "text-orange-200"
+			},
+			"cspell-sync": {
+				"icon": "BiLogoVisualStudio",
+				"gradient": "bg-gradient-to-br from-cyan-600/20 to-blue-600/20",
+				"borderColor": "border-cyan-500/30",
+				"hoverBorderColor": "hover:border-cyan-400/50",
+				"bgColor": "bg-cyan-500/20",
+				"hoverBgColor": "group-hover:bg-cyan-500/30",
+				"iconColor": "text-cyan-400",
+				"textColor": "text-cyan-200"
+			},
+			"RanobeGemini": {
+				"icon": "SiGoogle",
+				"gradient": "bg-gradient-to-br from-yellow-600/20 to-orange-600/20",
+				"borderColor": "border-yellow-500/30",
+				"hoverBorderColor": "hover:border-yellow-400/50",
+				"bgColor": "bg-yellow-500/20",
+				"hoverBgColor": "group-hover:bg-yellow-500/30",
+				"iconColor": "text-yellow-400",
+				"textColor": "text-yellow-200"
+			}
+		},
+		"featuredProjectsConfigNote": "Configure visual styling for projects that appear in the About page (projects with showInAbout: true). Each project's name should match a key in featuredProjectsConfig. Use cohesive color schemes that align with your brand. Visit https://react-icons.github.io/ to find appropriate icons.",
 		"officialName": "Krishna GSVV",
 		"devUsername": "VKrishna04",
 		"profileImage": "https://github.com/VKrishna04.png"
@@ -1619,7 +1977,7 @@
 				{
 					"label": "View Resume",
 					"icon": "DocumentIcon",
-					"url": "./resume.pdf",
+					"url": "{resume}",
 					"colorTheme": "purple",
 					"enabled": true
 				},
@@ -1633,7 +1991,7 @@
 				{
 					"label": "Download Portfolio",
 					"icon": "DocumentIcon",
-					"url": "./portfolio.pdf",
+					"url": "./resume.pdf",
 					"colorTheme": "purple",
 					"enabled": false
 				}

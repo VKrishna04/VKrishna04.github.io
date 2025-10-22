@@ -53,7 +53,6 @@ import {
 	SiVercel,
 	SiHeroku,
 } from "react-icons/si";
-import { getResumeUrl } from "../utils/resume";
 
 const Contact = () => {
 	const [settings, setSettings] = useState({});
@@ -235,29 +234,18 @@ const Contact = () => {
 									const IconComponent = getHeroIcon(action.icon);
 									let url = action.url;
 
-									// If this is the Resume quick action and mode is 'auto', use shared resume URL
-									const isResumeAction =
-										action.key === "resume" ||
-										action.label?.toLowerCase().includes("resume");
+									// Replace placeholders
 									if (
-										isResumeAction &&
-										settings.contact?.quickActions?.resumeMode === "auto"
+										url.includes("{email}") &&
+										settings.social?.contact?.email
 									) {
-										url = resumeUrl;
-									} else {
-										// Replace placeholders as before
-										if (
-											url.includes("{email}") &&
-											settings.social?.contact?.email
-										) {
-											url = url.replace(
-												"{email}",
-												settings.social.contact.email
-											);
-										}
-										if (url.includes("{calendly}") && contactConfig.calendly) {
-											url = url.replace("{calendly}", contactConfig.calendly);
-										}
+										url = url.replace("{email}", settings.social.contact.email);
+									}
+									if (url.includes("{calendly}") && contactConfig.calendly) {
+										url = url.replace("{calendly}", contactConfig.calendly);
+									}
+									if (url.includes("{resume}") && settings.resume?.url) {
+										url = url.replace("{resume}", settings.resume.url);
 									}
 
 									return (
@@ -673,7 +661,6 @@ const Contact = () => {
 	const collaborationInterests = getCollaborationInterests();
 	const faqItems = getFAQItems();
 	const contactInfo = getContactInfo();
-	const resumeUrl = getResumeUrl(settings);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
@@ -804,4 +791,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

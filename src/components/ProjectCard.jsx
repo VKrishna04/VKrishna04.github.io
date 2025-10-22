@@ -353,9 +353,9 @@ const ProjectCard = ({ project, index = 0 }) => {
 
 			{/* Stats */}
 			<div className="flex items-center justify-between text-sm text-gray-400 mb-4">
-				<div className="flex items-center gap-4">
+				<div className="flex items-center gap-3 flex-wrap">
 					{typeof project.stargazers_count === "number" && (
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center space-x-1 whitespace-nowrap">
 							{project.statsUrls?.starsUrl ? (
 								<a
 									href={project.statsUrls.starsUrl}
@@ -376,7 +376,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 						</div>
 					)}
 					{typeof project.forks_count === "number" && (
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center space-x-1 whitespace-nowrap">
 							{project.statsUrls?.forksUrl ? (
 								<a
 									href={project.statsUrls.forksUrl}
@@ -397,7 +397,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 						</div>
 					)}
 					{typeof project.watchers_count === "number" && (
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center space-x-1 whitespace-nowrap">
 							{project.statsUrls?.watchersUrl ? (
 								<a
 									href={project.statsUrls.watchersUrl}
@@ -418,7 +418,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 						</div>
 					)}
 					{typeof project.open_issues_count === "number" && (
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center space-x-1 whitespace-nowrap">
 							{project.statsUrls?.issuesUrl ? (
 								<a
 									href={project.statsUrls.issuesUrl}
@@ -439,7 +439,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 						</div>
 					)}
 					{project.updated_at && (
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center space-x-1 whitespace-nowrap">
 							<CalendarIcon className="w-4 h-4" />
 							<span>{formatDate(project.updated_at)}</span>
 						</div>

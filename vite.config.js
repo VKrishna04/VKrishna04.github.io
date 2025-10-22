@@ -21,7 +21,17 @@ import { injectSeoPlugin } from "./scripts/inject-seo.js";
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [react(), injectSeoPlugin()],
-	// base: "/VKrishna04.github.io/",
+	// base: "/Vkrishna04.me/",
+	server: {
+		watch: {
+			// Watch settings files explicitly for changes
+			ignored: ["!**/public/settings.json", "!**/public/settings.schema.json"],
+		},
+		// Force reload when these files change
+		hmr: {
+			overlay: true,
+		},
+	},
 	build: {
 		outDir: "dist",
 		rollupOptions: {

@@ -58,108 +58,100 @@ body {
   -webkit-text-fill-color: transparent !important;
 }
 
-/* Masonry Grid Styles */
-.masonry-grid {
-	column-count: 1;
-	column-gap: 2rem;
+/* ===================================
+   ABOUT PAGE MASONRY (CSS Columns)
+   =================================== */
+/* Intelligent masonry layout for About page skills section
+   Uses CSS columns for vertical waterfall effect */
+.masonry-grid-about {
+	column-gap: 1.5rem;
 	column-fill: balance;
+	width: 100%;
 	transition: all 0.3s ease-in-out;
 }
 
+/* Dynamically set column count based on item count via CSS variables */
+.masonry-grid-about {
+	column-count: var(--about-masonry-columns, 1);
+}
+
+/* Fallback responsive breakpoints if JS fails to set variables */
 @media (min-width: 640px) {
-	.masonry-grid {
-		column-count: 2;
+	.masonry-grid-about {
+			column-count: var(--about-masonry-columns, 2);
 	}
 }
 
 @media (min-width: 1024px) {
-	.masonry-grid {
-		column-count: 3;
-		column-gap: 2rem;
+	.masonry-grid-about {
+			column-count: var(--about-masonry-columns, 3);
 	}
 }
 
 @media (min-width: 1536px) {
-	.masonry-grid {
-		column-count: 4;
-		column-gap: 2rem;
+	.masonry-grid-about {
+			column-count: var(--about-masonry-columns, 4);
 	}
 }
 
-/* Alternative grid approach for very large screens */
 @media (min-width: 1920px) {
-	.masonry-grid {
-		column-count: 5;
+	.masonry-grid-about {
+			column-count: var(--about-masonry-columns, 5);
 	}
 }
 
-/* Dynamic masonry grid that adapts to project count */
-.masonry-grid-dynamic {
-	column-gap: 1rem;
-	/* Reduced gap for smaller screens */
-	column-fill: balance;
-	transition: all 0.3s ease-in-out;
-	column-count: var(--masonry-columns-sm, 1);
+/* About page masonry item wrapper */
+.masonry-item-about {
+	break-inside: avoid;
+	page-break-inside: avoid;
+	display: inline-block;
 	width: 100%;
-	overflow-x: hidden;
-	/* Prevent horizontal overflow */
+	margin-bottom: 1.5rem;
+	vertical-align: top;
+}
+
+/* ===================================
+   PROJECTS PAGE MASONRY (CSS Grid)
+   =================================== */
+/* Grid-based masonry for Projects page - ensures left-to-right flow */
+.masonry-grid-projects {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(var(--projects-masonry-columns-sm, 1), minmax(0, 1fr));
+	grid-auto-flow: row;
+	width: 100%;
+	transition: all 0.3s ease-in-out;
 }
 
 @media (min-width: 640px) {
-	.masonry-grid-dynamic {
-		column-count: var(--masonry-columns-md, 2);
-		column-gap: 1.5rem;
+	.masonry-grid-projects {
+			grid-template-columns: repeat(var(--projects-masonry-columns-md, 2), minmax(0, 1fr));
+			gap: 1.5rem;
 	}
 }
 
 @media (min-width: 1024px) {
-	.masonry-grid-dynamic {
-		column-count: var(--masonry-columns-lg, 3);
-		column-gap: 2rem;
+	.masonry-grid-projects {
+			grid-template-columns: repeat(var(--projects-masonry-columns-lg, 3), minmax(0, 1fr));
+			gap: 2rem;
 	}
 }
 
-/* Special handling for very few projects */
-.masonry-grid-dynamic[data-project-count="1"] {
-	column-count: 1 !important;
+/* Special handling for 1-2 projects */
+.masonry-grid-projects[data-project-count="1"] {
+	grid-template-columns: 1fr !important;
 	max-width: 500px;
 	margin: 0 auto;
 }
 
-.masonry-grid-dynamic[data-project-count="2"] {
-	column-count: 1 !important;
+.masonry-grid-projects[data-project-count="2"] {
+	grid-template-columns: 1fr !important;
 }
 
 @media (min-width: 640px) {
-	.masonry-grid-dynamic[data-project-count="2"] {
-		column-count: 2 !important;
-	}
-}
-
-/* Dynamic column count classes */
-.masonry-cols-1 {
-	column-count: 1;
-}
-
-.masonry-cols-2 {
-	column-count: 2;
-}
-
-.masonry-cols-3 {
-	column-count: 3;
-}
-
-.masonry-cols-5 {
-	column-count: 5;
-}
-
-.masonry-item {
-	break-inside: avoid;
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 2rem;
-	vertical-align: top;
-	transition: all 0.3s ease-in-out;
+	.masonry-grid-projects[data-project-count="2"] {
+			grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		}
 }
 
 /* Prevent breaking inside cards and smooth transitions */
