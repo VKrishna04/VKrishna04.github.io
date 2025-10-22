@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-09-24T07:14:31.723Z",
+  "timestamp": "2025-10-22T19:00:27.186Z",
   "files": {
     "src/utils/integrity-guard.js": {
       "sha256": "9a37e99d41c2f5ab9f7a5178039c73f0c1af25f51431a72cb680ef57b43b4fa6",
       "simple": "5aac7503",
       "size": 4499,
-      "lastModified": "2025-09-24T07:09:36.221Z"
+      "lastModified": "2025-09-24T07:14:31.742Z"
     },
     "src/utils/stealth-validator.js": {
       "sha256": "a2a21bb88369bb30585364898e29cafb0beefafd1a8665028f70e5718f2a17af",
@@ -32,10 +32,10 @@
       "lastModified": "2025-09-21T11:39:17.632Z"
     },
     "src/utils/settings-guard.js": {
-      "sha256": "4c3fbc69a3cb80ff6c2da28a7c04d5be11399e062d1d762aaf67efd5a60447e2",
-      "simple": "3b84f5f6",
-      "size": 7142,
-      "lastModified": "2025-09-21T12:04:41.500Z"
+      "sha256": "584a136dfb07a2c71047e43d94ab870c8a256aad86cc24283107857c8c062ed5",
+      "simple": "51d5faef",
+      "size": 6923,
+      "lastModified": "2025-09-24T12:21:37.021Z"
     }
   }
 }

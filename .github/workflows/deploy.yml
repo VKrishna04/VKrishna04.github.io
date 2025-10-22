@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Audit Packages
-        run: npm audit
+        run: npm audit fix
 
       - name: Lint code
         run: npm run lint
