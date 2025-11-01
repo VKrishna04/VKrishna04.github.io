@@ -124,8 +124,13 @@ const Footer = () => {
 	};
 
 	const getStatValue = (item) => {
-		if (item.key === "projects" && item.value === "auto") {
+		// Never display "auto" literally - always compute the value
+		if (item.key === "projects" && (item.value === "auto" || !item.value)) {
 			return getProjectsCount();
+		}
+		// Don't return "auto" for any other field either
+		if (item.value === "auto") {
+			return "N/A";
 		}
 		return item.value;
 	};
@@ -195,7 +200,8 @@ const Footer = () => {
 								</p>
 
 								{/* Configurable Stats */}
-								{statsConfig.show !== false &&
+								{settings.footer &&
+									statsConfig.show !== false &&
 									statsConfig.items &&
 									statsConfig.items.filter((item) => item.show !== false)
 										.length > 0 && (

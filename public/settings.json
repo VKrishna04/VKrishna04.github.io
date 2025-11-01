@@ -1,6 +1,6 @@
 {
 	"//": [
-		"Copyright Krishna GSVV",
+		"Copyright 2025 Krishna GSVV",
 		"",
 		"Licensed under the Apache License, Version 2.0 (the \"License\");",
 		"you may not use this file except in compliance with the License.",
@@ -14,6 +14,28 @@
 		"See the License for the specific language governing permissions and",
 		"limitations under the License."
 	],
+	"_colorFormatGuide": {
+		"description": "This portfolio supports ANY valid CSS color format for maximum flexibility",
+		"supportedFormats": {
+			"hex": "#a855f7",
+			"hexWithAlpha": "#a855f780",
+			"rgb": "rgb(168, 85, 247)",
+			"rgba": "rgba(168, 85, 247, 0.5)",
+			"hsl": "hsl(270, 91%, 65%)",
+			"hsla": "hsla(270, 91%, 65%, 0.5)",
+			"namedColors": "purple, blue, red, white, black, etc.",
+			"tailwindClasses": "purple-500, blue-400 (auto-converted to hex)",
+			"cssVariables": "var(--primary-color)",
+			"gradients": "linear-gradient(to right, #c770f0, #ec4899)"
+		},
+		"examples": {
+			"solidColor": "#a855f7",
+			"transparentColor": "rgba(168, 85, 247, 0.3)",
+			"namedColor": "purple",
+			"gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+		},
+		"note": "You can use any of these formats throughout the settings file for colors, borders, shadows, etc."
+	},
 	"$schema": "./settings.schema.json",
 	"seo": {
 		"title": "Krishna GSVV - Developer",
@@ -103,38 +125,40 @@
 			"devUsername": "VKrishna04",
 			"customUrl": "",
 			"altText": "Krishna GSVV",
-			"borderColor": "border-purple-500/30",
-			"shadowColor": "shadow-purple-500/20",
-			"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl"
+			"borderColor": "rgba(168, 85, 247, 0.3)",
+			"shadowColor": "rgba(168, 85, 247, 0.2)",
+			"note": "Set type to 'github' to use GitHub profile image, 'display' to use display.profileImage, or 'custom' to use customUrl. Colors support ANY CSS format: hex (#a855f7), rgb, rgba, hsl, named colors, or Tailwind classes (purple-500)"
 		},
 		"buttons": [
 			{
 				"text": "About Me",
 				"link": "/about",
-				"type": "primary",
-				"gradient": "from-purple-600 to-pink-600",
-				"hoverGradient": "from-purple-700 to-pink-700",
-				"shadowColor": "shadow-purple-500/25",
-				"icon": "ArrowDownIcon"
-			},
-			{
-				"text": "Projects",
-				"link": "/projects",
-				"type": "primary",
-				"gradient": "from-cyan-600 to-blue-600",
-				"hoverGradient": "from-cyan-700 to-blue-700",
-				"shadowColor": "shadow-cyan-500/25",
+				"type": "outline",
+				"borderColor": "#a855f7",
+				"textColor": "rgb(192, 132, 252)",
+				"hoverBg": "#a855f7",
+				"hoverText": "#ffffff",
 				"icon": "ArrowDownIcon"
 			},
 			{
 				"text": "Resume",
 				"link": "/resume",
 				"type": "outline",
-				"borderColor": "border-purple-500",
-				"textColor": "text-purple-400",
-				"hoverBg": "hover:bg-purple-500",
-				"hoverText": "hover:text-white",
+				"borderColor": "#a855f7",
+				"textColor": "rgb(192, 132, 252)",
+				"hoverBg": "#a855f7",
+				"hoverText": "#ffffff",
 				"icon": "DocumentArrowDownIcon"
+			},
+			{
+				"text": "Projects",
+				"link": "/projects",
+				"type": "outline",
+				"borderColor": "#a855f7",
+				"textColor": "rgb(192, 132, 252)",
+				"hoverBg": "#a855f7",
+				"hoverText": "#ffffff",
+				"icon": "ArrowDownIcon"
 			}
 		],
 		"showScrollIndicator": true,
@@ -207,7 +231,7 @@
 		},
 		"note": "Configure the About page content - heading, subheading, title, paragraphs, image settings, skills section heading, and skills categories with items",
 		"skillsHeading": "Technical Expertise",
-		"skillsLayout": "grid",
+		"skillsLayout": "masonry",
 		"skillsGridColumns": {
 			"mobile": "grid-cols-1",
 			"tablet": "md:grid-cols-2",
@@ -283,6 +307,93 @@
 						"name": "Responsive Design",
 						"icon": "DevicePhoneMobileIcon",
 						"color": "text-green-400"
+					}
+				]
+			},
+			{
+				"category": "Tools & Platforms",
+				"icon": "CpuChipIcon",
+				"items": [
+					{
+						"name": "Git",
+						"icon": "FaGitAlt",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "GitHub",
+						"icon": "FaGithub",
+						"color": "text-white"
+					},
+					{
+						"name": "VS Code",
+						"icon": "BiLogoVisualStudio",
+						"color": "text-blue-400"
+					},
+					{
+						"name": "Jupyter",
+						"icon": "SiJupyter",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Postman",
+						"icon": "SiPostman",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Linux",
+						"icon": "SiLinux",
+						"color": "text-gray-300"
+					}
+				]
+			},
+			{
+				"category": "Cloud & DevOps",
+				"icon": "ServerIcon",
+				"items": [
+					{
+						"name": "AWS",
+						"icon": "FaAws",
+						"color": "text-yellow-500"
+					},
+					{
+						"name": "Oracle Cloud",
+						"icon": "SiOracle",
+						"color": "text-red-500"
+					},
+					{
+						"name": "Cloudflare",
+						"icon": "SiCloudflare",
+						"color": "text-orange-400"
+					},
+					{
+						"name": "Cloudflare Pages",
+						"icon": "SiCloudflare",
+						"color": "text-orange-500"
+					},
+					{
+						"name": "Cloudflare D1",
+						"icon": "SiCloudflare",
+						"color": "text-orange-600"
+					},
+					{
+						"name": "Render",
+						"icon": "SiRender",
+						"color": "text-white"
+					},
+					{
+						"name": "Vercel",
+						"icon": "SiVercel",
+						"color": "text-white"
+					},
+					{
+						"name": "Docker",
+						"icon": "FaDocker",
+						"color": "text-blue-500"
+					},
+					{
+						"name": "GitHub Actions",
+						"icon": "SiGithubactions",
+						"color": "text-blue-600"
 					}
 				]
 			},
@@ -386,93 +497,6 @@
 						"name": "Firebase",
 						"icon": "SiFirebase",
 						"color": "text-yellow-500"
-					}
-				]
-			},
-			{
-				"category": "Cloud & DevOps",
-				"icon": "ServerIcon",
-				"items": [
-					{
-						"name": "AWS",
-						"icon": "FaAws",
-						"color": "text-yellow-500"
-					},
-					{
-						"name": "Oracle Cloud",
-						"icon": "SiOracle",
-						"color": "text-red-500"
-					},
-					{
-						"name": "Cloudflare",
-						"icon": "SiCloudflare",
-						"color": "text-orange-400"
-					},
-					{
-						"name": "Cloudflare Pages",
-						"icon": "SiCloudflare",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "Cloudflare D1",
-						"icon": "SiCloudflare",
-						"color": "text-orange-600"
-					},
-					{
-						"name": "Render",
-						"icon": "SiRender",
-						"color": "text-white"
-					},
-					{
-						"name": "Vercel",
-						"icon": "SiVercel",
-						"color": "text-white"
-					},
-					{
-						"name": "Docker",
-						"icon": "FaDocker",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "GitHub Actions",
-						"icon": "SiGithubactions",
-						"color": "text-blue-600"
-					}
-				]
-			},
-			{
-				"category": "Tools & Platforms",
-				"icon": "CpuChipIcon",
-				"items": [
-					{
-						"name": "Git",
-						"icon": "FaGitAlt",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "GitHub",
-						"icon": "FaGithub",
-						"color": "text-white"
-					},
-					{
-						"name": "VS Code",
-						"icon": "BiLogoVisualStudio",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Jupyter",
-						"icon": "SiJupyter",
-						"color": "text-orange-400"
-					},
-					{
-						"name": "Postman",
-						"icon": "SiPostman",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "Linux",
-						"icon": "SiLinux",
-						"color": "text-gray-300"
 					}
 				]
 			},
@@ -1558,8 +1582,8 @@
 				"url": "https://github.com/VKrishna04",
 				"label": "GitHub",
 				"description": "Check out my repositories and open source contributions",
-				"color": "text-white",
-				"hoverColor": "hover:text-gray-300",
+				"color": "#ffffff",
+				"hoverColor": "rgb(209, 213, 219)",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
@@ -1573,8 +1597,8 @@
 				"url": "https://github.com/Life-Experimentalist",
 				"label": "GitHub Organization",
 				"description": "My organization where I store working projects",
-				"color": "text-white",
-				"hoverColor": "hover:text-gray-300",
+				"color": "#ffffff",
+				"hoverColor": "rgb(209, 213, 219)",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
@@ -1588,8 +1612,8 @@
 				"url": "https://linkedin.com/in/krishnagsvv",
 				"label": "LinkedIn",
 				"description": "Connect with me professionally and see my career journey",
-				"color": "text-blue-500",
-				"hoverColor": "hover:text-blue-400",
+				"color": "#3b82f6",
+				"hoverColor": "rgb(96, 165, 250)",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
@@ -1602,8 +1626,8 @@
 				"icon": "FaTwitter",
 				"url": "https://twitter.com/VKrishna04",
 				"label": "Twitter Profile",
-				"color": "text-blue-400",
-				"hoverColor": "hover:text-blue-300",
+				"color": "#60a5fa",
+				"hoverColor": "rgb(147, 197, 253)",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,
@@ -1616,8 +1640,8 @@
 				"icon": "FaInstagram",
 				"url": "https://instagram.com/vkrishna04",
 				"label": "Instagram",
-				"color": "text-pink-500",
-				"hoverColor": "hover:text-pink-400",
+				"color": "#ec4899",
+				"hoverColor": "rgb(244, 114, 182)",
 				"showInHome": true,
 				"showInFooter": true,
 				"showInContact": true,

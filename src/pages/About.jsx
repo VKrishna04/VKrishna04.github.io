@@ -17,7 +17,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import useMasonry from "../hooks/useMasonry";
 import {
 	CodeBracketIcon,
 	CpuChipIcon,
@@ -87,7 +86,7 @@ const About = () => {
 	const [settings, setSettings] = useState({});
 	const [truncatedSkills, setTruncatedSkills] = useState(new Set());
 	const skillRefs = useRef({});
-	const masonryRef = useMasonry(".masonry-item", ".masonry-grid");
+	// Remove useMasonry hook - using pure CSS masonry instead
 
 	useEffect(() => {
 		// Fetch settings for about page configuration
@@ -348,7 +347,6 @@ const About = () => {
 								{settings.about?.skillsHeading || "Technical Skills"}
 							</h2>
 							<div
-								ref={masonryRef}
 								className={
 									settings.about?.skillsLayout === "masonry"
 										? "masonry-grid-about"

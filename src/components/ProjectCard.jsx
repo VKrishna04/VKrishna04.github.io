@@ -472,7 +472,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 						href={project.homepage || project.liveUrl || project.demoUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-sm font-medium hover:scale-105 flex-1 justify-center"
+						className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-sm font-medium hover:scale-105 flex-1 justify-center"
 					>
 						<ArrowTopRightOnSquareIcon className="w-4 h-4" />
 						<span>Live</span>

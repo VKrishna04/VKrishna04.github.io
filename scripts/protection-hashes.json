@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-10-22T19:00:27.186Z",
+  "timestamp": "2025-10-23T07:31:43.323Z",
   "files": {
     "src/utils/integrity-guard.js": {
       "sha256": "9a37e99d41c2f5ab9f7a5178039c73f0c1af25f51431a72cb680ef57b43b4fa6",
       "simple": "5aac7503",
       "size": 4499,
-      "lastModified": "2025-09-24T07:14:31.742Z"
+      "lastModified": "2025-10-22T19:00:27.211Z"
     },
     "src/utils/stealth-validator.js": {
       "sha256": "a2a21bb88369bb30585364898e29cafb0beefafd1a8665028f70e5718f2a17af",

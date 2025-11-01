@@ -14,44 +14,68 @@
  * limitations under the License.
  */
 
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { injectSeoPlugin } from "./scripts/inject-seo.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// https://vite.dev/config/
+// 🧩 Fix __dirname for ESM (Vite uses ES modules)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default defineConfig({
-	plugins: [react(), injectSeoPlugin()],
-	// base: "/Vkrishna04.me/",
+	plugins: [
+		react(),
+		injectSeoPlugin(),
+		{
+			name: "watch-public-settings",
+			configureServer(server) {
+				const filesToWatch = [
+					path.resolve(__dirname, "public/settings.json"),
+					path.resolve(__dirname, "public/settings.schema.json"),
+				];
+
+				for (const filePath of filesToWatch) {
+					if (fs.existsSync(filePath)) {
+						fs.watchFile(filePath, { interval: 500 }, () => {
+							console.log(
+								`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
+									filePath
+								)} changed — triggering full reload...`
+							);
+							server.ws.send({ type: "full-reload" });
+						});
+					} else {
+						console.warn(
+							`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
+								filePath
+							)} not found — skipping watch`
+						);
+					}
+				}
+			},
+		},
+	],
 	server: {
-		watch: {
-			// Watch settings files explicitly for changes
-			ignored: ["!**/public/settings.json", "!**/public/settings.schema.json"],
-		},
-		// Force reload when these files change
-		hmr: {
-			overlay: true,
-		},
+		hmr: { overlay: true },
 	},
 	build: {
 		outDir: "dist",
 		rollupOptions: {
 			output: {
 				manualChunks: {
-					// React core
 					"react-vendor": ["react", "react-dom"],
-					// Router
 					router: ["react-router-dom"],
-					// UI libraries
 					"ui-vendor": ["framer-motion", "@heroicons/react"],
-					// Icons
 					icons: ["react-icons/fa", "react-icons/si"],
-					// Particles
 					particles: [
 						"@tsparticles/react",
 						"@tsparticles/engine",
 						"@tsparticles/slim",
 					],
-					// Utilities
 					utils: ["typewriter-effect", "clsx", "tailwind-merge"],
 				},
 			},

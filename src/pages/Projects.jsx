@@ -626,16 +626,9 @@ const Projects = () => {
 		);
 	};
 
-	// Generate dynamic masonry styles based on project count
+	// Generate dynamic masonry styles - no longer needed, using pure CSS
 	const getMasonryStyles = () => {
-		const projectCount = filteredRepos.length;
-		if (projectCount === 0) return {};
-
-		return {
-			"--projects-masonry-columns-sm": Math.min(1, projectCount),
-			"--projects-masonry-columns-md": Math.min(2, projectCount),
-			"--projects-masonry-columns-lg": Math.min(3, projectCount),
-		};
+		return {};
 	};
 
 	// Generate dynamic grid classes based on project count
@@ -958,7 +951,13 @@ const Projects = () => {
 					>
 						{filteredRepos.map((repo) => {
 							return (
-								<motion.div key={repo.id} variants={staggerChild}>
+								<motion.div
+									key={repo.id}
+									variants={staggerChild}
+									className={
+										layoutMode === "masonry" ? "masonry-item-projects" : ""
+									}
+								>
 									<ProjectCard project={repo} />
 								</motion.div>
 							);

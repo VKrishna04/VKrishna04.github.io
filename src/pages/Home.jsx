@@ -40,6 +40,11 @@ import {
 	FaCodepen,
 } from "react-icons/fa";
 import AnimatedBackground from "../components/AnimatedBackground";
+import {
+	getButtonStyles,
+	getSocialLinkStyles,
+	parseColor,
+} from "../utils/themeUtils";
 
 const Home = () => {
 	const [settings, setSettings] = useState({});
@@ -155,11 +160,17 @@ const Home = () => {
 				{/* Profile Image */}
 				<motion.div className="mb-8 relative" variants={fadeInUp}>
 					<div
-						className={`w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 ${
-							settings.home?.profileImage?.borderColor || "border-purple-500/30"
-						} shadow-2xl ${
-							settings.home?.profileImage?.shadowColor || "shadow-purple-500/20"
-						} hover:scale-105 transition-transform duration-300`}
+						className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 shadow-2xl hover:scale-105 transition-transform duration-300"
+						style={{
+							borderColor: parseColor(
+								settings.home?.profileImage?.borderColor ||
+									"rgba(168, 85, 247, 0.3)"
+							),
+							boxShadow: `0 25px 50px -12px ${parseColor(
+								settings.home?.profileImage?.shadowColor ||
+									"rgba(168, 85, 247, 0.2)"
+							)}`,
+						}}
 					>
 						<img
 							src={getProfileImageUrl()}
@@ -257,7 +268,8 @@ const Home = () => {
 							return (
 								<Link key={index} to={button.link}>
 									<motion.div
-										className={`group relative inline-flex items-center px-8 py-3 bg-gradient-to-r ${button.gradient} text-white font-semibold rounded-full hover:${button.hoverGradient} transition-all duration-300 shadow-lg ${button.shadowColor} cursor-pointer`}
+										className="group relative inline-flex items-center px-8 py-3 font-semibold rounded-full transition-all duration-300 shadow-lg cursor-pointer"
+										style={getButtonStyles(button, false)}
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 									>
@@ -272,7 +284,16 @@ const Home = () => {
 							return (
 								<Link key={index} to={button.link}>
 									<motion.div
-										className={`group relative inline-flex items-center px-8 py-3 border-2 ${button.borderColor} ${button.textColor} font-semibold rounded-full ${button.hoverBg} ${button.hoverText} transition-all duration-300 cursor-pointer`}
+										className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
+										style={getButtonStyles(button, false)}
+										onMouseEnter={(e) => {
+											const hoverStyles = getButtonStyles(button, true);
+											Object.assign(e.currentTarget.style, hoverStyles);
+										}}
+										onMouseLeave={(e) => {
+											const normalStyles = getButtonStyles(button, false);
+											Object.assign(e.currentTarget.style, normalStyles);
+										}}
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 									>
@@ -301,11 +322,20 @@ const Home = () => {
 								href={social.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`transition-all duration-300 ${
-									social.color || "text-gray-400"
-								} ${
-									social.hoverColor || "hover:text-purple-400"
-								} hover:scale-110`}
+								className="transition-all duration-300 hover:scale-110"
+								style={getSocialLinkStyles(social, false)}
+								onMouseEnter={(e) =>
+									Object.assign(
+										e.currentTarget.style,
+										getSocialLinkStyles(social, true)
+									)
+								}
+								onMouseLeave={(e) =>
+									Object.assign(
+										e.currentTarget.style,
+										getSocialLinkStyles(social, false)
+									)
+								}
 								whileHover={{
 									scale: 1.2,
 									y: -5,

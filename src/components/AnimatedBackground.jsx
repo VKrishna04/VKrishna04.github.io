@@ -31,10 +31,14 @@ const AnimatedBackground = ({ config }) => {
 		const ctx = canvas.getContext("2d");
 		let particles = [];
 
-		// Mouse tracking for interactive effects
+		// Mouse tracking for interactive effects with scroll offset
 		const handleMouseMove = (event) => {
-			mouseRef.current.x = event.clientX;
-			mouseRef.current.y = event.clientY;
+			// Get canvas position relative to viewport
+			const rect = canvas.getBoundingClientRect();
+
+			// Calculate mouse position relative to canvas, accounting for scroll
+			mouseRef.current.x = event.clientX - rect.left;
+			mouseRef.current.y = event.clientY - rect.top;
 		};
 
 		if (config.type === "animated-network" || config.type === "particles") {
