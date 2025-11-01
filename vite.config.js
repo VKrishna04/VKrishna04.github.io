@@ -31,35 +31,35 @@ export default defineConfig({
 		react(),
 		injectSeoPlugin(),
 		{
-			name: "watch-public-settings",
+			name: "watch-public/settings",
 			configureServer(server) {
 				const filesToWatch = [
 					path.resolve(__dirname, "public/settings.json"),
 					path.resolve(__dirname, "public/settings.schema.json"),
-				];
+				]
 
 				for (const filePath of filesToWatch) {
 					if (fs.existsSync(filePath)) {
-						server.watcher.add(filePath);
+						server.watcher.add(filePath)
 					} else {
 						console.warn(
-							`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
+							`\x1b[33m[watch public/settings]\x1b[0m ${path.basename(
 								filePath
 							)} not found — skipping watch`
-						);
+						)
 					}
 				}
 
 				server.watcher.on("change", (changedPath) => {
 					if (filesToWatch.includes(changedPath)) {
 						console.log(
-							`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
+							`\x1b[33m[watch public/settings]\x1b[0m ${path.basename(
 								changedPath
 							)} changed — triggering full reload...`
-						);
-						server.ws.send({ type: "full-reload" });
+						)
+						server.ws.send({ type: "full-reload" })
 					}
-				});
+				})
 			},
 		},
 	],
@@ -86,4 +86,4 @@ export default defineConfig({
 		},
 		chunkSizeWarningLimit: 600,
 	},
-});
+})

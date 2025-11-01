@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -777,7 +777,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "publications":
 				return (

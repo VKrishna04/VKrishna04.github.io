@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import * as ReactIcons from "react-icons/fa";
-import * as ReactIconsSi from "react-icons/si";
-import * as ReactIconsMd from "react-icons/md";
-import * as ReactIconsBs from "react-icons/bs";
+// === LEGACY/BACKUP: Direct icon imports (deprecated) ===
+// These imports are kept for backward compatibility but should use unified system
+// import * as ReactIcons from "react-icons/fa"; // REPLACED with unified icon system
+// import * as ReactIconsSi from "react-icons/si"; // REPLACED with unified icon system
+// import * as ReactIconsMd from "react-icons/md"; // REPLACED with unified icon system
+// import * as ReactIconsBs from "react-icons/bs"; // REPLACED with unified icon system
+// ========================================================
+
+// === MODULAR SYSTEMS: Use unified icon system ===
+import { UnifiedIcon } from "../components/UnifiedIcon"
+// ================================================
 
 /**
  * Customizable Technical Experience Section Component
@@ -41,23 +48,6 @@ const TechnicalExperience = ({ settings }) => {
 		{ name: "Docker", icon: "FaDocker", color: "text-blue-500", level: 70 },
 	];
 
-	// Icon resolver function
-	const getIconComponent = (iconName) => {
-		if (!iconName) return null;
-
-		// Try different icon libraries
-		const iconSources = [ReactIcons, ReactIconsSi, ReactIconsMd, ReactIconsBs];
-
-		for (const source of iconSources) {
-			if (source[iconName]) {
-				return source[iconName];
-			}
-		}
-
-		// Fallback to a default icon
-		return ReactIcons.FaCode;
-	};
-
 	// Calculate responsive columns
 	const getGridColumns = () => {
 		if (fixedColumns) {
@@ -83,8 +73,6 @@ const TechnicalExperience = ({ settings }) => {
 
 	// Skill icon component with tooltip
 	const SkillIcon = ({ skill, index }) => {
-		const IconComponent = getIconComponent(skill.icon);
-
 		return (
 			<motion.div
 				className="relative group"
@@ -101,9 +89,11 @@ const TechnicalExperience = ({ settings }) => {
 				>
 					{/* Skill Icon */}
 					<div className="flex flex-col items-center space-y-2">
-						{IconComponent ? (
-							<IconComponent
+						{skill.icon ? (
+							<UnifiedIcon
+								name={skill.icon}
 								className={`w-8 h-8 ${skill.color || "text-primary-400"}`}
+								fallback={null}
 							/>
 						) : (
 							<div
@@ -170,13 +160,15 @@ const TechnicalExperience = ({ settings }) => {
 			className="mb-8"
 		>
 			<h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-				{category.icon &&
-					React.createElement(getIconComponent(category.icon), {
-						className: "mr-2 text-primary-400",
-					})}
+				{category.icon && (
+					<UnifiedIcon
+						name={category.icon}
+						className="mr-2 text-primary-400"
+						fallback={null}
+					/>
+				)}
 				{category.name}
-			</h3>
-
+			</h3>{" "}
 			<div
 				className="grid gap-4"
 				style={{

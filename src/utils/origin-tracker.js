@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Origin Tracking Module
  * Implements sophisticated commit tree validation and fork detection
  * Uses distributed checks to prevent git history manipulation

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,75 +17,24 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import {
-	CodeBracketIcon,
-	CpuChipIcon,
-	ServerIcon,
-	DevicePhoneMobileIcon,
-} from "@heroicons/react/24/outline";
-import {
-	FaReact,
-	FaNodeJs,
-	FaPython,
-	FaGitAlt,
-	FaDocker,
-	FaAws,
-	FaHtml5,
-	FaCss3Alt,
-	FaJsSquare,
-	FaVuejs,
-	FaAngular,
-	FaPhp,
-	FaJava,
-	FaDatabase,
-	FaGithub,
-} from "react-icons/fa";
-import { BiLogoVisualStudio } from "react-icons/bi";
-import {
-	SiJavascript,
-	SiTypescript,
-	SiMongodb,
-	SiPostgresql,
-	SiTailwindcss,
-	SiExpress,
-	SiNextdotjs,
-	SiNestjs,
-	SiRedis,
-	SiGraphql,
-	SiKubernetes,
-	SiLinux,
-	SiGit,
-	SiFirebase,
-	SiVercel,
-	SiNetlify,
-	SiVite,
-	SiFramer,
-	SiBootstrap,
-	SiTensorflow,
-	SiOpencv,
-	SiGoogle,
-	SiScikitlearn,
-	SiPandas,
-	SiNumpy,
-	SiSqlite,
-	SiRender,
-	SiDjango,
-	SiFastapi,
-	SiOracle,
-	SiJupyter,
-	SiPostman,
-	SiHiveBlockchain,
-	SiEthereum,
-	SiWeb3Dotjs,
-	SiBitcoin,
-	SiGithubactions,
-	SiFlask,
-} from "react-icons/si";
+// === LEGACY/BACKUP: Direct icon imports (deprecated) ===
+// These imports are kept for backward compatibility but should use unified system
+// import { ... } from "react-icons/fa"; // REPLACED with unified icon system
+// import { ... } from "react-icons/si"; // REPLACED with unified icon system
+// import { ... } from "react-icons/bi"; // REPLACED with unified icon system
+// import { ... } from "@heroicons/react/24/outline"; // REPLACED with unified icon system
+// ========================================================
+
+// === MODULAR SYSTEMS: Use unified icon + color systems ===
+import { getUnifiedIcon } from "../utils/iconSystemCore";
+import { UnifiedIcon } from "../components/UnifiedIcon";
+import { parseColor } from "../utils/themeUtils";
+// =========================================================
 
 const About = () => {
-	const [settings, setSettings] = useState({});
-	const [truncatedSkills, setTruncatedSkills] = useState(new Set());
-	const skillRefs = useRef({});
+	const [settings, setSettings] = useState({})
+	const [truncatedSkills, setTruncatedSkills] = useState(new Set())
+	const skillRefs = useRef({})
 	// Remove useMasonry hook - using pure CSS masonry instead
 
 	useEffect(() => {
@@ -93,137 +42,110 @@ const About = () => {
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
+			.catch((error) => console.warn("Could not fetch settings:", error))
+	}, [])
 
 	// Check for text truncation
 	useEffect(() => {
 		const checkTruncation = () => {
-			const truncated = new Set();
+			const truncated = new Set()
 			Object.entries(skillRefs.current).forEach(([key, ref]) => {
 				if (ref && ref.scrollWidth > ref.clientWidth) {
-					truncated.add(key);
+					truncated.add(key)
 				}
-			});
-			setTruncatedSkills(truncated);
-		};
+			})
+			setTruncatedSkills(truncated)
+		}
 
 		// Check initially and on window resize
-		checkTruncation();
-		window.addEventListener("resize", checkTruncation);
-		return () => window.removeEventListener("resize", checkTruncation);
-	}, [settings]);
+		checkTruncation()
+		window.addEventListener("resize", checkTruncation)
+		return () => window.removeEventListener("resize", checkTruncation)
+	}, [settings])
 
 	// Get image URL based on settings
 	const getImageUrl = () => {
-		const aboutConfig = settings.about || {};
-		const displayConfig = settings.display || {};
+		const aboutConfig = settings.about || {}
+		const displayConfig = settings.display || {}
 
 		if (aboutConfig.image?.type === "custom" && aboutConfig.image?.customUrl) {
-			return aboutConfig.image.customUrl;
+			return aboutConfig.image.customUrl
 		} else if (
 			aboutConfig.image?.type === "home" &&
 			displayConfig.profileImage
 		) {
-			return displayConfig.profileImage;
+			return displayConfig.profileImage
 		} else {
 			// Default to GitHub profile image
-			return displayConfig.profileImage || "https://github.com/VKrishna04.png";
+			return displayConfig.profileImage || "https://github.com/VKrishna04.png"
 		}
-	};
+	}
 
-	// Icon mapping for converting string names to actual icon components
-	const iconMap = {
-		// Heroicons
-		DevicePhoneMobileIcon,
-		ServerIcon,
-		CpuChipIcon,
-		CodeBracketIcon,
-		// React Icons - FA
-		FaReact,
-		FaNodeJs,
-		FaPython,
-		FaGitAlt,
-		FaDocker,
-		FaAws,
-		FaHtml5,
-		FaCss3Alt,
-		FaJsSquare,
-		FaVuejs,
-		FaAngular,
-		FaPhp,
-		FaJava,
-		FaDatabase,
-		FaGithub,
-		// React Icons - BI
-		BiLogoVisualStudio,
-		// React Icons - SI
-		SiJavascript,
-		SiTypescript,
-		SiMongodb,
-		SiPostgresql,
-		SiTailwindcss,
-		SiExpress,
-		SiNextdotjs,
-		SiNestjs,
-		SiRedis,
-		SiGraphql,
-		SiKubernetes,
-		SiLinux,
-		SiGit,
-		SiFirebase,
-		SiVercel,
-		SiNetlify,
-		SiVite,
-		SiFramer,
-		SiBootstrap,
-		SiTensorflow,
-		SiOpencv,
-		SiGoogle,
-		SiScikitlearn,
-		SiPandas,
-		SiNumpy,
-		SiSqlite,
-		SiRender,
-		SiDjango,
-		SiFastapi,
-		SiOracle,
-		SiJupyter,
-		SiPostman,
-		SiHiveBlockchain,
-		SiEthereum,
-		SiWeb3Dotjs,
-		SiBitcoin,
-		SiGithubactions,
-		SiFlask,
-	};
+	// === UNIFIED ICON SYSTEM: Dynamic icon loading ===
+	// Preload icons when settings are loaded
+	useEffect(() => {
+		if (!settings.about?.skills) return
 
-	// Get icon component from string name
-	const getIconComponent = (iconName) => {
-		return iconMap[iconName] || CodeBracketIcon; // fallback icon
-	};
+		const preloadIcons = async () => {
+			const iconNames = new Set()
+
+			// Collect all icon names from skills
+			settings.about.skills.forEach((category) => {
+				if (category.icon) iconNames.add(category.icon)
+				category.items?.forEach((item) => {
+					if (item.icon) iconNames.add(item.icon)
+				})
+			})
+
+			// Collect icon names from featured projects
+			const featuredProjects =
+				settings.projects?.staticProjects?.filter(
+					(project) => project.showInAbout === true
+				) || []
+
+			featuredProjects.forEach((project) => {
+				const styling =
+					settings.projects?.featuredProjectsConfig?.[project.name] || {}
+				if (styling.icon) iconNames.add(styling.icon)
+			})
+
+			// Load all icons in parallel (preload for performance)
+			await Promise.all(
+				Array.from(iconNames).map(async (iconName) => {
+					try {
+						await getUnifiedIcon(iconName)
+					} catch (error) {
+						console.warn(`Failed to preload icon: ${iconName}`, error)
+					}
+				})
+			)
+		}
+
+		preloadIcons()
+	}, [settings])
+	// ================================================
 
 	// Get skills from settings or use default
 	const getSkills = () => {
 		if (settings.about?.skills?.length > 0) {
 			return settings.about.skills.map((category) => ({
 				...category,
-				icon: getIconComponent(category.icon),
+				iconName: category.icon, // Store icon name for UnifiedIcon
 				items: category.items.map((item) => ({
 					...item,
-					icon: getIconComponent(item.icon),
+					iconName: item.icon, // Store icon name for UnifiedIcon
 				})),
-			}));
+			}))
 		}
 
 		// Return empty array if not configured
-		return [];
-	};
+		return []
+	}
 
 	// Get stats from settings or use default
 	const getStats = () => {
-		return settings.about?.stats || [];
-	};
+		return settings.about?.stats || []
+	}
 
 	// Get featured projects from settings or use default
 	const getFeaturedProjects = () => {
@@ -231,19 +153,19 @@ const About = () => {
 		const projects =
 			settings.projects?.staticProjects?.filter(
 				(project) => project.showInAbout === true
-			) || [];
+			) || []
 
 		// Get styling config
-		const stylingConfig = settings.projects?.featuredProjectsConfig || {};
+		const stylingConfig = settings.projects?.featuredProjectsConfig || {}
 
 		// Map projects to include their styling
 		return projects.map((project) => {
-			const styling = stylingConfig[project.name] || {};
+			const styling = stylingConfig[project.name] || {}
 			return {
 				name: project.name,
 				title: project.name,
 				description: project.description,
-				icon: styling.icon || "CodeBracketIcon",
+				icon: styling.icon || "HiCodeBracket",
 				gradient:
 					styling.gradient ||
 					"bg-gradient-to-br from-gray-600/20 to-gray-600/20",
@@ -254,19 +176,19 @@ const About = () => {
 				hoverBgColor: styling.hoverBgColor || "group-hover:bg-gray-500/30",
 				iconColor: styling.iconColor || "text-gray-400",
 				textColor: styling.textColor || "text-gray-200",
-			};
-		});
-	};
+			}
+		})
+	}
 
-	const skills = getSkills();
-	const stats = getStats();
-	const featuredProjects = getFeaturedProjects();
+	const skills = getSkills()
+	const stats = getStats()
+	const featuredProjects = getFeaturedProjects()
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
 		animate: { opacity: 1, y: 0 },
 		transition: { duration: 0.6 },
-	};
+	}
 
 	const staggerContainer = {
 		animate: {
@@ -274,7 +196,7 @@ const About = () => {
 				staggerChildren: 0.1,
 			},
 		},
-	};
+	}
 
 	return (
 		<div className="min-h-screen py-20 px-4">
@@ -327,18 +249,74 @@ const About = () => {
 							{settings.about?.image && (
 								<motion.div className="flex justify-center" variants={fadeInUp}>
 									<div className="relative">
-										<div className="w-80 h-80 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
+										<div
+											className="w-80 h-80 rounded-full overflow-hidden border-4 shadow-2xl"
+											style={{
+												borderColor: parseColor(
+													settings.about?.image?.borderColor ||
+														"rgba(168, 85, 247, 0.3)"
+												),
+												boxShadow: `0 25px 50px -12px ${parseColor(
+													settings.about?.image?.shadowColor ||
+														"rgba(168, 85, 247, 0.2)"
+												)}`,
+											}}
+										>
 											<img
 												src={getImageUrl()}
 												alt={settings.about?.image?.altText || "Profile"}
 												className="w-full h-full object-cover"
 											/>
 										</div>
-										<div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-500/10 to-pink-500/10"></div>
+										<div
+											className="absolute inset-0 rounded-full"
+											style={{
+												background: `linear-gradient(to top right, ${parseColor(
+													settings.about?.image?.gradientFrom ||
+														"rgba(168, 85, 247, 0.1)"
+												)}, ${parseColor(
+													settings.about?.image?.gradientTo ||
+														"rgba(236, 72, 153, 0.1)"
+												)})`,
+											}}
+										></div>
 									</div>
 								</motion.div>
 							)}
 						</div>
+					)}
+					{/* Stats Section */}
+					{stats.length > 0 && (
+						<motion.div
+							className={`mt-20 grid gap-6 ${
+								stats.length <= 2
+									? "grid-cols-1 md:grid-cols-2"
+									: stats.length === 3
+									? "grid-cols-1 md:grid-cols-3"
+									: stats.length === 4
+									? "grid-cols-2 md:grid-cols-4"
+									: stats.length === 5
+									? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+									: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+							}`}
+							variants={fadeInUp}
+						>
+							{stats.map((stat, index) => (
+								<motion.div
+									key={index}
+									className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group"
+									whileHover={{ scale: 1.05, y: -5 }}
+									transition={{ duration: 0.2 }}
+								>
+									<div className="text-3xl lg:text-4xl font-bold text-purple-400 mb-2 group-hover:text-purple-300 transition-colors">
+										{stat.number}
+									</div>
+									<div className="text-gray-300 group-hover:text-white transition-colors font-medium">
+										{stat.label}
+									</div>
+								</motion.div>
+							))}
+						</motion.div>
 					)}
 					{/* Skills Section */}
 					{skills.length > 0 && (
@@ -375,7 +353,11 @@ const About = () => {
 									>
 										<div className="flex items-center mb-4">
 											<div className="p-2 bg-purple-500/20 rounded-lg mr-3 group-hover:bg-purple-500/30 transition-colors">
-												<skillCategory.icon className="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors" />
+												<UnifiedIcon
+													name={skillCategory.iconName || "Icon 404"}
+													className="w-6 h-6 text-purple-400 group-hover:text-purple-300 transition-colors"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-lg font-semibold text-white group-hover:text-purple-300 transition-colors">
 												{skillCategory.category}
@@ -383,8 +365,8 @@ const About = () => {
 										</div>
 										<div className="grid grid-cols-2 gap-3">
 											{skillCategory.items.map((skill, skillIndex) => {
-												const skillKey = `${index}-${skillIndex}`;
-												const isTruncated = truncatedSkills.has(skillKey);
+												const skillKey = `${index}-${skillIndex}`
+												const isTruncated = truncatedSkills.has(skillKey)
 
 												return (
 													<div
@@ -392,8 +374,10 @@ const About = () => {
 														className="relative flex items-center space-x-2 p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-300 group/skill cursor-pointer"
 													>
 														<div className="flex-shrink-0">
-															<skill.icon
+															<UnifiedIcon
+																name={skill.iconName || "FaCode"}
 																className={`w-5 h-5 ${skill.color} group-hover/skill:scale-110 transition-transform`}
+																fallback="FaCode"
 															/>
 														</div>
 														<span
@@ -405,22 +389,24 @@ const About = () => {
 														{/* Enhanced tooltip - only show when text is truncated */}
 														{isTruncated && (
 															<div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover/skill:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-10 border border-purple-500/30 flex items-center gap-2">
-																<skill.icon
+																<UnifiedIcon
+																	name={skill.iconName || "FaCode"}
 																	className={`w-4 h-4 ${skill.color}`}
+																	fallback="FaCode"
 																/>
 																<span>{skill.name}</span>
 																<div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
 															</div>
 														)}
 													</div>
-												);
+												)
 											})}
 										</div>
 									</motion.div>
 								))}
 							</div>
 						</motion.div>
-					)}{" "}
+					)}
 					{/* Achievements Section */}
 					<motion.div className="mt-20" variants={fadeInUp}>
 						<h2 className="text-3xl font-bold text-center text-white mb-12">
@@ -430,7 +416,6 @@ const About = () => {
 						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{featuredProjects.length > 0 ? (
 								featuredProjects.map((project, index) => {
-									const IconComponent = getIconComponent(project.icon);
 									return (
 										<motion.div
 											key={index}
@@ -442,8 +427,10 @@ const About = () => {
 												<div
 													className={`w-16 h-16 ${project.bgColor} rounded-full flex items-center justify-center mx-auto mb-4 ${project.hoverBgColor} transition-colors`}
 												>
-													<IconComponent
+													<UnifiedIcon
+														name={project.icon || "FaCode"}
 														className={`w-8 h-8 ${project.iconColor}`}
+														fallback="FaCode"
 													/>
 												</div>
 												<h3 className="text-xl font-bold text-white mb-2">
@@ -454,7 +441,7 @@ const About = () => {
 												</p>
 											</div>
 										</motion.div>
-									);
+									)
 								})
 							) : (
 								// Default projects if not configured
@@ -466,7 +453,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-colors">
-												<SiTensorflow className="w-8 h-8 text-purple-400" />
+												<UnifiedIcon
+													name="SiTensorflow"
+													className="w-8 h-8 text-purple-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												EquiLens - AI Bias Detection
@@ -486,7 +477,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500/30 transition-colors">
-												<SiOpencv className="w-8 h-8 text-green-400" />
+												<UnifiedIcon
+													name="SiOpencv"
+													className="w-8 h-8 text-green-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												Facial Emotion Detection
@@ -506,7 +501,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-500/30 transition-colors">
-												<SiHiveBlockchain className="w-8 h-8 text-orange-400" />
+												<UnifiedIcon
+													name="SiHiveBlockchain"
+													className="w-8 h-8 text-orange-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												HiveXplore - Blockchain Gateway
@@ -526,7 +525,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-cyan-500/30 transition-colors">
-												<BiLogoVisualStudio className="w-8 h-8 text-cyan-400" />
+												<UnifiedIcon
+													name="BiLogoVisualStudio"
+													className="w-8 h-8 text-cyan-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												VS Code Extensions
@@ -546,7 +549,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-500/30 transition-colors">
-												<SiGoogle className="w-8 h-8 text-yellow-400" />
+												<UnifiedIcon
+													name="SiGoogle"
+													className="w-8 h-8 text-yellow-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												RanobeGemini Extension
@@ -566,7 +573,11 @@ const About = () => {
 									>
 										<div className="text-center">
 											<div className="w-16 h-16 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-500/30 transition-colors">
-												<FaAws className="w-8 h-8 text-pink-400" />
+												<UnifiedIcon
+													name="FaAws"
+													className="w-8 h-8 text-pink-400"
+													fallback="FaCode"
+												/>
 											</div>
 											<h3 className="text-xl font-bold text-white mb-2">
 												Cloud Infrastructure
@@ -582,43 +593,10 @@ const About = () => {
 							)}
 						</div>
 					</motion.div>
-					{/* Stats Section */}
-					{stats.length > 0 && (
-						<motion.div
-							className={`mt-20 grid gap-6 ${
-								stats.length <= 2
-									? "grid-cols-1 md:grid-cols-2"
-									: stats.length === 3
-									? "grid-cols-1 md:grid-cols-3"
-									: stats.length === 4
-									? "grid-cols-2 md:grid-cols-4"
-									: stats.length === 5
-									? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
-									: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
-							}`}
-							variants={fadeInUp}
-						>
-							{stats.map((stat, index) => (
-								<motion.div
-									key={index}
-									className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group"
-									whileHover={{ scale: 1.05, y: -5 }}
-									transition={{ duration: 0.2 }}
-								>
-									<div className="text-3xl lg:text-4xl font-bold text-purple-400 mb-2 group-hover:text-purple-300 transition-colors">
-										{stat.number}
-									</div>
-									<div className="text-gray-300 group-hover:text-white transition-colors font-medium">
-										{stat.label}
-									</div>
-								</motion.div>
-							))}
-						</motion.div>
-					)}
 				</motion.div>
 			</div>
 		</div>
-	);
+	)
 };
 
 export default About;

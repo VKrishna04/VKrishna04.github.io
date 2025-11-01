@@ -36,6 +36,51 @@
 		},
 		"note": "You can use any of these formats throughout the settings file for colors, borders, shadows, etc."
 	},
+	"_iconSystemGuide": {
+		"description": "Use ANY icon from react-icons (50,000+ icons from 40+ libraries) anywhere in settings.json",
+		"howToFindIcons": "Browse all available icons at: https://react-icons.github.io/react-icons",
+		"supportedLibraries": {
+			"FontAwesome": "FaReact, FaHome, FaGithub, FaHeart, FaStar",
+			"MaterialDesign": "MdHome, MdSettings, MdPerson, MdFavorite",
+			"Heroicons": "HiHome, HiUser, HiCog, HiHeart",
+			"Heroicons2": "Hi2Home, Hi2User, Hi2Cog",
+			"SimpleIcons": "SiReact, SiGithub, SiPython, SiJavascript",
+			"BootstrapIcons": "BsHouse, BsPerson, BsGear",
+			"Ionicons4": "IoHome, IoPerson, IoSettings",
+			"Ionicons5": "Io5Home, Io5Person, Io5Settings",
+			"Lucide": "LuHome, LuUser, LuSettings",
+			"AntDesign": "AiOutlineHome, AiFillHeart",
+			"Boxicons": "BiHome, BiUser, BiCog",
+			"Devicons": "DiReact, DiPython, DiNodejs",
+			"Feather": "FiHome, FiUser, FiSettings",
+			"GameIcons": "GiSword, GiShield, GiCastle",
+			"GitHubOcticons": "GoHome, GoRepo, GoPerson",
+			"RemixIcon": "RiHome2Line, RiUserLine",
+			"TablerIcons": "TbHome, TbUser, TbSettings",
+			"VSCodeIcons": "VscHome, VscFile, VscGithub",
+			"WeatherIcons": "WiDaySunny, WiRain, WiSnow",
+			"PhosphorIcons": "PiHouse, PiUser, PiGear",
+			"FlatColorIcons": "FcHome, FcSettings, FcLike",
+			"AndMore": "35+ more libraries available!"
+		},
+		"namingConvention": {
+			"format": "[LibraryPrefix][IconName]",
+			"examples": [
+				"FaReact = FontAwesome React icon",
+				"MdHome = Material Design home icon",
+				"HiUser = Heroicons user icon",
+				"SiGithub = Simple Icons GitHub logo"
+			]
+		},
+		"usageExamples": {
+			"socialLink": "\"icon\": \"FaGithub\"",
+			"skillIcon": "\"icon\": \"SiReact\"",
+			"buttonIcon": "\"icon\": \"MdDownload\"",
+			"menuIcon": "\"icon\": \"HiMenu\""
+		},
+		"documentation": "See 'docs/Unified Icon System Guide.md' for complete documentation",
+		"note": "The system automatically detects the library from the icon name prefix and loads it dynamically. No manual imports needed!"
+	},
 	"$schema": "./settings.schema.json",
 	"seo": {
 		"title": "Krishna GSVV - Developer",
@@ -240,7 +285,7 @@
 		"skills": [
 			{
 				"category": "Programming Languages",
-				"icon": "CodeBracketIcon",
+				"icon": "HiCodeBracket",
 				"items": [
 					{
 						"name": "Python",
@@ -276,7 +321,7 @@
 			},
 			{
 				"category": "Frontend Development",
-				"icon": "DevicePhoneMobileIcon",
+				"icon": "HiDevicePhoneMobile",
 				"items": [
 					{
 						"name": "React",
@@ -305,14 +350,14 @@
 					},
 					{
 						"name": "Responsive Design",
-						"icon": "DevicePhoneMobileIcon",
+						"icon": "HiDevicePhoneMobile",
 						"color": "text-green-400"
 					}
 				]
 			},
 			{
 				"category": "Tools & Platforms",
-				"icon": "CpuChipIcon",
+				"icon": "HiCpuChip",
 				"items": [
 					{
 						"name": "Git",
@@ -348,7 +393,7 @@
 			},
 			{
 				"category": "Cloud & DevOps",
-				"icon": "ServerIcon",
+				"icon": "HiServer",
 				"items": [
 					{
 						"name": "AWS",
@@ -399,7 +444,7 @@
 			},
 			{
 				"category": "Backend & APIs",
-				"icon": "ServerIcon",
+				"icon": "HiServer",
 				"items": [
 					{
 						"name": "Node.js",
@@ -428,14 +473,14 @@
 					},
 					{
 						"name": "REST APIs",
-						"icon": "CodeBracketIcon",
+						"icon": "HiCodeBracket",
 						"color": "text-purple-400"
 					}
 				]
 			},
 			{
 				"category": "AI & Machine Learning",
-				"icon": "CpuChipIcon",
+				"icon": "HiCpuChip",
 				"items": [
 					{
 						"name": "TensorFlow",
@@ -502,7 +547,7 @@
 			},
 			{
 				"category": "Blockchain & Web3",
-				"icon": "CodeBracketIcon",
+				"icon": "HiCodeBracket",
 				"items": [
 					{
 						"name": "Hive Blockchain",
@@ -821,8 +866,8 @@
 				"showInAbout": true,
 				"showInProjects": true,
 				"status": "Completed",
-				"startDate": "-05-01",
-				"endDate": "-08-15",
+				"startDate": "2025-05-01",
+				"endDate": "2025-08-15",
 				"githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection",
 				"liveUrl": "",
 				"demoUrl": "",
@@ -870,7 +915,7 @@
 				"showInAbout": true,
 				"showInProjects": true,
 				"status": "Live",
-				"startDate": "-03-01",
+				"startDate": "2025-03-01",
 				"endDate": null,
 				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
 				"liveUrl": "https://hivebuzz.onrender.com/",
@@ -967,7 +1012,7 @@
 				"showInAbout": true,
 				"showInProjects": true,
 				"status": "Active Development",
-				"startDate": "-06-01",
+				"startDate": "2025-06-01",
 				"endDate": null,
 				"githubUrl": "https://github.com/VKrishna04/RanobeGemini",
 				"liveUrl": "",
@@ -1216,7 +1261,7 @@
 					},
 					{
 						"name": "REST APIs",
-						"icon": "CodeBracketIcon",
+						"icon": "HiCodeBracket",
 						"color": "text-purple-400"
 					},
 					{
@@ -1299,7 +1344,7 @@
 		],
 		"skillsNote": "Configure skills with categories and items. Each item should have name, icon, and color. Available icons: same as About page skill icons.",
 		"skillsHeading": "Technical Skills",
-		"skillsIcon": "CpuChipIcon",
+		"skillsIcon": "HiCpuChip",
 		"certifications": [
 			{
 				"name": "AWS Certified Cloud Practitioner",
@@ -1381,7 +1426,7 @@
 				"date": "2025",
 				"description": "Awarded for scoring the highest points in the hackathon, demonstrating exceptional coding skills and innovative problem-solving abilities in a new technology.",
 				"rewardAmount": {
-					"amount": 50000,
+					"amount": 15000,
 					"currency": "INR",
 					"displayText": "₹50,000"
 				},
@@ -1394,7 +1439,7 @@
 				"date": "2025",
 				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity",
 				"rewardAmount": {
-					"amount": 25000,
+					"amount": 5000,
 					"currency": "INR",
 					"displayText": "₹25,000"
 				},
@@ -1472,7 +1517,7 @@
 					},
 					{
 						"name": "REST API",
-						"icon": "CodeBracketIcon",
+						"icon": "HiCodeBracket",
 						"color": "text-purple-400"
 					}
 				],
@@ -1523,7 +1568,7 @@
 					},
 					{
 						"name": "RESTful APIs",
-						"icon": "CodeBracketIcon",
+						"icon": "HiCodeBracket",
 						"color": "text-purple-400"
 					}
 				],
@@ -1609,7 +1654,7 @@
 				"name": "LinkedIn",
 				"key": "linkedin",
 				"icon": "FaLinkedin",
-				"url": "https://linkedin.com/in/krishnagsvv",
+				"url": "https://linkedin.com/in/vkrishna04",
 				"label": "LinkedIn",
 				"description": "Connect with me professionally and see my career journey",
 				"color": "#3b82f6",
@@ -2229,7 +2274,7 @@
 	},
 	"counterAPI": {
 		"enabled": false,
-		"baseUrl": "https://projectcounter.onrender.com/",
+		"baseUrl": "https://cflaircounter.pages.dev/",
 		"timeout": 10000,
 		"fallbackOnError": true,
 		"projectMapping": {
@@ -2239,3 +2284,4 @@
 		}
 	}
 }
+

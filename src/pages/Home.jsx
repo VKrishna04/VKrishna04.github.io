@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,17 +45,6 @@ import {
 	getSocialLinkStyles,
 	parseColor,
 } from "../utils/themeUtils";
-
-// Custom hook for hover styles
-const useHoverStyles = (normalStyles, hoverStyles) => {
-	const handleMouseEnter = (e) => {
-		Object.assign(e.currentTarget.style, hoverStyles);
-	};
-	const handleMouseLeave = (e) => {
-		Object.assign(e.currentTarget.style, normalStyles);
-	};
-	return [handleMouseEnter, handleMouseLeave];
-};
 
 const Home = () => {
 	const [settings, setSettings] = useState({});
@@ -273,7 +262,7 @@ const Home = () => {
 					variants={fadeInUp}
 				>
 					{settings.home?.buttons?.map((button, index) => {
-						const ButtonIcon = getButtonIcon(button.icon);
+						const ButtonIcon = getButtonIcon(button.icon)
 
 						if (button.type === "primary") {
 							return (
@@ -290,34 +279,37 @@ const Home = () => {
 										)}
 									</motion.div>
 								</Link>
-							);
+							)
 						} else if (button.type === "outline") {
 							return (
 								<Link key={index} to={button.link}>
-									{(() => {
-										const normalStyles = getButtonStyles(button, false);
-										const hoverStyles = getButtonStyles(button, true);
-										const [handleMouseEnter, handleMouseLeave] = useHoverStyles(normalStyles, hoverStyles);
-										return (
-											<motion.div
-												className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
-												style={normalStyles}
-												onMouseEnter={handleMouseEnter}
-												onMouseLeave={handleMouseLeave}
-												whileHover={{ scale: 1.05 }}
-												whileTap={{ scale: 0.95 }}
-											>
-												{button.text}
-												{ButtonIcon && (
-													<ButtonIcon className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
-												)}
-											</motion.div>
-										);
-									})()}
+									<motion.div
+										className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
+										style={getButtonStyles(button, false)}
+										onMouseEnter={(e) =>
+											Object.assign(
+												e.currentTarget.style,
+												getButtonStyles(button, true)
+											)
+										}
+										onMouseLeave={(e) =>
+											Object.assign(
+												e.currentTarget.style,
+												getButtonStyles(button, false)
+											)
+										}
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+									>
+										{button.text}
+										{ButtonIcon && (
+											<ButtonIcon className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
+										)}
+									</motion.div>
 								</Link>
-							);
+							)
 						}
-						return null;
+						return null
 					})}
 				</motion.div>
 
@@ -327,7 +319,7 @@ const Home = () => {
 					variants={fadeInUp}
 				>
 					{socialLinks.map((social, index) => {
-						const IconComponent = getIconComponent(social.icon);
+						const IconComponent = getIconComponent(social.icon)
 						return IconComponent ? (
 							<motion.a
 								key={index}
@@ -335,32 +327,30 @@ const Home = () => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className="transition-all duration-300 hover:scale-110"
-							{(() => {
-								const normalStyles = getSocialLinkStyles(social, false);
-								const hoverStyles = getSocialLinkStyles(social, true);
-								const [handleMouseEnter, handleMouseLeave] = useHoverStyles(normalStyles, hoverStyles);
-								return (
-									<motion.a
-										href={social.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="transition-all duration-300 hover:scale-110"
-										style={normalStyles}
-										onMouseEnter={handleMouseEnter}
-										onMouseLeave={handleMouseLeave}
-										whileHover={{
-											scale: 1.2,
-											y: -5,
-											rotate: [0, -10, 10, 0],
-										}}
-										whileTap={{ scale: 0.9 }}
-										aria-label={social.label}
-									>
-										<IconComponent className="w-6 h-6" />
-									</motion.a>
-								);
-							})()}
-						) : null;
+								style={getSocialLinkStyles(social, false)}
+								onMouseEnter={(e) =>
+									Object.assign(
+										e.currentTarget.style,
+										getSocialLinkStyles(social, true)
+									)
+								}
+								onMouseLeave={(e) =>
+									Object.assign(
+										e.currentTarget.style,
+										getSocialLinkStyles(social, false)
+									)
+								}
+								whileHover={{
+									scale: 1.2,
+									y: -5,
+									rotate: [0, -10, 10, 0],
+								}}
+								whileTap={{ scale: 0.9 }}
+								aria-label={social.label}
+							>
+								<IconComponent className="w-6 h-6" />
+							</motion.a>
+						) : null
 					})}
 				</motion.div>
 			</motion.div>
@@ -383,7 +373,7 @@ const Home = () => {
 				</motion.div>
 			)}
 		</motion.div>
-	);
+	)
 };
 
 export default Home;

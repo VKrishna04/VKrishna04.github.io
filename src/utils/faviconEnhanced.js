@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { reactIconToDataUrl, parseIconName } from "./reactIcons";
+import { getIconLibraryPrefix as parseIconName } from "./iconSystemCore.js"
+import { reactIconToDataUrl } from "./reactIcons.js";
 
 /*
  * Enhanced Favicon Management System with React Icons Support

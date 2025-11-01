@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Build-Time Protection System - Simplified
  * Essential protection without complex imports
  */

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +32,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import FaviconManager from "./components/FaviconManager";
 import PrivacyNotice from "./components/PrivacyNotice";
+import { trackPortfolioView } from "./utils/cflairCounter";
 import "./App.css";
 
 // Custom hook for managing page titles and favicon
@@ -43,6 +44,14 @@ const usePageConfiguration = (location) => {
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error));
+	}, []);
+
+	// Track portfolio view on mount (only once)
+	useEffect(() => {
+		// Track portfolio view with CFlair-Counter
+		trackPortfolioView().catch((error) =>
+			console.warn("Could not track portfolio view:", error)
+		);
 	}, []);
 
 	useEffect(() => {

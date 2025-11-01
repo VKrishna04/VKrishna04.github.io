@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Steganographic Protection System
  * This module implements invisible attribution and integrity validation
  * Uses encoded identifiers and distributed checks to resist tampering

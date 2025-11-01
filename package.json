@@ -29,6 +29,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "node scripts/validate-build-integrity.js && node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
+		"build-future-cflarecounter": "node scripts/validate-build-integrity.js && node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js && node scripts/register-cflair-projects.js",
 		"build-core": "node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
 		"lint": "eslint .",
 		"preview": "vite preview",
@@ -36,6 +37,7 @@
 		"generate-cname": "node scripts/generate-cname.js",
 		"generate-manifest": "node scripts/generate-manifest.js",
 		"generate-hashes": "node scripts/generate-hashes.js",
+		"register-cflair": "node scripts/register-cflair-projects.js",
 		"deploy:cloudflare": "npx wrangler deploy",
 		"deploy:cloudflare:preview": "npx wrangler deploy --env preview",
 		"validate": "node scripts/validate-build-integrity.js",

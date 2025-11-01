@@ -848,7 +848,7 @@ This project is open source and available under the [Apache License, Version 2.0
 - 🌐 Website: [VKrishna04.github.io](https://vkrishna04.github.io) | [VKrishna04.me](https://vkrishna04.me)
 - 💼 GitHub: [@VKrishna04](https://github.com/VKrishna04)
 - 🏢 Organization: [@Life-Experimentalists](https://github.com/orgs/Life-Experimentalists)
-- 💼 LinkedIn: [krishnagsvv](https://linkedin.com/in/krishnagsvv)
+- 💼 LinkedIn: [Krishna GSVV](https://linkedin.com/in/vkrishna04)
 - 📧 Email: me@vkrishna04.me
 
 ### Acknowledgments

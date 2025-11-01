@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -128,7 +128,7 @@ const useProjectsData = () => {
 		};
 	};
 
-	// Fetch CounterAPI data
+	// Fetch CFlair-Counter data (multiple projects)
 	const fetchCounterData = async (config) => {
 		if (!config.counterAPI?.enabled) return {};
 
@@ -140,33 +140,17 @@ const useProjectsData = () => {
 				config.counterAPI.timeout || 10000
 			);
 
-			const response = await fetch(`${config.counterAPI.baseUrl}/projects`, {
-				signal: controller.signal,
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-			});
-
+			// CFlair-Counter doesn't have a /projects endpoint
+			// Instead, we'll need to track projects individually
+			// For now, return empty object and rely on individual project fetches
+			setCounterData({});
 			clearTimeout(timeoutId);
-
-			if (response.ok) {
-				const data = await response.json();
-				const counterMap = {};
-
-				// Create mapping from CounterAPI project names to counts
-				data.forEach((project) => {
-					counterMap[project.name] = project.count || 0;
-				});
-
-				setCounterData(counterMap);
-				return counterMap;
-			}
+			return {};
 		} catch (error) {
 			if (error.name === "AbortError") {
-				console.warn("CounterAPI request timed out");
+				console.warn("CFlair-Counter request timed out");
 			} else {
-				console.warn("Could not fetch CounterAPI data:", error);
+				console.warn("Could not fetch CFlair-Counter data:", error);
 			}
 
 			if (config.counterAPI.fallbackOnError) {
@@ -176,6 +160,28 @@ const useProjectsData = () => {
 			setCounterLoading(false);
 		}
 		return {};
+	};
+
+	// Fetch view count for a single project from CFlair-Counter
+	const fetchProjectCounter = async (projectName, baseUrl) => {
+		try {
+			const response = await fetch(`${baseUrl}/api/views/${projectName}`, {
+				method: "GET",
+				headers: {
+					Accept: "application/json",
+				},
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				if (data.success) {
+					return data.totalViews || 0;
+				}
+			}
+		} catch (error) {
+			console.warn(`Could not fetch counter for ${projectName}:`, error);
+		}
+		return null;
 	};
 
 	// Get counter value for a repository
@@ -259,6 +265,18 @@ const useProjectsData = () => {
 						apiOptions.headers
 					);
 
+					// Fetch counter value for this specific repository from CFlair-Counter
+					let counterValue = null;
+					if (config.counterAPI?.enabled) {
+						const projectName =
+							config.counterAPI.projectMapping?.customMappings?.[repo.name] ||
+							repo.name;
+						counterValue = await fetchProjectCounter(
+							projectName,
+							config.counterAPI.baseUrl
+						);
+					}
+
 					return {
 						id: repo.id,
 						name: repo.name,
@@ -276,7 +294,7 @@ const useProjectsData = () => {
 						size: repo.size,
 						default_branch: repo.default_branch,
 						open_issues_count: repo.open_issues_count,
-						counterValue: getCounterValue(repo.name, config),
+						counterValue: counterValue,
 						statsUrls: generateStatsUrls(
 							repo.html_url,
 							repo.name,

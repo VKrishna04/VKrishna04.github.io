@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,43 @@
  */
 
 /**
- * React Icons Integration Utility
- * Dynamically loads and renders React Icons for favicons
+ * LEGACY/BACKUP: React Icons Integration Utility
+ *
+ * @deprecated This file is maintained for backward compatibility only.
+ *
+ * RECOMMENDED: Use the new Unified Icon System instead
+ * import { getUnifiedIcon } from './iconSystemCore.js'
+ * import { UnifiedIcon } from '../components/unifiedIcon.jsx';
+ *
+ * The Unified Icon System provides:
+ * - Access to ALL 50,000+ icons from react-icons
+ * - Automatic library detection from icon name
+ * - Built-in caching for better performance
+ * - Simpler API with no manual library mapping needed
+ * - Full React component support with UnifiedIcon
+ *
+ * Migration Example:
+ * OLD: const Icon = await getReactIcon('FaReact');
+ * NEW: const Icon = await getUnifiedIcon('FaReact');
+ *
+ * See: docs/Unified Icon System Guide.md for complete documentation
+ */
+
+// Re-export unified system functions for backward compatibility
+export {
+	getUnifiedIcon as getReactIcon,
+	getIconWithFallback,
+	getIconLibraryPrefix as parseIconName,
+	getAvailableLibraries,
+	iconExists,
+	preloadIcons,
+	searchCachedIcons,
+} from "./iconSystemCore.js"
+export { UnifiedIcon } from "../components/UnifiedIcon.jsx"
+
+/**
+ * LEGACY IMPLEMENTATION BELOW - KEPT FOR BACKWARD COMPATIBILITY
+ * This code is deprecated but still functional as a fallback
  */
 
 // Icon library mappings to react-icons packages
@@ -64,24 +99,26 @@ const ICON_LIBRARIES = {
 	vsc: () => import("react-icons/vsc"),
 	// Weather Icons
 	wi: () => import("react-icons/wi"),
-};
+}
 
 /**
- * Parse icon name to extract library and icon
+ * LEGACY: Parse icon name to extract library and icon
  * Examples: "FaReact", "MdHome", "AiFillHeart"
+ *
+ * @deprecated Use getIconLibraryPrefix from unifiedIconSystem instead
  */
-export const parseIconName = (iconName) => {
+export const parseIconNameLegacy = (iconName) => {
 	if (!iconName || typeof iconName !== "string") {
-		return null;
+		return null
 	}
 
 	// Extract prefix (first 2-3 letters) and convert to lowercase
-	const prefixMatch = iconName.match(/^([A-Z][a-z]+)/);
+	const prefixMatch = iconName.match(/^([A-Z][a-z]+)/)
 	if (!prefixMatch) {
-		return null;
+		return null
 	}
 
-	const prefix = prefixMatch[1].toLowerCase();
+	const prefix = prefixMatch[1].toLowerCase()
 
 	// Map common prefixes to library names
 	const libraryMap = {
@@ -106,44 +143,46 @@ export const parseIconName = (iconName) => {
 		ty: "ty", // TyHome
 		vsc: "vsc", // VscHome
 		wi: "wi", // WiDaySunny
-	};
-
-	const library = libraryMap[prefix];
-	return library ? { library, iconName } : null;
-};
-
-/**
- * Dynamically load and get React Icon component
- */
-export const getReactIcon = async (iconName) => {
-	const parsed = parseIconName(iconName);
-	if (!parsed) {
-		console.warn(`Invalid icon name format: ${iconName}`);
-		return null;
 	}
 
-	const { library, iconName: fullIconName } = parsed;
+	const library = libraryMap[prefix]
+	return library ? { library, iconName } : null
+}
+
+/**
+ * LEGACY: Dynamically load and get React Icon component
+ *
+ * @deprecated Use getUnifiedIcon from unifiedIconSystem instead
+ */
+export const getReactIconLegacy = async (iconName) => {
+	const parsed = parseIconNameLegacy(iconName)
+	if (!parsed) {
+		console.warn(`Invalid icon name format: ${iconName}`)
+		return null
+	}
+
+	const { library, iconName: fullIconName } = parsed
 
 	try {
 		if (!ICON_LIBRARIES[library]) {
-			console.warn(`Unsupported icon library: ${library}`);
-			return null;
+			console.warn(`Unsupported icon library: ${library}`)
+			return null
 		}
 
-		const iconModule = await ICON_LIBRARIES[library]();
-		const IconComponent = iconModule[fullIconName];
+		const iconModule = await ICON_LIBRARIES[library]()
+		const IconComponent = iconModule[fullIconName]
 
 		if (!IconComponent) {
-			console.warn(`Icon "${fullIconName}" not found in library "${library}"`);
-			return null;
+			console.warn(`Icon "${fullIconName}" not found in library "${library}"`)
+			return null
 		}
 
-		return IconComponent;
+		return IconComponent
 	} catch (error) {
-		console.error(`Error loading icon ${iconName}:`, error);
-		return null;
+		console.error(`Error loading icon ${iconName}:`, error)
+		return null
 	}
-};
+}
 
 /**
  * Convert React Icon to SVG data URL for favicon
@@ -154,29 +193,30 @@ export const reactIconToDataUrl = async (iconName, options = {}) => {
 		color = "#000000",
 		backgroundColor = "transparent",
 		padding = 4,
-	} = options;
+	} = options
 
 	try {
-		const IconComponent = await getReactIcon(iconName);
+		const { getUnifiedIcon } = await import("../components/UnifiedIcon.jsx")
+		const IconComponent = await getUnifiedIcon(iconName)
 		if (!IconComponent) {
-			return null;
+			return null
 		}
 
 		// Create a temporary div to render the icon
-		const div = document.createElement("div");
-		div.style.position = "absolute";
-		div.style.top = "-9999px";
-		div.style.left = "-9999px";
-		div.style.width = `${size}px`;
-		div.style.height = `${size}px`;
-		document.body.appendChild(div);
+		const div = document.createElement("div")
+		div.style.position = "absolute"
+		div.style.top = "-9999px"
+		div.style.left = "-9999px"
+		div.style.width = `${size}px`
+		div.style.height = `${size}px`
+		document.body.appendChild(div)
 
 		// Import React and ReactDOM for rendering
-		const React = (await import("react")).default;
-		const { createRoot } = await import("react-dom/client");
+		const React = (await import("react")).default
+		const { createRoot } = await import("react-dom/client")
 
 		// Create root and render icon
-		const root = createRoot(div);
+		const root = createRoot(div)
 		await new Promise((resolve) => {
 			root.render(
 				React.createElement(IconComponent, {
@@ -191,50 +231,50 @@ export const reactIconToDataUrl = async (iconName, options = {}) => {
 						borderRadius: backgroundColor !== "transparent" ? "4px" : "0",
 					},
 				})
-			);
-			setTimeout(resolve, 100); // Give time for rendering
-		});
+			)
+			setTimeout(resolve, 100) // Give time for rendering
+		})
 
 		// Get the SVG element
-		const svgElement = div.querySelector("svg");
+		const svgElement = div.querySelector("svg")
 		if (!svgElement) {
-			console.warn("No SVG element found for icon:", iconName);
-			return null;
+			console.warn("No SVG element found for icon:", iconName)
+			return null
 		}
 
 		// Clone and enhance the SVG
-		const svg = svgElement.cloneNode(true);
-		svg.setAttribute("width", size);
-		svg.setAttribute("height", size);
-		svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+		const svg = svgElement.cloneNode(true)
+		svg.setAttribute("width", size)
+		svg.setAttribute("height", size)
+		svg.setAttribute("viewBox", `0 0 ${size} ${size}`)
 
 		// Add background if specified
 		if (backgroundColor && backgroundColor !== "transparent") {
 			const rect = document.createElementNS(
 				"http://www.w3.org/2000/svg",
 				"rect"
-			);
-			rect.setAttribute("width", "100%");
-			rect.setAttribute("height", "100%");
-			rect.setAttribute("fill", backgroundColor);
-			rect.setAttribute("rx", "4");
-			svg.insertBefore(rect, svg.firstChild);
+			)
+			rect.setAttribute("width", "100%")
+			rect.setAttribute("height", "100%")
+			rect.setAttribute("fill", backgroundColor)
+			rect.setAttribute("rx", "4")
+			svg.insertBefore(rect, svg.firstChild)
 		}
 
 		// Convert to data URL
-		const svgData = new XMLSerializer().serializeToString(svg);
-		const dataUrl = `data:image/svg+xml;base64,${btoa(svgData)}`;
+		const svgData = new XMLSerializer().serializeToString(svg)
+		const dataUrl = `data:image/svg+xml;base64,${btoa(svgData)}`
 
 		// Cleanup
-		root.unmount();
-		document.body.removeChild(div);
+		root.unmount()
+		document.body.removeChild(div)
 
-		return dataUrl;
+		return dataUrl
 	} catch (error) {
-		console.error(`Error converting icon ${iconName} to data URL:`, error);
-		return null;
+		console.error(`Error converting icon ${iconName} to data URL:`, error)
+		return null
 	}
-};
+}
 
 /**
  * Get popular React Icons for suggestions

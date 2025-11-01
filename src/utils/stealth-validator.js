@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Stealth Validation Module
  * Performs discrete checks without obvious attribution references
  * Uses character codes and string manipulation to hide identifiers

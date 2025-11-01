@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Advanced Obfuscation Utilities - Simplified Version
  * Provides sophisticated code protection with multi-layer obfuscation
  * This is a simplified version to avoid build issues

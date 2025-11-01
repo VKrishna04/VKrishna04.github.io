@@ -1,4 +1,4 @@
-// Shared utility for getting the resume URL and filename
+﻿// Shared utility for getting the resume URL and filename
 
 /**
  * Returns a safe, absolute URL for the resume PDF or external link.

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,23 +18,15 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import {
-	FaGithub,
-	FaLinkedin,
-	FaTwitter,
-	FaInstagram,
-	FaDiscord,
-	FaYoutube,
-	FaTwitch,
-	FaTiktok,
-	FaMedium,
-	FaDev,
-	FaStackOverflow,
-	FaDribbble,
-	FaBehance,
-	FaCodepen,
-} from "react-icons/fa";
+// === LEGACY/BACKUP: Direct icon imports (deprecated) ===
+// These imports are kept for backward compatibility but should use unified system
+// import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // REPLACED
+// import { FaGithub, FaLinkedin, ... } from "react-icons/fa"; // REPLACED
+// ========================================================
+
+// === MODULAR SYSTEMS: Use unified icon system ===
+import { UnifiedIcon } from "../components/UnifiedIcon";
+// ================================================
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -240,9 +232,17 @@ const Navbar = () => {
 							className="text-white hover:text-primary-400 transition-colors"
 						>
 							{isOpen ? (
-								<XMarkIcon className="h-6 w-6" />
+								<UnifiedIcon
+									name="HiXMarkIcon"
+									className="h-6 w-6"
+									fallback="FaTimes"
+								/>
 							) : (
-								<Bars3Icon className="h-6 w-6" />
+								<UnifiedIcon
+									name="HiBars3"
+									className="h-6 w-6"
+									fallback="FaBars"
+								/>
 							)}
 						</button>
 					</div>

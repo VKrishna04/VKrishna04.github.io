@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Settings Verification Guard
  * This file ensures settings.json only loads if verification passes
  * If verification files are missing or tampered, settings.json will fail to load
