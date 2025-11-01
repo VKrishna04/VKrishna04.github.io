@@ -112,7 +112,8 @@ export const loadingPromises = new Map();
  * Examples:
  * - FaReact -> Fa
  * - MdHome -> Md
- * - HiUser -> Hi
+ * - HiUser -> Hi (from hi)
+ * - HiBars3 -> Hi (may resolve from hi or hi2)
  * - SiJavascript -> Si
  *
  * @param {string} iconName - The icon name (e.g., "FaReact")
@@ -120,19 +121,35 @@ export const loadingPromises = new Map();
  */
 export const getIconLibraryPrefix = (iconName) => {
 	if (!iconName || typeof iconName !== "string") {
-		return null;
+		return null
 	}
 
-	// Match icon prefixes (2-3 capital letters at start)
+	// Sort registry keys by length (longest first) to match Hi2 before Hi, Io5 before Io, etc.
+	const sortedPrefixes = Object.keys(ICON_LIBRARY_REGISTRY).sort(
+		(a, b) => b.length - a.length
+	)
+
+	// Try to match the longest possible prefix first
+	for (const prefix of sortedPrefixes) {
+		if (iconName.startsWith(prefix)) {
+			return prefix
+		}
+	}
+
+	// Fallback: Match icon prefixes (2-3 capital letters at start)
 	// Examples: Fa, Md, Hi, Hi2, Io5, Fa6
-	const match = iconName.match(/^([A-Z][a-z]*\d*)/);
-	if (!match) {
-		console.warn(`[UnifiedIconSystem] Invalid icon name format: ${iconName}`);
-		return null;
+	const match = iconName.match(/^([A-Z][a-z]*\d*)/)
+	if (match) {
+		const prefix = match[1]
+		console.warn(
+			`[UnifiedIconSystem] Prefix '${prefix}' found in icon name '${iconName}' but not in registry. May need to add to ICON_LIBRARY_REGISTRY.`
+		)
+		return prefix
 	}
 
-	return match[1];
-};
+	console.warn(`[UnifiedIconSystem] Invalid icon name format: ${iconName}`)
+	return null
+}
 
 /**
  * Get the import path for an icon library
@@ -141,16 +158,16 @@ export const getIconLibraryPrefix = (iconName) => {
  * @returns {string|null} - Import path or null if not found
  */
 export const getIconLibraryPath = (prefix) => {
-	if (!prefix) return null;
+	if (!prefix) return null
 
-	const path = ICON_LIBRARY_REGISTRY[prefix];
+	const path = ICON_LIBRARY_REGISTRY[prefix]
 	if (!path) {
-		console.warn(`[UnifiedIconSystem] Unknown icon library prefix: ${prefix}`);
-		return null;
+		console.warn(`[UnifiedIconSystem] Unknown icon library prefix: ${prefix}`)
+		return null
 	}
 
-	return path;
-};
+	return path
+}
 
 // ============================================================================
 // ICON LOADING
@@ -171,36 +188,36 @@ export const getIconLibraryPath = (prefix) => {
 export const getUnifiedIcon = async (iconName) => {
 	// Return null for invalid input
 	if (!iconName || typeof iconName !== "string") {
-		console.warn("[UnifiedIconSystem] Invalid icon name:", iconName);
-		return null;
+		console.warn("[UnifiedIconSystem] Invalid icon name:", iconName)
+		return null
 	}
 
 	// Check cache first
 	if (iconCache.has(iconName)) {
-		return iconCache.get(iconName);
+		return iconCache.get(iconName)
 	}
 
 	// Check if already loading
 	if (loadingPromises.has(iconName)) {
-		return loadingPromises.get(iconName);
+		return loadingPromises.get(iconName)
 	}
 
 	// Create loading promise
 	const loadingPromise = (async () => {
 		try {
 			// Parse icon name to get library
-			const prefix = getIconLibraryPrefix(iconName);
+			const prefix = getIconLibraryPrefix(iconName)
 			if (!prefix) {
-				return null;
+				return null
 			}
 
-			const libraryPath = getIconLibraryPath(prefix);
+			const libraryPath = getIconLibraryPath(prefix)
 			if (!libraryPath) {
-				return null;
+				return null
 			}
 
 			// Dynamically import the icon library using static paths for Vite
-			let iconModule;
+			let iconModule
 			switch (prefix) {
 				case "Fa":
 					iconModule = await import("react-icons/fa")
@@ -301,52 +318,48 @@ export const getUnifiedIcon = async (iconName) => {
 			}
 
 			// Get the specific icon component
-			let IconComponent = iconModule[iconName];
+			let IconComponent = iconModule[iconName]
 
-			// If not found and it's a Heroicon, try with Icon suffix
-			// Heroicons exports icons as "CodeBracketIcon", not "HiCodeBracket"
-			// So we strip the prefix and add "Icon" suffix
-			if (!IconComponent && (prefix === "Hi" || prefix === "Hi2")) {
-				// Remove the prefix (Hi or Hi2) from the iconName
-				const nameWithoutPrefix = iconName.replace(/^Hi2?/, "");
-				const iconNameWithSuffix = nameWithoutPrefix + "Icon";
-				IconComponent = iconModule[iconNameWithSuffix];
-				if (IconComponent) {
-					console.log(
-						`[UnifiedIconSystem] Found "${iconName}" as "${iconNameWithSuffix}"`
-					);
+			// Treat Hi* names as coming from either hi or hi2, exact name only.
+			// If prefix is Hi and not found in hi, try the same exact name from hi2.
+			if (!IconComponent && prefix === "Hi") {
+				try {
+					const hi2Module = await import("react-icons/hi2")
+					IconComponent = hi2Module[iconName]
+				} catch {
+					// ignore
 				}
 			}
 
 			if (!IconComponent) {
 				console.warn(
 					`[UnifiedIconSystem] Icon "${iconName}" not found in library "${prefix}"`
-				);
-				return null;
+				)
+				return null
 			}
 
 			// Cache the result
-			iconCache.set(iconName, IconComponent);
+			iconCache.set(iconName, IconComponent)
 
-			return IconComponent;
+			return IconComponent
 		} catch (error) {
 			console.error(
 				`[UnifiedIconSystem] Error loading icon "${iconName}":`,
 				error
-			);
-			iconCache.set(iconName, null); // Cache null to prevent repeated failures
-			return null;
+			)
+			iconCache.set(iconName, null) // Cache null to prevent repeated failures
+			return null
 		} finally {
 			// Remove from loading promises
-			loadingPromises.delete(iconName);
+			loadingPromises.delete(iconName)
 		}
-	})();
+	})()
 
 	// Track the loading promise
-	loadingPromises.set(iconName, loadingPromise);
+	loadingPromises.set(iconName, loadingPromise)
 
-	return loadingPromise;
-};
+	return loadingPromise
+}
 
 /**
  * Synchronously get a cached icon (returns null if not in cache)

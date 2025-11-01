@@ -48,14 +48,15 @@ import {
 
 const Home = () => {
 	const [settings, setSettings] = useState({});
+	const [hoveredButton, setHoveredButton] = useState(null)
 
 	useEffect(() => {
 		// Fetch settings for home page configuration
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
+			.catch((error) => console.warn("Could not fetch settings:", error))
+	}, [])
 
 	// Icon mapping for social links
 	const iconMap = {
@@ -73,25 +74,25 @@ const Home = () => {
 		FaDribbble,
 		FaBehance,
 		FaCodepen,
-	};
+	}
 
 	// Icon mapping for buttons
 	const buttonIconMap = {
 		ArrowDownIcon,
 		DocumentArrowDownIcon,
-	};
+	}
 
 	const getIconComponent = (iconName) => {
-		return iconMap[iconName];
-	};
+		return iconMap[iconName]
+	}
 
 	const getButtonIcon = (iconName) => {
-		return buttonIconMap[iconName];
-	};
+		return buttonIconMap[iconName]
+	}
 
 	const getProfileImageUrl = () => {
-		const imageConfig = settings.home?.profileImage;
-		if (!imageConfig) return settings.display?.profileImage;
+		const imageConfig = settings.home?.profileImage
+		if (!imageConfig) return settings.display?.profileImage
 
 		switch (imageConfig.type) {
 			case "github":
@@ -100,18 +101,18 @@ const Home = () => {
 					`https://github.com/${
 						settings.home?.profileImage?.devUsername || "VKrishna04"
 					}.png`
-				);
+				)
 			case "display":
-				return settings.display?.profileImage;
+				return settings.display?.profileImage
 			case "custom":
-				return imageConfig.customUrl;
+				return imageConfig.customUrl
 			default:
-				return settings.display?.profileImage;
+				return settings.display?.profileImage
 		}
-	};
+	}
 
 	const getSocialLinks = () => {
-		if (!settings.social?.platforms) return [];
+		if (!settings.social?.platforms) return []
 
 		return settings.social.platforms.filter(
 			(platform) =>
@@ -119,14 +120,14 @@ const Home = () => {
 				platform.url &&
 				platform.url.trim() !== "" &&
 				platform.showInHome
-		);
-	};
+		)
+	}
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
 		animate: { opacity: 1, y: 0 },
 		transition: { duration: settings.home?.animations?.fadeInDuration || 0.6 },
-	};
+	}
 
 	const staggerContainer = {
 		animate: {
@@ -134,9 +135,9 @@ const Home = () => {
 				staggerChildren: settings.home?.animations?.staggerDelay || 0.1,
 			},
 		},
-	};
+	}
 
-	const socialLinks = getSocialLinks();
+	const socialLinks = getSocialLinks()
 
 	return (
 		<motion.div
@@ -263,7 +264,7 @@ const Home = () => {
 				>
 					{settings.home?.buttons?.map((button, index) => {
 						const ButtonIcon = getButtonIcon(button.icon)
-
+						const isHovered = hoveredButton === index
 						if (button.type === "primary") {
 							return (
 								<Link key={index} to={button.link}>
@@ -285,19 +286,9 @@ const Home = () => {
 								<Link key={index} to={button.link}>
 									<motion.div
 										className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
-										style={getButtonStyles(button, false)}
-										onMouseEnter={(e) =>
-											Object.assign(
-												e.currentTarget.style,
-												getButtonStyles(button, true)
-											)
-										}
-										onMouseLeave={(e) =>
-											Object.assign(
-												e.currentTarget.style,
-												getButtonStyles(button, false)
-											)
-										}
+										style={getButtonStyles(button, isHovered)}
+										onMouseEnter={() => setHoveredButton(index)}
+										onMouseLeave={() => setHoveredButton(null)}
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 									>

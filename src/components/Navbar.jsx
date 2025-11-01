@@ -150,8 +150,8 @@ const Navbar = () => {
 									className="w-full h-full object-cover"
 									onError={(e) => {
 										// Fallback to text logo if image fails to load
-										e.target.style.display = "none";
-										e.target.nextSibling.style.display = "flex";
+										e.target.style.display = "none"
+										e.target.nextSibling.style.display = "flex"
 									}}
 								/>
 								<div
@@ -233,7 +233,7 @@ const Navbar = () => {
 						>
 							{isOpen ? (
 								<UnifiedIcon
-									name="HiXMarkIcon"
+									name="HiXMark"
 									className="h-6 w-6"
 									fallback="FaTimes"
 								/>
@@ -278,7 +278,7 @@ const Navbar = () => {
 				)}
 			</div>
 		</motion.nav>
-	);
+	)
 };
 
 export default Navbar;
