@@ -34,7 +34,7 @@ export const parseColor = (value) => {
 		value.startsWith("rgb") ||
 		value.startsWith("hsl") ||
 		value.startsWith("var(") ||
-		!/^[a-z-]+$/.test(value)
+		!/^[a-z-]+$/i.test(value)
 	) {
 		return value;
 	}
@@ -151,7 +151,7 @@ const getTailwindColor = (color, shade, opacity) => {
 	const baseColor = colorMap[color]?.[shade] || colorMap[color] || color;
 
 	if (opacity) {
-		const opacityValue = parseInt(opacity) / 100;
+		const opacityValue = parseFloat(opacity) / 100;
 		// Convert hex to rgba if needed
 		if (baseColor.startsWith("#")) {
 			const r = parseInt(baseColor.slice(1, 3), 16);

@@ -46,6 +46,17 @@ import {
 	parseColor,
 } from "../utils/themeUtils";
 
+// Custom hook for hover styles
+const useHoverStyles = (normalStyles, hoverStyles) => {
+	const handleMouseEnter = (e) => {
+		Object.assign(e.currentTarget.style, hoverStyles);
+	};
+	const handleMouseLeave = (e) => {
+		Object.assign(e.currentTarget.style, normalStyles);
+	};
+	return [handleMouseEnter, handleMouseLeave];
+};
+
 const Home = () => {
 	const [settings, setSettings] = useState({});
 
@@ -283,25 +294,26 @@ const Home = () => {
 						} else if (button.type === "outline") {
 							return (
 								<Link key={index} to={button.link}>
-									<motion.div
-										className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
-										style={getButtonStyles(button, false)}
-										onMouseEnter={(e) => {
-											const hoverStyles = getButtonStyles(button, true);
-											Object.assign(e.currentTarget.style, hoverStyles);
-										}}
-										onMouseLeave={(e) => {
-											const normalStyles = getButtonStyles(button, false);
-											Object.assign(e.currentTarget.style, normalStyles);
-										}}
-										whileHover={{ scale: 1.05 }}
-										whileTap={{ scale: 0.95 }}
-									>
-										{button.text}
-										{ButtonIcon && (
-											<ButtonIcon className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
-										)}
-									</motion.div>
+									{(() => {
+										const normalStyles = getButtonStyles(button, false);
+										const hoverStyles = getButtonStyles(button, true);
+										const [handleMouseEnter, handleMouseLeave] = useHoverStyles(normalStyles, hoverStyles);
+										return (
+											<motion.div
+												className="group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer hover:bg-opacity-100"
+												style={normalStyles}
+												onMouseEnter={handleMouseEnter}
+												onMouseLeave={handleMouseLeave}
+												whileHover={{ scale: 1.05 }}
+												whileTap={{ scale: 0.95 }}
+											>
+												{button.text}
+												{ButtonIcon && (
+													<ButtonIcon className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
+												)}
+											</motion.div>
+										);
+									})()}
 								</Link>
 							);
 						}
@@ -323,29 +335,31 @@ const Home = () => {
 								target="_blank"
 								rel="noopener noreferrer"
 								className="transition-all duration-300 hover:scale-110"
-								style={getSocialLinkStyles(social, false)}
-								onMouseEnter={(e) =>
-									Object.assign(
-										e.currentTarget.style,
-										getSocialLinkStyles(social, true)
-									)
-								}
-								onMouseLeave={(e) =>
-									Object.assign(
-										e.currentTarget.style,
-										getSocialLinkStyles(social, false)
-									)
-								}
-								whileHover={{
-									scale: 1.2,
-									y: -5,
-									rotate: [0, -10, 10, 0],
-								}}
-								whileTap={{ scale: 0.9 }}
-								aria-label={social.label}
-							>
-								<IconComponent className="w-6 h-6" />
-							</motion.a>
+							{(() => {
+								const normalStyles = getSocialLinkStyles(social, false);
+								const hoverStyles = getSocialLinkStyles(social, true);
+								const [handleMouseEnter, handleMouseLeave] = useHoverStyles(normalStyles, hoverStyles);
+								return (
+									<motion.a
+										href={social.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="transition-all duration-300 hover:scale-110"
+										style={normalStyles}
+										onMouseEnter={handleMouseEnter}
+										onMouseLeave={handleMouseLeave}
+										whileHover={{
+											scale: 1.2,
+											y: -5,
+											rotate: [0, -10, 10, 0],
+										}}
+										whileTap={{ scale: 0.9 }}
+										aria-label={social.label}
+									>
+										<IconComponent className="w-6 h-6" />
+									</motion.a>
+								);
+							})()}
 						) : null;
 					})}
 				</motion.div>

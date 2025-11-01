@@ -200,8 +200,7 @@ const Footer = () => {
 								</p>
 
 								{/* Configurable Stats */}
-								{settings.footer &&
-									statsConfig.show !== false &&
+								{statsConfig.show !== false &&
 									statsConfig.items &&
 									statsConfig.items.filter((item) => item.show !== false)
 										.length > 0 && (

@@ -40,14 +40,7 @@ export default defineConfig({
 
 				for (const filePath of filesToWatch) {
 					if (fs.existsSync(filePath)) {
-						fs.watchFile(filePath, { interval: 500 }, () => {
-							console.log(
-								`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
-									filePath
-								)} changed — triggering full reload...`
-							);
-							server.ws.send({ type: "full-reload" });
-						});
+						server.watcher.add(filePath);
 					} else {
 						console.warn(
 							`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
@@ -56,6 +49,17 @@ export default defineConfig({
 						);
 					}
 				}
+
+				server.watcher.on("change", (changedPath) => {
+					if (filesToWatch.includes(changedPath)) {
+						console.log(
+							`\x1b[33m[watch-public-settings]\x1b[0m ${path.basename(
+								changedPath
+							)} changed — triggering full reload...`
+						);
+						server.ws.send({ type: "full-reload" });
+					}
+				});
 			},
 		},
 	],
