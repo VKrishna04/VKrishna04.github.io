@@ -12,6 +12,19 @@ CFlair-Counter provides:
 - **Ultra-Fast**: Sub-100ms response times globally
 - **Free Forever**: Powered by Cloudflare's free tier
 
+## Summary
+
+This integration previously relied on an outdated batch endpoint which caused CORS and availability problems.
+The current implementation replaces the old `/projects` batch call with per-project requests to the official CFlair-Counter API (`GET /api/views/{projectName}`) and adds build-time project registration so repositories are added automatically.
+
+Key outcomes:
+- Individual project view fetching via `src/hooks/useProjectsData.js` (no batch `/projects` calls)
+- New utility module `src/utils/cflairCounter.js` for POST/GET/badge helpers
+- Build-time registration script `scripts/register-cflair-projects.js` wired into `npm run build`
+- Portfolio-level view tracking added to `src/App.jsx`
+- Documentation consolidated into this main guide (summary and full details)
+
+
 ## Architecture
 
 ```

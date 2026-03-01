@@ -1,6 +1,6 @@
 # GitHub Pages & Cloudflare Pages Deployment Guide
 
-See also: [Environment Variables Guide](./ENVIRONMENT%20VARIABLES.md) for details on configuring Environment Variables for Deployment.
+See also: [Environment Variables Guide](./environment-variables.md) for details on configuring Environment Variables for Deployment.
 
 This repository is configured to deploy to both GitHub Pages and Cloudflare Pages with environment variable support.
 
@@ -154,3 +154,5 @@ Track your Deployment:
 - **Cloudflare Pages:** Monitor build and Deployment status
 - **Analytics:** Use Cloudflare Web Analytics or Google Analytics
 - **Error Tracking:** Monitor browser console for errors
+
+

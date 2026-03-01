@@ -99,43 +99,48 @@ body {
 }
 
 /* ===================================
-   PROJECTS PAGE MASONRY (CSS Grid)
+   PROJECTS PAGE MASONRY LAYOUT
    =================================== */
-/* Clean masonry layout for Projects page using CSS Grid */
+/* True masonry grid - items pack into available vertical space */
 .masonry-grid-projects {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 2rem;
+	grid-auto-rows: 10px; /* Small row unit for fine-grained height control */
+	gap: 0 1.5rem; /* No row gap - handled by item margin */
 	width: 100%;
 }
 
-/* Responsive columns for masonry */
+/* Tablet: 2 columns */
 @media (min-width: 640px) {
 	.masonry-grid-projects {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 1.5rem;
 	}
 }
 
+/* Desktop: 3 columns */
 @media (min-width: 1024px) {
 	.masonry-grid-projects {
 		grid-template-columns: repeat(3, 1fr);
-		gap: 2rem;
 	}
 }
 
-/* Masonry item wrapper */
+/* Masonry item - will have grid-row-end set by JavaScript */
 .masonry-item-projects {
 	width: 100%;
-	display: block;
+	margin-bottom: 1.5rem;
+}
+
+/* Content wrapper */
+.masonry-item-content {
+	width: 100%;
 }
 
 /* Handle special cases for few projects */
 .masonry-grid-projects[data-project-count="1"] {
 	grid-template-columns: 1fr !important;
-	max-width: 600px;
+	max-width: 500px;
 	margin-left: auto;
-		margin-right: auto;
+	margin-right: auto;
 }
 
 .masonry-grid-projects[data-project-count="2"] {
@@ -145,8 +150,10 @@ body {
 @media (min-width: 640px) {
 	.masonry-grid-projects[data-project-count="2"] {
 		grid-template-columns: repeat(2, 1fr) !important;
-
-}
+		max-width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 /* ===================================
@@ -157,6 +164,6 @@ body {
 	transition: all 0.3s ease-in-out;
 }
 
-.grid>div {
+.grid > div {
 	transition: all 0.3s ease-in-out;
 }

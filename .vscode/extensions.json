@@ -1,0 +1,27 @@
+{
+	"recommendations": [
+		"streetsidesoftware.code-spell-checker",
+		"aaron-bond.better-comments",
+		"antfu.browse-lite",
+		"antfu.vite",
+		"bierner.markdown-mermaid",
+		"christian-kohler.npm-intellisense",
+		"christian-kohler.path-intellisense",
+		"dbaeumer.vscode-eslint",
+		"EditorConfig.EditorConfig",
+		"esbenp.prettier-vscode",
+		"formulahendry.code-runner",
+		"ms-vscode.js-debug",
+		"ms-vscode.js-debug-companion",
+		"ms-vscode.powershell",
+		"naumovs.color-highlight",
+		"PKief.material-icon-theme",
+		"redhat.vscode-yaml",
+		"rhalaly.scope-to-this",
+		"ryu1kn.partial-diff",
+		"VKrishna04.cspell-sync",
+		"VKrishna04.global-save-state",
+		"yzhang.markdown-all-in-one",
+		"ZainChen.json"
+	]
+}

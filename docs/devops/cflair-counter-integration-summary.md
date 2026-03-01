@@ -124,7 +124,7 @@ useEffect(() => {
 
 ### 7. Documentation
 
-**File**: `docs/CFlair-Counter Integration.md`
+**File**: `docs/cflair-counter-integration.md`
 
 Complete integration guide covering:
 - Configuration options
@@ -355,7 +355,7 @@ npm run register-cflair
 3. `src/App.jsx` - Added portfolio view tracking
 4. `scripts/register-cflair-projects.js` - New build-time registration script
 5. `package.json` - Added registration to build script
-6. `docs/CFlair-Counter Integration.md` - Complete documentation
+6. `docs/cflair-counter-integration.md` - Complete documentation
 
 ## Files Verified (No Changes Needed)
 
@@ -376,3 +376,4 @@ The portfolio now has full CFlair-Counter integration with:
 - ✅ GitHub Actions deployment support
 
 **Made with ❤️ by [VKrishna04](https://github.com/VKrishna04)**
+

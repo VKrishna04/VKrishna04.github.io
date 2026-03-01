@@ -172,7 +172,7 @@ You want:
 ## 🚀 What the Specification Provides
 
 ### Comprehensive GitHub Spec-Kit Document
-I've created `ICON_SYSTEM_SPECIFICATION.md` with:
+I've created `icon-system-specification.md` with:
 
 #### 1. **Constitution & Governance**
 - Design principles
@@ -327,7 +327,7 @@ Based on your stated preference ("i only want the icons directly imported"), I r
 
 ### Immediate (This Week)
 1. ✅ **Fix runtime errors** (DONE - parseIconName issue)
-2. ✅ **Create specification** (DONE - ICON_SYSTEM_SPECIFICATION.md)
+2. ✅ **Create specification** (DONE - icon-system-specification.md)
 3. ⏳ **Add settings.json config**:
    ```json
    {
@@ -387,7 +387,7 @@ Based on your stated preference ("i only want the icons directly imported"), I r
    - Fixed import: Renamed parseIconName to getIconLibraryPrefix
 
 ### Files Created
-3. ✅ `ICON_SYSTEM_SPECIFICATION.md` (1,500+ lines)
+3. ✅ `icon-system-specification.md` (1,500+ lines)
    - Complete GitHub spec-kit specification
    - Constitution & governance
    - Implementation plan (5 weeks)
@@ -396,7 +396,7 @@ Based on your stated preference ("i only want the icons directly imported"), I r
    - Risk mitigation
    - Code examples
 
-4. ✅ `CURRENT_STATE_SUMMARY.md` (THIS FILE)
+4. ✅ `current-state-summary.md` (THIS FILE)
    - Current architecture analysis
    - File-by-file status
    - User request interpretation
@@ -439,7 +439,7 @@ To proceed with implementation, please clarify:
 4. I'll implement your choice
 
 ### For Planning
-1. Read full ICON_SYSTEM_SPECIFICATION.md
+1. Read full icon-system-specification.md
 2. Review implementation plan (5 weeks)
 3. Approve or request changes
 4. Start Phase 1
@@ -476,3 +476,4 @@ Test it:
 ---
 
 **END OF SUMMARY**
+

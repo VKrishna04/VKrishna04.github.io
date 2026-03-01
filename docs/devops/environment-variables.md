@@ -1,6 +1,6 @@
 # Environment Variables Guide
 
-See also: [Deployment Guide](./Deployment.md) for platform-specific Deployment instructions.
+See also: [Deployment Guide](./deployment.md) for platform-specific Deployment instructions.
 
 This project supports Environment Variables for customizing behavior during build and Deployment. This guide covers all supported variables and platform-specific configuration.
 
@@ -276,3 +276,7 @@ Set Environment Variables in your Deployment platform:
 - **Vercel**: Project Settings → Environment Variables
 - **Netlify**: Site Settings → Environment Variables
 - **GitHub Pages**: Repository Settings → Secrets and Variables
+
+
+
+

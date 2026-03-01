@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AnimatedBackground component provides highly customizable background effects for your portfolio's home page. All configuration is managed under the `background` key in your `settings.json` file. For full examples and advanced use cases, see [ANIMATED%20BACKGROUND%20GUIDE.md](./ANIMATED%20BACKGROUND%20GUIDE.md).
+The AnimatedBackground component provides highly customizable background effects for your portfolio's home page. All configuration is managed under the `background` key in your `settings.json` file. For full examples and advanced use cases, see [ui/animated-background-guide.md](./animated-background-guide.md).
 
 ## Table of Contents
 - [Animated Background Configuration Guide](#animated-background-configuration-guide)
@@ -287,7 +287,7 @@ The particle system now uses **density-based scaling** to maintain consistent vi
 
 ## Examples
 
-See `examples/background-configurations.json` for complete configuration examples and `docs/ANIMATED%20BACKGROUND%20GUIDE.md` for additional examples and use cases.
+See `examples/background-configurations.json` for complete configuration examples and `docs/ui/animated-background-guide.md` for additional examples and use cases.
 
 ## Schema Support
 
@@ -298,3 +298,5 @@ The configuration includes full JSON Schema support with:
 - Type checking and constraints
 
 This ensures your configuration is always valid and provides helpful suggestions while editing.
+
+

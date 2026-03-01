@@ -220,7 +220,15 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 					className={getLayoutClasses()}
 				>
 					{featuredProjects.map((project, index) => (
-						<ProjectCard key={project.id || index} project={project} />
+						<ProjectCard
+							key={project.id || index}
+							project={project}
+							index={index}
+							accentColor={
+								config.accentColor || settings?.projects?.accentColor
+							}
+							globalButtonStyles={settings?.projects?.buttonStyles}
+						/>
 					))}
 				</motion.div>
 
@@ -254,7 +262,7 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 				)}
 			</div>
 		</section>
-	);
+	)
 };
 
 export default FeaturedProjects;

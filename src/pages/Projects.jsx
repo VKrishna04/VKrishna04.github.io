@@ -34,11 +34,9 @@ import {
 	FaJava,
 	FaPhp,
 	FaSwift,
-	FaRust,
+	FaNodeJs,
 	FaHtml5,
 	FaCss3Alt,
-	FaGithub,
-	FaNodeJs,
 	FaLock,
 	FaUserShield,
 	FaUsers,
@@ -48,6 +46,9 @@ import {
 	FaDesktop,
 	FaExclamationTriangle,
 	FaEnvelopeOpenText,
+	FaGithub,
+	FaRust,
+	FaGitAlt,
 	FaKey,
 	FaImage,
 	FaBrain,
@@ -135,7 +136,7 @@ import {
 	FaRocket,
 	FaRandom,
 	FaSyncAlt,
-} from "react-icons/fa";
+} from "react-icons/fa"
 import {
 	SiTypescript,
 	SiGo,
@@ -160,9 +161,9 @@ import {
 	SiFramer,
 	SiVite,
 	SiGithub,
-} from "react-icons/si";
-import ProjectCard from "../components/ProjectCard";
-import useMergedProjects from "../hooks/useMergedProjects";
+} from "react-icons/si"
+import ProjectCard from "../components/ProjectCard"
+import useMergedProjects from "../hooks/useMergedProjects"
 
 const Projects = () => {
 	const {
@@ -170,42 +171,43 @@ const Projects = () => {
 		loading,
 		error,
 		settings,
-	} = useMergedProjects();
-	const [searchTerm, setSearchTerm] = useState("");
-	const [selectedLanguages, setSelectedLanguages] = useState([]);
-	const [sortBy, setSortBy] = useState("updated");
-	const [showFilters, setShowFilters] = useState(false);
+	} = useMergedProjects()
+	const [searchTerm, setSearchTerm] = useState("")
+	const [selectedLanguages, setSelectedLanguages] = useState([])
+	const [sortBy, setSortBy] = useState("updated")
+	const [showFilters, setShowFilters] = useState(false)
 	const [layoutMode, setLayoutMode] = useState(() => {
 		// Get saved layout mode from localStorage or default to masonry
-		return localStorage.getItem("projectsLayoutMode") || "masonry";
-	});
-	const [currentColumns, setCurrentColumns] = useState(1);
+		return localStorage.getItem("projectsLayoutMode") || "masonry"
+	})
+	const [currentColumns, setCurrentColumns] = useState(1)
+	const masonryContainerRef = React.useRef(null)
 
 	// Save layout mode preference
 	useEffect(() => {
-		localStorage.setItem("projectsLayoutMode", layoutMode);
-	}, [layoutMode]);
+		localStorage.setItem("projectsLayoutMode", layoutMode)
+	}, [layoutMode])
 
 	// Use merged projects directly - the hook handles all merging logic
-	const projectsData = mergedProjects;
+	const projectsData = mergedProjects
 
 	// Get unique languages from repositories
 	const availableLanguages = useMemo(() => {
-		const languages = new Set();
+		const languages = new Set()
 		projectsData.forEach((project) => {
 			if (project.language) {
-				languages.add(project.language);
+				languages.add(project.language)
 			}
 			// For static projects, also add all technologies
 			if (project.technologies) {
 				project.technologies.forEach((tech) => {
-					const techName = typeof tech === "string" ? tech : tech.name;
-					if (techName) languages.add(techName);
-				});
+					const techName = typeof tech === "string" ? tech : tech.name
+					if (techName) languages.add(techName)
+				})
 			}
-		});
-		return Array.from(languages).sort();
-	}, [projectsData]);
+		})
+		return Array.from(languages).sort()
+	}, [projectsData])
 
 	// Language icon mapping - comprehensive version from ProjectsStatic.jsx
 	const getLanguageIcon = (language) => {
@@ -373,10 +375,10 @@ const Projects = () => {
 			Ruby: SiRuby,
 			Shell: SiShell,
 			Vue: FaVuejs,
-		};
+		}
 
-		return iconMap[language] || FaJs;
-	};
+		return iconMap[language] || FaJs
+	}
 
 	const getLanguageColor = (language) => {
 		const colorMap = {
@@ -544,9 +546,9 @@ const Projects = () => {
 			Ruby: "#701516",
 			Shell: "#89e051",
 			Vue: "#2c3e50",
-		};
-		return colorMap[language] || "#6366f1";
-	};
+		}
+		return colorMap[language] || "#6366f1"
+	}
 
 	// Filter and sort repositories
 	const filteredRepos = useMemo(() => {
@@ -563,7 +565,7 @@ const Projects = () => {
 						topic.toLowerCase().includes(searchTerm.toLowerCase())
 					)) ||
 				(project.category &&
-					project.category.toLowerCase().includes(searchTerm.toLowerCase()));
+					project.category.toLowerCase().includes(searchTerm.toLowerCase()))
 
 			// Language filter
 			const matchesLanguage =
@@ -571,96 +573,142 @@ const Projects = () => {
 				selectedLanguages.includes(project.language) ||
 				(project.technologies &&
 					project.technologies.some((tech) => {
-						const techName = typeof tech === "string" ? tech : tech.name;
-						return selectedLanguages.includes(techName);
-					}));
+						const techName = typeof tech === "string" ? tech : tech.name
+						return selectedLanguages.includes(techName)
+					}))
 
-			return matchesSearch && matchesLanguage;
-		});
+			return matchesSearch && matchesLanguage
+		})
 
 		// Sort repositories
 		filtered.sort((a, b) => {
 			switch (sortBy) {
 				case "name":
-					return a.name.localeCompare(b.name);
+					return a.name.localeCompare(b.name)
 				case "stars":
-					return (b.stargazers_count || 0) - (a.stargazers_count || 0);
+					return (b.stargazers_count || 0) - (a.stargazers_count || 0)
 				case "updated":
-					return new Date(b.updated_at) - new Date(a.updated_at);
+					return new Date(b.updated_at) - new Date(a.updated_at)
 				case "created":
-					return new Date(b.created_at) - new Date(a.created_at);
+					return new Date(b.created_at) - new Date(a.created_at)
 				default:
-					return new Date(b.updated_at) - new Date(a.updated_at);
+					return new Date(b.updated_at) - new Date(a.updated_at)
 			}
-		});
+		})
 
-		return filtered;
-	}, [projectsData, searchTerm, selectedLanguages, sortBy]);
+		return filtered
+	}, [projectsData, searchTerm, selectedLanguages, sortBy])
+
+	// Masonry layout - calculate grid-row-end for each item based on content height
+	useEffect(() => {
+		if (layoutMode !== "masonry" || !masonryContainerRef.current) return
+
+		const resizeMasonryItems = () => {
+			const grid = masonryContainerRef.current
+			if (!grid) return
+
+			const rowHeight = 10 // Matches grid-auto-rows in CSS
+			const rowGap = 0 // We use margin on items instead
+
+			const items = grid.querySelectorAll(".masonry-item-projects")
+			items.forEach((item) => {
+				const content = item.querySelector(".masonry-item-content")
+				if (!content) return
+
+				// Get the actual content height
+				const contentHeight = content.getBoundingClientRect().height
+				// Calculate how many rows this item should span
+				const rowSpan = Math.ceil((contentHeight + 24) / (rowHeight + rowGap)) // 24px for margin
+				item.style.gridRowEnd = `span ${rowSpan}`
+			})
+		}
+
+		// Initial calculation after render
+		const timeout = setTimeout(resizeMasonryItems, 100)
+
+		// Recalculate on window resize
+		window.addEventListener("resize", resizeMasonryItems)
+
+		// Use ResizeObserver for dynamic content changes
+		const resizeObserver = new ResizeObserver(() => {
+			requestAnimationFrame(resizeMasonryItems)
+		})
+
+		if (masonryContainerRef.current) {
+			resizeObserver.observe(masonryContainerRef.current)
+		}
+
+		return () => {
+			clearTimeout(timeout)
+			window.removeEventListener("resize", resizeMasonryItems)
+			resizeObserver.disconnect()
+		}
+	}, [layoutMode, filteredRepos])
 
 	// Update current columns on resize and project count change
 	useEffect(() => {
 		const getCurrentColumnsLocal = () => {
-			const projectCount = filteredRepos.length;
-			if (typeof window === "undefined") return Math.min(3, projectCount);
+			const projectCount = filteredRepos.length
+			if (typeof window === "undefined") return Math.min(3, projectCount)
 
-			const width = window.innerWidth;
-			if (width >= 1024) return Math.min(3, projectCount); // Large screens: max 3 columns
-			if (width >= 640) return Math.min(2, projectCount); // Medium screens: max 2 columns
-			return 1; // Small screens: 1 column
-		};
+			const width = window.innerWidth
+			if (width >= 1024) return Math.min(3, projectCount) // Large screens: max 3 columns
+			if (width >= 640) return Math.min(2, projectCount) // Medium screens: max 2 columns
+			return 1 // Small screens: 1 column
+		}
 
 		const updateColumns = () => {
-			setCurrentColumns(getCurrentColumnsLocal());
-		};
+			setCurrentColumns(getCurrentColumnsLocal())
+		}
 
-		updateColumns();
-		window.addEventListener("resize", updateColumns);
-		return () => window.removeEventListener("resize", updateColumns);
-	}, [filteredRepos.length]);
+		updateColumns()
+		window.addEventListener("resize", updateColumns)
+		return () => window.removeEventListener("resize", updateColumns)
+	}, [filteredRepos.length])
 
 	const toggleLanguageFilter = (language) => {
 		setSelectedLanguages((prev) =>
 			prev.includes(language)
 				? prev.filter((l) => l !== language)
 				: [...prev, language]
-		);
-	};
+		)
+	}
 
 	// Generate dynamic masonry styles - no longer needed, using pure CSS
 	const getMasonryStyles = () => {
-		return {};
-	};
+		return {}
+	}
 
 	// Generate dynamic grid classes based on project count
 	const getGridClasses = () => {
-		const projectCount = filteredRepos.length;
-		if (projectCount === 0) return "grid grid-cols-1 gap-8";
+		const projectCount = filteredRepos.length
+		if (projectCount === 0) return "grid grid-cols-1 gap-8"
 
 		// Base classes for left-to-right, top-to-bottom flow
 		let classes =
-			"grid gap-8 grid-cols-1 transition-all duration-300 ease-in-out grid-flow-row";
+			"grid gap-8 grid-cols-1 transition-all duration-300 ease-in-out grid-flow-row"
 
 		// Add responsive classes based on project count to avoid empty columns (max 3 columns)
-		if (projectCount >= 2) classes += " md:grid-cols-2";
-		if (projectCount >= 3) classes += " lg:grid-cols-3";
+		if (projectCount >= 2) classes += " md:grid-cols-2"
+		if (projectCount >= 3) classes += " lg:grid-cols-3"
 
 		// Note: grid-flow-row ensures left-to-right, then top-to-bottom filling
 		// This is the default behavior, but we explicitly set it for clarity
 
-		return classes;
-	};
+		return classes
+	}
 
 	const clearFilters = () => {
-		setSearchTerm("");
-		setSelectedLanguages([]);
-		setSortBy("updated");
-	};
+		setSearchTerm("")
+		setSelectedLanguages([])
+		setSortBy("updated")
+	}
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
 		animate: { opacity: 1, y: 0 },
 		transition: { duration: 0.6 },
-	};
+	}
 
 	const staggerContainer = {
 		animate: {
@@ -668,7 +716,7 @@ const Projects = () => {
 				staggerChildren: 0.05, // Reduced stagger for masonry
 			},
 		},
-	};
+	}
 
 	const staggerChild = {
 		initial: { opacity: 0, y: 20 }, // Reduced initial transform for masonry
@@ -680,7 +728,7 @@ const Projects = () => {
 				ease: "easeOut",
 			},
 		},
-	};
+	}
 
 	if (loading) {
 		return (
@@ -696,7 +744,7 @@ const Projects = () => {
 					</div>
 				</div>
 			</div>
-		);
+		)
 	}
 
 	if (error) {
@@ -711,7 +759,7 @@ const Projects = () => {
 					</div>
 				</div>
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -872,8 +920,8 @@ const Projects = () => {
 							transition={{ duration: 0.3 }}
 						>
 							{availableLanguages.map((language) => {
-								const IconComponent = getLanguageIcon(language);
-								const isSelected = selectedLanguages.includes(language);
+								const IconComponent = getLanguageIcon(language)
+								const isSelected = selectedLanguages.includes(language)
 
 								return (
 									<button
@@ -893,7 +941,7 @@ const Projects = () => {
 										)}
 										<span>{language}</span>
 									</button>
-								);
+								)
 							})}
 						</motion.div>
 					)}
@@ -937,6 +985,7 @@ const Projects = () => {
 				{/* Projects Grid/Masonry */}
 				{filteredRepos.length > 0 ? (
 					<motion.div
+						ref={masonryContainerRef}
 						key={layoutMode} // Force re-render on layout change
 						className={
 							layoutMode === "masonry"
@@ -958,9 +1007,17 @@ const Projects = () => {
 										layoutMode === "masonry" ? "masonry-item-projects" : ""
 									}
 								>
-									<ProjectCard project={repo} />
+									<div className="masonry-item-content">
+										<ProjectCard
+											project={repo}
+											accentColor={settings?.projects?.accentColor}
+											globalButtonStyles={settings?.projects?.buttonStyles}
+											tagStyles={settings?.projects?.tagStyles}
+											showSocialImage={settings?.projects?.showSocialImage}
+										/>
+									</div>
 								</motion.div>
-							);
+							)
 						})}
 					</motion.div>
 				) : (
@@ -1041,7 +1098,7 @@ const Projects = () => {
 				</motion.div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 export default Projects;

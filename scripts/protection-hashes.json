@@ -1,41 +1,41 @@
 {
-  "timestamp": "2025-10-23T07:31:43.323Z",
+  "timestamp": "2026-03-01T16:39:14.580Z",
   "files": {
     "src/utils/integrity-guard.js": {
-      "sha256": "9a37e99d41c2f5ab9f7a5178039c73f0c1af25f51431a72cb680ef57b43b4fa6",
-      "simple": "5aac7503",
-      "size": 4499,
-      "lastModified": "2025-10-22T19:00:27.211Z"
+      "sha256": "565611e1300d0b849a372e207982f68665d54477b408fc290c788d0669e4c2e0",
+      "simple": "5ec8da62",
+      "size": 4500,
+      "lastModified": "2025-11-01T13:01:57.577Z"
     },
     "src/utils/stealth-validator.js": {
-      "sha256": "a2a21bb88369bb30585364898e29cafb0beefafd1a8665028f70e5718f2a17af",
-      "simple": "44a337fc",
-      "size": 4838,
-      "lastModified": "2025-09-21T10:14:09.651Z"
+      "sha256": "0438d92b3d01d4beb84ae0007fd9f7eddcb913ee204d67d191bc8df872617dd6",
+      "simple": "22fc983d",
+      "size": 4839,
+      "lastModified": "2025-11-01T13:02:05.803Z"
     },
     "src/utils/origin-tracker.js": {
-      "sha256": "960c58bb71f2dc7b58f46623f58a534a4260b97debe41b5467da91ba71ff3013",
-      "simple": "1e0f93db",
-      "size": 6699,
-      "lastModified": "2025-09-21T10:14:09.647Z"
+      "sha256": "730adaa81fc515b253206aa0a3df2539e5831fb90a7d6635a7d0c476fc908301",
+      "simple": "42090e71",
+      "size": 6935,
+      "lastModified": "2025-11-01T12:25:12.477Z"
     },
     "src/utils/advanced-obfuscation.js": {
-      "sha256": "b2545eabfd80eeb4c743218658213fdff5fad79b5cabff7242fc0a8ce822ebe4",
-      "simple": "53b59469",
-      "size": 5311,
-      "lastModified": "2025-09-21T11:41:04.351Z"
+      "sha256": "f9b953de24671d6e76a0985c263bf65b56b92059860ee5412ee2e68219021fa8",
+      "simple": "76fdde76",
+      "size": 5312,
+      "lastModified": "2025-11-01T12:25:12.429Z"
     },
     "src/utils/build-time-protection.js": {
-      "sha256": "90f67dd877c706cc3ec84f0e3125dd86cd32237e0e5d6839c032ab672e6784dc",
-      "simple": "399204d2",
-      "size": 1261,
-      "lastModified": "2025-09-21T11:39:17.632Z"
+      "sha256": "313851f2de092b967fe565760ae2921811900a6ce6d14dd88a2473fe8617979e",
+      "simple": "2ae6af94",
+      "size": 1264,
+      "lastModified": "2025-11-01T12:25:12.432Z"
     },
     "src/utils/settings-guard.js": {
-      "sha256": "584a136dfb07a2c71047e43d94ab870c8a256aad86cc24283107857c8c062ed5",
-      "simple": "51d5faef",
-      "size": 6923,
-      "lastModified": "2025-09-24T12:21:37.021Z"
+      "sha256": "463b6b27122b5f8d69096643db0128f7a17862539756bf554e037e93087c64b5",
+      "simple": "6dd5217",
+      "size": 7143,
+      "lastModified": "2025-11-01T12:25:12.495Z"
     }
   }
 }

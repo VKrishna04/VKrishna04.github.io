@@ -280,10 +280,10 @@ const IconComponent = getUnifiedIcon("FaReact");
 
 ## 📚 Quick Reference Links
 
-- **Unified Icon System Guide:** `docs/Unified Icon System Guide.md`
-- **Color System Guide:** `docs/Color System Guide.md`
+- **Unified Icon System Guide:** `docs/unified-icon-system-guide.md`
+- **Color System Guide:** `docs/color-system-guide.md`
 - **Settings Schema:** `public/settings.schema.json` (IntelliSense support)
-- **Implementation Summary:** `docs/Recursive Implementation Summary.md`
+- **Implementation Summary:** `docs/recursive-implementation-summary.md`
 
 ---
 
@@ -370,3 +370,4 @@ function SkillCard({ skill, settings }) {
 **Last Updated:** January 2025
 **Maintained by:** Krishna GSVV
 **Questions?** Check `docs/` folder for detailed guides.
+

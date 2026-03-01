@@ -320,7 +320,7 @@ const About = () => {
 					)}
 					{/* Skills Section */}
 					{skills.length > 0 && (
-						<motion.div variants={fadeInUp}>
+						<motion.div className="mt-20" variants={fadeInUp}>
 							<h2 className="text-3xl font-bold text-center text-white mb-12">
 								{settings.about?.skillsHeading || "Technical Skills"}
 							</h2>

@@ -125,6 +125,7 @@ temp/
 .env.development.local
 .env.test.local
 .env.production.local
+SPEC_KIT_PROMPT.md
 
 # Firebase
 .firebase
@@ -136,9 +137,3 @@ firebase.json
 
 # Netlify
 .netlify
-
-.vscode/
-.vscode/settings.json
-.vscode/settings.json
-package-lock.json
-SPEC_KIT_PROMPT.md

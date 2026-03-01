@@ -81,7 +81,7 @@
 		"documentation": "See 'docs/Unified Icon System Guide.md' for complete documentation",
 		"note": "The system automatically detects the library from the icon name prefix and loads it dynamically. No manual imports needed!"
 	},
-	"$schema": "./settings.schema.json",
+	"$schema": "https://raw.githubusercontent.com/VKrishna04/VKrishna04.github.io/refs/heads/main/public/settings.schema.json",
 	"seo": {
 		"title": "Krishna GSVV - Developer",
 		"description": "Passionate developer specializing in React, Python, and AI. Hackathon winner with ₹3.75L+ prize money. Building innovative solutions.",
@@ -724,6 +724,30 @@
 		}
 	},
 	"projects": {
+		"accentColor": "#7c3aed",
+		"buttonStyles": {
+			"code": {
+				"background": "linear-gradient(90deg,#334155,#1f2937)",
+				"textColor": "#ffffff"
+			},
+			"live": {
+				"background": "linear-gradient(90deg,#1f2937,#7c3aed)",
+				"textColor": "#ffffff"
+			}
+		},
+		"showSocialImage": true,
+		"tagStyles": {
+			"topics": {
+				"backgroundOpacity": 0.18,
+				"textColor": "#e9d5ff",
+				"borderOpacity": 0.3
+			},
+			"technologies": {
+				"backgroundColor": "rgba(96, 165, 250, 0.2)",
+				"textColor": "#93c5fd",
+				"borderColor": "rgba(96, 165, 250, 0.35)"
+			}
+		},
 		"mode": "hybrid",
 		"useGitHubDescription": true,
 		"ignore": [
@@ -965,10 +989,10 @@
 				"status": "Maintenance",
 				"startDate": "2023-11-01",
 				"endDate": null,
-				"githubUrl": "https://github.com/VKrishna04/cspell-sync",
-				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
+				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=Life-Experimentalist.cspell-sync",
 				"demoUrl": "",
-				"documentationUrl": "https://github.com/VKrishna04/cspell-sync#readme",
+				"documentationUrl": "https://github.com/Life-Experimentalist/cspell-sync#readme",
 				"imageUrl": "",
 				"tags": [
 					"vscode-extension",
@@ -990,10 +1014,10 @@
 					"downloads": 1000
 				},
 				"statsUrls": {
-					"starsUrl": "https://github.com/VKrishna04/cspell-sync/stargazers",
-					"forksUrl": "https://github.com/VKrishna04/cspell-sync/network/members",
-					"watchersUrl": "https://github.com/VKrishna04/cspell-sync/watchers",
-					"issuesUrl": "https://github.com/VKrishna04/cspell-sync/issues"
+					"starsUrl": "https://github.com/Life-Experimentalist/cspell-sync/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/cspell-sync/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/cspell-sync/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/cspell-sync/issues"
 				}
 			},
 			{
@@ -1014,10 +1038,10 @@
 				"status": "Active Development",
 				"startDate": "2025-06-01",
 				"endDate": null,
-				"githubUrl": "https://github.com/VKrishna04/RanobeGemini",
+				"githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
 				"liveUrl": "",
 				"demoUrl": "",
-				"documentationUrl": "https://github.com/VKrishna04/RanobeGemini#readme",
+				"documentationUrl": "https://github.com/Life-Experimentalist/RanobeGemini#readme",
 				"imageUrl": "",
 				"tags": [
 					"browser-extension",
@@ -1039,10 +1063,10 @@
 					"issues": 3
 				},
 				"statsUrls": {
-					"starsUrl": "https://github.com/VKrishna04/RanobeGemini/stargazers",
-					"forksUrl": "https://github.com/VKrishna04/RanobeGemini/network/members",
-					"watchersUrl": "https://github.com/VKrishna04/RanobeGemini/watchers",
-					"issuesUrl": "https://github.com/VKrishna04/RanobeGemini/issues"
+					"starsUrl": "https://github.com/Life-Experimentalist/RanobeGemini/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/RanobeGemini/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/RanobeGemini/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/RanobeGemini/issues"
 				}
 			},
 			{
@@ -1385,6 +1409,14 @@
 				"date": "Sep 30, 2024",
 				"issuer": "HackerRank",
 				"verificationUrl": "https://www.hackerrank.com/certificates/870619abc876"
+			},
+			{
+				"name": "Cloud Computing NPTEL noc25-cs11",
+				"certificateUrl": "https://drive.google.com/file/d/1Uh0w9lX2LmxDDa9sVtk_yJZt-hqboGxy/view?usp=sharing",
+				"credentialId": "NPTEL25CS11S1060001591",
+				"date": "January - April, 2025",
+				"issuer": "NPTEL - IIT Kharagpur",
+				"verificationUrl": "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S106000159104239510.pdf"
 			}
 		],
 		"certificationsNote": "Configure certifications - each should have name, issuer, date, credentialId, certificateUrl (to view certificate), and verificationUrl (to verify certificate). Links are optional and will only show if provided.",
@@ -2284,4 +2316,3 @@
 		}
 	}
 }
-

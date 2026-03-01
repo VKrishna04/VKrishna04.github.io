@@ -143,7 +143,7 @@
 					"name": "RanobeGemini Extension",
 					"subtitle": "AI Translation Enhancement",
 					"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content with intelligent processing.",
-					"github": "https://github.com/VKrishna04/RanobeGemini",
+					"github": "https://github.com/Life-Experimentalist/RanobeGemini",
 					"technologies": [
 						"JavaScript",
 						"Browser Extension",

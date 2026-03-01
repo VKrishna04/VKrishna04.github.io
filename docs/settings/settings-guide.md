@@ -1,9 +1,9 @@
 # Settings.json Configuration Guide
 
 See also:
-- [Settings Reference](./SETTINGS%20REFERENCE.md) for a quick reference of all config keys
-- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md) for project configuration modes
-- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md) for background options
+- [Settings Reference](./settings-reference.md) for a quick reference of all config keys
+- [Projects Static/Dynamic Guide](../pages/projects-static-dynamic.md) for project configuration modes
+- [Animated Background Guide](../ui/animated-background-guide.md) for background options
 
 This guide provides comprehensive documentation for configuring your portfolio through the `settings.json` file.
 
@@ -1052,10 +1052,10 @@ This comprehensive guide covers all aspects of the `settings.json` configuration
 
 ## 📝 Additional Notes
 **Related Guides:**
-- [Settings Reference](./SETTINGS%20REFERENCE.md)
-- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md)
-- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md)
-- [Favicon Guide](./FAVICON%20GUIDE.md)
+- [Settings Reference](./settings-reference.md)
+- [Projects Static/Dynamic Guide](../pages/projects-static-dynamic.md)
+- [Animated Background Guide](../ui/animated-background-guide.md)
+- [Favicon Guide](../integrations/favicon-guide.md)
 
 **Best Practices:**
 - Ensure all URLs are valid and accessible.
@@ -1066,3 +1066,5 @@ This comprehensive guide covers all aspects of the `settings.json` configuration
 - Follow best practices for web development to ensure your portfolio is performant and accessible.
 - Stay updated with the latest web technologies to keep your skills sharp and your portfolio modern.
 - Engage with the community by sharing your portfolio and seeking feedback.
+
+

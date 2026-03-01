@@ -1,9 +1,9 @@
 # Settings.json Configuration Reference
 
 See also:
-- [Settings Guide](./SETTINGS%20GUIDE.md) for full documentation
-- [Projects Static/Dynamic Guide](./PROJECTS%20STATIC%20DYNAMIC.md) for project configuration modes
-- [Animated Background Guide](./ANIMATED%20BACKGROUND%20GUIDE.md) for background options
+- [Settings Guide](./settings-guide.md) for full documentation
+- [Projects Static/Dynamic Guide](../pages/projects-static-dynamic.md) for project configuration modes
+- [Animated Background Guide](../ui/animated-background-guide.md) for background options
 
 ## Table of Contents
 - [Settings.json Configuration Reference](#settingsjson-configuration-reference)
@@ -388,4 +388,6 @@ hover:text-blue-300, hover:text-gray-300
 2. Create corresponding data array (e.g., `experiences`)
 3. Include heading field (e.g., `experiencesHeading`)
 
-For complete documentation, see the full [Settings Guide](SETTINGS%20GUIDE.md).
+For complete documentation, see the full [Settings Guide](settings-guide.md).
+
+
