@@ -28,6 +28,7 @@
 	"browser": "dist/index.js",
 	"scripts": {
 		"dev": "vite",
+		"start": "vite",
 		"build": "node scripts/validate-build-integrity.js && node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
 		"build-future-cflarecounter": "node scripts/validate-build-integrity.js && node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js && node scripts/register-cflair-projects.js",
 		"build-core": "node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",

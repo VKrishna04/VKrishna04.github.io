@@ -1,4 +1,5 @@
 {
+	"$schema": "./settings.schema.json",
 	"//": [
 		"Copyright 2025 Krishna GSVV",
 		"",
@@ -81,10 +82,9 @@
 		"documentation": "See 'docs/Unified Icon System Guide.md' for complete documentation",
 		"note": "The system automatically detects the library from the icon name prefix and loads it dynamically. No manual imports needed!"
 	},
-	"$schema": "https://raw.githubusercontent.com/VKrishna04/VKrishna04.github.io/refs/heads/main/public/settings.schema.json",
 	"seo": {
-		"title": "Krishna GSVV - Developer",
-		"description": "Passionate developer specializing in React, Python, and AI. Hackathon winner with ₹3.75L+ prize money. Building innovative solutions.",
+		"title": "Krishna GSVV — Developer & AI Researcher",
+		"description": "Award-winning full-stack developer & AI researcher. ₹3.75L+ in hackathon wins. IEEE-published researcher. 25+ open-source projects.",
 		"keywords": [
 			"Full Stack Developer",
 			"React",
@@ -105,16 +105,16 @@
 		"author": "Krishna GSVV",
 		"canonical": "https://vkrishna04.me/",
 		"openGraph": {
-			"title": "Krishna GSVV - Developer",
-			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions with 15+ open source projects.",
+			"title": "Krishna GSVV — Developer & AI Researcher",
+			"description": "Award-winning developer & AI researcher. IEEE publications, ₹3.75L+ in hackathon wins, and 25+ open-source projects.",
 			"image": "https://github.com/VKrishna04.png",
 			"imageWidth": 1200,
 			"imageHeight": 630,
 			"siteName": "Krishna GSVV Portfolio"
 		},
 		"twitter": {
-			"title": "Krishna GSVV - Developer",
-			"description": "Passionate developer specializing in React, Python, and AI. Building innovative solutions.",
+			"title": "Krishna GSVV — Developer & AI Researcher",
+			"description": "Award-winning developer & AI researcher. Building open-source tools, ML systems, and impactful web apps.",
 			"image": "https://github.com/VKrishna04.png",
 			"creator": "@VKrishna04"
 		},
@@ -125,8 +125,11 @@
 			"worksFor": "Independent",
 			"sameAs": [
 				"https://github.com/VKrishna04",
+				"https://github.com/Life-Experimentalist",
 				"https://linkedin.com/in/vkrishna04",
-				"https://vkrishna04.me"
+				"https://vkrishna04.me",
+				"https://zenodo.org/search?q=Krishna+GSVV",
+				"https://ieeexplore.ieee.org/document/10987517"
 			],
 			"knowsAbout": [
 				"React",
@@ -153,11 +156,11 @@
 		"nameGradient": "linear-gradient(to right, #c770f0, #ec4999, #ef4444)",
 		"typewriterStrings": [
 			"Full Stack Developer",
-			"Problem Solver",
-			"Tech Enthusiast",
+			"AI Researcher",
+			"Hackathon Winner",
 			"Open Source Contributor"
 		],
-		"description": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. Always eager to learn new technologies and contribute to meaningful projects.",
+		"description": "Award-winning developer and AI researcher — I build full-stack apps, train ML models, and ship open-source tools. ₹3.75L+ in hackathon prizes and a growing library of projects that people actually use.",
 		"location": {
 			"show": true,
 			"text": "📍 Bengaluru, India",
@@ -260,13 +263,13 @@
 	},
 	"about": {
 		"heading": "About Me",
-		"subheading": "Get to know me better",
-		"title": "I'm Krishna GSVV, a passionate Developer",
+		"subheading": "The story behind the code",
+		"title": "I'm Krishna GSVV — developer, researcher & hackathon champion",
 		"paragraphs": [
-			"I'm a dedicated software engineer and AI researcher with a passion for creating innovative solutions that bridge the gap between cutting-edge technology and real-world applications. My journey began with curiosity about how computers work and has evolved into a professional pursuit of building impactful software.",
-			"I specialize in full-stack development with expertise in React, Python, and modern web technologies. My recent focus includes AI bias detection systems like EquiLens, computer vision applications for emotion detection, and blockchain technologies such as HiveXplore. I've successfully developed everything from VS Code extensions to complex machine learning pipelines, always prioritizing clean code and user experience.",
-			"Beyond coding, I'm deeply involved in AI research, particularly in bias detection and ethical AI systems. I've published research papers on diabetic retinopathy prediction using deep learning, won hackathons worth ₹3.75 lakhs including recent victories at IIT Delhi and Tredence Inc.",
-			"I've contributed to open-source projects that help make technology more accessible and fair. I believe in continuous learning and sharing knowledge with the developer community through my 15+ open source projects and developer tools including VS Code extensions with 2K+ downloads."
+			"I'm a software engineer and AI researcher who builds at the intersection of technology and real-world impact. What started as curiosity about how computers work has grown into published research, hackathon wins, and a growing library of open-source tools that people actually use.",
+			"I specialize in full-stack development with React and Python, and I dive deep into AI whenever I get the chance. Right now I'm building EquiLens — a platform to detect bias in language models — alongside computer vision apps and blockchain tools like HiveXplore. Whether it's a VS Code extension or an ML pipeline, I care about code that's clean, fast, and worth using.",
+			"I also contribute actively to AI research — my work on diabetic retinopathy prediction using deep learning is published on IEEE, and the EquiLens corpus dataset is released on Zenodo. On the competition front, I've won ₹3.75L+ across hackathons at IIT Delhi, IIT Hyderabad, Tredence Inc., and Microsoft.",
+			"I believe technology should be accessible and transparent. My open-source portfolio — 25+ projects including VS Code extensions with 2K+ downloads — reflects that belief. Always building, always learning, always looking for the next interesting problem."
 		],
 		"image": {
 			"type": "github",
@@ -332,6 +335,11 @@
 						"name": "Vite",
 						"icon": "SiVite",
 						"color": "text-purple-400"
+					},
+					{
+						"name": "Browser Extensions",
+						"icon": "FaChrome",
+						"color": "text-yellow-500"
 					},
 					{
 						"name": "Tailwind CSS",
@@ -426,8 +434,8 @@
 						"color": "text-white"
 					},
 					{
-						"name": "Vercel",
-						"icon": "SiVercel",
+						"name": "Github Pages",
+						"icon": "FaGithub",
 						"color": "text-white"
 					},
 					{
@@ -450,11 +458,6 @@
 						"name": "Node.js",
 						"icon": "FaNodeJs",
 						"color": "text-green-400"
-					},
-					{
-						"name": "Express.js",
-						"icon": "SiExpress",
-						"color": "text-gray-400"
 					},
 					{
 						"name": "Flask",
@@ -524,19 +527,9 @@
 						"color": "text-blue-400"
 					},
 					{
-						"name": "MongoDB",
-						"icon": "SiMongodb",
-						"color": "text-green-500"
-					},
-					{
 						"name": "SQLite",
 						"icon": "SiSqlite",
 						"color": "text-gray-400"
-					},
-					{
-						"name": "Redis",
-						"icon": "SiRedis",
-						"color": "text-red-500"
 					},
 					{
 						"name": "Firebase",
@@ -570,7 +563,7 @@
 		"skillsNote": "Comprehensive skills showcase covering programming languages, frameworks, AI/ML tools, cloud platforms, and emerging technologies. Each skill includes relevant icons and color coding for better visual representation.",
 		"stats": [
 			{
-				"number": "15+",
+				"number": "25+",
 				"label": "Open Source Projects"
 			},
 			{
@@ -590,138 +583,11 @@
 				"label": "Research Publications"
 			},
 			{
-				"number": "5+",
-				"label": "Cloud Certifications"
+				"number": "6+",
+				"label": "Global Certifications"
 			}
 		],
-		"statsNote": "Updated statistics reflecting real achievements including hackathon winnings, research publications, and technical certifications. Numbers are based on actual portfolio data and accomplishments.",
-		"technicalExperience": {
-			"title": "Technical Experience",
-			"subtitle": "Technologies and tools I work with",
-			"maxColumns": 4,
-			"fixedColumns": false,
-			"showProficiency": true,
-			"animateOnHover": true,
-			"categories": [
-				{
-					"name": "Core Technologies",
-					"icon": "FaCode",
-					"skills": [
-						{
-							"name": "React",
-							"icon": "FaReact",
-							"color": "text-blue-400",
-							"level": 90,
-							"description": "Building modern web applications with React hooks and context"
-						},
-						{
-							"name": "JavaScript",
-							"icon": "SiJavascript",
-							"color": "text-yellow-400",
-							"level": 85,
-							"description": "ES6+ features, async/await, DOM manipulation"
-						},
-						{
-							"name": "Python",
-							"icon": "FaPython",
-							"color": "text-green-400",
-							"level": 88,
-							"description": "Machine learning, web scraping, data analysis"
-						},
-						{
-							"name": "Node.js",
-							"icon": "FaNodeJs",
-							"color": "text-green-500",
-							"level": 75,
-							"description": "Backend development and API creation"
-						},
-						{
-							"name": "TypeScript",
-							"icon": "SiTypescript",
-							"color": "text-blue-500",
-							"level": 80,
-							"description": "Type-safe JavaScript development"
-						},
-						{
-							"name": "Git",
-							"icon": "FaGitAlt",
-							"color": "text-orange-500",
-							"level": 85,
-							"description": "Version control and collaborative development"
-						}
-					]
-				},
-				{
-					"name": "AI & Machine Learning",
-					"icon": "FaBrain",
-					"skills": [
-						{
-							"name": "TensorFlow",
-							"icon": "SiTensorflow",
-							"color": "text-orange-400",
-							"level": 82,
-							"description": "Deep learning model development and training"
-						},
-						{
-							"name": "PyTorch",
-							"icon": "SiPytorch",
-							"color": "text-red-400",
-							"level": 78,
-							"description": "Neural networks and computer vision"
-						},
-						{
-							"name": "Scikit-learn",
-							"icon": "SiScikitlearn",
-							"color": "text-blue-400",
-							"level": 85,
-							"description": "Traditional machine learning algorithms"
-						},
-						{
-							"name": "OpenCV",
-							"icon": "SiOpencv",
-							"color": "text-green-400",
-							"level": 80,
-							"description": "Computer vision and image processing"
-						}
-					]
-				},
-				{
-					"name": "Development Tools",
-					"icon": "FaTools",
-					"skills": [
-						{
-							"name": "VS Code",
-							"icon": "SiVisualstudiocode",
-							"color": "text-blue-400",
-							"level": 95,
-							"description": "Primary development environment with extensions"
-						},
-						{
-							"name": "Docker",
-							"icon": "FaDocker",
-							"color": "text-blue-500",
-							"level": 70,
-							"description": "Containerization and Deployment"
-						},
-						{
-							"name": "Vite",
-							"icon": "SiVite",
-							"color": "text-purple-400",
-							"level": 80,
-							"description": "Fast build tool for modern web development"
-						},
-						{
-							"name": "Postman",
-							"icon": "SiPostman",
-							"color": "text-orange-500",
-							"level": 85,
-							"description": "API testing and development"
-						}
-					]
-				}
-			],
-			"note": "Configure technical experience section with customizable columns. maxColumns: maximum grid columns (1-6), fixedColumns: true for fixed layout, false for dynamic. On mobile, always shows 1 column. Each skill can have name, icon, color, level (0-100), and description for tooltips."
-		}
+		"statsNote": "Updated statistics reflecting real achievements including hackathon winnings, research publications, and technical certifications. Numbers are based on actual portfolio data and accomplishments."
 	},
 	"projects": {
 		"accentColor": "#7c3aed",
@@ -757,7 +623,7 @@
 			"Life-Experimentalist.github.io",
 			"Template"
 		],
-		"maxProjects": 20,
+		"maxProjects": 25,
 		"sortBy": "updated",
 		"sortOrder": "desc",
 		"showForks": false,
@@ -783,11 +649,11 @@
 				"showInAbout": false,
 				"showInProjects": true,
 				"status": "Live",
-				"startDate": "2025-10-23",
+				"startDate": "2025-10-01",
 				"endDate": null,
 				"githubUrl": "https://github.com/VKrishna04/VKrishna04.github.io",
-				"liveUrl": "https://vkrishna04.github.io",
-				"demoUrl": "https://vkrishna04.me",
+				"liveUrl": "https://vkrishna04.me",
+				"demoUrl": "https://vkrishna04.github.io",
 				"documentationUrl": "https://github.com/VKrishna04/VKrishna04.github.io#readme",
 				"imageUrl": "https://opengraph.githubassets.com/1/VKrishna04/VKrishna04.github.io",
 				"tags": [
@@ -825,46 +691,202 @@
 			},
 			{
 				"id": "2",
+				"name": "RanobeGemini",
+				"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
+				"technologies": [
+					"JavaScript",
+					"Gemini-AI",
+					"Browser-Extension",
+					"HTML",
+					"CSS"
+				],
+				"category": "Browser Extension",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2025-11-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
+				"liveUrl": "http://ranobe.vkrishna04.me/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/RanobeGemini#readme",
+				"imageUrl": "",
+				"tags": [
+					"firefox-addon",
+					"javascript"
+				],
+				"highlights": [
+					"AI-powered translation enhancement using Google Gemini",
+					"One-click transformation of poorly translated content",
+					"Supports popular web novel reading sites",
+					"Context-aware intelligent text processing"
+				],
+				"stats": {
+					"stars": 3,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/RanobeGemini/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/RanobeGemini/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/RanobeGemini/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/RanobeGemini/issues"
+				}
+			},
+			{
+				"id": "3",
+				"name": "Youtube-Keystrokes-Blocker",
+				"description": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
+				"technologies": [
+					"JavaScript",
+					"Userscript",
+					"Browser-API"
+				],
+				"category": "Browser Extension",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2025-09-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
+				"liveUrl": "http://yt-hotkeys.vkrishna04.me/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker#readme",
+				"imageUrl": "",
+				"tags": [
+					"javascript",
+					"userscript",
+					"youtube",
+					"keyboard-shortcuts",
+					"productivity"
+				],
+				"highlights": [
+					"Fine-grained control over YouTube keyboard shortcuts",
+					"Block specific hotkeys while keeping others active",
+					"Non-intrusive userscript implementation",
+					"Configurable per-site rules"
+				],
+				"stats": {
+					"stars": 1,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
+				}
+			},
+			{
+				"id": "4",
+				"name": "ToxicGuard_AI",
+				"description": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
+				"technologies": [
+					"HTML",
+					"JavaScript",
+					"TensorFlow.js",
+					"Browser-Extension",
+					"NLP"
+				],
+				"category": "Browser Extension",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2025-10-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI",
+				"liveUrl": "http://toxic.vkrishna04.me/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI#readme",
+				"imageUrl": "",
+				"tags": [
+					"ai",
+					"browser-extension",
+					"censorship",
+					"chrome-extension",
+					"content-moderation",
+					"firefox-extension",
+					"javascript",
+					"machine-learning",
+					"nlp",
+					"privacy",
+					"real-time",
+					"tensorflowjs",
+					"toxicity-detection",
+					"user-safety",
+					"web-extension"
+				],
+				"highlights": [
+					"Real-time toxicity detection using TensorFlow.js",
+					"Fine-grained content moderation controls",
+					"Auto-censor with adjustable sensitivity",
+					"Privacy-first — all processing done client-side"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/issues"
+				}
+			},
+			{
+				"id": "5",
 				"name": "EquiLens",
-				"description": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization.",
+				"description": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
 				"technologies": [
 					"Python",
 					"Ollama",
-					"TensorFlow",
-					"Scikit-learn",
-					"Pandas",
-					"Matplotlib"
+					"Rich-CLI",
+					"Statistical-Analysis",
+					"uv"
 				],
 				"category": "AI/ML",
 				"featured": false,
 				"showInAbout": true,
 				"showInProjects": true,
 				"status": "Active Development",
-				"startDate": "2025-09-01",
+				"startDate": "2025-07-01",
 				"endDate": null,
 				"githubUrl": "https://github.com/Life-Experimentalist/EquiLens",
-				"liveUrl": "",
+				"liveUrl": "https://equilens.vkrishna04.me/",
 				"demoUrl": "",
 				"documentationUrl": "https://github.com/Life-Experimentalist/EquiLens#readme",
 				"imageUrl": "",
 				"tags": [
-					"ai-bias",
-					"machine-learning",
-					"llm",
-					"fairness",
-					"ethics"
+					"ai-bias-detection",
+					"ai-ethics",
+					"ai-research-tools",
+					"bias-measurement",
+					"llm-auditing",
+					"ollama-integration",
+					"rich-cli",
+					"statistical-analysis",
+					"uv-python"
 				],
 				"highlights": [
 					"Multi-metric bias detection across demographics",
-					"Interactive CLI for easy auditing",
-					"Statistical analysis with visualization",
-					"Supports multiple LLM providers"
+					"Interactive CLI with rich progress tracking",
+					"Corpus generation and statistical analysis",
+					"Supports multiple LLM providers via Ollama",
+					"Resume capability for long-running audits"
 				],
 				"stats": {
-					"stars": 5,
-					"forks": 2,
-					"watchers": 1,
-					"issues": 3
+					"stars": 2,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
 				},
 				"statsUrls": {
 					"starsUrl": "https://github.com/Life-Experimentalist/EquiLens/stargazers",
@@ -874,108 +896,271 @@
 				}
 			},
 			{
-				"id": "3",
-				"name": "Facial-Emotion-Detection",
-				"description": "Real-time emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions from images and videos.",
+				"id": "6",
+				"name": "Save-Sync",
+				"description": "VS Code Extension to save your project at working save points.",
 				"technologies": [
-					"Python",
-					"OpenCV",
-					"MediaPipe",
-					"TensorFlow",
-					"NumPy",
-					"Scikit-learn"
+					"TypeScript",
+					"VS-Code-API",
+					"Node.js"
 				],
-				"category": "AI/ML",
+				"category": "VS Code Extension",
 				"featured": false,
-				"showInAbout": true,
+				"showInAbout": false,
 				"showInProjects": true,
-				"status": "Completed",
-				"startDate": "2025-05-01",
-				"endDate": "2025-08-15",
-				"githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection",
-				"liveUrl": "",
+				"status": "Maintenance",
+				"startDate": "2025-08-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/Save-Sync",
+				"liveUrl": "http://save-sync.vkrishna04.me/",
 				"demoUrl": "",
-				"documentationUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection#readme",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Save-Sync#readme",
 				"imageUrl": "",
 				"tags": [
-					"computer-vision",
-					"emotion-detection",
-					"facial-recognition",
-					"deep-learning"
+					"backup",
+					"checkpoint",
+					"developer-tools",
+					"productivity",
+					"restore",
+					"save-state",
+					"timeline",
+					"typescript",
+					"vscode",
+					"vscode-extension"
 				],
 				"highlights": [
-					"Real-time emotion classification",
-					"MediaPipe facial landmark extraction",
-					"High accuracy emotion models",
-					"Support for images and video streams"
+					"Save project state at meaningful working checkpoints",
+					"Restore workspace to any previous save point",
+					"Timeline view of project save history",
+					"Integrates seamlessly with VS Code workflow"
 				],
 				"stats": {
-					"stars": 8,
-					"forks": 3,
-					"watchers": 2,
-					"issues": 1
+					"stars": 1,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
 				},
 				"statsUrls": {
-					"starsUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/stargazers",
-					"forksUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/network/members",
-					"watchersUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/watchers",
-					"issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detection/issues"
+					"starsUrl": "https://github.com/Life-Experimentalist/Save-Sync/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Save-Sync/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Save-Sync/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Save-Sync/issues"
 				}
 			},
 			{
-				"id": "4",
-				"name": "HiveXplore",
-				"description": "Beginner-friendly app for Hive blockchain with simplified authentication, intuitive posting tools, and guided experiences for blockchain newcomers.",
+				"id": "7",
+				"name": "Eldritchify",
+				"description": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
 				"technologies": [
-					"Python",
-					"Flask",
-					"Hive",
-					"Blockchain",
+					"HTML",
 					"JavaScript",
-					"Bootstrap"
+					"CSS",
+					"Unicode"
 				],
-				"category": "Blockchain",
+				"category": "Web Tool",
 				"featured": false,
-				"showInAbout": true,
+				"showInAbout": false,
 				"showInProjects": true,
 				"status": "Live",
-				"startDate": "2025-03-01",
+				"startDate": "2025-09-01",
 				"endDate": null,
-				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
-				"liveUrl": "https://hivebuzz.onrender.com/",
+				"githubUrl": "https://github.com/Life-Experimentalist/Eldritchify",
+				"liveUrl": "https://eldritchify.vkrishna04.me/",
 				"demoUrl": "",
-				"documentationUrl": "https://github.com/Life-Experimentalist/HiveXplore#readme",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Eldritchify#readme",
 				"imageUrl": "",
 				"tags": [
-					"blockchain",
-					"hive",
-					"web3",
-					"decentralized",
-					"social-media"
+					"cosmic-horror",
+					"cthulhu",
+					"eldritch",
+					"horror",
+					"javascript",
+					"lovecraft",
+					"text-corruption",
+					"text-generator",
+					"unicode",
+					"web-tools",
+					"zalgo"
 				],
 				"highlights": [
-					"Simplified Hive blockchain authentication",
-					"Intuitive posting and content creation",
-					"Beginner-friendly guided experience",
-					"Real-time blockchain interactions"
+					"Cosmic horror-themed Zalgo text corruption",
+					"Unicode combining characters for text effects",
+					"Multiple intensity levels from whisper to pure chaos",
+					"Reverse purification to clean corrupted text"
 				],
 				"stats": {
-					"stars": 4,
-					"forks": 1,
-					"watchers": 1,
-					"issues": 2
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
 				},
 				"statsUrls": {
-					"starsUrl": "https://github.com/Life-Experimentalist/HiveXplore/stargazers",
-					"forksUrl": "https://github.com/Life-Experimentalist/HiveXplore/network/members",
-					"watchersUrl": "https://github.com/Life-Experimentalist/HiveXplore/watchers",
-					"issuesUrl": "https://github.com/Life-Experimentalist/HiveXplore/issues"
+					"starsUrl": "https://github.com/Life-Experimentalist/Eldritchify/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Eldritchify/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Eldritchify/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Eldritchify/issues"
 				}
 			},
 			{
-				"id": "5",
+				"id": "8",
+				"name": "CFlair-Counter",
+				"description": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
+				"technologies": [
+					"HTML",
+					"JavaScript",
+					"Cloudflare-Workers",
+					"REST-API",
+					"SVG"
+				],
+				"category": "Backend",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2025-09-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/CFlair-Counter",
+				"liveUrl": "https://counter.vkrishna04.me/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/CFlair-Counter#readme",
+				"imageUrl": "",
+				"tags": [
+					"rest-api",
+					"cloudflare",
+					"serverless",
+					"view-counter",
+					"svg-badges",
+					"admin-panel",
+					"telemetry"
+				],
+				"highlights": [
+					"Ultra-efficient serverless architecture on Cloudflare",
+					"SVG badge generation for project stats",
+					"Admin panel for counter management",
+					"Headless telemetry with zero performance cost"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/issues"
+				}
+			},
+			{
+				"id": "9",
+				"name": "the-pensive-index",
+				"description": "Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.",
+				"technologies": [
+					"TypeScript",
+					"Next.js",
+					"Cloudflare-D1",
+					"Drizzle-ORM",
+					"Cloudflare-Pages"
+				],
+				"category": "Full Stack",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2025-09-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/the-pensive-index",
+				"liveUrl": "https://pensive.vkrishna04.me",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/the-pensive-index#readme",
+				"imageUrl": "",
+				"tags": [
+					"admin-dashboard",
+					"api",
+					"cloudflare",
+					"cloudflare-d1",
+					"drizzle-orm",
+					"fanfiction",
+					"next-js",
+					"spec-driven-development",
+					"story-discovery",
+					"typescript",
+					"validation-engine"
+				],
+				"highlights": [
+					"Hierarchical tagging system for story discovery",
+					"Intelligent prompt generation for content curation",
+					"Cloudflare D1 for edge-native database",
+					"Spec-Driven Development methodology"
+				],
+				"stats": {
+					"stars": 1,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/the-pensive-index/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/the-pensive-index/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/the-pensive-index/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/the-pensive-index/issues"
+				}
+			},
+			{
+				"id": "10",
+				"name": "eVidya",
+				"description": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
+				"technologies": [
+					"JavaScript",
+					"HTML",
+					"CSS",
+					"REST-API"
+				],
+				"category": "Full Stack",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2024-06-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/eVidya",
+				"liveUrl": "http://evidya.vkrishna04.me/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/eVidya#readme",
+				"imageUrl": "",
+				"tags": [
+					"education",
+					"e-learning",
+					"javascript",
+					"progress-tracking",
+					"quizzes",
+					"video-lessons",
+					"web-development"
+				],
+				"highlights": [
+					"Interactive tech learning with video lessons and quizzes",
+					"Progress tracking for self-paced education",
+					"Responsive design for all device sizes",
+					"Covers programming languages and web development"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/eVidya/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/eVidya/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/eVidya/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/eVidya/issues"
+				}
+			},
+			{
+				"id": "11",
 				"name": "cspell-sync",
-				"description": "VS Code extension that synchronizes cSpell dictionaries across workspace and user settings. Improves developer productivity with 1K+ downloads on VS Code Marketplace.",
+				"description": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
 				"technologies": [
 					"TypeScript",
 					"VS-Code-API",
@@ -987,31 +1172,37 @@
 				"showInAbout": true,
 				"showInProjects": true,
 				"status": "Maintenance",
-				"startDate": "2023-11-01",
+				"startDate": "2024-06-01",
 				"endDate": null,
 				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
-				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=Life-Experimentalist.cspell-sync",
+				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
 				"demoUrl": "",
 				"documentationUrl": "https://github.com/Life-Experimentalist/cspell-sync#readme",
 				"imageUrl": "",
 				"tags": [
-					"vscode-extension",
+					"automation",
+					"code-spellchecker",
+					"cspell",
 					"developer-tools",
-					"productivity",
-					"spell-check"
+					"extension",
+					"nodejs",
+					"open-source",
+					"typescript",
+					"visual-studio-code",
+					"vscode-extension",
+					"vscode-marketplace"
 				],
 				"highlights": [
-					"1K+ downloads on VS Code Marketplace",
-					"Automatic dictionary synchronization",
-					"Workspace and user settings support",
-					"Improves team consistency"
+					"2,000+ downloads on VS Code Marketplace",
+					"Bidirectional cSpell dictionary synchronization",
+					"Keyboard shortcuts and status bar integration",
+					"Supports custom dictionaries and project settings"
 				],
 				"stats": {
 					"stars": 3,
 					"forks": 0,
-					"watchers": 1,
-					"issues": 0,
-					"downloads": 1000
+					"watchers": 0,
+					"issues": 0
 				},
 				"statsUrls": {
 					"starsUrl": "https://github.com/Life-Experimentalist/cspell-sync/stargazers",
@@ -1021,90 +1212,196 @@
 				}
 			},
 			{
-				"id": "6",
-				"name": "RanobeGemini",
-				"description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content with intelligent processing.",
+				"id": "12",
+				"name": "Relax",
+				"description": "Refresh with inspirational quotes, GIFs and memes.",
 				"technologies": [
 					"JavaScript",
-					"Gemini-AI",
-					"Chrome-Extension-API",
 					"HTML",
-					"CSS"
+					"CSS",
+					"REST-API"
 				],
-				"category": "Browser Extension",
+				"category": "Web App",
 				"featured": false,
-				"showInAbout": true,
+				"showInAbout": false,
 				"showInProjects": true,
-				"status": "Active Development",
-				"startDate": "2025-06-01",
+				"status": "Live",
+				"startDate": "2024-01-01",
 				"endDate": null,
-				"githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
-				"liveUrl": "",
+				"githubUrl": "https://github.com/Life-Experimentalist/Relax",
+				"liveUrl": "https://relax-stress-bust.onrender.com/",
 				"demoUrl": "",
-				"documentationUrl": "https://github.com/Life-Experimentalist/RanobeGemini#readme",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Relax#readme",
 				"imageUrl": "",
 				"tags": [
-					"browser-extension",
-					"ai-translation",
-					"web-novels",
-					"gemini-ai",
-					"content-enhancement"
+					"javascript",
+					"quotes",
+					"gifs",
+					"memes",
+					"wellness",
+					"relaxation"
 				],
 				"highlights": [
-					"AI-powered translation enhancement",
-					"Real-time content processing",
-					"Supports multiple web novel sites",
-					"Context-aware translations"
+					"Curated inspirational quotes collection",
+					"GIF and meme integration for mood boost",
+					"Simple, distraction-free interface",
+					"Instant refresh for new content"
 				],
 				"stats": {
-					"stars": 6,
-					"forks": 2,
-					"watchers": 1,
-					"issues": 3
+					"stars": 0,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
 				},
 				"statsUrls": {
-					"starsUrl": "https://github.com/Life-Experimentalist/RanobeGemini/stargazers",
-					"forksUrl": "https://github.com/Life-Experimentalist/RanobeGemini/network/members",
-					"watchersUrl": "https://github.com/Life-Experimentalist/RanobeGemini/watchers",
-					"issuesUrl": "https://github.com/Life-Experimentalist/RanobeGemini/issues"
+					"starsUrl": "https://github.com/Life-Experimentalist/Relax/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Relax/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Relax/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Relax/issues"
 				}
 			},
 			{
-				"id": "7",
-				"name": "Cloud-Certifications",
-				"description": "Achieved multiple cloud certifications including AWS Cloud Practitioner and Oracle Cloud DevOps Professional, with hands-on deployment experience.",
+				"id": "13",
+				"name": "DrDerma",
+				"description": "Dermatology diagnosis and skin condition assessment tool using machine learning.",
 				"technologies": [
-					"AWS",
-					"Oracle-Cloud",
-					"Docker",
-					"Kubernetes",
-					"Terraform",
-					"CICD"
+					"PureBasic",
+					"Machine-Learning"
+				],
+				"category": "AI/ML",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2024-04-01",
+				"endDate": "2025-09-18",
+				"githubUrl": "https://github.com/Life-Experimentalist/DrDerma",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/DrDerma#readme",
+				"imageUrl": "",
+				"tags": [
+					"dermatology",
+					"medical-ai",
+					"diagnosis",
+					"skin-condition"
+				],
+				"highlights": [
+					"AI-assisted dermatology diagnosis",
+					"Skin condition pattern recognition",
+					"Medical imaging analysis"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/DrDerma/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/DrDerma/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/DrDerma/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/DrDerma/issues"
+				}
+			},
+			{
+				"id": "14",
+				"name": "Facial-Emotion-Detector",
+				"description": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
+				"technologies": [
+					"Python",
+					"OpenCV",
+					"MediaPipe",
+					"scikit-learn",
+					"NumPy",
+					"Flask"
+				],
+				"category": "AI/ML",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2025-06-01",
+				"endDate": "2025-08-23",
+				"githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector#readme",
+				"imageUrl": "",
+				"tags": [
+					"ai",
+					"computer-vision",
+					"emotion-detection",
+					"facial-landmarks",
+					"facial-recognition",
+					"human-computer-interaction",
+					"machine-learning",
+					"mediapipe",
+					"opencv",
+					"python",
+					"real-time-detection"
+				],
+				"highlights": [
+					"Real-time emotion classification from images and video",
+					"MediaPipe facial landmark extraction pipeline",
+					"Award-winning project at Tredence InfinityAI Hackathon",
+					"Custom ML model training support"
+				],
+				"stats": {
+					"stars": 1,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/issues"
+				}
+			},
+			{
+				"id": "15",
+				"name": "ActionsCounter",
+				"description": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
+				"technologies": [
+					"TypeScript",
+					"GitHub-Actions",
+					"GitHub-API",
+					"Webhooks"
 				],
 				"category": "DevOps",
 				"featured": false,
-				"showInAbout": true,
-				"showInProjects": false,
-				"status": "Ongoing",
-				"startDate": "2023-01-01",
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Active Development",
+				"startDate": "2025-04-01",
 				"endDate": null,
-				"githubUrl": "",
-				"liveUrl": "",
+				"githubUrl": "https://github.com/Life-Experimentalist/ActionsCounter",
+				"liveUrl": "https://life-experimentalist.github.io/ActionsCounter/",
 				"demoUrl": "",
-				"documentationUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/ActionsCounter#readme",
 				"imageUrl": "",
 				"tags": [
-					"cloud",
-					"aws",
-					"oracle-cloud",
-					"certifications",
-					"devops"
+					"analytics",
+					"automation",
+					"ci-cd",
+					"dashboard",
+					"deployment-tracking",
+					"developer-tools",
+					"devops",
+					"github-actions",
+					"github-api",
+					"monitoring",
+					"typescript",
+					"webhooks",
+					"workflow-tracking"
 				],
 				"highlights": [
-					"AWS Certified Cloud Practitioner",
-					"Oracle Cloud DevOps Professional",
-					"Multiple cloud certifications achieved",
-					"Hands-on deployment experience"
+					"GitHub Actions workflow analytics and tracking",
+					"CI/CD deployment monitoring dashboard",
+					"Webhook integration for real-time updates",
+					"TypeScript-powered with GitHub API"
 				],
 				"stats": {
 					"stars": 0,
@@ -1113,10 +1410,350 @@
 					"issues": 0
 				},
 				"statsUrls": {
-					"starsUrl": "",
-					"forksUrl": "",
-					"watchersUrl": "",
-					"issuesUrl": ""
+					"starsUrl": "https://github.com/Life-Experimentalist/ActionsCounter/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/ActionsCounter/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/ActionsCounter/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/ActionsCounter/issues"
+				}
+			},
+			{
+				"id": "16",
+				"name": "SignLanguageDetector",
+				"description": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
+				"technologies": [
+					"Python",
+					"Flask",
+					"MediaPipe",
+					"OpenCV",
+					"scikit-learn",
+					"NumPy",
+					"JavaScript"
+				],
+				"category": "AI/ML",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2025-04-01",
+				"endDate": "2025-07-09",
+				"githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector#readme",
+				"imageUrl": "",
+				"tags": [
+					"computer-vision",
+					"flask",
+					"gesture-recognition",
+					"hand-tracking",
+					"indian-sign-language",
+					"machine-learning",
+					"mediapipe-hands",
+					"opencv",
+					"python",
+					"real-time-detection",
+					"sign-language",
+					"web-application"
+				],
+				"highlights": [
+					"Real-time Indian Sign Language recognition system",
+					"98% accuracy with custom ML classifier",
+					"Interactive Flask web interface for live inference",
+					"MediaPipe hand tracking for precise detection"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/issues"
+				}
+			},
+			{
+				"id": "17",
+				"name": "ParkMeter",
+				"description": "Parking Ticket Management System for tracking and managing parking tickets, including payment processing, ticket history, and notifications.",
+				"technologies": [
+					"Python",
+					"Django",
+					"HTML",
+					"CSS",
+					"JavaScript"
+				],
+				"category": "Full Stack",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2025-04-01",
+				"endDate": "2025-07-08",
+				"githubUrl": "https://github.com/Life-Experimentalist/ParkMeter",
+				"liveUrl": "https://life-experimentalist.github.io/ParkMeter/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/ParkMeter#readme",
+				"imageUrl": "",
+				"tags": [
+					"access-control",
+					"django",
+					"login-system",
+					"parking-management",
+					"role-based-access-control",
+					"ticket-management",
+					"user-interface",
+					"user-management"
+				],
+				"highlights": [
+					"Full-featured parking ticket management system",
+					"Payment processing and ticket history",
+					"Role-based access control",
+					"Real-time notifications"
+				],
+				"stats": {
+					"stars": 1,
+					"forks": 2,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/ParkMeter/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/ParkMeter/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/ParkMeter/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/ParkMeter/issues"
+				}
+			},
+			{
+				"id": "18",
+				"name": "CounterAPI",
+				"description": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
+				"technologies": [
+					"Python",
+					"FastAPI",
+					"PostgreSQL",
+					"Render",
+					"REST-API"
+				],
+				"category": "Backend",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2025-04-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
+				"liveUrl": "https://life-experimentalist.github.io/CounterAPI/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/CounterAPI#readme",
+				"imageUrl": "",
+				"tags": [
+					"api",
+					"backend",
+					"counter",
+					"developer-tools",
+					"fastapi",
+					"free-tier",
+					"open-source",
+					"postgresql",
+					"project-stats",
+					"render",
+					"self-hosted",
+					"usage-tracking"
+				],
+				"highlights": [
+					"Self-hostable visitor tracking with FastAPI",
+					"PostgreSQL for reliable data persistence",
+					"Real-time usage analytics dashboard",
+					"One-click deploy to Render free tier"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/CounterAPI/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/CounterAPI/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/CounterAPI/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/CounterAPI/issues"
+				}
+			},
+			{
+				"id": "19",
+				"name": "BreachCheck",
+				"description": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
+				"technologies": [
+					"Python",
+					"Streamlit",
+					"REST-API",
+					"HIBP-API"
+				],
+				"category": "Security",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2025-03-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/BreachCheck",
+				"liveUrl": "https://breachcheck-sagittarius.streamlit.app/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/BreachCheck#readme",
+				"imageUrl": "",
+				"tags": [
+					"breach-check",
+					"email-phishing",
+					"password-safety",
+					"pure-python",
+					"streamlit",
+					"unsplash-api"
+				],
+				"highlights": [
+					"Check emails and passwords against known breach databases",
+					"Leverages breach database aggregator APIs",
+					"Privacy-conscious user exposure assessment",
+					"Simple Streamlit interface for accessibility"
+				],
+				"stats": {
+					"stars": 2,
+					"forks": 1,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/BreachCheck/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/BreachCheck/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/BreachCheck/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/BreachCheck/issues"
+				}
+			},
+			{
+				"id": "20",
+				"name": "HiveXplore",
+				"description": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
+				"technologies": [
+					"Python",
+					"Flask",
+					"SQLite",
+					"Hive-Blockchain",
+					"JavaScript",
+					"REST-API"
+				],
+				"category": "Blockchain",
+				"featured": false,
+				"showInAbout": true,
+				"showInProjects": true,
+				"status": "Live",
+				"startDate": "2025-01-01",
+				"endDate": null,
+				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
+				"liveUrl": "https://hivebuzz.onrender.com/",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/HiveXplore#readme",
+				"imageUrl": "",
+				"tags": [
+					"blockchain",
+					"caching",
+					"content-platform",
+					"cryptocurrency",
+					"dapp",
+					"decentralized",
+					"flask",
+					"hive-blockchain",
+					"hivesigner",
+					"keychain",
+					"markdown",
+					"python",
+					"real-time",
+					"restful-api",
+					"social-media",
+					"sqlite",
+					"web-application"
+				],
+				"highlights": [
+					"Won 1st Runner-up at IIT Delhi CodeHive Hackathon (₹1L prize)",
+					"Simplified Hive blockchain authentication (Keychain, HiveSigner, HiveAuth)",
+					"Beginner-friendly guided blockchain experience",
+					"Real-time decentralized content creation and interaction"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/HiveXplore/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/HiveXplore/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/HiveXplore/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/HiveXplore/issues"
+				}
+			},
+			{
+				"id": "21",
+				"name": "zipCracker",
+				"description": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
+				"technologies": [
+					"Python",
+					"Multithreading",
+					"CLI",
+					"Archive-Processing"
+				],
+				"category": "Security Tool",
+				"featured": false,
+				"showInAbout": false,
+				"showInProjects": true,
+				"status": "Completed",
+				"startDate": "2024-12-01",
+				"endDate": "2025-03-12",
+				"githubUrl": "https://github.com/Life-Experimentalist/zipCracker",
+				"liveUrl": "",
+				"demoUrl": "",
+				"documentationUrl": "https://github.com/Life-Experimentalist/zipCracker#readme",
+				"imageUrl": "",
+				"tags": [
+					"archive-extraction",
+					"archive-password-recovery",
+					"brute-force",
+					"command-line-tool",
+					"cross-platform",
+					"cybersecurity-education",
+					"data-recovery",
+					"dictionary-attack",
+					"ethical-hacking",
+					"file-processing",
+					"file-security",
+					"memory-efficient",
+					"multi-format-support",
+					"multithreading",
+					"password-analysis",
+					"password-cracking",
+					"password-dictionary",
+					"performance-optimization",
+					"python",
+					"zip-cracker"
+				],
+				"highlights": [
+					"Multi-format support: ZIP, RAR, 7Z, and TAR archives",
+					"Dictionary attack and brute force recovery methods",
+					"Concurrent processing for performance",
+					"Memory-efficient cross-platform implementation"
+				],
+				"stats": {
+					"stars": 0,
+					"forks": 0,
+					"watchers": 0,
+					"issues": 0
+				},
+				"statsUrls": {
+					"starsUrl": "https://github.com/Life-Experimentalist/zipCracker/stargazers",
+					"forksUrl": "https://github.com/Life-Experimentalist/zipCracker/network/members",
+					"watchersUrl": "https://github.com/Life-Experimentalist/zipCracker/watchers",
+					"issuesUrl": "https://github.com/Life-Experimentalist/zipCracker/issues"
 				}
 			}
 		],
@@ -1132,7 +1769,27 @@
 				"iconColor": "text-purple-400",
 				"textColor": "text-purple-200"
 			},
-			"Facial-Emotion-Detection": {
+			"RanobeGemini": {
+				"icon": "SiGoogle",
+				"gradient": "bg-gradient-to-br from-yellow-600/20 to-orange-600/20",
+				"borderColor": "border-yellow-500/30",
+				"hoverBorderColor": "hover:border-yellow-400/50",
+				"bgColor": "bg-yellow-500/20",
+				"hoverBgColor": "group-hover:bg-yellow-500/30",
+				"iconColor": "text-yellow-400",
+				"textColor": "text-yellow-200"
+			},
+			"ToxicGuard_AI": {
+				"icon": "SiTensorflow",
+				"gradient": "bg-gradient-to-br from-red-600/20 to-rose-600/20",
+				"borderColor": "border-red-500/30",
+				"hoverBorderColor": "hover:border-red-400/50",
+				"bgColor": "bg-red-500/20",
+				"hoverBgColor": "group-hover:bg-red-500/30",
+				"iconColor": "text-red-400",
+				"textColor": "text-red-200"
+			},
+			"Facial-Emotion-Detector": {
 				"icon": "SiOpencv",
 				"gradient": "bg-gradient-to-br from-green-600/20 to-blue-600/20",
 				"borderColor": "border-green-500/30",
@@ -1143,7 +1800,7 @@
 				"textColor": "text-green-200"
 			},
 			"HiveXplore": {
-				"icon": "SiHiveBlockchain",
+				"icon": "SiBlockchaindotcom",
 				"gradient": "bg-gradient-to-br from-orange-600/20 to-red-600/20",
 				"borderColor": "border-orange-500/30",
 				"hoverBorderColor": "hover:border-orange-400/50",
@@ -1161,16 +1818,6 @@
 				"hoverBgColor": "group-hover:bg-cyan-500/30",
 				"iconColor": "text-cyan-400",
 				"textColor": "text-cyan-200"
-			},
-			"RanobeGemini": {
-				"icon": "SiGoogle",
-				"gradient": "bg-gradient-to-br from-yellow-600/20 to-orange-600/20",
-				"borderColor": "border-yellow-500/30",
-				"hoverBorderColor": "hover:border-yellow-400/50",
-				"bgColor": "bg-yellow-500/20",
-				"hoverBgColor": "group-hover:bg-yellow-500/30",
-				"iconColor": "text-yellow-400",
-				"textColor": "text-yellow-200"
 			}
 		},
 		"featuredProjectsConfigNote": "Configure visual styling for projects that appear in the About page (projects with showInAbout: true). Each project's name should match a key in featuredProjectsConfig. Use cohesive color schemes that align with your brand. Visit https://react-icons.github.io/ to find appropriate icons.",
@@ -1456,11 +2103,11 @@
 				"organization": "IIT Hyderabad & Pathway.com",
 				"location": "IIT Hyderabad, India",
 				"date": "2025",
-				"description": "Awarded for scoring the highest points in the hackathon, demonstrating exceptional coding skills and innovative problem-solving abilities in a new technology.",
+				"description": "Achieved the top score in a hackathon focused on Pathway.com's stream-processing framework, demonstrating rapid learning and mastery of cutting-edge real-time data engineering technology.",
 				"rewardAmount": {
 					"amount": 15000,
 					"currency": "INR",
-					"displayText": "₹50,000"
+					"displayText": "₹15,000"
 				},
 				"verificationUrl": "",
 				"certificateUrl": ""
@@ -1469,11 +2116,11 @@
 				"name": "1st rank at Microsoft Imagine Cup Campus Hackathon",
 				"organization": "Microsoft Learn & Amrita Vishwa Vidyapeetham",
 				"date": "2025",
-				"description": "Recognized for outstanding performance in developing a web application that enhances user experience and accessibility, showcasing technical skills and creativity",
+				"description": "Won the campus round of Microsoft's globally recognized Imagine Cup by building MomCare — a complete end-to-end pregnancy companion app covering everything from the first trimester through birth and the newborn's early weeks.",
 				"rewardAmount": {
 					"amount": 5000,
 					"currency": "INR",
-					"displayText": "₹25,000"
+					"displayText": "₹5,000"
 				},
 				"verificationUrl": "",
 				"certificateUrl": ""
@@ -1484,7 +2131,7 @@
 		"awardsIcon": "TrophyIcon",
 		"publications": [
 			{
-				"title": "Predicting Sevearity of Type 2 Diabetic Retinopathy Using Retinal Fundus Images with new DeepLearning Architectures from the Inception and Resnet Families",
+				"title": "Predicting Severity of Type 2 Diabetic Retinopathy Using Retinal Fundus Images with New Deep Learning Architectures from the Inception and ResNet Families",
 				"type": "Conference Paper",
 				"publisher": "IEEE",
 				"date": "12 May 2025",
@@ -1524,7 +2171,44 @@
 		"languagesNote": "Configure languages - each should have name, proficiency, and level (A1, A2, B1, B2, C1, C2)",
 		"languagesHeading": "Languages",
 		"languagesIcon": "GlobeAltIcon",
-		"volunteerExperience": [],
+		"volunteerExperience": [
+			{
+				"role": "Class Advisor",
+				"organization": "Amrita Vishwa Vidyapeetham",
+				"period": "2022 - Present",
+				"description": [
+					"Serve as the elected class advisor for the B.Tech CS batch, acting as the primary liaison between students and faculty.",
+					"Coordinate academic schedules and extracurricular activities, address student concerns, and help maintain a healthy, collaborative class environment."
+				]
+			},
+			{
+				"role": "Member, Robotics Club",
+				"organization": "Amrita Vishwa Vidyapeetham",
+				"period": "2022 - Present",
+				"description": [
+					"Participate in robotics challenges and workshops, contributing to hardware-software integration projects.",
+					"Collaborate with team members to design and prototype autonomous systems combining sensors, actuators, and custom control logic."
+				]
+			},
+			{
+				"role": "Member, ACM Student Chapter",
+				"organization": "Amrita Vishwa Vidyapeetham",
+				"period": "2022 - Present",
+				"description": [
+					"Engage in ACM-organized technical talks, coding events, and competitive programming sessions.",
+					"Collaborate on inter-chapter hackathons and stay current with emerging CS research through the ACM Digital Library."
+				]
+			},
+			{
+				"role": "Open Source Contributor",
+				"organization": "GitHub / Life-Experimentalist",
+				"period": "2023 - Present",
+				"description": [
+					"Maintain 25+ open-source repositories under the Life-Experimentalist GitHub organization, including tools with active community usage.",
+					"Review pull requests, triage issues, write documentation, and mentor contributors on projects ranging from VS Code extensions to AI research tooling."
+				]
+			}
+		],
 		"volunteerExperienceNote": "Configure volunteer experience - each should have role, organization, period, and description array",
 		"volunteerExperienceHeading": "Volunteer Experience",
 		"volunteerExperienceIcon": "HeartIcon",
@@ -1576,7 +2260,7 @@
 						"color": "text-green-400"
 					}
 				],
-				"description": "Created VS Code extension for bidirectional cSpell dictionary sync, supporting custom dictionaries, project settings, and global configurations. Gained 500+ installs on VS Code Marketplace, driven by features like automatic sync, keyboard shortcuts, and status bar integration.",
+				"description": "Created VS Code extension for bidirectional cSpell dictionary sync, supporting custom dictionaries, project settings, and global configurations. Hit 2,000+ installs on VS Code Marketplace, driven by features like automatic sync, keyboard shortcuts, and status bar integration.",
 				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
 				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
 			},
@@ -2026,6 +2710,111 @@
 				"showInContact": true,
 				"contactSection": 2,
 				"enabled": false
+			},
+			{
+				"name": "Personal Website",
+				"key": "website",
+				"icon": "FaGlobe",
+				"url": "https://vkrishna04.me",
+				"label": "Personal Website",
+				"description": "My personal portfolio, projects, and blog",
+				"color": "#a855f7",
+				"hoverColor": "rgb(192, 132, 252)",
+				"showInHome": false,
+				"showInFooter": true,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": true
+			},
+			{
+				"name": "Unstop",
+				"key": "unstop",
+				"icon": "SiUnstop",
+				"url": "https://unstop.com/u/lifeexp2112",
+				"label": "Unstop Profile",
+				"description": "View my hackathon registrations and competition history",
+				"color": "text-orange-400",
+				"hoverColor": "hover:text-orange-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "Zenodo",
+				"key": "zenodo",
+				"icon": "SiZenodo",
+				"url": "https://zenodo.org/search?q=Krishna+GSVV",
+				"label": "Zenodo",
+				"description": "My published datasets and open research artifacts",
+				"color": "text-blue-400",
+				"hoverColor": "hover:text-blue-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": true
+			},
+			{
+				"name": "ResearchGate",
+				"key": "researchgate",
+				"icon": "SiResearchgate",
+				"url": "",
+				"label": "ResearchGate",
+				"description": "My academic publications and research profile",
+				"color": "text-green-400",
+				"hoverColor": "hover:text-green-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": false
+			},
+			{
+				"name": "IEEE Xplore",
+				"key": "ieee",
+				"icon": "SiIeee",
+				"url": "https://ieeexplore.ieee.org/document/10987517",
+				"label": "IEEE Publication",
+				"description": "Read my published IEEE conference paper on diabetic retinopathy prediction",
+				"color": "text-blue-500",
+				"hoverColor": "hover:text-blue-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": true
+			},
+			{
+				"name": "npm",
+				"key": "npm",
+				"icon": "FaNpm",
+				"url": "https://www.npmjs.com/~vkrishna04",
+				"label": "npm Profile",
+				"description": "My published npm packages",
+				"color": "text-red-500",
+				"hoverColor": "hover:text-red-400",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 1,
+				"enabled": true
+			},
+			{
+				"name": "Hashnode",
+				"key": "hashnode",
+				"icon": "SiHashnode",
+				"url": "",
+				"label": "Hashnode Blog",
+				"description": "My technical articles and engineering deep-dives",
+				"color": "text-blue-400",
+				"hoverColor": "hover:text-blue-300",
+				"showInHome": false,
+				"showInFooter": false,
+				"showInContact": true,
+				"contactSection": 2,
+				"enabled": false
 			}
 		],
 		"contact": {
@@ -2037,7 +2826,7 @@
 	},
 	"contact": {
 		"title": "Let's Connect",
-		"subtitle": "I'm always interested in new opportunities and collaborations. Let's build something amazing together!",
+		"subtitle": "Whether it's a hackathon, a startup idea, or an interesting open-source project — I'm always up for a conversation. Let's build something worth showing off.",
 		"timeZone": "Asia/Kolkata",
 		"timeFormat": "12-hour",
 		"status": {
@@ -2246,7 +3035,7 @@
 		"about": {
 			"show": true,
 			"title": "",
-			"description": "Full-stack developer passionate about creating innovative web applications and contributing to open source projects. Always learning, always building."
+			"description": "Full-stack developer & AI researcher. ₹3.75L+ in hackathon prizes. Building open-source tools that people actually use."
 		},
 		"stats": {
 			"show": true,

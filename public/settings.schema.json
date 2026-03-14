@@ -48,7 +48,7 @@
 					"type": "string",
 					"format": "uri",
 					"pattern": "^https://api\\.github\\.com/(orgs|users)/[^/]+/repos$",
-					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos\n- For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
+					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos \n - For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
 					"examples": [
 						"https://api.github.com/orgs/Life-Experimentalist/repos",
 						"https://api.github.com/users/VKrishna04/repos",

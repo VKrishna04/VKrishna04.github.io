@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react"
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import {
 	FunnelIcon,
 	MagnifyingGlassIcon,
@@ -25,7 +25,10 @@ import {
 	CodeBracketIcon,
 	ArrowTopRightOnSquareIcon,
 	CalendarIcon,
-} from "@heroicons/react/24/outline";
+	ClipboardDocumentIcon,
+	ClipboardDocumentCheckIcon,
+	ChevronDownIcon,
+} from "@heroicons/react/24/outline"
 import {
 	FaJs,
 	FaPython,
@@ -182,11 +185,28 @@ const Projects = () => {
 	})
 	const [currentColumns, setCurrentColumns] = useState(1)
 	const masonryContainerRef = React.useRef(null)
+	const [copied, setCopied] = useState(false)
+	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
+	const copyDropdownRef = React.useRef(null)
 
 	// Save layout mode preference
 	useEffect(() => {
 		localStorage.setItem("projectsLayoutMode", layoutMode)
 	}, [layoutMode])
+
+	// Close copy format dropdown on outside click
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (
+				copyDropdownRef.current &&
+				!copyDropdownRef.current.contains(event.target)
+			) {
+				setCopyDropdownOpen(false)
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => document.removeEventListener("mousedown", handleClickOutside)
+	}, [])
 
 	// Use merged projects directly - the hook handles all merging logic
 	const projectsData = mergedProjects
@@ -704,6 +724,174 @@ const Projects = () => {
 		setSortBy("updated")
 	}
 
+	// Format all projects into structured AI-readable text — three formats supported
+	const formatProjectsAs = (format) => {
+		const authorName =
+			settings?.seo?.structuredData?.name ||
+			settings?.about?.name ||
+			"Krishna GSVV"
+		const date = new Date().toLocaleDateString("en-IN", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		})
+
+		if (format === "raw") {
+			// Compact: one line per project, pipe-separated — minimal tokens for AI
+			const lines = []
+			lines.push(
+				`PROJECTS PORTFOLIO — ${authorName} | ${date} | Total: ${projectsData.length}`
+			)
+			lines.push("")
+			projectsData.forEach((p, i) => {
+				const parts = [`[${i + 1}] ${p.name}`]
+				if (p.description) parts.push(`Desc: ${p.description}`)
+				if (p.language) parts.push(`Lang: ${p.language}`)
+				const techs = p.technologies
+					?.map((t) => (typeof t === "string" ? t : t.name))
+					.filter(Boolean)
+				if (techs?.length) parts.push(`Tech: ${techs.join(", ")}`)
+				const topics = p.topics?.length
+					? p.topics
+					: p.tags?.length
+						? p.tags
+						: []
+				if (topics.length) parts.push(`Tags: ${topics.join(", ")}`)
+				if (p.category) parts.push(`Category: ${p.category}`)
+				if (p.status) parts.push(`Status: ${p.status}`)
+				const stats = []
+				if (p.stargazers_count) stats.push(`${p.stargazers_count}\u2605`)
+				if (p.forks_count) stats.push(`${p.forks_count} forks`)
+				if (stats.length) parts.push(`Stats: ${stats.join(", ")}`)
+				if (p.highlights?.length)
+					parts.push(`Highlights: ${p.highlights.join(" | ")}`)
+				const gh = p.html_url || p.githubUrl
+				const live = p.homepage || p.liveUrl
+				if (gh) parts.push(`GitHub: ${gh}`)
+				if (live) parts.push(`Live: ${live}`)
+				lines.push(parts.join(" | "))
+			})
+			return lines.join("\n")
+		}
+
+		if (format === "plain") {
+			// Clean plain text with aligned labels — readable without a markdown renderer
+			const lines = []
+			const sep = "=".repeat(50)
+			const div = "-".repeat(40)
+			lines.push(
+				`${authorName.toUpperCase()} \u2014 COMPLETE PROJECTS PORTFOLIO`
+			)
+			lines.push(sep)
+			lines.push(`Total projects : ${projectsData.length}`)
+			lines.push(`Generated      : ${date}`)
+			lines.push("")
+			projectsData.forEach((p, i) => {
+				lines.push(div)
+				lines.push(`${i + 1}. ${p.name}`)
+				lines.push(div)
+				if (p.description) lines.push(`Description  : ${p.description}`)
+				if (p.language) lines.push(`Language     : ${p.language}`)
+				const techs = p.technologies
+					?.map((t) => (typeof t === "string" ? t : t.name))
+					.filter(Boolean)
+				if (techs?.length) lines.push(`Technologies : ${techs.join(", ")}`)
+				const topics = p.topics?.length
+					? p.topics
+					: p.tags?.length
+						? p.tags
+						: []
+				if (topics.length) lines.push(`Topics       : ${topics.join(", ")}`)
+				if (p.category) lines.push(`Category     : ${p.category}`)
+				if (p.status) lines.push(`Status       : ${p.status}`)
+				const stats = []
+				if (p.stargazers_count) stats.push(`${p.stargazers_count} stars`)
+				if (p.forks_count) stats.push(`${p.forks_count} forks`)
+				if (stats.length) lines.push(`Stats        : ${stats.join(" | ")}`)
+				if (p.highlights?.length) {
+					lines.push(`Highlights   :`)
+					p.highlights.forEach((h) => lines.push(`               - ${h}`))
+				}
+				const gh = p.html_url || p.githubUrl
+				const live = p.homepage || p.liveUrl
+				if (gh) lines.push(`GitHub       : ${gh}`)
+				if (live) lines.push(`Live Demo    : ${live}`)
+				if (p.updated_at)
+					lines.push(
+						`Last Updated : ${new Date(p.updated_at).toLocaleDateString()}`
+					)
+				lines.push("")
+			})
+			return lines.join("\n")
+		}
+
+		// Default: markdown — ## headers and **bold** labels
+		const lines = []
+		lines.push(`# ${authorName} \u2014 Complete Projects Portfolio`)
+		lines.push("")
+		lines.push(`Total projects: ${projectsData.length}`)
+		lines.push(`Generated: ${date}`)
+		lines.push("")
+		lines.push("---")
+		lines.push("")
+		projectsData.forEach((p, i) => {
+			lines.push(`## ${i + 1}. ${p.name}`)
+			if (p.description) lines.push(`**Description**: ${p.description}`)
+			if (p.language) lines.push(`**Primary Language**: ${p.language}`)
+			const techs = p.technologies
+				?.map((t) => (typeof t === "string" ? t : t.name))
+				.filter(Boolean)
+			if (techs?.length) lines.push(`**Technologies**: ${techs.join(", ")}`)
+			const topics = p.topics?.length ? p.topics : p.tags?.length ? p.tags : []
+			if (topics.length) lines.push(`**Topics/Tags**: ${topics.join(", ")}`)
+			if (p.category) lines.push(`**Category**: ${p.category}`)
+			if (p.status) lines.push(`**Status**: ${p.status}`)
+			const stats = []
+			if (p.stargazers_count) stats.push(`${p.stargazers_count} stars`)
+			if (p.forks_count) stats.push(`${p.forks_count} forks`)
+			if (p.watchers_count) stats.push(`${p.watchers_count} watchers`)
+			if (stats.length) lines.push(`**Stats**: ${stats.join(" | ")}`)
+			if (p.highlights?.length) {
+				lines.push(`**Highlights**:`)
+				p.highlights.forEach((h) => lines.push(`  - ${h}`))
+			}
+			const gh = p.html_url || p.githubUrl
+			const live = p.homepage || p.liveUrl
+			if (gh || live) {
+				lines.push(`**Links**:`)
+				if (gh) lines.push(`  - GitHub: ${gh}`)
+				if (live) lines.push(`  - Live Demo: ${live}`)
+			}
+			if (p.updated_at)
+				lines.push(
+					`**Last Updated**: ${new Date(p.updated_at).toLocaleDateString()}`
+				)
+			lines.push("")
+			lines.push("---")
+			lines.push("")
+		})
+		return lines.join("\n")
+	}
+
+	const copyProjectsToClipboard = async (format = "markdown") => {
+		const text = formatProjectsAs(format)
+		try {
+			await navigator.clipboard.writeText(text)
+			setCopied(true)
+			setTimeout(() => setCopied(false), 2500)
+		} catch {
+			// Fallback for browsers without clipboard API
+			const el = document.createElement("textarea")
+			el.value = text
+			document.body.appendChild(el)
+			el.select()
+			document.execCommand("copy")
+			document.body.removeChild(el)
+			setCopied(true)
+			setTimeout(() => setCopied(false), 2500)
+		}
+	}
+
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
 		animate: { opacity: 1, y: 0 },
@@ -908,6 +1096,83 @@ const Projects = () => {
 								<span className="hidden sm:inline">Clear</span>
 							</button>
 						)}
+
+						{/* Copy all projects to clipboard for AI context */}
+						<div className="relative" ref={copyDropdownRef}>
+							<div
+								className={`flex items-center border rounded-lg overflow-hidden transition-all duration-300 backdrop-blur-sm text-sm ${
+									copied
+										? "bg-green-500/20 border-green-500/40 text-green-300"
+										: "bg-white/5 border-white/10 text-gray-300"
+								}`}
+							>
+								<button
+									onClick={() => copyProjectsToClipboard("markdown")}
+									className={`flex items-center space-x-2 px-3 sm:px-4 py-2 transition-colors ${
+										copied ? "" : "hover:bg-purple-500/10 hover:text-purple-300"
+									}`}
+									title={`Copy all ${projectsData.length} projects for AI context`}
+								>
+									{copied ? (
+										<ClipboardDocumentCheckIcon className="w-4 h-4 flex-shrink-0" />
+									) : (
+										<ClipboardDocumentIcon className="w-4 h-4 flex-shrink-0" />
+									)}
+									<span className="whitespace-nowrap">
+										{copied ? "Copied!" : "Copy for AI"}
+									</span>
+								</button>
+								{!copied && (
+									<button
+										onClick={() => setCopyDropdownOpen(!copyDropdownOpen)}
+										className="px-2 py-2 border-l border-white/10 hover:bg-purple-500/10 hover:text-purple-300 transition-colors"
+										title="Choose format"
+									>
+										<ChevronDownIcon
+											className={`w-3 h-3 transition-transform duration-200 ${
+												copyDropdownOpen ? "rotate-180" : ""
+											}`}
+										/>
+									</button>
+								)}
+							</div>
+							{copyDropdownOpen && !copied && (
+								<div className="absolute right-0 top-full mt-1 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden">
+									<div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5">
+										Choose format
+									</div>
+									{[
+										{
+											id: "markdown",
+											label: "Markdown",
+											desc: "## headers, **bold** syntax",
+										},
+										{
+											id: "plain",
+											label: "Plain Text",
+											desc: "Aligned labels, no symbols",
+										},
+										{
+											id: "raw",
+											label: "Compact / Raw",
+											desc: "One line per project",
+										},
+									].map(({ id, label, desc }) => (
+										<button
+											key={id}
+											onClick={() => {
+												copyProjectsToClipboard(id)
+												setCopyDropdownOpen(false)
+											}}
+											className="w-full text-left px-3 py-2.5 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+										>
+											<div className="text-sm text-gray-200">{label}</div>
+											<div className="text-xs text-gray-500">{desc}</div>
+										</button>
+									))}
+								</div>
+							)}
+						</div>
 					</div>
 
 					{/* Language Filter Pills */}
@@ -1101,4 +1366,4 @@ const Projects = () => {
 	)
 }
 
-export default Projects;
+export default Projects

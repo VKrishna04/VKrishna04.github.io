@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import {
 	DocumentArrowDownIcon,
 	AcademicCapIcon,
@@ -31,7 +31,10 @@ import {
 	RocketLaunchIcon,
 	LinkIcon,
 	GlobeAltIcon,
-} from "@heroicons/react/24/outline";
+	ClipboardDocumentIcon,
+	ClipboardDocumentCheckIcon,
+	ChevronDownIcon,
+} from "@heroicons/react/24/outline"
 import {
 	FaReact,
 	FaNodeJs,
@@ -45,7 +48,7 @@ import {
 	FaJava,
 	FaDatabase,
 	FaGithub,
-} from "react-icons/fa";
+} from "react-icons/fa"
 import {
 	SiJavascript,
 	SiTypescript,
@@ -60,35 +63,51 @@ import {
 	SiStripe,
 	SiNotion,
 	SiFigma,
-} from "react-icons/si";
+} from "react-icons/si"
 
 const Resume = () => {
-	const [settings, setSettings] = useState({});
+	const [settings, setSettings] = useState({})
+	const [copied, setCopied] = useState(false)
+	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
+	const copyDropdownRef = React.useRef(null)
 
 	useEffect(() => {
 		// Fetch settings for resume configuration
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
+			.catch((error) => console.warn("Could not fetch settings:", error))
+	}, [])
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (
+				copyDropdownRef.current &&
+				!copyDropdownRef.current.contains(event.target)
+			) {
+				setCopyDropdownOpen(false)
+			}
+		}
+		document.addEventListener("mousedown", handleClickOutside)
+		return () => document.removeEventListener("mousedown", handleClickOutside)
+	}, [])
 
 	const getResumeUrl = () => {
 		// 1. Check for environment variable (VITE_RESUME_LINK)
 		// Works with GitHub Actions, Cloudflare Pages, Vercel, Netlify
-		const envResumeUrl = import.meta.env.VITE_RESUME_LINK;
+		const envResumeUrl = import.meta.env.VITE_RESUME_LINK
 		if (
 			envResumeUrl &&
 			typeof envResumeUrl === "string" &&
 			envResumeUrl.trim() !== ""
 		) {
-			console.log("Using environment resume URL:", envResumeUrl);
+			console.log("Using environment resume URL:", envResumeUrl)
 			try {
 				if (
 					envResumeUrl.startsWith("https://") ||
 					envResumeUrl.startsWith("http://")
 				) {
-					return new URL(envResumeUrl).href;
+					return new URL(envResumeUrl).href
 				}
 				if (envResumeUrl.startsWith("/") || !envResumeUrl.includes(":")) {
 					if (
@@ -96,29 +115,29 @@ const Resume = () => {
 						envResumeUrl.includes("data:") ||
 						envResumeUrl.includes("vbscript:")
 					) {
-						console.warn("Blocked dangerous URL scheme in env var");
-						return "/resume.pdf";
+						console.warn("Blocked dangerous URL scheme in env var")
+						return "/resume.pdf"
 					}
-					return envResumeUrl;
+					return envResumeUrl
 				}
-				console.warn("Invalid URL format in env var, using fallback");
-				return "/resume.pdf";
+				console.warn("Invalid URL format in env var, using fallback")
+				return "/resume.pdf"
 			} catch (error) {
-				console.warn("Error parsing env resume URL:", error);
-				return "/resume.pdf";
+				console.warn("Error parsing env resume URL:", error)
+				return "/resume.pdf"
 			}
 		}
 		// 2. Fallback to settings.json logic
-		const resumeConfig = settings.resume || {};
-		let url;
+		const resumeConfig = settings.resume || {}
+		let url
 		if (resumeConfig.type === "external" && resumeConfig.alternativeUrl) {
-			url = resumeConfig.url || "/resume.pdf";
+			url = resumeConfig.url || "/resume.pdf"
 		} else {
-			url = resumeConfig.alternativeUrl;
+			url = resumeConfig.alternativeUrl
 		}
 		try {
 			if (url.startsWith("http://") || url.startsWith("https://")) {
-				return new URL(url).href;
+				return new URL(url).href
 			}
 			if (url.startsWith("/") || !url.includes(":")) {
 				if (
@@ -126,48 +145,48 @@ const Resume = () => {
 					url.includes("data:") ||
 					url.includes("vbscript:")
 				) {
-					return "/resume.pdf";
+					return "/resume.pdf"
 				}
-				return url;
+				return url
 			}
-			return "/resume.pdf";
+			return "/resume.pdf"
 		} catch {
-			return "/resume.pdf";
+			return "/resume.pdf"
 		}
-	};
+	}
 
 	const getResumeFilename = () => {
-		const resumeConfig = settings.resume || {};
-		const filename = resumeConfig.filename;
+		const resumeConfig = settings.resume || {}
+		const filename = resumeConfig.filename
 
 		// Sanitize filename to prevent XSS and ensure it's a valid filename
 		if (!filename || typeof filename !== "string") {
-			return undefined; // Let browser handle default naming
+			return undefined // Let browser handle default naming
 		}
 
 		// Remove any dangerous characters and ensure it's a safe filename
 		const sanitizedFilename = filename
 			.replace(/[<>:"/\\|?*]/g, "") // Remove invalid filename characters
 			.replace(/\.\./g, "") // Remove directory traversal attempts
-			.trim();
+			.trim()
 
 		// Ensure filename is not empty after sanitization
 		if (sanitizedFilename.length === 0) {
-			return undefined;
+			return undefined
 		}
 
-		return sanitizedFilename;
-	};
+		return sanitizedFilename
+	}
 
 	// Get work experience from settings
 	const getExperiences = () => {
-		return settings.resume?.experiences || [];
-	};
+		return settings.resume?.experiences || []
+	}
 
 	// Get education from settings
 	const getEducation = () => {
-		return settings.resume?.education || [];
-	};
+		return settings.resume?.education || []
+	}
 
 	// Icon mapping for converting string names to actual icon components
 	const iconMap = {
@@ -200,12 +219,12 @@ const Resume = () => {
 		SiStripe,
 		SiNotion,
 		SiFigma,
-	};
+	}
 
 	// Get icon component from string name
 	const getIconComponent = (iconName) => {
-		return iconMap[iconName];
-	};
+		return iconMap[iconName]
+	}
 
 	// Get skills from settings
 	const getSkills = () => {
@@ -216,97 +235,471 @@ const Resume = () => {
 					...item,
 					icon: getIconComponent(item.icon),
 				})),
-			}));
+			}))
 		}
-		return [];
-	};
+		return []
+	}
 
 	// Get certifications from settings
 	const getCertifications = () => {
-		return settings.resume?.certifications || [];
-	};
+		return settings.resume?.certifications || []
+	}
 
 	// Get awards from settings
 	const getAwards = () => {
-		return settings.resume?.awards || [];
-	};
+		return settings.resume?.awards || []
+	}
 
 	// Get publications from settings
 	const getPublications = () => {
-		return settings.resume?.publications || [];
-	};
+		return settings.resume?.publications || []
+	}
 
 	// Get languages from settings
 	const getLanguages = () => {
-		return settings.resume?.languages || [];
-	};
+		return settings.resume?.languages || []
+	}
 
 	// Get volunteer experience from settings
 	const getVolunteerExperience = () => {
-		return settings.resume?.volunteerExperience || [];
-	};
+		return settings.resume?.volunteerExperience || []
+	}
 
 	// Get personal projects from settings
 	const getPersonalProjects = () => {
-		return settings.resume?.personalProjects || [];
-	};
+		return settings.resume?.personalProjects || []
+	}
 
-	const experiences = getExperiences();
-	const education = getEducation();
-	const skills = getSkills();
-	const certifications = getCertifications();
-	const awards = getAwards();
-	const publications = getPublications();
-	const languages = getLanguages();
-	const volunteerExperience = getVolunteerExperience();
-	const personalProjects = getPersonalProjects();
+	const experiences = getExperiences()
+	const education = getEducation()
+	const skills = getSkills()
+	const certifications = getCertifications()
+	const awards = getAwards()
+	const publications = getPublications()
+	const languages = getLanguages()
+	const volunteerExperience = getVolunteerExperience()
+	const personalProjects = getPersonalProjects()
 
 	// Calculate total rewards from awards
 	const calculateTotalRewards = () => {
-		const totalRewardsConfig = settings.resume?.totalRewards;
-		if (!totalRewardsConfig?.show) return null;
+		const totalRewardsConfig = settings.resume?.totalRewards
+		if (!totalRewardsConfig?.show) return null
 
 		const total = awards.reduce((sum, award) => {
 			if (
 				award.rewardAmount &&
 				award.rewardAmount.currency === totalRewardsConfig.currency
 			) {
-				return sum + (award.rewardAmount.amount || 0);
+				return sum + (award.rewardAmount.amount || 0)
 			}
-			return sum;
-		}, 0);
+			return sum
+		}, 0)
 
-		if (total === 0) return null;
+		if (total === 0) return null
 
 		// Format the total amount
 		const formatAmount = (amount, currency) => {
 			switch (currency) {
 				case "INR":
-					return `₹${amount.toLocaleString("en-IN")}`;
+					return `₹${amount.toLocaleString("en-IN")}`
 				case "USD":
-					return `$${amount.toLocaleString("en-US")}`;
+					return `$${amount.toLocaleString("en-US")}`
 				case "EUR":
-					return `€${amount.toLocaleString("en-EU")}`;
+					return `€${amount.toLocaleString("en-EU")}`
 				case "GBP":
-					return `£${amount.toLocaleString("en-GB")}`;
+					return `£${amount.toLocaleString("en-GB")}`
 				default:
-					return `${amount.toLocaleString()} ${currency}`;
+					return `${amount.toLocaleString()} ${currency}`
 			}
-		};
+		}
 
 		return {
 			total,
 			displayText: formatAmount(total, totalRewardsConfig.currency),
 			config: totalRewardsConfig,
-		};
-	};
+		}
+	}
 
-	const totalRewards = calculateTotalRewards();
+	const totalRewards = calculateTotalRewards()
+
+	// Format complete resume as structured text for AI context — three formats
+	const formatResumeAs = (format) => {
+		const name =
+			settings?.seo?.structuredData?.name ||
+			settings?.about?.name ||
+			"Krishna GSVV"
+		const date = new Date().toLocaleDateString("en-IN", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		})
+
+		if (format === "raw") {
+			const parts = []
+			parts.push(`RESUME \u2014 ${name} | Generated: ${date}`)
+			if (education.length)
+				parts.push(
+					`Education: ${education
+						.map(
+							(e) =>
+								`${e.degree}${e.field ? " in " + e.field : ""}, ${e.school}${
+									e.period ? " (" + e.period + ")" : ""
+								}${e.gpa ? ", GPA: " + e.gpa : ""}`
+						)
+						.join(" | ")}`
+				)
+			if (experiences.length)
+				parts.push(
+					`Experience: ${experiences
+						.map(
+							(e) =>
+								`${e.title} at ${e.company}${
+									e.period ? " (" + e.period + ")" : ""
+								}`
+						)
+						.join(" | ")}`
+				)
+			const allSkills = skills.flatMap((c) => c.items.map((s) => s.name))
+			if (allSkills.length) parts.push(`Skills: ${allSkills.join(", ")}`)
+			if (certifications.length)
+				parts.push(
+					`Certifications: ${certifications
+						.map((c) => `${c.name} (${c.issuer}${c.date ? ", " + c.date : ""})`)
+						.join(" | ")}`
+				)
+			if (awards.length)
+				parts.push(
+					`Awards: ${awards
+						.map(
+							(a) =>
+								`${a.name}${
+									a.organization ? " by " + a.organization : ""
+								}${a.rewardAmount ? " [" + a.rewardAmount.displayText + "]" : ""}${a.date ? " (" + a.date + ")" : ""}`
+						)
+						.join(" | ")}`
+				)
+			if (publications.length)
+				parts.push(
+					`Publications: ${publications
+						.map(
+							(p) =>
+								`${p.title}${
+									p.publisher ? " \u2014 " + p.publisher : ""
+								}${p.date ? " (" + p.date + ")" : ""}`
+						)
+						.join(" | ")}`
+				)
+			if (languages.length)
+				parts.push(
+					`Languages: ${languages
+						.map((l) => `${l.name} (${l.proficiency || l.level || ""})`)
+						.join(", ")}`
+				)
+			if (volunteerExperience.length)
+				parts.push(
+					`Volunteer: ${volunteerExperience
+						.map(
+							(v) =>
+								`${v.role} at ${v.organization}${
+									v.period ? " (" + v.period + ")" : ""
+								}`
+						)
+						.join(" | ")}`
+				)
+			if (personalProjects.length)
+				parts.push(
+					`Projects: ${personalProjects
+						.map(
+							(p) =>
+								`${p.name}${
+									p.technologies?.length
+										? " [" +
+											p.technologies
+												.map((t) => (typeof t === "string" ? t : t.name))
+												.join(", ") +
+											"]"
+										: ""
+								}${p.githubUrl ? " GitHub: " + p.githubUrl : ""}`
+						)
+						.join(" | ")}`
+				)
+			return parts.join("\n")
+		}
+
+		if (format === "plain") {
+			const lines = []
+			const sep = "=".repeat(50)
+			const div = "-".repeat(40)
+			lines.push(`${name.toUpperCase()} \u2014 RESUME / CV`)
+			lines.push(sep)
+			lines.push(`Generated: ${date}`)
+			lines.push("")
+			if (education.length) {
+				lines.push("EDUCATION")
+				lines.push(div)
+				education.forEach((e) => {
+					lines.push(`${e.degree}${e.field ? " in " + e.field : ""}`)
+					if (e.school) lines.push(`  School   : ${e.school}`)
+					if (e.period) lines.push(`  Period   : ${e.period}`)
+					if (e.gpa) lines.push(`  GPA      : ${e.gpa}`)
+					if (e.achievements?.length) {
+						lines.push(`  Achievements:`)
+						e.achievements.forEach((a) => lines.push(`    - ${a}`))
+					}
+					lines.push("")
+				})
+			}
+			if (experiences.length) {
+				lines.push("WORK EXPERIENCE")
+				lines.push(div)
+				experiences.forEach((e) => {
+					lines.push(e.title)
+					if (e.company) lines.push(`  Company  : ${e.company}`)
+					if (e.period) lines.push(`  Period   : ${e.period}`)
+					if (e.location) lines.push(`  Location : ${e.location}`)
+					if (e.description?.length) {
+						lines.push(`  Details  :`)
+						e.description.forEach((d) => lines.push(`    - ${d}`))
+					}
+					lines.push("")
+				})
+			}
+			if (skills.length) {
+				lines.push("SKILLS")
+				lines.push(div)
+				skills.forEach((cat) => {
+					lines.push(
+						`${cat.category}: ${cat.items.map((s) => s.name).join(", ")}`
+					)
+				})
+				lines.push("")
+			}
+			if (certifications.length) {
+				lines.push("CERTIFICATIONS")
+				lines.push(div)
+				certifications.forEach((c) => {
+					lines.push(c.name)
+					if (c.issuer) lines.push(`  Issuer        : ${c.issuer}`)
+					if (c.date) lines.push(`  Date          : ${c.date}`)
+					if (c.credentialId) lines.push(`  Credential ID : ${c.credentialId}`)
+					lines.push("")
+				})
+			}
+			if (awards.length) {
+				lines.push("AWARDS & HONORS")
+				lines.push(div)
+				awards.forEach((a) => {
+					lines.push(a.name)
+					if (a.organization) lines.push(`  Organization : ${a.organization}`)
+					if (a.date) lines.push(`  Date         : ${a.date}`)
+					if (a.rewardAmount)
+						lines.push(`  Prize        : ${a.rewardAmount.displayText}`)
+					if (a.description) lines.push(`  Description  : ${a.description}`)
+					lines.push("")
+				})
+			}
+			if (publications.length) {
+				lines.push("PUBLICATIONS")
+				lines.push(div)
+				publications.forEach((p) => {
+					lines.push(p.title)
+					if (p.publisher) lines.push(`  Publisher : ${p.publisher}`)
+					if (p.type) lines.push(`  Type      : ${p.type}`)
+					if (p.date) lines.push(`  Date      : ${p.date}`)
+					if (p.description) lines.push(`  Abstract  : ${p.description}`)
+					if (p.url) lines.push(`  URL       : ${p.url}`)
+					lines.push("")
+				})
+			}
+			if (languages.length) {
+				lines.push("LANGUAGES")
+				lines.push(div)
+				languages.forEach((l) => {
+					lines.push(`${l.name}: ${l.proficiency || l.level || ""}`)
+				})
+				lines.push("")
+			}
+			if (volunteerExperience.length) {
+				lines.push("VOLUNTEER EXPERIENCE")
+				lines.push(div)
+				volunteerExperience.forEach((v) => {
+					lines.push(v.role)
+					if (v.organization) lines.push(`  Organization : ${v.organization}`)
+					if (v.period) lines.push(`  Period       : ${v.period}`)
+					if (v.description?.length) {
+						lines.push(`  Details:`)
+						v.description.forEach((d) => lines.push(`    - ${d}`))
+					}
+					lines.push("")
+				})
+			}
+			if (personalProjects.length) {
+				lines.push("PERSONAL PROJECTS")
+				lines.push(div)
+				personalProjects.forEach((p) => {
+					lines.push(p.name)
+					if (p.period) lines.push(`  Period       : ${p.period}`)
+					if (p.description) lines.push(`  Description  : ${p.description}`)
+					if (p.technologies?.length) {
+						const techs = p.technologies
+							.map((t) => (typeof t === "string" ? t : t.name))
+							.filter(Boolean)
+						lines.push(`  Technologies : ${techs.join(", ")}`)
+					}
+					if (p.githubUrl) lines.push(`  GitHub       : ${p.githubUrl}`)
+					if (p.liveUrl) lines.push(`  Live Demo    : ${p.liveUrl}`)
+					lines.push("")
+				})
+			}
+			return lines.join("\n")
+		}
+
+		// Default: markdown
+		const lines = []
+		lines.push(`# ${name} \u2014 Resume / CV`)
+		lines.push("")
+		lines.push(`*Generated: ${date}*`)
+		lines.push("")
+		if (education.length) {
+			lines.push("## Education")
+			lines.push("")
+			education.forEach((e) => {
+				lines.push(`### ${e.degree}${e.field ? " in " + e.field : ""}`)
+				if (e.school) lines.push(`**School**: ${e.school}`)
+				if (e.period) lines.push(`**Period**: ${e.period}`)
+				if (e.gpa) lines.push(`**GPA**: ${e.gpa}`)
+				if (e.achievements?.length) {
+					lines.push(`**Achievements**:`)
+					e.achievements.forEach((a) => lines.push(`- ${a}`))
+				}
+				lines.push("")
+			})
+		}
+		if (experiences.length) {
+			lines.push("## Work Experience")
+			lines.push("")
+			experiences.forEach((e) => {
+				lines.push(`### ${e.title}${e.company ? " \u2014 " + e.company : ""}`)
+				if (e.period) lines.push(`**Period**: ${e.period}`)
+				if (e.location) lines.push(`**Location**: ${e.location}`)
+				if (e.description?.length)
+					e.description.forEach((d) => lines.push(`- ${d}`))
+				lines.push("")
+			})
+		}
+		if (skills.length) {
+			lines.push("## Skills")
+			lines.push("")
+			skills.forEach((cat) => {
+				lines.push(
+					`**${cat.category}**: ${cat.items.map((s) => s.name).join(", ")}`
+				)
+			})
+			lines.push("")
+		}
+		if (certifications.length) {
+			lines.push("## Certifications")
+			lines.push("")
+			certifications.forEach((c) => {
+				lines.push(`### ${c.name}`)
+				if (c.issuer) lines.push(`**Issuer**: ${c.issuer}`)
+				if (c.date) lines.push(`**Date**: ${c.date}`)
+				if (c.credentialId) lines.push(`**Credential ID**: ${c.credentialId}`)
+				if (c.verificationUrl) lines.push(`**Verify**: ${c.verificationUrl}`)
+				lines.push("")
+			})
+		}
+		if (awards.length) {
+			lines.push("## Awards & Honors")
+			lines.push("")
+			awards.forEach((a) => {
+				lines.push(`### ${a.name}`)
+				if (a.organization) lines.push(`**Organization**: ${a.organization}`)
+				if (a.date) lines.push(`**Date**: ${a.date}`)
+				if (a.rewardAmount)
+					lines.push(`**Prize**: ${a.rewardAmount.displayText}`)
+				if (a.description) lines.push(`**Description**: ${a.description}`)
+				if (a.verificationUrl) lines.push(`**Verify**: ${a.verificationUrl}`)
+				lines.push("")
+			})
+		}
+		if (publications.length) {
+			lines.push("## Publications")
+			lines.push("")
+			publications.forEach((p) => {
+				lines.push(`### ${p.title}`)
+				if (p.publisher) lines.push(`**Publisher**: ${p.publisher}`)
+				if (p.type) lines.push(`**Type**: ${p.type}`)
+				if (p.date) lines.push(`**Date**: ${p.date}`)
+				if (p.description) lines.push(`**Abstract**: ${p.description}`)
+				if (p.url) lines.push(`**URL**: ${p.url}`)
+				lines.push("")
+			})
+		}
+		if (languages.length) {
+			lines.push("## Languages")
+			lines.push("")
+			languages.forEach((l) => {
+				lines.push(`- **${l.name}**: ${l.proficiency || l.level || ""}`)
+			})
+			lines.push("")
+		}
+		if (volunteerExperience.length) {
+			lines.push("## Volunteer Experience")
+			lines.push("")
+			volunteerExperience.forEach((v) => {
+				lines.push(
+					`### ${v.role}${v.organization ? " \u2014 " + v.organization : ""}`
+				)
+				if (v.period) lines.push(`**Period**: ${v.period}`)
+				if (v.description?.length)
+					v.description.forEach((d) => lines.push(`- ${d}`))
+				lines.push("")
+			})
+		}
+		if (personalProjects.length) {
+			lines.push("## Personal Projects")
+			lines.push("")
+			personalProjects.forEach((p) => {
+				lines.push(`### ${p.name}${p.period ? " (" + p.period + ")" : ""}`)
+				if (p.description) lines.push(`**Description**: ${p.description}`)
+				if (p.technologies?.length) {
+					const techs = p.technologies
+						.map((t) => (typeof t === "string" ? t : t.name))
+						.filter(Boolean)
+					lines.push(`**Technologies**: ${techs.join(", ")}`)
+				}
+				if (p.githubUrl) lines.push(`**GitHub**: ${p.githubUrl}`)
+				if (p.liveUrl) lines.push(`**Live Demo**: ${p.liveUrl}`)
+				lines.push("")
+			})
+		}
+		return lines.join("\n")
+	}
+
+	const copyResumeToClipboard = async (format = "markdown") => {
+		const text = formatResumeAs(format)
+		try {
+			await navigator.clipboard.writeText(text)
+			setCopied(true)
+			setTimeout(() => setCopied(false), 2500)
+		} catch {
+			// Fallback for older browsers
+			const el = document.createElement("textarea")
+			el.value = text
+			document.body.appendChild(el)
+			el.select()
+			document.execCommand("copy")
+			document.body.removeChild(el)
+			setCopied(true)
+			setTimeout(() => setCopied(false), 2500)
+		}
+	}
 
 	// Get section order from settings
 	const getSectionOrder = () => {
-		return settings.resume?.sectionOrder || [];
-	};
+		return settings.resume?.sectionOrder || []
+	}
 
 	// Section components mapping
 	const renderSection = (sectionName) => {
@@ -371,7 +764,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "education":
 				return (
@@ -439,7 +832,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "skills":
 				return (
@@ -461,7 +854,7 @@ const Resume = () => {
 										</h3>
 										<div className="flex flex-wrap gap-2">
 											{skillGroup.items.map((skill, skillIndex) => {
-												const IconComponent = skill.icon;
+												const IconComponent = skill.icon
 												return (
 													<span
 														key={skillIndex}
@@ -476,7 +869,7 @@ const Resume = () => {
 														)}
 														{skill.name}
 													</span>
-												);
+												)
 											})}
 										</div>
 									</motion.div>
@@ -484,7 +877,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "personalProjects":
 				return (
@@ -537,15 +930,15 @@ const Resume = () => {
 														{project.technologies.map((tech, techIndex) => {
 															// Handle both string and object formats for backward compatibility
 															const techName =
-																typeof tech === "string" ? tech : tech.name;
+																typeof tech === "string" ? tech : tech.name
 															const TechIcon =
 																typeof tech === "object"
 																	? getIconComponent(tech.icon)
-																	: null;
+																	: null
 															const techColor =
 																typeof tech === "object"
 																	? tech.color
-																	: "text-purple-300";
+																	: "text-purple-300"
 
 															return (
 																<span
@@ -559,7 +952,7 @@ const Resume = () => {
 																	)}
 																	{techName}
 																</span>
-															);
+															)
 														})}
 													</div>
 												</div>
@@ -617,7 +1010,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "certifications":
 				return (
@@ -691,7 +1084,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "awards":
 				return (
@@ -846,7 +1239,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "languages":
 				return (
@@ -888,7 +1281,7 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			case "volunteerExperience":
 				return (
@@ -948,18 +1341,18 @@ const Resume = () => {
 							</div>
 						</motion.section>
 					)
-				);
+				)
 
 			default:
-				return null;
+				return null
 		}
-	};
+	}
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
 		animate: { opacity: 1, y: 0 },
 		transition: { duration: 0.6 },
-	};
+	}
 
 	const staggerContainer = {
 		animate: {
@@ -967,7 +1360,7 @@ const Resume = () => {
 				staggerChildren: 0.1,
 			},
 		},
-	};
+	}
 
 	return (
 		<div className="min-h-screen py-20 px-4">
@@ -1028,6 +1421,87 @@ const Resume = () => {
 								</motion.a>
 							</div>
 						)}
+
+						{/* Copy full resume to clipboard for AI context */}
+						<div className="mt-6 flex justify-center" ref={copyDropdownRef}>
+							<div className="relative">
+								<div
+									className={`flex items-center border rounded-lg overflow-hidden transition-all duration-300 text-sm ${
+										copied
+											? "bg-green-500/20 border-green-500/40 text-green-300"
+											: "bg-white/5 border-white/10 text-gray-300"
+									}`}
+								>
+									<button
+										onClick={() => copyResumeToClipboard("markdown")}
+										className={`flex items-center space-x-2 px-4 py-2 transition-colors ${
+											copied
+												? ""
+												: "hover:bg-purple-500/10 hover:text-purple-300"
+										}`}
+										title="Copy full resume as structured text for AI context"
+									>
+										{copied ? (
+											<ClipboardDocumentCheckIcon className="w-4 h-4 flex-shrink-0" />
+										) : (
+											<ClipboardDocumentIcon className="w-4 h-4 flex-shrink-0" />
+										)}
+										<span className="whitespace-nowrap">
+											{copied ? "Copied!" : "Copy Resume for AI"}
+										</span>
+									</button>
+									{!copied && (
+										<button
+											onClick={() => setCopyDropdownOpen(!copyDropdownOpen)}
+											className="px-2 py-2 border-l border-white/10 hover:bg-purple-500/10 hover:text-purple-300 transition-colors"
+											title="Choose format"
+										>
+											<ChevronDownIcon
+												className={`w-3 h-3 transition-transform duration-200 ${
+													copyDropdownOpen ? "rotate-180" : ""
+												}`}
+											/>
+										</button>
+									)}
+								</div>
+								{copyDropdownOpen && !copied && (
+									<div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-52 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden">
+										<div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5">
+											Choose format
+										</div>
+										{[
+											{
+												id: "markdown",
+												label: "Markdown",
+												desc: "## headers, **bold** syntax",
+											},
+											{
+												id: "plain",
+												label: "Plain Text",
+												desc: "Aligned labels, no symbols",
+											},
+											{
+												id: "raw",
+												label: "Compact / Raw",
+												desc: "One line per section",
+											},
+										].map(({ id, label, desc }) => (
+											<button
+												key={id}
+												onClick={() => {
+													copyResumeToClipboard(id)
+													setCopyDropdownOpen(false)
+												}}
+												className="w-full text-left px-3 py-2.5 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+											>
+												<div className="text-sm text-gray-200">{label}</div>
+												<div className="text-xs text-gray-500">{desc}</div>
+											</button>
+										))}
+									</div>
+								)}
+							</div>
+						</div>
 					</motion.div>
 
 					{/* Total Rewards Section */}
@@ -1056,7 +1530,7 @@ const Resume = () => {
 				</motion.div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Resume;
+export default Resume

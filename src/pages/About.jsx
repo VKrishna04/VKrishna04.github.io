@@ -15,8 +15,8 @@
  */
 
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
 // === LEGACY/BACKUP: Direct icon imports (deprecated) ===
 // These imports are kept for backward compatibility but should use unified system
 // import { ... } from "react-icons/fa"; // REPLACED with unified icon system
@@ -26,9 +26,10 @@ import { useState, useEffect, useRef } from "react";
 // ========================================================
 
 // === MODULAR SYSTEMS: Use unified icon + color systems ===
-import { getUnifiedIcon } from "../utils/iconSystemCore";
-import { UnifiedIcon } from "../components/UnifiedIcon";
-import { parseColor } from "../utils/themeUtils";
+import { getUnifiedIcon } from "../utils/iconSystemCore"
+import { UnifiedIcon } from "../components/UnifiedIcon"
+import { parseColor } from "../utils/themeUtils"
+import TechnicalExperience from "../components/TechnicalExperience"
 // =========================================================
 
 const About = () => {
@@ -292,12 +293,12 @@ const About = () => {
 								stats.length <= 2
 									? "grid-cols-1 md:grid-cols-2"
 									: stats.length === 3
-									? "grid-cols-1 md:grid-cols-3"
-									: stats.length === 4
-									? "grid-cols-2 md:grid-cols-4"
-									: stats.length === 5
-									? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
-									: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+										? "grid-cols-1 md:grid-cols-3"
+										: stats.length === 4
+											? "grid-cols-2 md:grid-cols-4"
+											: stats.length === 5
+												? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+												: "grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
 							}`}
 							variants={fadeInUp}
 						>
@@ -318,6 +319,18 @@ const About = () => {
 							))}
 						</motion.div>
 					)}
+					{/* Technical Experience Section */}
+					{settings.about?.technicalExperience?.show !== false &&
+						settings.about?.technicalExperience?.categories?.length > 0 && (
+							<motion.div
+								className="mt-20"
+								initial={{ opacity: 0, y: 60 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6, delay: 0.2 }}
+							>
+								<TechnicalExperience settings={settings} />
+							</motion.div>
+						)}
 					{/* Skills Section */}
 					{skills.length > 0 && (
 						<motion.div className="mt-20" variants={fadeInUp}>
@@ -331,13 +344,13 @@ const About = () => {
 										: `grid gap-6 ${
 												settings.about?.skillsGridColumns?.mobile ||
 												"grid-cols-1"
-										  } ${
+											} ${
 												settings.about?.skillsGridColumns?.tablet ||
 												"md:grid-cols-2"
-										  } ${
+											} ${
 												settings.about?.skillsGridColumns?.desktop ||
 												"lg:grid-cols-3"
-										  }`
+											}`
 								}
 							>
 								{skills.map((skillCategory, index) => (
@@ -597,6 +610,6 @@ const About = () => {
 			</div>
 		</div>
 	)
-};
+}
 
-export default About;
+export default About
