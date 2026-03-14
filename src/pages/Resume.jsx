@@ -68,8 +68,10 @@ import {
 const Resume = () => {
 	const [settings, setSettings] = useState({})
 	const [copied, setCopied] = useState(false)
+	const [copyError, setCopyError] = useState(false)
 	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
 	const copyDropdownRef = React.useRef(null)
+	const resumeCopyDropdownId = "resume-copy-format-menu"
 
 	useEffect(() => {
 		// Fetch settings for resume configuration
@@ -88,8 +90,17 @@ const Resume = () => {
 				setCopyDropdownOpen(false)
 			}
 		}
+		const handleEscape = (event) => {
+			if (event.key === "Escape") {
+				setCopyDropdownOpen(false)
+			}
+		}
 		document.addEventListener("mousedown", handleClickOutside)
-		return () => document.removeEventListener("mousedown", handleClickOutside)
+		document.addEventListener("keydown", handleEscape)
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside)
+			document.removeEventListener("keydown", handleEscape)
+		}
 	}, [])
 
 	const getResumeUrl = () => {
@@ -679,20 +690,40 @@ const Resume = () => {
 
 	const copyResumeToClipboard = async (format = "markdown") => {
 		const text = formatResumeAs(format)
+		setCopyError(false)
 		try {
 			await navigator.clipboard.writeText(text)
 			setCopied(true)
 			setTimeout(() => setCopied(false), 2500)
 		} catch {
 			// Fallback for older browsers
-			const el = document.createElement("textarea")
-			el.value = text
-			document.body.appendChild(el)
-			el.select()
-			document.execCommand("copy")
-			document.body.removeChild(el)
-			setCopied(true)
-			setTimeout(() => setCopied(false), 2500)
+			try {
+				const el = document.createElement("textarea")
+				el.value = text
+				document.body.appendChild(el)
+				el.select()
+				const copiedWithExecCommand = document.execCommand("copy")
+				document.body.removeChild(el)
+
+				if (!copiedWithExecCommand) {
+					console.warn(
+						"Clipboard copy fallback failed (execCommand returned false)"
+					)
+					setCopyError(true)
+					setTimeout(() => setCopyError(false), 3000)
+					return
+				}
+
+				setCopied(true)
+				setTimeout(() => setCopied(false), 2500)
+			} catch (fallbackError) {
+				console.warn(
+					"Clipboard copy failed using both modern and fallback APIs",
+					fallbackError
+				)
+				setCopyError(true)
+				setTimeout(() => setCopyError(false), 3000)
+			}
 		}
 	}
 
@@ -1429,13 +1460,15 @@ const Resume = () => {
 									className={`flex items-center border rounded-lg overflow-hidden transition-all duration-300 text-sm ${
 										copied
 											? "bg-green-500/20 border-green-500/40 text-green-300"
-											: "bg-white/5 border-white/10 text-gray-300"
+											: copyError
+												? "bg-red-500/20 border-red-500/40 text-red-300"
+												: "bg-white/5 border-white/10 text-gray-300"
 									}`}
 								>
 									<button
 										onClick={() => copyResumeToClipboard("markdown")}
 										className={`flex items-center space-x-2 px-4 py-2 transition-colors ${
-											copied
+											copied || copyError
 												? ""
 												: "hover:bg-purple-500/10 hover:text-purple-300"
 										}`}
@@ -1447,12 +1480,19 @@ const Resume = () => {
 											<ClipboardDocumentIcon className="w-4 h-4 flex-shrink-0" />
 										)}
 										<span className="whitespace-nowrap">
-											{copied ? "Copied!" : "Copy Resume for AI"}
+											{copied
+												? "Copied!"
+												: copyError
+													? "Copy failed"
+													: "Copy Resume for AI"}
 										</span>
 									</button>
-									{!copied && (
+									{!copied && !copyError && (
 										<button
 											onClick={() => setCopyDropdownOpen(!copyDropdownOpen)}
+											aria-expanded={copyDropdownOpen}
+											aria-haspopup="menu"
+											aria-controls={resumeCopyDropdownId}
 											className="px-2 py-2 border-l border-white/10 hover:bg-purple-500/10 hover:text-purple-300 transition-colors"
 											title="Choose format"
 										>
@@ -1464,8 +1504,12 @@ const Resume = () => {
 										</button>
 									)}
 								</div>
-								{copyDropdownOpen && !copied && (
-									<div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-52 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden">
+								{copyDropdownOpen && !copied && !copyError && (
+									<div
+										id={resumeCopyDropdownId}
+										role="menu"
+										className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-52 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden"
+									>
 										<div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5">
 											Choose format
 										</div>
@@ -1488,6 +1532,7 @@ const Resume = () => {
 										].map(({ id, label, desc }) => (
 											<button
 												key={id}
+												role="menuitem"
 												onClick={() => {
 													copyResumeToClipboard(id)
 													setCopyDropdownOpen(false)

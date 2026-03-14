@@ -97,7 +97,6 @@ import {
 	FaCode,
 	FaSave,
 	FaFlag,
-	FaCodeBranch,
 	FaLightbulb,
 	FaUndoAlt,
 	FaStream,
@@ -186,8 +185,10 @@ const Projects = () => {
 	const [currentColumns, setCurrentColumns] = useState(1)
 	const masonryContainerRef = React.useRef(null)
 	const [copied, setCopied] = useState(false)
+	const [copyError, setCopyError] = useState(false)
 	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
 	const copyDropdownRef = React.useRef(null)
+	const projectsCopyDropdownId = "projects-copy-format-menu"
 
 	// Save layout mode preference
 	useEffect(() => {
@@ -204,8 +205,17 @@ const Projects = () => {
 				setCopyDropdownOpen(false)
 			}
 		}
+		const handleEscape = (event) => {
+			if (event.key === "Escape") {
+				setCopyDropdownOpen(false)
+			}
+		}
 		document.addEventListener("mousedown", handleClickOutside)
-		return () => document.removeEventListener("mousedown", handleClickOutside)
+		document.addEventListener("keydown", handleEscape)
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside)
+			document.removeEventListener("keydown", handleEscape)
+		}
 	}, [])
 
 	// Use merged projects directly - the hook handles all merging logic
@@ -319,7 +329,6 @@ const Projects = () => {
 			"vscode-extension": FaCode,
 			backup: FaSave,
 			checkpoint: FaFlag,
-			develo: FaCodeBranch,
 			productivity: FaLightbulb,
 			restore: FaUndoAlt,
 			"save-state": FaSave,
@@ -490,7 +499,6 @@ const Projects = () => {
 			"vscode-extension": "#007acc",
 			backup: "#5cb85c",
 			checkpoint: "#f0ad4e",
-			develo: "#5bc0de",
 			productivity: "#5cb85c",
 			restore: "#f0ad4e",
 			"save-state": "#5cb85c",
@@ -875,20 +883,40 @@ const Projects = () => {
 
 	const copyProjectsToClipboard = async (format = "markdown") => {
 		const text = formatProjectsAs(format)
+		setCopyError(false)
 		try {
 			await navigator.clipboard.writeText(text)
 			setCopied(true)
 			setTimeout(() => setCopied(false), 2500)
 		} catch {
 			// Fallback for browsers without clipboard API
-			const el = document.createElement("textarea")
-			el.value = text
-			document.body.appendChild(el)
-			el.select()
-			document.execCommand("copy")
-			document.body.removeChild(el)
-			setCopied(true)
-			setTimeout(() => setCopied(false), 2500)
+			try {
+				const el = document.createElement("textarea")
+				el.value = text
+				document.body.appendChild(el)
+				el.select()
+				const copiedWithExecCommand = document.execCommand("copy")
+				document.body.removeChild(el)
+
+				if (!copiedWithExecCommand) {
+					console.warn(
+						"Clipboard copy fallback failed (execCommand returned false)"
+					)
+					setCopyError(true)
+					setTimeout(() => setCopyError(false), 3000)
+					return
+				}
+
+				setCopied(true)
+				setTimeout(() => setCopied(false), 2500)
+			} catch (fallbackError) {
+				console.warn(
+					"Clipboard copy failed using both modern and fallback APIs",
+					fallbackError
+				)
+				setCopyError(true)
+				setTimeout(() => setCopyError(false), 3000)
+			}
 		}
 	}
 
@@ -1103,13 +1131,17 @@ const Projects = () => {
 								className={`flex items-center border rounded-lg overflow-hidden transition-all duration-300 backdrop-blur-sm text-sm ${
 									copied
 										? "bg-green-500/20 border-green-500/40 text-green-300"
-										: "bg-white/5 border-white/10 text-gray-300"
+										: copyError
+											? "bg-red-500/20 border-red-500/40 text-red-300"
+											: "bg-white/5 border-white/10 text-gray-300"
 								}`}
 							>
 								<button
 									onClick={() => copyProjectsToClipboard("markdown")}
 									className={`flex items-center space-x-2 px-3 sm:px-4 py-2 transition-colors ${
-										copied ? "" : "hover:bg-purple-500/10 hover:text-purple-300"
+										copied || copyError
+											? ""
+											: "hover:bg-purple-500/10 hover:text-purple-300"
 									}`}
 									title={`Copy all ${projectsData.length} projects for AI context`}
 								>
@@ -1119,12 +1151,19 @@ const Projects = () => {
 										<ClipboardDocumentIcon className="w-4 h-4 flex-shrink-0" />
 									)}
 									<span className="whitespace-nowrap">
-										{copied ? "Copied!" : "Copy for AI"}
+										{copied
+											? "Copied!"
+											: copyError
+												? "Copy failed"
+												: "Copy for AI"}
 									</span>
 								</button>
-								{!copied && (
+								{!copied && !copyError && (
 									<button
 										onClick={() => setCopyDropdownOpen(!copyDropdownOpen)}
+										aria-expanded={copyDropdownOpen}
+										aria-haspopup="menu"
+										aria-controls={projectsCopyDropdownId}
 										className="px-2 py-2 border-l border-white/10 hover:bg-purple-500/10 hover:text-purple-300 transition-colors"
 										title="Choose format"
 									>
@@ -1136,8 +1175,12 @@ const Projects = () => {
 									</button>
 								)}
 							</div>
-							{copyDropdownOpen && !copied && (
-								<div className="absolute right-0 top-full mt-1 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden">
+							{copyDropdownOpen && !copied && !copyError && (
+								<div
+									id={projectsCopyDropdownId}
+									role="menu"
+									className="absolute right-0 top-full mt-1 w-48 bg-gray-900 border border-white/10 rounded-lg shadow-xl z-50 overflow-hidden"
+								>
 									<div className="px-3 py-2 text-xs text-gray-500 border-b border-white/5">
 										Choose format
 									</div>
@@ -1160,6 +1203,7 @@ const Projects = () => {
 									].map(({ id, label, desc }) => (
 										<button
 											key={id}
+											role="menuitem"
 											onClick={() => {
 												copyProjectsToClipboard(id)
 												setCopyDropdownOpen(false)

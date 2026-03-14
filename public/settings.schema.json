@@ -1,5 +1,5 @@
 {
-	"c": "http://json-schema.org/draft-07/schema#",
+	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://vkrishna04.github.io/settings.schema.json",
 	"$comment": "Portfolio Website Configuration Schema v2.0.0 - This comprehensive schema validates all configuration options for a modern portfolio website including GitHub integration, project management, social media links, resume sections, and UI customization. It provides detailed validation rules, helpful examples, and inline documentation to ensure proper configuration and optimal user experience.",
 	"title": "Portfolio Website Configuration Schema",
@@ -48,7 +48,7 @@
 					"type": "string",
 					"format": "uri",
 					"pattern": "^https://api\\.github\\.com/(orgs|users)/[^/]+/repos$",
-					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos \n - For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
+					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos\n- For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
 					"examples": [
 						"https://api.github.com/orgs/Life-Experimentalist/repos",
 						"https://api.github.com/users/VKrishna04/repos",
@@ -1546,7 +1546,19 @@
 								"additionalProperties": false,
 								"properties": {
 									"starsUrl": {
-										"$ref": "#/definitions/githubStatsUrl",
+										"oneOf": [
+											{
+												"type": "string",
+												"const": "",
+												"description": "Empty string for no GitHub stats URL"
+											},
+											{
+												"type": "string",
+												"format": "uri",
+												"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+												"description": "A valid GitHub repository statistics page URL"
+											}
+										],
 										"description": "Direct URL to the repository's stargazers page",
 										"examples": [
 											"https://github.com/VKrishna04/VKrishna04.github.io/stargazers",
@@ -1554,7 +1566,19 @@
 										]
 									},
 									"forksUrl": {
-										"$ref": "#/definitions/githubStatsUrl",
+										"oneOf": [
+											{
+												"type": "string",
+												"const": "",
+												"description": "Empty string for no GitHub stats URL"
+											},
+											{
+												"type": "string",
+												"format": "uri",
+												"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+												"description": "A valid GitHub repository statistics page URL"
+											}
+										],
 										"description": "Direct URL to the repository's network/forks page",
 										"examples": [
 											"https://github.com/VKrishna04/VKrishna04.github.io/network/members",
@@ -1562,7 +1586,19 @@
 										]
 									},
 									"watchersUrl": {
-										"$ref": "#/definitions/githubStatsUrl",
+										"oneOf": [
+											{
+												"type": "string",
+												"const": "",
+												"description": "Empty string for no GitHub stats URL"
+											},
+											{
+												"type": "string",
+												"format": "uri",
+												"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+												"description": "A valid GitHub repository statistics page URL"
+											}
+										],
 										"description": "Direct URL to the repository's watchers page",
 										"examples": [
 											"https://github.com/VKrishna04/VKrishna04.github.io/watchers",
@@ -1570,7 +1606,19 @@
 										]
 									},
 									"issuesUrl": {
-										"$ref": "#/definitions/githubStatsUrl",
+										"oneOf": [
+											{
+												"type": "string",
+												"const": "",
+												"description": "Empty string for no GitHub stats URL"
+											},
+											{
+												"type": "string",
+												"format": "uri",
+												"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+												"description": "A valid GitHub repository statistics page URL"
+											}
+										],
 										"description": "Direct URL to the repository's issues page",
 										"examples": [
 											"https://github.com/VKrishna04/VKrishna04.github.io/issues",

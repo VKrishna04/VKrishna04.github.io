@@ -39,6 +39,11 @@ jobs:
       - name: Lint code
         run: npm run lint
 
+      - name: Validate configuration JSON
+        run: |
+          node scripts/validate-json.js public/settings.json
+          node scripts/validate-json.js public/settings.schema.json
+
       - name: Build project
         run: npm run build
         env:
