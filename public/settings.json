@@ -1881,9 +1881,9 @@
 						"color": "text-yellow-400"
 					},
 					{
-						"name": "SQL",
-						"icon": "FaDatabase",
-						"color": "text-blue-400"
+						"name": "TypeScript",
+						"icon": "SiTypescript",
+						"color": "text-blue-500"
 					}
 				]
 			},
@@ -1896,24 +1896,9 @@
 						"color": "text-blue-400"
 					},
 					{
-						"name": "HTML5",
-						"icon": "FaHtml5",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "CSS3",
-						"icon": "FaCss3Alt",
-						"color": "text-blue-500"
-					},
-					{
 						"name": "Tailwind CSS",
 						"icon": "SiTailwindcss",
 						"color": "text-cyan-400"
-					},
-					{
-						"name": "Bootstrap",
-						"icon": "SiBootstrap",
-						"color": "text-purple-500"
 					}
 				]
 			},
@@ -1926,9 +1911,9 @@
 						"color": "text-green-400"
 					},
 					{
-						"name": "Express.js",
-						"icon": "SiExpress",
-						"color": "text-gray-400"
+						"name": "FastAPI",
+						"icon": "SiFirebase",
+						"color": "text-green-400"
 					},
 					{
 						"name": "REST APIs",
@@ -1946,19 +1931,14 @@
 				"category": "Databases",
 				"items": [
 					{
-						"name": "MongoDB",
-						"icon": "SiMongodb",
-						"color": "text-green-500"
-					},
-					{
 						"name": "PostgreSQL",
 						"icon": "SiPostgresql",
 						"color": "text-blue-400"
 					},
 					{
-						"name": "MySQL",
-						"icon": "FaDatabase",
-						"color": "text-blue-500"
+						"name": "MongoDB",
+						"icon": "SiMongodb",
+						"color": "text-green-500"
 					},
 					{
 						"name": "SQLite",
@@ -1989,21 +1969,6 @@
 						"name": "Cloudflare",
 						"icon": "SiCloudflare",
 						"color": "text-orange-400"
-					},
-					{
-						"name": "Cloudflare Pages",
-						"icon": "SiCloudflare",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "Cloudflare D1",
-						"icon": "SiCloudflare",
-						"color": "text-orange-600"
-					},
-					{
-						"name": "Render",
-						"icon": "SiRender",
-						"color": "text-white"
 					},
 					{
 						"name": "OCI",
@@ -2071,6 +2036,14 @@
 		"certificationsIcon": "ShieldCheckIcon",
 		"awards": [
 			{
+				"name": "cSpell Sync — VS Code Extension (2,000+ installs)",
+				"organization": "VS Code Marketplace",
+				"date": "2025",
+				"description": "Built bidirectional cSpell dictionary synchronization extension using TypeScript and VS Code API with 2,000+ installs.",
+				"verificationUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+				"certificateUrl": ""
+			},
+			{
 				"name": "2nd Runner-up at Corporate Hackathon - 2 Lakhs INR Prize",
 				"organization": "InfinityAI 2025, Tredence Inc.",
 				"date": "March 2025",
@@ -2127,7 +2100,7 @@
 			}
 		],
 		"awardsNote": "Configure awards and recognitions - each should have name, organization, date, description, and optional rewardAmount. URLs are optional: verificationUrl (to verify the award) and certificateUrl (to view certificate). Links will only show if provided.",
-		"awardsHeading": "Awards & Recognition",
+		"awardsHeading": "Achievements",
 		"awardsIcon": "TrophyIcon",
 		"publications": [
 			{
@@ -2214,120 +2187,52 @@
 		"volunteerExperienceIcon": "HeartIcon",
 		"personalProjects": [
 			{
-				"name": "CounterAPI",
+				"name": "EquiLens",
 				"technologies": [
-					{
-						"name": "FastAPI",
-						"icon": "SiFlask",
-						"color": "text-green-400"
-					},
-					{
-						"name": "PostgreSQL",
-						"icon": "SiPostgresql",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Render",
-						"icon": "SiRender",
-						"color": "text-white"
-					},
-					{
-						"name": "REST API",
-						"icon": "HiCodeBracket",
-						"color": "text-purple-400"
-					}
+					"Python",
+					"Ollama",
+					"Docker",
+					"scikit-learn"
 				],
-				"description": "Developed FastAPI analytics microservice with PostgreSQL for zero-code visitor tracking, featuring real-time dashboards and few-click cloud Deployment. Automated CI/CD pipeline, optimizing for high performance and reliability.",
-				"githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
-				"liveUrl": "https://life-experimentalist.github.io/CounterAPI/"
-			},
-			{
-				"name": "cSpell Sync",
-				"technologies": [
-					{
-						"name": "TypeScript",
-						"icon": "SiTypescript",
-						"color": "text-blue-500"
-					},
-					{
-						"name": "VS Code API",
-						"icon": "BiLogoVisualStudio",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "Node.js",
-						"icon": "FaNodeJs",
-						"color": "text-green-400"
-					}
-				],
-				"description": "Created VS Code extension for bidirectional cSpell dictionary sync, supporting custom dictionaries, project settings, and global configurations. Hit 2,000+ installs on VS Code Marketplace, driven by features like automatic sync, keyboard shortcuts, and status bar integration.",
-				"githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
-				"liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
+				"description": "Built open-source CLI to audit statistical bias in LLM outputs; published EquiLens Corpus v1.0.0 on Zenodo for reproducible bias research. Automated corpus generation with controlled variable isolation and dynamic concurrency to output concrete fairness metrics across demographic axes.",
+				"githubUrl": "https://github.com/Life-Experimentalist/EquiLens",
+				"liveUrl": "https://equilens.vkrishna04.me/"
 			},
 			{
 				"name": "HiveXplore",
 				"technologies": [
-					{
-						"name": "Flask",
-						"icon": "SiFlask",
-						"color": "text-pink-400"
-					},
-					{
-						"name": "SQLite3",
-						"icon": "SiSqlite",
-						"color": "text-gray-400"
-					},
-					{
-						"name": "Hive Blockchain",
-						"icon": "SiBlockchaindotcom",
-						"color": "text-orange-400"
-					},
-					{
-						"name": "RESTful APIs",
-						"icon": "HiCodeBracket",
-						"color": "text-purple-400"
-					}
+					"Flask",
+					"Hive Blockchain",
+					"SQLite",
+					"REST APIs"
 				],
-				"description": "Developed user-friendly web application (Flask, JavaScript) as a gateway to decentralized social media blockchain, featuring intuitive content creation, multi-method authentication (Hive Keychain, HiveSigner, HiveAuth), and a robust demo mode for easy onboarding to blockchain technology.",
+				"description": "1st Runner-up at IIT Delhi CodeHive Hackathon (INR 1,00,000) with a beginner-friendly Hive blockchain onboarding app built in 24 hours. Implemented Keychain, HiveSigner, and HiveAuth flows with guided demo mode and Flask + SQLite caching for low-latency responses.",
 				"githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
 				"liveUrl": "https://hivebuzz.onrender.com/"
 			},
 			{
 				"name": "Indian Sign Language Detector",
 				"technologies": [
-					{
-						"name": "Flask",
-						"icon": "SiFlask",
-						"color": "text-pink-400"
-					},
-					{
-						"name": "MediaPipe",
-						"icon": "SiTensorflow",
-						"color": "text-orange-400"
-					},
-					{
-						"name": "OpenCV",
-						"icon": "SiOpencv",
-						"color": "text-green-400"
-					},
-					{
-						"name": "scikit-learn",
-						"icon": "SiScikitlearn",
-						"color": "text-orange-500"
-					},
-					{
-						"name": "NumPy",
-						"icon": "SiNumpy",
-						"color": "text-blue-400"
-					},
-					{
-						"name": "JavaScript",
-						"icon": "SiJavascript",
-						"color": "text-yellow-400"
-					}
+					"Python",
+					"Flask",
+					"MediaPipe",
+					"OpenCV",
+					"scikit-learn"
 				],
-				"description": "Built real-time sign language translator using Python, OpenCV, MediaPipe achieving 98% accuracy with interactive web UI and custom model training for accessibility communication.",
+				"description": "Award-winning at Tredence InfinityAI 2025 (INR 2,00,000 prize pool) with real-time ISL recognition achieving 98% classification accuracy. Built full ML pipeline from MediaPipe landmark extraction to custom classifier training and live Flask inference with sub-100ms latency.",
 				"githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector"
+			},
+			{
+				"name": "RanobeGemini",
+				"technologies": [
+					"JavaScript",
+					"Gemini AI",
+					"Chrome/Firefox",
+					"Manifest V3"
+				],
+				"description": "Cross-browser extension (Chrome, Edge, Firefox) enhancing machine-translated web novels with Gemini AI and an extensible site-adapter architecture for rapid platform support.",
+				"githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
+				"liveUrl": "http://ranobe.vkrishna04.me/"
 			}
 		],
 		"personalProjectsNote": "Configure personal projects - each should have name, technologies array (with icon and color), period, description, githubUrl (optional), liveUrl (optional), demoUrl (optional), documentationUrl (optional)",
