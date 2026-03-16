@@ -1,7 +1,7 @@
 {
     "name": "Krishna GSVV - Portfolio",
     "short_name": "Krishna Portfolio",
-		"description": "Personal portfolio website of Krishna GSVV - Developer",
+    "description": "Personal portfolio website of Krishna GSVV - Developer",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#0a0a0a",
@@ -9,13 +9,13 @@
     "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "https://github.com/VKrishna04.png",
+            "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "https://github.com/VKrishna04.png",
+            "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
@@ -38,7 +38,7 @@
             "url": "/about",
             "icons": [
                 {
-                    "src": "https://github.com/VKrishna04.png",
+                    "src": "/favicon-96x96.png",
                     "sizes": "96x96"
                 }
             ]
@@ -50,7 +50,7 @@
             "url": "/projects",
             "icons": [
                 {
-                    "src": "https://github.com/VKrishna04.png",
+                    "src": "/favicon-96x96.png",
                     "sizes": "96x96"
                 }
             ]

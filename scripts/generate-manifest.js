@@ -14,20 +14,55 @@
  * limitations under the License.
  */
 
-import { readFileSync, writeFileSync } from "fs";
-import { parse } from "jsonc-parser";
+import { readFileSync, writeFileSync } from "fs"
+import { parse } from "jsonc-parser"
 
 /**
  * Generate PWA manifest.json from settings.json
  */
 try {
-	console.log("Reading settings.json for manifest generation...");
-	const content = readFileSync("public/settings.json", "utf-8");
-	const settings = parse(content);
+	console.log("Reading settings.json for manifest generation...")
+	const content = readFileSync("public/settings.json", "utf-8")
+	const settings = parse(content)
 
 	if (settings.seo) {
-		const seo = settings.seo;
-		const name = settings.home?.name || "Portfolio";
+		const seo = settings.seo
+		const name = settings.home?.name || "Portfolio"
+		const favicon = settings.favicon || {}
+		let manifestIconSrc = "/logo.jpg"
+		let manifestIcon192 = "/android-chrome-192x192.png"
+		let manifestIcon512 = "/android-chrome-512x512.png"
+		let shortcutIcon96 = "/favicon-96x96.png"
+
+		if (favicon.type === "custom" && favicon.customUrl) {
+			manifestIconSrc = favicon.customUrl
+		} else if (
+			(favicon.type === "image" || favicon.type === "url") &&
+			(favicon.url || favicon.path)
+		) {
+			manifestIconSrc = favicon.url || favicon.path
+		} else if (favicon.type === "github") {
+			const githubUsername =
+				favicon.githubUsername ||
+				settings.github?.username ||
+				settings.projects?.devUsername
+			if (githubUsername) {
+				manifestIconSrc = `https://github.com/${githubUsername}.png`
+			}
+		} else if (seo.openGraph?.image) {
+			manifestIconSrc = seo.openGraph.image
+		}
+
+		if (manifestIconSrc.startsWith("http")) {
+			manifestIcon192 = manifestIconSrc
+			manifestIcon512 = manifestIconSrc
+			shortcutIcon96 = manifestIconSrc
+		}
+
+		const iconType =
+			manifestIconSrc.endsWith(".jpg") || manifestIconSrc.endsWith(".jpeg")
+				? "image/jpeg"
+				: "image/png"
 
 		const manifest = {
 			name: `${name} - Portfolio`,
@@ -40,15 +75,15 @@ try {
 			orientation: "portrait-primary",
 			icons: [
 				{
-					src: seo.openGraph?.image || "https://github.com/VKrishna04.png",
+					src: manifestIcon512,
 					sizes: "512x512",
-					type: "image/png",
+					type: iconType,
 					purpose: "any maskable",
 				},
 				{
-					src: seo.openGraph?.image || "https://github.com/VKrishna04.png",
+					src: manifestIcon192,
 					sizes: "192x192",
-					type: "image/png",
+					type: iconType,
 					purpose: "any",
 				},
 			],
@@ -65,7 +100,7 @@ try {
 					url: "/about",
 					icons: [
 						{
-							src: seo.openGraph?.image || "https://github.com/VKrishna04.png",
+							src: shortcutIcon96,
 							sizes: "96x96",
 						},
 					],
@@ -77,20 +112,20 @@ try {
 					url: "/projects",
 					icons: [
 						{
-							src: seo.openGraph?.image || "https://github.com/VKrishna04.png",
+							src: shortcutIcon96,
 							sizes: "96x96",
 						},
 					],
 				},
 			],
-		};
+		}
 
-		console.log(`Generating manifest.json for: ${manifest.name}`);
-		writeFileSync("dist/manifest.json", JSON.stringify(manifest, null, 2));
-		console.log("Manifest.json generated successfully");
+		console.log(`Generating manifest.json for: ${manifest.name}`)
+		writeFileSync("dist/manifest.json", JSON.stringify(manifest, null, 2))
+		console.log("Manifest.json generated successfully")
 	} else {
-		console.log("No SEO configuration found, using default manifest");
+		console.log("No SEO configuration found, using default manifest")
 	}
 } catch (error) {
-	console.error("Error generating manifest:", error.message);
+	console.error("Error generating manifest:", error.message)
 }

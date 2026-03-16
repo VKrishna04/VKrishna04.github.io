@@ -15,7 +15,7 @@
  */
 
 import { getIconLibraryPrefix as parseIconName } from "./iconSystemCore.js"
-import { reactIconToDataUrl } from "./reactIcons.js";
+import { reactIconToDataUrl } from "./reactIcons.js"
 
 /*
  * Enhanced Favicon Management System with React Icons Support
@@ -28,56 +28,68 @@ import { reactIconToDataUrl } from "./reactIcons.js";
 const setFavicon = async (url) => {
 	return new Promise((resolve, reject) => {
 		// Remove existing favicons
-		const existingIcons = document.querySelectorAll('link[rel*="icon"]');
-		existingIcons.forEach((icon) => icon.remove());
+		const existingIcons = document.querySelectorAll('link[rel*="icon"]')
+		existingIcons.forEach((icon) => icon.remove())
 
-		// Create new favicon link
-		const link = document.createElement("link");
-		link.rel = "icon";
-		link.type = "image/png";
-		link.href = url;
+		const iconType = url?.endsWith(".ico")
+			? "image/x-icon"
+			: url?.endsWith(".jpg") || url?.endsWith(".jpeg")
+				? "image/jpeg"
+				: "image/png"
+
+		// Create new favicon links
+		const link = document.createElement("link")
+		link.rel = "icon"
+		link.type = iconType
+		link.href = url
+
+		const shortcutIcon = document.createElement("link")
+		shortcutIcon.rel = "shortcut icon"
+		shortcutIcon.type = iconType
+		shortcutIcon.href = url
 
 		// Add load and error handlers
 		link.onload = () => {
-			console.log("Favicon loaded successfully");
-			resolve(url);
-		};
+			console.log("Favicon loaded successfully")
+			resolve(url)
+		}
 
 		link.onerror = (error) => {
-			console.error("Failed to load favicon:", error);
-			reject(error);
-		};
+			console.error("Failed to load favicon:", error)
+			reject(error)
+		}
 
 		// Add to document head
-		document.head.appendChild(link);
+		document.head.appendChild(link)
+		document.head.appendChild(shortcutIcon)
 
 		// Also add apple touch icon for mobile devices
-		const appleIcon = document.createElement("link");
-		appleIcon.rel = "apple-touch-icon";
-		appleIcon.href = url;
-		document.head.appendChild(appleIcon);
-	});
-};
+		const appleIcon = document.createElement("link")
+		appleIcon.rel = "apple-touch-icon"
+		appleIcon.href = url
+		document.head.appendChild(appleIcon)
+	})
+}
 
 /**
  * Generate favicon from React Icon
  */
 const generateReactIconFavicon = async (iconName, options = {}) => {
 	try {
-		console.log(`Generating React Icon favicon: ${iconName}`);
+		console.log(`Generating React Icon favicon: ${iconName}`)
 
 		const {
 			size = 32,
 			color = "#6366f1",
 			backgroundColor = "transparent",
 			padding = 4,
-		} = options;
+		} = options
 
 		// Check if icon name is valid
-		const parsed = parseIconName(iconName);
+		const parsed = parseIconName(iconName)
 		if (!parsed) {
-			console.warn(`Invalid React Icon name: ${iconName}`);
-			return null;
+			console.warn(`Invalid React Icon name: ${iconName}`)
+			return null
 		}
 
 		// Generate data URL from React Icon
@@ -86,42 +98,42 @@ const generateReactIconFavicon = async (iconName, options = {}) => {
 			color,
 			backgroundColor,
 			padding,
-		});
+		})
 
 		if (!dataUrl) {
-			console.warn(`Failed to generate data URL for icon: ${iconName}`);
-			return null;
+			console.warn(`Failed to generate data URL for icon: ${iconName}`)
+			return null
 		}
 
-		return dataUrl;
+		return dataUrl
 	} catch (error) {
-		console.error("Error generating React Icon favicon:", error);
-		return null;
+		console.error("Error generating React Icon favicon:", error)
+		return null
 	}
-};
+}
 
 /**
  * Generate favicon from emoji
  */
 const generateEmojiFavicon = (emoji, size = 32) => {
 	try {
-		const canvas = document.createElement("canvas");
-		const ctx = canvas.getContext("2d");
-		canvas.width = size;
-		canvas.height = size;
+		const canvas = document.createElement("canvas")
+		const ctx = canvas.getContext("2d")
+		canvas.width = size
+		canvas.height = size
 
 		// Set font and draw emoji
-		ctx.font = `${size * 0.75}px Arial`;
-		ctx.textAlign = "center";
-		ctx.textBaseline = "middle";
-		ctx.fillText(emoji, size / 2, size / 2);
+		ctx.font = `${size * 0.75}px Arial`
+		ctx.textAlign = "center"
+		ctx.textBaseline = "middle"
+		ctx.fillText(emoji, size / 2, size / 2)
 
-		return canvas.toDataURL("image/png");
+		return canvas.toDataURL("image/png")
 	} catch (error) {
-		console.error("Error generating emoji favicon:", error);
-		return null;
+		console.error("Error generating emoji favicon:", error)
+		return null
 	}
-};
+}
 
 /**
  * Generate favicon from text
@@ -134,28 +146,28 @@ const generateTextFavicon = (
 	fontFamily = "Arial, sans-serif"
 ) => {
 	try {
-		const canvas = document.createElement("canvas");
-		const ctx = canvas.getContext("2d");
-		canvas.width = size;
-		canvas.height = size;
+		const canvas = document.createElement("canvas")
+		const ctx = canvas.getContext("2d")
+		canvas.width = size
+		canvas.height = size
 
 		// Draw background
-		ctx.fillStyle = bgColor;
-		ctx.fillRect(0, 0, size, size);
+		ctx.fillStyle = bgColor
+		ctx.fillRect(0, 0, size, size)
 
 		// Draw text
-		ctx.fillStyle = textColor;
-		ctx.font = `bold ${size * 0.6}px ${fontFamily}`;
-		ctx.textAlign = "center";
-		ctx.textBaseline = "middle";
-		ctx.fillText(text.charAt(0).toUpperCase(), size / 2, size / 2);
+		ctx.fillStyle = textColor
+		ctx.font = `bold ${size * 0.6}px ${fontFamily}`
+		ctx.textAlign = "center"
+		ctx.textBaseline = "middle"
+		ctx.fillText(text.charAt(0).toUpperCase(), size / 2, size / 2)
 
-		return canvas.toDataURL("image/png");
+		return canvas.toDataURL("image/png")
 	} catch (error) {
-		console.error("Error generating text favicon:", error);
-		return null;
+		console.error("Error generating text favicon:", error)
+		return null
 	}
-};
+}
 
 /**
  * Enhanced favicon initialization with React Icons support
@@ -163,88 +175,117 @@ const generateTextFavicon = (
 export const initializeFavicons = async (settings) => {
 	try {
 		if (!settings?.favicon) {
-			console.log("No favicon settings found");
-			return;
+			console.log("No favicon settings found")
+			return
 		}
 
-		const { favicon } = settings;
-		let faviconUrl = null;
+		const { favicon } = settings
+		let faviconUrl = null
+		const githubUsername =
+			favicon.githubUsername ||
+			settings.github?.username ||
+			settings.projects?.devUsername ||
+			null
 
 		// Determine favicon type and generate accordingly
 		switch (favicon.type) {
+			case "icon":
 			case "react-icon":
 				if (favicon.iconName) {
 					faviconUrl = await generateReactIconFavicon(favicon.iconName, {
-						size: favicon.size || 32,
-						color: favicon.color || "#6366f1",
+						size: favicon.iconSize || favicon.size || 32,
+						color: favicon.iconColor || favicon.color || "#6366f1",
 						backgroundColor: favicon.backgroundColor || "transparent",
 						padding: favicon.padding || 4,
-					});
+					})
 				}
-				break;
+				break
 
 			case "github":
-				if (settings.profile?.github?.username) {
-					faviconUrl = `https://github.com/${settings.profile.github.username}.png`;
+				if (githubUsername) {
+					faviconUrl = `https://github.com/${githubUsername}.png`
 				}
-				break;
+				break
+
+			case "custom":
+				if (favicon.customUrl) {
+					faviconUrl = favicon.customUrl
+				}
+				break
+
+			case "default":
+				faviconUrl = "/favicon-32x32.png"
+				break
 
 			case "emoji":
 				if (favicon.emoji) {
-					faviconUrl = generateEmojiFavicon(favicon.emoji, favicon.size || 32);
+					faviconUrl = generateEmojiFavicon(
+						favicon.emoji,
+						favicon.iconSize || favicon.size || 32
+					)
 				}
-				break;
+				break
 
 			case "text":
 				if (favicon.text) {
 					faviconUrl = generateTextFavicon(
 						favicon.text,
-						favicon.size || 32,
+						favicon.iconSize || favicon.size || 32,
 						favicon.backgroundColor || "#6366f1",
-						favicon.color || "#ffffff",
+						favicon.iconColor || favicon.color || "#ffffff",
 						favicon.fontFamily || "Arial, sans-serif"
-					);
+					)
 				}
-				break;
+				break
 
 			case "url":
 			case "image":
 			default:
-				if (favicon.url || favicon.path) {
-					faviconUrl = favicon.url || favicon.path;
+				if (favicon.url || favicon.path || favicon.customUrl) {
+					faviconUrl = favicon.url || favicon.path || favicon.customUrl
 				}
-				break;
+				break
 		}
 
 		// Apply favicon if generated/found
 		if (faviconUrl) {
-			await setFavicon(faviconUrl);
-			console.log(`Favicons updated successfully: ${faviconUrl}`);
+			await setFavicon(faviconUrl)
+			console.log(`Favicons updated successfully: ${faviconUrl}`)
 		} else {
 			// Fallback to a default favicon if none could be generated
-			console.warn("No valid favicon could be generated, using default");
+			console.warn("No valid favicon could be generated, using default")
+			if (settings.favicon?.customUrl) {
+				await setFavicon(settings.favicon.customUrl)
+				return
+			}
+			if (
+				document.querySelector('link[rel="icon"][href="/favicon-32x32.png"]')
+			) {
+				return
+			}
 			// Try to set a simple text-based fallback
 			try {
-				const fallbackFavicon = await generateTextFavicon(
+				const fallbackFavicon = generateTextFavicon(
 					"K",
+					32,
 					"#c770f0",
 					"#0a0a0a"
-				);
-				await setFavicon(fallbackFavicon);
-				console.log("Fallback favicon applied successfully");
+				)
+				await setFavicon(fallbackFavicon)
+				console.log("Fallback favicon applied successfully")
 			} catch (fallbackError) {
-				console.warn("Could not apply fallback favicon:", fallbackError);
+				console.warn("Could not apply fallback favicon:", fallbackError)
 			}
 		}
 	} catch (error) {
-		console.error("Error initializing favicons:", error);
+		console.error("Error initializing favicons:", error)
 	}
-};
+}
 
 /**
  * Utility functions for favicon management
  */
-export const setCustomFavicon = setFavicon;
-export const createEmojiFavicon = generateEmojiFavicon;
-export const createTextFavicon = generateTextFavicon;
-export const createReactIconFavicon = generateReactIconFavicon;
+export const setCustomFavicon = setFavicon
+export const createEmojiFavicon = generateEmojiFavicon
+export const createTextFavicon = generateTextFavicon
+export const createReactIconFavicon = generateReactIconFavicon

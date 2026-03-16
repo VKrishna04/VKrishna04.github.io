@@ -2981,8 +2981,8 @@
 		"note": "Enhanced footer with configurable stats, optional quick links (disabled since navbar is always visible), dynamic project counting, and improved layout"
 	},
 	"favicon": {
-		"type": "github",
-		"customUrl": "https://github.com/VKrishna04.png",
+		"type": "custom",
+		"customUrl": "/favicon-32x32.png",
 		"githubUsername": "VKrishna04",
 		"iconName": "FaReact",
 		"iconColor": "#61DAFB",
@@ -2996,7 +2996,7 @@
 			"512x512"
 		],
 		"appleTouchIcon": true,
-		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, 'icon' to use React Icons from react-icons.github.io, or 'default' for default favicon. For 'icon' type, visit https://react-icons.github.io/react-icons and use any icon name (e.g., FaReact, SiJavascript, MdHome). githubUsername overrides projects.devUsername for favicon only."
+		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, 'icon' to use React Icons from react-icons.github.io, or 'default' for default favicon. For 'icon' type, visit https://react-icons.github.io/react-icons and use any icon name (e.g., FaReact, SiJavascript, MdHome). githubUsername overrides projects.devUsername for favicon only. For best tab clarity, prefer local PNG assets like '/favicon-32x32.png'."
 	},
 	"counterAPI": {
 		"enabled": false,
