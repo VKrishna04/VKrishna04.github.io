@@ -1827,6 +1827,56 @@
 						"description": "Whether to display social preview images (GitHub OpenGraph or custom) at the top of project cards. When enabled, the card will show the project's social image if available.",
 						"default": true
 					},
+					"socialPreview": {
+						"type": "object",
+						"description": "Social preview banner source configuration for project cards. By default, GitHub projects render their OpenGraph banner automatically.",
+						"additionalProperties": false,
+						"properties": {
+							"defaultSource": {
+								"type": "string",
+								"enum": [
+									"custom",
+									"github-opengraph",
+									"none"
+								],
+								"description": "Default social preview source. 'custom' prefers custom/socialImage/imageUrl first. 'github-opengraph' prefers GitHub OpenGraph first. 'none' disables automatic fallback.",
+								"default": "github-opengraph"
+							},
+							"opengraphVariant": {
+								"type": "string",
+								"pattern": "^[0-9]+$",
+								"description": "OpenGraph cache-busting seed used in opengraph.githubassets.com URLs. This number can be 0, 1, 2, etc. It does not change repository data; it mainly affects cache behavior.",
+								"default": "2",
+								"examples": [
+									"0",
+									"1",
+									"2"
+								]
+							},
+							"allowSourceToggle": {
+								"type": "boolean",
+								"description": "When both custom and GitHub previews are available, show a switcher on the project card so users can change source manually.",
+								"default": true
+							},
+							"overrides": {
+								"type": "object",
+								"description": "Per-project social banner overrides. Keys can be repo full name (owner/repo) or project name. Values must be absolute image URLs.",
+								"additionalProperties": {
+									"$ref": "#/definitions/url"
+								},
+								"examples": [
+									{
+										"Life-Experimentalist/RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini",
+										"RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini"
+									}
+								]
+							},
+							"note": {
+								"type": "string",
+								"description": "Optional documentation note."
+							}
+						}
+					},
 					"tagStyles": {
 						"type": "object",
 						"description": "Styling configuration for project tags (topics and technologies). Allows customization of background opacity, text colors, and border opacity separately for topics and technology tags.",

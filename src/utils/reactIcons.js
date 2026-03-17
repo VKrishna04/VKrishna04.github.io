@@ -37,6 +37,11 @@
  * See: docs/Unified Icon System Guide.md for complete documentation
  */
 
+import React from "react"
+import { createRoot } from "react-dom/client"
+import * as FaIcons from "react-icons/fa"
+import * as SiIcons from "react-icons/si"
+
 // Re-export unified system functions for backward compatibility
 export {
 	getUnifiedIcon as getReactIcon,
@@ -48,6 +53,7 @@ export {
 	searchCachedIcons,
 } from "./iconSystemCore.js"
 export { UnifiedIcon } from "../components/UnifiedIcon.jsx"
+import { getUnifiedIcon } from "./iconSystemCore.js"
 
 /**
  * LEGACY IMPLEMENTATION BELOW - KEPT FOR BACKWARD COMPATIBILITY
@@ -67,7 +73,7 @@ const ICON_LIBRARIES = {
 	// Feather
 	fi: () => import("react-icons/fi"),
 	// Font Awesome
-	fa: () => import("react-icons/fa"),
+	fa: () => Promise.resolve(FaIcons),
 	fa6: () => import("react-icons/fa6"),
 	// Game Icons
 	gi: () => import("react-icons/gi"),
@@ -88,7 +94,7 @@ const ICON_LIBRARIES = {
 	// React Icons
 	ri: () => import("react-icons/ri"),
 	// Simple Icons
-	si: () => import("react-icons/si"),
+	si: () => Promise.resolve(SiIcons),
 	// Tabler Icons
 	tb: () => import("react-icons/tb"),
 	// Themify Icons
@@ -196,7 +202,6 @@ export const reactIconToDataUrl = async (iconName, options = {}) => {
 	} = options
 
 	try {
-		const { getUnifiedIcon } = await import("../components/UnifiedIcon.jsx")
 		const IconComponent = await getUnifiedIcon(iconName)
 		if (!IconComponent) {
 			return null
@@ -210,10 +215,6 @@ export const reactIconToDataUrl = async (iconName, options = {}) => {
 		div.style.width = `${size}px`
 		div.style.height = `${size}px`
 		document.body.appendChild(div)
-
-		// Import React and ReactDOM for rendering
-		const React = (await import("react")).default
-		const { createRoot } = await import("react-dom/client")
 
 		// Create root and render icon
 		const root = createRoot(div)
@@ -341,31 +342,31 @@ export const getPopularIcons = () => {
 			"BsLinkedin",
 			"BsTwitter",
 		],
-	};
-};
+	}
+}
 
 /**
  * Search for icons by name or category
  */
 export const searchIcons = (query, category = "all") => {
-	const popularIcons = getPopularIcons();
-	let icons = [];
+	const popularIcons = getPopularIcons()
+	let icons = []
 
 	if (category === "all") {
 		icons = [
 			...popularIcons.general,
 			...popularIcons.tech,
 			...popularIcons.social,
-		];
+		]
 	} else if (popularIcons[category]) {
-		icons = popularIcons[category];
+		icons = popularIcons[category]
 	}
 
 	if (!query) {
-		return icons;
+		return icons
 	}
 
 	return icons.filter((icon) =>
 		icon.toLowerCase().includes(query.toLowerCase())
-	);
-};
+	)
+}

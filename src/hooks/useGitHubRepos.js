@@ -29,6 +29,22 @@ const useGitHubRepos = () => {
 			setError(null);
 
 			try {
+				const buildGitHubApiError = async (response) => {
+					let detail = "";
+					try {
+						const errorBody = await response.json();
+						detail = errorBody?.message || errorBody?.error || "";
+					} catch {
+						// Ignore JSON parsing errors for non-JSON responses
+					}
+
+					const status =
+						typeof response?.status === "number" ? response.status : "unknown";
+					return new Error(
+						`GitHub API Error: ${status}${detail ? ` - ${detail}` : ""}`
+					);
+				};
+
 				// Fetch settings configuration
 				let config;
 				try {
@@ -93,7 +109,7 @@ const useGitHubRepos = () => {
 						const response = await cachedFetch(apiUrl, apiOptions);
 
 						if (!response.ok) {
-							throw new Error(`GitHub API Error: ${response.status}`);
+							throw await buildGitHubApiError(response);
 						}
 
 						const repos = await response.json();
@@ -184,7 +200,7 @@ const useGitHubRepos = () => {
 				const response = await cachedFetch(apiUrl, apiOptions);
 
 				if (!response.ok) {
-					throw new Error(`GitHub API Error: ${response.status}`);
+					throw await buildGitHubApiError(response);
 				}
 
 				const repos = await response.json();

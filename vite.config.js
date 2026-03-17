@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { injectSeoPlugin } from "./scripts/inject-seo.js";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { injectSeoPlugin } from "./scripts/inject-seo.js"
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
 
 // 🧩 Fix __dirname for ESM (Vite uses ES modules)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export default defineConfig({
 	plugins: [
@@ -74,7 +73,6 @@ export default defineConfig({
 					"react-vendor": ["react", "react-dom"],
 					router: ["react-router-dom"],
 					"ui-vendor": ["framer-motion", "@heroicons/react"],
-					icons: ["react-icons/fa", "react-icons/si"],
 					particles: [
 						"@tsparticles/react",
 						"@tsparticles/engine",

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import { useEffect, useState } from "react"
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import {
 	StarIcon,
 	CodeBracketIcon,
@@ -23,7 +24,7 @@ import {
 	ArrowTopRightOnSquareIcon,
 	EyeIcon,
 	ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/outline"
 import { parseColor, applyOpacity } from "../utils/themeUtils"
 import {
 	FaGithub,
@@ -94,6 +95,7 @@ const ProjectCard = ({
 	globalButtonStyles = {},
 	tagStyles = {},
 	showSocialImage = true,
+	socialPreviewConfig = {},
 }) => {
 	// Animation variants
 	const cardVariants = {
@@ -347,23 +349,200 @@ const ProjectCard = ({
 	}
 
 	// Get social image URL - priority: local settings -> GitHub social preview
-	const getSocialImageUrl = () => {
-		// Check for local override in project settings
-		if (project.socialImage) {
-			return project.socialImage
+	const resolveRepoPathFromUrl = (url) => {
+		if (!url) return null
+		try {
+			const parsed = new URL(url)
+			if (!parsed.hostname.includes("github.com")) return null
+			const parts = parsed.pathname.split("/").filter(Boolean)
+			if (parts.length < 2) return null
+			return {
+				owner: parts[0],
+				repo: parts[1].replace(/\.git$/i, ""),
+			}
+		} catch {
+			return null
 		}
-		if (project.imageUrl) {
-			return project.imageUrl
+	}
+
+	const resolveRepoPath = () => {
+		if (
+			typeof project.full_name === "string" &&
+			project.full_name.includes("/")
+		) {
+			const [owner, repo] = project.full_name.split("/")
+			if (owner && repo) {
+				return { owner, repo: repo.replace(/\.git$/i, "") }
+			}
 		}
-		if (project.image) {
-			return project.image
-		}
-		// Don't use GitHub OpenGraph by default - it shows generic GitHub logo for repos without custom social preview
-		// Only use it if explicitly enabled or if the repo has a custom social_preview
+
+		return (
+			resolveRepoPathFromUrl(project.githubUrl) ||
+			resolveRepoPathFromUrl(project.html_url)
+		)
+	}
+
+	const getGitHubOpenGraphUrl = () => {
+		const repoPath = resolveRepoPath()
+		if (!repoPath) return null
+
+		const variant =
+			String(socialPreviewConfig?.opengraphVariant || "2").trim() || "2"
+
+		return `https://opengraph.githubassets.com/${encodeURIComponent(
+			variant
+		)}/${encodeURIComponent(repoPath.owner)}/${encodeURIComponent(repoPath.repo)}`
+	}
+
+	const getCustomPreviewFromProject = () => {
+		if (project.socialImage) return project.socialImage
+		if (project.imageUrl) return project.imageUrl
+		if (project.image) return project.image
 		return null
 	}
 
-	const socialImageUrl = showSocialImage ? getSocialImageUrl() : null
+	const getCustomOverridePreview = () => {
+		const overrides = socialPreviewConfig?.overrides
+		if (!overrides || typeof overrides !== "object") return null
+
+		const repoPath = resolveRepoPath()
+		const keys = [
+			project.full_name,
+			repoPath ? `${repoPath.owner}/${repoPath.repo}` : null,
+			project.name,
+		].filter(Boolean)
+
+		for (const key of keys) {
+			const overrideUrl = overrides[key]
+			if (typeof overrideUrl === "string" && overrideUrl.trim()) {
+				return overrideUrl.trim()
+			}
+		}
+
+		return null
+	}
+
+	const socialSources = (() => {
+		if (!showSocialImage) return []
+
+		const sources = []
+		const customUrl =
+			getCustomOverridePreview() || getCustomPreviewFromProject()
+		const githubUrl = getGitHubOpenGraphUrl()
+
+		if (customUrl) {
+			sources.push({
+				key: "custom",
+				label: "Custom",
+				url: customUrl,
+			})
+		}
+
+		if (githubUrl) {
+			sources.push({
+				key: "github-opengraph",
+				label: "GitHub",
+				url: githubUrl,
+			})
+		}
+
+		const uniqueByUrl = []
+		const seenUrls = new Set()
+		for (const source of sources) {
+			if (seenUrls.has(source.url)) continue
+			seenUrls.add(source.url)
+			uniqueByUrl.push(source)
+		}
+
+		return uniqueByUrl
+	})()
+
+	const orderSocialSources = (sources) => {
+		const defaultSource =
+			socialPreviewConfig?.defaultSource || "github-opengraph"
+
+		if (defaultSource === "none") return []
+
+		if (defaultSource === "custom") {
+			return [...sources].sort((a, b) => {
+				if (a.key === "custom") return -1
+				if (b.key === "custom") return 1
+				return 0
+			})
+		}
+
+		return [...sources].sort((a, b) => {
+			if (a.key === "github-opengraph") return -1
+			if (b.key === "github-opengraph") return 1
+			return 0
+		})
+	}
+
+	const [failedSourceKeys, setFailedSourceKeys] = useState([])
+	const [selectedSourceKey, setSelectedSourceKey] = useState(null)
+	const [isPreviewLoaded, setIsPreviewLoaded] = useState(false)
+
+	const orderedSources = orderSocialSources(socialSources)
+
+	const availableSources = orderedSources.filter(
+		(source) => !failedSourceKeys.includes(source.key)
+	)
+
+	const activeSocialSource =
+		availableSources.find((source) => source.key === selectedSourceKey) ||
+		availableSources[0] ||
+		null
+
+	useEffect(() => {
+		setFailedSourceKeys([])
+		setSelectedSourceKey(null)
+		setIsPreviewLoaded(false)
+	}, [project?.id, project?.name, showSocialImage])
+
+	useEffect(() => {
+		setIsPreviewLoaded(false)
+		window.dispatchEvent(new Event("projects:masonry-reflow"))
+	}, [activeSocialSource?.url])
+
+	useEffect(() => {
+		if (!availableSources.length) {
+			setSelectedSourceKey(null)
+			return
+		}
+
+		const currentStillAvailable = availableSources.some(
+			(source) => source.key === selectedSourceKey
+		)
+		if (!currentStillAvailable) {
+			setSelectedSourceKey(availableSources[0].key)
+		}
+	}, [availableSources, selectedSourceKey])
+
+	const allowSourceToggle = socialPreviewConfig?.allowSourceToggle !== false
+	const showSourceToggle =
+		allowSourceToggle && socialSources.length > 1 && !!activeSocialSource
+
+	const handleSocialSourceLoad = () => {
+		setIsPreviewLoaded(true)
+		window.dispatchEvent(new Event("projects:masonry-reflow"))
+	}
+
+	const handleSocialSourceError = () => {
+		if (!activeSocialSource) return
+		setIsPreviewLoaded(false)
+		setFailedSourceKeys((prev) => {
+			if (prev.includes(activeSocialSource.key)) return prev
+			return [...prev, activeSocialSource.key]
+		})
+		window.dispatchEvent(new Event("projects:masonry-reflow"))
+	}
+
+	const handleSourceSwitch = (sourceKey) => {
+		setFailedSourceKeys((prev) => prev.filter((key) => key !== sourceKey))
+		setSelectedSourceKey(sourceKey)
+		setIsPreviewLoaded(false)
+		window.dispatchEvent(new Event("projects:masonry-reflow"))
+	}
 
 	return (
 		<motion.div
@@ -377,17 +556,42 @@ const ProjectCard = ({
 			className="bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 group h-full flex flex-col"
 		>
 			{/* Social Image */}
-			{socialImageUrl && (
-				<div className="w-full h-40 overflow-hidden bg-gray-800/50">
+			{activeSocialSource && (
+				<div className="w-full h-40 overflow-hidden bg-gray-800/50 relative">
+					{!isPreviewLoaded && (
+						<div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-800 via-gray-700/80 to-gray-800" />
+					)}
 					<img
-						src={socialImageUrl}
+						src={activeSocialSource.url}
 						alt={`${project.name} preview`}
-						className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-						onError={(e) => {
-							// Hide the image container if it fails to load
-							e.target.parentElement.style.display = "none"
-						}}
+						className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
+							isPreviewLoaded ? "opacity-100" : "opacity-0"
+						}`}
+						onLoad={handleSocialSourceLoad}
+						onError={handleSocialSourceError}
 					/>
+					{showSourceToggle && (
+						<div className="absolute top-2 right-2 flex items-center gap-1 bg-black/50 rounded-md p-1 backdrop-blur-sm border border-white/10">
+							{socialSources.map((source) => {
+								const isActive = source.key === activeSocialSource.key
+								return (
+									<button
+										key={source.key}
+										type="button"
+										onClick={() => handleSourceSwitch(source.key)}
+										className={`px-2 py-1 rounded text-[10px] font-medium transition-colors ${
+											isActive
+												? "bg-purple-500/70 text-white"
+												: "bg-white/10 text-gray-200 hover:bg-white/20"
+										}`}
+										title={`Use ${source.label} preview`}
+									>
+										{source.label}
+									</button>
+								)
+							})}
+						</div>
+					)}
 				</div>
 			)}
 
@@ -407,7 +611,7 @@ const ProjectCard = ({
 												parseColor(effectiveAccent),
 												0.85
 											)} 100%)`,
-									  }
+										}
 									: { background: "linear-gradient(90deg,#a855f7,#ec4899)" }
 							}
 						>
@@ -444,92 +648,86 @@ const ProjectCard = ({
 				</p>
 
 				{/* Topics/Tags */}
-				{
-					project.topics && project.topics.length > 0 && (
-						<div className="mb-4">
-							<div className="flex flex-wrap gap-1">
-								{project.topics.slice(0, 4).map((topic, idx) => {
-									const TopicIcon = getTechnologyIcon(topic)
-									const showIcon = TopicIcon !== CodeBracketIcon
-									return (
-										<span
-											key={idx}
-											className="flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium"
-											title={topic}
-											style={
-												effectiveAccent
-													? {
-															backgroundColor: applyOpacity(
-																parseColor(effectiveAccent),
-																effectiveTagStyles.topics.backgroundOpacity
-															),
-															color: effectiveTagStyles.topics.textColor,
-															border: `1px solid ${applyOpacity(
-																parseColor(effectiveAccent),
-																effectiveTagStyles.topics.borderOpacity
-															)}`,
-													  }
-													: {
-															backgroundColor: `rgba(168, 85, 247, ${effectiveTagStyles.topics.backgroundOpacity})`,
-															color: effectiveTagStyles.topics.textColor,
-															border: `1px solid rgba(168, 85, 247, ${effectiveTagStyles.topics.borderOpacity})`,
-													  }
-											}
-										>
-											{showIcon && <TopicIcon className="w-3 h-3" />}
-											<span>{topic}</span>
-										</span>
-									)
-								})}
-								{project.topics.length > 4 && (
-									<span className="px-2 py-1 text-xs text-gray-400">
-										+{project.topics.length - 4} more
+				{project.topics && project.topics.length > 0 && (
+					<div className="mb-4">
+						<div className="flex flex-wrap gap-1">
+							{project.topics.slice(0, 4).map((topic, idx) => {
+								const TopicIcon = getTechnologyIcon(topic)
+								const showIcon = TopicIcon !== CodeBracketIcon
+								return (
+									<span
+										key={idx}
+										className="flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium"
+										title={topic}
+										style={
+											effectiveAccent
+												? {
+														backgroundColor: applyOpacity(
+															parseColor(effectiveAccent),
+															effectiveTagStyles.topics.backgroundOpacity
+														),
+														color: effectiveTagStyles.topics.textColor,
+														border: `1px solid ${applyOpacity(
+															parseColor(effectiveAccent),
+															effectiveTagStyles.topics.borderOpacity
+														)}`,
+													}
+												: {
+														backgroundColor: `rgba(168, 85, 247, ${effectiveTagStyles.topics.backgroundOpacity})`,
+														color: effectiveTagStyles.topics.textColor,
+														border: `1px solid rgba(168, 85, 247, ${effectiveTagStyles.topics.borderOpacity})`,
+													}
+										}
+									>
+										{showIcon && <TopicIcon className="w-3 h-3" />}
+										<span>{topic}</span>
 									</span>
-								)}
-							</div>
+								)
+							})}
+							{project.topics.length > 4 && (
+								<span className="px-2 py-1 text-xs text-gray-400">
+									+{project.topics.length - 4} more
+								</span>
+							)}
 						</div>
-					)
-				}
+					</div>
+				)}
 
-				{
-					/* Technologies */
-				}
-				{
-					project.technologies && project.technologies.length > 0 && (
-						<div className="mb-4">
-							<div className="flex flex-wrap gap-2">
-								{project.technologies.slice(0, 4).map((tech, idx) => {
-									const TechIcon = getTechnologyIcon(
-										typeof tech === "string" ? tech : tech.name
-									)
-									const techName = typeof tech === "string" ? tech : tech.name
-									const showIcon = TechIcon !== CodeBracketIcon
-									return (
-										<span
-											key={idx}
-											className="flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium"
-											title={techName}
-											style={{
-												backgroundColor:
-													effectiveTagStyles.technologies.backgroundColor,
-												color: effectiveTagStyles.technologies.textColor,
-												border: `1px solid ${effectiveTagStyles.technologies.borderColor}`,
-											}}
-										>
-											{showIcon && <TechIcon className="w-3 h-3" />}
-											<span>{techName}</span>
-										</span>
-									)
-								})}
-								{project.technologies.length > 4 && (
-									<span className="px-2 py-1 text-xs text-gray-400">
-										+{project.technologies.length - 4} more
+				{/* Technologies */}
+				{project.technologies && project.technologies.length > 0 && (
+					<div className="mb-4">
+						<div className="flex flex-wrap gap-2">
+							{project.technologies.slice(0, 4).map((tech, idx) => {
+								const TechIcon = getTechnologyIcon(
+									typeof tech === "string" ? tech : tech.name
+								)
+								const techName = typeof tech === "string" ? tech : tech.name
+								const showIcon = TechIcon !== CodeBracketIcon
+								return (
+									<span
+										key={idx}
+										className="flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium"
+										title={techName}
+										style={{
+											backgroundColor:
+												effectiveTagStyles.technologies.backgroundColor,
+											color: effectiveTagStyles.technologies.textColor,
+											border: `1px solid ${effectiveTagStyles.technologies.borderColor}`,
+										}}
+									>
+										{showIcon && <TechIcon className="w-3 h-3" />}
+										<span>{techName}</span>
 									</span>
-								)}
-							</div>
+								)
+							})}
+							{project.technologies.length > 4 && (
+								<span className="px-2 py-1 text-xs text-gray-400">
+									+{project.technologies.length - 4} more
+								</span>
+							)}
 						</div>
-					)
-				}
+					</div>
+				)}
 
 				{/* Stats */}
 				<div className="flex items-center justify-between text-sm text-gray-400 mb-4">
@@ -681,4 +879,4 @@ const ProjectCard = ({
 	)
 }
 
-export default ProjectCard;
+export default ProjectCard

@@ -651,11 +651,25 @@ const Projects = () => {
 			})
 		}
 
+		const onProjectMediaReflow = () => {
+			requestAnimationFrame(resizeMasonryItems)
+		}
+
 		// Initial calculation after render
 		const timeout = setTimeout(resizeMasonryItems, 100)
+		const delayedTimeout = setTimeout(resizeMasonryItems, 450)
 
 		// Recalculate on window resize
 		window.addEventListener("resize", resizeMasonryItems)
+		window.addEventListener("projects:masonry-reflow", onProjectMediaReflow)
+
+		// Recalculate when project images load or error (no reload needed).
+		const grid = masonryContainerRef.current
+		const mediaElements = grid ? grid.querySelectorAll("img, video") : []
+		mediaElements.forEach((media) => {
+			media.addEventListener("load", resizeMasonryItems)
+			media.addEventListener("error", resizeMasonryItems)
+		})
 
 		// Use ResizeObserver for dynamic content changes
 		const resizeObserver = new ResizeObserver(() => {
@@ -664,11 +678,24 @@ const Projects = () => {
 
 		if (masonryContainerRef.current) {
 			resizeObserver.observe(masonryContainerRef.current)
+			const items = masonryContainerRef.current.querySelectorAll(
+				".masonry-item-content"
+			)
+			items.forEach((item) => resizeObserver.observe(item))
 		}
 
 		return () => {
 			clearTimeout(timeout)
+			clearTimeout(delayedTimeout)
 			window.removeEventListener("resize", resizeMasonryItems)
+			window.removeEventListener(
+				"projects:masonry-reflow",
+				onProjectMediaReflow
+			)
+			mediaElements.forEach((media) => {
+				media.removeEventListener("load", resizeMasonryItems)
+				media.removeEventListener("error", resizeMasonryItems)
+			})
 			resizeObserver.disconnect()
 		}
 	}, [layoutMode, filteredRepos])
@@ -1323,6 +1350,7 @@ const Projects = () => {
 											globalButtonStyles={settings?.projects?.buttonStyles}
 											tagStyles={settings?.projects?.tagStyles}
 											showSocialImage={settings?.projects?.showSocialImage}
+											socialPreviewConfig={settings?.projects?.socialPreview}
 										/>
 									</div>
 								</motion.div>

@@ -26,6 +26,15 @@
  */
 
 const CFLAIR_BASE_URL = "https://cflaircounter.pages.dev";
+const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000;
+
+let cflairRateLimitedUntil = 0;
+
+const isInRateLimitCooldown = () => Date.now() < cflairRateLimitedUntil;
+
+const markRateLimited = () => {
+	cflairRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS;
+};
 
 /**
  * Track a view for a project
@@ -36,6 +45,10 @@ const CFLAIR_BASE_URL = "https://cflaircounter.pages.dev";
 export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
 	if (!projectName) {
 		console.warn("[CFlair-Counter] Project name is required");
+		return null;
+	}
+
+	if (isInRateLimitCooldown()) {
 		return null;
 	}
 
@@ -64,6 +77,12 @@ export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
 			}
 		}
 
+		if (response.status === 429) {
+			markRateLimited();
+			console.warn("[CFlair-Counter] Rate limited (429). Backing off for 5 minutes.");
+			return null;
+		}
+
 		console.warn(
 			`[CFlair-Counter] Failed to track view for ${projectName}: ${response.status}`
 		);
@@ -89,6 +108,10 @@ export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 		return null;
 	}
 
+	if (isInRateLimitCooldown()) {
+		return null;
+	}
+
 	try {
 		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`;
 		const response = await fetch(url, {
@@ -110,6 +133,12 @@ export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 					createdAt: data.createdAt,
 				};
 			}
+		}
+
+		if (response.status === 429) {
+			markRateLimited();
+			console.warn("[CFlair-Counter] Rate limited (429). Backing off for 5 minutes.");
+			return null;
 		}
 
 		console.warn(

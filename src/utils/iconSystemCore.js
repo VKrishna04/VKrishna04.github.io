@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import * as FaIcons from "react-icons/fa"
+import * as SiIcons from "react-icons/si"
+
 /**
  * UNIFIED ICON SYSTEM - CORE UTILITIES
  *
@@ -90,18 +93,18 @@ export const ICON_LIBRARY_REGISTRY = {
 	Wi: "react-icons/wi",
 	// css.gg
 	Cg: "react-icons/cg",
-};
+}
 
 /**
  * Cache for loaded icon components to improve performance
  * Prevents redundant imports of the same icon
  */
-export const iconCache = new Map();
+export const iconCache = new Map()
 
 /**
  * In-flight requests tracker to prevent duplicate loads
  */
-export const loadingPromises = new Map();
+export const loadingPromises = new Map()
 
 // ============================================================================
 // ICON NAME PARSING
@@ -220,13 +223,13 @@ export const getUnifiedIcon = async (iconName) => {
 			let iconModule
 			switch (prefix) {
 				case "Fa":
-					iconModule = await import("react-icons/fa")
+					iconModule = FaIcons
 					break
 				case "Fa6":
 					iconModule = await import("react-icons/fa6")
 					break
 				case "Si":
-					iconModule = await import("react-icons/si")
+					iconModule = SiIcons
 					break
 				case "Hi":
 					iconModule = await import("react-icons/hi")
@@ -369,8 +372,8 @@ export const getUnifiedIcon = async (iconName) => {
  * @returns {React.Component|null} - Cached icon or null
  */
 export const getCachedIcon = (iconName) => {
-	return iconCache.get(iconName) || null;
-};
+	return iconCache.get(iconName) || null
+}
 
 /**
  * Preload multiple icons for better performance
@@ -381,12 +384,12 @@ export const getCachedIcon = (iconName) => {
  */
 export const preloadIcons = async (iconNames) => {
 	if (!Array.isArray(iconNames)) {
-		console.warn("[UnifiedIconSystem] preloadIcons expects an array");
-		return;
+		console.warn("[UnifiedIconSystem] preloadIcons expects an array")
+		return
 	}
 
-	await Promise.all(iconNames.map((name) => getUnifiedIcon(name)));
-};
+	await Promise.all(iconNames.map((name) => getUnifiedIcon(name)))
+}
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -399,9 +402,9 @@ export const preloadIcons = async (iconNames) => {
  * @returns {Promise<boolean>}
  */
 export const iconExists = async (iconName) => {
-	const icon = await getUnifiedIcon(iconName);
-	return icon !== null;
-};
+	const icon = await getUnifiedIcon(iconName)
+	return icon !== null
+}
 
 /**
  * Get all available icon libraries
@@ -409,8 +412,8 @@ export const iconExists = async (iconName) => {
  * @returns {string[]} - Array of library prefixes
  */
 export const getAvailableLibraries = () => {
-	return Object.keys(ICON_LIBRARY_REGISTRY);
-};
+	return Object.keys(ICON_LIBRARY_REGISTRY)
+}
 
 /**
  * Search for icons by partial name match
@@ -420,21 +423,21 @@ export const getAvailableLibraries = () => {
  * @returns {string[]} - Array of matching icon names
  */
 export const searchCachedIcons = (query) => {
-	if (!query) return [];
+	if (!query) return []
 
-	const lowerQuery = query.toLowerCase();
+	const lowerQuery = query.toLowerCase()
 	return Array.from(iconCache.keys()).filter((name) =>
 		name.toLowerCase().includes(lowerQuery)
-	);
-};
+	)
+}
 
 /**
  * Clear the icon cache (useful for testing or memory management)
  */
 export const clearIconCache = () => {
-	iconCache.clear();
-	loadingPromises.clear();
-};
+	iconCache.clear()
+	loadingPromises.clear()
+}
 
 /**
  * Get cache statistics
@@ -446,77 +449,69 @@ export const getIconCacheStats = () => {
 		cachedIcons: iconCache.size,
 		loadingIcons: loadingPromises.size,
 		libraries: Object.keys(ICON_LIBRARY_REGISTRY).length,
-	};
-};
+	}
+}
 
 // ============================================================================
 // LEGACY SUPPORT
 // ============================================================================
 
 // Import commonly used icons for legacy fallback (lazy loaded)
-let heroiconsModule = null;
-let faModule = null;
-let siModule = null;
+let heroiconsModule = null
 
 /**
  * Lazy load legacy icon modules
  */
 const loadLegacyModules = async () => {
 	if (!heroiconsModule) {
-		heroiconsModule = await import("@heroicons/react/24/outline");
-	}
-	if (!faModule) {
-		faModule = await import("react-icons/fa");
-	}
-	if (!siModule) {
-		siModule = await import("react-icons/si");
+		heroiconsModule = await import("@heroicons/react/24/outline")
 	}
 
 	return {
 		...heroiconsModule,
-		FaGithub: faModule.FaGithub,
-		FaLinkedin: faModule.FaLinkedin,
-		FaTwitter: faModule.FaTwitter,
-		FaInstagram: faModule.FaInstagram,
-		FaDiscord: faModule.FaDiscord,
-		FaYoutube: faModule.FaYoutube,
-		FaTwitch: faModule.FaTwitch,
-		FaTiktok: faModule.FaTiktok,
-		FaMedium: faModule.FaMedium,
-		FaDev: faModule.FaDev,
-		FaStackOverflow: faModule.FaStackOverflow,
-		FaDribbble: faModule.FaDribbble,
-		FaBehance: faModule.FaBehance,
-		FaCodepen: faModule.FaCodepen,
-		FaHeart: faModule.FaHeart,
-		FaReact: faModule.FaReact,
-		FaDatabase: faModule.FaDatabase,
-		SiGithub: siModule.SiGithub,
-		SiLinkedin: siModule.SiLinkedin,
-		SiX: siModule.SiX,
-		SiInstagram: siModule.SiInstagram,
-		SiDiscord: siModule.SiDiscord,
-		SiYoutube: siModule.SiYoutube,
-		SiTwitch: siModule.SiTwitch,
-		SiTiktok: siModule.SiTiktok,
-		SiMedium: siModule.SiMedium,
-		SiDevdotto: siModule.SiDevdotto,
-		SiStackoverflow: siModule.SiStackoverflow,
-		SiDribbble: siModule.SiDribbble,
-		SiBehance: siModule.SiBehance,
-		SiCodepen: siModule.SiCodepen,
-		SiGmail: siModule.SiGmail,
-		SiWhatsapp: siModule.SiWhatsapp,
-		SiTelegram: siModule.SiTelegram,
-		SiSlack: siModule.SiSlack,
-		SiReddit: siModule.SiReddit,
-		SiFacebook: siModule.SiFacebook,
-		SiSnapchat: siModule.SiSnapchat,
-		SiSpotify: siModule.SiSpotify,
-		SiSoundcloud: siModule.SiSoundcloud,
-		SiGithubcopilot: siModule.SiGithubcopilot,
-	};
-};
+		FaGithub: FaIcons.FaGithub,
+		FaLinkedin: FaIcons.FaLinkedin,
+		FaTwitter: FaIcons.FaTwitter,
+		FaInstagram: FaIcons.FaInstagram,
+		FaDiscord: FaIcons.FaDiscord,
+		FaYoutube: FaIcons.FaYoutube,
+		FaTwitch: FaIcons.FaTwitch,
+		FaTiktok: FaIcons.FaTiktok,
+		FaMedium: FaIcons.FaMedium,
+		FaDev: FaIcons.FaDev,
+		FaStackOverflow: FaIcons.FaStackOverflow,
+		FaDribbble: FaIcons.FaDribbble,
+		FaBehance: FaIcons.FaBehance,
+		FaCodepen: FaIcons.FaCodepen,
+		FaHeart: FaIcons.FaHeart,
+		FaReact: FaIcons.FaReact,
+		FaDatabase: FaIcons.FaDatabase,
+		SiGithub: SiIcons.SiGithub,
+		SiLinkedin: SiIcons.SiLinkedin,
+		SiX: SiIcons.SiX,
+		SiInstagram: SiIcons.SiInstagram,
+		SiDiscord: SiIcons.SiDiscord,
+		SiYoutube: SiIcons.SiYoutube,
+		SiTwitch: SiIcons.SiTwitch,
+		SiTiktok: SiIcons.SiTiktok,
+		SiMedium: SiIcons.SiMedium,
+		SiDevdotto: SiIcons.SiDevdotto,
+		SiStackoverflow: SiIcons.SiStackoverflow,
+		SiDribbble: SiIcons.SiDribbble,
+		SiBehance: SiIcons.SiBehance,
+		SiCodepen: SiIcons.SiCodepen,
+		SiGmail: SiIcons.SiGmail,
+		SiWhatsapp: SiIcons.SiWhatsapp,
+		SiTelegram: SiIcons.SiTelegram,
+		SiSlack: SiIcons.SiSlack,
+		SiReddit: SiIcons.SiReddit,
+		SiFacebook: SiIcons.SiFacebook,
+		SiSnapchat: SiIcons.SiSnapchat,
+		SiSpotify: SiIcons.SiSpotify,
+		SiSoundcloud: SiIcons.SiSoundcloud,
+		SiGithubcopilot: SiIcons.SiGithubcopilot,
+	}
+}
 
 /**
  * Get icon from legacy static map
@@ -526,11 +521,11 @@ const loadLegacyModules = async () => {
  * @returns {Promise<React.Component|null>}
  */
 export const getLegacyIcon = async (iconName) => {
-	if (!iconName) return null;
+	if (!iconName) return null
 
-	const legacyMap = await loadLegacyModules();
-	return legacyMap[iconName] || null;
-};
+	const legacyMap = await loadLegacyModules()
+	return legacyMap[iconName] || null
+}
 
 /**
  * Get icon with automatic fallback to legacy system
@@ -541,20 +536,20 @@ export const getLegacyIcon = async (iconName) => {
  */
 export const getIconWithFallback = async (iconName) => {
 	// Try unified system first
-	const unifiedIcon = await getUnifiedIcon(iconName);
+	const unifiedIcon = await getUnifiedIcon(iconName)
 	if (unifiedIcon) {
-		return unifiedIcon;
+		return unifiedIcon
 	}
 
 	// Fallback to legacy system
-	const legacyIcon = await getLegacyIcon(iconName);
+	const legacyIcon = await getLegacyIcon(iconName)
 	if (legacyIcon) {
-		console.info(`[UnifiedIconSystem] Using legacy icon for "${iconName}"`);
-		return legacyIcon;
+		console.info(`[UnifiedIconSystem] Using legacy icon for "${iconName}"`)
+		return legacyIcon
 	}
 
 	console.warn(
 		`[UnifiedIconSystem] Icon "${iconName}" not found in unified or legacy systems`
-	);
-	return null;
-};
+	)
+	return null
+}

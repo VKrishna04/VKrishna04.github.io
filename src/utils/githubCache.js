@@ -279,9 +279,15 @@ export const cachedFetch = async (url, options = {}) => {
 	// Check cache first
 	const cached = await githubCache.get(url, options);
 	if (cached) {
+		const cachedStatus =
+			typeof cached?.status === "number" ? cached.status : 200;
+		const cachedOk =
+			cachedStatus >= 200 && cachedStatus < 300 && !cached?.error;
 		return {
-			ok: true,
-			status: 200,
+			ok: cachedOk,
+			status: cachedStatus,
+			statusText: cachedOk ? "OK (cache)" : "Cached error",
+			url,
 			json: async () => cached,
 			headers: new Map([["x-cache", "HIT"]]),
 		};
@@ -298,7 +304,10 @@ export const cachedFetch = async (url, options = {}) => {
 			githubCache.set(url, data, options, ttl);
 
 			return {
-				...response,
+				ok: true,
+				status: response.status,
+				statusText: response.statusText,
+				url: response.url,
 				json: async () => data,
 				headers: new Map([
 					...Array.from(response.headers.entries()),

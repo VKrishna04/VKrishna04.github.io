@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React from "react"
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import {
 	FaGithub,
 	FaExternalLinkAlt,
 	FaStar,
 	FaCodeBranch,
-} from "react-icons/fa";
+} from "react-icons/fa"
 
 /**
  * Customizable Featured Projects Component
@@ -35,19 +35,19 @@ import {
  */
 const FeaturedProjects = ({ settings, projects = [] }) => {
 	// Get configuration from settings
-	const config = settings?.home?.featuredProjects || {};
-	const maxProjects = config.maxProjects || 6;
-	const layout = config.layout || "grid"; // 'grid', 'carousel', 'list'
-	const showStats = config.showStats !== false;
-	const showTechStack = config.showTechStack !== false;
-	const animateOnScroll = config.animateOnScroll !== false;
+	const config = settings?.home?.featuredProjects || {}
+	const maxProjects = config.maxProjects || 6
+	const layout = config.layout || "grid" // 'grid', 'carousel', 'list'
+	const showStats = config.showStats !== false
+	const showTechStack = config.showTechStack !== false
+	const animateOnScroll = config.animateOnScroll !== false
 
 	// Get featured projects (limited by settings)
 	const featuredProjects = projects
 		.filter(
 			(project) => project.featured || projects.indexOf(project) < maxProjects
 		)
-		.slice(0, maxProjects);
+		.slice(0, maxProjects)
 
 	// Animation variants
 	const containerVariants = {
@@ -58,7 +58,7 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 				staggerChildren: 0.1,
 			},
 		},
-	};
+	}
 
 	const itemVariants = {
 		hidden: { opacity: 0, y: 30 },
@@ -69,7 +69,7 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 				duration: 0.5,
 			},
 		},
-	};
+	}
 
 	// Project card component
 	const ProjectCard = ({ project }) => (
@@ -173,24 +173,24 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 				</div>
 			)}
 		</motion.div>
-	);
+	)
 
 	// Layout styles based on configuration
 	const getLayoutClasses = () => {
 		switch (layout) {
 			case "grid":
-				return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+				return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
 			case "list":
-				return "space-y-6";
+				return "space-y-6"
 			case "carousel":
-				return "flex overflow-x-auto space-x-6 pb-4 scrollbar-hide";
+				return "flex overflow-x-auto space-x-6 pb-4 scrollbar-hide"
 			default:
-				return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+				return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
 		}
-	};
+	}
 
 	if (!featuredProjects.length) {
-		return null;
+		return null
 	}
 
 	return (
@@ -228,6 +228,8 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 								config.accentColor || settings?.projects?.accentColor
 							}
 							globalButtonStyles={settings?.projects?.buttonStyles}
+							showSocialImage={settings?.projects?.showSocialImage}
+							socialPreviewConfig={settings?.projects?.socialPreview}
 						/>
 					))}
 				</motion.div>
@@ -263,6 +265,6 @@ const FeaturedProjects = ({ settings, projects = [] }) => {
 			</div>
 		</section>
 	)
-};
+}
 
-export default FeaturedProjects;
+export default FeaturedProjects

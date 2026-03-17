@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import {
 	FaHeart,
 	FaGithub,
@@ -36,7 +36,7 @@ import {
 	FaReddit,
 	FaAws,
 	FaArrowUp,
-} from "react-icons/fa";
+} from "react-icons/fa"
 import {
 	SiLeetcode,
 	SiHackerrank,
@@ -45,20 +45,20 @@ import {
 	SiYoutubemusic,
 	SiVercel,
 	SiHeroku,
-} from "react-icons/si";
-import useProjectsData from "../hooks/useProjectsData";
+} from "react-icons/si"
+import useProjectsData from "../hooks/useProjectsData"
 
 const Footer = () => {
-	const [settings, setSettings] = useState({});
-	const { repos: repositories } = useProjectsData();
+	const [settings, setSettings] = useState({})
+	const { repos: repositories } = useProjectsData()
 
 	useEffect(() => {
 		// Fetch settings for footer configuration
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
+			.catch((error) => console.warn("Could not fetch settings:", error))
+	}, [])
 
 	// Enhanced icon mapping for social links and made with icon
 	const iconMap = {
@@ -89,15 +89,15 @@ const Footer = () => {
 		SiYoutubemusic,
 		SiVercel,
 		SiHeroku,
-	};
+	}
 
 	const getIconComponent = (iconName) => {
-		return iconMap[iconName];
-	};
+		return iconMap[iconName]
+	}
 
 	const getSocialLinks = () => {
 		if (!settings.footer?.socialLinks?.show || !settings.social?.platforms)
-			return [];
+			return []
 
 		return settings.social.platforms.filter(
 			(platform) =>
@@ -105,63 +105,75 @@ const Footer = () => {
 				platform.url &&
 				platform.url.trim() !== "" &&
 				platform.showInFooter
-		);
-	};
+		)
+	}
 
 	const getProjectsCount = () => {
-		const footerConfig = settings.footer || {};
-		const statsConfig = footerConfig.stats || {};
+		const footerConfig = settings.footer || {}
+		const statsConfig = footerConfig.stats || {}
+		const staticProjects = settings.projects?.staticProjects || []
+		const visibleStaticProjects = staticProjects.filter(
+			(project) => project.showInProjects !== false
+		)
 
 		if (statsConfig.countProjectsFromData && repositories.length > 0) {
-			return `${repositories.length}+`;
+			return `${repositories.length}+`
+		}
+
+		// Use static projects immediately so visitors don't see placeholders on first load.
+		if (visibleStaticProjects.length > 0) {
+			return `${visibleStaticProjects.length}+`
 		}
 
 		// Fallback to manual count or default
 		const projectsStat = statsConfig.items?.find(
 			(item) => item.key === "projects"
-		);
-		return projectsStat?.value || "100+";
-	};
+		)
+		if (!projectsStat?.value || projectsStat.value === "auto") {
+			return "0+"
+		}
+		return projectsStat.value
+	}
 
 	const getStatValue = (item) => {
 		// Never display "auto" literally - always compute the value
 		if (item.key === "projects" && (item.value === "auto" || !item.value)) {
-			return getProjectsCount();
+			return getProjectsCount()
 		}
 		// Don't return "auto" for any other field either
 		if (item.value === "auto") {
-			return "N/A";
+			return "N/A"
 		}
-		return item.value;
-	};
+		return item.value
+	}
 
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
 			behavior: "smooth",
-		});
-	};
+		})
+	}
 
-	const footerConfig = settings.footer || {};
-	const styling = footerConfig.styling || {};
-	const socialLinks = getSocialLinks();
-	const aboutConfig = footerConfig.about || {};
-	const statsConfig = footerConfig.stats || {};
-	const quickLinksConfig = footerConfig.quickLinks || {};
+	const footerConfig = settings.footer || {}
+	const styling = footerConfig.styling || {}
+	const socialLinks = getSocialLinks()
+	const aboutConfig = footerConfig.about || {}
+	const statsConfig = footerConfig.stats || {}
+	const quickLinksConfig = footerConfig.quickLinks || {}
 
 	// Calculate grid columns based on what's shown
 	const sectionsShown = [
 		aboutConfig.show !== false, // About section
 		quickLinksConfig.show === true, // Quick links (only if explicitly enabled)
 		socialLinks.length > 0, // Social section
-	].filter(Boolean).length;
+	].filter(Boolean).length
 
 	const gridCols =
 		sectionsShown === 1
 			? "grid-cols-1"
 			: sectionsShown === 2
-			? "grid-cols-1 md:grid-cols-2"
-			: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+				? "grid-cols-1 md:grid-cols-2"
+				: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
 
 	return (
 		<footer
@@ -293,7 +305,7 @@ const Footer = () => {
 									</div>
 									<div className="flex flex-wrap gap-3 justify-end">
 										{socialLinks.map((social, index) => {
-											const IconComponent = getIconComponent(social.icon);
+											const IconComponent = getIconComponent(social.icon)
 											return IconComponent ? (
 												<a
 													key={index}
@@ -312,7 +324,7 @@ const Footer = () => {
 														{social.label}
 													</div>
 												</a>
-											) : null;
+											) : null
 										})}
 									</div>
 								</div>
@@ -342,7 +354,7 @@ const Footer = () => {
 									(() => {
 										const IconComponent = getIconComponent(
 											footerConfig.madeWith.icon
-										);
+										)
 										return IconComponent ? (
 											<div>
 												<IconComponent
@@ -351,7 +363,7 @@ const Footer = () => {
 													}`}
 												/>
 											</div>
-										) : null;
+										) : null
 									})()}
 								<span className="text-sm">
 									by{" "}
@@ -399,7 +411,7 @@ const Footer = () => {
 				<div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
 			</div>
 		</footer>
-	);
-};
+	)
+}
 
-export default Footer;
+export default Footer

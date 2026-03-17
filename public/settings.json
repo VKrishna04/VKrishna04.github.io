@@ -602,6 +602,16 @@
 			}
 		},
 		"showSocialImage": true,
+		"socialPreview": {
+			"defaultSource": "github-opengraph",
+			"opengraphVariant": "2",
+			"allowSourceToggle": true,
+			"overrides": {
+				"Life-Experimentalist/RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini",
+				"RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini"
+			},
+			"note": "opengraphVariant can be 0,1,2,etc and mostly changes cache behavior. If GitHub OpenGraph is rate-limited, card falls back to custom image and users can switch sources when both are available."
+		},
 		"tagStyles": {
 			"topics": {
 				"backgroundOpacity": 0.18,
@@ -655,7 +665,7 @@
 				"liveUrl": "https://vkrishna04.me",
 				"demoUrl": "https://vkrishna04.github.io",
 				"documentationUrl": "https://github.com/VKrishna04/VKrishna04.github.io#readme",
-				"imageUrl": "https://opengraph.githubassets.com/1/VKrishna04/VKrishna04.github.io",
+				"imageUrl": "https://opengraph.githubassets.com/2/VKrishna04/VKrishna04.github.io",
 				"tags": [
 					"portfolio",
 					"personal-website",
