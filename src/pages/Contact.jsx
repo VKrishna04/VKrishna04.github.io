@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import {
 	EnvelopeIcon,
 	PhoneIcon,
@@ -27,7 +27,7 @@ import {
 	GlobeAltIcon,
 	DocumentIcon,
 	ArrowDownTrayIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/outline"
 import {
 	FaGithub,
 	FaLinkedin,
@@ -44,7 +44,9 @@ import {
 	FaReddit,
 	FaSpotify,
 	FaAws,
-} from "react-icons/fa";
+	FaNpm,
+	FaGlobe,
+} from "react-icons/fa"
 import {
 	SiLeetcode,
 	SiHackerrank,
@@ -52,12 +54,16 @@ import {
 	SiYoutubemusic,
 	SiVercel,
 	SiHeroku,
-} from "react-icons/si";
+	SiGithubcopilot,
+	SiZenodo,
+	SiIeee,
+	SiHashnode,
+} from "react-icons/si"
 
 const Contact = () => {
-	const [settings, setSettings] = useState({});
-	const [currentTime, setCurrentTime] = useState(new Date());
-	const [copiedText, setCopiedText] = useState("");
+	const [settings, setSettings] = useState({})
+	const [currentTime, setCurrentTime] = useState(new Date())
+	const [copiedText, setCopiedText] = useState("")
 
 	// Icon mapping for dynamic icon rendering
 	const iconMap = {
@@ -76,13 +82,20 @@ const Contact = () => {
 		FaReddit,
 		FaSpotify,
 		FaAws,
+		FaNpm,
+		FaGlobe,
 		SiLeetcode,
 		SiHackerrank,
 		SiKaggle,
 		SiYoutubemusic,
 		SiVercel,
 		SiHeroku,
-	};
+		SiGithubcopilot,
+		SiZenodo,
+		SiIeee,
+		SiHashnode,
+		SiUnstop: FaGlobe,
+	}
 
 	// Safe color mapping to prevent XSS
 	const colorMap = {
@@ -94,7 +107,7 @@ const Contact = () => {
 		indigo: "text-indigo-400 hover:bg-indigo-900/20",
 		pink: "text-pink-400 hover:bg-pink-900/20",
 		gray: "text-gray-400 hover:bg-gray-900/20",
-	};
+	}
 
 	// Hero icon mapping for dynamic icon rendering
 	const heroIconMap = {
@@ -108,35 +121,164 @@ const Contact = () => {
 		GlobeAltIcon,
 		DocumentIcon,
 		ArrowDownTrayIcon,
-	};
+	}
 
 	// Helper function to get icon component
 	const getIconComponent = (iconName) => {
-		return iconMap[iconName] || FaGithub;
-	};
+		return iconMap[iconName] || FaGithub
+	}
 
 	// Helper function to get Heroicon component
 	const getHeroIcon = (iconName) => {
-		return heroIconMap[iconName] || EnvelopeIcon;
-	};
+		return heroIconMap[iconName] || EnvelopeIcon
+	}
+
+	const getCopyConfig = () => {
+		const defaults = {
+			enabled: true,
+			showOnContactInfo: true,
+			showOnQuickActions: true,
+			showOnPlatforms: true,
+			successDurationMs: 2000,
+			tooltipPrefix: "Copy",
+		}
+
+		return {
+			...defaults,
+			...(settings.contact?.copy || {}),
+		}
+	}
+
+	const getPlatformAccentColor = (platform) => {
+		if (platform.brandColor && typeof platform.brandColor === "string") {
+			return platform.brandColor
+		}
+
+		if (
+			typeof platform.color === "string" &&
+			platform.color.trim().startsWith("#")
+		) {
+			return platform.color.trim()
+		}
+
+		return "#ffffff"
+	}
+
+	const isDetailedPlatformCard = (platform) => {
+		const explicitStyle = platform.contactCardStyle
+		if (explicitStyle === "tile") return false
+		if (explicitStyle === "detailed") return true
+		return Boolean(platform.description && platform.description.trim() !== "")
+	}
+
+	const renderPlatformCard = (platform, cardType, keyId) => {
+		const IconComponent =
+			platform.icon === "EnvelopeIcon"
+				? EnvelopeIcon
+				: getIconComponent(platform.icon)
+		const copyConfig = getCopyConfig()
+		const canCopy = copyConfig.enabled && copyConfig.showOnPlatforms
+		const copyId = `platform-${platform.label || platform.name}`
+		const accentColor = getPlatformAccentColor(platform)
+
+		if (cardType === "detailed") {
+			return (
+				<div key={keyId} className="space-y-2">
+					<a
+						href={sanitizeUrl(platform.url)}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
+					>
+						<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
+							<IconComponent
+								className="text-2xl"
+								style={{ color: accentColor }}
+							/>
+						</div>
+						<div className="flex-1 min-w-0">
+							<h5 className="font-medium text-white group-hover:text-purple-300 transition-colors">
+								{platform.label || platform.name}
+							</h5>
+							<p className="text-sm text-gray-400 truncate">
+								{platform.description}
+							</p>
+						</div>
+					</a>
+					{canCopy && platform.url && (
+						<button
+							type="button"
+							onClick={() => copyToClipboard(platform.url, copyId)}
+							className="inline-flex items-center px-2 py-1 text-xs rounded border border-gray-600 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
+							title={`${copyConfig.tooltipPrefix} ${platform.label || platform.name} link`}
+						>
+							{copiedText === copyId ? (
+								<CheckCircleIcon className="h-3 w-3 mr-1 text-green-400" />
+							) : (
+								<DocumentDuplicateIcon className="h-3 w-3 mr-1" />
+							)}
+							{copiedText === copyId ? "Copied" : "Copy Link"}
+						</button>
+					)}
+				</div>
+			)
+		}
+
+		return (
+			<div key={keyId} className="space-y-2">
+				<a
+					href={sanitizeUrl(platform.url)}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="flex flex-col items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group"
+				>
+					<div className="w-12 h-12 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
+						<IconComponent
+							className="text-2xl"
+							style={{ color: accentColor }}
+						/>
+					</div>
+					<span className="text-sm text-gray-300 text-center font-medium">
+						{platform.label || platform.name}
+					</span>
+				</a>
+				{canCopy && platform.url && (
+					<button
+						type="button"
+						onClick={() => copyToClipboard(platform.url, copyId)}
+						className="inline-flex items-center px-2 py-1 text-xs rounded border border-gray-600 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
+						title={`${copyConfig.tooltipPrefix} ${platform.label || platform.name} link`}
+					>
+						{copiedText === copyId ? (
+							<CheckCircleIcon className="h-3 w-3 mr-1 text-green-400" />
+						) : (
+							<DocumentDuplicateIcon className="h-3 w-3 mr-1" />
+						)}
+						{copiedText === copyId ? "Copied" : "Copy Link"}
+					</button>
+				)}
+			</div>
+		)
+	}
 
 	// Helper function to render section by type
 	const renderSection = (sectionConfig, sectionType, columnType = "right") => {
+		const copyConfig = getCopyConfig()
 		// Grid classes based on column type
 		const getIconGridClasses = (columnType) => {
 			if (columnType === "left") {
-				return "grid grid-cols-2 gap-4"; // Only 2 icons per row in left column
+				return "grid grid-cols-2 gap-4" // Only 2 icons per row in left column
 			}
-			return "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"; // Default for right column
-		};
+			return "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" // Default for right column
+		}
 
 		const getTextGridClasses = (columnType) => {
 			if (columnType === "left") {
-				return "grid grid-cols-1 gap-4"; // Only 1 platform with description per row in left column
+				return "grid grid-cols-1 gap-4" // Only 1 platform with description per row in left column
 			}
-			return "grid grid-cols-1 lg:grid-cols-2 gap-4"; // Default for right column
-		};
-		if (!sectionConfig.show) return null;
+			return "grid grid-cols-1 lg:grid-cols-2 gap-4" // Default for right column
+		}
+		if (!sectionConfig.show) return null
 
 		switch (sectionType) {
 			case "contactInfo":
@@ -166,19 +308,21 @@ const Contact = () => {
 											)}
 										</div>
 									</div>
-									{(info.type === "email" || info.type === "phone") && (
-										<button
-											onClick={() => copyToClipboard(info.value, info.label)}
-											className="p-2 text-gray-400 hover:text-purple-400 transition-colors"
-											title={`Copy ${info.label}`}
-										>
-											{copiedText === info.label ? (
-												<CheckCircleIcon className="h-4 w-4 text-green-400" />
-											) : (
-												<DocumentDuplicateIcon className="h-4 w-4" />
-											)}
-										</button>
-									)}
+									{copyConfig.enabled &&
+										copyConfig.showOnContactInfo &&
+										(info.type === "email" || info.type === "phone") && (
+											<button
+												onClick={() => copyToClipboard(info.value, info.label)}
+												className="p-2 text-gray-400 hover:text-purple-400 transition-colors"
+												title={`${copyConfig.tooltipPrefix} ${info.label}`}
+											>
+												{copiedText === info.label ? (
+													<CheckCircleIcon className="h-4 w-4 text-green-400" />
+												) : (
+													<DocumentDuplicateIcon className="h-4 w-4" />
+												)}
+											</button>
+										)}
 								</div>
 							</div>
 						))}
@@ -203,7 +347,7 @@ const Contact = () => {
 							</div>
 						)}
 					</div>
-				);
+				)
 
 			case "currentFocus":
 				return contactConfig.currentFocus?.show ? (
@@ -216,10 +360,10 @@ const Contact = () => {
 								"Building innovative web applications"}
 						</p>
 					</div>
-				) : null;
+				) : null
 
 			case "Open to Collaborate On":
-				return;
+				return
 
 			case "quickActions":
 				return contactConfig.quickActions?.show ? (
@@ -231,42 +375,58 @@ const Contact = () => {
 							{contactConfig.quickActions.actions
 								?.filter((action) => action.enabled)
 								.map((action, index) => {
-									const IconComponent = getHeroIcon(action.icon);
-									let url = action.url;
+									const IconComponent = getHeroIcon(action.icon)
+									let url = action.url
 
 									// Replace placeholders
 									if (
 										url.includes("{email}") &&
 										settings.social?.contact?.email
 									) {
-										url = url.replace("{email}", settings.social.contact.email);
+										url = url.replace("{email}", settings.social.contact.email)
 									}
 									if (url.includes("{calendly}") && contactConfig.calendly) {
-										url = url.replace("{calendly}", contactConfig.calendly);
+										url = url.replace("{calendly}", contactConfig.calendly)
 									}
 									if (url.includes("{resume}") && settings.resume?.url) {
-										url = url.replace("{resume}", settings.resume.url);
+										url = url.replace("{resume}", settings.resume.url)
 									}
 
+									const actionCopyId = `quick-action-${action.label}`
 									return (
-										<a
-											key={index}
-											href={sanitizeUrl(url)}
-											target="_blank"
-											rel="noopener noreferrer"
-											className={`flex items-center p-2 ${
-												colorMap[action.colorTheme] ||
-												"text-gray-400 hover:bg-gray-900/20"
-											} rounded transition-colors`}
-										>
-											<IconComponent className="h-4 w-4 mr-2" />
-											{action.label}
-										</a>
-									);
+										<div key={index} className="flex items-center gap-2">
+											<a
+												href={sanitizeUrl(url)}
+												target="_blank"
+												rel="noopener noreferrer"
+												className={`flex items-center flex-1 p-2 ${
+													colorMap[action.colorTheme] ||
+													"text-gray-400 hover:bg-gray-900/20"
+												} rounded transition-colors`}
+											>
+												<IconComponent className="h-4 w-4 mr-2" />
+												{action.label}
+											</a>
+											{copyConfig.enabled && copyConfig.showOnQuickActions && (
+												<button
+													type="button"
+													onClick={() => copyToClipboard(url, actionCopyId)}
+													className="p-2 text-gray-400 hover:text-purple-400 transition-colors"
+													title={`${copyConfig.tooltipPrefix} ${action.label} link`}
+												>
+													{copiedText === actionCopyId ? (
+														<CheckCircleIcon className="h-4 w-4 text-green-400" />
+													) : (
+														<DocumentDuplicateIcon className="h-4 w-4" />
+													)}
+												</button>
+											)}
+										</div>
+									)
 								})}
 						</div>
 					</div>
-				) : null;
+				) : null
 
 			case "collaboration":
 				return collaborationInterests.length > 0 ? (
@@ -281,11 +441,11 @@ const Contact = () => {
 							</div>
 						))}
 					</div>
-				) : null;
+				) : null
 
 			case "github":
 				// GitHub platforms are now handled in the social section
-				return null;
+				return null
 
 			case "social":
 			case "section1":
@@ -299,19 +459,19 @@ const Contact = () => {
 			case "section9":
 			case "section10": {
 				// Determine which section to render
-				let targetSectionNumber;
+				let targetSectionNumber
 				if (sectionType === "social") {
 					// For backward compatibility, show all sections
-					targetSectionNumber = null;
+					targetSectionNumber = null
 				} else if (sectionType.startsWith("section")) {
 					// Extract section number from sectionType (e.g., "section1" -> 1)
-					targetSectionNumber = parseInt(sectionType.replace("section", ""));
+					targetSectionNumber = parseInt(sectionType.replace("section", ""))
 				}
 
 				const allPlatforms =
 					settings.social?.platforms?.filter(
 						(platform) => platform.enabled && platform.showInContact
-					) || [];
+					) || []
 
 				const emailPlatform = settings.social?.contact?.email
 					? {
@@ -322,67 +482,65 @@ const Contact = () => {
 							label: "Email",
 							description: "Send me a direct email",
 							contactSection: 2,
-					  }
-					: null;
+						}
+					: null
 
 				const platformsToShow = [
 					...allPlatforms,
 					...(emailPlatform ? [emailPlatform] : []),
-				];
+				]
 
 				// Filter platforms by section if targetSectionNumber is specified
 				const filteredPlatforms = targetSectionNumber
 					? platformsToShow.filter(
 							(platform) => platform.contactSection === targetSectionNumber
-					  )
-					: platformsToShow;
+						)
+					: platformsToShow
 
 				// Group platforms by contactSection
-				const groupedPlatforms = {};
+				const groupedPlatforms = {}
 				filteredPlatforms.forEach((platform) => {
-					const section = platform.contactSection || 1;
+					const section = platform.contactSection || 1
 					if (!groupedPlatforms[section]) {
-						groupedPlatforms[section] = [];
+						groupedPlatforms[section] = []
 					}
-					groupedPlatforms[section].push(platform);
-				});
+					groupedPlatforms[section].push(platform)
+				})
 
 				// Get section headings from settings
 				const sectionHeadings =
-					settings.contact?.sections?.sectionHeadings || {};
+					settings.contact?.sections?.sectionHeadings || {}
 
 				// Get platform sorting configuration
 				const platformSorting = settings.contact?.sections?.platformSorting || {
 					iconOnlyFirst: true,
 					enabled: true,
-				};
+				}
 
 				// Sort sections by number
 				const sortedSections = Object.keys(groupedPlatforms).sort(
 					(a, b) => parseInt(a) - parseInt(b)
-				);
+				)
 
 				return (
 					<div className="space-y-8">
 						{sortedSections.map((sectionNumber) => {
-							const platforms = groupedPlatforms[sectionNumber];
-							const sectionHeading = sectionHeadings[sectionNumber];
+							const platforms = groupedPlatforms[sectionNumber]
+							const sectionHeading = sectionHeadings[sectionNumber]
 
-							if (!platforms || platforms.length === 0) return null;
+							if (!platforms || platforms.length === 0) return null
 
 							// Separate platforms with and without descriptions within each section
-							const platformsWithText = platforms.filter(
-								(platform) =>
-									platform.description && platform.description.trim() !== ""
-							);
+							const platformsWithText = platforms.filter((platform) =>
+								isDetailedPlatformCard(platform)
+							)
 							const iconOnlyPlatforms = platforms.filter(
-								(platform) =>
-									!platform.description || platform.description.trim() === ""
-							);
+								(platform) => !isDetailedPlatformCard(platform)
+							)
 
 							// Determine the order based on sorting configuration
 							const shouldShowIconOnlyFirst =
-								platformSorting.enabled && platformSorting.iconOnlyFirst;
+								platformSorting.enabled && platformSorting.iconOnlyFirst
 
 							return (
 								<div key={sectionNumber} className="space-y-4">
@@ -399,72 +557,26 @@ const Contact = () => {
 											{/* Icon-only platforms first */}
 											{iconOnlyPlatforms.length > 0 && (
 												<div className={getIconGridClasses(columnType)}>
-													{iconOnlyPlatforms.map((platform, index) => {
-														const IconComponent = getIconComponent(
-															platform.icon
-														);
-
-														return (
-															<a
-																key={`${sectionNumber}-icon-${index}`}
-																href={sanitizeUrl(platform.url)}
-																target="_blank"
-																rel="noopener noreferrer"
-																className="flex flex-col items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group"
-															>
-																<div className="w-12 h-12 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
-																	<IconComponent
-																		className="text-2xl"
-																		style={{
-																			color: platform.brandColor || "#ffffff",
-																		}}
-																	/>
-																</div>
-																<span className="text-sm text-gray-300 text-center font-medium">
-																	{platform.label || platform.name}
-																</span>
-															</a>
-														);
-													})}
+													{iconOnlyPlatforms.map((platform, index) =>
+														renderPlatformCard(
+															platform,
+															"tile",
+															`${sectionNumber}-icon-${index}`
+														)
+													)}
 												</div>
 											)}
 
 											{/* Platforms with descriptions after */}
 											{platformsWithText.length > 0 && (
 												<div className={getTextGridClasses(columnType)}>
-													{platformsWithText.map((platform, index) => {
-														const IconComponent =
-															platform.icon === "EnvelopeIcon"
-																? EnvelopeIcon
-																: getIconComponent(platform.icon);
-
-														return (
-															<a
-																key={`${sectionNumber}-text-${index}`}
-																href={sanitizeUrl(platform.url)}
-																target="_blank"
-																rel="noopener noreferrer"
-																className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
-															>
-																<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
-																	<IconComponent
-																		className="text-2xl"
-																		style={{
-																			color: platform.brandColor || "#ffffff",
-																		}}
-																	/>
-																</div>
-																<div className="flex-1 min-w-0">
-																	<h5 className="font-medium text-white group-hover:text-purple-300 transition-colors">
-																		{platform.label || platform.name}
-																	</h5>
-																	<p className="text-sm text-gray-400 truncate">
-																		{platform.description}
-																	</p>
-																</div>
-															</a>
-														);
-													})}
+													{platformsWithText.map((platform, index) =>
+														renderPlatformCard(
+															platform,
+															"detailed",
+															`${sectionNumber}-text-${index}`
+														)
+													)}
 												</div>
 											)}
 										</>
@@ -473,165 +585,124 @@ const Contact = () => {
 											{/* Platforms with descriptions first */}
 											{platformsWithText.length > 0 && (
 												<div className={getTextGridClasses(columnType)}>
-													{platformsWithText.map((platform, index) => {
-														const IconComponent =
-															platform.icon === "EnvelopeIcon"
-																? EnvelopeIcon
-																: getIconComponent(platform.icon);
-
-														return (
-															<a
-																key={`${sectionNumber}-text-${index}`}
-																href={sanitizeUrl(platform.url)}
-																target="_blank"
-																rel="noopener noreferrer"
-																className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
-															>
-																<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
-																	<IconComponent
-																		className="text-2xl"
-																		style={{
-																			color: platform.brandColor || "#ffffff",
-																		}}
-																	/>
-																</div>
-																<div className="flex-1 min-w-0">
-																	<h5 className="font-medium text-white group-hover:text-purple-300 transition-colors">
-																		{platform.label || platform.name}
-																	</h5>
-																	<p className="text-sm text-gray-400 truncate">
-																		{platform.description}
-																	</p>
-																</div>
-															</a>
-														);
-													})}
+													{platformsWithText.map((platform, index) =>
+														renderPlatformCard(
+															platform,
+															"detailed",
+															`${sectionNumber}-text-${index}`
+														)
+													)}
 												</div>
 											)}
 
 											{/* Icon-only platforms after */}
 											{iconOnlyPlatforms.length > 0 && (
 												<div className={getIconGridClasses(columnType)}>
-													{iconOnlyPlatforms.map((platform, index) => {
-														const IconComponent = getIconComponent(
-															platform.icon
-														);
-
-														return (
-															<a
-																key={`${sectionNumber}-icon-${index}`}
-																href={sanitizeUrl(platform.url)}
-																target="_blank"
-																rel="noopener noreferrer"
-																className="flex flex-col items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group"
-															>
-																<div className="w-12 h-12 flex items-center justify-center mb-3 transition-transform group-hover:scale-110">
-																	<IconComponent
-																		className="text-2xl"
-																		style={{
-																			color: platform.brandColor || "#ffffff",
-																		}}
-																	/>
-																</div>
-																<span className="text-sm text-gray-300 text-center font-medium">
-																	{platform.label || platform.name}
-																</span>
-															</a>
-														);
-													})}
+													{iconOnlyPlatforms.map((platform, index) =>
+														renderPlatformCard(
+															platform,
+															"tile",
+															`${sectionNumber}-icon-${index}`
+														)
+													)}
 												</div>
 											)}
 										</>
 									)}
 								</div>
-							);
+							)
 						})}
 					</div>
-				);
+				)
 			}
 
 			default:
-				return null;
+				return null
 		}
-	};
+	}
 
 	useEffect(() => {
 		// Fetch settings for contact information
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
+			.catch((error) => console.warn("Could not fetch settings:", error))
 
 		// Update time every minute
 		const timer = setInterval(() => {
-			setCurrentTime(new Date());
-		}, 60000);
+			setCurrentTime(new Date())
+		}, 60000)
 
-		return () => clearInterval(timer);
-	}, []);
+		return () => clearInterval(timer)
+	}, [])
 
 	// Copy to clipboard functionality
 	const copyToClipboard = async (text, label) => {
+		if (!text) return
+		const copyConfig = getCopyConfig()
 		try {
-			await navigator.clipboard.writeText(text);
-			setCopiedText(label);
-			setTimeout(() => setCopiedText(""), 2000);
+			await navigator.clipboard.writeText(text)
+			setCopiedText(label)
+			setTimeout(
+				() => setCopiedText(""),
+				Number(copyConfig.successDurationMs) || 2000
+			)
 		} catch (err) {
-			console.error("Failed to copy: ", err);
+			console.error("Failed to copy: ", err)
 		}
-	};
+	}
 
 	// URL sanitization helper
 	const sanitizeUrl = (url) => {
-		if (!url || typeof url !== "string") return "#";
+		if (!url || typeof url !== "string") return "#"
 
 		// Only allow http, https, mailto, and tel protocols
-		const allowedProtocols = ["http:", "https:", "mailto:", "tel:"];
+		const allowedProtocols = ["http:", "https:", "mailto:", "tel:"]
 
 		try {
-			const urlObj = new URL(url);
+			const urlObj = new URL(url)
 			if (allowedProtocols.includes(urlObj.protocol)) {
-				return url;
+				return url
 			}
 		} catch {
 			// If URL parsing fails, treat as relative/invalid
-			return "#";
+			return "#"
 		}
 
-		return "#";
-	};
+		return "#"
+	}
 
 	// Get contact configuration
-	const contactConfig = settings.contact || {};
+	const contactConfig = settings.contact || {}
 
 	// Get collaboration interests
 	const getCollaborationInterests = () => {
-		return contactConfig.collaborationInterests || [];
-	};
+		return contactConfig.collaborationInterests || []
+	}
 
 	// Get FAQ items
 	const getFAQItems = () => {
-		return contactConfig.faq || [];
-	};
+		return contactConfig.faq || []
+	}
 
 	// Format current time for user's timezone
 	const formatCurrentTime = () => {
-		const timeZone = contactConfig.timeZone || "Asia/Kolkata";
-		const timeFormat = contactConfig.timeFormat || "12-hour";
+		const timeZone = contactConfig.timeZone || "Asia/Kolkata"
+		const timeFormat = contactConfig.timeFormat || "12-hour"
 
 		const options = {
 			timeZone,
 			hour: "2-digit",
 			minute: "2-digit",
 			hour12: timeFormat === "12-hour",
-		};
+		}
 
-		return currentTime.toLocaleTimeString("en-US", options);
-	};
+		return currentTime.toLocaleTimeString("en-US", options)
+	}
 
 	// Get contact information with proper mapping
 	const getContactInfo = () => {
-		if (!settings.social?.contact) return [];
+		if (!settings.social?.contact) return []
 
 		return [
 			{
@@ -655,12 +726,12 @@ const Contact = () => {
 				icon: MapPinIcon,
 				href: null,
 			},
-		].filter((item) => item.value && item.value.trim() !== "");
-	};
+		].filter((item) => item.value && item.value.trim() !== "")
+	}
 
-	const collaborationInterests = getCollaborationInterests();
-	const faqItems = getFAQItems();
-	const contactInfo = getContactInfo();
+	const collaborationInterests = getCollaborationInterests()
+	const faqItems = getFAQItems()
+	const contactInfo = getContactInfo()
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
@@ -787,7 +858,7 @@ const Contact = () => {
 				)}
 			</motion.div>
 		</div>
-	);
-};
+	)
+}
 
-export default Contact;
+export default Contact

@@ -256,6 +256,75 @@ const Resume = () => {
 		return settings.resume?.certifications || []
 	}
 
+	const normalizeCertification = (cert) => {
+		const issueDate = cert.issueDate || cert.issuedOn || cert.date || null
+		const hasExpiry =
+			typeof cert.hasExpiry === "boolean"
+				? cert.hasExpiry
+				: Boolean(cert.expiryDate)
+		const expiryDate = cert.expiryDate || null
+		const credentialId =
+			typeof cert.credentialId === "string"
+				? cert.credentialId.trim()
+				: cert.credentialId
+
+		return {
+			...cert,
+			issueDate,
+			hasExpiry,
+			expiryDate,
+			credentialId,
+		}
+	}
+
+	const getCertificationExpiryMeta = (cert) => {
+		if (!cert.hasExpiry) {
+			return {
+				label: "No Expiry",
+				className: "text-blue-300 border-blue-500/30 bg-blue-600/20",
+			}
+		}
+
+		if (!cert.expiryDate) {
+			return {
+				label: "Expiry Not Set",
+				className: "text-yellow-300 border-yellow-500/30 bg-yellow-600/20",
+			}
+		}
+
+		const expiry = new Date(cert.expiryDate)
+		if (Number.isNaN(expiry.getTime())) {
+			return {
+				label: "Invalid Expiry Date",
+				className: "text-red-300 border-red-500/30 bg-red-600/20",
+			}
+		}
+
+		const now = new Date()
+		now.setHours(0, 0, 0, 0)
+		expiry.setHours(0, 0, 0, 0)
+		const daysLeft = Math.ceil((expiry.getTime() - now.getTime()) / 86400000)
+
+		if (daysLeft < 0) {
+			return {
+				label: "Expired",
+				className: "text-red-300 border-red-500/30 bg-red-600/20",
+			}
+		}
+
+		if (daysLeft <= 90) {
+			return {
+				label: `Expiring in ${daysLeft} days`,
+				className: "text-yellow-300 border-yellow-500/30 bg-yellow-600/20",
+			}
+		}
+
+		return {
+			label: "Valid",
+			className: "text-green-300 border-green-500/30 bg-green-600/20",
+		}
+	}
+
 	// Get awards from settings
 	const getAwards = () => {
 		return settings.resume?.awards || []
@@ -284,7 +353,7 @@ const Resume = () => {
 	const experiences = getExperiences()
 	const education = getEducation()
 	const skills = getSkills()
-	const certifications = getCertifications()
+	const certifications = getCertifications().map(normalizeCertification)
 	const awards = getAwards()
 	const publications = getPublications()
 	const languages = getLanguages()
@@ -375,7 +444,18 @@ const Resume = () => {
 			if (certifications.length)
 				parts.push(
 					`Certifications: ${certifications
-						.map((c) => `${c.name} (${c.issuer}${c.date ? ", " + c.date : ""})`)
+						.map((c) => {
+							const dateBits = []
+							if (c.issueDate) dateBits.push(`Issued ${c.issueDate}`)
+							if (c.hasExpiry && c.expiryDate) {
+								dateBits.push(`Expires ${c.expiryDate}`)
+							} else if (!c.hasExpiry) {
+								dateBits.push("No Expiry")
+							}
+							return `${c.name} (${c.issuer}${
+								dateBits.length ? ", " + dateBits.join(" | ") : ""
+							})`
+						})
 						.join(" | ")}`
 				)
 			if (awards.length)
@@ -491,7 +571,11 @@ const Resume = () => {
 				certifications.forEach((c) => {
 					lines.push(c.name)
 					if (c.issuer) lines.push(`  Issuer        : ${c.issuer}`)
-					if (c.date) lines.push(`  Date          : ${c.date}`)
+					if (c.issueDate) lines.push(`  Issued On     : ${c.issueDate}`)
+					lines.push(`  Has Expiry    : ${c.hasExpiry ? "Yes" : "No"}`)
+					if (c.hasExpiry && c.expiryDate) {
+						lines.push(`  Expires On    : ${c.expiryDate}`)
+					}
 					if (c.credentialId) lines.push(`  Credential ID : ${c.credentialId}`)
 					lines.push("")
 				})
@@ -614,7 +698,11 @@ const Resume = () => {
 			certifications.forEach((c) => {
 				lines.push(`### ${c.name}`)
 				if (c.issuer) lines.push(`**Issuer**: ${c.issuer}`)
-				if (c.date) lines.push(`**Date**: ${c.date}`)
+				if (c.issueDate) lines.push(`**Issued On**: ${c.issueDate}`)
+				lines.push(`**Has Expiry**: ${c.hasExpiry ? "Yes" : "No"}`)
+				if (c.hasExpiry && c.expiryDate) {
+					lines.push(`**Expires On**: ${c.expiryDate}`)
+				}
 				if (c.credentialId) lines.push(`**Credential ID**: ${c.credentialId}`)
 				if (c.verificationUrl) lines.push(`**Verify**: ${c.verificationUrl}`)
 				lines.push("")
@@ -1072,11 +1160,30 @@ const Resume = () => {
 												{cert.issuer}
 											</p>
 										)}
-										{cert.date && (
-											<p className="text-gray-300 text-sm mb-2">
-												Issued: {cert.date}
+										{cert.issueDate && (
+											<p className="text-gray-300 text-sm mb-1">
+												Issued: {cert.issueDate}
 											</p>
 										)}
+										{cert.hasExpiry ? (
+											<p className="text-gray-300 text-sm mb-2">
+												Expires: {cert.expiryDate || "Not specified"}
+											</p>
+										) : (
+											<p className="text-gray-300 text-sm mb-2">
+												No expiration
+											</p>
+										)}
+										{(() => {
+											const expiryMeta = getCertificationExpiryMeta(cert)
+											return (
+												<span
+													className={`inline-flex items-center px-2 py-1 rounded-full text-xs border mb-3 ${expiryMeta.className}`}
+												>
+													{expiryMeta.label}
+												</span>
+											)
+										})()}
 										{cert.credentialId && (
 											<p className="text-gray-400 text-xs mb-3">
 												Credential ID: {cert.credentialId}

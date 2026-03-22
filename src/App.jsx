@@ -14,83 +14,88 @@
  * limitations under the License.
  */
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react"
 import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
 	useLocation,
-} from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+} from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 // import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Resume from "./pages/Resume";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import FaviconManager from "./components/FaviconManager";
-import PrivacyNotice from "./components/PrivacyNotice";
-import { trackPortfolioView } from "./utils/cflairCounter";
-import "./App.css";
+import Home from "./pages/Home"
+import About from "./pages/About"
+import Projects from "./pages/Projects"
+import Resume from "./pages/Resume"
+import Contact from "./pages/Contact"
+import NotFound from "./pages/NotFound"
+import FaviconManager from "./components/FaviconManager"
+import PrivacyNotice from "./components/PrivacyNotice"
+import { trackPortfolioView } from "./utils/cflairCounter"
+import "./App.css"
 
 // Custom hook for managing page titles and favicon
 const usePageConfiguration = (location) => {
-	const [settings, setSettings] = useState({});
+	const [settings, setSettings] = useState({})
+	const hasTrackedPortfolioView = useRef(false)
 
 	useEffect(() => {
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
-			.catch((error) => console.warn("Could not fetch settings:", error));
-	}, []);
+			.catch((error) => console.warn("Could not fetch settings:", error))
+	}, [])
 
-	// Track portfolio view on mount (only once)
+	// Track portfolio view only when enabled in settings (once per app load)
 	useEffect(() => {
-		// Track portfolio view with CFlair-Counter
-		trackPortfolioView().catch((error) =>
+		if (hasTrackedPortfolioView.current) return
+		const counterSettings = settings?.counterAPI
+		if (!counterSettings || counterSettings.enabled !== true) return
+
+		hasTrackedPortfolioView.current = true
+		trackPortfolioView(counterSettings.baseUrl).catch((error) =>
 			console.warn("Could not track portfolio view:", error)
-		);
-	}, []);
+		)
+	}, [settings])
 
 	useEffect(() => {
-		if (!settings.display) return;
+		if (!settings.display) return
 
 		// Update page title based on current route
 		const getPageTitle = () => {
-			const baseName = settings.display.officialName || "Portfolio";
+			const baseName = settings.display.officialName || "Portfolio"
 			const titles = {
 				"/": `${baseName} - Portfolio`,
 				"/about": `About - ${baseName}`,
 				"/projects": `Projects - ${baseName}`,
 				"/resume": `Resume - ${baseName}`,
 				"/contact": `Contact - ${baseName}`,
-			};
-			return titles[location.pathname] || `${baseName} - Portfolio`;
-		};
+			}
+			return titles[location.pathname] || `${baseName} - Portfolio`
+		}
 
-		document.title = getPageTitle();
+		document.title = getPageTitle()
 
 		// Update meta description
-		const metaDescription = document.querySelector('meta[name="description"]');
+		const metaDescription = document.querySelector('meta[name="description"]')
 		if (metaDescription && settings.display.officialName) {
-			metaDescription.content = `${settings.display.officialName} - Full Stack Developer Portfolio`;
+			metaDescription.content = `${settings.display.officialName} - Full Stack Developer Portfolio`
 		}
 
 		// Update author meta
-		const metaAuthor = document.querySelector('meta[name="author"]');
+		const metaAuthor = document.querySelector('meta[name="author"]')
 		if (metaAuthor && settings.display.devUsername) {
-			metaAuthor.content = settings.display.devUsername;
+			metaAuthor.content = settings.display.devUsername
 		}
-	}, [location.pathname, settings]);
+	}, [location.pathname, settings])
 
-	return settings;
-};
+	return settings
+}
 
 const AppContent = memo(() => {
-	const location = useLocation();
-	const settings = usePageConfiguration(location); // Use the hook to manage page configuration
+	const location = useLocation()
+	const settings = usePageConfiguration(location) // Use the hook to manage page configuration
 
 	return (
 		<div className="App">
@@ -112,8 +117,8 @@ const AppContent = memo(() => {
 			<PrivacyNotice />
 			{/* <ScrollToTop /> */}
 		</div>
-	);
-});
+	)
+})
 
 const App = memo(() => {
 	return (
@@ -125,7 +130,7 @@ const App = memo(() => {
 		>
 			<AppContent />
 		</Router>
-	);
-});
+	)
+})
 
-export default App;
+export default App

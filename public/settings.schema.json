@@ -2531,6 +2531,34 @@
 										"2023"
 									]
 								},
+								"issueDate": {
+									"type": "string",
+									"format": "date",
+									"description": "ISO issue date in YYYY-MM-DD format. Preferred over legacy 'date' for machine-readable certification timelines.",
+									"examples": [
+										"2025-08-27"
+									]
+								},
+								"hasExpiry": {
+									"type": "boolean",
+									"description": "Whether this certification expires.",
+									"default": false
+								},
+								"expiryDate": {
+									"oneOf": [
+										{
+											"type": "string",
+											"format": "date",
+											"description": "ISO expiration date in YYYY-MM-DD format"
+										},
+										{
+											"type": "string",
+											"const": "",
+											"description": "Empty string when no expiration date applies"
+										}
+									],
+									"description": "Expiration date (required in practice when hasExpiry is true)."
+								},
 								"credentialId": {
 									"type": "string",
 									"minLength": 1,
@@ -2572,7 +2600,6 @@
 							"required": [
 								"name",
 								"issuer",
-								"date",
 								"certificateUrl"
 							]
 						}
@@ -3340,6 +3367,25 @@
 										"Follow for tech updates and insights"
 									]
 								},
+								"brandColor": {
+									"type": "string",
+									"description": "Optional explicit HEX color used for icon rendering on Contact cards.",
+									"examples": [
+										"#ffffff",
+										"#1da1f2",
+										"#f97316"
+									]
+								},
+								"contactCardStyle": {
+									"type": "string",
+									"enum": [
+										"auto",
+										"tile",
+										"detailed"
+									],
+									"description": "Contact card style override. auto uses description presence; tile forces square icon card; detailed forces description card.",
+									"default": "auto"
+								},
 								"color": {
 									"type": "string",
 									"description": "Color for the platform - hex color code or Tailwind CSS class",
@@ -3742,6 +3788,45 @@
 							"title",
 							"actions"
 						]
+					},
+					"copy": {
+						"type": "object",
+						"description": "Controls copy-to-clipboard behavior on Contact page blocks.",
+						"additionalProperties": false,
+						"properties": {
+							"enabled": {
+								"type": "boolean",
+								"default": true,
+								"description": "Global toggle for Contact page copy buttons."
+							},
+							"showOnContactInfo": {
+								"type": "boolean",
+								"default": true,
+								"description": "Show copy buttons for direct email/phone contact info."
+							},
+							"showOnQuickActions": {
+								"type": "boolean",
+								"default": true,
+								"description": "Show copy buttons for quick action links."
+							},
+							"showOnPlatforms": {
+								"type": "boolean",
+								"default": true,
+								"description": "Show copy buttons for social/contact platform cards."
+							},
+							"successDurationMs": {
+								"type": "number",
+								"minimum": 500,
+								"maximum": 10000,
+								"default": 2000,
+								"description": "How long the copied state remains visible."
+							},
+							"tooltipPrefix": {
+								"type": "string",
+								"default": "Copy",
+								"description": "Prefix text used in copy button tooltips."
+							}
+						}
 					},
 					"sections": {
 						"type": "object",

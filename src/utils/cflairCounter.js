@@ -25,16 +25,16 @@
  * - GET /api/views/{projectName}/badge - Get SVG badge
  */
 
-const CFLAIR_BASE_URL = "https://cflaircounter.pages.dev";
-const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000;
+const CFLAIR_BASE_URL = "https://cflaircounter.pages.dev"
+const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000
 
-let cflairRateLimitedUntil = 0;
+let cflairRateLimitedUntil = 0
 
-const isInRateLimitCooldown = () => Date.now() < cflairRateLimitedUntil;
+const isInRateLimitCooldown = () => Date.now() < cflairRateLimitedUntil
 
 const markRateLimited = () => {
-	cflairRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS;
-};
+	cflairRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS
+}
 
 /**
  * Track a view for a project
@@ -44,55 +44,57 @@ const markRateLimited = () => {
  */
 export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
 	if (!projectName) {
-		console.warn("[CFlair-Counter] Project name is required");
-		return null;
+		console.warn("[CFlair-Counter] Project name is required")
+		return null
 	}
 
 	if (isInRateLimitCooldown()) {
-		return null;
+		return null
 	}
 
 	try {
-		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`;
+		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`
 		const response = await fetch(url, {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
 			},
-		});
+		})
 
 		if (response.ok) {
-			const data = await response.json();
+			const data = await response.json()
 			if (data.success) {
 				console.log(
 					`[CFlair-Counter] Tracked view for ${projectName}: ${data.totalViews} total views`
-				);
+				)
 				return {
 					success: true,
 					projectName: data.projectName,
 					totalViews: data.totalViews || 0,
 					uniqueViews: data.uniqueViews || 0,
 					timestamp: data.timestamp,
-				};
+				}
 			}
 		}
 
 		if (response.status === 429) {
-			markRateLimited();
-			console.warn("[CFlair-Counter] Rate limited (429). Backing off for 5 minutes.");
-			return null;
+			markRateLimited()
+			console.warn(
+				"[CFlair-Counter] Rate limited (429). Backing off for 5 minutes."
+			)
+			return null
 		}
 
 		console.warn(
 			`[CFlair-Counter] Failed to track view for ${projectName}: ${response.status}`
-		);
-		return null;
+		)
+		return null
 	} catch (error) {
 		console.warn(
 			`[CFlair-Counter] Error tracking view for ${projectName}:`,
 			error.message
-		);
-		return null;
+		)
+		return null
 	}
 }
 
@@ -104,25 +106,25 @@ export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
  */
 export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 	if (!projectName) {
-		console.warn("[CFlair-Counter] Project name is required");
-		return null;
+		console.warn("[CFlair-Counter] Project name is required")
+		return null
 	}
 
 	if (isInRateLimitCooldown()) {
-		return null;
+		return null
 	}
 
 	try {
-		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`;
+		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`
 		const response = await fetch(url, {
 			method: "GET",
 			headers: {
 				Accept: "application/json",
 			},
-		});
+		})
 
 		if (response.ok) {
-			const data = await response.json();
+			const data = await response.json()
 			if (data.success) {
 				return {
 					success: true,
@@ -131,26 +133,28 @@ export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 					uniqueViews: data.uniqueViews || 0,
 					description: data.description,
 					createdAt: data.createdAt,
-				};
+				}
 			}
 		}
 
 		if (response.status === 429) {
-			markRateLimited();
-			console.warn("[CFlair-Counter] Rate limited (429). Backing off for 5 minutes.");
-			return null;
+			markRateLimited()
+			console.warn(
+				"[CFlair-Counter] Rate limited (429). Backing off for 5 minutes."
+			)
+			return null
 		}
 
 		console.warn(
 			`[CFlair-Counter] Failed to get stats for ${projectName}: ${response.status}`
-		);
-		return null;
+		)
+		return null
 	} catch (error) {
 		console.warn(
 			`[CFlair-Counter] Error getting stats for ${projectName}:`,
 			error.message
-		);
-		return null;
+		)
+		return null
 	}
 }
 
@@ -169,18 +173,18 @@ export function getProjectBadgeUrl(
 	baseUrl = CFLAIR_BASE_URL
 ) {
 	if (!projectName) {
-		console.warn("[CFlair-Counter] Project name is required");
-		return "";
+		console.warn("[CFlair-Counter] Project name is required")
+		return ""
 	}
 
-	const params = new URLSearchParams();
-	if (options.color) params.set("color", options.color);
-	if (options.label) params.set("label", options.label);
+	const params = new URLSearchParams()
+	if (options.color) params.set("color", options.color)
+	if (options.label) params.set("label", options.label)
 
-	const queryString = params.toString();
-	const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}/badge`;
+	const queryString = params.toString()
+	const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}/badge`
 
-	return queryString ? `${url}?${queryString}` : url;
+	return queryString ? `${url}?${queryString}` : url
 }
 
 /**
@@ -190,7 +194,7 @@ export function getProjectBadgeUrl(
  * @returns {Promise<object|null>} - The response data or null on error
  */
 export async function trackPortfolioView(baseUrl = CFLAIR_BASE_URL) {
-	return trackProjectView("vkrishna04-portfolio", baseUrl);
+	return trackProjectView("vkrishna04-portfolio", baseUrl)
 }
 
 /**
@@ -206,20 +210,20 @@ export async function batchTrackViews(
 	baseUrl = CFLAIR_BASE_URL,
 	delayMs = 200
 ) {
-	const results = [];
+	const results = []
 
 	for (let i = 0; i < projectNames.length; i++) {
-		const projectName = projectNames[i];
-		const result = await trackProjectView(projectName, baseUrl);
-		results.push(result);
+		const projectName = projectNames[i]
+		const result = await trackProjectView(projectName, baseUrl)
+		results.push(result)
 
 		// Add delay to avoid rate limiting (except for last item)
 		if (i < projectNames.length - 1) {
-			await new Promise((resolve) => setTimeout(resolve, delayMs));
+			await new Promise((resolve) => setTimeout(resolve, delayMs))
 		}
 	}
 
-	return results;
+	return results
 }
 
 /**
@@ -234,16 +238,16 @@ export async function isCFlairCounterAvailable(baseUrl = CFLAIR_BASE_URL) {
 			headers: {
 				Accept: "application/json",
 			},
-		});
+		})
 
 		if (response.ok) {
-			const data = await response.json();
-			return data.success === true && data.status === "ok";
+			const data = await response.json()
+			return data.success === true && data.status === "ok"
 		}
-		return false;
+		return false
 	} catch (error) {
-		console.warn("[CFlair-Counter] Service unavailable:", error.message);
-		return false;
+		console.warn("[CFlair-Counter] Service unavailable:", error.message)
+		return false
 	}
 }
 
@@ -254,4 +258,4 @@ export default {
 	trackPortfolioView,
 	batchTrackViews,
 	isCFlairCounterAvailable,
-};
+}

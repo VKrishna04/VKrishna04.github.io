@@ -107,7 +107,7 @@
 		"openGraph": {
 			"title": "Krishna GSVV — Developer & AI Researcher",
 			"description": "Award-winning developer & AI researcher. IEEE publications, ₹3.75L+ in hackathon wins, and 25+ open-source projects.",
-			"image": "https://github.com/VKrishna04.png",
+			"image": "https://vkrishna04.me/social.png",
 			"imageWidth": 1200,
 			"imageHeight": 630,
 			"siteName": "Krishna GSVV Portfolio"
@@ -115,7 +115,7 @@
 		"twitter": {
 			"title": "Krishna GSVV — Developer & AI Researcher",
 			"description": "Award-winning developer & AI researcher. Building open-source tools, ML systems, and impactful web apps.",
-			"image": "https://github.com/VKrishna04.png",
+			"image": "https://vkrishna04.me/social.png",
 			"creator": "@VKrishna04"
 		},
 		"structuredData": {
@@ -1996,7 +1996,9 @@
 				"name": "AWS Certified Cloud Practitioner",
 				"certificateUrl": "https://drive.google.com/file/d/1RoyflDxiOjvilKKqSdrkdduH85YeMIs1/view?usp=sharing",
 				"credentialId": "a6d782dae67d4865980a627800cd6a14",
-				"date": "August 27, 2025 - 2028",
+				"issueDate": "2025-08-27",
+				"hasExpiry": true,
+				"expiryDate": "2028-08-27",
 				"issuer": "Amazon Web Services",
 				"verificationUrl": "https://cp.certmetrics.com/amazon/en/public/verify/credential/a6d782dae67d4865980a627800cd6a14"
 			},
@@ -2004,7 +2006,9 @@
 				"name": "Oracle Cloud Infrastructure 2025 Certified DevOps Professional",
 				"certificateUrl": "https://drive.google.com/file/d/1agdxuPZMtTZKG2EATzEp_WKyLCkbx4uL/view?usp=drive_link",
 				"credentialId": "321011846OCI25DOPOCP",
-				"date": "August 01, 2025",
+				"issueDate": "2025-08-01",
+				"hasExpiry": true,
+				"expiryDate": "2027-08-01",
 				"issuer": "Oracle University",
 				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=036D4F15C7CE2DBFDA848564556DC1AC0DD279E215B4C84E699CC51AFA72D953"
 			},
@@ -2012,15 +2016,19 @@
 				"name": "Oracle Cloud Infrastructure 2025 Certified Architect Associate",
 				"certificateUrl": "https://drive.google.com/file/d/1wMEJIXJvo9mqDRl8qwCzm77HUelJk5Ru/view?usp=sharing",
 				"credentialId": "321011846OCI25CAA",
-				"date": "July 16, 2025",
+				"issueDate": "2025-07-16",
+				"hasExpiry": true,
+				"expiryDate": "2027-07-16",
 				"issuer": "Oracle University",
 				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=D7A5B1169CBBF5293E9E216E889A16D9E28346FC8CC006E736CAE94691F767F4"
 			},
 			{
 				"name": "Oracle Cloud Infrastructure 2025 Certified Foundations Associate",
 				"certificateUrl": "https://drive.google.com/file/d/1g03w4xyfmwqlIzUT2JDPrZgkHbgGM7AK/view?usp=sharing",
-				"credentialId": " 321011846OCI25FNDCFA",
-				"date": "June 16, 2025",
+				"credentialId": "321011846OCI25FNDCFA",
+				"issueDate": "2025-06-16",
+				"hasExpiry": true,
+				"expiryDate": "2027-06-16",
 				"issuer": "Oracle University",
 				"verificationUrl": "https://catalog-education.oracle.com/ords/certview/sharebadge?id=8F7882AF5335917AF532785D4A37504361F573F994774F8543319A454B3579F3"
 			},
@@ -2028,7 +2036,9 @@
 				"name": "HackerRank Python (Basic) Certificate",
 				"certificateUrl": "https://drive.google.com/file/d/1cNH4dJ5LC0CwPEbnxK-jr4NXJXJ27TM-/view?usp=sharing",
 				"credentialId": "870619ABC876",
-				"date": "Sep 30, 2024",
+				"issueDate": "2024-09-30",
+				"hasExpiry": false,
+				"expiryDate": "",
 				"issuer": "HackerRank",
 				"verificationUrl": "https://www.hackerrank.com/certificates/870619abc876"
 			},
@@ -2036,12 +2046,14 @@
 				"name": "Cloud Computing NPTEL noc25-cs11",
 				"certificateUrl": "https://drive.google.com/file/d/1Uh0w9lX2LmxDDa9sVtk_yJZt-hqboGxy/view?usp=sharing",
 				"credentialId": "NPTEL25CS11S1060001591",
-				"date": "January - April, 2025",
+				"issueDate": "2025-04-30",
+				"hasExpiry": false,
+				"expiryDate": "",
 				"issuer": "NPTEL - IIT Kharagpur",
 				"verificationUrl": "https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S106000159104239510.pdf"
 			}
 		],
-		"certificationsNote": "Configure certifications - each should have name, issuer, date, credentialId, certificateUrl (to view certificate), and verificationUrl (to verify certificate). Links are optional and will only show if provided.",
+		"certificationsNote": "Configure certifications with machine-readable validity metadata. Recommended fields: name, issuer, issueDate (YYYY-MM-DD), hasExpiry (boolean), expiryDate (YYYY-MM-DD or empty when hasExpiry is false), credentialId, certificateUrl, and verificationUrl.",
 		"certificationsHeading": "Certifications",
 		"certificationsIcon": "ShieldCheckIcon",
 		"awards": [
@@ -2258,6 +2270,8 @@
 				"url": "https://github.com/VKrishna04",
 				"label": "GitHub",
 				"description": "Check out my repositories and open source contributions",
+				"brandColor": "#ffffff",
+				"contactCardStyle": "detailed",
 				"color": "#ffffff",
 				"hoverColor": "rgb(209, 213, 219)",
 				"showInHome": true,
@@ -2273,6 +2287,8 @@
 				"url": "https://github.com/Life-Experimentalist",
 				"label": "GitHub Organization",
 				"description": "My organization where I store working projects",
+				"brandColor": "#ffffff",
+				"contactCardStyle": "detailed",
 				"color": "#ffffff",
 				"hoverColor": "rgb(209, 213, 219)",
 				"showInHome": true,
@@ -2288,6 +2304,8 @@
 				"url": "https://linkedin.com/in/vkrishna04",
 				"label": "LinkedIn",
 				"description": "Connect with me professionally and see my career journey",
+				"brandColor": "#0a66c2",
+				"contactCardStyle": "detailed",
 				"color": "#3b82f6",
 				"hoverColor": "rgb(96, 165, 250)",
 				"showInHome": true,
@@ -2316,6 +2334,9 @@
 				"icon": "FaInstagram",
 				"url": "https://instagram.com/vkrishna04",
 				"label": "Instagram",
+				"description": "Personal snapshots, design ideas, and everyday build moments.",
+				"brandColor": "#e1306c",
+				"contactCardStyle": "tile",
 				"color": "#ec4899",
 				"hoverColor": "rgb(244, 114, 182)",
 				"showInHome": true,
@@ -2331,6 +2352,8 @@
 				"url": "https://discordapp.com/users/vkrishna04",
 				"label": "Discord",
 				"description": "Join me for tech discussions and collaborations",
+				"brandColor": "#5865f2",
+				"contactCardStyle": "detailed",
 				"color": "text-indigo-500",
 				"hoverColor": "hover:text-indigo-400",
 				"showInHome": false,
@@ -2430,6 +2453,9 @@
 				"icon": "FaReddit",
 				"url": "https://www.reddit.com/user/Krishnalsh04/",
 				"label": "Reddit",
+				"description": "Threads on tooling, AI workflows, and builder communities.",
+				"brandColor": "#ff4500",
+				"contactCardStyle": "detailed",
 				"color": "text-orange-500",
 				"hoverColor": "hover:text-orange-400",
 				"showInHome": false,
@@ -2445,6 +2471,8 @@
 				"url": "https://leetcode.com/u/VKrishna04/",
 				"label": "LeetCode",
 				"description": "Check out my coding solutions and progress",
+				"brandColor": "#f59e0b",
+				"contactCardStyle": "detailed",
 				"color": "text-orange-400",
 				"hoverColor": "hover:text-orange-300",
 				"showInHome": false,
@@ -2489,6 +2517,9 @@
 				"icon": "FaSpotify",
 				"url": "https://open.spotify.com/user/drz1bknr8dy7yo88gwzi9nl3d?si=86da6e56d31d4ea0",
 				"label": "Spotify",
+				"description": "My coding and focus playlists.",
+				"brandColor": "#1db954",
+				"contactCardStyle": "tile",
 				"color": "text-green-500",
 				"hoverColor": "hover:text-green-400",
 				"showInHome": false,
@@ -2503,6 +2534,9 @@
 				"icon": "SiYoutubemusic",
 				"url": "https://music.youtube.com/channel/UCh918uhzsqX-D32Etxq61eQ?si=Uvyy7e6Pg0Ye7BSK",
 				"label": "YouTube Music",
+				"description": "Chill and deep-focus mixes for long build sessions.",
+				"brandColor": "#ff0000",
+				"contactCardStyle": "tile",
 				"color": "text-red-500",
 				"hoverColor": "hover:text-red-400",
 				"showInHome": false,
@@ -2603,13 +2637,15 @@
 				"url": "https://codepen.io/vkrishna04",
 				"label": "CodePen",
 				"description": "Interactive code examples and experiments",
+				"brandColor": "#ffffff",
+				"contactCardStyle": "detailed",
 				"color": "text-white",
 				"hoverColor": "hover:text-gray-300",
 				"showInHome": false,
 				"showInFooter": false,
 				"showInContact": true,
 				"contactSection": 2,
-				"enabled": false
+				"enabled": true
 			},
 			{
 				"name": "Calendly",
@@ -2720,16 +2756,18 @@
 				"name": "Hashnode",
 				"key": "hashnode",
 				"icon": "SiHashnode",
-				"url": "",
+				"url": "https://hashnode.com/@vkrishna04",
 				"label": "Hashnode Blog",
 				"description": "My technical articles and engineering deep-dives",
+				"brandColor": "#2962ff",
+				"contactCardStyle": "detailed",
 				"color": "text-blue-400",
 				"hoverColor": "hover:text-blue-300",
 				"showInHome": false,
 				"showInFooter": false,
 				"showInContact": true,
 				"contactSection": 2,
-				"enabled": false
+				"enabled": true
 			}
 		],
 		"contact": {
@@ -2801,6 +2839,14 @@
 					"enabled": false
 				}
 			]
+		},
+		"copy": {
+			"enabled": true,
+			"showOnContactInfo": true,
+			"showOnQuickActions": true,
+			"showOnPlatforms": true,
+			"successDurationMs": 2200,
+			"tooltipPrefix": "Copy"
 		},
 		"sections": {
 			"platformSorting": {

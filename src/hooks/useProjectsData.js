@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-import { useState, useEffect, useCallback } from "react";
-import { cachedFetch } from "../utils/githubCache";
+import { useState, useEffect, useCallback } from "react"
+import { cachedFetch } from "../utils/githubCache"
 
 const useProjectsData = () => {
-	const [repositories, setRepositories] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
-	const [settings, setSettings] = useState({});
-	const [counterData, setCounterData] = useState({});
-	const [counterLoading, setCounterLoading] = useState(false);
+	const [repositories, setRepositories] = useState([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [settings, setSettings] = useState({})
+	const [counterData, setCounterData] = useState({})
+	const [counterLoading, setCounterLoading] = useState(false)
 
 	// Fetch settings configuration
 	const fetchSettings = async () => {
 		try {
-			const response = await fetch("/settings.json");
+			const response = await fetch("/settings.json")
 			if (response.ok) {
-				const data = await response.json();
-				setSettings(data);
-				return data;
+				const data = await response.json()
+				setSettings(data)
+				return data
 			}
 		} catch (error) {
-			console.warn("Could not fetch settings:", error);
+			console.warn("Could not fetch settings:", error)
 		}
 
 		// Fallback settings if file can't be loaded
@@ -70,10 +70,10 @@ const useProjectsData = () => {
 					customMappings: {},
 				},
 			},
-		};
-		setSettings(fallbackSettings);
-		return fallbackSettings;
-	};
+		}
+		setSettings(fallbackSettings)
+		return fallbackSettings
+	}
 
 	// Fetch repository languages (top 3)
 	const fetchRepositoryLanguages = async (owner, repo, apiHeaders) => {
@@ -81,13 +81,13 @@ const useProjectsData = () => {
 			const response = await cachedFetch(
 				`https://api.github.com/repos/${owner}/${repo}/languages`,
 				{ headers: apiHeaders }
-			);
+			)
 			if (response.ok) {
-				const languages = await response.json();
+				const languages = await response.json()
 				const total = Object.values(languages).reduce(
 					(sum, bytes) => sum + bytes,
 					0
-				);
+				)
 
 				// Get top 3 languages by bytes
 				const sortedLanguages = Object.entries(languages)
@@ -96,28 +96,28 @@ const useProjectsData = () => {
 					.map(([lang, bytes]) => ({
 						name: lang,
 						percentage: ((bytes / total) * 100).toFixed(1),
-					}));
+					}))
 
-				return sortedLanguages;
+				return sortedLanguages
 			}
 		} catch (error) {
-			console.warn(`Could not fetch languages for ${repo}:`, error);
+			console.warn(`Could not fetch languages for ${repo}:`, error)
 		}
-		return [];
-	};
+		return []
+	}
 
 	// Generate stats URLs for GitHub repositories
 	const generateStatsUrls = (githubUrl, repoName, owner) => {
-		if (!githubUrl && !repoName && !owner) return null;
+		if (!githubUrl && !repoName && !owner) return null
 
-		let baseUrl;
+		let baseUrl
 		if (githubUrl) {
 			// Extract base URL from github URL
-			baseUrl = githubUrl.replace(/\/$/, ""); // Remove trailing slash
+			baseUrl = githubUrl.replace(/\/$/, "") // Remove trailing slash
 		} else if (repoName && owner) {
-			baseUrl = `https://github.com/${owner}/${repoName}`;
+			baseUrl = `https://github.com/${owner}/${repoName}`
 		} else {
-			return null;
+			return null
 		}
 
 		return {
@@ -125,42 +125,42 @@ const useProjectsData = () => {
 			forksUrl: `${baseUrl}/network/members`,
 			watchersUrl: `${baseUrl}/watchers`,
 			issuesUrl: `${baseUrl}/issues`,
-		};
-	};
+		}
+	}
 
 	// Fetch CFlair-Counter data (multiple projects)
 	const fetchCounterData = async (config) => {
-		if (!config.counterAPI?.enabled) return {};
+		if (!config.counterAPI?.enabled) return {}
 
-		setCounterLoading(true);
+		setCounterLoading(true)
 		try {
-			const controller = new AbortController();
+			const controller = new AbortController()
 			const timeoutId = setTimeout(
 				() => controller.abort(),
 				config.counterAPI.timeout || 10000
-			);
+			)
 
 			// CFlair-Counter doesn't have a /projects endpoint
 			// Instead, we'll need to track projects individually
 			// For now, return empty object and rely on individual project fetches
-			setCounterData({});
-			clearTimeout(timeoutId);
-			return {};
+			setCounterData({})
+			clearTimeout(timeoutId)
+			return {}
 		} catch (error) {
 			if (error.name === "AbortError") {
-				console.warn("CFlair-Counter request timed out");
+				console.warn("CFlair-Counter request timed out")
 			} else {
-				console.warn("Could not fetch CFlair-Counter data:", error);
+				console.warn("Could not fetch CFlair-Counter data:", error)
 			}
 
 			if (config.counterAPI.fallbackOnError) {
-				return {};
+				return {}
 			}
 		} finally {
-			setCounterLoading(false);
+			setCounterLoading(false)
 		}
-		return {};
-	};
+		return {}
+	}
 
 	// Fetch view count for a single project from CFlair-Counter
 	const fetchProjectCounter = async (projectName, baseUrl) => {
@@ -170,107 +170,107 @@ const useProjectsData = () => {
 				headers: {
 					Accept: "application/json",
 				},
-			});
+			})
 
 			if (response.ok) {
-				const data = await response.json();
+				const data = await response.json()
 				if (data.success) {
-					return data.totalViews || 0;
+					return data.totalViews || 0
 				}
 			}
 		} catch (error) {
-			console.warn(`Could not fetch counter for ${projectName}:`, error);
+			console.warn(`Could not fetch counter for ${projectName}:`, error)
 		}
-		return null;
-	};
+		return null
+	}
 
 	// Get counter value for a repository
 	const getCounterValue = (repoName, settings) => {
-		if (!settings.counterAPI?.enabled) return null;
+		if (!settings.counterAPI?.enabled) return null
 
 		const { customMappings, autoGenerate } =
-			settings.counterAPI.projectMapping || {};
+			settings.counterAPI.projectMapping || {}
 
 		// Check custom mappings first
 		if (customMappings && customMappings[repoName]) {
-			const mappedName = customMappings[repoName];
-			return counterData[mappedName] || null;
+			const mappedName = customMappings[repoName]
+			return counterData[mappedName] || null
 		}
 
 		// Auto-generate mapping if enabled
 		if (autoGenerate) {
-			return counterData[repoName] || null;
+			return counterData[repoName] || null
 		}
 
-		return null;
-	};
+		return null
+	}
 
 	// Fetch repositories from GitHub API
 	const fetchRepositories = useCallback(async () => {
-		setLoading(true);
-		setError(null);
+		setLoading(true)
+		setError(null)
 
 		const buildGitHubApiError = async (response) => {
-			let detail = "";
+			let detail = ""
 			try {
-				const errorBody = await response.json();
-				detail = errorBody?.message || errorBody?.error || "";
+				const errorBody = await response.json()
+				detail = errorBody?.message || errorBody?.error || ""
 			} catch {
 				// Ignore JSON parsing errors for non-JSON responses
 			}
 
 			const status =
-				typeof response?.status === "number" ? response.status : "unknown";
+				typeof response?.status === "number" ? response.status : "unknown"
 			return new Error(
 				`GitHub API Error: ${status}${detail ? ` - ${detail}` : ""}`
-			);
-		};
+			)
+		}
 
 		try {
-			const config = await fetchSettings();
+			const config = await fetchSettings()
 
 			// Fetch CounterAPI data in parallel
-			const counterPromise = fetchCounterData(config);
+			const counterPromise = fetchCounterData(config)
 
 			// Build API URL and options from settings
 			const apiUrl =
 				config.github?.apiUrl ||
 				`https://api.github.com/${
 					config.github.type === "org" ? "orgs" : "users"
-				}/${config.github.username}/repos`;
+				}/${config.github.username}/repos`
 
 			const apiOptions = {
 				headers: {
 					Accept: "application/vnd.github.v3+json",
 					"User-Agent": config.github?.userAgent || "VKrishna04-Portfolio",
 				},
-			};
-
-			const response = await cachedFetch(apiUrl, apiOptions);
-
-			if (!response.ok) {
-				throw await buildGitHubApiError(response);
 			}
 
-			const repos = await response.json();
-			const ignoreList = config.projects?.ignore || [];
-			const projectSettings = config.projects || {};
+			const response = await cachedFetch(apiUrl, apiOptions)
+
+			if (!response.ok) {
+				throw await buildGitHubApiError(response)
+			}
+
+			const repos = await response.json()
+			const ignoreList = config.projects?.ignore || []
+			const projectSettings = config.projects || {}
 
 			// Await counter data
-			await counterPromise;
+			await counterPromise
 
 			// Transform and filter GitHub API data
 			const filteredRepos = repos
 				.filter((repo) => {
 					// Filter out private repos if setting is false
-					if (!projectSettings.showPrivate && repo.private) return false;
+					if (!projectSettings.showPrivate && repo.private) return false
 					// Filter out forks if setting is false
-					if (!projectSettings.showForks && repo.fork) return false;
+					if (!projectSettings.showForks && repo.fork) return false
 					// Filter out repos in ignore list
-					if (ignoreList.includes(repo.name)) return false;
-					return true;
+					if (ignoreList.includes(repo.name)) return false
+					return true
 				})
-				.slice(0, projectSettings.maxProjects || 15);
+				.slice(0, projectSettings.maxProjects || 15)
 
 			// Fetch languages for each repository
 			const reposWithLanguages = await Promise.all(
@@ -279,18 +279,18 @@ const useProjectsData = () => {
 						repo.owner.login,
 						repo.name,
 						apiOptions.headers
-					);
+					)
 
 					// Fetch counter value for this specific repository from CFlair-Counter
-					let counterValue = null;
+					let counterValue = null
 					if (config.counterAPI?.enabled) {
 						const projectName =
 							config.counterAPI.projectMapping?.customMappings?.[repo.name] ||
-							repo.name;
+							repo.name
 						counterValue = await fetchProjectCounter(
 							projectName,
 							config.counterAPI.baseUrl
-						);
+						)
 					}
 
 					return {
@@ -316,55 +316,55 @@ const useProjectsData = () => {
 							repo.name,
 							repo.owner.login
 						),
-					};
+					}
 				})
-			);
+			)
 
 			// Sort repositories
 			const sortedRepos = reposWithLanguages.sort((a, b) => {
-				const sortBy = projectSettings.sortBy || "updated";
-				const sortOrder = projectSettings.sortOrder || "desc";
+				const sortBy = projectSettings.sortBy || "updated"
+				const sortOrder = projectSettings.sortOrder || "desc"
 
-				let comparison = 0;
+				let comparison = 0
 				switch (sortBy) {
 					case "updated":
-						comparison = new Date(b.updated_at) - new Date(a.updated_at);
-						break;
+						comparison = new Date(b.updated_at) - new Date(a.updated_at)
+						break
 					case "created":
-						comparison = new Date(b.created_at) - new Date(a.created_at);
-						break;
+						comparison = new Date(b.created_at) - new Date(a.created_at)
+						break
 					case "stars":
-						comparison = b.stargazers_count - a.stargazers_count;
-						break;
+						comparison = b.stargazers_count - a.stargazers_count
+						break
 					case "name":
-						comparison = a.name.localeCompare(b.name);
-						break;
+						comparison = a.name.localeCompare(b.name)
+						break
 					default:
-						comparison = new Date(b.updated_at) - new Date(a.updated_at);
+						comparison = new Date(b.updated_at) - new Date(a.updated_at)
 				}
 
-				return sortOrder === "asc" ? -comparison : comparison;
-			});
+				return sortOrder === "asc" ? -comparison : comparison
+			})
 
-			setRepositories(sortedRepos);
+			setRepositories(sortedRepos)
 		} catch (error) {
-			console.error("Error fetching repositories:", error);
-			setError(error.message);
+			console.error("Error fetching repositories:", error)
+			setError(error.message)
 
 			// Fallback mode
 			if (settings.projects?.fallbackMode) {
-				setRepositories([]);
+				setRepositories([])
 			}
 		} finally {
-			setLoading(false);
+			setLoading(false)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
 	// Initial fetch
 	useEffect(() => {
-		fetchRepositories();
-	}, [fetchRepositories]);
+		fetchRepositories()
+	}, [fetchRepositories])
 
 	return {
 		repos: repositories,
@@ -375,7 +375,7 @@ const useProjectsData = () => {
 		counterLoading,
 		refetch: fetchRepositories,
 		getCounterValue: (repoName) => getCounterValue(repoName, settings),
-	};
-};
+	}
+}
 
-export default useProjectsData;
+export default useProjectsData
