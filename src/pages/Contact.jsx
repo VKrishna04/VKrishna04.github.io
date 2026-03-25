@@ -149,6 +149,61 @@ const Contact = () => {
 		}
 	}
 
+	const buildContactSnapshot = () => {
+		const lines = []
+		const personName =
+			settings.display?.officialName ||
+			settings.about?.name ||
+			"Portfolio Owner"
+
+		lines.push(`CONTACT SNAPSHOT - ${personName}`)
+
+		const infoRows = getContactInfo()
+		if (infoRows.length) {
+			lines.push("")
+			lines.push("CONTACT INFO")
+			infoRows.forEach((item) => {
+				lines.push(`- ${item.label}: ${item.value}`)
+			})
+		}
+
+		const enabledActions =
+			settings.contact?.quickActions?.actions?.filter(
+				(action) => action.enabled
+			) || []
+		if (enabledActions.length) {
+			lines.push("")
+			lines.push("QUICK ACTIONS")
+			enabledActions.forEach((action) => {
+				let url = action.url || ""
+				if (url.includes("{email}") && settings.social?.contact?.email) {
+					url = url.replace("{email}", settings.social.contact.email)
+				}
+				if (url.includes("{calendly}") && settings.contact?.calendly) {
+					url = url.replace("{calendly}", settings.contact.calendly)
+				}
+				if (url.includes("{resume}") && settings.resume?.url) {
+					url = url.replace("{resume}", settings.resume.url)
+				}
+				lines.push(`- ${action.label}: ${url}`)
+			})
+		}
+
+		const enabledPlatforms =
+			settings.social?.platforms?.filter(
+				(platform) => platform.enabled && platform.showInContact && platform.url
+			) || []
+		if (enabledPlatforms.length) {
+			lines.push("")
+			lines.push("PLATFORMS")
+			enabledPlatforms.forEach((platform) => {
+				lines.push(`- ${platform.label || platform.name}: ${platform.url}`)
+			})
+		}
+
+		return lines.join("\n")
+	}
+
 	const getPlatformAccentColor = (platform) => {
 		if (platform.brandColor && typeof platform.brandColor === "string") {
 			return platform.brandColor
@@ -183,12 +238,12 @@ const Contact = () => {
 
 		if (cardType === "detailed") {
 			return (
-				<div key={keyId} className="space-y-2">
+				<div key={keyId} className="relative">
 					<a
 						href={sanitizeUrl(platform.url)}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
+						className="flex items-center p-4 pr-14 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] group"
 					>
 						<div className="w-12 h-12 flex items-center justify-center mr-4 transition-transform group-hover:scale-110">
 							<IconComponent
@@ -209,15 +264,14 @@ const Contact = () => {
 						<button
 							type="button"
 							onClick={() => copyToClipboard(platform.url, copyId)}
-							className="inline-flex items-center px-2 py-1 text-xs rounded border border-gray-600 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
+							className="absolute top-3 right-3 inline-flex items-center justify-center w-8 h-8 rounded-md border border-gray-600 bg-gray-900/70 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
 							title={`${copyConfig.tooltipPrefix} ${platform.label || platform.name} link`}
 						>
 							{copiedText === copyId ? (
-								<CheckCircleIcon className="h-3 w-3 mr-1 text-green-400" />
+								<CheckCircleIcon className="h-4 w-4 text-green-400" />
 							) : (
-								<DocumentDuplicateIcon className="h-3 w-3 mr-1" />
+								<DocumentDuplicateIcon className="h-4 w-4" />
 							)}
-							{copiedText === copyId ? "Copied" : "Copy Link"}
 						</button>
 					)}
 				</div>
@@ -225,7 +279,7 @@ const Contact = () => {
 		}
 
 		return (
-			<div key={keyId} className="space-y-2">
+			<div key={keyId} className="relative">
 				<a
 					href={sanitizeUrl(platform.url)}
 					target="_blank"
@@ -246,15 +300,14 @@ const Contact = () => {
 					<button
 						type="button"
 						onClick={() => copyToClipboard(platform.url, copyId)}
-						className="inline-flex items-center px-2 py-1 text-xs rounded border border-gray-600 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
+						className="absolute top-2 right-2 inline-flex items-center justify-center w-8 h-8 rounded-md border border-gray-600 bg-gray-900/70 text-gray-300 hover:text-purple-300 hover:border-purple-500/50 transition-colors"
 						title={`${copyConfig.tooltipPrefix} ${platform.label || platform.name} link`}
 					>
 						{copiedText === copyId ? (
-							<CheckCircleIcon className="h-3 w-3 mr-1 text-green-400" />
+							<CheckCircleIcon className="h-4 w-4 text-green-400" />
 						) : (
-							<DocumentDuplicateIcon className="h-3 w-3 mr-1" />
+							<DocumentDuplicateIcon className="h-4 w-4" />
 						)}
-						{copiedText === copyId ? "Copied" : "Copy Link"}
 					</button>
 				)}
 			</div>
@@ -732,6 +785,8 @@ const Contact = () => {
 	const collaborationInterests = getCollaborationInterests()
 	const faqItems = getFAQItems()
 	const contactInfo = getContactInfo()
+	const copyConfig = getCopyConfig()
+	const contactSnapshotCopyId = "contact-snapshot"
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
@@ -750,6 +805,33 @@ const Contact = () => {
 						{contactConfig.subtitle ||
 							"I'm always interested in new opportunities and collaborations. Let's build something amazing together!"}
 					</p>
+					{copyConfig.enabled && (
+						<div className="mt-6 flex justify-center">
+							<button
+								type="button"
+								onClick={() =>
+									copyToClipboard(buildContactSnapshot(), contactSnapshotCopyId)
+								}
+								className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg border text-sm transition-all duration-300 ${
+									copiedText === contactSnapshotCopyId
+										? "bg-green-500/20 border-green-500/40 text-green-300"
+										: "bg-white/5 border-white/10 text-gray-300 hover:bg-purple-500/10 hover:text-purple-300"
+								}`}
+								title="Copy full contact details for quick sharing"
+							>
+								{copiedText === contactSnapshotCopyId ? (
+									<CheckCircleIcon className="h-4 w-4" />
+								) : (
+									<DocumentDuplicateIcon className="h-4 w-4" />
+								)}
+								<span>
+									{copiedText === contactSnapshotCopyId
+										? "Copied Contact Data"
+										: "Copy Contact for AI"}
+								</span>
+							</button>
+						</div>
+					)}
 				</div>
 
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

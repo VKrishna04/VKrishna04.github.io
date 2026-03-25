@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import Typewriter from "typewriter-effect";
+import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
+import Typewriter from "typewriter-effect"
 import {
 	ArrowDownIcon,
 	DocumentArrowDownIcon,
-} from "@heroicons/react/24/outline";
+	DocumentDuplicateIcon,
+	CheckCircleIcon,
+} from "@heroicons/react/24/outline"
 import {
 	FaGithub,
 	FaLinkedin,
@@ -38,17 +40,18 @@ import {
 	FaDribbble,
 	FaBehance,
 	FaCodepen,
-} from "react-icons/fa";
-import AnimatedBackground from "../components/AnimatedBackground";
+} from "react-icons/fa"
+import AnimatedBackground from "../components/AnimatedBackground"
 import {
 	getButtonStyles,
 	getSocialLinkStyles,
 	parseColor,
-} from "../utils/themeUtils";
+} from "../utils/themeUtils"
 
 const Home = () => {
-	const [settings, setSettings] = useState({});
+	const [settings, setSettings] = useState({})
 	const [hoveredButton, setHoveredButton] = useState(null)
+	const [copiedAllData, setCopiedAllData] = useState(false)
 
 	useEffect(() => {
 		// Fetch settings for home page configuration
@@ -138,6 +141,40 @@ const Home = () => {
 	}
 
 	const socialLinks = getSocialLinks()
+
+	const buildPortfolioDataDump = () => {
+		const payload = {
+			meta: {
+				exportedAt: new Date().toISOString(),
+				source: "settings.json",
+			},
+			data: settings,
+		}
+
+		return JSON.stringify(payload, null, 2)
+	}
+
+	const copyAllDataToClipboard = async () => {
+		const text = buildPortfolioDataDump()
+		try {
+			await navigator.clipboard.writeText(text)
+			setCopiedAllData(true)
+			setTimeout(() => setCopiedAllData(false), 2200)
+		} catch {
+			try {
+				const el = document.createElement("textarea")
+				el.value = text
+				document.body.appendChild(el)
+				el.select()
+				document.execCommand("copy")
+				document.body.removeChild(el)
+				setCopiedAllData(true)
+				setTimeout(() => setCopiedAllData(false), 2200)
+			} catch (error) {
+				console.warn("Could not copy portfolio data:", error)
+			}
+		}
+	}
 
 	return (
 		<motion.div
@@ -302,6 +339,25 @@ const Home = () => {
 						}
 						return null
 					})}
+					<motion.button
+						type="button"
+						onClick={copyAllDataToClipboard}
+						className={`group relative inline-flex items-center px-8 py-3 border-2 font-semibold rounded-full transition-all duration-300 cursor-pointer ${
+							copiedAllData
+								? "text-green-300 border-green-500/60 bg-green-500/10"
+								: "text-cyan-300 border-cyan-400/50 hover:border-cyan-300 hover:bg-cyan-500/10"
+						}`}
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						title="Copy complete portfolio settings data"
+					>
+						{copiedAllData ? (
+							<CheckCircleIcon className="mr-2 w-4 h-4" />
+						) : (
+							<DocumentDuplicateIcon className="mr-2 w-4 h-4" />
+						)}
+						{copiedAllData ? "Copied All Data" : "Copy All Data"}
+					</motion.button>
 				</motion.div>
 
 				{/* Social Links */}
@@ -365,6 +421,6 @@ const Home = () => {
 			)}
 		</motion.div>
 	)
-};
+}
 
-export default Home;
+export default Home
