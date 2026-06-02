@@ -527,6 +527,7 @@ const ProjectCard = ({
 		allowSourceToggle && socialSources.length > 1 && !!activeSocialSource
 
 	const handleSocialSourceLoad = () => {
+		setImgLoaded(true)
 		setIsPreviewLoaded(true)
 		window.dispatchEvent(new Event("projects:masonry-reflow"))
 	}
