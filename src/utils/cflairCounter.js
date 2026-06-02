@@ -96,6 +96,14 @@ export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
 			},
 		})
 
+		if (response.status === 429) {
+			markRateLimited()
+			console.warn(
+				"[CFlair-Counter] Rate limited (429). Backing off for 5 minutes."
+			)
+			return null
+		}
+
 		if (response.ok) {
 			const data = await response.json()
 			if (data.success) {
@@ -110,14 +118,6 @@ export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
 					timestamp: data.timestamp,
 				}
 			}
-		}
-
-		if (response.status === 429) {
-			markRateLimited()
-			console.warn(
-				"[CFlair-Counter] Rate limited (429). Backing off for 5 minutes."
-			)
-			return null
 		}
 
 		console.warn(
