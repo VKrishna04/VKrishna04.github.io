@@ -2057,24 +2057,6 @@
 					]
 				}
 			},
-			"codeLedger": {
-				"type": "object",
-				"description": "CodeLedger DSA stats integration — shows live solve stats from a GitHub Pages DSA repo",
-				"properties": {
-					"enabled": { "type": "boolean", "default": false, "description": "Show DSA stats in portfolio" },
-					"repoOwner": { "type": "string", "description": "GitHub username owning the DSA solutions repo" },
-					"repoName": { "type": "string", "description": "Repo name (must have code-ledger topic set by CodeLedger extension)" },
-					"pagesUrl": { "type": "string", "format": "uri", "description": "GitHub Pages URL where index.json is served" },
-					"widget": {
-						"type": "object",
-						"description": "About page mini widget configuration",
-						"properties": {
-							"showInAbout": { "type": "boolean", "default": true },
-							"defaultView": { "type": "string", "enum": ["month", "year", "both"], "default": "both" }
-						}
-					}
-				}
-			},
 			"resume": {
 				"type": "object",
 				"description": "Resume configuration and content management. The resume URL can be set via the 'url' property, 'alternativeUrl', or by setting the RESUME_LINK environment variable. If RESUME_LINK is set, it takes priority.",
@@ -4759,6 +4741,24 @@
 						}
 					}
 				]
+			},
+			"codeLedger": {
+				"type": "object",
+				"description": "CodeLedger DSA stats integration — shows live solve stats from a GitHub Pages DSA repo",
+				"properties": {
+					"enabled": { "type": "boolean", "default": false, "description": "Show DSA stats in portfolio" },
+					"repoOwner": { "type": "string", "description": "GitHub username owning the DSA solutions repo" },
+					"repoName": { "type": "string", "description": "Repo name (must have code-ledger topic set by CodeLedger extension)" },
+					"pagesUrl": { "type": "string", "format": "uri", "description": "GitHub Pages URL where index.json is served" },
+					"widget": {
+						"type": "object",
+						"description": "About page mini widget configuration",
+						"properties": {
+							"showInAbout": { "type": "boolean", "default": true },
+							"defaultView": { "type": "string", "enum": ["month", "year", "both"], "default": "both" }
+						}
+					}
+				}
 			},
 			"counterAPI": {
 				"type": "object",
