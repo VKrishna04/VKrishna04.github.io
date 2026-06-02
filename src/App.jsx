@@ -29,6 +29,7 @@ import About from "./pages/About"
 import Projects from "./pages/Projects"
 import Resume from "./pages/Resume"
 import Contact from "./pages/Contact"
+import Stats from "./pages/Stats"
 import NotFound from "./pages/NotFound"
 import FaviconManager from "./components/FaviconManager"
 import PrivacyNotice from "./components/PrivacyNotice"
@@ -109,6 +110,7 @@ const AppContent = memo(() => {
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/resume" element={<Resume />} />
 					<Route path="/contact" element={<Contact />} />
+					<Route path="/stats" element={<Stats />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</main>
