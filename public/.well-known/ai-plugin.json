@@ -1,0 +1,13 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Krishna GSVV Data",
+  "name_for_model": "portfolio_data",
+  "description_for_human": "Access portfolio data, projects, and bio information.",
+  "description_for_model": "Provides structured portfolio data including projects, skills, bio, and contact information for AI agents.",
+  "auth": {
+    "type": "none"
+  },
+  "logo_url": "https://vkrishna04.me/favicon.ico",
+  "contact_email": "",
+  "legal_info_url": "https://github.com/Life-Experimentalist"
+}
