@@ -15,7 +15,7 @@ const MONTH_NAMES = [
 	"Nov",
 	"Dec",
 ]
-const DAY_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""]
+const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
 function dayKey(d) {
 	return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`

@@ -68,6 +68,7 @@ export function useCodeLedgerStats() {
 			setConfig(cfg)
 
 			if (!cfg?.enabled || !cfg?.pagesUrl) {
+				setData(null)
 				setLoading(false)
 				return
 			}
