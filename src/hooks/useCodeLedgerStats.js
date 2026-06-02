@@ -14,18 +14,18 @@ function dayKey(d) {
 function computeStats(problems) {
 	const now = new Date()
 	const dayMap = {}
-	let thisMonth = 0,
-		thisYear = 0
+	const ago7 = new Date(now.getTime() - 7 * 86400000)
+	const ago30 = new Date(now.getTime() - 30 * 86400000)
+	let last7Days = 0,
+		last30Days = 0
 
 	problems.forEach((p) => {
 		if (!p.timestamp) return
 		const d = new Date(toMs(p.timestamp))
 		const key = dayKey(d)
 		dayMap[key] = (dayMap[key] || 0) + 1
-		if (d.getFullYear() === now.getFullYear()) {
-			thisYear++
-			if (d.getMonth() === now.getMonth()) thisMonth++
-		}
+		if (d >= ago7) last7Days++
+		if (d >= ago30) last30Days++
 	})
 
 	// Current streak (consecutive days going backwards from today)
@@ -49,7 +49,7 @@ function computeStats(problems) {
 		}
 	}
 
-	return { thisMonth, thisYear, currentStreak, longestStreak, dayMap }
+	return { last7Days, last30Days, currentStreak, longestStreak, dayMap }
 }
 
 export function useCodeLedgerStats() {

@@ -28,8 +28,8 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Projects from "./pages/Projects"
 import Resume from "./pages/Resume"
-import Contact from "./pages/Contact"
 import Stats from "./pages/Stats"
+import Contact from "./pages/Contact"
 import NotFound from "./pages/NotFound"
 import FaviconManager from "./components/FaviconManager"
 import PrivacyNotice from "./components/PrivacyNotice"
@@ -71,6 +71,7 @@ const usePageConfiguration = (location) => {
 				"/about": `About - ${baseName}`,
 				"/projects": `Projects - ${baseName}`,
 				"/resume": `Resume - ${baseName}`,
+				"/stats": `DSA Stats - ${baseName}`,
 				"/contact": `Contact - ${baseName}`,
 			}
 			return titles[location.pathname] || `${baseName} - Portfolio`
@@ -109,8 +110,8 @@ const AppContent = memo(() => {
 					<Route path="/about" element={<About />} />
 					<Route path="/projects" element={<Projects />} />
 					<Route path="/resume" element={<Resume />} />
-					<Route path="/contact" element={<Contact />} />
 					<Route path="/stats" element={<Stats />} />
+					<Route path="/contact" element={<Contact />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</main>

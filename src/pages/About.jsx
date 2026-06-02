@@ -40,7 +40,9 @@ const About = () => {
 	const skillRefs = useRef({})
 	// Remove useMasonry hook - using pure CSS masonry instead
 	const { data: dsaData, config: dsaConfig } = useCodeLedgerStats()
-	const [dsaView, setDsaView] = useState(dsaConfig?.widget?.defaultView || "both")
+	const [dsaView, setDsaView] = useState(
+		dsaConfig?.widget?.defaultView || "both"
+	)
 
 	useEffect(() => {
 		// Fetch settings for about page configuration
@@ -321,6 +323,84 @@ const About = () => {
 									</div>
 								</motion.div>
 							))}
+						</motion.div>
+					)}
+					{/* DSA Activity Widget */}
+					{dsaData && (
+						<motion.div
+							initial={{ opacity: 0, y: 16 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.4 }}
+							className="mt-6 p-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl"
+						>
+							<div className="flex items-center justify-between mb-3">
+								<span className="text-[10px] uppercase tracking-[0.15em] font-bold text-slate-500">
+									DSA Activity
+								</span>
+								<div className="flex gap-1">
+									{["month", "year", "both"].map((v) => (
+										<button
+											key={v}
+											onClick={() => setDsaView(v)}
+											className={`text-[9px] px-2 py-0.5 rounded-full transition-all ${
+												dsaView === v
+													? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
+													: "text-slate-600 hover:text-slate-400"
+											}`}
+										>
+											{v === "both" ? "All" : v[0].toUpperCase() + v.slice(1)}
+										</button>
+									))}
+								</div>
+							</div>
+
+							<div className="flex items-center gap-3 flex-wrap">
+								<div className="flex items-baseline gap-1">
+									<span className="text-lg font-bold text-cyan-400">
+										{dsaData.stats?.total || 0}
+									</span>
+									<span className="text-[10px] text-slate-500">solved</span>
+								</div>
+								<div className="text-slate-700">·</div>
+								<div className="flex items-baseline gap-1">
+									<span className="text-lg font-bold text-emerald-400">
+										{dsaData.currentStreak}d
+									</span>
+									<span className="text-[10px] text-slate-500">streak</span>
+								</div>
+								{(dsaView === "month" || dsaView === "both") && (
+									<>
+										<div className="text-slate-700">·</div>
+										<div className="flex items-baseline gap-1">
+											<span className="text-base font-bold text-amber-400">
+												{dsaData.thisMonth}
+											</span>
+											<span className="text-[10px] text-slate-500">
+												this month
+											</span>
+										</div>
+									</>
+								)}
+								{(dsaView === "year" || dsaView === "both") && (
+									<>
+										<div className="text-slate-700">·</div>
+										<div className="flex items-baseline gap-1">
+											<span className="text-base font-bold text-purple-400">
+												{dsaData.thisYear}
+											</span>
+											<span className="text-[10px] text-slate-500">
+												this year
+											</span>
+										</div>
+									</>
+								)}
+								<Link
+									to="/stats"
+									className="ml-auto text-[10px] text-slate-500 hover:text-cyan-400 transition-colors"
+								>
+									View full stats →
+								</Link>
+							</div>
 						</motion.div>
 					)}
 					{/* Technical Experience Section */}
@@ -609,81 +689,6 @@ const About = () => {
 								</>
 							)}
 						</div>
-
-						{/* DSA Activity Widget */}
-						{dsaData && (
-							<motion.div
-								initial={{ opacity: 0, y: 16 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.4 }}
-								className="mt-6 p-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl"
-							>
-								<div className="flex items-center justify-between mb-3">
-									<span className="text-[10px] uppercase tracking-[0.15em] font-bold text-slate-500">
-										DSA Activity
-									</span>
-									<div className="flex gap-1">
-										{["month", "year", "both"].map((v) => (
-											<button
-												key={v}
-												onClick={() => setDsaView(v)}
-												className={`text-[9px] px-2 py-0.5 rounded-full transition-all ${
-													dsaView === v
-														? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
-														: "text-slate-600 hover:text-slate-400"
-												}`}
-											>
-												{v === "both" ? "All" : v[0].toUpperCase() + v.slice(1)}
-											</button>
-										))}
-									</div>
-								</div>
-
-								<div className="flex items-center gap-3 flex-wrap">
-									<div className="flex items-baseline gap-1">
-										<span className="text-lg font-bold text-cyan-400">
-											{dsaData.stats?.total || 0}
-										</span>
-										<span className="text-[10px] text-slate-500">solved</span>
-									</div>
-									<div className="text-slate-700">·</div>
-									<div className="flex items-baseline gap-1">
-										<span className="text-lg font-bold text-emerald-400">
-											{dsaData.currentStreak}d
-										</span>
-										<span className="text-[10px] text-slate-500">streak</span>
-									</div>
-									{(dsaView === "month" || dsaView === "both") && (
-										<>
-											<div className="text-slate-700">·</div>
-											<div className="flex items-baseline gap-1">
-												<span className="text-base font-bold text-amber-400">
-													{dsaData.thisMonth}
-												</span>
-												<span className="text-[10px] text-slate-500">this month</span>
-											</div>
-										</>
-									)}
-									{(dsaView === "year" || dsaView === "both") && (
-										<>
-											<div className="text-slate-700">·</div>
-											<div className="flex items-baseline gap-1">
-												<span className="text-base font-bold text-purple-400">
-													{dsaData.thisYear}
-												</span>
-												<span className="text-[10px] text-slate-500">this year</span>
-											</div>
-										</>
-									)}
-									<Link
-										to="/stats"
-										className="ml-auto text-[10px] text-slate-500 hover:text-cyan-400 transition-colors"
-									>
-										View full stats →
-									</Link>
-								</div>
-							</motion.div>
-						)}
 					</motion.div>
 				</motion.div>
 			</div>
