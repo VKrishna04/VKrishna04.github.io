@@ -96,6 +96,7 @@ const ProjectCard = ({
 	tagStyles = {},
 	showSocialImage = true,
 	socialPreviewConfig = {},
+	dsaStats = null,
 }) => {
 	// Animation variants
 	const cardVariants = {
@@ -623,6 +624,25 @@ const ProjectCard = ({
 
 			{/* Card Content */}
 			<div className="p-6 flex flex-col flex-grow">
+				{/* CodeLedger Ribbon and Stats */}
+				{project.codeLedgerProject && (
+					<div className="mb-3">
+						<div className="flex items-center gap-1.5 mb-2">
+							<span className="text-[9px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+								⚡ CodeLedger
+							</span>
+						</div>
+						{dsaStats && (
+							<div className="flex gap-2 text-[11px] mb-2">
+								<span className="text-emerald-400">{dsaStats.stats?.easy || 0}E</span>
+								<span className="text-amber-400">{dsaStats.stats?.medium || 0}M</span>
+								<span className="text-rose-400">{dsaStats.stats?.hard || 0}H</span>
+								<span className="text-slate-500 ml-auto">{dsaStats.currentStreak || 0}d streak</span>
+							</div>
+						)}
+					</div>
+				)}
+
 				{/* Header */}
 				<div className="flex items-start justify-between mb-4">
 					<div className="flex items-center space-x-3 flex-1 min-w-0">

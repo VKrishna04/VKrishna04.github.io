@@ -166,6 +166,7 @@ import {
 } from "react-icons/si"
 import ProjectCard from "../components/ProjectCard"
 import useMergedProjects from "../hooks/useMergedProjects"
+import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats"
 
 const Projects = () => {
 	const {
@@ -174,6 +175,7 @@ const Projects = () => {
 		error,
 		settings,
 	} = useMergedProjects()
+	const { data: dsaData } = useCodeLedgerStats()
 	const [searchTerm, setSearchTerm] = useState("")
 	const [selectedLanguages, setSelectedLanguages] = useState([])
 	const [sortBy, setSortBy] = useState("updated")
@@ -1351,6 +1353,7 @@ const Projects = () => {
 											tagStyles={settings?.projects?.tagStyles}
 											showSocialImage={settings?.projects?.showSocialImage}
 											socialPreviewConfig={settings?.projects?.socialPreview}
+											dsaStats={repo.codeLedgerProject ? dsaData : null}
 										/>
 									</div>
 								</motion.div>
