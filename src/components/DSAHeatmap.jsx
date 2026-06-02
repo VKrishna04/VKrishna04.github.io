@@ -75,8 +75,7 @@ export function DSAHeatmap({ dayMap = {}, year }) {
 			}
 		}
 
-		const allCounts = Object.values(dayMap)
-		const maxCount = allCounts.length ? Math.max(...allCounts) : 1
+		const maxCount = weeks.flat().reduce((m, c) => (c.inRange ? Math.max(m, c.count) : m), 1)
 
 		return { weeks, monthLabels, maxCount }
 	}, [dayMap, year])
