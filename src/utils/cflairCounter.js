@@ -25,7 +25,7 @@
  * - GET /api/views/{projectName}/badge - Get SVG badge
  */
 
-const CFLAIR_BASE_URL = "https://cflaircounter.pages.dev"
+const CFLAIR_BASE_URL = "https://counter.vkrishna04.me"
 const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000
 
 let cflairRateLimitedUntil = 0
@@ -34,6 +34,41 @@ const isInRateLimitCooldown = () => Date.now() < cflairRateLimitedUntil
 
 const markRateLimited = () => {
 	cflairRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS
+}
+
+/**
+ * Track a named event
+ * @param {string} category - e.g. "resume", "contact", "llm"
+ * @param {string} eventName - e.g. "page-view", "pdf-download", "api-query"
+ * @param {object} [metadata]
+ * @param {string} [baseUrl]
+ */
+export async function trackEvent(
+	category,
+	eventName,
+	metadata = {},
+	baseUrl = CFLAIR_BASE_URL
+) {
+	if (!category || !eventName) return null
+	if (isInRateLimitCooldown()) return null
+	try {
+		const res = await fetch(`${baseUrl}/api/events`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({ category, event: eventName, metadata }),
+		})
+		if (res.status === 429) {
+			markRateLimited()
+			return null
+		}
+		if (!res.ok) return null
+		return await res.json()
+	} catch {
+		return null
+	}
 }
 
 /**
@@ -251,6 +286,24 @@ export async function isCFlairCounterAvailable(baseUrl = CFLAIR_BASE_URL) {
 	}
 }
 
+export const trackResumeView = (base) =>
+	trackEvent("resume", "page-view", {}, base)
+
+export const trackResumeDownload = (base) =>
+	trackEvent("resume", "pdf-download", {}, base)
+
+export const trackResumeCopy = (fmt, base) =>
+	trackEvent("resume", "copy", { format: fmt }, base)
+
+export const trackContactSubmit = (base) =>
+	trackEvent("contact", "form-submit", {}, base)
+
+export const trackLLMQuery = (endpoint, base) =>
+	trackEvent("llm", "api-query", { endpoint }, base)
+
+export const trackProjectsCopy = (fmt, base) =>
+	trackEvent("projects", "copy", { format: fmt }, base)
+
 export default {
 	trackProjectView,
 	getProjectStats,
@@ -258,4 +311,11 @@ export default {
 	trackPortfolioView,
 	batchTrackViews,
 	isCFlairCounterAvailable,
+	trackEvent,
+	trackResumeView,
+	trackResumeDownload,
+	trackResumeCopy,
+	trackContactSubmit,
+	trackLLMQuery,
+	trackProjectsCopy,
 }

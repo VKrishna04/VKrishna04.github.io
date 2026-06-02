@@ -16,6 +16,7 @@
 import React, { useState, useEffect } from "react"
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
+import { trackResumeView, trackResumeDownload, trackResumeCopy } from "../utils/cflairCounter"
 import {
 	DocumentArrowDownIcon,
 	AcademicCapIcon,
@@ -72,6 +73,11 @@ const Resume = () => {
 	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
 	const copyDropdownRef = React.useRef(null)
 	const resumeCopyDropdownId = "resume-copy-format-menu"
+
+	useEffect(() => {
+		// Track page view
+		trackResumeView()
+	}, [])
 
 	useEffect(() => {
 		// Fetch settings for resume configuration
@@ -779,6 +785,7 @@ const Resume = () => {
 	const copyResumeToClipboard = async (format = "markdown") => {
 		const text = formatResumeAs(format)
 		setCopyError(false)
+		trackResumeCopy(format)
 		try {
 			await navigator.clipboard.writeText(text)
 			setCopied(true)
@@ -1554,6 +1561,7 @@ const Resume = () => {
 									whileHover={{ scale: 1.02 }}
 									whileTap={{ scale: 0.98 }}
 									title="Download PDF"
+									onClick={() => trackResumeDownload()}
 								>
 									<DocumentArrowDownIcon className="w-5 h-5" />
 								</motion.a>

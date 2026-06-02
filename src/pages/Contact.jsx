@@ -16,6 +16,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
+import { trackContactSubmit } from "../utils/cflairCounter"
 import {
 	EnvelopeIcon,
 	PhoneIcon,
@@ -809,9 +810,10 @@ const Contact = () => {
 						<div className="mt-6 flex justify-center">
 							<button
 								type="button"
-								onClick={() =>
+								onClick={() => {
+									trackContactSubmit()
 									copyToClipboard(buildContactSnapshot(), contactSnapshotCopyId)
-								}
+								}}
 								className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg border text-sm transition-all duration-300 ${
 									copiedText === contactSnapshotCopyId
 										? "bg-green-500/20 border-green-500/40 text-green-300"
