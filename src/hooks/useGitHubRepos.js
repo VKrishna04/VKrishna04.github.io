@@ -117,11 +117,12 @@ const useGitHubRepos = () => {
 						const projectSettings = config.projects || {}
 
 						// Transform and filter GitHub API data
+						const ignoreListLower = ignoreList.map(n => n.toLowerCase())
 						const filteredRepos = repos
 							.filter((repo) => {
 								if (!projectSettings.showPrivate && repo.private) return false
 								if (!projectSettings.showForks && repo.fork) return false
-								if (ignoreList.includes(repo.name)) return false
+								if (ignoreListLower.includes((repo.name || '').toLowerCase())) return false
 								return true
 							})
 							.map((repo) => ({
@@ -139,6 +140,7 @@ const useGitHubRepos = () => {
 								size: repo.size,
 								default_branch: repo.default_branch,
 								open_issues_count: repo.open_issues_count,
+								codeLedgerProject: Array.isArray(repo.topics) && repo.topics.includes('code-ledger'),
 							}))
 
 						// Combine GitHub repos with static projects
@@ -207,11 +209,12 @@ const useGitHubRepos = () => {
 				const ignoreList = config.projects?.ignore || []
 				const projectSettings = config.projects || {}
 
+				const ignoreListLower = ignoreList.map(n => n.toLowerCase())
 				const filteredRepos = repos
 					.filter((repo) => {
 						if (!projectSettings.showPrivate && repo.private) return false
 						if (!projectSettings.showForks && repo.fork) return false
-						if (ignoreList.includes(repo.name)) return false
+						if (ignoreListLower.includes((repo.name || '').toLowerCase())) return false
 						return true
 					})
 					.map((repo) => ({
@@ -229,6 +232,7 @@ const useGitHubRepos = () => {
 						size: repo.size,
 						default_branch: repo.default_branch,
 						open_issues_count: repo.open_issues_count,
+						codeLedgerProject: Array.isArray(repo.topics) && repo.topics.includes('code-ledger'),
 					}))
 					.sort((a, b) => {
 						const sortBy = projectSettings.sortBy || "updated"

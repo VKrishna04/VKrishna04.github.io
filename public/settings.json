@@ -631,7 +631,8 @@
 			"VKrishna04",
 			"Tredence",
 			"Life-Experimentalist.github.io",
-			"Template"
+			"Template",
+			"VKrishna04.github.io"
 		],
 		"maxProjects": 25,
 		"sortBy": "updated",
@@ -3055,14 +3056,32 @@
 		"note": "Set type to 'github' to use GitHub profile image, 'custom' to use customUrl, 'icon' to use React Icons from react-icons.github.io, or 'default' for default favicon. For 'icon' type, visit https://react-icons.github.io/react-icons and use any icon name (e.g., FaReact, SiJavascript, MdHome). githubUsername overrides projects.devUsername for favicon only. For best tab clarity, prefer local PNG assets like '/favicon-32x32.png'."
 	},
 	"counterAPI": {
-		"enabled": false,
-		"baseUrl": "https://cflaircounter.pages.dev/",
+		"enabled": true,
+		"baseUrl": "https://counter.vkrishna04.me",
 		"timeout": 10000,
 		"fallbackOnError": true,
+		"trackEvents": {
+			"resumeView": true,
+			"resumeDownload": true,
+			"resumeCopy": true,
+			"contactSubmit": true,
+			"llmQuery": true,
+			"projectsCopy": true
+		},
 		"projectMapping": {
 			"note": "Maps repository names to CounterAPI project names",
 			"autoGenerate": true,
 			"customMappings": {}
+		}
+	},
+	"codeLedger": {
+		"enabled": true,
+		"repoOwner": "VKrishna04",
+		"repoName": "My-DSA-Life",
+		"pagesUrl": "https://vkrishna04.me/My-DSA-Life/",
+		"widget": {
+			"showInAbout": true,
+			"defaultView": "both"
 		}
 	}
 }
