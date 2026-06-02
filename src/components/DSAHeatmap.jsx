@@ -29,15 +29,17 @@ function getCellColor(count, max) {
 	return "bg-cyan-400 hover:bg-cyan-300"
 }
 
-export function DSAHeatmap({ dayMap = {}, year }) {
+export function DSAHeatmap({ dayMap = {} }) {
 	const [tooltip, setTooltip] = useState(null)
 
 	const { weeks, monthLabels, maxCount } = useMemo(() => {
-		const targetYear = year || new Date().getFullYear() - 1
-		const start = new Date(targetYear, 0, 1)
-		const end = new Date(targetYear, 11, 31)
+		// Rolling window: exactly 1 year back from today (leap-year aware via setFullYear)
+		const end = new Date()
+		const start = new Date(end)
+		start.setFullYear(start.getFullYear() - 1)
+		start.setDate(start.getDate() + 1) // exclusive start so we get exactly 365/366 days
 
-		// Snap to Sunday before Jan 1
+		// Snap to Sunday before range start
 		const cur = new Date(start)
 		cur.setDate(cur.getDate() - cur.getDay())
 
@@ -77,7 +79,7 @@ export function DSAHeatmap({ dayMap = {}, year }) {
 		const maxCount = weeks.flat().reduce((m, c) => (c.inRange ? Math.max(m, c.count) : m), 1)
 
 		return { weeks, monthLabels, maxCount }
-	}, [dayMap, year])
+	}, [dayMap])
 
 	return (
 		<div className="w-full overflow-x-auto">

@@ -179,6 +179,9 @@ const Projects = () => {
 	const [searchTerm, setSearchTerm] = useState("")
 	const [selectedLanguages, setSelectedLanguages] = useState([])
 	const [sortBy, setSortBy] = useState("updated")
+	// Tracks first mount to prevent stagger replay on sort
+	const [hasAnimated, setHasAnimated] = useState(false)
+	useEffect(() => { setHasAnimated(true) }, [])
 	const [showFilters, setShowFilters] = useState(false)
 	const [layoutMode, setLayoutMode] = useState(() => {
 		// Get saved layout mode from localStorage or default to masonry
@@ -1333,14 +1336,17 @@ const Projects = () => {
 						style={layoutMode === "masonry" ? getMasonryStyles() : {}}
 						data-project-count={filteredRepos.length}
 						variants={staggerContainer}
-						initial="initial"
+						initial={hasAnimated ? false : "initial"}
 						animate="animate"
+						layout
 					>
 						{filteredRepos.map((repo) => {
 							return (
 								<motion.div
 									key={repo.id}
-									variants={staggerChild}
+									variants={hasAnimated ? undefined : staggerChild}
+									layout
+									transition={{ duration: 0.3, ease: "easeOut" }}
 									className={
 										layoutMode === "masonry" ? "masonry-item-projects" : ""
 									}

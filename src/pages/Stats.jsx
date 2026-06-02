@@ -139,7 +139,6 @@ const Stats = () => {
 		pagesUrl,
 	} = data
 
-	const prevYear = new Date().getFullYear() - 1
 	const maxTopicCount = topTopics.length ? topTopics[0][1] : 1
 
 	const statCards = [
@@ -226,9 +225,9 @@ const Stats = () => {
 					className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
 				>
 					<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
-						Activity — {prevYear}
+						Activity — Last 12 Months
 					</span>
-					<DSAHeatmap dayMap={dayMap} year={prevYear} />
+					<DSAHeatmap dayMap={dayMap} />
 				</motion.div>
 
 				{/* Two-column: Topics + Recent */}
