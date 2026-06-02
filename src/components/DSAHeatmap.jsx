@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react"
-import { motion } from "framer-motion"
 
 const MONTH_NAMES = [
 	"Jan",
@@ -116,13 +115,10 @@ export function DSAHeatmap({ dayMap = {}, year }) {
 						{weeks.map((week, wi) => (
 							<div key={wi} className="flex flex-col gap-[3px] flex-1">
 								{week.map((cell, di) => (
-									<motion.div
+									<div
 										key={di}
-										initial={{ opacity: 0, scale: 0.5 }}
-										animate={{ opacity: 1, scale: 1 }}
-										transition={{
-											delay: (wi * 7 + di) * 0.0008,
-											duration: 0.15,
+										style={{
+											animation: `cl-fade-in 0.15s ease-out ${(wi * 7 + di) * 0.0008}s both`,
 										}}
 										className={`w-full h-[11px] rounded-[2px] cursor-pointer transition-colors duration-150 ${
 											cell.inRange
@@ -138,7 +134,7 @@ export function DSAHeatmap({ dayMap = {}, year }) {
 											})
 										}}
 										onMouseLeave={() => setTooltip(null)}
-									/>
+									></div>
 								))}
 							</div>
 						))}

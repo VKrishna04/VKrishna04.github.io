@@ -591,7 +591,7 @@ const ProjectCard = ({
 							decoding="async"
 							fetchPriority={project.featured ? 'high' : 'auto'}
 							className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
-								isPreviewLoaded ? "opacity-100" : "opacity-0"
+								imgLoaded ? "opacity-100" : "opacity-0"
 							}`}
 							onLoad={handleSocialSourceLoad}
 							onError={() => { setImgError(true); setIsPreviewLoaded(true); handleSocialSourceError(); }}
