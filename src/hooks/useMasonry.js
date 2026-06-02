@@ -78,6 +78,12 @@ const useMasonry = (
 
 		window.addEventListener("resize", handleResize);
 
+		// Listen for masonry reflow events (e.g., when images load/error)
+		const handleMasonryReflow = () => {
+			requestAnimationFrame(updateMasonryColumns);
+		};
+		window.addEventListener("projects:masonry-reflow", handleMasonryReflow);
+
 		// Observe container for content changes
 		const resizeObserver = new ResizeObserver(() => {
 			requestAnimationFrame(updateMasonryColumns);
@@ -93,6 +99,7 @@ const useMasonry = (
 		return () => {
 			if (resizeTimeout) clearTimeout(resizeTimeout);
 			window.removeEventListener("resize", handleResize);
+			window.removeEventListener("projects:masonry-reflow", handleMasonryReflow);
 			resizeObserver.disconnect();
 		};
 	}, [itemSelector, containerSelector]);

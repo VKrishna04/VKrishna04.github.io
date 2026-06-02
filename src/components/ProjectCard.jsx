@@ -481,6 +481,8 @@ const ProjectCard = ({
 	const [failedSourceKeys, setFailedSourceKeys] = useState([])
 	const [selectedSourceKey, setSelectedSourceKey] = useState(null)
 	const [isPreviewLoaded, setIsPreviewLoaded] = useState(false)
+	const [imgLoaded, setImgLoaded] = useState(false)
+	const [imgError, setImgError] = useState(false)
 
 	const orderedSources = orderSocialSources(socialSources)
 
@@ -501,6 +503,8 @@ const ProjectCard = ({
 
 	useEffect(() => {
 		setIsPreviewLoaded(false)
+		setImgLoaded(false)
+		setImgError(false)
 		window.dispatchEvent(new Event("projects:masonry-reflow"))
 	}, [activeSocialSource?.url])
 
@@ -557,19 +561,40 @@ const ProjectCard = ({
 		>
 			{/* Social Image */}
 			{activeSocialSource && (
-				<div className="w-full h-40 overflow-hidden bg-gray-800/50 relative">
-					{!isPreviewLoaded && (
-						<div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-800 via-gray-700/80 to-gray-800" />
+				<div className="relative w-full overflow-hidden rounded-t-xl bg-gray-900" style={{ aspectRatio: '2/1' }}>
+					{/* Skeleton while loading */}
+					{!isPreviewLoaded && !imgError && (
+						<div className="absolute inset-0 animate-pulse bg-gradient-to-br from-gray-800 to-gray-900" />
 					)}
-					<img
-						src={activeSocialSource.url}
-						alt={`${project.name} preview`}
-						className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
-							isPreviewLoaded ? "opacity-100" : "opacity-0"
-						}`}
-						onLoad={handleSocialSourceLoad}
-						onError={handleSocialSourceError}
-					/>
+
+					{/* Initials fallback on error */}
+					{imgError && (
+						<div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cyan-900/40 to-slate-900">
+							<span className="text-2xl font-bold text-cyan-400/60 select-none">
+								{(project.name || project.full_name || 'P')
+									.split(/[\s\-_]/)
+									.slice(0, 2)
+									.map(w => (w[0] || '').toUpperCase())
+									.join('')}
+							</span>
+						</div>
+					)}
+
+					{/* Actual image */}
+					{!imgError && activeSocialSource?.url && (
+						<img
+							src={activeSocialSource.url}
+							alt={`${project.name} preview`}
+							loading="lazy"
+							decoding="async"
+							fetchPriority={project.featured ? 'high' : 'auto'}
+							className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
+								isPreviewLoaded ? "opacity-100" : "opacity-0"
+							}`}
+							onLoad={handleSocialSourceLoad}
+							onError={() => { setImgError(true); setIsPreviewLoaded(true); handleSocialSourceError(); }}
+						/>
+					)}
 					{showSourceToggle && (
 						<div className="absolute top-2 right-2 flex items-center gap-1 bg-black/50 rounded-md p-1 backdrop-blur-sm border border-white/10">
 							{socialSources.map((source) => {
