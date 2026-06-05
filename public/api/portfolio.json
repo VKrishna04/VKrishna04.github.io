@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-06-02T12:07:36.569Z",
+  "generatedAt": "2026-06-05T12:46:49.494Z",
   "owner": {
     "name": "Krishna GSVV",
-    "title": "I'm Krishna GSVV — developer, researcher & hackathon champion",
+    "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
     "location": {
       "show": true,
       "text": "📍 Bengaluru, India",
@@ -10,7 +10,7 @@
       "city": "Bengaluru",
       "country": "India"
     },
-    "bio": "I'm a software engineer and AI researcher who builds at the intersection of technology and real-world impact. What started as curiosity about how computers work has grown into published research, hackathon wins, and a growing library of open-source tools that people actually use. I specialize in full-stack development with React and Python, and I dive deep into AI whenever I get the chance. Right now I'm building EquiLens — a platform to detect bias in language models — alongside computer vision apps and blockchain tools like HiveXplore. Whether it's a VS Code extension or an ML pipeline, I care about code that's clean, fast, and worth using. I also contribute actively to AI research — my work on diabetic retinopathy prediction using deep learning is published on IEEE, and the EquiLens corpus dataset is released on Zenodo. On the competition front, I've won ₹3.75L+ across hackathons at IIT Delhi, IIT Hyderabad, Tredence Inc., and Microsoft. I believe technology should be accessible and transparent. My open-source portfolio — 25+ projects including VS Code extensions with 2K+ downloads — reflects that belief. Always building, always learning, always looking for the next interesting problem."
+    "bio": "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (GPA: 8.53/10, graduating Jul 2026), based in Bengaluru. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines. I've competed at the national level and won: 1st runner-up at IIT Delhi CodeHive, 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000 prize), 1st at IIT Hyderabad Pathway Hackathon, and 1st at Microsoft Imagine Cup campus round — ₹3.20L+ in prizes across 2025. On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 1.5K+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL. My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
   },
   "skills": [
     "Python",
