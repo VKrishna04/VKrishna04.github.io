@@ -68,7 +68,7 @@ function SkeletonCard({ className = "" }) {
 
 function StatsSkeleton() {
 	return (
-		<div className="min-h-screen bg-gray-950 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<div className="space-y-3 animate-pulse">
@@ -228,7 +228,7 @@ const Stats = () => {
 	]
 
 	return (
-		<div className="min-h-screen bg-gray-950 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<motion.div
@@ -238,7 +238,7 @@ const Stats = () => {
 					className="space-y-2"
 				>
 					<div className="flex items-center gap-3 flex-wrap">
-						<h1 className="text-3xl font-bold text-slate-100">DSA Progress</h1>
+						<h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">DSA Progress</h1>
 						<VerifiedBadge repoOwner={config?.repoOwner} repoName={config?.repoName} />
 					</div>
 					<p className="text-sm text-slate-400">

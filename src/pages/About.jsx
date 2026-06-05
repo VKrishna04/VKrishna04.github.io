@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright 2025 Krishna GSVV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,13 +19,6 @@ import { motion } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats"
-// === LEGACY/BACKUP: Direct icon imports (deprecated) ===
-// These imports are kept for backward compatibility but should use unified system
-// import { ... } from "react-icons/fa"; // REPLACED with unified icon system
-// import { ... } from "react-icons/si"; // REPLACED with unified icon system
-// import { ... } from "react-icons/bi"; // REPLACED with unified icon system
-// import { ... } from "@heroicons/react/24/outline"; // REPLACED with unified icon system
-// ========================================================
 
 // === MODULAR SYSTEMS: Use unified icon + color systems ===
 import { getUnifiedIcon } from "../utils/iconSystemCore"
@@ -38,19 +31,23 @@ const About = () => {
 	const [settings, setSettings] = useState({})
 	const [truncatedSkills, setTruncatedSkills] = useState(new Set())
 	const skillRefs = useRef({})
-	// Remove useMasonry hook - using pure CSS masonry instead
 	const { data: dsaData, config: dsaConfig } = useCodeLedgerStats()
-	const [dsaView, setDsaView] = useState(
-		dsaConfig?.widget?.defaultView || "both"
-	)
+	const [dsaView, setDsaView] = useState("all")
 
 	useEffect(() => {
-		// Fetch settings for about page configuration
 		fetch("/settings.json")
 			.then((response) => response.json())
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])
+
+	// Sync dsaView default from settings once config is available
+	useEffect(() => {
+		if (dsaConfig?.widget?.defaultView) {
+			const viewMap = { both: "all", month: "30d", year: "7d" }
+			setDsaView(viewMap[dsaConfig.widget.defaultView] || "all")
+		}
+	}, [dsaConfig])
 
 	// Check for text truncation
 	useEffect(() => {
@@ -64,7 +61,6 @@ const About = () => {
 			setTruncatedSkills(truncated)
 		}
 
-		// Check initially and on window resize
 		checkTruncation()
 		window.addEventListener("resize", checkTruncation)
 		return () => window.removeEventListener("resize", checkTruncation)
@@ -83,12 +79,10 @@ const About = () => {
 		) {
 			return displayConfig.profileImage
 		} else {
-			// Default to GitHub profile image
 			return displayConfig.profileImage || "https://github.com/VKrishna04.png"
 		}
 	}
 
-	// === UNIFIED ICON SYSTEM: Dynamic icon loading ===
 	// Preload icons when settings are loaded
 	useEffect(() => {
 		if (!settings.about?.skills) return
@@ -96,7 +90,6 @@ const About = () => {
 		const preloadIcons = async () => {
 			const iconNames = new Set()
 
-			// Collect all icon names from skills
 			settings.about.skills.forEach((category) => {
 				if (category.icon) iconNames.add(category.icon)
 				category.items?.forEach((item) => {
@@ -104,19 +97,11 @@ const About = () => {
 				})
 			})
 
-			// Collect icon names from featured projects
-			const featuredProjects =
-				settings.projects?.staticProjects?.filter(
-					(project) => project.showInAbout === true
-				) || []
-
-			featuredProjects.forEach((project) => {
-				const styling =
-					settings.projects?.featuredProjectsConfig?.[project.name] || {}
-				if (styling.icon) iconNames.add(styling.icon)
+			// Preload achievement icons
+			settings.about?.achievements?.items?.forEach((item) => {
+				if (item.icon) iconNames.add(item.icon)
 			})
 
-			// Load all icons in parallel (preload for performance)
 			await Promise.all(
 				Array.from(iconNames).map(async (iconName) => {
 					try {
@@ -130,66 +115,26 @@ const About = () => {
 
 		preloadIcons()
 	}, [settings])
-	// ================================================
 
-	// Get skills from settings or use default
+	// Get skills from settings
 	const getSkills = () => {
 		if (settings.about?.skills?.length > 0) {
 			return settings.about.skills.map((category) => ({
 				...category,
-				iconName: category.icon, // Store icon name for UnifiedIcon
+				iconName: category.icon,
 				items: category.items.map((item) => ({
 					...item,
-					iconName: item.icon, // Store icon name for UnifiedIcon
+					iconName: item.icon,
 				})),
 			}))
 		}
-
-		// Return empty array if not configured
 		return []
 	}
 
-	// Get stats from settings or use default
-	const getStats = () => {
-		return settings.about?.stats || []
-	}
-
-	// Get featured projects from settings or use default
-	const getFeaturedProjects = () => {
-		// Get projects with showInAbout: true from staticProjects
-		const projects =
-			settings.projects?.staticProjects?.filter(
-				(project) => project.showInAbout === true
-			) || []
-
-		// Get styling config
-		const stylingConfig = settings.projects?.featuredProjectsConfig || {}
-
-		// Map projects to include their styling
-		return projects.map((project) => {
-			const styling = stylingConfig[project.name] || {}
-			return {
-				name: project.name,
-				title: project.name,
-				description: project.description,
-				icon: styling.icon || "HiCodeBracket",
-				gradient:
-					styling.gradient ||
-					"bg-gradient-to-br from-gray-600/20 to-gray-600/20",
-				borderColor: styling.borderColor || "border-gray-500/30",
-				hoverBorderColor:
-					styling.hoverBorderColor || "hover:border-gray-400/50",
-				bgColor: styling.bgColor || "bg-gray-500/20",
-				hoverBgColor: styling.hoverBgColor || "group-hover:bg-gray-500/30",
-				iconColor: styling.iconColor || "text-gray-400",
-				textColor: styling.textColor || "text-gray-200",
-			}
-		})
-	}
+	const getStats = () => settings.about?.stats || []
 
 	const skills = getSkills()
 	const stats = getStats()
-	const featuredProjects = getFeaturedProjects()
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 60 },
@@ -204,6 +149,15 @@ const About = () => {
 			},
 		},
 	}
+
+	// DSA totals
+	const dsaTotal =
+		(dsaData?.stats?.easy ?? 0) +
+		(dsaData?.stats?.medium ?? 0) +
+		(dsaData?.stats?.hard ?? 0)
+
+	const showDsaWidget =
+		settings.codeLedger?.widget?.showInAbout !== false && dsaData
 
 	return (
 		<div className="min-h-screen py-20 px-4">
@@ -228,6 +182,7 @@ const About = () => {
 							)}
 						</motion.div>
 					)}
+
 					{/* Main Content */}
 					{(settings.about?.title ||
 						settings.about?.paragraphs?.length > 0 ||
@@ -292,6 +247,7 @@ const About = () => {
 							)}
 						</div>
 					)}
+
 					{/* Stats Section */}
 					{stats.length > 0 && (
 						<motion.div
@@ -325,8 +281,9 @@ const About = () => {
 							))}
 						</motion.div>
 					)}
+
 					{/* DSA Activity Widget */}
-					{dsaData && (
+					{showDsaWidget && (
 						<motion.div
 							initial={{ opacity: 0, y: 16 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -338,17 +295,21 @@ const About = () => {
 									DSA Activity
 								</span>
 								<div className="flex gap-1">
-									{["month", "year", "both"].map((v) => (
+									{[
+										{ key: "7d", label: "7d" },
+										{ key: "30d", label: "30d" },
+										{ key: "all", label: "All" },
+									].map(({ key, label }) => (
 										<button
-											key={v}
-											onClick={() => setDsaView(v)}
+											key={key}
+											onClick={() => setDsaView(key)}
 											className={`text-[9px] px-2 py-0.5 rounded-full transition-all ${
-												dsaView === v
+												dsaView === key
 													? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
 													: "text-slate-600 hover:text-slate-400"
 											}`}
 										>
-											{v === "both" ? "All" : v[0].toUpperCase() + v.slice(1)}
+											{label}
 										</button>
 									))}
 								</div>
@@ -357,7 +318,7 @@ const About = () => {
 							<div className="flex items-center gap-3 flex-wrap">
 								<div className="flex items-baseline gap-1">
 									<span className="text-lg font-bold text-cyan-400">
-										{dsaData.stats?.total || 0}
+										{dsaTotal}
 									</span>
 									<span className="text-[10px] text-slate-500">solved</span>
 								</div>
@@ -368,28 +329,28 @@ const About = () => {
 									</span>
 									<span className="text-[10px] text-slate-500">streak</span>
 								</div>
-								{(dsaView === "month" || dsaView === "both") && (
+								{(dsaView === "30d" || dsaView === "all") && (
 									<>
 										<div className="text-slate-700">·</div>
 										<div className="flex items-baseline gap-1">
 											<span className="text-base font-bold text-amber-400">
-												{dsaData.thisMonth}
+												{dsaData.last30Days}
 											</span>
 											<span className="text-[10px] text-slate-500">
-												this month
+												last 30d
 											</span>
 										</div>
 									</>
 								)}
-								{(dsaView === "year" || dsaView === "both") && (
+								{(dsaView === "7d" || dsaView === "all") && (
 									<>
 										<div className="text-slate-700">·</div>
 										<div className="flex items-baseline gap-1">
 											<span className="text-base font-bold text-purple-400">
-												{dsaData.thisYear}
+												{dsaData.last7Days}
 											</span>
 											<span className="text-[10px] text-slate-500">
-												this year
+												last 7d
 											</span>
 										</div>
 									</>
@@ -403,6 +364,7 @@ const About = () => {
 							</div>
 						</motion.div>
 					)}
+
 					{/* Technical Experience Section */}
 					{settings.about?.technicalExperience?.show !== false &&
 						settings.about?.technicalExperience?.categories?.length > 0 && (
@@ -415,6 +377,7 @@ const About = () => {
 								<TechnicalExperience settings={settings} />
 							</motion.div>
 						)}
+
 					{/* Skills Section */}
 					{skills.length > 0 && (
 						<motion.div className="mt-20" variants={fadeInUp}>
@@ -483,7 +446,6 @@ const About = () => {
 														>
 															{skill.name}
 														</span>
-														{/* Enhanced tooltip - only show when text is truncated */}
 														{isTruncated && (
 															<div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover/skill:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-10 border border-purple-500/30 flex items-center gap-2">
 																<UnifiedIcon
@@ -504,192 +466,50 @@ const About = () => {
 							</div>
 						</motion.div>
 					)}
-					{/* Achievements Section */}
-					<motion.div className="mt-20" variants={fadeInUp}>
-						<h2 className="text-3xl font-bold text-center text-white mb-12">
-							{settings.about?.featuredProjectsHeading ||
-								"Featured Projects & Achievements"}
-						</h2>
-						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-							{featuredProjects.length > 0 ? (
-								featuredProjects.map((project, index) => {
-									return (
+
+					{/* Achievements & Recognition Section */}
+					{settings.about?.achievements?.show !== false &&
+						settings.about?.achievements?.items?.length > 0 && (
+							<motion.div className="mt-20" variants={fadeInUp}>
+								<h2 className="text-3xl font-bold text-center text-white mb-12">
+									{settings.about.achievements.heading ||
+										"Achievements & Recognition"}
+								</h2>
+								<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+									{settings.about.achievements.items.map((item, index) => (
 										<motion.div
 											key={index}
-											className={`${project.gradient} backdrop-blur-sm rounded-xl p-6 border ${project.borderColor} ${project.hoverBorderColor} transition-all duration-300 group`}
+											className={`${item.gradient} backdrop-blur-sm rounded-xl p-6 border ${item.borderColor} ${item.hoverBorderColor} transition-all duration-300 group`}
 											variants={fadeInUp}
 											whileHover={{ scale: 1.02, y: -5 }}
 										>
 											<div className="text-center">
 												<div
-													className={`w-16 h-16 ${project.bgColor} rounded-full flex items-center justify-center mx-auto mb-4 ${project.hoverBgColor} transition-colors`}
+													className={`w-16 h-16 ${item.bgColor} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:opacity-80 transition-opacity`}
 												>
 													<UnifiedIcon
-														name={project.icon || "FaCode"}
-														className={`w-8 h-8 ${project.iconColor}`}
-														fallback="FaCode"
+														name={item.icon || "FaTrophy"}
+														className={`w-8 h-8 ${item.iconColor}`}
+														fallback="FaTrophy"
 													/>
 												</div>
-												<h3 className="text-xl font-bold text-white mb-2">
-													{project.title}
+												<h3 className="text-lg font-bold text-white mb-1">
+													{item.title}
 												</h3>
-												<p className={`${project.textColor} text-sm`}>
-													{project.description}
+												{item.subtitle && (
+													<p className="text-xs text-slate-400 mb-3">
+														{item.subtitle}
+													</p>
+												)}
+												<p className={`${item.textColor} text-sm leading-relaxed`}>
+													{item.description}
 												</p>
 											</div>
 										</motion.div>
-									)
-								})
-							) : (
-								// Default projects if not configured
-								<>
-									<motion.div
-										className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-colors">
-												<UnifiedIcon
-													name="SiTensorflow"
-													className="w-8 h-8 text-purple-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												EquiLens - AI Bias Detection
-											</h3>
-											<p className="text-purple-200 text-sm">
-												AI Bias Detection Platform for LLMs via Ollama.
-												Interactive CLI with corpus generation, multi-metric
-												auditing, statistical analysis & visualization.
-											</p>
-										</div>
-									</motion.div>
-
-									<motion.div
-										className="bg-gradient-to-br from-green-600/20 to-blue-600/20 backdrop-blur-sm rounded-xl p-6 border border-green-500/30 hover:border-green-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500/30 transition-colors">
-												<UnifiedIcon
-													name="SiOpencv"
-													className="w-8 h-8 text-green-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												Facial Emotion Detection
-											</h3>
-											<p className="text-green-200 text-sm">
-												Real-time emotion detection using MediaPipe and machine
-												learning. Extract facial landmarks, train models, and
-												classify emotions from images and videos.
-											</p>
-										</div>
-									</motion.div>
-
-									<motion.div
-										className="bg-gradient-to-br from-orange-600/20 to-red-600/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30 hover:border-orange-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-500/30 transition-colors">
-												<UnifiedIcon
-													name="SiHiveBlockchain"
-													className="w-8 h-8 text-orange-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												HiveXplore - Blockchain Gateway
-											</h3>
-											<p className="text-orange-200 text-sm">
-												Beginner-friendly app for Hive blockchain with
-												simplified authentication, intuitive posting tools, and
-												guided experiences for blockchain newcomers.
-											</p>
-										</div>
-									</motion.div>
-
-									<motion.div
-										className="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-cyan-500/30 transition-colors">
-												<UnifiedIcon
-													name="BiLogoVisualStudio"
-													className="w-8 h-8 text-cyan-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												VS Code Extensions
-											</h3>
-											<p className="text-cyan-200 text-sm">
-												Published extensions including cSpell Sync and Global
-												Save State, improving developer productivity with 2K+
-												total downloads on VS Code Marketplace.
-											</p>
-										</div>
-									</motion.div>
-
-									<motion.div
-										className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/30 hover:border-yellow-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-500/30 transition-colors">
-												<UnifiedIcon
-													name="SiGoogle"
-													className="w-8 h-8 text-yellow-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												RanobeGemini Extension
-											</h3>
-											<p className="text-yellow-200 text-sm">
-												Browser extension enhancing web novel translations using
-												Google's Gemini AI. Transforms poorly translated content
-												with intelligent processing.
-											</p>
-										</div>
-									</motion.div>
-
-									<motion.div
-										className="bg-gradient-to-br from-pink-600/20 to-purple-600/20 backdrop-blur-sm rounded-xl p-6 border border-pink-500/30 hover:border-pink-400/50 transition-all duration-300 group"
-										variants={fadeInUp}
-										whileHover={{ scale: 1.02, y: -5 }}
-									>
-										<div className="text-center">
-											<div className="w-16 h-16 bg-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-500/30 transition-colors">
-												<UnifiedIcon
-													name="FaAws"
-													className="w-8 h-8 text-pink-400"
-													fallback="FaCode"
-												/>
-											</div>
-											<h3 className="text-xl font-bold text-white mb-2">
-												Cloud Infrastructure
-											</h3>
-											<p className="text-pink-200 text-sm">
-												Achieved multiple cloud certifications including AWS
-												Cloud Practitioner and Oracle Cloud DevOps Professional,
-												with hands-on deployment experience.
-											</p>
-										</div>
-									</motion.div>
-								</>
-							)}
-						</div>
-					</motion.div>
+									))}
+								</div>
+							</motion.div>
+						)}
 				</motion.div>
 			</div>
 		</div>

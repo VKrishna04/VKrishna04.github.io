@@ -71,7 +71,7 @@ const usePageConfiguration = (location) => {
 				"/about": `About - ${baseName}`,
 				"/projects": `Projects - ${baseName}`,
 				"/resume": `Resume - ${baseName}`,
-				"/stats": `DSA Stats - ${baseName}`,
+				"/stats": `Stats - ${baseName}`,
 				"/contact": `Contact - ${baseName}`,
 			}
 			return titles[location.pathname] || `${baseName} - Portfolio`
