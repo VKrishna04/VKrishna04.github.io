@@ -1494,8 +1494,7 @@
           "OpenCV",
           "MediaPipe",
           "scikit-learn",
-          "NumPy",
-          "Flask"
+          "NumPy"
         ],
         "category": "AI/ML",
         "featured": false,
@@ -1642,7 +1641,7 @@
         ],
         "highlights": [
           "Real-time Indian Sign Language recognition system",
-          "98% accuracy with custom ML classifier",
+          "99.3% accuracy on 2,399 held-out test samples (random forest)",
           "Interactive Flask web interface for live inference",
           "MediaPipe hand tracking for precise detection"
         ],
@@ -2914,12 +2913,11 @@
         "name": "Facial Emotion Detector",
         "technologies": [
           "Python",
-          "Flask",
           "MediaPipe",
           "OpenCV",
           "scikit-learn"
         ],
-        "description": "2nd Runner-up at Tredence InfinityAI 2025 (INR 2,00,000) with real-time facial emotion classification from images and video. Built the full ML pipeline from MediaPipe facial-landmark extraction through custom classifier training to live Flask inference.",
+        "description": "2nd Runner-up at Tredence InfinityAI 2025 (INR 2,00,000) with real-time facial emotion classification from images and video. Built the full ML pipeline from MediaPipe facial-landmark extraction through custom classifier training to live webcam inference.",
         "githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector"
       },
       {
@@ -2931,7 +2929,7 @@
           "OpenCV",
           "scikit-learn"
         ],
-        "description": "Real-time Indian Sign Language recognition achieving 98% classification accuracy. Built full ML pipeline from MediaPipe landmark extraction to custom classifier training and live Flask inference with sub-100ms latency.",
+        "description": "Real-time Indian Sign Language recognition scoring 99.3% accuracy on a 2,399-sample held-out test set. Built the full ML pipeline from MediaPipe landmark extraction through random-forest training to live Flask inference.",
         "githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector"
       },
       {
