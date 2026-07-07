@@ -1,0 +1,156 @@
+# Pull code changes from the upstream portfolio, without touching your content.
+#
+# A repository generated from a template has no shared history with the
+# template, so `git merge upstream/main` has nothing to merge and will refuse.
+# This workflow copies the code directories over instead and opens a pull
+# request, so you see exactly what changed before anything lands on main.
+#
+# Your content is never in the copy list. settings.json, your images, your
+# CNAME and your README are yours; upstream never writes to them.
+#
+# It does nothing in the upstream repository itself — see the `if` below.
+
+name: Sync from upstream
+
+on:
+  schedule:
+    # Mondays, 04:00 UTC. Nothing about this is urgent; a PR that waits a week
+    # is fine, and a weekly cadence keeps the notification cost near zero.
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  UPSTREAM_REPO: VKrishna04/VKrishna04.github.io
+  UPSTREAM_BRANCH: main
+  SYNC_BRANCH: chore/upstream-sync
+
+jobs:
+  sync:
+    # The upstream repository is its own upstream, so skip it there.
+    if: github.repository != 'VKrishna04/VKrishna04.github.io'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out this portfolio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream "https://github.com/${UPSTREAM_REPO}.git"
+          git fetch --depth=1 upstream "${UPSTREAM_BRANCH}"
+
+      - name: Copy the code, leave the content
+        id: copy
+        run: |
+          set -euo pipefail
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "${SYNC_BRANCH}"
+
+          # Directories replaced wholesale: removed first so that a file deleted
+          # upstream is also deleted here, then restored from upstream's tree.
+          # Everything in this list is code. None of it is yours.
+          for dir in src scripts public/schemas; do
+            git rm -r --quiet --ignore-unmatch -- "$dir" || true
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- "$dir" || true
+          done
+
+          # Single files, copied only if upstream still has them.
+          #
+          # NOTICE and LICENSE.md are in this list on purpose. They carry the
+          # Apache-2.0 attribution the licence requires you to keep, and keeping
+          # them current is the point, not an oversight.
+          for file in \
+            package.json package-lock.json \
+            vite.config.js tailwind.config.js postcss.config.js eslint.config.js \
+            index.html AGENTS.md NOTICE LICENSE.md \
+            public/settings.schema.json
+          do
+            git checkout "upstream/${UPSTREAM_BRANCH}" -- "$file" 2>/dev/null || true
+          done
+
+          # Deliberately NOT copied, and each for its own reason:
+          #
+          #   public/settings.json   your content. The whole site is this file.
+          #   public/images, assets  your pictures.
+          #   public/resume.*        yours.
+          #   CNAME                  your domain.
+          #   README.md              your project, described your way.
+          #   .portfolio/            how other sites describe this repo.
+          #   .github/workflows/     the default GITHUB_TOKEN is not permitted
+          #                          to write workflow files, so a sync that
+          #                          included them would simply fail to push.
+          #                          Update those by hand when a release note
+          #                          says to.
+
+          if git diff --cached --quiet && git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Already up to date with upstream."
+            exit 0
+          fi
+
+          # No git add is needed: git rm and git checkout <tree> -- <path>
+          # both write the index, so everything above is already staged.
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+          # Two -m flags rather than one multi-line string: inside a YAML block
+          # scalar every line would otherwise carry the block's indentation.
+          git commit \
+            -m "chore: sync code from ${UPSTREAM_REPO}" \
+            -m "Copied src/, scripts/, public/schemas/ and the build configuration from ${UPSTREAM_REPO}@${UPSTREAM_BRANCH}. Content files were not touched: settings.json, images, CNAME and README.md are unchanged."
+
+      - name: Set up Node
+        if: steps.copy.outputs.changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # If upstream added a setting your settings.json does not have yet, the
+      # build is where you find out — and finding out in a PR is the point.
+      - name: Check that it still builds
+        if: steps.copy.outputs.changed == 'true'
+        id: build
+        continue-on-error: true
+        run: |
+          npm ci
+          npm run build
+
+      - name: Open a pull request
+        if: steps.copy.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+        run: |
+          set -euo pipefail
+          git push --force-with-lease origin "${SYNC_BRANCH}"
+
+          if [ "$BUILD_RESULT" = "success" ]; then
+            verdict="The site still builds with these changes."
+          else
+            verdict="**The build failed with these changes.** Usually that means upstream added a setting your \`settings.json\` does not have yet; check the workflow log for what the validator asked for."
+          fi
+
+          # Built in a file rather than passed inline. A multi-line string here
+          # would carry this block's indentation into the PR body, and four
+          # leading spaces is a markdown code block.
+          body="Code from \`${UPSTREAM_REPO}\`, refreshed."
+          body="${body}"$'\n\n'"${verdict}"
+          body="${body}"$'\n\n'"Your content was not touched - \`settings.json\`, images, \`CNAME\` and \`README.md\` are exactly as you left them. Review the diff and merge when you are happy with it."
+          printf '%s\n' "$body" > pr-body.md
+
+          if gh pr view "${SYNC_BRANCH}" --json number >/dev/null 2>&1; then
+            gh pr edit "${SYNC_BRANCH}" --body-file pr-body.md
+          else
+            gh pr create \
+              --title "Sync code from ${UPSTREAM_REPO}" \
+              --head "${SYNC_BRANCH}" \
+              --body-file pr-body.md
+          fi
+          rm -f pr-body.md
