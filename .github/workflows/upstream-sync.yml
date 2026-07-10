@@ -9,6 +9,19 @@
 # CNAME and your README are yours; upstream never writes to them.
 #
 # It does nothing in the upstream repository itself — see the `if` below.
+#
+# ONE SETTING TO TURN ON, once, or this cannot open its pull request:
+#   Settings → Actions → General → Workflow permissions →
+#   "Allow GitHub Actions to create and approve pull requests"
+# That box is off by default on new repositories. Without it the last step
+# fails with "GitHub Actions is not permitted to create or approve pull
+# requests", and you would never hear that an update existed.
+#
+# Also worth knowing: GitHub disables scheduled workflows in a repository
+# after 60 days with no activity. If the weekly run goes quiet, re-enable it
+# on the Actions tab, or just use "Run workflow" whenever you want to check.
+#
+# All of this is written out for humans in docs/updates-from-upstream.md.
 
 name: Sync from upstream
 
@@ -71,7 +84,7 @@ jobs:
             package.json package-lock.json \
             vite.config.js tailwind.config.js postcss.config.js eslint.config.js \
             index.html AGENTS.md NOTICE LICENSE.md \
-            public/settings.schema.json
+            public/settings.schema.json docs/updates-from-upstream.md
           do
             git checkout "upstream/${UPSTREAM_BRANCH}" -- "$file" 2>/dev/null || true
           done
@@ -145,7 +158,11 @@ jobs:
           body="${body}"$'\n\n'"Your content was not touched - \`settings.json\`, images, \`CNAME\` and \`README.md\` are exactly as you left them. Review the diff and merge when you are happy with it."
           printf '%s\n' "$body" > pr-body.md
 
-          if gh pr view "${SYNC_BRANCH}" --json number >/dev/null 2>&1; then
+          # gh pr view falls back to the most recent CLOSED pr when none is
+          # open, so once the first sync PR is merged it would edit that dead
+          # PR forever and never open a new one. Ask about open PRs only.
+          open_prs="$(gh pr list --head "${SYNC_BRANCH}" --state open --json number --jq 'length')"
+          if [ "$open_prs" -gt 0 ]; then
             gh pr edit "${SYNC_BRANCH}" --body-file pr-body.md
           else
             gh pr create \
