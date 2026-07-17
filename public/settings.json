@@ -1545,18 +1545,17 @@
       {
         "id": "15",
         "name": "ActionsCounter",
-        "description": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
+        "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by CFlair-Counter.",
         "technologies": [
           "TypeScript",
           "GitHub-Actions",
-          "GitHub-API",
-          "Webhooks"
+          "GitHub-API"
         ],
         "category": "DevOps",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
-        "status": "Active Development",
+        "status": "Deprecated",
         "startDate": "2025-04-01",
         "endDate": null,
         "githubUrl": "https://github.com/Life-Experimentalist/ActionsCounter",
@@ -1567,23 +1566,20 @@
         "tags": [
           "analytics",
           "automation",
-          "ci-cd",
+          "counter",
           "dashboard",
-          "deployment-tracking",
           "developer-tools",
           "devops",
           "github-actions",
           "github-api",
-          "monitoring",
-          "typescript",
-          "webhooks",
-          "workflow-tracking"
+          "serverless",
+          "typescript"
         ],
         "highlights": [
-          "GitHub Actions workflow analytics and tracking",
-          "CI/CD deployment monitoring dashboard",
-          "Webhook integration for real-time updates",
-          "TypeScript-powered with GitHub API"
+          "Counts update on demand, from a manual run or a repository_dispatch - there is no schedule and no server",
+          "Tallies live in the repository's own GitHub Actions variables rather than a database",
+          "Static dashboard published to GitHub Pages",
+          "Superseded by CFlair-Counter, which is what serves counter.vkrishna04.me today"
         ],
         "stats": {
           "stars": 0,
