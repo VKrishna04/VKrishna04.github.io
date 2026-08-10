@@ -68,7 +68,7 @@ function SkeletonCard({ className = "" }) {
 
 function StatsSkeleton() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-black px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<div className="space-y-3 animate-pulse">
@@ -228,7 +228,7 @@ const Stats = () => {
 	]
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-black px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<motion.div
