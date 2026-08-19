@@ -370,7 +370,11 @@ const Stats = () => {
 	const statCards = [
 		{
 			label: "Total Solved",
-			value: (stats.easy ?? 0) + (stats.medium ?? 0) + (stats.hard ?? 0),
+			// stats.total includes solves with unknown difficulty, so it can
+			// exceed E+M+H — prefer it when present
+			value:
+				stats.total ??
+				(stats.easy ?? 0) + (stats.medium ?? 0) + (stats.hard ?? 0),
 			sub: `${stats.easy ?? 0}E · ${stats.medium ?? 0}M · ${stats.hard ?? 0}H`,
 			accentColor: "#06b6d4",
 		},

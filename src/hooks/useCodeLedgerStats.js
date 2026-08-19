@@ -173,7 +173,29 @@ export function useCodeLedgerStats() {
 					if (name) langMap[name] = (langMap[name] || 0) + 1
 				})
 			}
-			const topLanguages = Object.entries(langMap)
+			// The raw map duplicates casing variants ("python3" vs "Python3") and
+			// LeetCode's Python/Python3 split, and carries an "Unknown" bucket —
+			// fold before ranking so each language shows as one bar
+			const merged = {}
+			Object.entries(langMap).forEach(([name, count]) => {
+				const lower = name.trim().toLowerCase()
+				if (lower === "unknown") return
+				const key = lower === "python3" ? "python" : lower
+				if (!merged[key]) {
+					merged[key] = {
+						label: key === "python" ? "Python" : name.trim(),
+						count: 0,
+						best: 0,
+					}
+				}
+				merged[key].count += count
+				if (count > merged[key].best && key !== "python") {
+					merged[key].best = count
+					merged[key].label = name.trim()
+				}
+			})
+			const topLanguages = Object.values(merged)
+				.map((m) => [m.label, m.count])
 				.sort((a, b) => b[1] - a[1])
 				.slice(0, 8)
 
@@ -194,7 +216,6 @@ export function useCodeLedgerStats() {
 				topTopics,
 				topLanguages,
 				platforms,
-				summary: json.meta?.summary || null,
 				updatedAt: json.updatedAt,
 				pagesUrl: cfg.pagesUrl,
 				...computed,
