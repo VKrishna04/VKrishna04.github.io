@@ -6,6 +6,7 @@ node_modules_backup
 
 # Local development
 .workspace-config
+desktop.ini
 
 # Production builds
 /dist

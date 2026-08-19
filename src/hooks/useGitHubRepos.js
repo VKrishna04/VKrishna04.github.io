@@ -94,9 +94,14 @@ const useGitHubRepos = () => {
 				// If mode is hybrid, try GitHub first, then combine with static
 				if (projectMode === "hybrid") {
 					try {
-						const apiUrl =
+						const _baseUrl =
 							config.github?.apiUrl ||
 							"https://api.github.com/users/VKrishna04/repos"
+						const _urlObj = new URL(_baseUrl)
+						if (!_urlObj.searchParams.has("sort")) _urlObj.searchParams.set("sort", "updated")
+						if (!_urlObj.searchParams.has("direction")) _urlObj.searchParams.set("direction", "desc")
+						if (!_urlObj.searchParams.has("per_page")) _urlObj.searchParams.set("per_page", "100")
+						const apiUrl = _urlObj.toString()
 						const apiOptions = {
 							headers: {
 								Accept: "application/vnd.github.v3+json",
@@ -188,9 +193,14 @@ const useGitHubRepos = () => {
 				}
 
 				// Regular GitHub mode
-				const apiUrl =
+				const _baseUrlRegular =
 					config.github?.apiUrl ||
 					"https://api.github.com/users/VKrishna04/repos"
+				const _urlObjRegular = new URL(_baseUrlRegular)
+				if (!_urlObjRegular.searchParams.has("sort")) _urlObjRegular.searchParams.set("sort", "updated")
+				if (!_urlObjRegular.searchParams.has("direction")) _urlObjRegular.searchParams.set("direction", "desc")
+				if (!_urlObjRegular.searchParams.has("per_page")) _urlObjRegular.searchParams.set("per_page", "100")
+				const apiUrl = _urlObjRegular.toString()
 				const apiOptions = {
 					headers: {
 						Accept: "application/vnd.github.v3+json",

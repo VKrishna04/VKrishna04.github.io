@@ -35,13 +35,25 @@ function timeSinceLabel(date) {
 
 function solveDate(ts) {
 	const ms = Number(ts) > 1e12 ? Number(ts) : Number(ts) * 1000
-	return new Date(ms).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+	return new Date(ms).toLocaleDateString("en-US", {
+		month: "short",
+		day: "numeric",
+	})
 }
 
 const DIFF_BADGE = {
-	Easy: { label: "E", color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20" },
-	Medium: { label: "M", color: "text-amber-400 bg-amber-400/10 border-amber-400/20" },
-	Hard: { label: "H", color: "text-rose-400 bg-rose-400/10 border-rose-400/20" },
+	Easy: {
+		label: "E",
+		color: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+	},
+	Medium: {
+		label: "M",
+		color: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+	},
+	Hard: {
+		label: "H",
+		color: "text-rose-400 bg-rose-400/10 border-rose-400/20",
+	},
 }
 
 // ── skeleton ─────────────────────────────────────────────────────────────────
@@ -56,7 +68,7 @@ function SkeletonCard({ className = "" }) {
 
 function StatsSkeleton() {
 	return (
-		<div className="min-h-screen bg-gray-950 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<div className="space-y-3 animate-pulse">
@@ -101,26 +113,64 @@ function StatCard({ label, value, sub, accentColor, delay = 0 }) {
 			<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] truncate">
 				{label}
 			</span>
-			<span className="text-2xl font-bold text-slate-100 leading-tight" style={{ color: accentColor }}>
+			<span
+				className="text-2xl font-bold text-slate-100 leading-tight"
+				style={{ color: accentColor }}
+			>
 				{value}
 			</span>
 			{sub && (
-				<span className="text-[11px] text-slate-500 leading-tight truncate">{sub}</span>
+				<span className="text-[11px] text-slate-500 leading-tight truncate">
+					{sub}
+				</span>
 			)}
 		</motion.div>
+	)
+}
+
+// ── verified badge ────────────────────────────────────────────────────────────
+
+function VerifiedBadge({ repoOwner, repoName }) {
+	if (!repoOwner || !repoName) return null
+	return (
+		<a
+			href={`https://github.com/${repoOwner}/${repoName}`}
+			target="_blank"
+			rel="noopener noreferrer"
+			className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-colors duration-150 no-underline"
+			title={`Data verified from ${repoOwner}/${repoName} via CodeLedger`}
+		>
+			<svg
+				viewBox="0 0 20 20"
+				fill="currentColor"
+				className="w-3 h-3 shrink-0"
+				aria-hidden="true"
+			>
+				<path
+					fillRule="evenodd"
+					d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+					clipRule="evenodd"
+				/>
+			</svg>
+			Verified by CodeLedger
+		</a>
 	)
 }
 
 // ── main component ────────────────────────────────────────────────────────────
 
 const Stats = () => {
-	const { data, loading, error, lastUpdated, config, refresh } = useCodeLedgerStats()
+	const { data, loading, error, lastUpdated, config, refresh } =
+		useCodeLedgerStats()
 	const [timeSince, setTimeSince] = useState(() => timeSinceLabel(lastUpdated))
 
 	// Update "X minutes ago" every 30 seconds
 	useEffect(() => {
 		setTimeSince(timeSinceLabel(lastUpdated))
-		const id = setInterval(() => setTimeSince(timeSinceLabel(lastUpdated)), 30_000)
+		const id = setInterval(
+			() => setTimeSince(timeSinceLabel(lastUpdated)),
+			30_000
+		)
 		return () => clearInterval(id)
 	}, [lastUpdated])
 
@@ -132,14 +182,13 @@ const Stats = () => {
 		topTopics,
 		recentProblems,
 		dayMap,
-		thisMonth,
-		thisYear,
+		last7Days,
+		last30Days,
 		currentStreak,
 		longestStreak,
 		pagesUrl,
 	} = data
 
-	const prevYear = new Date().getFullYear() - 1
 	const maxTopicCount = topTopics.length ? topTopics[0][1] : 1
 
 	const statCards = [
@@ -171,17 +220,16 @@ const Stats = () => {
 			accentColor: "#10b981",
 		},
 		{
-			label: "This Month",
-			value: thisMonth,
-			sub: `${thisYear} this year`,
+			label: "Last 30 Days",
+			value: last30Days,
+			sub: `${last7Days} last 7 days`,
 			accentColor: "#a855f7",
 		},
 	]
 
 	return (
-		<div className="min-h-screen bg-gray-950 px-4 py-20 md:px-8">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
-
 				{/* Header */}
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -189,9 +237,30 @@ const Stats = () => {
 					transition={{ duration: 0.45 }}
 					className="space-y-2"
 				>
-					<h1 className="text-3xl font-bold text-slate-100">DSA Progress</h1>
+					<div className="flex items-center gap-3 flex-wrap">
+						<h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">DSA Progress</h1>
+						<VerifiedBadge repoOwner={config?.repoOwner} repoName={config?.repoName} />
+					</div>
 					<p className="text-sm text-slate-400">
-						Tracked by CodeLedger&nbsp;·&nbsp;Updated {timeSince}
+						Tracked by{" "}
+						<a
+							href="https://codeledger.vkrishna04.me/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-cyan-400 hover:text-cyan-300"
+						>
+							CodeLedger
+						</a>{" "}
+						at{" "}
+						<a
+							href={`https://github.com/${config?.repoOwner}/${config?.repoName}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-cyan-400 hover:text-cyan-300"
+						>
+							{config?.repoOwner}/{config?.repoName}
+						</a>
+						&nbsp;·&nbsp;Updated {timeSince}
 					</p>
 					<div className="flex flex-wrap gap-3 pt-1">
 						<button
@@ -200,6 +269,14 @@ const Stats = () => {
 						>
 							↺ Refresh
 						</button>
+						<a
+							href={`https://github.com/${config?.repoOwner}/${config?.repoName}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-300 bg-white/[0.05] hover:bg-white/[0.09] border border-white/[0.08] rounded-lg transition-colors duration-150"
+						>
+							View Repo ↗
+						</a>
 						<a
 							href={pagesUrl}
 							target="_blank"
@@ -226,14 +303,13 @@ const Stats = () => {
 					className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
 				>
 					<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
-						Activity — {prevYear}
+						Activity — Last 12 Months
 					</span>
-					<DSAHeatmap dayMap={dayMap} year={prevYear} />
+					<DSAHeatmap dayMap={dayMap} />
 				</motion.div>
 
 				{/* Two-column: Topics + Recent */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
 					{/* Top Topics */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -335,8 +411,8 @@ const Stats = () => {
 						className="text-slate-500 hover:text-slate-400 transition-colors duration-150"
 					>
 						{config?.repoOwner}/{config?.repoName}
-					</a>
-					{" "}·{" "}
+					</a>{" "}
+					·{" "}
 					<a
 						href="https://codeledger.vkrishna04.me"
 						target="_blank"
@@ -346,7 +422,6 @@ const Stats = () => {
 						CodeLedger
 					</a>
 				</motion.p>
-
 			</div>
 		</div>
 	)

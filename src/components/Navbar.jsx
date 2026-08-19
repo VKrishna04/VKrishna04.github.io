@@ -28,15 +28,11 @@ import { motion } from "framer-motion";
 import { UnifiedIcon } from "../components/UnifiedIcon";
 // ================================================
 
-import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats";
-
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [settings, setSettings] = useState({});
 	const location = useLocation();
-	const { data: dsaData, config: dsaConfig } = useCodeLedgerStats();
-	const showStatsLink = Boolean(dsaConfig?.enabled && dsaData !== null);
 
 	useEffect(() => {
 		// Fetch settings for navbar configuration
@@ -227,34 +223,6 @@ const Navbar = () => {
 								)}
 							</Link>
 						))}
-						{showStatsLink && (
-							<Link
-								to="/stats"
-								className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
-									location.pathname === "/stats"
-										? styling.activeColor || "text-primary-400"
-										: styling.inactiveColor ||
-										  "text-white hover:text-primary-400"
-								}`}
-							>
-								Stats
-								{location.pathname === "/stats" && (
-									<motion.div
-										layoutId="activeTab"
-										className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${
-											styling.activeTabGradient ||
-											"from-primary-500 to-accent-500"
-										}`}
-										initial={false}
-										transition={{
-											type: "spring",
-											stiffness: animations.springStiffness || 380,
-											damping: animations.springDamping || 30,
-										}}
-									/>
-								)}
-							</Link>
-						)}
 					</div>
 
 					{/* Mobile menu button */}
@@ -305,19 +273,6 @@ const Navbar = () => {
 									{item.name}
 								</Link>
 							))}
-							{showStatsLink && (
-								<Link
-									to="/stats"
-									onClick={() => setIsOpen(false)}
-									className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-										location.pathname === "/stats"
-											? "text-primary-400 bg-white/10"
-											: "text-white hover:text-primary-400 hover:bg-white/5"
-									}`}
-								>
-									Stats
-								</Link>
-							)}
 						</div>
 					</motion.div>
 				)}

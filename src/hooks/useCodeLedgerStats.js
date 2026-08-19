@@ -14,18 +14,18 @@ function dayKey(d) {
 function computeStats(problems) {
 	const now = new Date()
 	const dayMap = {}
-	let thisMonth = 0,
-		thisYear = 0
+	const ago7 = new Date(now.getTime() - 7 * 86400000)
+	const ago30 = new Date(now.getTime() - 30 * 86400000)
+	let last7Days = 0,
+		last30Days = 0
 
 	problems.forEach((p) => {
 		if (!p.timestamp) return
 		const d = new Date(toMs(p.timestamp))
 		const key = dayKey(d)
 		dayMap[key] = (dayMap[key] || 0) + 1
-		if (d.getFullYear() === now.getFullYear()) {
-			thisYear++
-			if (d.getMonth() === now.getMonth()) thisMonth++
-		}
+		if (d >= ago7) last7Days++
+		if (d >= ago30) last30Days++
 	})
 
 	// Current streak (consecutive days going backwards from today)
@@ -49,7 +49,7 @@ function computeStats(problems) {
 		}
 	}
 
-	return { thisMonth, thisYear, currentStreak, longestStreak, dayMap }
+	return { last7Days, last30Days, currentStreak, longestStreak, dayMap }
 }
 
 export function useCodeLedgerStats() {
@@ -75,12 +75,32 @@ export function useCodeLedgerStats() {
 
 			// Cache-bust every 2 minutes so data stays fresh as new solves are committed
 			const cacheBuster = Math.floor(Date.now() / REFRESH_INTERVAL_MS)
-			const url = `${cfg.pagesUrl.replace(/\/$/, "")}/index.json?v=${cacheBuster}`
+			const fetchOpts = force ? { cache: "no-store" } : {}
 
-			const res = await fetch(url, force ? { cache: "no-store" } : {})
-			if (!res.ok) throw new Error(`HTTP ${res.status}`)
+			// Auto-fallback: try custom domain first, then github.io URL
+			const primaryBase = cfg.pagesUrl.replace(/\/$/, "")
+			const fallbackBase =
+				cfg.repoOwner && cfg.repoName
+					? `https://${cfg.repoOwner}.github.io/${cfg.repoName}`
+					: null
 
-			const json = await res.json()
+			const tryFetch = async (base) => {
+				const res = await fetch(`${base}/index.json?v=${cacheBuster}`, fetchOpts)
+				if (!res.ok) throw new Error(`HTTP ${res.status} from ${base}`)
+				return res.json()
+			}
+
+			let json
+			try {
+				json = await tryFetch(primaryBase)
+			} catch (primaryErr) {
+				if (fallbackBase && fallbackBase !== primaryBase) {
+					console.warn("[CodeLedger] Primary URL failed, trying fallback:", primaryErr.message)
+					json = await tryFetch(fallbackBase)
+				} else {
+					throw primaryErr
+				}
+			}
 			const problems = json.problems || []
 			const computed = computeStats(problems)
 
