@@ -68,7 +68,7 @@ function SkeletonCard({ className = "" }) {
 
 function StatsSkeleton() {
 	return (
-		<div className="min-h-screen bg-black px-4 py-20 md:px-8">
+		<div className="min-h-screen px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<div className="space-y-3 animate-pulse">
@@ -81,8 +81,8 @@ function StatsSkeleton() {
 				</div>
 
 				{/* Stat cards */}
-				<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-					{Array.from({ length: 6 }).map((_, i) => (
+				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+					{Array.from({ length: 8 }).map((_, i) => (
 						<SkeletonCard key={i} className="h-24" />
 					))}
 				</div>
@@ -90,11 +90,40 @@ function StatsSkeleton() {
 				{/* Heatmap */}
 				<SkeletonCard className="h-40" />
 
-				{/* Two-column */}
+				{/* Charts */}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<SkeletonCard className="h-56 md:col-span-2" />
+					<SkeletonCard className="h-56" />
+				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<SkeletonCard className="h-64" />
 					<SkeletonCard className="h-64" />
 				</div>
+			</div>
+		</div>
+	)
+}
+
+// ── error state ───────────────────────────────────────────────────────────────
+
+function StatsError({ error, onRetry }) {
+	return (
+		<div className="min-h-screen px-4 py-20 md:px-8 flex items-center justify-center">
+			<div className="max-w-md w-full p-8 bg-white/[0.03] border border-white/[0.07] rounded-2xl text-center space-y-4">
+				<h1 className="text-xl font-bold text-slate-200">
+					Stats are taking a break
+				</h1>
+				<p className="text-sm text-slate-400">
+					Couldn&apos;t load the DSA data right now
+					{error ? ` (${error})` : ""}. The source repo may be updating —
+					try again in a moment.
+				</p>
+				<button
+					onClick={onRetry}
+					className="inline-flex items-center gap-1.5 px-4 py-2 text-sm text-cyan-400 hover:text-cyan-300 bg-cyan-400/[0.06] hover:bg-cyan-400/[0.10] border border-cyan-400/20 rounded-lg transition-colors duration-150"
+				>
+					↺ Retry
+				</button>
 			</div>
 		</div>
 	)
@@ -126,6 +155,147 @@ function StatCard({ label, value, sub, accentColor, delay = 0 }) {
 			)}
 		</motion.div>
 	)
+}
+
+// ── charts (hand-rolled — no chart library on this site) ─────────────────────
+
+const DIFF_COLORS = { easy: "#34d399", medium: "#fbbf24", hard: "#f87171" }
+
+function MonthlyVelocity({ monthly }) {
+	const max = Math.max(1, ...monthly.map((m) => m.total))
+	return (
+		<div>
+			<div className="flex items-end gap-1.5 sm:gap-2 h-40">
+				{monthly.map((m, i) => (
+					<div
+						key={m.key}
+						className="flex-1 flex flex-col justify-end items-center gap-1 min-w-0 group"
+						title={`${m.label}: ${m.total} solved (${m.easy}E · ${m.medium}M · ${m.hard}H)`}
+					>
+						{m.total > 0 && (
+							<span className="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">
+								{m.total}
+							</span>
+						)}
+						<motion.div
+							className="w-full max-w-[26px] flex flex-col-reverse rounded-t overflow-hidden"
+							initial={{ height: 0 }}
+							animate={{ height: `${(m.total / max) * 100}%` }}
+							transition={{ duration: 0.5, delay: 0.4 + i * 0.03 }}
+							style={{ minHeight: m.total > 0 ? 3 : 0 }}
+						>
+							{["easy", "medium", "hard"].map(
+								(d) =>
+									m[d] > 0 && (
+										<div
+											key={d}
+											style={{
+												flexGrow: m[d],
+												backgroundColor: DIFF_COLORS[d],
+												opacity: 0.8,
+											}}
+										/>
+									)
+							)}
+						</motion.div>
+						<span className="text-[10px] text-slate-500 truncate">
+							{m.label}
+						</span>
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
+function DifficultyDonut({ easy, medium, hard }) {
+	const total = easy + medium + hard
+	if (!total) return <p className="text-sm text-slate-500">No data yet.</p>
+	const R = 42
+	const C = 2 * Math.PI * R
+	const segments = [
+		{ label: "Easy", value: easy, color: DIFF_COLORS.easy },
+		{ label: "Medium", value: medium, color: DIFF_COLORS.medium },
+		{ label: "Hard", value: hard, color: DIFF_COLORS.hard },
+	].filter((s) => s.value > 0)
+	let offset = 0
+	return (
+		<div className="flex items-center gap-5">
+			<svg viewBox="0 0 100 100" className="w-28 h-28 shrink-0 -rotate-90">
+				{segments.map((s) => {
+					const frac = s.value / total
+					const el = (
+						<circle
+							key={s.label}
+							cx="50"
+							cy="50"
+							r={R}
+							fill="none"
+							stroke={s.color}
+							strokeOpacity="0.85"
+							strokeWidth="12"
+							strokeDasharray={`${frac * C} ${C}`}
+							strokeDashoffset={-offset * C}
+						/>
+					)
+					offset += frac
+					return el
+				})}
+			</svg>
+			<div className="space-y-1.5 min-w-0">
+				{segments.map((s) => (
+					<div key={s.label} className="flex items-center gap-2 text-sm">
+						<span
+							className="w-2.5 h-2.5 rounded-full shrink-0"
+							style={{ backgroundColor: s.color }}
+						/>
+						<span className="text-slate-300">{s.label}</span>
+						<span className="text-slate-500 text-xs">
+							{s.value} · {Math.round((s.value / total) * 100)}%
+						</span>
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
+function BarList({ entries, barColor = "bg-cyan-500/70", delayBase = 0.5 }) {
+	if (!entries.length) return <p className="text-sm text-slate-500">No data yet.</p>
+	const max = entries[0][1] || 1
+	return (
+		<div className="space-y-2.5">
+			{entries.map(([label, count], i) => (
+				<div key={label} className="flex items-center gap-3 min-w-0">
+					<span
+						className="text-sm text-slate-300 truncate w-36 shrink-0"
+						title={label}
+					>
+						{label}
+					</span>
+					<div className="flex-1 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
+						<motion.div
+							className={`h-full ${barColor} rounded-full`}
+							initial={{ width: 0 }}
+							animate={{ width: `${(count / max) * 100}%` }}
+							transition={{ duration: 0.6, delay: delayBase + i * 0.05 }}
+						/>
+					</div>
+					<span className="text-xs text-slate-500 w-7 text-right shrink-0">
+						{count}
+					</span>
+				</div>
+			))}
+		</div>
+	)
+}
+
+const PLATFORM_LABELS = {
+	leetcode: "LeetCode",
+	geeksforgeeks: "GeeksForGeeks",
+	codeforces: "Codeforces",
+	neetcode: "NeetCode",
+	takeuforward: "takeUforward",
 }
 
 // ── verified badge ────────────────────────────────────────────────────────────
@@ -175,21 +345,27 @@ const Stats = () => {
 	}, [lastUpdated])
 
 	if (loading) return <StatsSkeleton />
-	if (!data || error) return null
+	// Fetch failed and we have nothing to show — offer a retry instead of a blank page
+	if (!data && error) return <StatsError error={error} onRetry={refresh} />
+	// CodeLedger disabled in settings — nothing to render
+	if (!data) return null
 
 	const {
 		stats,
 		topTopics,
+		topLanguages,
+		platforms,
 		recentProblems,
 		dayMap,
 		last7Days,
 		last30Days,
 		currentStreak,
 		longestStreak,
+		activeDays,
+		avgPerActiveDay,
+		monthly,
 		pagesUrl,
 	} = data
-
-	const maxTopicCount = topTopics.length ? topTopics[0][1] : 1
 
 	const statCards = [
 		{
@@ -225,10 +401,22 @@ const Stats = () => {
 			sub: `${last7Days} last 7 days`,
 			accentColor: "#a855f7",
 		},
+		{
+			label: "Active Days",
+			value: activeDays,
+			sub: "days with ≥1 solve",
+			accentColor: "#06b6d4",
+		},
+		{
+			label: "Avg / Active Day",
+			value: avgPerActiveDay.toFixed(1),
+			sub: "solves per active day",
+			accentColor: "#f472b6",
+		},
 	]
 
 	return (
-		<div className="min-h-screen bg-black px-4 py-20 md:px-8">
+		<div className="min-h-screen px-4 py-20 md:px-8">
 			<div className="max-w-6xl mx-auto space-y-8">
 				{/* Header */}
 				<motion.div
@@ -289,7 +477,7 @@ const Stats = () => {
 				</motion.div>
 
 				{/* Stat cards */}
-				<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
 					{statCards.map((card, i) => (
 						<StatCard key={card.label} {...card} delay={0.05 * i} />
 					))}
@@ -308,9 +496,39 @@ const Stats = () => {
 					<DSAHeatmap dayMap={dayMap} />
 				</motion.div>
 
-				{/* Two-column: Topics + Recent */}
+				{/* Velocity + difficulty split */}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.4 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl md:col-span-2"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Monthly Velocity
+						</span>
+						<MonthlyVelocity monthly={monthly} />
+					</motion.div>
+
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.45 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Difficulty Split
+						</span>
+						<DifficultyDonut
+							easy={stats.easy ?? 0}
+							medium={stats.medium ?? 0}
+							hard={stats.hard ?? 0}
+						/>
+					</motion.div>
+				</div>
+
+				{/* Topics + Languages */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					{/* Top Topics */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -320,33 +538,40 @@ const Stats = () => {
 						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
 							Top Topics
 						</span>
-						{topTopics.length === 0 ? (
-							<p className="text-sm text-slate-500">No data yet.</p>
-						) : (
-							<div className="space-y-2.5">
-								{topTopics.map(([topic, count], i) => (
-									<div key={topic} className="flex items-center gap-3 min-w-0">
-										<span
-											className="text-sm text-slate-300 truncate w-36 shrink-0"
-											title={topic}
-										>
-											{topic}
-										</span>
-										<div className="flex-1 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
-											<motion.div
-												className="h-full bg-cyan-500/70 rounded-full"
-												initial={{ width: 0 }}
-												animate={{ width: `${(count / maxTopicCount) * 100}%` }}
-												transition={{ duration: 0.6, delay: 0.5 + i * 0.05 }}
-											/>
-										</div>
-										<span className="text-xs text-slate-500 w-6 text-right shrink-0">
-											{count}
-										</span>
-									</div>
-								))}
-							</div>
-						)}
+						<BarList entries={topTopics} />
+					</motion.div>
+
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.5 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Languages
+						</span>
+						<BarList entries={topLanguages} barColor="bg-purple-500/70" />
+					</motion.div>
+				</div>
+
+				{/* Platforms + Recent */}
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.5 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Platforms
+						</span>
+						<BarList
+							entries={platforms.map(([k, v]) => [
+								PLATFORM_LABELS[k] || k,
+								v,
+							])}
+							barColor="bg-emerald-500/70"
+						/>
 					</motion.div>
 
 					{/* Recent Solves */}
