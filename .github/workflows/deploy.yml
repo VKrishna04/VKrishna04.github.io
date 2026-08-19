@@ -84,6 +84,24 @@ jobs:
         with:
           path: "./dist"
 
+      # The Cloudflare Workers git build cannot launch Chromium, so its
+      # deploys are SPA-only (prerender skips itself there). When a
+      # CLOUDFLARE_API_TOKEN secret is present, deploy the prerendered dist
+      # from this runner instead; without it this step is a no-op. Once the
+      # token is added, disable the Workers Builds git integration in the
+      # Cloudflare dashboard so the two deploys stop racing.
+      - name: Deploy prerendered dist to Cloudflare
+        if: github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::notice title=Cloudflare deploy::CLOUDFLARE_API_TOKEN not set - skipping (Workers git build keeps serving the SPA-only build)"
+            exit 0
+          fi
+          npx wrangler deploy
+
   deploy:
     environment:
       name: github-pages
