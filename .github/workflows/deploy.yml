@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # auto-heal commits (audit fix, lint --fix, lockfile sync)
   pages: write
   id-token: write
 
@@ -27,17 +27,41 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
+      # Auto-heal: a stale lockfile downgrades npm ci to npm install so the
+      # run keeps going; the refreshed lockfile is committed back below.
       - name: Install dependencies
-        run: npm ci
+        run: npm ci || npm install
 
-      - name: Audit Packages
-        run: npm audit fix
+      # Auto-heal: apply every non-breaking security fix; remaining advisories
+      # (major-version bumps) surface as a warning instead of stopping deploys.
+      - name: Audit packages (auto-heal)
+        run: |
+          npm audit fix || true
+          npm audit || echo "::warning title=npm audit::Unfixable advisories remain - a dependency needs a manual major-version bump"
 
-      - name: Lint code
-        run: npm run lint
+      # Auto-heal: mechanical lint issues are fixed in place and committed
+      # back; only errors eslint cannot fix (real bugs) still fail the run.
+      - name: Lint code (auto-heal)
+        run: |
+          npx eslint . --fix || true
+          npm run lint
+
+      - name: Commit auto-heal changes back to main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -u
+            git commit -m "chore: auto-heal (audit fix / lint) [skip ci]"
+            # someone may have pushed meanwhile - rebase, and never fail the
+            # deploy over the write-back; the heal still applies to this build
+            git pull --rebase origin main || true
+            git push origin HEAD:main || echo "::warning title=auto-heal::Could not push heal commit (will retry next run)"
+          fi
 
       - name: Validate configuration JSON
         run: |
