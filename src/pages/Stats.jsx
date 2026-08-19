@@ -163,6 +163,10 @@ const DIFF_COLORS = { easy: "#34d399", medium: "#fbbf24", hard: "#f87171" }
 
 function MonthlyVelocity({ monthly }) {
 	const max = Math.max(1, ...monthly.map((m) => m.total))
+	// Pixel heights, not percentages — the flex columns are content-sized, so a
+	// percentage height resolves against nothing and every bar collapses to its
+	// minHeight floor
+	const BAR_AREA = 120
 	return (
 		<div>
 			<div className="flex items-end gap-1.5 sm:gap-2 h-40">
@@ -180,9 +184,12 @@ function MonthlyVelocity({ monthly }) {
 						<motion.div
 							className="w-full max-w-[26px] flex flex-col-reverse rounded-t overflow-hidden"
 							initial={{ height: 0 }}
-							animate={{ height: `${(m.total / max) * 100}%` }}
+							animate={{
+								height: m.total
+									? Math.max(3, (m.total / max) * BAR_AREA)
+									: 0,
+							}}
 							transition={{ duration: 0.5, delay: 0.4 + i * 0.03 }}
-							style={{ minHeight: m.total > 0 ? 3 : 0 }}
 						>
 							{["easy", "medium", "hard"].map(
 								(d) =>
