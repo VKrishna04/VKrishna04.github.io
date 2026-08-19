@@ -148,13 +148,9 @@ export function injectSeoPlugin() {
 				}
 
 				// Additional meta tags for better SEO
+				// (viewport lives statically in index.html — injecting a second
+				// one here produced duplicate tags in the shipped page)
 				metaTags.push(`<meta name="robots" content="index, follow" />`);
-				metaTags.push(
-					`<meta name="viewport" content="width=device-width, initial-scale=1.0" />`
-				);
-				metaTags.push(
-					`<meta http-equiv="X-UA-Compatible" content="IE=edge" />`
-				);
 
 				// Structured Data (JSON-LD)
 				if (seo.structuredData?.enabled !== false) {

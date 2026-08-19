@@ -61,17 +61,22 @@ const usePageConfiguration = (location) => {
 	}, [settings])
 
 	useEffect(() => {
-		if (!settings.display) return
+		// Wait for settings.json — but don't gate on settings.display: that key
+		// doesn't exist in settings.json, and gating on it left every route with
+		// the build-time title forever.
+		if (!Object.keys(settings).length) return
+
+		const baseName =
+			settings.display?.officialName || settings.seo?.author || "Portfolio"
 
 		// Update page title based on current route
 		const getPageTitle = () => {
-			const baseName = settings.display.officialName || "Portfolio"
 			const titles = {
-				"/": `${baseName} - Portfolio`,
+				"/": settings.seo?.title || `${baseName} - Portfolio`,
 				"/about": `About - ${baseName}`,
 				"/projects": `Projects - ${baseName}`,
 				"/resume": `Resume - ${baseName}`,
-				"/stats": `Stats - ${baseName}`,
+				"/stats": `DSA Stats - ${baseName}`,
 				"/contact": `Contact - ${baseName}`,
 			}
 			return titles[location.pathname] || `${baseName} - Portfolio`
@@ -79,16 +84,17 @@ const usePageConfiguration = (location) => {
 
 		document.title = getPageTitle()
 
-		// Update meta description
-		const metaDescription = document.querySelector('meta[name="description"]')
-		if (metaDescription && settings.display.officialName) {
-			metaDescription.content = `${settings.display.officialName} - Full Stack Developer Portfolio`
-		}
-
-		// Update author meta
-		const metaAuthor = document.querySelector('meta[name="author"]')
-		if (metaAuthor && settings.display.devUsername) {
-			metaAuthor.content = settings.display.devUsername
+		// Per-route canonical — a single hard-coded homepage canonical makes
+		// every other route deduplicate itself out of the index
+		const canonicalBase = (
+			settings.seo?.canonical || "https://vkrishna04.me/"
+		).replace(/\/$/, "")
+		const canonicalLink = document.querySelector('link[rel="canonical"]')
+		if (canonicalLink) {
+			canonicalLink.href =
+				location.pathname === "/"
+					? `${canonicalBase}/`
+					: `${canonicalBase}${location.pathname}`
 		}
 	}, [location.pathname, settings])
 
