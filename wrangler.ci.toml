@@ -1,0 +1,19 @@
+# wrangler.ci.toml — used only by the GitHub Actions deploy step.
+#
+# Identical to wrangler.toml minus the [build] section: the workflow has
+# already built (and prerendered) ./dist, and re-running the build here
+# would fail pre-build-validation, because generate-hashes.js rewrites
+# src/utils/integrity-guard.js during the first build so the tree no
+# longer matches GitHub. This config makes `wrangler deploy` upload the
+# existing dist as-is.
+name = 'me'
+compatibility_date = "2025-08-27"
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+
+[vars]
+NODE_VERSION = "24"
+NPM_FLAGS = "--production=false"
+NODE_OPTIONS = "--max-old-space-size=4096"

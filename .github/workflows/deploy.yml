@@ -87,4 +87,7 @@ jobs:
             echo "::notice title=Cloudflare deploy::CLOUDFLARE_API_TOKEN not set - skipping (Workers git build keeps serving the SPA-only build)"
             exit 0
           fi
-          npx wrangler deploy
+          # wrangler.ci.toml has no [build] section: dist is already built
+          # and prerendered, and a second build would fail integrity
+          # validation (generate-hashes.js rewrites integrity-guard.js).
+          npx wrangler deploy --config wrangler.ci.toml
