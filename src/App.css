@@ -18,6 +18,12 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .page-transition {
+        animation: none;
+    }
+}
+
 /* Fade in animation for cards */
 @keyframes fadeIn {
     from {

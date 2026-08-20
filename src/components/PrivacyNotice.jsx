@@ -40,7 +40,8 @@ const PrivacyNotice = () => {
 				<h3 className="font-semibold text-sm mb-2">Local Storage Notice</h3>
 				<p className="text-xs text-white/80 mb-3">
 					This site uses local storage to cache GitHub data for better
-					performance. No personal data is stored or tracked.
+					performance, and an anonymous visit counter. No personal data is
+						stored or shared.
 				</p>
 				<div className="flex gap-2">
 					<button
@@ -50,7 +51,7 @@ const PrivacyNotice = () => {
 						Got it
 					</button>
 					<button
-						onClick={() => setShowNotice(false)}
+						onClick={handleAcknowledge}
 						className="px-3 py-1 text-white/70 text-xs hover:text-white transition-colors"
 					>
 						Dismiss
