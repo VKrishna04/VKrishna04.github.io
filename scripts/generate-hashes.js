@@ -27,12 +27,28 @@ const PROTECTION_FILES = [
 ];
 
 /**
+ * Normalizes line endings so hashes are identical on Windows (CRLF working
+ * trees) and CI (LF). Without this, a Windows-generated commit carries hash
+ * values a Linux runner recomputes differently, the injection rewrites
+ * integrity-guard.js mid-run, and the strict CI GitHub comparison fails on
+ * the second build of the same run (wrangler's custom build).
+ * @param {string} content - Raw file content
+ * @returns {string} Content with \n line endings
+ */
+function normalizeContent(content) {
+	return content.replace(/\r\n/g, "\n");
+}
+
+/**
  * Generates SHA-256 hash for file content
  * @param {string} content - File content to hash
  * @returns {string} SHA-256 hash
  */
 function generateHash(content) {
-	return crypto.createHash("sha256").update(content, "utf8").digest("hex");
+	return crypto
+		.createHash("sha256")
+		.update(normalizeContent(content), "utf8")
+		.digest("hex");
 }
 
 /**
@@ -41,9 +57,10 @@ function generateHash(content) {
  * @returns {string} Simple hash
  */
 function generateSimpleHash(content) {
+	const normalized = normalizeContent(content);
 	let hash = 0;
-	for (let i = 0; i < content.length; i++) {
-		const char = content.charCodeAt(i);
+	for (let i = 0; i < normalized.length; i++) {
+		const char = normalized.charCodeAt(i);
 		hash = (hash << 5) - hash + char;
 		hash = hash & hash; // Convert to 32-bit integer
 	}
@@ -68,7 +85,7 @@ function computeProtectionHashes() {
 			hashes.files[filePath] = {
 				sha256: generateHash(content),
 				simple: generateSimpleHash(content),
-				size: content.length,
+				size: normalizeContent(content).length,
 				lastModified: fs.statSync(fullPath).mtime.toISOString(),
 			};
 

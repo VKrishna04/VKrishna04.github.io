@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-08-20T17:40:27.445Z",
+  "timestamp": "2026-08-20T17:49:43.069Z",
   "files": {
     "src/utils/integrity-guard.js": {
-      "sha256": "2539c08a7f9a024a6308b0b8ec69c9c45f43ccb9641618f8c7de818c606b12b3",
-      "simple": "2560f132",
-      "size": 4643,
-      "lastModified": "2026-08-20T17:40:24.172Z"
+      "sha256": "53b89849a215a44a7594c3fffb8cf7ce35ec1c13e6fa1f21b9e5fe2ca5b1cea4",
+      "simple": "68d4ff3",
+      "size": 4644,
+      "lastModified": "2026-08-20T17:49:11.530Z"
     },
     "src/utils/stealth-validator.js": {
       "sha256": "0438d92b3d01d4beb84ae0007fd9f7eddcb913ee204d67d191bc8df872617dd6",
@@ -14,27 +14,27 @@
       "lastModified": "2025-11-01T13:02:05.803Z"
     },
     "src/utils/origin-tracker.js": {
-      "sha256": "730adaa81fc515b253206aa0a3df2539e5831fb90a7d6635a7d0c476fc908301",
-      "simple": "42090e71",
-      "size": 6935,
+      "sha256": "8aee1b5161a6f97dafa2a191d1d03bd20244a916f9dc7803c3a37b07a07ea7e1",
+      "simple": "2b7a63c6",
+      "size": 6700,
       "lastModified": "2025-11-01T12:25:12.477Z"
     },
     "src/utils/advanced-obfuscation.js": {
-      "sha256": "f9b953de24671d6e76a0985c263bf65b56b92059860ee5412ee2e68219021fa8",
-      "simple": "76fdde76",
-      "size": 5312,
+      "sha256": "7469f0db031d3dfcd01f21bdfc936117e817a26dcac53be405f6bc467a1611ad",
+      "simple": "36233349",
+      "size": 5103,
       "lastModified": "2025-11-01T12:25:12.429Z"
     },
     "src/utils/build-time-protection.js": {
-      "sha256": "313851f2de092b967fe565760ae2921811900a6ce6d14dd88a2473fe8617979e",
-      "simple": "2ae6af94",
-      "size": 1264,
+      "sha256": "310f0473af70524144069e61955ccb97d8196cae24e458dd5f1dd14ad3f494c6",
+      "simple": "3a06bbc5",
+      "size": 1199,
       "lastModified": "2025-11-01T12:25:12.432Z"
     },
     "src/utils/settings-guard.js": {
-      "sha256": "463b6b27122b5f8d69096643db0128f7a17862539756bf554e037e93087c64b5",
-      "simple": "6dd5217",
-      "size": 7143,
+      "sha256": "fc6d36b3ff7dd5a6088fd72992a58307545b9debb99aefdee82b64c93d75e3db",
+      "simple": "79835f4e",
+      "size": 6924,
       "lastModified": "2025-11-01T12:25:12.495Z"
     },
     "src/utils/attribution.js": {
