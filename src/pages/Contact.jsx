@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect } from "react"
 import { trackContactSubmit } from "../utils/cflairCounter"
 import {
@@ -28,6 +28,7 @@ import {
 	GlobeAltIcon,
 	DocumentIcon,
 	ArrowDownTrayIcon,
+	ChevronDownIcon,
 } from "@heroicons/react/24/outline"
 import {
 	FaGithub,
@@ -66,6 +67,7 @@ const Contact = () => {
 	const [settings, setSettings] = useState({})
 	const [currentTime, setCurrentTime] = useState(new Date())
 	const [copiedText, setCopiedText] = useState("")
+	const [openFaqIndex, setOpenFaqIndex] = useState(null)
 
 	// Icon mapping for dynamic icon rendering
 	const iconMap = {
@@ -847,7 +849,11 @@ const Contact = () => {
 						>
 							<div className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-gray-700/50 border-l-4 border-l-green-500">
 								<div className="flex items-center">
-									<CheckCircleIcon className="h-6 w-6 text-green-400 mr-3" />
+									{/* Live availability indicator */}
+									<span className="relative flex h-3 w-3 mr-4 shrink-0">
+										<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+										<span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+									</span>
 									<div>
 										<h3 className="font-semibold text-green-200">
 											{contactConfig.status.title || "Current Status"}
@@ -914,29 +920,63 @@ const Contact = () => {
 					</motion.div>
 				</div>
 
-				{/* FAQ Section */}
+				{/* FAQ Section — interactive accordion */}
 				{faqItems.length > 0 && (
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.5 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, amount: 0.2 }}
+						transition={{ duration: 0.5 }}
 						className="mt-16"
 					>
 						<h2 className="text-3xl font-bold text-white text-center mb-12">
 							Frequently Asked Questions
 						</h2>
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							{faqItems.map((faq, index) => (
-								<div
-									key={index}
-									className="bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700/50 p-6"
-								>
-									<h3 className="font-semibold text-white mb-2">
-										{faq.question}
-									</h3>
-									<p className="text-gray-300">{faq.answer}</p>
-								</div>
-							))}
+						<div className="max-w-3xl mx-auto space-y-3">
+							{faqItems.map((faq, index) => {
+								const isOpen = openFaqIndex === index
+								return (
+									<div
+										key={index}
+										className={`bg-gray-800/50 backdrop-blur-sm rounded-lg border transition-colors duration-300 ${
+											isOpen
+												? "border-purple-500/50"
+												: "border-gray-700/50 hover:border-purple-500/30"
+										}`}
+									>
+										<button
+											type="button"
+											onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+											aria-expanded={isOpen}
+											className="w-full flex items-center justify-between gap-4 p-5 text-left"
+										>
+											<h3 className="font-semibold text-white">
+												{faq.question}
+											</h3>
+											<ChevronDownIcon
+												className={`h-5 w-5 shrink-0 text-purple-400 transition-transform duration-300 ${
+													isOpen ? "rotate-180" : ""
+												}`}
+											/>
+										</button>
+										<AnimatePresence initial={false}>
+											{isOpen && (
+												<motion.div
+													initial={{ height: 0, opacity: 0 }}
+													animate={{ height: "auto", opacity: 1 }}
+													exit={{ height: 0, opacity: 0 }}
+													transition={{ duration: 0.25, ease: "easeInOut" }}
+													className="overflow-hidden"
+												>
+													<p className="text-gray-300 px-5 pb-5">
+														{faq.answer}
+													</p>
+												</motion.div>
+											)}
+										</AnimatePresence>
+									</div>
+								)
+							})}
 						</div>
 					</motion.div>
 				)}
