@@ -7,7 +7,6 @@
 import fs from "fs";
 import process from "process";
 
-/* eslint-env node */
 
 /**
  * Expected build script configuration - this is the source of truth

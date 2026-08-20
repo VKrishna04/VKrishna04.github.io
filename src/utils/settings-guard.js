@@ -8,7 +8,6 @@ import fs from "fs";
 import crypto from "crypto";
 import process from "process";
 
-/* eslint-env node */
 
 /**
  * Detects if we're in a legitimate development environment

@@ -36,6 +36,7 @@ import {
 	FaReddit,
 	FaAws,
 	FaArrowUp,
+	FaGlobe,
 } from "react-icons/fa"
 import {
 	SiLeetcode,
@@ -44,7 +45,6 @@ import {
 	SiGithubcopilot,
 	SiYoutubemusic,
 	SiVercel,
-	SiHeroku,
 } from "react-icons/si"
 import useProjectsData from "../hooks/useProjectsData"
 import { fetchSettings } from "../utils/settingsCache"
@@ -89,7 +89,7 @@ const Footer = () => {
 		SiGithubcopilot,
 		SiYoutubemusic,
 		SiVercel,
-		SiHeroku,
+		SiHeroku: FaGlobe, // icon retired from react-icons 5.7 (Simple Icons removal)
 	}
 
 	const getIconComponent = (iconName) => {

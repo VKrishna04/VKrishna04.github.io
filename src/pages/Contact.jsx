@@ -55,7 +55,6 @@ import {
 	SiKaggle,
 	SiYoutubemusic,
 	SiVercel,
-	SiHeroku,
 	SiGithubcopilot,
 	SiZenodo,
 	SiIeee,
@@ -93,7 +92,7 @@ const Contact = () => {
 		SiKaggle,
 		SiYoutubemusic,
 		SiVercel,
-		SiHeroku,
+		SiHeroku: FaGlobe, // icon retired from react-icons 5.7 (Simple Icons removal)
 		SiGithubcopilot,
 		SiZenodo,
 		SiIeee,

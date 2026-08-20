@@ -5,7 +5,6 @@
  * @fileoverview Node.js script for generating protection system hashes
  */
 
-/* eslint-env node */
 
 import fs from "fs";
 import path from "path";

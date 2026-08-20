@@ -63,7 +63,7 @@ import {
 	SiNetlify,
 	SiVuedotjs,
 	SiSvelte,
-	SiNuxtdotjs,
+	SiNuxt,
 	SiGo,
 	SiRust,
 	SiCplusplus,
@@ -85,7 +85,6 @@ import {
 	SiVite,
 	SiWebpack,
 	SiGooglecloud,
-	SiHeroku,
 } from "react-icons/si"
 
 const ProjectCard = ({
@@ -174,8 +173,8 @@ const ProjectCard = ({
 			next: SiNextdotjs,
 			nextjs: SiNextdotjs,
 			"next.js": SiNextdotjs,
-			nuxt: SiNuxtdotjs,
-			nuxtjs: SiNuxtdotjs,
+			nuxt: SiNuxt,
+			nuxtjs: SiNuxt,
 			tailwind: SiTailwindcss,
 			copilot: SiGithubcopilot,
 			copilotx: SiGithubcopilot,
@@ -238,7 +237,7 @@ const ProjectCard = ({
 			google: SiGooglecloud,
 			vercel: SiVercel,
 			netlify: SiNetlify,
-			heroku: SiHeroku,
+			heroku: FaGlobe, // SiHeroku retired from react-icons 5.7 (Simple Icons removal)
 			web: FaGlobe,
 			website: FaGlobe,
 			webapp: FaGlobe,
