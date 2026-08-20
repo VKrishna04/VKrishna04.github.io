@@ -166,7 +166,7 @@ fs.writeFileSync(
       description_for_model:
         "Provides structured portfolio data including projects, skills, bio, and contact information for AI agents.",
       auth: { type: "none" },
-      logo_url: "https://vkrishna04.me/favicon.ico",
+      logo_url: "https://vkrishna04.me/favicon-96x96.png",
       contact_email: "",
       legal_info_url: `https://github.com/${github?.username || ""}`,
     },

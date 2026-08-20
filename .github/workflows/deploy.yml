@@ -1,4 +1,4 @@
-name: Deploy Portfolio to GitHub Pages
+name: Build and Deploy Portfolio
 
 on:
   push:
@@ -9,11 +9,9 @@ on:
 
 permissions:
   contents: write # auto-heal commits (audit fix, lint --fix, lockfile sync)
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "deploy"
   cancel-in-progress: false
 
 jobs:
@@ -73,17 +71,6 @@ jobs:
         env:
           VITE_RESUME_LINK: ${{ secrets.VITE_RESUME_LINK }}
 
-      - name: Generate CNAME file
-        run: npm run generate-cname
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "./dist"
-
       # The Cloudflare Workers git build cannot launch Chromium, so its
       # deploys are SPA-only (prerender skips itself there). When a
       # CLOUDFLARE_API_TOKEN secret is present, deploy the prerendered dist
@@ -101,15 +88,3 @@ jobs:
             exit 0
           fi
           npx wrangler deploy
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
