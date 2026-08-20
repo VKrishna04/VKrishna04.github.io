@@ -48,6 +48,7 @@ import {
 } from "react-icons/si"
 import useProjectsData from "../hooks/useProjectsData"
 import { fetchSettings } from "../utils/settingsCache"
+import { ATTRIBUTION } from "../utils/attribution"
 
 const Footer = () => {
 	const [settings, setSettings] = useState({})
@@ -405,6 +406,30 @@ const Footer = () => {
 							<FaArrowUp className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
 						</button>
 					</div>
+				</div>
+
+				{/* Attribution — not settings-driven; validated at build time (see src/utils/attribution.js) */}
+				<div className="mt-6 pt-4 border-t border-gray-800/30 text-center text-xs text-gray-600">
+					Designed &amp; built by{" "}
+					<a
+						href={ATTRIBUTION.github}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-gray-500 hover:text-purple-400 transition-colors duration-300"
+					>
+						{ATTRIBUTION.author}
+					</a>
+					{" · "}
+					<a
+						href={ATTRIBUTION.repository}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-gray-500 hover:text-purple-400 transition-colors duration-300"
+					>
+						Open source
+					</a>
+					{" · "}
+					{ATTRIBUTION.license}
 				</div>
 
 				{/* Bottom gradient line */}

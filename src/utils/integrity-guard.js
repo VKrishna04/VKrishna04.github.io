@@ -18,11 +18,14 @@ const ENCODED_REFS = {
 };
 
 // Expected file hashes for integrity validation
-const PROTECTION_HASHES =   {
-    'src/utils/integrity-guard.js': 'cba920b',
-    'src/utils/stealth-validator.js': '44a337fc',
-    'src/utils/origin-tracker.js': '1e0f93db',
-    'src/utils/advanced-obfuscation.js': '2c1220ed'
+const PROTECTION_HASHES = {
+    'src/utils/integrity-guard.js': '2560f132',
+    'src/utils/stealth-validator.js': '22fc983d',
+    'src/utils/origin-tracker.js': '42090e71',
+    'src/utils/advanced-obfuscation.js': '76fdde76',
+    'src/utils/build-time-protection.js': '2ae6af94',
+    'src/utils/settings-guard.js': '6dd5217',
+    'src/utils/attribution.js': '66984d76'
   };
 
 /**

@@ -25,6 +25,8 @@ const EXPECTED_BUILD_CONFIG = {
 		"src/utils/integrity-guard.js",
 		"src/utils/origin-tracker.js",
 		"src/utils/advanced-obfuscation.js",
+		"src/utils/attribution.js",
+		"NOTICE",
 	],
 
 	// GitHub repository details
@@ -93,6 +95,7 @@ async function validateSelfIntegrity() {
 			"expectedBuildScript",
 			"EXPECTED_BUILD_CONFIG",
 			"runComprehensiveValidation",
+			"validateAttributionIntegrity",
 		];
 
 		for (const pattern of requiredPatterns) {
@@ -187,6 +190,66 @@ async function validateBuildChainIntegrity() {
 		return true;
 	} catch (error) {
 		console.error("❌ Build chain validation failed:", error.message);
+		return false;
+	}
+}
+
+/**
+ * Validates that the project attribution is intact and rendered.
+ * The credit is NOTICE-backed (Apache License §4(d)): redistribution must
+ * retain it, and this check makes stripping it break the build.
+ * @returns {boolean} True if attribution is intact
+ */
+function validateAttributionIntegrity() {
+	try {
+		console.log("🔍 Validating attribution integrity...");
+
+		// 1. The attribution module must exist and carry the canonical credit
+		const attributionPath = "src/utils/attribution.js";
+		const attribution = fs.readFileSync(attributionPath, "utf8");
+		const requiredAttributionMarkers = [
+			"Krishna GSVV",
+			"https://github.com/VKrishna04",
+			"Object.freeze",
+			"ATTRIBUTION",
+		];
+		for (const marker of requiredAttributionMarkers) {
+			if (!attribution.includes(marker)) {
+				console.error(
+					`❌ Attribution module missing required content: '${marker}'`
+				);
+				console.error(
+					"   src/utils/attribution.js must retain the original project credit."
+				);
+				return false;
+			}
+		}
+
+		// 2. The Footer must import and render the attribution
+		const footerPath = "src/components/Footer.jsx";
+		const footer = fs.readFileSync(footerPath, "utf8");
+		if (
+			!footer.includes("utils/attribution") ||
+			!footer.includes("ATTRIBUTION.author")
+		) {
+			console.error("❌ Footer no longer renders the project attribution");
+			console.error(
+				"   src/components/Footer.jsx must import ATTRIBUTION and render ATTRIBUTION.author."
+			);
+			return false;
+		}
+
+		// 3. The NOTICE file (Apache §4(d)) must retain the credit
+		const notice = fs.readFileSync("NOTICE", "utf8");
+		if (!notice.includes("Krishna GSVV")) {
+			console.error("❌ NOTICE file no longer credits the original author");
+			return false;
+		}
+
+		console.log("✅ Attribution integrity validated");
+		return true;
+	} catch (error) {
+		console.error("❌ Attribution validation failed:", error.message);
 		return false;
 	}
 }
@@ -348,6 +411,15 @@ async function runComprehensiveValidation() {
 			throw new Error("Build chain integrity check failed");
 		}
 
+		// Step 1.5: Validate the project attribution is intact
+		if (!validateAttributionIntegrity()) {
+			console.error("\n❌ Attribution validation failed!");
+			console.error(
+				"   The original author credit (NOTICE / src/utils/attribution.js) must be retained."
+			);
+			throw new Error("Attribution integrity check failed");
+		}
+
 		// Step 2: Validate files against GitHub (if available)
 		const githubValid = await validateCriticalFilesAgainstGitHub();
 		if (!githubValid) {
@@ -381,6 +453,7 @@ export {
 	validatePackageJsonBuildScript,
 	validateSelfIntegrity,
 	validateBuildChainIntegrity,
+	validateAttributionIntegrity,
 	validateCriticalFilesAgainstGitHub,
 	runComprehensiveValidation,
 };

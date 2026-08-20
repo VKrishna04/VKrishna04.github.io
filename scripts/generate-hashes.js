@@ -10,6 +10,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import process from "process";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +23,7 @@ const PROTECTION_FILES = [
 	"src/utils/advanced-obfuscation.js",
 	"src/utils/build-time-protection.js",
 	"src/utils/settings-guard.js", // CRITICAL: Protect the core bypass logic
+	"src/utils/attribution.js", // CRITICAL: Project credit — NOTICE-backed, must not be stripped
 ];
 
 /**
@@ -95,15 +97,24 @@ function updateIntegrityGuard(hashes) {
 			hashObject[filePath] = hashes.files[filePath].simple;
 		});
 
-		// Replace the null values in PROTECTION_HASHES
+		// Replace the null values in PROTECTION_HASHES. The indent pass used to
+		// prefix the first line too, so the written file said "=   {" and the
+		// strict "= \{" regex never matched again — the injection silently
+		// no-opped on every later run. Tolerate any whitespace after "=" and
+		// keep the first line unindented so the replacement stays re-runnable.
 		const hashString = JSON.stringify(hashObject, null, 2)
 			.replace(/"/g, "'")
-			.replace(/^/gm, "  ");
+			.replace(/^/gm, "  ")
+			.trimStart();
 
+		const before = content;
 		content = content.replace(
-			/const PROTECTION_HASHES = \{[\s\S]*?\};/,
+			/const PROTECTION_HASHES =\s*\{[\s\S]*?\};/,
 			`const PROTECTION_HASHES = ${hashString};`
 		);
+		if (content === before) {
+			throw new Error("PROTECTION_HASHES block not found in integrity-guard.js");
+		}
 
 		fs.writeFileSync(integrityGuardPath, content, "utf8");
 		console.log("✓ Updated integrity-guard.js with computed hashes");
@@ -152,8 +163,11 @@ function main() {
 	console.log("\n✅ Protection system hash generation completed!");
 }
 
-// Run if called directly
-if (import.meta.url === fileURLToPath(import.meta.url)) {
+// Run if called directly. Comparing import.meta.url (a file:// URL) to
+// fileURLToPath's result (a filesystem path) was always false, so the
+// `npm run generate-hashes` entry point silently did nothing — compare
+// path-to-path instead.
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
 	main();
 }
 

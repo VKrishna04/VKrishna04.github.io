@@ -842,6 +842,19 @@ This project is open source and available under the [Apache License, Version 2.0
 - ❌ Liability
 - ❌ Warranty
 
+### Attribution
+
+You are welcome — encouraged, even — to fork this portfolio and make it your
+own. The only ask is that the original credit stays:
+
+- The [NOTICE](NOTICE) file must be retained in any redistribution
+  (Apache License §4(d) makes this a license condition, not a request).
+- The footer credit rendered from `src/utils/attribution.js` is part of the
+  build-integrity system — removing it fails `npm run build`.
+
+Everything else (name, content, settings, colors, projects) is yours to change
+via `public/settings.json`.
+
 ## 👤 Author & Credits
 
 **Krishna GSVV** (VKrishna04)

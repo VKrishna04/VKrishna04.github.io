@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-06-05T12:44:38.035Z",
+  "timestamp": "2026-08-20T17:40:27.445Z",
   "files": {
     "src/utils/integrity-guard.js": {
-      "sha256": "565611e1300d0b849a372e207982f68665d54477b408fc290c788d0669e4c2e0",
-      "simple": "5ec8da62",
-      "size": 4500,
-      "lastModified": "2026-06-02T12:06:38.651Z"
+      "sha256": "2539c08a7f9a024a6308b0b8ec69c9c45f43ccb9641618f8c7de818c606b12b3",
+      "simple": "2560f132",
+      "size": 4643,
+      "lastModified": "2026-08-20T17:40:24.172Z"
     },
     "src/utils/stealth-validator.js": {
       "sha256": "0438d92b3d01d4beb84ae0007fd9f7eddcb913ee204d67d191bc8df872617dd6",
@@ -36,6 +36,12 @@
       "simple": "6dd5217",
       "size": 7143,
       "lastModified": "2025-11-01T12:25:12.495Z"
+    },
+    "src/utils/attribution.js": {
+      "sha256": "a44d7223e25ea5cb2287401efcf1a3ca9fdc5c0cc388d1f6d44572da76dc44d9",
+      "simple": "66984d76",
+      "size": 1587,
+      "lastModified": "2026-08-20T17:34:05.025Z"
     }
   }
 }
