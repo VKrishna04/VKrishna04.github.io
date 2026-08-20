@@ -14,7 +14,7 @@ import process from "process";
  * We check the build-core script to avoid circular dependency
  */
 const EXPECTED_BUILD_CORE_SCRIPT =
-	"node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js";
+	"node scripts/pre-build-validation.js && node scripts/generate-icon-map.js && vite build && node scripts/generate-manifest.js";
 
 /**
  * Forbidden build scripts that bypass validation

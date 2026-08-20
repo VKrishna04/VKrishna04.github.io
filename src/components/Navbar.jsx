@@ -26,6 +26,7 @@ import { motion } from "framer-motion";
 
 // === MODULAR SYSTEMS: Use unified icon system ===
 import { UnifiedIcon } from "../components/UnifiedIcon";
+import { fetchSettings } from "../utils/settingsCache";
 // ================================================
 
 const Navbar = () => {
@@ -36,8 +37,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		// Fetch settings for navbar configuration
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error));
 	}, []);

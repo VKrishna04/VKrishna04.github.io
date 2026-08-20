@@ -16,6 +16,7 @@
 
 import { useState, useEffect } from "react"
 import { cachedFetch } from "../utils/githubCache"
+import { fetchSettings } from "../utils/settingsCache"
 
 const useGitHubRepos = () => {
 	const [repositories, setRepositories] = useState([])
@@ -48,13 +49,8 @@ const useGitHubRepos = () => {
 				// Fetch settings configuration
 				let config
 				try {
-					const response = await fetch("/settings.json")
-					if (response.ok) {
-						config = await response.json()
-						setSettings(config)
-					} else {
-						throw new Error("Failed to fetch settings")
-					}
+					config = await fetchSettings()
+					setSettings(config)
 				} catch (settingsError) {
 					console.warn("Could not fetch settings:", settingsError)
 					// Fallback settings if file can't be loaded

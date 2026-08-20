@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react"
+import { fetchSettings } from "../utils/settingsCache"
 
 const REFRESH_INTERVAL_MS = 2 * 60 * 1000 // 2 minutes
 
@@ -106,8 +107,7 @@ export function useCodeLedgerStats() {
 
 	const fetchStats = useCallback(async (force = false) => {
 		try {
-			const settingsRes = await fetch("/settings.json")
-			const settings = await settingsRes.json()
+			const settings = await fetchSettings()
 			const cfg = settings.codeLedger
 			setConfig(cfg)
 

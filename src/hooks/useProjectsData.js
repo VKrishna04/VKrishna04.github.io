@@ -16,6 +16,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { cachedFetch } from "../utils/githubCache"
+import { fetchSettings as fetchSharedSettings } from "../utils/settingsCache"
 
 const useProjectsData = () => {
 	const [repositories, setRepositories] = useState([])
@@ -28,12 +29,9 @@ const useProjectsData = () => {
 	// Fetch settings configuration
 	const fetchSettings = async () => {
 		try {
-			const response = await fetch("/settings.json")
-			if (response.ok) {
-				const data = await response.json()
-				setSettings(data)
-				return data
-			}
+			const data = await fetchSharedSettings()
+			setSettings(data)
+			return data
 		} catch (error) {
 			console.warn("Could not fetch settings:", error)
 		}

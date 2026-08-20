@@ -65,6 +65,7 @@ import {
 	SiNotion,
 	SiFigma,
 } from "react-icons/si"
+import { fetchSettings } from "../utils/settingsCache"
 
 const Resume = () => {
 	const [settings, setSettings] = useState({})
@@ -81,8 +82,7 @@ const Resume = () => {
 
 	useEffect(() => {
 		// Fetch settings for resume configuration
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])

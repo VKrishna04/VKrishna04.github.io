@@ -47,6 +47,7 @@ import {
 	SiHeroku,
 } from "react-icons/si"
 import useProjectsData from "../hooks/useProjectsData"
+import { fetchSettings } from "../utils/settingsCache"
 
 const Footer = () => {
 	const [settings, setSettings] = useState({})
@@ -54,8 +55,7 @@ const Footer = () => {
 
 	useEffect(() => {
 		// Fetch settings for footer configuration
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])

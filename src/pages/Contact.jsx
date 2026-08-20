@@ -60,6 +60,7 @@ import {
 	SiIeee,
 	SiHashnode,
 } from "react-icons/si"
+import { fetchSettings } from "../utils/settingsCache"
 
 const Contact = () => {
 	const [settings, setSettings] = useState({})
@@ -677,8 +678,7 @@ const Contact = () => {
 
 	useEffect(() => {
 		// Fetch settings for contact information
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 

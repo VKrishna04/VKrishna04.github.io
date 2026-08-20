@@ -47,6 +47,7 @@ import {
 	getSocialLinkStyles,
 	parseColor,
 } from "../utils/themeUtils"
+import { fetchSettings } from "../utils/settingsCache"
 
 const Home = () => {
 	const [settings, setSettings] = useState({})
@@ -55,8 +56,7 @@ const Home = () => {
 
 	useEffect(() => {
 		// Fetch settings for home page configuration
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])

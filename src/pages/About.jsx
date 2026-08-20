@@ -25,6 +25,7 @@ import { getUnifiedIcon } from "../utils/iconSystemCore"
 import { UnifiedIcon } from "../components/UnifiedIcon"
 import { parseColor } from "../utils/themeUtils"
 import TechnicalExperience from "../components/TechnicalExperience"
+import { fetchSettings } from "../utils/settingsCache"
 // =========================================================
 
 const About = () => {
@@ -35,8 +36,7 @@ const About = () => {
 	const [dsaView, setDsaView] = useState("all")
 
 	useEffect(() => {
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])

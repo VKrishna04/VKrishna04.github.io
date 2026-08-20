@@ -14,542 +14,103 @@
  * limitations under the License.
  */
 
-import * as FaIcons from "react-icons/fa"
-import * as SiIcons from "react-icons/si"
-
 /**
- * UNIFIED ICON SYSTEM - CORE UTILITIES
+ * UNIFIED ICON SYSTEM — core resolution
  *
- * This module provides utility functions for the icon system.
- * Separated from the React component to avoid Fast Refresh warnings.
+ * Icons resolve synchronously from a build-time generated map
+ * (src/generated/icon-map.js) that contains exactly the icons referenced in
+ * public/settings.json and the source tree — regenerate it with
+ * `node scripts/generate-icon-map.js` after adding a new icon name.
+ *
+ * This replaced runtime barrel imports + per-family dynamic imports that
+ * shipped the entire react-icons catalogue (~35 MB of JS) to render ~90 icons.
+ *
+ * The async signatures are kept so existing callers (UnifiedIcon, About
+ * preload, favicon generation) keep working unchanged.
  */
 
-// ============================================================================
-// ICON LIBRARY REGISTRY
-// ============================================================================
+import { ICON_MAP } from "../generated/icon-map.js"
+
+// react-icons family prefixes, used only to sanity-parse icon names.
+// Longest first so "Fa6"/"Hi2"/"Io5" are not swallowed by "Fa"/"Hi"/"Io".
+const LIBRARY_PREFIXES = [
+	"Tfi", "Vsc", "Fa6", "Hi2", "Io5",
+	"Ai", "Bi", "Bs", "Cg", "Ci", "Di", "Fa", "Fc", "Fi", "Gi", "Go", "Gr",
+	"Hi", "Im", "Io", "Lu", "Md", "Pi", "Ri", "Rx", "Si", "Sl", "Tb", "Ti", "Wi",
+]
 
 /**
- * Complete mapping of icon library prefixes to their import paths
- * This enables automatic detection and loading of ANY react-icons icon
+ * Extract the library prefix from a react-icons style name.
+ * @param {string} iconName - e.g. "FaReact" → "Fa"
+ * @returns {string|null} the prefix, or null if the name matches no family
  */
-export const ICON_LIBRARY_REGISTRY = {
-	// Ant Design Icons
-	Ai: "react-icons/ai",
-	// Bootstrap Icons
-	Bs: "react-icons/bs",
-	// Boxicons
-	Bi: "react-icons/bi",
-	// Circum Icons
-	Ci: "react-icons/ci",
-	// Devicons
-	Di: "react-icons/di",
-	// Feather
-	Fi: "react-icons/fi",
-	// Flat Color Icons
-	Fc: "react-icons/fc",
-	// Font Awesome (Free)
-	Fa: "react-icons/fa",
-	// Font Awesome 6
-	Fa6: "react-icons/fa6",
-	// Game Icons
-	Gi: "react-icons/gi",
-	// GitHub Octicons
-	Go: "react-icons/go",
-	// Grommet Icons
-	Gr: "react-icons/gr",
-	// Heroicons (v1)
-	Hi: "react-icons/hi",
-	// Heroicons 2
-	Hi2: "react-icons/hi2",
-	// IcoMoon Free
-	Im: "react-icons/im",
-	// Ionicons 4
-	Io: "react-icons/io",
-	// Ionicons 5
-	Io5: "react-icons/io5",
-	// Lucide
-	Lu: "react-icons/lu",
-	// Material Design Icons
-	Md: "react-icons/md",
-	// Phosphor Icons
-	Pi: "react-icons/pi",
-	// Remix Icon
-	Ri: "react-icons/ri",
-	// Radix Icons
-	Rx: "react-icons/rx",
-	// Simple Icons
-	Si: "react-icons/si",
-	// Simple Line Icons
-	Sl: "react-icons/sl",
-	// Tabler Icons
-	Tb: "react-icons/tb",
-	// Themify Icons
-	Tfi: "react-icons/tfi",
-	// Typicons
-	Ti: "react-icons/ti",
-	// VS Code Icons
-	Vsc: "react-icons/vsc",
-	// Weather Icons
-	Wi: "react-icons/wi",
-	// css.gg
-	Cg: "react-icons/cg",
+export const getIconLibraryPrefix = (iconName) => {
+	if (!iconName || typeof iconName !== "string") return null
+	return LIBRARY_PREFIXES.find((p) => iconName.startsWith(p)) || null
+}
+
+const warned = new Set()
+const warnOnce = (iconName) => {
+	if (warned.has(iconName)) return
+	warned.add(iconName)
+	console.warn(
+		`[IconSystem] Icon "${iconName}" is not in the generated map — ` +
+			`add it to settings.json or source and run: node scripts/generate-icon-map.js`
+	)
 }
 
 /**
- * Cache for loaded icon components to improve performance
- * Prevents redundant imports of the same icon
+ * Resolve an icon component by name (react-icons or heroicons style).
+ * Kept async for API compatibility; resolution is synchronous.
+ * @param {string} iconName
+ * @returns {Promise<React.Component|null>}
  */
-export const iconCache = new Map()
+export const getUnifiedIcon = async (iconName) => {
+	return getCachedIcon(iconName)
+}
 
 /**
- * In-flight requests tracker to prevent duplicate loads
+ * Synchronous icon lookup.
+ * @param {string} iconName
+ * @returns {React.Component|null}
  */
-export const loadingPromises = new Map()
-
-// ============================================================================
-// ICON NAME PARSING
-// ============================================================================
-
-/**
- * Extract library prefix from icon name
- * Examples:
- * - FaReact -> Fa
- * - MdHome -> Md
- * - HiUser -> Hi (from hi)
- * - HiBars3 -> Hi (may resolve from hi or hi2)
- * - SiJavascript -> Si
- *
- * @param {string} iconName - The icon name (e.g., "FaReact")
- * @returns {string|null} - The library prefix or null if invalid
- */
-export const getIconLibraryPrefix = (iconName) => {
-	if (!iconName || typeof iconName !== "string") {
-		return null
-	}
-
-	// Sort registry keys by length (longest first) to match Hi2 before Hi, Io5 before Io, etc.
-	const sortedPrefixes = Object.keys(ICON_LIBRARY_REGISTRY).sort(
-		(a, b) => b.length - a.length
-	)
-
-	// Try to match the longest possible prefix first
-	for (const prefix of sortedPrefixes) {
-		if (iconName.startsWith(prefix)) {
-			return prefix
-		}
-	}
-
-	// Fallback: Match icon prefixes (2-3 capital letters at start)
-	// Examples: Fa, Md, Hi, Hi2, Io5, Fa6
-	const match = iconName.match(/^([A-Z][a-z]*\d*)/)
-	if (match) {
-		const prefix = match[1]
-		console.warn(
-			`[UnifiedIconSystem] Prefix '${prefix}' found in icon name '${iconName}' but not in registry. May need to add to ICON_LIBRARY_REGISTRY.`
-		)
-		return prefix
-	}
-
-	console.warn(`[UnifiedIconSystem] Invalid icon name format: ${iconName}`)
+export const getCachedIcon = (iconName) => {
+	if (!iconName || typeof iconName !== "string") return null
+	const icon = ICON_MAP[iconName]
+	if (icon) return icon
+	warnOnce(iconName)
 	return null
 }
 
 /**
- * Get the import path for an icon library
- *
- * @param {string} prefix - Library prefix (e.g., "Fa", "Md")
- * @returns {string|null} - Import path or null if not found
- */
-export const getIconLibraryPath = (prefix) => {
-	if (!prefix) return null
-
-	const path = ICON_LIBRARY_REGISTRY[prefix]
-	if (!path) {
-		console.warn(`[UnifiedIconSystem] Unknown icon library prefix: ${prefix}`)
-		return null
-	}
-
-	return path
-}
-
-// ============================================================================
-// ICON LOADING
-// ============================================================================
-
-/**
- * Dynamically load an icon component from react-icons
- *
- * This function:
- * 1. Checks the cache first
- * 2. Parses the icon name to detect library
- * 3. Dynamically imports the library
- * 4. Extracts and returns the icon component
- *
- * @param {string} iconName - The icon name (e.g., "FaReact")
- * @returns {Promise<React.Component|null>} - Icon component or null
- */
-export const getUnifiedIcon = async (iconName) => {
-	// Return null for invalid input
-	if (!iconName || typeof iconName !== "string") {
-		console.warn("[UnifiedIconSystem] Invalid icon name:", iconName)
-		return null
-	}
-
-	// Check cache first
-	if (iconCache.has(iconName)) {
-		return iconCache.get(iconName)
-	}
-
-	// Check if already loading
-	if (loadingPromises.has(iconName)) {
-		return loadingPromises.get(iconName)
-	}
-
-	// Create loading promise
-	const loadingPromise = (async () => {
-		try {
-			// Parse icon name to get library
-			const prefix = getIconLibraryPrefix(iconName)
-			if (!prefix) {
-				return null
-			}
-
-			const libraryPath = getIconLibraryPath(prefix)
-			if (!libraryPath) {
-				return null
-			}
-
-			// Dynamically import the icon library using static paths for Vite
-			let iconModule
-			switch (prefix) {
-				case "Fa":
-					iconModule = FaIcons
-					break
-				case "Fa6":
-					iconModule = await import("react-icons/fa6")
-					break
-				case "Si":
-					iconModule = SiIcons
-					break
-				case "Hi":
-					iconModule = await import("react-icons/hi")
-					// iconModule = await import("@heroicons/react/24/outline");
-					break
-				case "Hi2":
-					iconModule = await import("react-icons/hi2")
-					break
-				case "Md":
-					iconModule = await import("react-icons/md")
-					break
-				case "Ai":
-					iconModule = await import("react-icons/ai")
-					break
-				case "Bs":
-					iconModule = await import("react-icons/bs")
-					break
-				case "Bi":
-					iconModule = await import("react-icons/bi")
-					break
-				case "Ci":
-					iconModule = await import("react-icons/ci")
-					break
-				case "Di":
-					iconModule = await import("react-icons/di")
-					break
-				case "Fi":
-					iconModule = await import("react-icons/fi")
-					break
-				case "Fc":
-					iconModule = await import("react-icons/fc")
-					break
-				case "Gi":
-					iconModule = await import("react-icons/gi")
-					break
-				case "Go":
-					iconModule = await import("react-icons/go")
-					break
-				case "Gr":
-					iconModule = await import("react-icons/gr")
-					break
-				case "Im":
-					iconModule = await import("react-icons/im")
-					break
-				case "Io":
-					iconModule = await import("react-icons/io")
-					break
-				case "Io5":
-					iconModule = await import("react-icons/io5")
-					break
-				case "Lu":
-					iconModule = await import("react-icons/lu")
-					break
-				case "Pi":
-					iconModule = await import("react-icons/pi")
-					break
-				case "Ri":
-					iconModule = await import("react-icons/ri")
-					break
-				case "Rx":
-					iconModule = await import("react-icons/rx")
-					break
-				case "Sl":
-					iconModule = await import("react-icons/sl")
-					break
-				case "Tb":
-					iconModule = await import("react-icons/tb")
-					break
-				case "Tfi":
-					iconModule = await import("react-icons/tfi")
-					break
-				case "Ti":
-					iconModule = await import("react-icons/ti")
-					break
-				case "Vsc":
-					iconModule = await import("react-icons/vsc")
-					break
-				case "Wi":
-					iconModule = await import("react-icons/wi")
-					break
-				case "Cg":
-					iconModule = await import("react-icons/cg")
-					break
-				default:
-					console.warn(
-						`[UnifiedIconSystem] Unsupported icon library prefix: ${prefix}`
-					)
-					return null
-			}
-
-			// Get the specific icon component
-			let IconComponent = iconModule[iconName]
-
-			// Treat Hi* names as coming from either hi or hi2, exact name only.
-			// If prefix is Hi and not found in hi, try the same exact name from hi2.
-			if (!IconComponent && prefix === "Hi") {
-				try {
-					const hi2Module = await import("react-icons/hi2")
-					IconComponent = hi2Module[iconName]
-				} catch {
-					// ignore
-				}
-			}
-
-			if (!IconComponent) {
-				console.warn(
-					`[UnifiedIconSystem] Icon "${iconName}" not found in library "${prefix}"`
-				)
-				return null
-			}
-
-			// Cache the result
-			iconCache.set(iconName, IconComponent)
-
-			return IconComponent
-		} catch (error) {
-			console.error(
-				`[UnifiedIconSystem] Error loading icon "${iconName}":`,
-				error
-			)
-			iconCache.set(iconName, null) // Cache null to prevent repeated failures
-			return null
-		} finally {
-			// Remove from loading promises
-			loadingPromises.delete(iconName)
-		}
-	})()
-
-	// Track the loading promise
-	loadingPromises.set(iconName, loadingPromise)
-
-	return loadingPromise
-}
-
-/**
- * Synchronously get a cached icon (returns null if not in cache)
- * Useful for components that can't use async/await
- *
- * @param {string} iconName - The icon name
- * @returns {React.Component|null} - Cached icon or null
- */
-export const getCachedIcon = (iconName) => {
-	return iconCache.get(iconName) || null
-}
-
-/**
- * Preload multiple icons for better performance
- * Useful for preloading icons that will be needed soon
- *
- * @param {string[]} iconNames - Array of icon names to preload
- * @returns {Promise<void>}
- */
-export const preloadIcons = async (iconNames) => {
-	if (!Array.isArray(iconNames)) {
-		console.warn("[UnifiedIconSystem] preloadIcons expects an array")
-		return
-	}
-
-	await Promise.all(iconNames.map((name) => getUnifiedIcon(name)))
-}
-
-// ============================================================================
-// UTILITY FUNCTIONS
-// ============================================================================
-
-/**
- * Check if an icon exists in the unified system
- *
- * @param {string} iconName - Icon name to check
- * @returns {Promise<boolean>}
- */
-export const iconExists = async (iconName) => {
-	const icon = await getUnifiedIcon(iconName)
-	return icon !== null
-}
-
-/**
- * Get all available icon libraries
- *
- * @returns {string[]} - Array of library prefixes
- */
-export const getAvailableLibraries = () => {
-	return Object.keys(ICON_LIBRARY_REGISTRY)
-}
-
-/**
- * Search for icons by partial name match
- * Note: This only searches within cached icons for performance
- *
- * @param {string} query - Search query
- * @returns {string[]} - Array of matching icon names
- */
-export const searchCachedIcons = (query) => {
-	if (!query) return []
-
-	const lowerQuery = query.toLowerCase()
-	return Array.from(iconCache.keys()).filter((name) =>
-		name.toLowerCase().includes(lowerQuery)
-	)
-}
-
-/**
- * Clear the icon cache (useful for testing or memory management)
- */
-export const clearIconCache = () => {
-	iconCache.clear()
-	loadingPromises.clear()
-}
-
-/**
- * Get cache statistics
- *
- * @returns {Object} - Cache stats
- */
-export const getIconCacheStats = () => {
-	return {
-		cachedIcons: iconCache.size,
-		loadingIcons: loadingPromises.size,
-		libraries: Object.keys(ICON_LIBRARY_REGISTRY).length,
-	}
-}
-
-// ============================================================================
-// LEGACY SUPPORT
-// ============================================================================
-
-// Import commonly used icons for legacy fallback (lazy loaded)
-let heroiconsModule = null
-
-/**
- * Lazy load legacy icon modules
- */
-const loadLegacyModules = async () => {
-	if (!heroiconsModule) {
-		heroiconsModule = await import("@heroicons/react/24/outline")
-	}
-
-	return {
-		...heroiconsModule,
-		FaGithub: FaIcons.FaGithub,
-		FaLinkedin: FaIcons.FaLinkedin,
-		FaTwitter: FaIcons.FaTwitter,
-		FaInstagram: FaIcons.FaInstagram,
-		FaDiscord: FaIcons.FaDiscord,
-		FaYoutube: FaIcons.FaYoutube,
-		FaTwitch: FaIcons.FaTwitch,
-		FaTiktok: FaIcons.FaTiktok,
-		FaMedium: FaIcons.FaMedium,
-		FaDev: FaIcons.FaDev,
-		FaStackOverflow: FaIcons.FaStackOverflow,
-		FaDribbble: FaIcons.FaDribbble,
-		FaBehance: FaIcons.FaBehance,
-		FaCodepen: FaIcons.FaCodepen,
-		FaHeart: FaIcons.FaHeart,
-		FaReact: FaIcons.FaReact,
-		FaDatabase: FaIcons.FaDatabase,
-		SiGithub: SiIcons.SiGithub,
-		SiLinkedin: SiIcons.SiLinkedin,
-		SiX: SiIcons.SiX,
-		SiInstagram: SiIcons.SiInstagram,
-		SiDiscord: SiIcons.SiDiscord,
-		SiYoutube: SiIcons.SiYoutube,
-		SiTwitch: SiIcons.SiTwitch,
-		SiTiktok: SiIcons.SiTiktok,
-		SiMedium: SiIcons.SiMedium,
-		SiDevdotto: SiIcons.SiDevdotto,
-		SiStackoverflow: SiIcons.SiStackoverflow,
-		SiDribbble: SiIcons.SiDribbble,
-		SiBehance: SiIcons.SiBehance,
-		SiCodepen: SiIcons.SiCodepen,
-		SiGmail: SiIcons.SiGmail,
-		SiWhatsapp: SiIcons.SiWhatsapp,
-		SiTelegram: SiIcons.SiTelegram,
-		SiSlack: SiIcons.SiSlack,
-		SiReddit: SiIcons.SiReddit,
-		SiFacebook: SiIcons.SiFacebook,
-		SiSnapchat: SiIcons.SiSnapchat,
-		SiSpotify: SiIcons.SiSpotify,
-		SiSoundcloud: SiIcons.SiSoundcloud,
-		SiGithubcopilot: SiIcons.SiGithubcopilot,
-	}
-}
-
-/**
- * Get icon from legacy static map
- * @deprecated Use getUnifiedIcon() instead
- *
- * @param {string} iconName - Icon name
- * @returns {Promise<React.Component|null>}
- */
-export const getLegacyIcon = async (iconName) => {
-	if (!iconName) return null
-
-	const legacyMap = await loadLegacyModules()
-	return legacyMap[iconName] || null
-}
-
-/**
- * Get icon with automatic fallback to legacy system
- * This is the recommended function for maximum compatibility
- *
- * @param {string} iconName - Icon name
+ * Resolve an icon, falling back to the heroicons naming convention
+ * ("User" → "UserIcon") before giving up.
+ * @param {string} iconName
  * @returns {Promise<React.Component|null>}
  */
 export const getIconWithFallback = async (iconName) => {
-	// Try unified system first
-	const unifiedIcon = await getUnifiedIcon(iconName)
-	if (unifiedIcon) {
-		return unifiedIcon
+	if (!iconName || typeof iconName !== "string") return null
+	const direct = ICON_MAP[iconName]
+	if (direct) return direct
+	if (!iconName.endsWith("Icon") && ICON_MAP[`${iconName}Icon`]) {
+		return ICON_MAP[`${iconName}Icon`]
 	}
-
-	// Fallback to legacy system
-	const legacyIcon = await getLegacyIcon(iconName)
-	if (legacyIcon) {
-		console.info(`[UnifiedIconSystem] Using legacy icon for "${iconName}"`)
-		return legacyIcon
-	}
-
-	console.warn(
-		`[UnifiedIconSystem] Icon "${iconName}" not found in unified or legacy systems`
-	)
+	warnOnce(iconName)
 	return null
 }
+
+/**
+ * Preload a list of icons. With the build-time map everything is already
+ * loaded — this now just validates the names (warning on misses).
+ * @param {string[]} iconNames
+ * @returns {Promise<Array<React.Component|null>>}
+ */
+export const preloadIcons = async (iconNames = []) => {
+	return iconNames.map((name) => getCachedIcon(name))
+}
+
+/**
+ * @param {string} iconName
+ * @returns {boolean} whether the icon exists in the generated map
+ */
+export const iconExists = (iconName) => Boolean(ICON_MAP[iconName])

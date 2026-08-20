@@ -20,6 +20,7 @@ import { injectSeoPlugin } from "./scripts/inject-seo.js"
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import { spawn } from "child_process"
 
 // 🧩 Fix __dirname for ESM (Vite uses ES modules)
 const __filename = fileURLToPath(import.meta.url)
@@ -56,6 +57,14 @@ export default defineConfig({
 								changedPath
 							)} changed — triggering full reload...`
 						)
+						// settings.json is a source of icon names — keep the
+						// generated icon map in sync during dev
+						if (changedPath.endsWith("settings.json")) {
+							spawn("node", ["scripts/generate-icon-map.js"], {
+								cwd: __dirname,
+								stdio: "inherit",
+							})
+						}
 						server.ws.send({ type: "full-reload" })
 					}
 				})
@@ -67,18 +76,26 @@ export default defineConfig({
 	},
 	build: {
 		outDir: "dist",
+		target: "es2020",
 		rollupOptions: {
 			output: {
-				manualChunks: {
-					"react-vendor": ["react", "react-dom"],
-					router: ["react-router-dom"],
-					"ui-vendor": ["framer-motion", "@heroicons/react"],
-					particles: [
-						"@tsparticles/react",
-						"@tsparticles/engine",
-						"@tsparticles/slim",
-					],
-					utils: ["typewriter-effect", "clsx", "tailwind-merge"],
+				// Function form: the object form silently produced an empty
+				// react-vendor chunk (React stayed in the entry) because the
+				// entry itself depended on it synchronously.
+				manualChunks(id) {
+					if (!id.includes("node_modules")) return
+					if (id.includes("react-router")) return "router"
+					if (id.includes("framer-motion")) return "motion"
+					if (id.includes("react-icons") || id.includes("@heroicons")) {
+						return "icons"
+					}
+					if (
+						id.includes("/react/") ||
+						id.includes("/react-dom/") ||
+						id.includes("/scheduler/")
+					) {
+						return "react-vendor"
+					}
 				},
 			},
 		},

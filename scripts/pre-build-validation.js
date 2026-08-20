@@ -13,7 +13,7 @@ import process from "process";
 const EXPECTED_BUILD_CONFIG = {
 	// Expected package.json build-core script (to avoid circular dependency)
 	expectedBuildScript:
-		"node scripts/pre-build-validation.js && vite build && node scripts/generate-manifest.js",
+		"node scripts/pre-build-validation.js && node scripts/generate-icon-map.js && vite build && node scripts/generate-manifest.js",
 
 	// Files that must exist and be valid
 	requiredFiles: [

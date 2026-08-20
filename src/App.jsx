@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { memo, useEffect, useRef, useState } from "react"
+import React, { lazy, memo, Suspense, useEffect, useRef, useState } from "react"
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -23,18 +23,27 @@ import {
 } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
-// import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import ScrollToTop from "./components/ScrollToTop"
 import Home from "./pages/Home"
-import About from "./pages/About"
-import Projects from "./pages/Projects"
-import Resume from "./pages/Resume"
-import Stats from "./pages/Stats"
-import Contact from "./pages/Contact"
 import NotFound from "./pages/NotFound"
 import FaviconManager from "./components/FaviconManager"
 import PrivacyNotice from "./components/PrivacyNotice"
 import { trackPortfolioView } from "./utils/cflairCounter"
+import { fetchSettings } from "./utils/settingsCache"
 import "./App.css"
+
+// Route-split the heavier pages; Home stays eager so first paint is instant
+const About = lazy(() => import("./pages/About"))
+const Projects = lazy(() => import("./pages/Projects"))
+const Resume = lazy(() => import("./pages/Resume"))
+const Stats = lazy(() => import("./pages/Stats"))
+const Contact = lazy(() => import("./pages/Contact"))
+
+const RouteFallback = () => (
+	<div className="min-h-screen flex items-center justify-center bg-gray-950">
+		<div className="w-10 h-10 rounded-full border-2 border-primary-500/30 border-t-primary-500 animate-spin" />
+	</div>
+)
 
 // Custom hook for managing page titles and favicon
 const usePageConfiguration = (location) => {
@@ -42,8 +51,7 @@ const usePageConfiguration = (location) => {
 	const hasTrackedPortfolioView = useRef(false)
 
 	useEffect(() => {
-		fetch("/settings.json")
-			.then((response) => response.json())
+		fetchSettings()
 			.then((data) => setSettings(data))
 			.catch((error) => console.warn("Could not fetch settings:", error))
 	}, [])
@@ -105,26 +113,34 @@ const AppContent = memo(() => {
 	const location = useLocation()
 	const settings = usePageConfiguration(location) // Use the hook to manage page configuration
 
+	// SPA route changes keep the old scroll position — reset like a real navigation
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [location.pathname])
+
 	return (
 		<div className="App">
 			<FaviconManager settings={settings} />
 			<Navbar />
 
-			<main className="page-transition">
-				<Routes location={location}>
-					<Route path="/" element={<Home />} />
-					<Route path="/about" element={<About />} />
-					<Route path="/projects" element={<Projects />} />
-					<Route path="/resume" element={<Resume />} />
-					<Route path="/stats" element={<Stats />} />
-					<Route path="/contact" element={<Contact />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
+			{/* key remounts main per route so the page-transition animation replays */}
+			<main key={location.pathname} className="page-transition">
+				<Suspense fallback={<RouteFallback />}>
+					<Routes location={location}>
+						<Route path="/" element={<Home />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/projects" element={<Projects />} />
+						<Route path="/resume" element={<Resume />} />
+						<Route path="/stats" element={<Stats />} />
+						<Route path="/contact" element={<Contact />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</Suspense>
 			</main>
 
 			<Footer />
 			<PrivacyNotice />
-			{/* <ScrollToTop /> */}
+			<ScrollToTop />
 		</div>
 	)
 })

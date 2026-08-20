@@ -16,6 +16,7 @@
 
 import { useState, useEffect } from "react";
 import useGitHubRepos from "./useGitHubRepos";
+import { fetchSettings } from "../utils/settingsCache";
 
 /**
  * Hook to merge static projects with GitHub repos
@@ -39,11 +40,7 @@ const useMergedProjects = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await fetch("/settings.json");
-				if (!response.ok) {
-					throw new Error(`Failed to fetch settings: ${response.status}`);
-				}
-				const data = await response.json();
+				const data = await fetchSettings();
 				setSettings(data);
 				setStaticProjects(data.projects?.staticProjects || []);
 			} catch (err) {
