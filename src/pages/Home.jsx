@@ -15,7 +15,7 @@
  */
 
 import React, { useState, useEffect } from "react"
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import Typewriter from "typewriter-effect"

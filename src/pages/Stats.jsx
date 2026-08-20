@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats"

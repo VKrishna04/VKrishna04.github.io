@@ -16,7 +16,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion } from "framer-motion";
 // === LEGACY/BACKUP: Direct icon imports (deprecated) ===
 // These imports are kept for backward compatibility but should use unified system

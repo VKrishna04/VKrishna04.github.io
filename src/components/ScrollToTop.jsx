@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { useState, useEffect } from "react";
-// eslint-disable-next-line no-unused-vars
+ 
 import { motion, AnimatePresence } from "framer-motion";
 // === LEGACY/BACKUP: Direct icon imports (deprecated) ===
 // import { ArrowUpIcon } from "@heroicons/react/24/outline"; // REPLACED with unified icon system
