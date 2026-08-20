@@ -23,6 +23,7 @@ import {
 } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import NextPageNav from "./components/NextPageNav"
 import ScrollToTop from "./components/ScrollToTop"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
@@ -138,6 +139,7 @@ const AppContent = memo(() => {
 				</Suspense>
 			</main>
 
+			<NextPageNav />
 			<Footer />
 			<PrivacyNotice />
 			<ScrollToTop />
