@@ -1,0 +1,5914 @@
+{
+	"updatedAt": "2026-08-27T08:35:00.704Z",
+	"snapshotAt": "2026-08-31T01:59:31.007Z",
+	"stats": {
+		"total": 316,
+		"easy": 176,
+		"medium": 127,
+		"hard": 11,
+		"byPlatform": {
+			"geeksforgeeks": 55,
+			"leetcode": 261
+		},
+		"byLang": {
+			"python3": 5,
+			"Python3": 200,
+			"Unknown": 45,
+			"MySQL": 15,
+			"Java": 12,
+			"Python": 16,
+			"Pandas": 14,
+			"JavaScript": 3,
+			"C++": 1,
+			"C": 1,
+			"Bash": 4
+		},
+		"byTopic": {
+			"Sorting": 6,
+			"Binary Search": 2,
+			"Tree": 11,
+			"Untagged": 10,
+			"Greedy": 1,
+			"Math": 26,
+			"String": 25,
+			"Sliding Window": 2,
+			"Depth-First Search": 1,
+			"Linked List": 8,
+			"Bit Manipulation": 3,
+			"Array": 132,
+			"Searching": 2,
+			"Hash Table": 14,
+			"Java": 1,
+			"Dynamic Programming": 12,
+			"Graph": 5,
+			"Two Pointers": 8,
+			"Database": 15,
+			"Data Manipulation": 15,
+			"Bit": 3,
+			"Vectorization": 2,
+			"Pandas": 3,
+			"Higher Order Functions": 1,
+			"Data Cleaning": 1,
+			"Data Reshaping": 2,
+			"Divide and Conquer": 1,
+			"Shell": 4
+		}
+	},
+	"meta": {
+		"summary": null,
+		"summaryUpdatedAt": null,
+		"commitsSinceLastSummary": 0
+	},
+	"problems": [
+		{
+			"id": "gfg-2-sum-find-a-pair-with-given-sum",
+			"platform": "geeksforgeeks",
+			"title": "2 Sum Find A Pair With Given Sum",
+			"titleSlug": "2-sum-find-a-pair-with-given-sum",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Sorting",
+				"Two Pointers",
+				"Array",
+				"Hash Table"
+			],
+			"topic": "Array",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-aggressive-cows",
+			"platform": "geeksforgeeks",
+			"title": "Aggressive Cows",
+			"titleSlug": "aggressive-cows",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1782299296475
+		},
+		{
+			"id": "gfg-assign-cookies",
+			"platform": "geeksforgeeks",
+			"title": "Assign Cookies",
+			"titleSlug": "assign-cookies",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Sorting",
+				"Array",
+				"Greedy",
+				"Two Pointers"
+			],
+			"topic": "Greedy",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-attend-all-meetings",
+			"platform": "geeksforgeeks",
+			"title": "Attend All Meetings",
+			"titleSlug": "attend-all-meetings",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Sorting",
+				"Greedy",
+				"Array"
+			],
+			"topic": "Intervals",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-bheem-wants-ladoos102404",
+			"platform": "geeksforgeeks",
+			"title": "Bheem Wants Ladoos",
+			"titleSlug": "bheem-wants-ladoos102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-burger-shop102404",
+			"platform": "geeksforgeeks",
+			"title": "Burger Shop",
+			"titleSlug": "burger-shop102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-buy-stock-2",
+			"platform": "geeksforgeeks",
+			"title": "Buy Stock",
+			"titleSlug": "buy-stock-2",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Greedy",
+				"Array"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-c-matrix-rotation-by-180-degree0745",
+			"platform": "geeksforgeeks",
+			"title": "C Matrix Rotation By 180 Degree",
+			"titleSlug": "c-matrix-rotation-by-180-degree0745",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Math",
+				"Matrix"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-camelcase-pattern-matching2259",
+			"platform": "geeksforgeeks",
+			"title": "Camelcase Pattern Matching",
+			"titleSlug": "camelcase-pattern-matching2259",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"String",
+				"Trie",
+				"Advanced Data Structure"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-compare-two-fractions4438",
+			"platform": "geeksforgeeks",
+			"title": "Compare two fractions",
+			"titleSlug": "compare-two-fractions4438",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Number Theory",
+				"Regular Expression",
+				"String Parsing"
+			],
+			"topic": "Math",
+			"timestamp": 1782233988848
+		},
+		{
+			"id": "gfg-count-number-of-substrings4528",
+			"platform": "geeksforgeeks",
+			"title": "Count Number Of Substrings",
+			"titleSlug": "count-number-of-substrings4528",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Sliding Window",
+				"Two Pointers",
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-count-ways-to-partition-a-string-such-that-both-parts-have-equal-distinct-characters102404",
+			"platform": "geeksforgeeks",
+			"title": "Count Ways To Partition A String Such That Both Parts Have Equal Distinct Characters",
+			"titleSlug": "count-ways-to-partition-a-string-such-that-both-parts-have-equal-distinct-characters102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-count-ways-to-reach-the-nth-stair-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Count Ways To Reach The Nth Stair",
+			"titleSlug": "count-ways-to-reach-the-nth-stair-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Sliding Window",
+				"Dynamic Programming",
+				"Math"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-detect-cycle-in-an-undirected-graph",
+			"platform": "geeksforgeeks",
+			"title": "Detect Cycle In An Undirected Graph",
+			"titleSlug": "detect-cycle-in-an-undirected-graph",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Depth-First Search",
+				"Graph",
+				"Union Find"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-detect-loop-in-linked-list",
+			"platform": "geeksforgeeks",
+			"title": "Detect Loop In Linked List",
+			"titleSlug": "detect-loop-in-linked-list",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Linked List",
+				"Two Pointers"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-diameter-of-binary-tree",
+			"platform": "geeksforgeeks",
+			"title": "Diameter Of Binary Tree",
+			"titleSlug": "diameter-of-binary-tree",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-find-unique-number",
+			"platform": "geeksforgeeks",
+			"title": "Find Unique Number",
+			"titleSlug": "find-unique-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Bit Manipulation"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-height-of-binary-tree",
+			"platform": "geeksforgeeks",
+			"title": "Height Of Binary Tree",
+			"titleSlug": "height-of-binary-tree",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-implement-atoi",
+			"platform": "geeksforgeeks",
+			"title": "Implement Atoi",
+			"titleSlug": "implement-atoi",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"String",
+				"Design Pattern"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-intersection-point-in-y-shapped-linked-lists",
+			"platform": "geeksforgeeks",
+			"title": "Intersection Point In Y Shapped Linked Lists",
+			"titleSlug": "intersection-point-in-y-shapped-linked-lists",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Linked List",
+				"Two Pointers"
+			],
+			"topic": "Linked List",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-is-array-sorted122153",
+			"platform": "geeksforgeeks",
+			"title": "Is Array Sorted",
+			"titleSlug": "is-array-sorted122153",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-k-largest-elements4206",
+			"platform": "geeksforgeeks",
+			"title": "K Largest Elements",
+			"titleSlug": "k-largest-elements4206",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Sorting",
+				"Heap (Priority Queue)"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-kadanes-algorithm-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Kadanes Algorithm",
+			"titleSlug": "kadanes-algorithm-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-kth-smallest-element5635",
+			"platform": "geeksforgeeks",
+			"title": "Kth Smallest",
+			"titleSlug": "kth-smallest-element5635",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Searching",
+				"Sorting",
+				"Array"
+			],
+			"topic": "Searching",
+			"timestamp": 1782270750546
+		},
+		{
+			"id": "gfg-ladoo-problem2929",
+			"platform": "geeksforgeeks",
+			"title": "Ladoo problem",
+			"titleSlug": "ladoo-problem2929",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1782265991000
+		},
+		{
+			"id": "gfg-learn-to-comment-python",
+			"platform": "geeksforgeeks",
+			"title": "Learn To Comment Python",
+			"titleSlug": "learn-to-comment-python",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Java"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-level-order-traversal",
+			"platform": "geeksforgeeks",
+			"title": "Level Order Traversal",
+			"titleSlug": "level-order-traversal",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-longest-increasing-subsequence-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Longest Increasing Subsequence",
+			"titleSlug": "longest-increasing-subsequence-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Binary Search"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-maximum-index-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Maximum Index",
+			"titleSlug": "maximum-index-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-maximum-path-sum-from-any-node",
+			"platform": "geeksforgeeks",
+			"title": "Maximum Path Sum From Any Node",
+			"titleSlug": "maximum-path-sum-from-any-node",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-merge-two-sorted-linked-lists",
+			"platform": "geeksforgeeks",
+			"title": "Merge Two Sorted Linked Lists",
+			"titleSlug": "merge-two-sorted-linked-lists",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Linked List"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-minimum-element-in-a-sorted-and-rotated-array3611",
+			"platform": "geeksforgeeks",
+			"title": "Minimum Element In A Sorted And Rotated Array",
+			"titleSlug": "minimum-element-in-a-sorted-and-rotated-array3611",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Searching"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-minimum-platforms-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Minimum Platforms",
+			"titleSlug": "minimum-platforms-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Greedy",
+				"Sorting",
+				"Binary Search"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-mirror-tree",
+			"platform": "geeksforgeeks",
+			"title": "Mirror Tree",
+			"titleSlug": "mirror-tree",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-missing-number-in-array1416",
+			"platform": "geeksforgeeks",
+			"title": "Missing Number In Array",
+			"titleSlug": "missing-number-in-array1416",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Searching",
+				"Bit Manipulation"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-nearly-sorted-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Nearly Sorted",
+			"titleSlug": "nearly-sorted-1587115620",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Sorting",
+				"Array",
+				"Heap (Priority Queue)"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-non-repeating-character-1587115620",
+			"platform": "geeksforgeeks",
+			"title": "Non Repeating Character",
+			"titleSlug": "non-repeating-character-1587115620",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Hash Table",
+				"String"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-number-of-coins1824",
+			"platform": "geeksforgeeks",
+			"title": "Number Of Coins",
+			"titleSlug": "number-of-coins1824",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-number-of-paths0926",
+			"platform": "geeksforgeeks",
+			"title": "Number Of Paths",
+			"titleSlug": "number-of-paths0926",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-number-of-students-unable-to-eat-lunch102404",
+			"platform": "geeksforgeeks",
+			"title": "Number Of Students Unable To Eat Lunch",
+			"titleSlug": "number-of-students-unable-to-eat-lunch102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-overlapping-intervals170633",
+			"platform": "geeksforgeeks",
+			"title": "Overlapping Intervals",
+			"titleSlug": "overlapping-intervals170633",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-pacific-atlantic-water-flow",
+			"platform": "geeksforgeeks",
+			"title": "Pacific Atlantic Water Flow",
+			"titleSlug": "pacific-atlantic-water-flow",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Graph",
+				"Breadth-First Search",
+				"Depth-First Search"
+			],
+			"topic": "Graph",
+			"timestamp": 1782267680000
+		},
+		{
+			"id": "gfg-parenthesis-checker2744",
+			"platform": "geeksforgeeks",
+			"title": "Parenthesis Checker",
+			"titleSlug": "parenthesis-checker2744",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"String",
+				"Stack",
+				"Stl"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-police-and-thieves102404",
+			"platform": "geeksforgeeks",
+			"title": "Police And Thieves",
+			"titleSlug": "police-and-thieves102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-product-array-puzzle4525",
+			"platform": "geeksforgeeks",
+			"title": "Product Array Puzzle",
+			"titleSlug": "product-array-puzzle4525",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Prefix Sum"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-rearrange-characters5322",
+			"platform": "geeksforgeeks",
+			"title": "Rearrange Characters",
+			"titleSlug": "rearrange-characters5322",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-repetitive-addition-of-digits2221",
+			"platform": "geeksforgeeks",
+			"title": "Repetitive Addition Of Digits",
+			"titleSlug": "repetitive-addition-of-digits2221",
+			"difficulty": "Unknown",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-rotate-a-linked-list",
+			"platform": "geeksforgeeks",
+			"title": "Rotate A Linked List",
+			"titleSlug": "rotate-a-linked-list",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Linked List"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-serialize-and-deserialize-a-binary-tree",
+			"platform": "geeksforgeeks",
+			"title": "Serialize And Deserialize A Binary Tree",
+			"titleSlug": "serialize-and-deserialize-a-binary-tree",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Tree"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-sort-an-array-of-0s-1s-and-2s4231",
+			"platform": "geeksforgeeks",
+			"title": "Sort 0s, 1s and 2s",
+			"titleSlug": "sort-an-array-of-0s-1s-and-2s4231",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Sorting",
+				"Array"
+			],
+			"topic": "Sorting",
+			"timestamp": 1782268408408
+		},
+		{
+			"id": "gfg-start-coding-python093158",
+			"platform": "geeksforgeeks",
+			"title": "Start Coding Python",
+			"titleSlug": "start-coding-python093158",
+			"difficulty": "Unknown",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-stickler-theif-1587115621",
+			"platform": "geeksforgeeks",
+			"title": "Stickler Theif",
+			"titleSlug": "stickler-theif-1587115621",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-string-palindromic-ignoring-spaces4723",
+			"platform": "geeksforgeeks",
+			"title": "String Palindromic Ignoring Spaces",
+			"titleSlug": "string-palindromic-ignoring-spaces4723",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Two Pointers",
+				"String",
+				"Palindrome"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-total-decoding-messages1235",
+			"platform": "geeksforgeeks",
+			"title": "Total Decoding Messages",
+			"titleSlug": "total-decoding-messages1235",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [
+				"Dynamic Programming"
+			],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "gfg-water-flow102404",
+			"platform": "geeksforgeeks",
+			"title": "Water Flow",
+			"titleSlug": "water-flow102404",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Unknown",
+				"ext": "txt",
+				"slug": "unknown"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1782298700927
+		},
+		{
+			"id": "lc-01-matrix",
+			"platform": "leetcode",
+			"title": "01 Matrix",
+			"titleSlug": "01-matrix",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Breadth-First Search",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1779101502000
+		},
+		{
+			"id": "lc-3sum::1730412472",
+			"platform": "leetcode",
+			"title": "3Sum",
+			"titleSlug": "3sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Two Pointers",
+				"Sorting"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1754848047000
+		},
+		{
+			"id": "lc-add-binary",
+			"platform": "leetcode",
+			"title": "Add Binary",
+			"titleSlug": "add-binary",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"String",
+				"Bit Manipulation",
+				"Simulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1729279641000
+		},
+		{
+			"id": "lc-add-digits",
+			"platform": "leetcode",
+			"title": "Add Digits",
+			"titleSlug": "add-digits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Math",
+				"Simulation",
+				"Number Theory"
+			],
+			"topic": "Math",
+			"timestamp": 1729416459000
+		},
+		{
+			"id": "lc-add-strings",
+			"platform": "leetcode",
+			"title": "Add Strings",
+			"titleSlug": "add-strings",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"String",
+				"Simulation"
+			],
+			"topic": "Math",
+			"timestamp": 1729281468000
+		},
+		{
+			"id": "lc-add-to-array-form-of-integer",
+			"platform": "leetcode",
+			"title": "Add to Array-Form of Integer",
+			"titleSlug": "add-to-array-form-of-integer",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1729281259000
+		},
+		{
+			"id": "lc-add-two-numbers::1351959711",
+			"platform": "leetcode",
+			"title": "Add Two Numbers",
+			"titleSlug": "add-two-numbers",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Linked List",
+				"Linked List",
+				"Math",
+				"Recursion"
+			],
+			"topic": "Linked List",
+			"timestamp": 1723373759000
+		},
+		{
+			"id": "lc-article-views-i",
+			"platform": "leetcode",
+			"title": "Article Views I",
+			"titleSlug": "article-views-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777054016000
+		},
+		{
+			"id": "lc-assign-cookies",
+			"platform": "leetcode",
+			"title": "Assign Cookies",
+			"titleSlug": "assign-cookies",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Greedy",
+				"Sorting"
+			],
+			"topic": "Greedy",
+			"timestamp": 1775539972000
+		},
+		{
+			"id": "lc-average-time-of-process-per-machine",
+			"platform": "leetcode",
+			"title": "Average Time of Process per Machine",
+			"titleSlug": "average-time-of-process-per-machine",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777114835000
+		},
+		{
+			"id": "lc-best-time-to-buy-and-sell-stock",
+			"platform": "leetcode",
+			"title": "Best Time to Buy and Sell Stock",
+			"titleSlug": "best-time-to-buy-and-sell-stock",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Sliding Window",
+			"timestamp": 1729371844000
+		},
+		{
+			"id": "lc-best-time-to-buy-and-sell-stock::1427680302",
+			"platform": "leetcode",
+			"title": "Best Time to Buy and Sell Stock",
+			"titleSlug": "best-time-to-buy-and-sell-stock",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Sliding Window",
+			"timestamp": 1729372227000
+		},
+		{
+			"id": "lc-big-countries",
+			"platform": "leetcode",
+			"title": "Big Countries",
+			"titleSlug": "big-countries",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777048368000
+		},
+		{
+			"id": "lc-binary-number-with-alternating-bits::1651695247",
+			"platform": "leetcode",
+			"title": "Binary Number with Alternating Bits",
+			"titleSlug": "binary-number-with-alternating-bits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748869843000
+		},
+		{
+			"id": "lc-binary-search::1875796252",
+			"platform": "leetcode",
+			"title": "Binary Search",
+			"titleSlug": "binary-search",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767650811000
+		},
+		{
+			"id": "lc-binary-tree-level-order-traversal::1707691360",
+			"platform": "leetcode",
+			"title": "Binary Tree Level Order Traversal",
+			"titleSlug": "binary-tree-level-order-traversal",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Tree",
+				"Tree",
+				"Breadth-First Search",
+				"Binary Tree"
+			],
+			"topic": "Tree",
+			"timestamp": 1753211566000
+		},
+		{
+			"id": "lc-binary-tree-maximum-path-sum",
+			"platform": "leetcode",
+			"title": "Binary Tree Maximum Path Sum",
+			"titleSlug": "binary-tree-maximum-path-sum",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Tree",
+				"Tree",
+				"Dynamic Programming",
+				"Depth-First Search",
+				"Binary Tree"
+			],
+			"topic": "Tree",
+			"timestamp": 1778305222000
+		},
+		{
+			"id": "lc-can-make-arithmetic-progression-from-sequence::1626740114",
+			"platform": "leetcode",
+			"title": "Can Make Arithmetic Progression From Sequence",
+			"titleSlug": "can-make-arithmetic-progression-from-sequence",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Sorting"
+			],
+			"topic": "Sorting",
+			"timestamp": 1746512029000
+		},
+		{
+			"id": "lc-can-place-flowers",
+			"platform": "leetcode",
+			"title": "Can Place Flowers",
+			"titleSlug": "can-place-flowers",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1781766691000
+		},
+		{
+			"id": "lc-change-data-type::1433139571",
+			"platform": "leetcode",
+			"title": "Change Data Type",
+			"titleSlug": "change-data-type",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Schema Transformation"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838254000
+		},
+		{
+			"id": "lc-check-if-all-characters-have-equal-number-of-occurrences",
+			"platform": "leetcode",
+			"title": "Check if All Characters Have Equal Number of Occurrences",
+			"titleSlug": "check-if-all-characters-have-equal-number-of-occurrences",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1729430331000
+		},
+		{
+			"id": "lc-climbing-stairs",
+			"platform": "leetcode",
+			"title": "Climbing Stairs",
+			"titleSlug": "climbing-stairs",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"Math",
+				"Memoization"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1729173921000
+		},
+		{
+			"id": "lc-climbing-stairs-ii::1869084198",
+			"platform": "leetcode",
+			"title": "Climbing Stairs II",
+			"titleSlug": "climbing-stairs-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1767075488000
+		},
+		{
+			"id": "lc-coin-change-ii",
+			"platform": "leetcode",
+			"title": "Coin Change II",
+			"titleSlug": "coin-change-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777622405000
+		},
+		{
+			"id": "lc-coin-change::1777857768",
+			"platform": "leetcode",
+			"title": "Coin Change",
+			"titleSlug": "coin-change",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"Array",
+				"Breadth-First Search"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1758441308000
+		},
+		{
+			"id": "lc-combination-sum-iv",
+			"platform": "leetcode",
+			"title": "Combination Sum IV",
+			"titleSlug": "combination-sum-iv",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777618258000
+		},
+		{
+			"id": "lc-consecutive-characters::1761747697",
+			"platform": "leetcode",
+			"title": "Consecutive Characters",
+			"titleSlug": "consecutive-characters",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1757180443000
+		},
+		{
+			"id": "lc-construct-smallest-number-from-di-string::1432728977",
+			"platform": "leetcode",
+			"title": "Construct Smallest Number From DI String",
+			"titleSlug": "construct-smallest-number-from-di-string",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Backtracking",
+				"Stack",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1729795270000
+		},
+		{
+			"id": "lc-container-with-most-water",
+			"platform": "leetcode",
+			"title": "Container With Most Water",
+			"titleSlug": "container-with-most-water",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Two Pointers",
+				"Greedy"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1776517178000
+		},
+		{
+			"id": "lc-contains-duplicate::1651715436",
+			"platform": "leetcode",
+			"title": "Contains Duplicate",
+			"titleSlug": "contains-duplicate",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Array",
+				"Hash Table",
+				"Sorting"
+			],
+			"topic": "Array",
+			"timestamp": 1748871383000
+		},
+		{
+			"id": "lc-convert-1d-array-into-2d-array",
+			"platform": "leetcode",
+			"title": "Convert 1D Array Into 2D Array",
+			"titleSlug": "convert-1d-array-into-2d-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Matrix",
+				"Simulation"
+			],
+			"topic": "Array",
+			"timestamp": 1726674627000
+		},
+		{
+			"id": "lc-convert-1d-array-into-2d-array::1394530944",
+			"platform": "leetcode",
+			"title": "Convert 1D Array Into 2D Array",
+			"titleSlug": "convert-1d-array-into-2d-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Matrix",
+				"Simulation"
+			],
+			"topic": "Array",
+			"timestamp": 1726675330000
+		},
+		{
+			"id": "lc-count-integers-with-even-digit-sum",
+			"platform": "leetcode",
+			"title": "Count Integers With Even Digit Sum",
+			"titleSlug": "count-integers-with-even-digit-sum",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Math",
+				"Simulation"
+			],
+			"topic": "Math",
+			"timestamp": 1729413509000
+		},
+		{
+			"id": "lc-count-number-of-pairs-with-absolute-difference-k::1765393180",
+			"platform": "leetcode",
+			"title": "Count Number of Pairs With Absolute Difference K",
+			"titleSlug": "count-number-of-pairs-with-absolute-difference-k",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1757449762000
+		},
+		{
+			"id": "lc-count-number-of-teams",
+			"platform": "leetcode",
+			"title": "Count Number of Teams",
+			"titleSlug": "count-number-of-teams",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Binary Indexed Tree",
+				"Segment Tree"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777792329000
+		},
+		{
+			"id": "lc-count-pairs-whose-sum-is-less-than-target::1761207970",
+			"platform": "leetcode",
+			"title": "Count Pairs Whose Sum is Less than Target",
+			"titleSlug": "count-pairs-whose-sum-is-less-than-target",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Binary Search",
+				"Sorting"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1757142983000
+		},
+		{
+			"id": "lc-count-square-submatrices-with-all-ones",
+			"platform": "leetcode",
+			"title": "Count Square Submatrices with All Ones",
+			"titleSlug": "count-square-submatrices-with-all-ones",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776708953000
+		},
+		{
+			"id": "lc-count-the-number-of-fair-pairs::1761545599",
+			"platform": "leetcode",
+			"title": "Count the Number of Fair Pairs",
+			"titleSlug": "count-the-number-of-fair-pairs",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Binary Search",
+				"Sorting"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1757168091000
+		},
+		{
+			"id": "lc-counting-bits::1650939576",
+			"platform": "leetcode",
+			"title": "Counting Bits",
+			"titleSlug": "counting-bits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Bit",
+				"Bit",
+				"Dynamic Programming",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748798966000
+		},
+		{
+			"id": "lc-course-schedule",
+			"platform": "leetcode",
+			"title": "Course Schedule",
+			"titleSlug": "course-schedule",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Graph",
+				"Graph",
+				"Depth-First Search",
+				"Breadth-First Search",
+				"Graph Theory",
+				"Topological Sort"
+			],
+			"topic": "Graph",
+			"timestamp": 1779203182000
+		},
+		{
+			"id": "lc-course-schedule-ii",
+			"platform": "leetcode",
+			"title": "Course Schedule II",
+			"titleSlug": "course-schedule-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Graph",
+				"Graph",
+				"Depth-First Search",
+				"Breadth-First Search",
+				"Graph Theory",
+				"Topological Sort"
+			],
+			"topic": "Graph",
+			"timestamp": 1779208533000
+		},
+		{
+			"id": "lc-create-a-dataframe-from-list",
+			"platform": "leetcode",
+			"title": "Create a DataFrame from List",
+			"titleSlug": "create-a-dataframe-from-list",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Matrix"
+			],
+			"topic": "",
+			"timestamp": 1729715291000
+		},
+		{
+			"id": "lc-create-a-new-column",
+			"platform": "leetcode",
+			"title": "Create a New Column",
+			"titleSlug": "create-a-new-column",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Vectorization",
+				"Data Manipulation",
+				"Pandas"
+			],
+			"topic": "Vectorization",
+			"timestamp": 1729715905000
+		},
+		{
+			"id": "lc-create-a-new-column::1431827775",
+			"platform": "leetcode",
+			"title": "Create a New Column",
+			"titleSlug": "create-a-new-column",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Pandas",
+				"Vectorization",
+				"Data Manipulation"
+			],
+			"topic": "Pandas",
+			"timestamp": 1729715905000
+		},
+		{
+			"id": "lc-create-hello-world-function",
+			"platform": "leetcode",
+			"title": "Create Hello World Function",
+			"titleSlug": "create-hello-world-function",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "JavaScript",
+				"slug": "javascript",
+				"ext": "js"
+			},
+			"tags": [
+				"Higher Order Functions",
+				"Closures",
+				"Functional Programming"
+			],
+			"topic": "Higher Order Functions",
+			"timestamp": 1729715118000
+		},
+		{
+			"id": "lc-customer-who-visited-but-did-not-make-any-transactions",
+			"platform": "leetcode",
+			"title": "Customer Who Visited but Did Not Make Any Transactions",
+			"titleSlug": "customer-who-visited-but-did-not-make-any-transactions",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777104021000
+		},
+		{
+			"id": "lc-decode-ways",
+			"platform": "leetcode",
+			"title": "Decode Ways",
+			"titleSlug": "decode-ways",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"String"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775915781000
+		},
+		{
+			"id": "lc-delete-and-earn",
+			"platform": "leetcode",
+			"title": "Delete and Earn",
+			"titleSlug": "delete-and-earn",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776852931000
+		},
+		{
+			"id": "lc-delete-duplicate-emails::1651706736",
+			"platform": "leetcode",
+			"title": "Delete Duplicate Emails",
+			"titleSlug": "delete-duplicate-emails",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1748870730000
+		},
+		{
+			"id": "lc-di-string-match",
+			"platform": "leetcode",
+			"title": "DI String Match",
+			"titleSlug": "di-string-match",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"String",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1729540191000
+		},
+		{
+			"id": "lc-diameter-of-binary-tree",
+			"platform": "leetcode",
+			"title": "Diameter of Binary Tree",
+			"titleSlug": "diameter-of-binary-tree",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Tree",
+				"Tree",
+				"Depth-First Search",
+				"Binary Tree"
+			],
+			"topic": "Tree",
+			"timestamp": 1778262569000
+		},
+		{
+			"id": "lc-display-the-first-three-rows",
+			"platform": "leetcode",
+			"title": "Display the First Three Rows",
+			"titleSlug": "display-the-first-three-rows",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"ext": "txt",
+				"slug": "pythondata"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Slicing"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729715470000
+		},
+		{
+			"id": "lc-display-the-first-three-rows::1431823293",
+			"platform": "leetcode",
+			"title": "Display the First Three Rows",
+			"titleSlug": "display-the-first-three-rows",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Pandas",
+				"Data Manipulation",
+				"Slicing"
+			],
+			"topic": "Pandas",
+			"timestamp": 1729715470000
+		},
+		{
+			"id": "lc-distinct-subsequences",
+			"platform": "leetcode",
+			"title": "Distinct Subsequences",
+			"titleSlug": "distinct-subsequences",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776946572000
+		},
+		{
+			"id": "lc-drop-duplicate-rows",
+			"platform": "leetcode",
+			"title": "Drop Duplicate Rows",
+			"titleSlug": "drop-duplicate-rows",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Hash Table",
+				"Data Manipulation",
+				"Sorting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1729795647000
+		},
+		{
+			"id": "lc-drop-duplicate-rows::1432734217",
+			"platform": "leetcode",
+			"title": "Drop Duplicate Rows",
+			"titleSlug": "drop-duplicate-rows",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Hash Table"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729795635000
+		},
+		{
+			"id": "lc-drop-missing-data",
+			"platform": "leetcode",
+			"title": "Drop Missing Data",
+			"titleSlug": "drop-missing-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Cleaning",
+				"Pandas",
+				"Data Manipulation"
+			],
+			"topic": "Data Cleaning",
+			"timestamp": 1729837664000
+		},
+		{
+			"id": "lc-drop-missing-data::1433132289",
+			"platform": "leetcode",
+			"title": "Drop Missing Data",
+			"titleSlug": "drop-missing-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Data Cleaning"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729837664000
+		},
+		{
+			"id": "lc-dungeon-game",
+			"platform": "leetcode",
+			"title": "Dungeon Game",
+			"titleSlug": "dungeon-game",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776769484000
+		},
+		{
+			"id": "lc-edit-distance",
+			"platform": "leetcode",
+			"title": "Edit Distance",
+			"titleSlug": "edit-distance",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776941552000
+		},
+		{
+			"id": "lc-employee-bonus",
+			"platform": "leetcode",
+			"title": "Employee Bonus",
+			"titleSlug": "employee-bonus",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777115023000
+		},
+		{
+			"id": "lc-fibonacci-number",
+			"platform": "leetcode",
+			"title": "Fibonacci Number",
+			"titleSlug": "fibonacci-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Dynamic Programming",
+				"Recursion",
+				"Memoization"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1729191109000
+		},
+		{
+			"id": "lc-fill-missing-data",
+			"platform": "leetcode",
+			"title": "Fill Missing Data",
+			"titleSlug": "fill-missing-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Data Imputation",
+				"Pandas Api"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838683000
+		},
+		{
+			"id": "lc-fill-missing-data::1433144665",
+			"platform": "leetcode",
+			"title": "Fill Missing Data",
+			"titleSlug": "fill-missing-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838671000
+		},
+		{
+			"id": "lc-filling-bookcase-shelves",
+			"platform": "leetcode",
+			"title": "Filling Bookcase Shelves",
+			"titleSlug": "filling-bookcase-shelves",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1778184820000
+		},
+		{
+			"id": "lc-find-all-k-distant-indices-in-an-array::1762915066",
+			"platform": "leetcode",
+			"title": "Find All K-Distant Indices in an Array",
+			"titleSlug": "find-all-k-distant-indices-in-an-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1757265155000
+		},
+		{
+			"id": "lc-find-closest-number-to-zero",
+			"platform": "leetcode",
+			"title": "Find Closest Number to Zero",
+			"titleSlug": "find-closest-number-to-zero",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1723634014000
+		},
+		{
+			"id": "lc-find-closest-number-to-zero::1365719223",
+			"platform": "leetcode",
+			"title": "Find Closest Number to Zero",
+			"titleSlug": "find-closest-number-to-zero",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1724419713000
+		},
+		{
+			"id": "lc-find-closest-person",
+			"platform": "leetcode",
+			"title": "Find Closest Person",
+			"titleSlug": "find-closest-person",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1748846155000
+		},
+		{
+			"id": "lc-find-closest-person::1651389613",
+			"platform": "leetcode",
+			"title": "Find Closest Person",
+			"titleSlug": "find-closest-person",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1748846101000
+		},
+		{
+			"id": "lc-find-closest-person::1651390442",
+			"platform": "leetcode",
+			"title": "Find Closest Person",
+			"titleSlug": "find-closest-person",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1748846155000
+		},
+		{
+			"id": "lc-find-customer-referee",
+			"platform": "leetcode",
+			"title": "Find Customer Referee",
+			"titleSlug": "find-customer-referee",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777045371000
+		},
+		{
+			"id": "lc-find-greatest-common-divisor-of-array::1967589570",
+			"platform": "leetcode",
+			"title": "Find Greatest Common Divisor of Array",
+			"titleSlug": "find-greatest-common-divisor-of-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Number Theory"
+			],
+			"topic": "Math",
+			"timestamp": 1775209937000
+		},
+		{
+			"id": "lc-find-if-digit-game-can-be-won::1428167266",
+			"platform": "leetcode",
+			"title": "Find if Digit Game Can Be Won",
+			"titleSlug": "find-if-digit-game-can-be-won",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1729413139000
+		},
+		{
+			"id": "lc-find-minimum-in-rotated-sorted-array::1870297243",
+			"platform": "leetcode",
+			"title": "Find Minimum in Rotated Sorted Array",
+			"titleSlug": "find-minimum-in-rotated-sorted-array",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767187706000
+		},
+		{
+			"id": "lc-find-numbers-with-even-number-of-digits",
+			"platform": "leetcode",
+			"title": "Find Numbers with Even Number of Digits",
+			"titleSlug": "find-numbers-with-even-number-of-digits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1707563263000
+		},
+		{
+			"id": "lc-find-peak-element",
+			"platform": "leetcode",
+			"title": "Find Peak Element",
+			"titleSlug": "find-peak-element",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767208319000
+		},
+		{
+			"id": "lc-find-the-index-of-the-first-occurrence-in-a-string::1772724594",
+			"platform": "leetcode",
+			"title": "Find the Index of the First Occurrence in a String",
+			"titleSlug": "find-the-index-of-the-first-occurrence-in-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Two Pointers",
+				"String",
+				"String Matching"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1758027280000
+		},
+		{
+			"id": "lc-find-the-key-of-the-numbers",
+			"platform": "leetcode",
+			"title": "Find the Key of the Numbers",
+			"titleSlug": "find-the-key-of-the-numbers",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1729536807000
+		},
+		{
+			"id": "lc-find-the-key-of-the-numbers::1429658026",
+			"platform": "leetcode",
+			"title": "Find the Key of the Numbers",
+			"titleSlug": "find-the-key-of-the-numbers",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1729536807000
+		},
+		{
+			"id": "lc-find-the-most-common-response::1777708235",
+			"platform": "leetcode",
+			"title": "Find the Most Common Response",
+			"titleSlug": "find-the-most-common-response",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"String",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1758429498000
+		},
+		{
+			"id": "lc-find-the-number-of-ways-to-place-people-i::1435349794",
+			"platform": "leetcode",
+			"title": "Find the Number of Ways to Place People I",
+			"titleSlug": "find-the-number-of-ways-to-place-people-i",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Geometry",
+				"Sorting",
+				"Enumeration"
+			],
+			"topic": "Math",
+			"timestamp": 1730044905000
+		},
+		{
+			"id": "lc-find-the-student-that-will-replace-the-chalk",
+			"platform": "leetcode",
+			"title": "Find the Student that Will Replace the Chalk",
+			"titleSlug": "find-the-student-that-will-replace-the-chalk",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Binary Search",
+				"Simulation",
+				"Prefix Sum"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1726776317000
+		},
+		{
+			"id": "lc-find-the-student-that-will-replace-the-chalk::1395835773",
+			"platform": "leetcode",
+			"title": "Find the Student that Will Replace the Chalk",
+			"titleSlug": "find-the-student-that-will-replace-the-chalk",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Binary Search",
+				"Simulation",
+				"Prefix Sum"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1726776706000
+		},
+		{
+			"id": "lc-find-the-xor-of-numbers-which-appear-twice",
+			"platform": "leetcode",
+			"title": "Find the XOR of Numbers Which Appear Twice",
+			"titleSlug": "find-the-xor-of-numbers-which-appear-twice",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1729373687000
+		},
+		{
+			"id": "lc-finding-pairs-with-a-certain-sum::1764184136",
+			"platform": "leetcode",
+			"title": "Finding Pairs With a Certain Sum",
+			"titleSlug": "finding-pairs-with-a-certain-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Design"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1757356973000
+		},
+		{
+			"id": "lc-first-bad-version",
+			"platform": "leetcode",
+			"title": "First Bad Version",
+			"titleSlug": "first-bad-version",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Binary Search",
+				"Interactive"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1729282745000
+		},
+		{
+			"id": "lc-frog-jump",
+			"platform": "leetcode",
+			"title": "Frog Jump",
+			"titleSlug": "frog-jump",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776684932000
+		},
+		{
+			"id": "lc-furthest-point-from-origin",
+			"platform": "leetcode",
+			"title": "Furthest Point From Origin",
+			"titleSlug": "furthest-point-from-origin",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Counting"
+			],
+			"topic": "String",
+			"timestamp": 1777044583000
+		},
+		{
+			"id": "lc-get-the-size-of-a-dataframe",
+			"platform": "leetcode",
+			"title": "Get the Size of a DataFrame",
+			"titleSlug": "get-the-size-of-a-dataframe",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Matrix Operations"
+			],
+			"topic": "",
+			"timestamp": 1729715393000
+		},
+		{
+			"id": "lc-get-the-size-of-a-dataframe::1431822442",
+			"platform": "leetcode",
+			"title": "Get the Size of a DataFrame",
+			"titleSlug": "get-the-size-of-a-dataframe",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Pandas",
+				"Data Science",
+				"Metadata Extraction"
+			],
+			"topic": "Pandas",
+			"timestamp": 1729715393000
+		},
+		{
+			"id": "lc-greatest-common-divisor-of-strings::1967576641",
+			"platform": "leetcode",
+			"title": "Greatest Common Divisor of Strings",
+			"titleSlug": "greatest-common-divisor-of-strings",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"String"
+			],
+			"topic": "Math",
+			"timestamp": 1775208833000
+		},
+		{
+			"id": "lc-hamming-distance::1651663412",
+			"platform": "leetcode",
+			"title": "Hamming Distance",
+			"titleSlug": "hamming-distance",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748867363000
+		},
+		{
+			"id": "lc-happy-number::1428234006",
+			"platform": "leetcode",
+			"title": "Happy Number",
+			"titleSlug": "happy-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Hash Table",
+				"Math",
+				"Two Pointers"
+			],
+			"topic": "Math",
+			"timestamp": 1729419260000
+		},
+		{
+			"id": "lc-height-checker",
+			"platform": "leetcode",
+			"title": "Height Checker",
+			"titleSlug": "height-checker",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Sorting",
+				"Counting Sort"
+			],
+			"topic": "Sorting",
+			"timestamp": 1726773202000
+		},
+		{
+			"id": "lc-height-checker::1395797265",
+			"platform": "leetcode",
+			"title": "Height Checker",
+			"titleSlug": "height-checker",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Sorting",
+				"Counting Sort"
+			],
+			"topic": "Sorting",
+			"timestamp": 1726773598000
+		},
+		{
+			"id": "lc-house-robber-v",
+			"platform": "leetcode",
+			"title": "House Robber V",
+			"titleSlug": "house-robber-v",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1787048419000
+		},
+		{
+			"id": "lc-house-robber::1974558813",
+			"platform": "leetcode",
+			"title": "House Robber",
+			"titleSlug": "house-robber",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"Array"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775833411000
+		},
+		{
+			"id": "lc-intersection-of-two-arrays::1873478355",
+			"platform": "leetcode",
+			"title": "Intersection of Two Arrays",
+			"titleSlug": "intersection-of-two-arrays",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Two Pointers",
+				"Binary Search",
+				"Sorting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1767464844000
+		},
+		{
+			"id": "lc-invalid-tweets",
+			"platform": "leetcode",
+			"title": "Invalid Tweets",
+			"titleSlug": "invalid-tweets",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777054886000
+		},
+		{
+			"id": "lc-jump-game-ii",
+			"platform": "leetcode",
+			"title": "Jump Game II",
+			"titleSlug": "jump-game-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Greedy"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1778395723000
+		},
+		{
+			"id": "lc-jump-game::1871756970",
+			"platform": "leetcode",
+			"title": "Jump Game",
+			"titleSlug": "jump-game",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Greedy"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1767338350000
+		},
+		{
+			"id": "lc-kids-with-the-greatest-number-of-candies",
+			"platform": "leetcode",
+			"title": "Kids With the Greatest Number of Candies",
+			"titleSlug": "kids-with-the-greatest-number-of-candies",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1781764845000
+		},
+		{
+			"id": "lc-koko-eating-bananas::1871324972",
+			"platform": "leetcode",
+			"title": "Koko Eating Bananas",
+			"titleSlug": "koko-eating-bananas",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767293071000
+		},
+		{
+			"id": "lc-largest-number::1429608798",
+			"platform": "leetcode",
+			"title": "Largest Number",
+			"titleSlug": "largest-number",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"String",
+				"Greedy",
+				"Sorting"
+			],
+			"topic": "Greedy",
+			"timestamp": 1729533908000
+		},
+		{
+			"id": "lc-last-stone-weight-ii::1991232652",
+			"platform": "leetcode",
+			"title": "Last Stone Weight II",
+			"titleSlug": "last-stone-weight-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777484846000
+		},
+		{
+			"id": "lc-lemonade-change::1356197827",
+			"platform": "leetcode",
+			"title": "Lemonade Change",
+			"titleSlug": "lemonade-change",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1723702054000
+		},
+		{
+			"id": "lc-lemonade-change::1356200718",
+			"platform": "leetcode",
+			"title": "Lemonade Change",
+			"titleSlug": "lemonade-change",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1723702227000
+		},
+		{
+			"id": "lc-length-of-last-word::1627215076",
+			"platform": "leetcode",
+			"title": "Length of Last Word",
+			"titleSlug": "length-of-last-word",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1746553756000
+		},
+		{
+			"id": "lc-length-of-last-word::1627215692",
+			"platform": "leetcode",
+			"title": "Length of Last Word",
+			"titleSlug": "length-of-last-word",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1746553799000
+		},
+		{
+			"id": "lc-letter-combinations-of-a-phone-number::1708822302",
+			"platform": "leetcode",
+			"title": "Letter Combinations of a Phone Number",
+			"titleSlug": "letter-combinations-of-a-phone-number",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Backtracking"
+			],
+			"topic": "Backtracking",
+			"timestamp": 1753292336000
+		},
+		{
+			"id": "lc-linked-list-cycle::1428277941",
+			"platform": "leetcode",
+			"title": "Linked List Cycle",
+			"titleSlug": "linked-list-cycle",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Linked List",
+				"Linked List",
+				"Hash Table",
+				"Two Pointers"
+			],
+			"topic": "Linked List",
+			"timestamp": 1729423179000
+		},
+		{
+			"id": "lc-longest-common-prefix::1650472821",
+			"platform": "leetcode",
+			"title": "Longest Common Prefix",
+			"titleSlug": "longest-common-prefix",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"String",
+				"Trie"
+			],
+			"topic": "Trie",
+			"timestamp": 1748762079000
+		},
+		{
+			"id": "lc-longest-common-subsequence::1985170934",
+			"platform": "leetcode",
+			"title": "Longest Common Subsequence",
+			"titleSlug": "longest-common-subsequence",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"String"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776847829000
+		},
+		{
+			"id": "lc-longest-continuous-increasing-subsequence::1731540158",
+			"platform": "leetcode",
+			"title": "Longest Continuous Increasing Subsequence",
+			"titleSlug": "longest-continuous-increasing-subsequence",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1754933193000
+		},
+		{
+			"id": "lc-longest-increasing-subsequence::1995267310",
+			"platform": "leetcode",
+			"title": "Longest Increasing Subsequence",
+			"titleSlug": "longest-increasing-subsequence",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777924725000
+		},
+		{
+			"id": "lc-longest-increasing-subsequence::1996133259",
+			"platform": "leetcode",
+			"title": "Longest Increasing Subsequence",
+			"titleSlug": "longest-increasing-subsequence",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1778010498000
+		},
+		{
+			"id": "lc-longest-palindromic-subsequence::1987087739",
+			"platform": "leetcode",
+			"title": "Longest Palindromic Subsequence",
+			"titleSlug": "longest-palindromic-subsequence",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777043970000
+		},
+		{
+			"id": "lc-longest-palindromic-substring::1431797796",
+			"platform": "leetcode",
+			"title": "Longest Palindromic Substring",
+			"titleSlug": "longest-palindromic-substring",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"String",
+				"Two Pointers",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1729713153000
+		},
+		{
+			"id": "lc-longest-substring-without-repeating-characters::1351982506",
+			"platform": "leetcode",
+			"title": "Longest Substring Without Repeating Characters",
+			"titleSlug": "longest-substring-without-repeating-characters",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Hash Table",
+				"String",
+				"Hash Table",
+				"Sliding Window"
+			],
+			"topic": "Sliding Window",
+			"timestamp": 1723375390000
+		},
+		{
+			"id": "lc-longest-substring-without-repeating-characters::1351984398",
+			"platform": "leetcode",
+			"title": "Longest Substring Without Repeating Characters",
+			"titleSlug": "longest-substring-without-repeating-characters",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Hash Table",
+				"String",
+				"Hash Table",
+				"Sliding Window"
+			],
+			"topic": "Sliding Window",
+			"timestamp": 1723375530000
+		},
+		{
+			"id": "lc-magic-squares-in-grid::1350291377",
+			"platform": "leetcode",
+			"title": "Magic Squares In Grid",
+			"titleSlug": "magic-squares-in-grid",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Hash Table",
+				"Matrix"
+			],
+			"topic": "Math",
+			"timestamp": 1723228427000
+		},
+		{
+			"id": "lc-magic-squares-in-grid::1992056989",
+			"platform": "leetcode",
+			"title": "Magic Squares In Grid",
+			"titleSlug": "magic-squares-in-grid",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Hash Table",
+				"Matrix"
+			],
+			"topic": "Math",
+			"timestamp": 1777574549000
+		},
+		{
+			"id": "lc-majority-element-ii::1448987288",
+			"platform": "leetcode",
+			"title": "Majority Element II",
+			"titleSlug": "majority-element-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Sorting",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731269234000
+		},
+		{
+			"id": "lc-majority-element::1448985394",
+			"platform": "leetcode",
+			"title": "Majority Element",
+			"titleSlug": "majority-element",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Divide and Conquer",
+				"Sorting",
+				"Counting"
+			],
+			"topic": "Divide and Conquer",
+			"timestamp": 1731269043000
+		},
+		{
+			"id": "lc-majority-element::1448986088",
+			"platform": "leetcode",
+			"title": "Majority Element",
+			"titleSlug": "majority-element",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Divide and Conquer",
+				"Sorting",
+				"Counting"
+			],
+			"topic": "Divide and Conquer",
+			"timestamp": 1731269111000
+		},
+		{
+			"id": "lc-make-array-zero-by-subtracting-equal-amounts::1651723108",
+			"platform": "leetcode",
+			"title": "Make Array Zero by Subtracting Equal Amounts",
+			"titleSlug": "make-array-zero-by-subtracting-equal-amounts",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Greedy",
+				"Sorting",
+				"Heap (Priority Queue)",
+				"Simulation"
+			],
+			"topic": "Greedy",
+			"timestamp": 1748871945000
+		},
+		{
+			"id": "lc-managers-with-at-least-5-direct-reports::1994063381",
+			"platform": "leetcode",
+			"title": "Managers with at Least 5 Direct Reports",
+			"titleSlug": "managers-with-at-least-5-direct-reports",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777801757000
+		},
+		{
+			"id": "lc-max-consecutive-ones::1171315976",
+			"platform": "leetcode",
+			"title": "Max Consecutive Ones",
+			"titleSlug": "max-consecutive-ones",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1707560436000
+		},
+		{
+			"id": "lc-maximal-square::1984334387",
+			"platform": "leetcode",
+			"title": "Maximal Square",
+			"titleSlug": "maximal-square",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776764361000
+		},
+		{
+			"id": "lc-maximum-count-of-positive-integer-and-negative-integer::1429718786",
+			"platform": "leetcode",
+			"title": "Maximum Count of Positive Integer and Negative Integer",
+			"titleSlug": "maximum-count-of-positive-integer-and-negative-integer",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Binary Search",
+				"Counting"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1729541320000
+		},
+		{
+			"id": "lc-maximum-depth-of-binary-tree::1707642652",
+			"platform": "leetcode",
+			"title": "Maximum Depth of Binary Tree",
+			"titleSlug": "maximum-depth-of-binary-tree",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Tree",
+				"Tree",
+				"Depth-First Search",
+				"Breadth-First Search",
+				"Binary Tree"
+			],
+			"topic": "Tree",
+			"timestamp": 1753208852000
+		},
+		{
+			"id": "lc-maximum-number-of-operations-with-the-same-score-i::1730434235",
+			"platform": "leetcode",
+			"title": "Maximum Number of Operations With the Same Score I",
+			"titleSlug": "maximum-number-of-operations-with-the-same-score-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Simulation"
+			],
+			"topic": "Array",
+			"timestamp": 1754849200000
+		},
+		{
+			"id": "lc-maximum-subarray::1871817412",
+			"platform": "leetcode",
+			"title": "Maximum Subarray",
+			"titleSlug": "maximum-subarray",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Divide and Conquer",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1767342752000
+		},
+		{
+			"id": "lc-median-of-two-sorted-arrays",
+			"platform": "leetcode",
+			"title": "Median of Two Sorted Arrays",
+			"titleSlug": "median-of-two-sorted-arrays",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Binary Search",
+				"Divide and Conquer"
+			],
+			"topic": "Divide and Conquer",
+			"timestamp": 1778869326000
+		},
+		{
+			"id": "lc-median-of-two-sorted-arrays::2004038057",
+			"platform": "leetcode",
+			"title": "Median of Two Sorted Arrays",
+			"titleSlug": "median-of-two-sorted-arrays",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Binary Search",
+				"Divide and Conquer"
+			],
+			"topic": "Divide and Conquer",
+			"timestamp": 1778869326000
+		},
+		{
+			"id": "lc-merge-strings-alternately::1356177455",
+			"platform": "leetcode",
+			"title": "Merge Strings Alternately",
+			"titleSlug": "merge-strings-alternately",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1723700871000
+		},
+		{
+			"id": "lc-merge-strings-alternately::1363827829",
+			"platform": "leetcode",
+			"title": "Merge Strings Alternately",
+			"titleSlug": "merge-strings-alternately",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1724264849000
+		},
+		{
+			"id": "lc-merge-strings-alternately::1957612804",
+			"platform": "leetcode",
+			"title": "Merge Strings Alternately",
+			"titleSlug": "merge-strings-alternately",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1774344800000
+		},
+		{
+			"id": "lc-merge-two-sorted-lists::1716712147",
+			"platform": "leetcode",
+			"title": "Merge Two Sorted Lists",
+			"titleSlug": "merge-two-sorted-lists",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Linked List",
+				"Linked List",
+				"Recursion"
+			],
+			"topic": "Linked List",
+			"timestamp": 1753856636000
+		},
+		{
+			"id": "lc-method-chaining",
+			"platform": "leetcode",
+			"title": "Method Chaining",
+			"titleSlug": "method-chaining",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Sorting",
+				"Data Filtering",
+				"Vectorization"
+			],
+			"topic": "Sorting",
+			"timestamp": 1729937534000
+		},
+		{
+			"id": "lc-method-chaining::1434101518",
+			"platform": "leetcode",
+			"title": "Method Chaining",
+			"titleSlug": "method-chaining",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Sorting",
+				"Pandas"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729937534000
+		},
+		{
+			"id": "lc-min-cost-climbing-stairs::1974551678",
+			"platform": "leetcode",
+			"title": "Min Cost Climbing Stairs",
+			"titleSlug": "min-cost-climbing-stairs",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775832871000
+		},
+		{
+			"id": "lc-minimize-maximum-pair-sum-in-array::1730450212",
+			"platform": "leetcode",
+			"title": "Minimize Maximum Pair Sum in Array",
+			"titleSlug": "minimize-maximum-pair-sum-in-array",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Greedy",
+				"Sorting"
+			],
+			"topic": "Greedy",
+			"timestamp": 1754850077000
+		},
+		{
+			"id": "lc-minimize-maximum-pair-sum-in-array::1730457343",
+			"platform": "leetcode",
+			"title": "Minimize Maximum Pair Sum in Array",
+			"titleSlug": "minimize-maximum-pair-sum-in-array",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Greedy",
+				"Sorting"
+			],
+			"topic": "Greedy",
+			"timestamp": 1754850478000
+		},
+		{
+			"id": "lc-minimum-ascii-delete-sum-for-two-strings::1985691602",
+			"platform": "leetcode",
+			"title": "Minimum ASCII Delete Sum for Two Strings",
+			"titleSlug": "minimum-ascii-delete-sum-for-two-strings",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776892351000
+		},
+		{
+			"id": "lc-minimum-cost-for-tickets::1982765835",
+			"platform": "leetcode",
+			"title": "Minimum Cost For Tickets",
+			"titleSlug": "minimum-cost-for-tickets",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776611538000
+		},
+		{
+			"id": "lc-minimum-cost-tree-from-leaf-values",
+			"platform": "leetcode",
+			"title": "Minimum Cost Tree From Leaf Values",
+			"titleSlug": "minimum-cost-tree-from-leaf-values",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Stack",
+				"Greedy"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777370154000
+		},
+		{
+			"id": "lc-minimum-index-of-a-valid-split::1451861442",
+			"platform": "leetcode",
+			"title": "Minimum Index of a Valid Split",
+			"titleSlug": "minimum-index-of-a-valid-split",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Sorting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731521488000
+		},
+		{
+			"id": "lc-minimum-moves-to-reach-target-score::1777023549",
+			"platform": "leetcode",
+			"title": "Minimum Moves to Reach Target Score",
+			"titleSlug": "minimum-moves-to-reach-target-score",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Greedy"
+			],
+			"topic": "Greedy",
+			"timestamp": 1758374078000
+		},
+		{
+			"id": "lc-minimum-operations-to-exceed-threshold-value-i::1448975552",
+			"platform": "leetcode",
+			"title": "Minimum Operations to Exceed Threshold Value I",
+			"titleSlug": "minimum-operations-to-exceed-threshold-value-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1731268101000
+		},
+		{
+			"id": "lc-minimum-path-sum",
+			"platform": "leetcode",
+			"title": "Minimum Path Sum",
+			"titleSlug": "minimum-path-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776706915000
+		},
+		{
+			"id": "lc-minimum-positive-sum-subarray::1461265703",
+			"platform": "leetcode",
+			"title": "Minimum Positive Sum Subarray ",
+			"titleSlug": "minimum-positive-sum-subarray",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Sliding Window",
+				"Prefix Sum"
+			],
+			"topic": "Sliding Window",
+			"timestamp": 1732416710000
+		},
+		{
+			"id": "lc-minimum-sum-of-mountain-triplets-i::1435378557",
+			"platform": "leetcode",
+			"title": "Minimum Sum of Mountain Triplets I",
+			"titleSlug": "minimum-sum-of-mountain-triplets-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1730046996000
+		},
+		{
+			"id": "lc-minimum-sum-of-mountain-triplets-ii::1435414883",
+			"platform": "leetcode",
+			"title": "Minimum Sum of Mountain Triplets II",
+			"titleSlug": "minimum-sum-of-mountain-triplets-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1730049504000
+		},
+		{
+			"id": "lc-minimum-time-to-make-rope-colorful::1975252923",
+			"platform": "leetcode",
+			"title": "Minimum Time to Make Rope Colorful",
+			"titleSlug": "minimum-time-to-make-rope-colorful",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"String",
+				"Dynamic Programming",
+				"Greedy"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775907589000
+		},
+		{
+			"id": "lc-missing-number::1626720145",
+			"platform": "leetcode",
+			"title": "Missing Number",
+			"titleSlug": "missing-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Math",
+				"Binary Search",
+				"Bit Manipulation",
+				"Sorting"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1746510386000
+		},
+		{
+			"id": "lc-modify-columns",
+			"platform": "leetcode",
+			"title": "Modify Columns",
+			"titleSlug": "modify-columns",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Data Manipulation",
+				"Vectorization"
+			],
+			"topic": "Array",
+			"timestamp": 1729837816000
+		},
+		{
+			"id": "lc-modify-columns::1433134107",
+			"platform": "leetcode",
+			"title": "Modify Columns",
+			"titleSlug": "modify-columns",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Vectorization",
+				"Data Manipulation",
+				"Pandas"
+			],
+			"topic": "Vectorization",
+			"timestamp": 1729837816000
+		},
+		{
+			"id": "lc-most-frequent-even-element::1448999875",
+			"platform": "leetcode",
+			"title": "Most Frequent Even Element",
+			"titleSlug": "most-frequent-even-element",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731270519000
+		},
+		{
+			"id": "lc-n-queens",
+			"platform": "leetcode",
+			"title": "N-Queens",
+			"titleSlug": "n-queens",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Backtracking"
+			],
+			"topic": "Backtracking",
+			"timestamp": 1777783817000
+		},
+		{
+			"id": "lc-n-th-tribonacci-number",
+			"platform": "leetcode",
+			"title": "N-th Tribonacci Number",
+			"titleSlug": "n-th-tribonacci-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Dynamic Programming",
+				"Memoization"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1729191409000
+		},
+		{
+			"id": "lc-network-delay-time",
+			"platform": "leetcode",
+			"title": "Network Delay Time",
+			"titleSlug": "network-delay-time",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Graph",
+				"Graph",
+				"Depth-First Search",
+				"Breadth-First Search",
+				"Graph Theory",
+				"Heap (Priority Queue)",
+				"Shortest Path"
+			],
+			"topic": "Graph",
+			"timestamp": 1779434885000
+		},
+		{
+			"id": "lc-next-greater-element-i::1650915399",
+			"platform": "leetcode",
+			"title": "Next Greater Element I",
+			"titleSlug": "next-greater-element-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Stack"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1748797354000
+		},
+		{
+			"id": "lc-number-of-1-bits::1650943714",
+			"platform": "leetcode",
+			"title": "Number of 1 Bits",
+			"titleSlug": "number-of-1-bits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Bit",
+				"Bit",
+				"Divide and Conquer",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748799239000
+		},
+		{
+			"id": "lc-number-of-1-bits::1651630536",
+			"platform": "leetcode",
+			"title": "Number of 1 Bits",
+			"titleSlug": "number-of-1-bits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Bit",
+				"Bit",
+				"Divide and Conquer",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748864639000
+		},
+		{
+			"id": "lc-number-of-dice-rolls-with-target-sum",
+			"platform": "leetcode",
+			"title": "Number of Dice Rolls With Target Sum",
+			"titleSlug": "number-of-dice-rolls-with-target-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "JavaScript",
+				"ext": "js",
+				"slug": "javascript"
+			},
+			"tags": [
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777803043000
+		},
+		{
+			"id": "lc-number-of-dice-rolls-with-target-sum::1992314832",
+			"platform": "leetcode",
+			"title": "Number of Dice Rolls With Target Sum",
+			"titleSlug": "number-of-dice-rolls-with-target-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777615130000
+		},
+		{
+			"id": "lc-number-of-employees-who-met-the-target::1448974448",
+			"platform": "leetcode",
+			"title": "Number of Employees Who Met the Target",
+			"titleSlug": "number-of-employees-who-met-the-target",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1731268004000
+		},
+		{
+			"id": "lc-number-of-employees-who-met-the-target::1448974557",
+			"platform": "leetcode",
+			"title": "Number of Employees Who Met the Target",
+			"titleSlug": "number-of-employees-who-met-the-target",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array"
+			],
+			"topic": "Array",
+			"timestamp": 1731268014000
+		},
+		{
+			"id": "lc-number-of-islands",
+			"platform": "leetcode",
+			"title": "Number of Islands",
+			"titleSlug": "number-of-islands",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Graph",
+				"Graph",
+				"Array",
+				"Depth-First Search",
+				"Breadth-First Search",
+				"Union Find",
+				"Matrix"
+			],
+			"topic": "Graph",
+			"timestamp": 1778313930000
+		},
+		{
+			"id": "lc-ones-and-zeroes",
+			"platform": "leetcode",
+			"title": "Ones and Zeroes",
+			"titleSlug": "ones-and-zeroes",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777628464000
+		},
+		{
+			"id": "lc-palindrome-number",
+			"platform": "leetcode",
+			"title": "Palindrome Number",
+			"titleSlug": "palindrome-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1723273055000
+		},
+		{
+			"id": "lc-palindromic-substrings::1989784394",
+			"platform": "leetcode",
+			"title": "Palindromic Substrings",
+			"titleSlug": "palindromic-substrings",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"String",
+				"Two Pointers",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777331650000
+		},
+		{
+			"id": "lc-partition-array-for-maximum-sum",
+			"platform": "leetcode",
+			"title": "Partition Array for Maximum Sum",
+			"titleSlug": "partition-array-for-maximum-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1778098101000
+		},
+		{
+			"id": "lc-partition-equal-subset-sum",
+			"platform": "leetcode",
+			"title": "Partition Equal Subset Sum",
+			"titleSlug": "partition-equal-subset-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777460975000
+		},
+		{
+			"id": "lc-pascals-triangle::1650929295",
+			"platform": "leetcode",
+			"title": "Pascal's Triangle",
+			"titleSlug": "pascals-triangle",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1748798288000
+		},
+		{
+			"id": "lc-perfect-squares",
+			"platform": "leetcode",
+			"title": "Perfect Squares",
+			"titleSlug": "perfect-squares",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Breadth-First Search",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775882113000
+		},
+		{
+			"id": "lc-plus-one",
+			"platform": "leetcode",
+			"title": "Plus One",
+			"titleSlug": "plus-one",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1729278249000
+		},
+		{
+			"id": "lc-power-of-four::1651385553",
+			"platform": "leetcode",
+			"title": "Power of Four",
+			"titleSlug": "power-of-four",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Bit Manipulation",
+				"Recursion"
+			],
+			"topic": "Recursion",
+			"timestamp": 1748845822000
+		},
+		{
+			"id": "lc-power-of-three::1650980140",
+			"platform": "leetcode",
+			"title": "Power of Three",
+			"titleSlug": "power-of-three",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Recursion"
+			],
+			"topic": "Recursion",
+			"timestamp": 1748801661000
+		},
+		{
+			"id": "lc-power-of-three::1650981852",
+			"platform": "leetcode",
+			"title": "Power of Three",
+			"titleSlug": "power-of-three",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Recursion"
+			],
+			"topic": "Recursion",
+			"timestamp": 1748801773000
+		},
+		{
+			"id": "lc-power-of-two::1650965939",
+			"platform": "leetcode",
+			"title": "Power of Two",
+			"titleSlug": "power-of-two",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Bit Manipulation",
+				"Recursion"
+			],
+			"topic": "Recursion",
+			"timestamp": 1748800689000
+		},
+		{
+			"id": "lc-power-of-two::1650968743",
+			"platform": "leetcode",
+			"title": "Power of Two",
+			"titleSlug": "power-of-two",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Bit Manipulation",
+				"Recursion"
+			],
+			"topic": "Recursion",
+			"timestamp": 1748800884000
+		},
+		{
+			"id": "lc-product-sales-analysis-i",
+			"platform": "leetcode",
+			"title": "Product Sales Analysis I",
+			"titleSlug": "product-sales-analysis-i",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777095239000
+		},
+		{
+			"id": "lc-profitable-schemes",
+			"platform": "leetcode",
+			"title": "Profitable Schemes",
+			"titleSlug": "profitable-schemes",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777748353000
+		},
+		{
+			"id": "lc-ransom-note::1626469933",
+			"platform": "leetcode",
+			"title": "Ransom Note",
+			"titleSlug": "ransom-note",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1746479514000
+		},
+		{
+			"id": "lc-recyclable-and-low-fat-products",
+			"platform": "leetcode",
+			"title": "Recyclable and Low Fat Products",
+			"titleSlug": "recyclable-and-low-fat-products",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777045102000
+		},
+		{
+			"id": "lc-remove-duplicates-from-sorted-array",
+			"platform": "leetcode",
+			"title": "Remove Duplicates from Sorted Array",
+			"titleSlug": "remove-duplicates-from-sorted-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1729192119000
+		},
+		{
+			"id": "lc-remove-element",
+			"platform": "leetcode",
+			"title": "Remove Element",
+			"titleSlug": "remove-element",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1729192238000
+		},
+		{
+			"id": "lc-rename-columns",
+			"platform": "leetcode",
+			"title": "Rename Columns",
+			"titleSlug": "rename-columns",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Hash Table",
+				"Pandas"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838137000
+		},
+		{
+			"id": "lc-rename-columns::1433138106",
+			"platform": "leetcode",
+			"title": "Rename Columns",
+			"titleSlug": "rename-columns",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Schema Mapping"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838137000
+		},
+		{
+			"id": "lc-replace-employee-id-with-the-unique-identifier",
+			"platform": "leetcode",
+			"title": "Replace Employee ID With The Unique Identifier",
+			"titleSlug": "replace-employee-id-with-the-unique-identifier",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777093595000
+		},
+		{
+			"id": "lc-reshape-data-concatenate",
+			"platform": "leetcode",
+			"title": "Reshape Data: Concatenate",
+			"titleSlug": "reshape-data-concatenate",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Concatenation"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838819000
+		},
+		{
+			"id": "lc-reshape-data-concatenate::1433146452",
+			"platform": "leetcode",
+			"title": "Reshape Data: Concatenate",
+			"titleSlug": "reshape-data-concatenate",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Array Stacking"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729838819000
+		},
+		{
+			"id": "lc-reshape-data-melt",
+			"platform": "leetcode",
+			"title": "Reshape Data: Melt",
+			"titleSlug": "reshape-data-melt",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Matrix Reshaping",
+				"Pandas"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729937409000
+		},
+		{
+			"id": "lc-reshape-data-melt::1434100437",
+			"platform": "leetcode",
+			"title": "Reshape Data: Melt",
+			"titleSlug": "reshape-data-melt",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Array Reshaping"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729937409000
+		},
+		{
+			"id": "lc-reshape-data-pivot",
+			"platform": "leetcode",
+			"title": "Reshape Data: Pivot",
+			"titleSlug": "reshape-data-pivot",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Reshaping",
+				"Pivot Table"
+			],
+			"topic": "Data Reshaping",
+			"timestamp": 1729872212000
+		},
+		{
+			"id": "lc-reshape-data-pivot::1433500647",
+			"platform": "leetcode",
+			"title": "Reshape Data: Pivot",
+			"titleSlug": "reshape-data-pivot",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Reshaping",
+				"Matrix Transformation"
+			],
+			"topic": "Data Reshaping",
+			"timestamp": 1729872212000
+		},
+		{
+			"id": "lc-return-length-of-arguments-passed",
+			"platform": "leetcode",
+			"title": "Return Length of Arguments Passed",
+			"titleSlug": "return-length-of-arguments-passed",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "JavaScript",
+				"ext": "js",
+				"slug": "javascript"
+			},
+			"tags": [],
+			"topic": "Untagged",
+			"timestamp": 1723361457000
+		},
+		{
+			"id": "lc-reverse-bits::1650957577",
+			"platform": "leetcode",
+			"title": "Reverse Bits",
+			"titleSlug": "reverse-bits",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Divide and Conquer",
+				"Bit Manipulation"
+			],
+			"topic": "Divide and Conquer",
+			"timestamp": 1748800142000
+		},
+		{
+			"id": "lc-reverse-integer",
+			"platform": "leetcode",
+			"title": "Reverse Integer",
+			"titleSlug": "reverse-integer",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1725076382000
+		},
+		{
+			"id": "lc-reverse-linked-list",
+			"platform": "leetcode",
+			"title": "Reverse Linked List",
+			"titleSlug": "reverse-linked-list",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Linked List",
+				"Linked List",
+				"Recursion"
+			],
+			"topic": "Linked List",
+			"timestamp": 1775973487000
+		},
+		{
+			"id": "lc-reverse-string",
+			"platform": "leetcode",
+			"title": "Reverse String",
+			"titleSlug": "reverse-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "C++",
+				"ext": "cpp",
+				"slug": "cpp"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1704614743000
+		},
+		{
+			"id": "lc-reverse-vowels-of-a-string",
+			"platform": "leetcode",
+			"title": "Reverse Vowels of a String",
+			"titleSlug": "reverse-vowels-of-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1781783602000
+		},
+		{
+			"id": "lc-reverse-words-in-a-string",
+			"platform": "leetcode",
+			"title": "Reverse Words in a String",
+			"titleSlug": "reverse-words-in-a-string",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Two Pointers",
+				"String"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1781784271000
+		},
+		{
+			"id": "lc-rings-and-rods",
+			"platform": "leetcode",
+			"title": "Rings and Rods",
+			"titleSlug": "rings-and-rods",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Hash Table",
+				"String"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1729424179000
+		},
+		{
+			"id": "lc-rising-temperature",
+			"platform": "leetcode",
+			"title": "Rising Temperature",
+			"titleSlug": "rising-temperature",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777107821000
+		},
+		{
+			"id": "lc-rising-temperature::1987589875",
+			"platform": "leetcode",
+			"title": "Rising Temperature",
+			"titleSlug": "rising-temperature",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777107821000
+		},
+		{
+			"id": "lc-roman-to-integer::1353182041",
+			"platform": "leetcode",
+			"title": "Roman to Integer",
+			"titleSlug": "roman-to-integer",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"Math",
+				"String"
+			],
+			"topic": "Math",
+			"timestamp": 1723471110000
+		},
+		{
+			"id": "lc-roman-to-integer::1353183942",
+			"platform": "leetcode",
+			"title": "Roman to Integer",
+			"titleSlug": "roman-to-integer",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"Math",
+				"String"
+			],
+			"topic": "Math",
+			"timestamp": 1723471216000
+		},
+		{
+			"id": "lc-rotting-oranges",
+			"platform": "leetcode",
+			"title": "Rotting Oranges",
+			"titleSlug": "rotting-oranges",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Breadth-First Search",
+				"Matrix"
+			],
+			"topic": "Array",
+			"timestamp": 1778444579000
+		},
+		{
+			"id": "lc-score-of-a-string",
+			"platform": "leetcode",
+			"title": "Score of a String",
+			"titleSlug": "score-of-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "C",
+				"ext": "c",
+				"slug": "c"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1713448827000
+		},
+		{
+			"id": "lc-score-of-a-string::1235774141",
+			"platform": "leetcode",
+			"title": "Score of a String",
+			"titleSlug": "score-of-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1713449089000
+		},
+		{
+			"id": "lc-score-of-a-string::1235776226",
+			"platform": "leetcode",
+			"title": "Score of a String",
+			"titleSlug": "score-of-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1713449268000
+		},
+		{
+			"id": "lc-score-of-a-string::1235831135",
+			"platform": "leetcode",
+			"title": "Score of a String",
+			"titleSlug": "score-of-a-string",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1713453923000
+		},
+		{
+			"id": "lc-search-in-rotated-sorted-array-ii::1870290248",
+			"platform": "leetcode",
+			"title": "Search in Rotated Sorted Array II",
+			"titleSlug": "search-in-rotated-sorted-array-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767187029000
+		},
+		{
+			"id": "lc-search-in-rotated-sorted-array::1870298973",
+			"platform": "leetcode",
+			"title": "Search in Rotated Sorted Array",
+			"titleSlug": "search-in-rotated-sorted-array",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1767187867000
+		},
+		{
+			"id": "lc-search-insert-position",
+			"platform": "leetcode",
+			"title": "Search Insert Position",
+			"titleSlug": "search-insert-position",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Binary Search"
+			],
+			"topic": "Binary Search",
+			"timestamp": 1729281793000
+		},
+		{
+			"id": "lc-select-data",
+			"platform": "leetcode",
+			"title": "Select Data",
+			"titleSlug": "select-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Pandas",
+				"slug": "python",
+				"ext": "py"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Filtering",
+				"Array"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729715616000
+		},
+		{
+			"id": "lc-select-data::1431824819",
+			"platform": "leetcode",
+			"title": "Select Data",
+			"titleSlug": "select-data",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Data Manipulation",
+				"Pandas",
+				"Vectorization"
+			],
+			"topic": "Data Manipulation",
+			"timestamp": 1729715616000
+		},
+		{
+			"id": "lc-shift-distance-between-two-strings::1460841171",
+			"platform": "leetcode",
+			"title": "Shift Distance Between Two Strings",
+			"titleSlug": "shift-distance-between-two-strings",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"String",
+				"Prefix Sum"
+			],
+			"topic": "Array",
+			"timestamp": 1732373827000
+		},
+		{
+			"id": "lc-shortest-common-supersequence",
+			"platform": "leetcode",
+			"title": "Shortest Common Supersequence ",
+			"titleSlug": "shortest-common-supersequence",
+			"difficulty": "Hard",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776968026000
+		},
+		{
+			"id": "lc-single-number",
+			"platform": "leetcode",
+			"title": "Single Number",
+			"titleSlug": "single-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1729372978000
+		},
+		{
+			"id": "lc-single-number-ii",
+			"platform": "leetcode",
+			"title": "Single Number II",
+			"titleSlug": "single-number-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1729373096000
+		},
+		{
+			"id": "lc-single-number-iii",
+			"platform": "leetcode",
+			"title": "Single Number III",
+			"titleSlug": "single-number-iii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Array",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1729373179000
+		},
+		{
+			"id": "lc-slowest-key::1627212876",
+			"platform": "leetcode",
+			"title": "Slowest Key",
+			"titleSlug": "slowest-key",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"String"
+			],
+			"topic": "Array",
+			"timestamp": 1746553615000
+		},
+		{
+			"id": "lc-smallest-missing-integer-greater-than-sequential-prefix-sum::1650604745",
+			"platform": "leetcode",
+			"title": "Smallest Missing Integer Greater Than Sequential Prefix Sum",
+			"titleSlug": "smallest-missing-integer-greater-than-sequential-prefix-sum",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Sorting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1748773293000
+		},
+		{
+			"id": "lc-smallest-number-in-infinite-set::1777012123",
+			"platform": "leetcode",
+			"title": "Smallest Number in Infinite Set",
+			"titleSlug": "smallest-number-in-infinite-set",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"Design",
+				"Heap (Priority Queue)",
+				"Ordered Set"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1758373115000
+		},
+		{
+			"id": "lc-solving-questions-with-brainpower",
+			"platform": "leetcode",
+			"title": "Solving Questions With Brainpower",
+			"titleSlug": "solving-questions-with-brainpower",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776658842000
+		},
+		{
+			"id": "lc-sort-characters-by-frequency::1458513295",
+			"platform": "leetcode",
+			"title": "Sort Characters By Frequency",
+			"titleSlug": "sort-characters-by-frequency",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Sorting",
+				"Heap (Priority Queue)",
+				"Bucket Sort",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1732127348000
+		},
+		{
+			"id": "lc-sort-characters-by-frequency::1458513764",
+			"platform": "leetcode",
+			"title": "Sort Characters By Frequency",
+			"titleSlug": "sort-characters-by-frequency",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Sorting",
+				"Heap (Priority Queue)",
+				"Bucket Sort",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1732127378000
+		},
+		{
+			"id": "lc-spiral-matrix-iii",
+			"platform": "leetcode",
+			"title": "Spiral Matrix III",
+			"titleSlug": "spiral-matrix-iii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Matrix",
+				"Simulation"
+			],
+			"topic": "Array",
+			"timestamp": 1782232937000
+		},
+		{
+			"id": "lc-split-the-array::1448736927",
+			"platform": "leetcode",
+			"title": "Split the Array",
+			"titleSlug": "split-the-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731249478000
+		},
+		{
+			"id": "lc-split-the-array::1448742291",
+			"platform": "leetcode",
+			"title": "Split the Array",
+			"titleSlug": "split-the-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731249926000
+		},
+		{
+			"id": "lc-split-the-array::1448744519",
+			"platform": "leetcode",
+			"title": "Split the Array",
+			"titleSlug": "split-the-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python",
+				"ext": "py",
+				"slug": "python"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731250114000
+		},
+		{
+			"id": "lc-split-the-array::1448744782",
+			"platform": "leetcode",
+			"title": "Split the Array",
+			"titleSlug": "split-the-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1731250137000
+		},
+		{
+			"id": "lc-sqrtx::1733769228",
+			"platform": "leetcode",
+			"title": "Sqrt(x)",
+			"titleSlug": "sqrtx",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math",
+				"Binary Search"
+			],
+			"topic": "Math",
+			"timestamp": 1755092258000
+		},
+		{
+			"id": "lc-squares-of-a-sorted-array",
+			"platform": "leetcode",
+			"title": "Squares of a Sorted Array",
+			"titleSlug": "squares-of-a-sorted-array",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Java",
+				"ext": "java",
+				"slug": "java"
+			},
+			"tags": [
+				"Array",
+				"Two Pointers",
+				"Sorting"
+			],
+			"topic": "Two Pointers",
+			"timestamp": 1708183559000
+		},
+		{
+			"id": "lc-stone-game",
+			"platform": "leetcode",
+			"title": "Stone Game",
+			"titleSlug": "stone-game",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Dynamic Programming",
+				"Game Theory"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777218408000
+		},
+		{
+			"id": "lc-stone-game-vii",
+			"platform": "leetcode",
+			"title": "Stone Game VII",
+			"titleSlug": "stone-game-vii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Dynamic Programming",
+				"Game Theory"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777217330000
+		},
+		{
+			"id": "lc-string-to-integer-atoi",
+			"platform": "leetcode",
+			"title": "String to Integer (atoi)",
+			"titleSlug": "string-to-integer-atoi",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1723360999000
+		},
+		{
+			"id": "lc-students-and-examinations",
+			"platform": "leetcode",
+			"title": "Students and Examinations",
+			"titleSlug": "students-and-examinations",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "MySQL",
+				"ext": "sql",
+				"slug": "mysql"
+			},
+			"tags": [
+				"Database"
+			],
+			"topic": "Database",
+			"timestamp": 1777737250000
+		},
+		{
+			"id": "lc-sum-of-digits-of-string-after-convert",
+			"platform": "leetcode",
+			"title": "Sum of Digits of String After Convert",
+			"titleSlug": "sum-of-digits-of-string-after-convert",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"String",
+				"Simulation"
+			],
+			"topic": "String",
+			"timestamp": 1729415590000
+		},
+		{
+			"id": "lc-surrounded-regions::2002901441",
+			"platform": "leetcode",
+			"title": "Surrounded Regions",
+			"titleSlug": "surrounded-regions",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Breadth-First Search",
+				"Depth-First Search",
+				"Matrix",
+				"Union Find"
+			],
+			"topic": "Array",
+			"timestamp": 1778755915000
+		},
+		{
+			"id": "lc-target-sum",
+			"platform": "leetcode",
+			"title": "Target Sum",
+			"titleSlug": "target-sum",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Backtracking"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1777463681000
+		},
+		{
+			"id": "lc-tenth-line::1651709018",
+			"platform": "leetcode",
+			"title": "Tenth Line",
+			"titleSlug": "tenth-line",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Bash",
+				"ext": "sh",
+				"slug": "bash"
+			},
+			"tags": [
+				"Shell"
+			],
+			"topic": "Shell",
+			"timestamp": 1748870903000
+		},
+		{
+			"id": "lc-top-k-frequent-elements",
+			"platform": "leetcode",
+			"title": "Top K Frequent Elements",
+			"titleSlug": "top-k-frequent-elements",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Heap (Priority Queue)",
+				"Array",
+				"Heap (Priority Queue)",
+				"Hash Table",
+				"Divide and Conquer",
+				"Sorting",
+				"Bucket Sort",
+				"Counting",
+				"Quickselect"
+			],
+			"topic": "Heap (Priority Queue)",
+			"timestamp": 1732126927000
+		},
+		{
+			"id": "lc-total-hamming-distance::1651693230",
+			"platform": "leetcode",
+			"title": "Total Hamming Distance",
+			"titleSlug": "total-hamming-distance",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Math",
+				"Bit Manipulation"
+			],
+			"topic": "Bit Manipulation",
+			"timestamp": 1748869685000
+		},
+		{
+			"id": "lc-transpose-file",
+			"platform": "leetcode",
+			"title": "Transpose File",
+			"titleSlug": "transpose-file",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Bash",
+				"ext": "sh",
+				"slug": "bash"
+			},
+			"tags": [
+				"Shell"
+			],
+			"topic": "Shell",
+			"timestamp": 1777643323000
+		},
+		{
+			"id": "lc-triangle",
+			"platform": "leetcode",
+			"title": "Triangle",
+			"titleSlug": "triangle",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776574519000
+		},
+		{
+			"id": "lc-two-sum::1430566383",
+			"platform": "leetcode",
+			"title": "Two Sum",
+			"titleSlug": "two-sum",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Hash Table",
+				"Array",
+				"Hash Table"
+			],
+			"topic": "Array",
+			"timestamp": 1729613082000
+		},
+		{
+			"id": "lc-ugly-number::1626696575",
+			"platform": "leetcode",
+			"title": "Ugly Number",
+			"titleSlug": "ugly-number",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Math"
+			],
+			"topic": "Math",
+			"timestamp": 1746508341000
+		},
+		{
+			"id": "lc-uncommon-words-from-two-sentences",
+			"platform": "leetcode",
+			"title": "Uncommon Words from Two Sentences",
+			"titleSlug": "uncommon-words-from-two-sentences",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Hash Table",
+				"String",
+				"Counting"
+			],
+			"topic": "Hash Table",
+			"timestamp": 1782231343000
+		},
+		{
+			"id": "lc-uncrossed-lines",
+			"platform": "leetcode",
+			"title": "Uncrossed Lines",
+			"titleSlug": "uncrossed-lines",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776857356000
+		},
+		{
+			"id": "lc-unique-paths",
+			"platform": "leetcode",
+			"title": "Unique Paths",
+			"titleSlug": "unique-paths",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"Dynamic Programming",
+				"Dynamic Programming",
+				"Math",
+				"Combinatorics"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1775832660000
+		},
+		{
+			"id": "lc-unique-paths-ii",
+			"platform": "leetcode",
+			"title": "Unique Paths II",
+			"titleSlug": "unique-paths-ii",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"Array",
+				"Dynamic Programming",
+				"Matrix"
+			],
+			"topic": "Dynamic Programming",
+			"timestamp": 1776706156000
+		},
+		{
+			"id": "lc-valid-parentheses",
+			"platform": "leetcode",
+			"title": "Valid Parentheses",
+			"titleSlug": "valid-parentheses",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Python3",
+				"slug": "python3",
+				"ext": "py"
+			},
+			"tags": [
+				"String",
+				"String",
+				"Stack"
+			],
+			"topic": "Stack",
+			"timestamp": 1729447151000
+		},
+		{
+			"id": "lc-valid-phone-numbers",
+			"platform": "leetcode",
+			"title": "Valid Phone Numbers",
+			"titleSlug": "valid-phone-numbers",
+			"difficulty": "Easy",
+			"lang": {
+				"name": "Bash",
+				"ext": "sh",
+				"slug": "bash"
+			},
+			"tags": [
+				"Shell"
+			],
+			"topic": "Shell",
+			"timestamp": 1777643023000
+		},
+		{
+			"id": "lc-word-frequency::1651698937",
+			"platform": "leetcode",
+			"title": "Word Frequency",
+			"titleSlug": "word-frequency",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Bash",
+				"ext": "sh",
+				"slug": "bash"
+			},
+			"tags": [
+				"Shell"
+			],
+			"topic": "Shell",
+			"timestamp": 1748870128000
+		},
+		{
+			"id": "lc-zigzag-conversion::1445726687",
+			"platform": "leetcode",
+			"title": "Zigzag Conversion",
+			"titleSlug": "zigzag-conversion",
+			"difficulty": "Medium",
+			"lang": {
+				"name": "Python3",
+				"ext": "py",
+				"slug": "python3"
+			},
+			"tags": [
+				"String"
+			],
+			"topic": "String",
+			"timestamp": 1730981168000
+		}
+	]
+}

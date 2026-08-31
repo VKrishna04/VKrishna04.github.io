@@ -54,13 +54,12 @@ const useMergedProjects = () => {
 
 	// Merge projects when both GitHub and static are ready
 	useEffect(() => {
-		// Always set loading based on GitHub loading state
-		setLoading(githubLoading);
-
-		// Don't merge until GitHub is done loading
-		if (githubLoading) {
-			return;
-		}
+		// Merge as soon as settings are available. githubRepos may still be
+		// empty at this point — that is fine: the static projects from
+		// settings.json render on their own, and a later GitHub response
+		// re-runs this effect to enrich them. The page must never depend on
+		// a network call to produce its first paint, or prerender captures
+		// the spinner.
 
 		const mergeProjects = () => {
 			const merged = [];
@@ -253,7 +252,7 @@ const useMergedProjects = () => {
 
 	return {
 		projects: mergedProjects,
-		loading: loading || githubLoading,
+		loading,
 		error: error || githubError,
 		settings,
 	};

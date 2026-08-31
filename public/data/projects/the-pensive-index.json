@@ -1,0 +1,63 @@
+{
+	"slug": "the-pensive-index",
+	"name": "the-pensive-index",
+	"tagline": "",
+	"summary": "Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.",
+	"status": "Active Development",
+	"category": "Full Stack",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-09-01",
+		"end": null
+	},
+	"technologies": [
+		"TypeScript",
+		"Next.js",
+		"Cloudflare-D1",
+		"Drizzle-ORM",
+		"Cloudflare-Pages"
+	],
+	"tags": [
+		"admin-dashboard",
+		"api",
+		"cloudflare",
+		"cloudflare-d1",
+		"drizzle-orm",
+		"fanfiction",
+		"next-js",
+		"spec-driven-development",
+		"story-discovery",
+		"typescript",
+		"validation-engine"
+	],
+	"highlights": [
+		"Hierarchical tagging system for story discovery",
+		"Intelligent prompt generation for content curation",
+		"Cloudflare D1 for edge-native database",
+		"Spec-Driven Development methodology"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/the-pensive-index",
+		"live": "https://pensive.vkrishna04.me",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/the-pensive-index#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 1,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/the-pensive-index",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/the-pensive-index/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:34.368Z"
+}

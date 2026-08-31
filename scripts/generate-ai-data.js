@@ -9,11 +9,14 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import { resolveDerivedValues } from "../src/utils/awards.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const settingsPath = path.join(__dirname, "..", "public", "settings.json")
-const settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"))
+const settings = resolveDerivedValues(
+	JSON.parse(fs.readFileSync(settingsPath, "utf8"))
+)
 const { home, about, github, projects } = settings
 
 const OUT = path.join(__dirname, "..", "public", "api")

@@ -294,7 +294,13 @@ export const cachedFetch = async (url, options = {}) => {
 
 	try {
 		console.log(`Fetching from API: ${url}`)
-		const response = await fetch(url, options)
+		// Cap the request: an unauthenticated api.github.com call from a CI
+		// runner can hang long enough to stall the prerender pass, and the
+		// caller already falls back to the static project list.
+		const response = await fetch(url, {
+			...options,
+			signal: AbortSignal.timeout(8000),
+		})
 
 		// Only cache successful responses
 		if (response.ok) {

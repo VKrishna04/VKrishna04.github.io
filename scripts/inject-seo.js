@@ -17,6 +17,7 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { parse } from "jsonc-parser";
+import { resolveDerivedValues } from "../src/utils/awards.js";
 
 /**
  * Vite plugin to inject SEO meta tags from settings.json into HTML
@@ -31,7 +32,7 @@ export function injectSeoPlugin() {
 				const settingsContent = readFileSync(settingsPath, "utf-8");
 
 				// Parse JSONC (JSON with comments)
-				const settings = parse(settingsContent);
+				const settings = resolveDerivedValues(parse(settingsContent));
 				if (!settings.seo) {
 					console.warn("SEO configuration not found in settings.json");
 					return html;

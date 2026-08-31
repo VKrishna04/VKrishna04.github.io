@@ -1,0 +1,59 @@
+{
+	"slug": "cflair-counter",
+	"name": "CFlair-Counter",
+	"tagline": "",
+	"summary": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
+	"status": "Live",
+	"category": "Backend",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-09-01",
+		"end": null
+	},
+	"technologies": [
+		"HTML",
+		"JavaScript",
+		"Cloudflare-Workers",
+		"REST-API",
+		"SVG"
+	],
+	"tags": [
+		"rest-api",
+		"cloudflare",
+		"serverless",
+		"view-counter",
+		"svg-badges",
+		"admin-panel",
+		"telemetry"
+	],
+	"highlights": [
+		"Ultra-efficient serverless architecture on Cloudflare",
+		"SVG badge generation for project stats",
+		"Admin panel for counter management",
+		"Headless telemetry with zero performance cost"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/CFlair-Counter",
+		"live": "https://counter.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/CFlair-Counter#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/CFlair-Counter",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/CFlair-Counter/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:34.084Z"
+}

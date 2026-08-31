@@ -1,0 +1,54 @@
+{
+	"slug": "ranobegemini",
+	"name": "RanobeGemini",
+	"tagline": "",
+	"summary": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
+	"status": "Active Development",
+	"category": "Browser Extension",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-11-01",
+		"end": null
+	},
+	"technologies": [
+		"JavaScript",
+		"Gemini-AI",
+		"Browser-Extension",
+		"HTML",
+		"CSS"
+	],
+	"tags": [
+		"firefox-addon",
+		"javascript"
+	],
+	"highlights": [
+		"AI-powered translation enhancement using Google Gemini",
+		"One-click transformation of poorly translated content",
+		"Supports popular web novel reading sites",
+		"Context-aware intelligent text processing"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/RanobeGemini",
+		"live": "http://ranobe.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/RanobeGemini#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 3,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/RanobeGemini",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/RanobeGemini/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:32.439Z"
+}

@@ -84,7 +84,7 @@
   },
   "seo": {
     "title": "Krishna GSVV — Developer & AI Researcher",
-    "description": "Award-winning full-stack developer & AI researcher. ₹3.75L+ in hackathon wins. IEEE-published researcher. 25+ open-source projects.",
+    "description": "Award-winning full-stack developer & AI researcher. {{prizeTotal}} in hackathon wins. IEEE-published researcher. 25+ open-source projects.",
     "keywords": [
       "Full Stack Developer",
       "React",
@@ -106,7 +106,7 @@
     "canonical": "https://vkrishna04.me/",
     "openGraph": {
       "title": "Krishna GSVV — Developer & AI Researcher",
-      "description": "Award-winning developer & AI researcher. IEEE publications, ₹3.75L+ in hackathon wins, and 25+ open-source projects.",
+      "description": "Award-winning developer & AI researcher. IEEE publications, {{prizeTotal}} in hackathon wins, and 25+ open-source projects.",
       "image": "https://vkrishna04.me/social.jpg",
       "imageWidth": 1200,
       "imageHeight": 630,
@@ -160,10 +160,10 @@
       "Hackathon Winner",
       "Open Source Contributor"
     ],
-    "description": "Award-winning developer and AI researcher — I build full-stack apps, train ML models, and ship open-source tools. ₹3.75L+ in hackathon prizes and a growing library of projects that people actually use.",
+    "description": "Award-winning developer and AI researcher — I build full-stack apps, train ML models, and ship open-source tools. {{prizeTotal}} in hackathon prizes and a growing library of projects that people actually use.",
     "location": {
       "show": true,
-      "text": "📍 Bengaluru, India",
+      "text": "📍 Bengaluru, India · open to relocation",
       "icon": "📍",
       "city": "Bengaluru",
       "country": "India"
@@ -266,9 +266,9 @@
     "subheading": "The story behind the code",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
     "paragraphs": [
-      "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (GPA: 8.53/10, graduating Jul 2026), based in Bengaluru. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
-      "I've competed at the national level and won: 1st runner-up at IIT Delhi CodeHive, 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000 prize), 1st at IIT Hyderabad Pathway Hackathon, and 1st at Microsoft Imagine Cup campus round — ₹3.20L+ in prizes across 2025.",
-      "On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 1.5K+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL.",
+      "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 8.55/10, graduating Jul 2026), based in Bengaluru and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
+      "I've competed at the national level and won: 1st runner-up at IIT Delhi CodeHive, 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000 prize), 1st at IIT Hyderabad Pathway Hackathon, and 1st at Microsoft Imagine Cup campus round — {{prizeTotal}} in prizes across 2025.",
+      "On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,100+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL.",
       "My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
     ],
     "image": {
@@ -567,7 +567,7 @@
         "label": "Open Source Projects"
       },
       {
-        "number": "₹375k+",
+        "number": "{{prizeTotal}}",
         "label": "Prize Money Won (INR)"
       },
       {
@@ -595,7 +595,7 @@
         {
           "title": "InfinityAI 2025 — 2nd Runner-up",
           "subtitle": "Tredence Inc. & Databricks · Bengaluru · Mar 2025",
-          "description": "Built an AI solution competing against top engineers across India. Won ₹2,00,000 — one of the most competitive AI hackathons in the country.",
+          "description": "Built the Facial Emotion Detector — real-time emotion classification with MediaPipe — competing against top engineers across India. Won ₹2,00,000 at one of the most competitive AI hackathons in the country.",
           "icon": "FaTrophy",
           "gradient": "bg-gradient-to-br from-yellow-600/20 to-orange-600/20",
           "borderColor": "border-yellow-500/30",
@@ -678,8 +678,8 @@
         },
         {
           "title": "cSpell Sync — VS Code Extension",
-          "subtitle": "VS Code Marketplace · 1.5K+ Installs",
-          "description": "Published VS Code extension for bidirectional cSpell dictionary synchronization across team environments. 1.5K+ active installs.",
+          "subtitle": "VS Code Marketplace · 2,100+ Installs",
+          "description": "Published VS Code extension for bidirectional cSpell dictionary synchronization across team environments. 2,100+ active installs.",
           "icon": "BiLogoVisualStudio",
           "gradient": "bg-gradient-to-br from-cyan-600/20 to-blue-600/20",
           "borderColor": "border-cyan-500/30",
@@ -1306,7 +1306,7 @@
           "vscode-marketplace"
         ],
         "highlights": [
-          "2,000+ downloads on VS Code Marketplace",
+          "2,100+ downloads on VS Code Marketplace",
           "Bidirectional cSpell dictionary synchronization",
           "Keyboard shortcuts and status bar integration",
           "Supports custom dictionaries and project settings"
@@ -1939,8 +1939,8 @@
     "profileImage": "https://github.com/VKrishna04.png"
   },
   "resume": {
-    "type": "external",
-    "url": "https://drive.google.com/drive/folders/1pLvckiL1bPmbkMn3BI1pqp3ud2z79DcN?usp=sharing",
+    "type": "local",
+    "url": "/resume.pdf",
     "filename": "Krishna_GSVV_Resume.pdf",
     "alternativeUrl": "/resume.pdf",
     "note": "Resume URL - can be a relative path (for local files) or a full URL (for external). If the RESUME_LINK environment variable is set, it will override this value.",
@@ -1972,7 +1972,7 @@
         "field": "Computer Science",
         "school": "Amrita Vishwa Vidyapeetham",
         "period": "2022 - 2026",
-        "gpa": "8.6/10",
+        "gpa": "8.55/10",
         "achievements": []
       }
     ],
@@ -2161,10 +2161,10 @@
     "certificationsIcon": "ShieldCheckIcon",
     "awards": [
       {
-        "name": "cSpell Sync — VS Code Extension (2,000+ installs)",
+        "name": "cSpell Sync — VS Code Extension (2,100+ installs)",
         "organization": "VS Code Marketplace",
         "date": "2025",
-        "description": "Built bidirectional cSpell dictionary synchronization extension using TypeScript and VS Code API with 2,000+ installs.",
+        "description": "Built bidirectional cSpell dictionary synchronization extension using TypeScript and VS Code API with 2,100+ installs.",
         "verificationUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
         "certificateUrl": ""
       },
@@ -2194,6 +2194,19 @@
           "displayText": "₹1,00,000"
         },
         "verificationUrl": "https://unstop.com/p/tryst25-iitd-code-hive-india-hackathon-blockchain-and-web3-hybrid-hackathon-2025-iit-delhi-1411972/offline-round/1057623?d=eyJwYWdlIjoxfQ==",
+        "certificateUrl": ""
+      },
+      {
+        "name": "1st Runner-up at ITM Gwalior Code Kurukshetra",
+        "organization": "ITM Gwalior",
+        "date": "2025",
+        "description": "1st Runner-up at Code Kurukshetra with MomCare — an end-to-end pregnancy companion app covering the first trimester through birth and the newborn's early weeks.",
+        "rewardAmount": {
+          "amount": 35000,
+          "currency": "INR",
+          "displayText": "₹35,000"
+        },
+        "verificationUrl": "",
         "certificateUrl": ""
       },
       {
@@ -2241,12 +2254,12 @@
         "type": "Other",
         "publisher": "Zenodo",
         "date": "1 September 2025",
-        "url": "https://zenodo.org/record/17014104",
+        "url": "https://zenodo.org/records/17014103",
         "description": "The EquiLens Corpus Generator is an open-source tool for creating balanced, reproducible datasets for bias auditing in Small Language Models (SLMs).",
         "authors": [
           "Krishna GSVV"
         ],
-        "doi": "10.5281/zenodo.17014104"
+        "doi": "10.5281/zenodo.17014103"
       }
     ],
     "publicationsNote": "Configure publications - each should have title, type, publisher, date, url (optional), and description",
@@ -2331,9 +2344,21 @@
           "SQLite",
           "REST APIs"
         ],
-        "description": "1st Runner-up at IIT Delhi CodeHive Hackathon (INR 1,00,000) with a beginner-friendly Hive blockchain onboarding app built in 24 hours. Implemented Keychain, HiveSigner, and HiveAuth flows with guided demo mode and Flask + SQLite caching for low-latency responses.",
+        "description": "1st Runner-up at IIT Delhi CodeHive Hackathon (INR 1,00,000) with a beginner-friendly Hive blockchain onboarding app built in 36 hours. Implemented Keychain, HiveSigner, and HiveAuth flows with guided demo mode and Flask + SQLite caching for low-latency responses.",
         "githubUrl": "https://github.com/Life-Experimentalist/HiveXplore",
         "liveUrl": "https://hivebuzz.onrender.com/"
+      },
+      {
+        "name": "Facial Emotion Detector",
+        "technologies": [
+          "Python",
+          "Flask",
+          "MediaPipe",
+          "OpenCV",
+          "scikit-learn"
+        ],
+        "description": "2nd Runner-up at Tredence InfinityAI 2025 (INR 2,00,000) with real-time facial emotion classification from images and video. Built the full ML pipeline from MediaPipe facial-landmark extraction through custom classifier training to live Flask inference.",
+        "githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector"
       },
       {
         "name": "Indian Sign Language Detector",
@@ -2344,7 +2369,7 @@
           "OpenCV",
           "scikit-learn"
         ],
-        "description": "Award-winning at Tredence InfinityAI 2025 (INR 2,00,000 prize pool) with real-time ISL recognition achieving 98% classification accuracy. Built full ML pipeline from MediaPipe landmark extraction to custom classifier training and live Flask inference with sub-100ms latency.",
+        "description": "Real-time Indian Sign Language recognition achieving 98% classification accuracy. Built full ML pipeline from MediaPipe landmark extraction to custom classifier training and live Flask inference with sub-100ms latency.",
         "githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector"
       },
       {
@@ -2369,6 +2394,7 @@
       {
         "name": "GitHub",
         "key": "github",
+        "audience": "professional",
         "icon": "FaGithub",
         "url": "https://github.com/VKrishna04",
         "label": "GitHub",
@@ -2384,8 +2410,27 @@
         "enabled": true
       },
       {
+        "name": "FissionLife",
+        "key": "fissionlife",
+        "audience": "professional",
+        "icon": "FaGithub",
+        "url": "https://github.com/FissionLife",
+        "label": "FissionLife on GitHub",
+        "description": "Second GitHub account — newer experiments and work-in-progress repositories.",
+        "brandColor": "#ffffff",
+        "contactCardStyle": "detailed",
+        "color": "#ffffff",
+        "hoverColor": "rgb(209, 213, 219)",
+        "showInHome": false,
+        "showInFooter": false,
+        "showInContact": true,
+        "contactSection": 1,
+        "enabled": true
+      },
+      {
         "name": "GitHub Org",
         "key": "github",
+        "audience": "professional",
         "icon": "SiGithubcopilot",
         "url": "https://github.com/Life-Experimentalist",
         "label": "GitHub Organization",
@@ -2403,6 +2448,7 @@
       {
         "name": "LinkedIn",
         "key": "linkedin",
+        "audience": "professional",
         "icon": "FaLinkedin",
         "url": "https://linkedin.com/in/vkrishna04",
         "label": "LinkedIn",
@@ -2420,6 +2466,7 @@
       {
         "name": "Twitter",
         "key": "twitter",
+        "audience": "personal",
         "icon": "FaTwitter",
         "url": "https://twitter.com/VKrishna04",
         "label": "Twitter Profile",
@@ -2434,6 +2481,7 @@
       {
         "name": "Instagram",
         "key": "instagram",
+        "audience": "personal",
         "icon": "FaInstagram",
         "url": "https://instagram.com/vkrishna04",
         "label": "Instagram",
@@ -2451,6 +2499,7 @@
       {
         "name": "Discord",
         "key": "discord",
+        "audience": "personal",
         "icon": "FaDiscord",
         "url": "https://discordapp.com/users/vkrishna04",
         "label": "Discord",
@@ -2468,6 +2517,7 @@
       {
         "name": "YouTube",
         "key": "youtube",
+        "audience": "personal",
         "icon": "FaYoutube",
         "url": "",
         "label": "YouTube Channel",
@@ -2482,6 +2532,7 @@
       {
         "name": "Twitch",
         "key": "twitch",
+        "audience": "personal",
         "icon": "FaTwitch",
         "url": "https://twitch.tv/vkrishna04",
         "label": "Twitch Channel",
@@ -2497,6 +2548,7 @@
       {
         "name": "Medium",
         "key": "medium",
+        "audience": "professional",
         "icon": "FaMedium",
         "url": "",
         "label": "Medium Blog",
@@ -2510,6 +2562,7 @@
       {
         "name": "Dev.to",
         "key": "dev",
+        "audience": "professional",
         "icon": "FaDev",
         "url": "https://dev.to/vkrishna04",
         "label": "Dev.to",
@@ -2525,6 +2578,7 @@
       {
         "name": "Stack Overflow",
         "key": "stackoverflow",
+        "audience": "professional",
         "icon": "FaStackOverflow",
         "url": "",
         "label": "Stack Overflow Profile",
@@ -2538,6 +2592,7 @@
       {
         "name": "Pinterest",
         "key": "pinterest",
+        "audience": "personal",
         "icon": "FaPinterest",
         "url": "https://in.pinterest.com/VKrishna04/",
         "label": "Pinterest",
@@ -2553,6 +2608,7 @@
       {
         "name": "Reddit",
         "key": "reddit",
+        "audience": "personal",
         "icon": "FaReddit",
         "url": "https://www.reddit.com/user/Krishnalsh04/",
         "label": "Reddit",
@@ -2570,6 +2626,7 @@
       {
         "name": "LeetCode",
         "key": "leetcode",
+        "audience": "professional",
         "icon": "SiLeetcode",
         "url": "https://leetcode.com/u/VKrishna04/",
         "label": "LeetCode",
@@ -2587,6 +2644,7 @@
       {
         "name": "HackerRank",
         "key": "hackerrank",
+        "audience": "professional",
         "icon": "SiHackerrank",
         "url": "https://www.hackerrank.com/profile/VKrishna04",
         "label": "HackerRank",
@@ -2602,6 +2660,7 @@
       {
         "name": "Kaggle",
         "key": "kaggle",
+        "audience": "professional",
         "icon": "SiKaggle",
         "url": "https://www.kaggle.com/krishnagsvv",
         "label": "Kaggle",
@@ -2617,6 +2676,7 @@
       {
         "name": "Spotify",
         "key": "spotify",
+        "audience": "personal",
         "icon": "FaSpotify",
         "url": "https://open.spotify.com/user/drz1bknr8dy7yo88gwzi9nl3d?si=86da6e56d31d4ea0",
         "label": "Spotify",
@@ -2634,6 +2694,7 @@
       {
         "name": "YouTube Music",
         "key": "youtube-music",
+        "audience": "personal",
         "icon": "SiYoutubemusic",
         "url": "https://music.youtube.com/channel/UCh918uhzsqX-D32Etxq61eQ?si=Uvyy7e6Pg0Ye7BSK",
         "label": "YouTube Music",
@@ -2651,6 +2712,7 @@
       {
         "name": "GitHub Pages",
         "key": "github-pages",
+        "audience": "professional",
         "icon": "FaGithub",
         "url": "https://Life-Experimentalist.github.io/",
         "description": "My GitHub Pages site for the Life Experimentalist organization",
@@ -2666,6 +2728,7 @@
       {
         "name": "Vercel",
         "key": "vercel",
+        "audience": "professional",
         "icon": "SiVercel",
         "url": "",
         "label": "Vercel Profile",
@@ -2680,6 +2743,7 @@
       {
         "name": "AWS",
         "key": "aws",
+        "audience": "professional",
         "icon": "FaAws",
         "url": "",
         "label": "AWS Profile",
@@ -2695,6 +2759,7 @@
       {
         "name": "Heroku",
         "key": "heroku",
+        "audience": "professional",
         "icon": "SiHeroku",
         "url": "",
         "label": "Heroku Profile",
@@ -2710,6 +2775,7 @@
       {
         "name": "Dribbble",
         "key": "dribbble",
+        "audience": "professional",
         "icon": "FaDribbble",
         "url": "",
         "label": "Dribbble Profile",
@@ -2723,6 +2789,7 @@
       {
         "name": "Behance",
         "key": "behance",
+        "audience": "professional",
         "icon": "FaBehance",
         "url": "",
         "label": "Behance Portfolio",
@@ -2736,6 +2803,7 @@
       {
         "name": "CodePen",
         "key": "codepen",
+        "audience": "professional",
         "icon": "FaCodepen",
         "url": "https://codepen.io/vkrishna04",
         "label": "CodePen",
@@ -2753,6 +2821,7 @@
       {
         "name": "Calendly",
         "key": "calendly",
+        "audience": "professional",
         "icon": "SiCalendly",
         "url": "https://calendly.com/vkrishna04/30min",
         "label": "Schedule Meeting",
@@ -2768,6 +2837,7 @@
       {
         "name": "Personal Website",
         "key": "website",
+        "audience": "professional",
         "icon": "FaGlobe",
         "url": "https://vkrishna04.me",
         "label": "Personal Website",
@@ -2783,6 +2853,7 @@
       {
         "name": "Unstop",
         "key": "unstop",
+        "audience": "professional",
         "icon": "SiUnstop",
         "url": "https://unstop.com/u/lifeexp2112",
         "label": "Unstop Profile",
@@ -2798,6 +2869,7 @@
       {
         "name": "Zenodo",
         "key": "zenodo",
+        "audience": "professional",
         "icon": "SiZenodo",
         "url": "https://zenodo.org/search?q=Krishna+GSVV",
         "label": "Zenodo",
@@ -2813,6 +2885,7 @@
       {
         "name": "ResearchGate",
         "key": "researchgate",
+        "audience": "professional",
         "icon": "SiResearchgate",
         "url": "",
         "label": "ResearchGate",
@@ -2828,6 +2901,7 @@
       {
         "name": "IEEE Xplore",
         "key": "ieee",
+        "audience": "professional",
         "icon": "SiIeee",
         "url": "https://ieeexplore.ieee.org/document/10987517",
         "label": "IEEE Publication",
@@ -2843,6 +2917,7 @@
       {
         "name": "npm",
         "key": "npm",
+        "audience": "professional",
         "icon": "FaNpm",
         "url": "https://www.npmjs.com/~vkrishna04",
         "label": "npm Profile",
@@ -2858,6 +2933,7 @@
       {
         "name": "Hashnode",
         "key": "hashnode",
+        "audience": "professional",
         "icon": "SiHashnode",
         "url": "https://hashnode.com/@vkrishna04",
         "label": "Hashnode Blog",
@@ -2876,7 +2952,7 @@
     "contact": {
       "email": "me@vkrishna04.me",
       "phone": "",
-      "location": "Bengaluru, India"
+      "location": "Bengaluru, India · open to relocation"
     },
     "note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags. Available icons: FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch, FaTiktok, FaMedium, FaDev, FaStackOverflow, FaDribbble, FaBehance, FaCodepen, ArrowUpIcon, Bars3Icon, XMarkIcon"
   },
@@ -3103,7 +3179,7 @@
     "about": {
       "show": true,
       "title": "",
-      "description": "Full-stack developer & AI researcher. ₹3.75L+ in hackathon prizes. Building open-source tools that people actually use."
+      "description": "Full-stack developer & AI researcher. {{prizeTotal}} in hackathon prizes. Building open-source tools that people actually use."
     },
     "stats": {
       "show": true,
@@ -3118,8 +3194,8 @@
         },
         {
           "key": "experience",
-          "label": "Years Experience",
-          "value": "3+",
+          "label": "Building Open Source",
+          "value": "3+ yrs",
           "color": "text-blue-400",
           "show": true
         },

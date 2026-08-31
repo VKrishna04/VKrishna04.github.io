@@ -1,0 +1,70 @@
+{
+	"slug": "hivexplore",
+	"name": "HiveXplore",
+	"tagline": "",
+	"summary": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
+	"status": "Live",
+	"category": "Blockchain",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-01-01",
+		"end": null
+	},
+	"technologies": [
+		"Python",
+		"Flask",
+		"SQLite",
+		"Hive-Blockchain",
+		"JavaScript",
+		"REST-API"
+	],
+	"tags": [
+		"blockchain",
+		"caching",
+		"content-platform",
+		"cryptocurrency",
+		"dapp",
+		"decentralized",
+		"flask",
+		"hive-blockchain",
+		"hivesigner",
+		"keychain",
+		"markdown",
+		"python",
+		"real-time",
+		"restful-api",
+		"social-media",
+		"sqlite",
+		"web-application"
+	],
+	"highlights": [
+		"Won 1st Runner-up at IIT Delhi CodeHive Hackathon (₹1L prize)",
+		"Simplified Hive blockchain authentication (Keychain, HiveSigner, HiveAuth)",
+		"Beginner-friendly guided blockchain experience",
+		"Real-time decentralized content creation and interaction"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/HiveXplore",
+		"live": "https://hivebuzz.onrender.com/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/HiveXplore#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/HiveXplore",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/HiveXplore/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:37.415Z"
+}

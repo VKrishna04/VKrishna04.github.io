@@ -67,6 +67,9 @@ const Contact = () => {
 	const [currentTime, setCurrentTime] = useState(new Date())
 	const [copiedText, setCopiedText] = useState("")
 	const [openFaqIndex, setOpenFaqIndex] = useState(null)
+	// Recruiters are the primary audience here, so only professional profiles
+	// render by default; personal accounts stay one click away.
+	const [showPersonalLinks, setShowPersonalLinks] = useState(false)
 
 	// Icon mapping for dynamic icon rendering
 	const iconMap = {
@@ -526,8 +529,18 @@ const Contact = () => {
 
 				const allPlatforms =
 					settings.social?.platforms?.filter(
-						(platform) => platform.enabled && platform.showInContact
+						(platform) =>
+							platform.enabled &&
+							platform.showInContact &&
+							(platform.audience !== "personal" || showPersonalLinks)
 					) || []
+
+				const hasPersonalLinks = (settings.social?.platforms || []).some(
+					(platform) =>
+						platform.enabled &&
+						platform.showInContact &&
+						platform.audience === "personal"
+				)
 
 				const emailPlatform = settings.social?.contact?.email
 					? {
@@ -668,6 +681,22 @@ const Contact = () => {
 								</div>
 							)
 						})}
+
+						{hasPersonalLinks && (
+							<button
+								type="button"
+								onClick={() => setShowPersonalLinks((v) => !v)}
+								aria-expanded={showPersonalLinks}
+								className="flex items-center gap-2 mx-auto px-4 py-2 text-sm text-gray-400 hover:text-gray-200 border border-gray-700/60 hover:border-gray-600 rounded-full transition-colors"
+							>
+								{showPersonalLinks ? "Hide" : "Show"} personal links
+								<ChevronDownIcon
+									className={`h-4 w-4 transition-transform ${
+										showPersonalLinks ? "rotate-180" : ""
+									}`}
+								/>
+							</button>
+						)}
 					</div>
 				)
 			}

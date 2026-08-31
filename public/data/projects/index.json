@@ -1,0 +1,398 @@
+{
+	"generatedAt": "2026-08-30T20:11:37.697Z",
+	"count": 21,
+	"projects": [
+		{
+			"slug": "equilens",
+			"name": "EquiLens",
+			"summary": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
+			"status": "Active Development",
+			"category": "AI/ML",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Ollama",
+				"Rich-CLI",
+				"Statistical-Analysis",
+				"uv"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/EquiLens",
+			"source": "settings",
+			"depth": 5
+		},
+		{
+			"slug": "vkrishna04-github-io",
+			"name": "Krishna GSVV Portfolio",
+			"summary": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
+			"status": "Live",
+			"category": "Full Stack",
+			"featured": false,
+			"technologies": [
+				"React",
+				"Vite",
+				"TailwindCSS",
+				"FramerMotion",
+				"JavaScript",
+				"ReactRouter",
+				"ReactIcons",
+				"JSONSchema"
+			],
+			"cover": "https://opengraph.githubassets.com/2/VKrishna04/VKrishna04.github.io",
+			"repo": "VKrishna04/VKrishna04.github.io",
+			"source": "settings",
+			"depth": 5
+		},
+		{
+			"slug": "actionscounter",
+			"name": "ActionsCounter",
+			"summary": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
+			"status": "Active Development",
+			"category": "DevOps",
+			"featured": false,
+			"technologies": [
+				"TypeScript",
+				"GitHub-Actions",
+				"GitHub-API",
+				"Webhooks"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/ActionsCounter",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "breachcheck",
+			"name": "BreachCheck",
+			"summary": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
+			"status": "Live",
+			"category": "Security",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Streamlit",
+				"REST-API",
+				"HIBP-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/BreachCheck",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "cflair-counter",
+			"name": "CFlair-Counter",
+			"summary": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
+			"status": "Live",
+			"category": "Backend",
+			"featured": false,
+			"technologies": [
+				"HTML",
+				"JavaScript",
+				"Cloudflare-Workers",
+				"REST-API",
+				"SVG"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/CFlair-Counter",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "counterapi",
+			"name": "CounterAPI",
+			"summary": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
+			"status": "Live",
+			"category": "Backend",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"FastAPI",
+				"PostgreSQL",
+				"Render",
+				"REST-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/CounterAPI",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "cspell-sync",
+			"name": "cspell-sync",
+			"summary": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
+			"status": "Maintenance",
+			"category": "VS Code Extension",
+			"featured": false,
+			"technologies": [
+				"TypeScript",
+				"VS-Code-API",
+				"Node.js",
+				"JSON"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/cspell-sync",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "eldritchify",
+			"name": "Eldritchify",
+			"summary": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
+			"status": "Live",
+			"category": "Web Tool",
+			"featured": false,
+			"technologies": [
+				"HTML",
+				"JavaScript",
+				"CSS",
+				"Unicode"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Eldritchify",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "evidya",
+			"name": "eVidya",
+			"summary": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
+			"status": "Live",
+			"category": "Full Stack",
+			"featured": false,
+			"technologies": [
+				"JavaScript",
+				"HTML",
+				"CSS",
+				"REST-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/eVidya",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "facial-emotion-detector",
+			"name": "Facial-Emotion-Detector",
+			"summary": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
+			"status": "Completed",
+			"category": "AI/ML",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"OpenCV",
+				"MediaPipe",
+				"scikit-learn",
+				"NumPy",
+				"Flask"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Facial-Emotion-Detector",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "hivexplore",
+			"name": "HiveXplore",
+			"summary": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
+			"status": "Live",
+			"category": "Blockchain",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Flask",
+				"SQLite",
+				"Hive-Blockchain",
+				"JavaScript",
+				"REST-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/HiveXplore",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "parkmeter",
+			"name": "ParkMeter",
+			"summary": "Parking Ticket Management System for tracking and managing parking tickets, including payment processing, ticket history, and notifications.",
+			"status": "Completed",
+			"category": "Full Stack",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Django",
+				"HTML",
+				"CSS",
+				"JavaScript"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/ParkMeter",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "ranobegemini",
+			"name": "RanobeGemini",
+			"summary": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
+			"status": "Active Development",
+			"category": "Browser Extension",
+			"featured": false,
+			"technologies": [
+				"JavaScript",
+				"Gemini-AI",
+				"Browser-Extension",
+				"HTML",
+				"CSS"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/RanobeGemini",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "relax",
+			"name": "Relax",
+			"summary": "Refresh with inspirational quotes, GIFs and memes.",
+			"status": "Live",
+			"category": "Web App",
+			"featured": false,
+			"technologies": [
+				"JavaScript",
+				"HTML",
+				"CSS",
+				"REST-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Relax",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "save-sync",
+			"name": "Save-Sync",
+			"summary": "VS Code Extension to save your project at working save points.",
+			"status": "Maintenance",
+			"category": "VS Code Extension",
+			"featured": false,
+			"technologies": [
+				"TypeScript",
+				"VS-Code-API",
+				"Node.js"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Save-Sync",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "signlanguagedetector",
+			"name": "SignLanguageDetector",
+			"summary": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
+			"status": "Completed",
+			"category": "AI/ML",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Flask",
+				"MediaPipe",
+				"OpenCV",
+				"scikit-learn",
+				"NumPy",
+				"JavaScript"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/SignLanguageDetector",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "the-pensive-index",
+			"name": "the-pensive-index",
+			"summary": "Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.",
+			"status": "Active Development",
+			"category": "Full Stack",
+			"featured": false,
+			"technologies": [
+				"TypeScript",
+				"Next.js",
+				"Cloudflare-D1",
+				"Drizzle-ORM",
+				"Cloudflare-Pages"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/the-pensive-index",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "toxicguard-ai",
+			"name": "ToxicGuard_AI",
+			"summary": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
+			"status": "Active Development",
+			"category": "Browser Extension",
+			"featured": false,
+			"technologies": [
+				"HTML",
+				"JavaScript",
+				"TensorFlow.js",
+				"Browser-Extension",
+				"NLP"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/ToxicGuard_AI",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "youtube-keystrokes-blocker",
+			"name": "Youtube-Keystrokes-Blocker",
+			"summary": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
+			"status": "Active Development",
+			"category": "Browser Extension",
+			"featured": false,
+			"technologies": [
+				"JavaScript",
+				"Userscript",
+				"Browser-API"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Youtube-Keystrokes-Blocker",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "zipcracker",
+			"name": "zipCracker",
+			"summary": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
+			"status": "Completed",
+			"category": "Security Tool",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"Multithreading",
+				"CLI",
+				"Archive-Processing"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/zipCracker",
+			"source": "settings",
+			"depth": 4
+		},
+		{
+			"slug": "drderma",
+			"name": "DrDerma",
+			"summary": "Dermatology diagnosis and skin condition assessment tool using machine learning.",
+			"status": "Completed",
+			"category": "AI/ML",
+			"featured": false,
+			"technologies": [
+				"PureBasic",
+				"Machine-Learning"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/DrDerma",
+			"source": "settings",
+			"depth": 3
+		}
+	]
+}

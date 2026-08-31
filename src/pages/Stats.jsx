@@ -82,7 +82,7 @@ function StatsSkeleton() {
 
 				{/* Stat cards */}
 				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-					{Array.from({ length: 8 }).map((_, i) => (
+					{Array.from({ length: 12 }).map((_, i) => (
 						<SkeletonCard key={i} className="h-24" />
 					))}
 				</div>
@@ -94,6 +94,10 @@ function StatsSkeleton() {
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 					<SkeletonCard className="h-56 md:col-span-2" />
 					<SkeletonCard className="h-56" />
+				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<SkeletonCard className="h-48" />
+					<SkeletonCard className="h-48" />
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<SkeletonCard className="h-64" />
@@ -297,6 +301,75 @@ function BarList({ entries, barColor = "bg-cyan-500/70", delayBase = 0.5 }) {
 	)
 }
 
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+// Which days of the week the work actually happens on. Same shape as the
+// velocity chart — pixel heights, because the columns are content-sized.
+function WeekdayRhythm({ byWeekday }) {
+	const max = Math.max(1, ...byWeekday)
+	const total = byWeekday.reduce((a, b) => a + b, 0)
+	const BAR_AREA = 96
+	return (
+		<div className="flex items-end gap-2 h-32">
+			{byWeekday.map((count, i) => (
+				<div
+					key={WEEKDAYS[i]}
+					className="flex-1 flex flex-col justify-end items-center gap-1 min-w-0 group"
+					title={`${WEEKDAYS[i]}: ${count} solved (${total ? Math.round((count / total) * 100) : 0}%)`}
+				>
+					<span className="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">
+						{count}
+					</span>
+					<motion.div
+						className="w-full max-w-[30px] rounded-t bg-cyan-500/70"
+						initial={{ height: 0 }}
+						animate={{ height: count ? Math.max(3, (count / max) * BAR_AREA) : 0 }}
+						transition={{ duration: 0.5, delay: 0.45 + i * 0.04 }}
+					/>
+					<span className="text-[10px] text-slate-500">{WEEKDAYS[i][0]}</span>
+				</div>
+			))}
+		</div>
+	)
+}
+
+// 24 hourly columns, labelled every six hours so the axis stays readable.
+function TimeOfDay({ byHour }) {
+	const max = Math.max(1, ...byHour)
+	const BAR_AREA = 96
+	const peak = byHour.indexOf(max)
+	return (
+		<div className="space-y-2">
+			<div className="flex items-end gap-[3px] h-32">
+				{byHour.map((count, h) => (
+					<div
+						key={h}
+						className="flex-1 flex flex-col justify-end min-w-0"
+						title={`${String(h).padStart(2, "0")}:00 — ${count} solved`}
+					>
+						<motion.div
+							className="w-full rounded-t bg-purple-500/70"
+							initial={{ height: 0 }}
+							animate={{ height: count ? Math.max(2, (count / max) * BAR_AREA) : 0 }}
+							transition={{ duration: 0.5, delay: 0.45 + h * 0.015 }}
+						/>
+					</div>
+				))}
+			</div>
+			<div className="flex justify-between text-[10px] text-slate-500">
+				<span>00</span>
+				<span>06</span>
+				<span>12</span>
+				<span>18</span>
+				<span>23</span>
+			</div>
+			<p className="text-[11px] text-slate-500">
+				Peak hour: {String(peak).padStart(2, "0")}:00
+			</p>
+		</div>
+	)
+}
+
 const PLATFORM_LABELS = {
 	leetcode: "LeetCode",
 	geeksforgeeks: "GeeksForGeeks",
@@ -371,17 +444,26 @@ const Stats = () => {
 		activeDays,
 		avgPerActiveDay,
 		monthly,
+		byWeekday,
+		byHour,
+		firstSolve,
+		thisMonth,
+		lastMonth,
+		monthsTracked,
+		topicCount,
 		pagesUrl,
 	} = data
+
+	const totalSolved =
+		stats.total ?? (stats.easy ?? 0) + (stats.medium ?? 0) + (stats.hard ?? 0)
+	const monthDelta = thisMonth - lastMonth
 
 	const statCards = [
 		{
 			label: "Total Solved",
 			// stats.total includes solves with unknown difficulty, so it can
 			// exceed E+M+H — prefer it when present
-			value:
-				stats.total ??
-				(stats.easy ?? 0) + (stats.medium ?? 0) + (stats.hard ?? 0),
+			value: totalSolved,
 			sub: `${stats.easy ?? 0}E · ${stats.medium ?? 0}M · ${stats.hard ?? 0}H`,
 			accentColor: "#06b6d4",
 		},
@@ -423,6 +505,40 @@ const Stats = () => {
 			value: avgPerActiveDay.toFixed(1),
 			sub: "solves per active day",
 			accentColor: "#f472b6",
+		},
+		{
+			label: "This Month",
+			value: thisMonth,
+			sub:
+				monthDelta === 0
+					? `same as last month (${lastMonth})`
+					: `${monthDelta > 0 ? "▲" : "▼"} ${Math.abs(monthDelta)} vs last month`,
+			accentColor: monthDelta >= 0 ? "#34d399" : "#f87171",
+		},
+		{
+			label: "Hard Share",
+			value: totalSolved
+				? `${Math.round(((stats.hard ?? 0) / totalSolved) * 100)}%`
+				: "—",
+			sub: `${stats.hard ?? 0} hard problems`,
+			accentColor: "#f87171",
+		},
+		{
+			label: "Topics Covered",
+			value: topicCount ?? 0,
+			sub: "distinct problem tags",
+			accentColor: "#38bdf8",
+		},
+		{
+			label: "Solving Since",
+			value: firstSolve
+				? new Date(firstSolve).toLocaleDateString("en-US", {
+						month: "short",
+						year: "numeric",
+					})
+				: "—",
+			sub: monthsTracked ? `${monthsTracked} months tracked` : "",
+			accentColor: "#a78bfa",
 		},
 	]
 
@@ -535,6 +651,33 @@ const Stats = () => {
 							medium={stats.medium ?? 0}
 							hard={stats.hard ?? 0}
 						/>
+					</motion.div>
+				</div>
+
+				{/* Rhythm — when the work actually happens */}
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.42 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Weekly Rhythm
+						</span>
+						<WeekdayRhythm byWeekday={byWeekday || []} />
+					</motion.div>
+
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.45, delay: 0.44 }}
+						className="p-5 bg-white/[0.03] border border-white/[0.07] rounded-2xl"
+					>
+						<span className="text-xs font-bold text-slate-400 uppercase tracking-[0.15em] block mb-4">
+							Time of Day
+						</span>
+						<TimeOfDay byHour={byHour || []} />
 					</motion.div>
 				</div>
 

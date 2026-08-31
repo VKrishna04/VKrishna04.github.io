@@ -138,3 +138,6 @@ firebase.json
 
 # Netlify
 .netlify
+.devprune.json
+.devprune-ignore
+ignore.devprune.json

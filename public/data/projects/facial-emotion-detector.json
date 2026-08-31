@@ -1,0 +1,64 @@
+{
+	"slug": "facial-emotion-detector",
+	"name": "Facial-Emotion-Detector",
+	"tagline": "",
+	"summary": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
+	"status": "Completed",
+	"category": "AI/ML",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-06-01",
+		"end": "2025-08-23"
+	},
+	"technologies": [
+		"Python",
+		"OpenCV",
+		"MediaPipe",
+		"scikit-learn",
+		"NumPy",
+		"Flask"
+	],
+	"tags": [
+		"ai",
+		"computer-vision",
+		"emotion-detection",
+		"facial-landmarks",
+		"facial-recognition",
+		"human-computer-interaction",
+		"machine-learning",
+		"mediapipe",
+		"opencv",
+		"python",
+		"real-time-detection"
+	],
+	"highlights": [
+		"Real-time emotion classification from images and video",
+		"MediaPipe facial landmark extraction pipeline",
+		"Award-winning project at Tredence InfinityAI Hackathon",
+		"Custom ML model training support"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector",
+		"live": "",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 1,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/Facial-Emotion-Detector",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Facial-Emotion-Detector/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:35.729Z"
+}

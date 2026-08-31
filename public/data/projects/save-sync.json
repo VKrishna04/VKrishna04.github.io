@@ -1,0 +1,60 @@
+{
+	"slug": "save-sync",
+	"name": "Save-Sync",
+	"tagline": "",
+	"summary": "VS Code Extension to save your project at working save points.",
+	"status": "Maintenance",
+	"category": "VS Code Extension",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-08-01",
+		"end": null
+	},
+	"technologies": [
+		"TypeScript",
+		"VS-Code-API",
+		"Node.js"
+	],
+	"tags": [
+		"backup",
+		"checkpoint",
+		"developer-tools",
+		"productivity",
+		"restore",
+		"save-state",
+		"timeline",
+		"typescript",
+		"vscode",
+		"vscode-extension"
+	],
+	"highlights": [
+		"Save project state at meaningful working checkpoints",
+		"Restore workspace to any previous save point",
+		"Timeline view of project save history",
+		"Integrates seamlessly with VS Code workflow"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/Save-Sync",
+		"live": "http://save-sync.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/Save-Sync#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 1,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/Save-Sync",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Save-Sync/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:33.544Z"
+}

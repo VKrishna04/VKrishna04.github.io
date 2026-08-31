@@ -23,6 +23,8 @@
  * in-flight/settled promise serves every consumer.
  */
 
+import { resolveDerivedValues } from "./awards.js"
+
 let settingsPromise = null
 
 export function fetchSettings() {
@@ -32,6 +34,10 @@ export function fetchSettings() {
 				if (!res.ok) throw new Error(`settings.json HTTP ${res.status}`)
 				return res.json()
 			})
+			// Every consumer goes through here, so {{prizeTotal}} is resolved
+			// once for the whole app — including the prerenderer, which runs
+			// the real app and so bakes the computed figure into the HTML.
+			.then(resolveDerivedValues)
 			.catch((err) => {
 				// don't cache a failure — the next caller retries
 				settingsPromise = null

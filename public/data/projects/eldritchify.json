@@ -1,0 +1,62 @@
+{
+	"slug": "eldritchify",
+	"name": "Eldritchify",
+	"tagline": "",
+	"summary": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
+	"status": "Live",
+	"category": "Web Tool",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-09-01",
+		"end": null
+	},
+	"technologies": [
+		"HTML",
+		"JavaScript",
+		"CSS",
+		"Unicode"
+	],
+	"tags": [
+		"cosmic-horror",
+		"cthulhu",
+		"eldritch",
+		"horror",
+		"javascript",
+		"lovecraft",
+		"text-corruption",
+		"text-generator",
+		"unicode",
+		"web-tools",
+		"zalgo"
+	],
+	"highlights": [
+		"Cosmic horror-themed Zalgo text corruption",
+		"Unicode combining characters for text effects",
+		"Multiple intensity levels from whisper to pure chaos",
+		"Reverse purification to clean corrupted text"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/Eldritchify",
+		"live": "https://eldritchify.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/Eldritchify#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/Eldritchify",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Eldritchify/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:33.817Z"
+}

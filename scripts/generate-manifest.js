@@ -16,6 +16,7 @@
 
 import { readFileSync, writeFileSync } from "fs"
 import { parse } from "jsonc-parser"
+import { resolveDerivedValues } from "../src/utils/awards.js"
 
 /**
  * Generate PWA manifest.json from settings.json
@@ -23,7 +24,7 @@ import { parse } from "jsonc-parser"
 try {
 	console.log("Reading settings.json for manifest generation...")
 	const content = readFileSync("public/settings.json", "utf-8")
-	const settings = parse(content)
+	const settings = resolveDerivedValues(parse(content))
 
 	if (settings.seo) {
 		const seo = settings.seo

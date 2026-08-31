@@ -1,0 +1,71 @@
+{
+	"slug": "zipcracker",
+	"name": "zipCracker",
+	"tagline": "",
+	"summary": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
+	"status": "Completed",
+	"category": "Security Tool",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2024-12-01",
+		"end": "2025-03-12"
+	},
+	"technologies": [
+		"Python",
+		"Multithreading",
+		"CLI",
+		"Archive-Processing"
+	],
+	"tags": [
+		"archive-extraction",
+		"archive-password-recovery",
+		"brute-force",
+		"command-line-tool",
+		"cross-platform",
+		"cybersecurity-education",
+		"data-recovery",
+		"dictionary-attack",
+		"ethical-hacking",
+		"file-processing",
+		"file-security",
+		"memory-efficient",
+		"multi-format-support",
+		"multithreading",
+		"password-analysis",
+		"password-cracking",
+		"password-dictionary",
+		"performance-optimization",
+		"python",
+		"zip-cracker"
+	],
+	"highlights": [
+		"Multi-format support: ZIP, RAR, 7Z, and TAR archives",
+		"Dictionary attack and brute force recovery methods",
+		"Concurrent processing for performance",
+		"Memory-efficient cross-platform implementation"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/zipCracker",
+		"live": "",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/zipCracker#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/zipCracker",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/zipCracker/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:37.681Z"
+}

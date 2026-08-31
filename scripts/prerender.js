@@ -34,8 +34,21 @@ import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DIST = path.resolve(__dirname, "..", "dist")
-const ROUTES = ["/", "/about", "/projects", "/resume", "/stats", "/contact"]
+const STATIC_ROUTES = ["/", "/about", "/projects", "/resume", "/stats", "/contact"]
 const PORT = 41730
+
+// Every generated project page is a real URL and needs real HTML. Read the
+// index the manifest step wrote rather than hard-coding a list that drifts.
+function projectRoutes() {
+	const indexFile = path.join(DIST, "data", "projects", "index.json")
+	if (!fs.existsSync(indexFile)) return []
+	try {
+		const { projects = [] } = JSON.parse(fs.readFileSync(indexFile, "utf8"))
+		return projects.map((p) => `/projects/${p.slug}`)
+	} catch {
+		return []
+	}
+}
 
 const MIME = {
 	".html": "text/html",
@@ -82,6 +95,30 @@ function startServer() {
 	return new Promise((resolve) => server.listen(PORT, () => resolve(server)))
 }
 
+// Text that only ever appears while a route is still waiting on data.
+// If any of these survive the settle window the HTML is not publishable.
+const LOADING_MARKERS = ["Loading projects", "Loading..."]
+const SETTLE_MS = 15000
+
+// A skeleton has plenty of markup and no words. /stats used to pass the
+// innerHTML length check with zero readable text, so measure what a crawler
+// would actually index.
+const MIN_TEXT_CHARS = 400
+
+// Resolves true once no loading marker is present, false if one persists.
+async function waitForContent(page) {
+	const deadline = Date.now() + SETTLE_MS
+	for (;;) {
+		const stillLoading = await page.evaluate((markers) => {
+			const text = document.getElementById("root")?.innerText || ""
+			return markers.some((m) => text.includes(m))
+		}, LOADING_MARKERS)
+		if (!stillLoading) return true
+		if (Date.now() > deadline) return false
+		await new Promise((r) => setTimeout(r, 500))
+	}
+}
+
 async function main() {
 	if (!fs.existsSync(path.join(DIST, "index.html"))) {
 		console.error("❌ dist/index.html not found — run the build first")
@@ -109,11 +146,12 @@ async function main() {
 		return
 	}
 
+	const routes = [...STATIC_ROUTES, ...projectRoutes()]
 	let written = 0
 	try {
 		const page = await browser.newPage()
 		await page.setViewport({ width: 1280, height: 900 })
-		for (const route of ROUTES) {
+		for (const route of routes) {
 			try {
 				await page.goto(`http://localhost:${PORT}${route}`, {
 					waitUntil: "networkidle2",
@@ -125,11 +163,29 @@ async function main() {
 			// let late effects (titles, canonical, async content) flush
 			await new Promise((r) => setTimeout(r, 1000))
 
-			const rootLength = await page.evaluate(
-				() => document.getElementById("root")?.innerHTML.length || 0
-			)
-			if (rootLength < 500) {
-				console.warn(`⚠️ ${route}: rendered almost nothing (${rootLength} chars) — skipped`)
+			// Poll until the route has settled out of every loading state. A
+			// route whose data comes from a remote API can still be on its
+			// spinner when networkidle2 resolves, and writing that HTML ships
+			// a permanently-"Loading..." page to crawlers.
+			const settled = await waitForContent(page)
+			if (!settled) {
+				console.warn(`⚠️ ${route}: still showing a loading state after ${SETTLE_MS}ms — skipped (SPA fallback serves this route)`)
+				continue
+			}
+
+			const { markup, text } = await page.evaluate(() => {
+				const root = document.getElementById("root")
+				return {
+					markup: root?.innerHTML.length || 0,
+					text: (root?.innerText || "").replace(/\s+/g, " ").trim().length,
+				}
+			})
+			if (markup < 500) {
+				console.warn(`⚠️ ${route}: rendered almost nothing (${markup} chars) — skipped`)
+				continue
+			}
+			if (text < MIN_TEXT_CHARS) {
+				console.warn(`⚠️ ${route}: only ${text} chars of readable text — skipped (skeleton, not content)`)
 				continue
 			}
 
@@ -148,7 +204,7 @@ async function main() {
 		server.close()
 	}
 
-	console.log(`✅ Prerender complete: ${written}/${ROUTES.length} routes`)
+	console.log(`✅ Prerender complete: ${written}/${routes.length} routes`)
 }
 
 main().catch((err) => {

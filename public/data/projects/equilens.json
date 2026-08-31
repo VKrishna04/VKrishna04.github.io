@@ -1,0 +1,62 @@
+{
+	"slug": "equilens",
+	"name": "EquiLens",
+	"tagline": "",
+	"summary": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
+	"status": "Active Development",
+	"category": "AI/ML",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-07-01",
+		"end": null
+	},
+	"technologies": [
+		"Python",
+		"Ollama",
+		"Rich-CLI",
+		"Statistical-Analysis",
+		"uv"
+	],
+	"tags": [
+		"ai-bias-detection",
+		"ai-ethics",
+		"ai-research-tools",
+		"bias-measurement",
+		"llm-auditing",
+		"ollama-integration",
+		"rich-cli",
+		"statistical-analysis",
+		"uv-python"
+	],
+	"highlights": [
+		"Multi-metric bias detection across demographics",
+		"Interactive CLI with rich progress tracking",
+		"Corpus generation and statistical analysis",
+		"Supports multiple LLM providers via Ollama",
+		"Resume capability for long-running audits"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/EquiLens",
+		"live": "https://equilens.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/EquiLens#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 2,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/EquiLens",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/EquiLens/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:33.268Z"
+}

@@ -1,0 +1,66 @@
+{
+	"slug": "signlanguagedetector",
+	"name": "SignLanguageDetector",
+	"tagline": "",
+	"summary": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
+	"status": "Completed",
+	"category": "AI/ML",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-04-01",
+		"end": "2025-07-09"
+	},
+	"technologies": [
+		"Python",
+		"Flask",
+		"MediaPipe",
+		"OpenCV",
+		"scikit-learn",
+		"NumPy",
+		"JavaScript"
+	],
+	"tags": [
+		"computer-vision",
+		"flask",
+		"gesture-recognition",
+		"hand-tracking",
+		"indian-sign-language",
+		"machine-learning",
+		"mediapipe-hands",
+		"opencv",
+		"python",
+		"real-time-detection",
+		"sign-language",
+		"web-application"
+	],
+	"highlights": [
+		"Real-time Indian Sign Language recognition system",
+		"98% accuracy with custom ML classifier",
+		"Interactive Flask web interface for live inference",
+		"MediaPipe hand tracking for precise detection"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/SignLanguageDetector",
+		"live": "",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/SignLanguageDetector#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/SignLanguageDetector",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/SignLanguageDetector/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:36.265Z"
+}

@@ -17,6 +17,7 @@
 import { useEffect, useState } from "react"
  
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import {
 	StarIcon,
 	CodeBracketIcon,
@@ -24,6 +25,7 @@ import {
 	ArrowTopRightOnSquareIcon,
 	EyeIcon,
 	ExclamationTriangleIcon,
+	DocumentTextIcon,
 } from "@heroicons/react/24/outline"
 import { parseColor, applyOpacity } from "../utils/themeUtils"
 import {
@@ -96,6 +98,7 @@ const ProjectCard = ({
 	showSocialImage = true,
 	socialPreviewConfig = {},
 	dsaStats = null,
+	detailSlug = null,
 }) => {
 	// Animation variants
 	const cardVariants = {
@@ -872,6 +875,18 @@ const ProjectCard = ({
 
 				{/* Action Buttons */}
 				<div className="flex space-x-3 mt-auto">
+					{/* Detail page — a real internal link so the project page is
+					    reachable by crawlers, not only by typing the URL */}
+					{detailSlug && (
+						<Link
+							to={`/projects/${detailSlug}`}
+							className="flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium hover:scale-105 flex-1 justify-center border border-white/15 text-gray-200 hover:bg-white/10"
+						>
+							<DocumentTextIcon className="w-4 h-4" />
+							<span>Details</span>
+						</Link>
+					)}
+
 					{/* GitHub Code Button - Always show for GitHub projects */}
 					{(project.html_url || project.githubUrl || project.name) && (
 						<a

@@ -1,0 +1,67 @@
+{
+	"slug": "vkrishna04-github-io",
+	"name": "Krishna GSVV Portfolio",
+	"tagline": "",
+	"summary": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
+	"status": "Live",
+	"category": "Full Stack",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-10-01",
+		"end": null
+	},
+	"technologies": [
+		"React",
+		"Vite",
+		"TailwindCSS",
+		"FramerMotion",
+		"JavaScript",
+		"ReactRouter",
+		"ReactIcons",
+		"JSONSchema"
+	],
+	"tags": [
+		"portfolio",
+		"personal-website",
+		"react",
+		"vite",
+		"tailwindcss",
+		"framer-motion",
+		"responsive-design",
+		"github-api",
+		"configuration-driven",
+		"modern-ui",
+		"animation"
+	],
+	"highlights": [
+		"Fully responsive design with mobile-first approach",
+		"Dynamic GitHub repository integration with real-time fetching",
+		"Comprehensive configuration system - no code changes needed",
+		"Beautiful animations powered by Framer Motion",
+		"JSON Schema support for IntelliSense in VS Code"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/VKrishna04/VKrishna04.github.io",
+		"live": "https://vkrishna04.me",
+		"demo": "https://vkrishna04.github.io",
+		"docs": "https://github.com/VKrishna04/VKrishna04.github.io#readme"
+	},
+	"media": {
+		"cover": "https://opengraph.githubassets.com/2/VKrishna04/VKrishna04.github.io",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 2,
+		"forks": 1,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "VKrishna04/VKrishna04.github.io",
+	"manifestUrl": "https://raw.githubusercontent.com/VKrishna04/VKrishna04.github.io/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:32.116Z"
+}

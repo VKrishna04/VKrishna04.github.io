@@ -1,0 +1,62 @@
+{
+	"slug": "cspell-sync",
+	"name": "cspell-sync",
+	"tagline": "",
+	"summary": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
+	"status": "Maintenance",
+	"category": "VS Code Extension",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2024-06-01",
+		"end": null
+	},
+	"technologies": [
+		"TypeScript",
+		"VS-Code-API",
+		"Node.js",
+		"JSON"
+	],
+	"tags": [
+		"automation",
+		"code-spellchecker",
+		"cspell",
+		"developer-tools",
+		"extension",
+		"nodejs",
+		"open-source",
+		"typescript",
+		"visual-studio-code",
+		"vscode-extension",
+		"vscode-marketplace"
+	],
+	"highlights": [
+		"2,100+ downloads on VS Code Marketplace",
+		"Bidirectional cSpell dictionary synchronization",
+		"Keyboard shortcuts and status bar integration",
+		"Supports custom dictionaries and project settings"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/cspell-sync",
+		"live": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/cspell-sync#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 3,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/cspell-sync",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/cspell-sync/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:34.916Z"
+}

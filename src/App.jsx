@@ -31,11 +31,13 @@ import FaviconManager from "./components/FaviconManager"
 import PrivacyNotice from "./components/PrivacyNotice"
 import { trackPortfolioView } from "./utils/cflairCounter"
 import { fetchSettings } from "./utils/settingsCache"
+import { applyPageMeta } from "./utils/pageMeta"
 import "./App.css"
 
 // Route-split the heavier pages; Home stays eager so first paint is instant
 const About = lazy(() => import("./pages/About"))
 const Projects = lazy(() => import("./pages/Projects"))
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"))
 const Resume = lazy(() => import("./pages/Resume"))
 const Stats = lazy(() => import("./pages/Stats"))
 const Contact = lazy(() => import("./pages/Contact"))
@@ -47,6 +49,38 @@ const RouteFallback = () => (
 )
 
 // Custom hook for managing page titles and favicon
+// Per-route descriptions. Each routed page needs its own or it competes
+// with the homepage for the same snippet in search results.
+const PAGE_DESCRIPTIONS = {
+	"/about": "Background, skills, education and achievements of Krishna GSVV — CS engineer, IEEE-published author and national hackathon winner.",
+	"/projects": "Open-source projects by Krishna GSVV — AI/ML pipelines, VS Code extensions, browser extensions, blockchain tools and developer utilities, with source and live demos.",
+	"/resume": "Resume of Krishna GSVV — experience, education, skills, awards, certifications and publications. Downloadable as PDF.",
+	"/stats": "Data structures and algorithms practice statistics for Krishna GSVV — solved counts by difficulty, streaks and activity over time.",
+	"/contact": "Get in touch with Krishna GSVV — professional profiles, email and availability.",
+}
+
+const JSONLD_TYPES = {
+	"/about": "AboutPage",
+	"/projects": "CollectionPage",
+	"/resume": "ProfilePage",
+	"/stats": "WebPage",
+	"/contact": "ContactPage",
+}
+
+const routeJsonLd = (pathname, url, title, description, authorName) => {
+	// The homepage already carries the site-wide Person block.
+	if (pathname === "/") return null
+	return {
+		"@context": "https://schema.org",
+		"@type": JSONLD_TYPES[pathname] || "WebPage",
+		name: title,
+		description,
+		url,
+		isPartOf: { "@type": "WebSite", name: authorName, url: new URL(url).origin },
+		about: { "@type": "Person", name: authorName },
+	}
+}
+
 const usePageConfiguration = (location) => {
 	const [settings, setSettings] = useState({})
 	const hasTrackedPortfolioView = useRef(false)
@@ -75,6 +109,10 @@ const usePageConfiguration = (location) => {
 		// the build-time title forever.
 		if (!Object.keys(settings).length) return
 
+		// /projects/<slug> owns its own title, description and structured data
+		// — it has the project record, this effect only has the URL.
+		if (/^\/projects\/[^/]+/.test(location.pathname)) return
+
 		const baseName =
 			settings.display?.officialName || settings.seo?.author || "Portfolio"
 
@@ -91,20 +129,36 @@ const usePageConfiguration = (location) => {
 			return titles[location.pathname] || `${baseName} - Portfolio`
 		}
 
-		document.title = getPageTitle()
+		const title = getPageTitle()
 
 		// Per-route canonical — a single hard-coded homepage canonical makes
 		// every other route deduplicate itself out of the index
 		const canonicalBase = (
 			settings.seo?.canonical || "https://vkrishna04.me/"
 		).replace(/\/$/, "")
-		const canonicalLink = document.querySelector('link[rel="canonical"]')
-		if (canonicalLink) {
-			canonicalLink.href =
-				location.pathname === "/"
-					? `${canonicalBase}/`
-					: `${canonicalBase}${location.pathname}`
-		}
+		const canonicalUrl =
+			location.pathname === "/"
+				? `${canonicalBase}/`
+				: `${canonicalBase}${location.pathname}`
+
+		// Per-route description + social cards. Without these every route
+		// shares the homepage card, so a link to /projects previews as the
+		// homepage and ranks against it for the same terms.
+		const description =
+			PAGE_DESCRIPTIONS[location.pathname] || settings.seo?.description || ""
+
+		applyPageMeta({
+			title,
+			description,
+			url: canonicalUrl,
+			jsonLd: routeJsonLd(
+				location.pathname,
+				canonicalUrl,
+				title,
+				description,
+				baseName
+			),
+		})
 	}, [location.pathname, settings])
 
 	return settings
@@ -131,6 +185,7 @@ const AppContent = memo(() => {
 						<Route path="/" element={<Home />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/projects" element={<Projects />} />
+						<Route path="/projects/:slug" element={<ProjectDetail />} />
 						<Route path="/resume" element={<Resume />} />
 						<Route path="/stats" element={<Stats />} />
 						<Route path="/contact" element={<Contact />} />

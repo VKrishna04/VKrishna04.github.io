@@ -1,0 +1,188 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://vkrishna04.me/schemas/project-manifest.schema.json",
+	"title": "Portfolio Project Manifest",
+	"description": "Contents of .portfolio/project.json in a project repository. The portfolio at vkrishna04.me fetches this file at build time and renders it as https://vkrishna04.me/projects/<slug>. Every field is optional; anything omitted falls back to the entry already in the portfolio's settings.json.",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"$schema": {
+			"type": "string",
+			"description": "Editor hint. Set to this schema URL for autocomplete."
+		},
+		"manifestVersion": {
+			"type": "integer",
+			"enum": [1],
+			"description": "Manifest format version. Currently always 1."
+		},
+		"slug": {
+			"type": "string",
+			"pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+			"maxLength": 60,
+			"description": "URL segment for the project page. Defaults to the repository name, lowercased. Changing this after the page is indexed loses its search ranking — pick once."
+		},
+		"name": { "type": "string", "maxLength": 80 },
+		"tagline": {
+			"type": "string",
+			"maxLength": 120,
+			"description": "One line under the title. Not a sentence — a label."
+		},
+		"summary": {
+			"type": "string",
+			"maxLength": 400,
+			"description": "Two or three sentences. Used as the page meta description, so lead with what the project does, not with why it was built."
+		},
+		"status": {
+			"type": "string",
+			"enum": ["active", "maintained", "archived", "experimental", "complete"]
+		},
+		"category": { "type": "string", "maxLength": 60 },
+		"role": {
+			"type": "string",
+			"maxLength": 120,
+			"description": "What you did on it, if the repo is not solo work."
+		},
+		"period": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"start": { "type": "string", "description": "YYYY-MM or YYYY-MM-DD" },
+				"end": {
+					"type": ["string", "null"],
+					"description": "YYYY-MM, YYYY-MM-DD, or null while ongoing"
+				}
+			}
+		},
+		"technologies": {
+			"type": "array",
+			"items": { "type": "string", "maxLength": 40 },
+			"maxItems": 30
+		},
+		"tags": {
+			"type": "array",
+			"items": { "type": "string", "maxLength": 40 },
+			"maxItems": 20
+		},
+		"highlights": {
+			"type": "array",
+			"maxItems": 10,
+			"items": { "type": "string", "maxLength": 200 },
+			"description": "Bullet points. Concrete outcomes beat adjectives."
+		},
+		"metrics": {
+			"type": "array",
+			"maxItems": 8,
+			"description": "Numbers worth putting on a card. Both fields are required or the entry is dropped at build time.",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["label", "value"],
+				"properties": {
+					"label": { "type": "string", "maxLength": 40 },
+					"value": { "type": "string", "maxLength": 30 },
+					"detail": { "type": "string", "maxLength": 120 }
+				}
+			}
+		},
+		"links": {
+			"type": "object",
+			"additionalProperties": false,
+			"description": "Only http(s) URLs are rendered; anything else is dropped by the page.",
+			"properties": {
+				"repo": { "type": "string", "format": "uri" },
+				"live": { "type": "string", "format": "uri" },
+				"demo": { "type": "string", "format": "uri" },
+				"docs": { "type": "string", "format": "uri" },
+				"paper": { "type": "string", "format": "uri" },
+				"package": { "type": "string", "format": "uri" }
+			}
+		},
+		"media": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"cover": {
+					"type": "string",
+					"format": "uri",
+					"description": "Absolute URL. Relative repo paths do not resolve — the page is served from vkrishna04.me, not from the repo."
+				},
+				"screenshots": {
+					"type": "array",
+					"maxItems": 8,
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"required": ["url"],
+						"properties": {
+							"url": { "type": "string", "format": "uri" },
+							"alt": { "type": "string", "maxLength": 160 },
+							"caption": { "type": "string", "maxLength": 200 }
+						}
+					}
+				}
+			}
+		},
+		"sections": {
+			"type": "array",
+			"maxItems": 20,
+			"description": "The body of the page, in order. A section whose type is not in the enum is dropped at build time rather than rendered.",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["type"],
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": ["prose", "list", "code", "table", "media"]
+					},
+					"heading": { "type": "string", "maxLength": 80 },
+					"body": {
+						"type": "string",
+						"maxLength": 4000,
+						"description": "prose: plain text paragraphs separated by a blank line (Markdown is not parsed). code: the snippet itself, rendered verbatim without syntax highlighting."
+					},
+					"items": {
+						"type": "array",
+						"maxItems": 30,
+						"items": { "type": "string", "maxLength": 300 },
+						"description": "list: bullet points."
+					},
+					"columns": {
+						"type": "array",
+						"maxItems": 6,
+						"items": { "type": "string", "maxLength": 40 }
+					},
+					"rows": {
+						"type": "array",
+						"maxItems": 30,
+						"items": {
+							"type": "array",
+							"items": { "type": "string", "maxLength": 160 }
+						}
+					},
+					"url": {
+						"type": "string",
+						"format": "uri",
+						"description": "media: absolute http(s) URL of one image. Anything else is dropped."
+					},
+					"alt": { "type": "string", "maxLength": 160 },
+					"caption": { "type": "string", "maxLength": 200 }
+				}
+			}
+		},
+		"seo": {
+			"type": "object",
+			"additionalProperties": false,
+			"description": "Overrides for the page head. Leave unset unless the summary makes a bad meta description.",
+			"properties": {
+				"title": { "type": "string", "maxLength": 70 },
+				"description": { "type": "string", "maxLength": 160 },
+				"image": {
+					"type": "string",
+					"format": "uri",
+					"description": "Social card image. Overrides media.cover for og:image only."
+				}
+			}
+		}
+	}
+}

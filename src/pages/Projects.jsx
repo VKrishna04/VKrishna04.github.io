@@ -189,6 +189,42 @@ const Projects = () => {
 	})
 	const [currentColumns, setCurrentColumns] = useState(1)
 	const masonryContainerRef = React.useRef(null)
+	// Slug lookup for the generated /projects/<slug> detail pages. Reading the
+	// build-time index (rather than guessing) means a card only ever links to a
+	// page that actually exists, and repo-chosen custom slugs are honoured.
+	const [detailSlugs, setDetailSlugs] = useState({})
+	useEffect(() => {
+		fetch("/data/projects/index.json")
+			.then((res) => (res.ok ? res.json() : null))
+			.then((data) => {
+				if (!data?.projects) return
+				const map = {}
+				for (const p of data.projects) {
+					if (p.repo) map[p.repo.toLowerCase()] = p.slug
+					map[p.slug] = p.slug
+				}
+				setDetailSlugs(map)
+			})
+			.catch(() => {
+				/* no detail links is a fine degradation */
+			})
+	}, [])
+
+	const detailSlugFor = (repo) => {
+		const match = /github\.com\/([^/]+)\/([^/#?]+)/.exec(
+			repo.html_url || repo.githubUrl || ""
+		)
+		if (match) {
+			const key = `${match[1]}/${match[2].replace(/\.git$/, "")}`.toLowerCase()
+			if (detailSlugs[key]) return detailSlugs[key]
+		}
+		const guess = String(repo.name || "")
+			.replace(/[_\s.]+/g, "-")
+			.toLowerCase()
+			.replace(/[^a-z0-9-]/g, "")
+		return detailSlugs[guess] || null
+	}
+
 	const [copied, setCopied] = useState(false)
 	const [copyError, setCopyError] = useState(false)
 	const [copyDropdownOpen, setCopyDropdownOpen] = useState(false)
@@ -985,10 +1021,6 @@ const Projects = () => {
 					<div className="text-center">
 						<div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-purple-500 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
 						<p className="mt-4 text-gray-300">Loading projects...</p>
-						<p className="mt-2 text-sm text-gray-500">
-							Debug: Loading={loading.toString()}, Error={error?.toString()},
-							ProjectsLength={projectsData?.length || 0}
-						</p>
 					</div>
 				</div>
 			</div>
@@ -1360,6 +1392,7 @@ const Projects = () => {
 											showSocialImage={settings?.projects?.showSocialImage}
 											socialPreviewConfig={settings?.projects?.socialPreview}
 											dsaStats={repo.codeLedgerProject ? dsaData : null}
+										detailSlug={detailSlugFor(repo)}
 										/>
 									</div>
 								</motion.div>

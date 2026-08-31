@@ -1,0 +1,57 @@
+{
+	"slug": "breachcheck",
+	"name": "BreachCheck",
+	"tagline": "",
+	"summary": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
+	"status": "Live",
+	"category": "Security",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-03-01",
+		"end": null
+	},
+	"technologies": [
+		"Python",
+		"Streamlit",
+		"REST-API",
+		"HIBP-API"
+	],
+	"tags": [
+		"breach-check",
+		"email-phishing",
+		"password-safety",
+		"pure-python",
+		"streamlit",
+		"unsplash-api"
+	],
+	"highlights": [
+		"Check emails and passwords against known breach databases",
+		"Leverages breach database aggregator APIs",
+		"Privacy-conscious user exposure assessment",
+		"Simple Streamlit interface for accessibility"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/BreachCheck",
+		"live": "https://breachcheck-sagittarius.streamlit.app/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/BreachCheck#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 2,
+		"forks": 1,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/BreachCheck",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/BreachCheck/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:37.143Z"
+}

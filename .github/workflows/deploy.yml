@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  # Data sources (GitHub API, CodeLedger) refresh at most daily, so a nightly
+  # rebuild keeps the prerendered HTML current without a server.
+  schedule:
+    - cron: "0 3 * * *"
 
 permissions:
   contents: write # auto-heal commits (audit fix, lint --fix, lockfile sync)
@@ -66,10 +70,11 @@ jobs:
           node scripts/validate-json.js public/settings.json
           node scripts/validate-json.js public/settings.schema.json
 
+      # No VITE_RESUME_LINK here on purpose: that env var overrides
+      # settings.json in Resume.jsx, so a stale secret silently beat every
+      # edit to the resume link. settings.json is the single source of truth.
       - name: Build project
         run: npm run build
-        env:
-          VITE_RESUME_LINK: ${{ secrets.VITE_RESUME_LINK }}
 
       # The Cloudflare Workers git build cannot launch Chromium, so its
       # deploys are SPA-only (prerender skips itself there). When a

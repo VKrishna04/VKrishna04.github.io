@@ -1,0 +1,64 @@
+{
+	"slug": "actionscounter",
+	"name": "ActionsCounter",
+	"tagline": "",
+	"summary": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
+	"status": "Active Development",
+	"category": "DevOps",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2025-04-01",
+		"end": null
+	},
+	"technologies": [
+		"TypeScript",
+		"GitHub-Actions",
+		"GitHub-API",
+		"Webhooks"
+	],
+	"tags": [
+		"analytics",
+		"automation",
+		"ci-cd",
+		"dashboard",
+		"deployment-tracking",
+		"developer-tools",
+		"devops",
+		"github-actions",
+		"github-api",
+		"monitoring",
+		"typescript",
+		"webhooks",
+		"workflow-tracking"
+	],
+	"highlights": [
+		"GitHub Actions workflow analytics and tracking",
+		"CI/CD deployment monitoring dashboard",
+		"Webhook integration for real-time updates",
+		"TypeScript-powered with GitHub API"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/ActionsCounter",
+		"live": "https://life-experimentalist.github.io/ActionsCounter/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/ActionsCounter#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": []
+	},
+	"sections": [],
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/ActionsCounter",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/ActionsCounter/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-08-30T20:11:35.989Z"
+}
