@@ -27,6 +27,7 @@ import { motion } from "framer-motion";
 // === MODULAR SYSTEMS: Use unified icon system ===
 import { UnifiedIcon } from "../components/UnifiedIcon";
 import { fetchSettings } from "../utils/settingsCache";
+import { getOwnerName, getGitHubUsername } from "../utils/identity";
 // ================================================
 
 const Navbar = () => {
@@ -66,26 +67,26 @@ const Navbar = () => {
 
 	const getLogoContent = () => {
 		const logoConfig = settings.navbar?.logo;
-		if (!logoConfig) return { text: "VK", name: "Krishna GSVV" };
+		if (!logoConfig) return { text: "", name: getOwnerName(settings) };
 
 		switch (logoConfig.type) {
 			case "text":
 				return {
 					text: logoConfig.text || "VK",
 					name:
-						logoConfig.name || settings.home?.name || "Krishna GSVV",
+						logoConfig.name || getOwnerName(settings),
 				};
 			case "image":
 				return {
 					imageUrl: logoConfig.customImageUrl,
-					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
+					name: logoConfig.name || getOwnerName(settings),
 				};
 			case "github": {
 				// Use the GitHub profile image URL
-				const githubUsername = logoConfig.githubUsername || settings.github?.username || "VKrishna04";
+				const githubUsername = logoConfig.githubUsername || getGitHubUsername(settings);
 				return {
 					imageUrl: `https://github.com/${githubUsername}.png`,
-					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
+					name: logoConfig.name || getOwnerName(settings),
 				};
 			}
 			case "auto": {
@@ -95,23 +96,23 @@ const Navbar = () => {
 
 				if (homeProfile?.type === "github") {
 					const username =
-						homeProfile.devUsername ||
-						settings.github?.username ||
-						"VKrishna04";
-					imageUrl = `https://github.com/${username}.png`;
+						homeProfile.devUsername || getGitHubUsername(settings);
+					imageUrl = username
+						? `https://github.com/${username}.png`
+						: "";
 				} else if (homeProfile?.type === "custom") {
 					imageUrl = homeProfile.customUrl;
 				}
 
 				return {
 					imageUrl,
-					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
+					name: logoConfig.name || getOwnerName(settings),
 				};
 			}
 			default:
 				return {
 					text: logoConfig.text || "VK",
-					name: logoConfig.name || settings.home?.name || "Krishna GSVV",
+					name: logoConfig.name || getOwnerName(settings),
 				};
 		}
 	};

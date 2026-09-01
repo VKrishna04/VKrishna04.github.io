@@ -17,7 +17,12 @@ const settingsPath = path.join(__dirname, "..", "public", "settings.json")
 const settings = resolveDerivedValues(
 	JSON.parse(fs.readFileSync(settingsPath, "utf8"))
 )
-const { home, about, github, projects } = settings
+const { home, about, github, projects, seo } = settings
+
+// The site's own address. Everything published under public/api and llms.txt is
+// absolute, so this cannot be a fixed domain: a fork would advertise the
+// upstream author's URLs as its own machine-readable endpoints.
+const SITE = (seo?.canonical || seo?.customDomain || "").replace(/\/$/, "")
 
 const OUT = path.join(__dirname, "..", "public", "api")
 fs.mkdirSync(OUT, { recursive: true })
@@ -60,7 +65,7 @@ const portfolio = {
   stats: about?.stats || [],
   contact: {
     github: `https://github.com/${github?.username || ""}`,
-    site: `https://vkrishna04.me`,
+    site: SITE,
   },
   projects: portfolioProjects,
 }
@@ -118,7 +123,7 @@ fs.writeFileSync(
     {
       generatedAt: new Date().toISOString(),
       github: `https://github.com/${github?.username || ""}`,
-      website: "https://vkrishna04.me",
+      website: SITE,
       links: buttons.map((b) => ({ label: b.text || b.label || "", url: b.href || b.url || "" })),
     },
     null,
@@ -142,10 +147,10 @@ ${portfolioProjects
   .join("\n")}
 
 ## Links
-- Portfolio: https://vkrishna04.me
+- Portfolio: ${SITE}
 - GitHub: https://github.com/${github?.username || ""}
-- Projects API: https://vkrishna04.me/api/projects.json
-- Full data: https://vkrishna04.me/api/portfolio.json
+- Projects API: ${SITE}/api/projects.json
+- Full data: ${SITE}/api/portfolio.json
 
 ## Machine-Readable Data
 All portfolio data available as JSON at build time:
@@ -169,7 +174,7 @@ fs.writeFileSync(
       description_for_model:
         "Provides structured portfolio data including projects, skills, bio, and contact information for AI agents.",
       auth: { type: "none" },
-      logo_url: "https://vkrishna04.me/favicon-96x96.png",
+      logo_url: SITE ? `${SITE}/favicon-96x96.png` : "",
       contact_email: "",
       legal_info_url: `https://github.com/${github?.username || ""}`,
     },

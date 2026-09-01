@@ -38,6 +38,7 @@ import {
 import { FaGithub } from "react-icons/fa"
 import { fetchSettings } from "../utils/settingsCache"
 import { getCachedIcon } from "../utils/iconSystemCore"
+import { getOwnerName } from "../utils/identity"
 
 const Resume = () => {
 	const [settings, setSettings] = useState({})
@@ -356,7 +357,7 @@ const Resume = () => {
 		const name =
 			settings?.seo?.structuredData?.name ||
 			settings?.about?.name ||
-			"Krishna GSVV"
+			getOwnerName(settings)
 		const date = new Date().toLocaleDateString("en-IN", {
 			year: "numeric",
 			month: "long",

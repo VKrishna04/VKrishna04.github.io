@@ -1,0 +1,243 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"description": "Navigation bar configuration and styling",
+	"additionalProperties": false,
+	"properties": {
+		"logo": {
+			"type": "object",
+			"description": "Logo configuration for the navigation bar with dynamic options",
+			"additionalProperties": false,
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": [
+						"text",
+						"image",
+						"github",
+						"auto"
+					],
+					"description": "Logo type:\n- 'text': Text-based logo with gradient styling\n- 'image': Custom image from customImageUrl\n- 'github': GitHub profile image with fallback to text\n- 'auto': Automatically match home page profileImage settings"
+				},
+				"text": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 20,
+					"description": "Text to display as logo (used for text type or as fallback)",
+					"examples": [
+						"VK",
+						"KG",
+						"Krishna"
+					]
+				},
+				"name": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 50,
+					"description": "Full name to display alongside logo",
+					"examples": [
+						"Krishna GSVV",
+						"John Doe"
+					]
+				},
+				"showName": {
+					"type": "boolean",
+					"description": "Whether to show the name on desktop",
+					"default": true
+				},
+				"showNameOnMobile": {
+					"type": "boolean",
+					"description": "Whether to show the name on mobile devices",
+					"default": false
+				},
+				"gradient": {
+					"type": "string",
+					"description": "Tailwind CSS gradient classes for text logo styling",
+					"examples": [
+						"from-primary-500 to-accent-500",
+						"from-blue-400 to-purple-600",
+						"from-purple-500 to-pink-500"
+					]
+				},
+				"customImageUrl": {
+					"$ref": "common.schema.json#/definitions/url",
+					"description": "Custom image URL (for image type) or GitHub profile image URL (for github type)",
+					"examples": [
+						"https://example.com/logo.png",
+						"https://github.com/VKrishna04.png",
+						""
+					]
+				},
+				"githubUsername": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 39,
+					"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+					"description": "GitHub username for fetching profile image (overrides projects.devUsername for navbar only)",
+					"examples": [
+						"VKrishna04",
+						"Life-Experimentalist"
+					]
+				},
+				"imageSize": {
+					"type": "string",
+					"pattern": "^w-[0-9]+ h-[0-9]+$",
+					"description": "Tailwind CSS size classes for image logo",
+					"examples": [
+						"w-8 h-8",
+						"w-10 h-10",
+						"w-6 h-6"
+					],
+					"default": "w-8 h-8"
+				},
+				"borderRadius": {
+					"type": "string",
+					"pattern": "^rounded(-[a-z]+)?$",
+					"description": "Tailwind CSS border radius class for image logo",
+					"examples": [
+						"rounded-full",
+						"rounded-lg",
+						"rounded",
+						"rounded-none"
+					],
+					"default": "rounded-full"
+				},
+				"note": {
+					"type": "string",
+					"description": "Documentation note for configuration guidance"
+				}
+			},
+			"required": [
+				"type"
+			]
+		},
+		"navigation": {
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 8,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 20,
+						"description": "Display name for the navigation item",
+						"examples": [
+							"Home",
+							"About",
+							"Projects"
+						]
+					},
+					"path": {
+						"type": "string",
+						"description": "URL path for the navigation item",
+						"examples": [
+							"/",
+							"/about",
+							"/projects",
+							"#contact"
+						]
+					}
+				},
+				"required": [
+					"name",
+					"path"
+				]
+			}
+		},
+		"styling": {
+			"type": "object",
+			"description": "Visual styling options for the navbar",
+			"additionalProperties": false,
+			"properties": {
+				"scrolledBg": {
+					"type": "string",
+					"description": "Tailwind CSS background classes for navbar when scrolled",
+					"examples": [
+						"bg-black/80 backdrop-blur-md border-b border-white/10",
+						"bg-white/90 backdrop-blur-md"
+					]
+				},
+				"transparentBg": {
+					"type": "string",
+					"description": "Tailwind CSS background classes for transparent navbar",
+					"examples": [
+						"bg-transparent",
+						"bg-gray-900/0"
+					]
+				},
+				"activeColor": {
+					"type": "string",
+					"description": "Tailwind CSS text color class for active navigation items",
+					"examples": [
+						"text-primary-400",
+						"text-blue-500"
+					]
+				},
+				"inactiveColor": {
+					"type": "string",
+					"description": "Tailwind CSS text color classes for inactive navigation items",
+					"examples": [
+						"text-white hover:text-primary-400",
+						"text-gray-300 hover:text-blue-400"
+					]
+				},
+				"activeTabGradient": {
+					"type": "string",
+					"description": "Tailwind CSS gradient classes for active tab styling",
+					"examples": [
+						"from-primary-500 to-accent-500",
+						"from-blue-400 to-purple-600"
+					]
+				},
+				"mobileMenuBg": {
+					"type": "string",
+					"description": "Tailwind CSS background class for mobile menu",
+					"examples": [
+						"bg-gray-900/95",
+						"bg-black/90",
+						"bg-black/90 backdrop-blur-md"
+					]
+				}
+			}
+		},
+		"animations": {
+			"type": "object",
+			"description": "Animation settings for navbar interactions",
+			"additionalProperties": false,
+			"properties": {
+				"initialY": {
+					"type": "number",
+					"minimum": -200,
+					"maximum": 200,
+					"description": "Initial Y position for navbar animation in pixels",
+					"default": -100
+				},
+				"springStiffness": {
+					"type": "number",
+					"minimum": 100,
+					"maximum": 1000,
+					"description": "Spring stiffness for animations (100 to 1000)",
+					"default": 380
+				},
+				"springDamping": {
+					"type": "number",
+					"minimum": 10,
+					"maximum": 100,
+					"description": "Spring damping for animations (10 to 100)",
+					"default": 30
+				}
+			}
+		},
+		"note": {
+			"type": "string",
+			"description": "Documentation note for navbar configuration guidance"
+		}
+	},
+	"required": [
+		"logo",
+		"navigation"
+	]
+}

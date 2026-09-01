@@ -26,6 +26,7 @@ import { UnifiedIcon } from "../components/UnifiedIcon"
 import { parseColor } from "../utils/themeUtils"
 import TechnicalExperience from "../components/TechnicalExperience"
 import { fetchSettings } from "../utils/settingsCache"
+import { getGitHubUsername } from "../utils/identity"
 // =========================================================
 
 const About = () => {
@@ -79,7 +80,10 @@ const About = () => {
 		) {
 			return displayConfig.profileImage
 		} else {
-			return displayConfig.profileImage || "https://github.com/VKrishna04.png"
+			return displayConfig.profileImage ||
+				(getGitHubUsername(settings)
+					? `https://github.com/${getGitHubUsername(settings)}.png`
+					: "")
 		}
 	}
 

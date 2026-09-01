@@ -910,13 +910,9 @@ const ProjectCard = ({
 					)}
 
 					{/* GitHub Code Button - Always show for GitHub projects */}
-					{(project.html_url || project.githubUrl || project.name) && (
+					{(project.html_url || project.githubUrl) && (
 						<a
-							href={
-								project.html_url ||
-								project.githubUrl ||
-								`https://github.com/Life-Experimentalist/${project.name}`
-							}
+							href={project.html_url || project.githubUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium hover:scale-105 flex-1 justify-center"

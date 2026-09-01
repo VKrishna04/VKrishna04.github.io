@@ -412,6 +412,9 @@ function VerifiedBadge({ repoOwner, repoName }) {
 const Stats = () => {
 	const { data, loading, error, lastUpdated, config, refresh } =
 		useCodeLedgerStats()
+	// The CodeLedger dashboard this portfolio points at. Comes from
+	// settings.codeLedger.pagesUrl via the hook — never a fixed domain.
+	const codeLedgerUrl = config?.pagesUrl || undefined
 	const [timeSince, setTimeSince] = useState(() => timeSinceLabel(lastUpdated))
 
 	// Update "X minutes ago" every 30 seconds
@@ -559,7 +562,7 @@ const Stats = () => {
 					<p className="text-sm text-slate-400">
 						Tracked by{" "}
 						<a
-							href="https://codeledger.vkrishna04.me/"
+							href={codeLedgerUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-cyan-400 hover:text-cyan-300"
@@ -793,7 +796,7 @@ const Stats = () => {
 					</a>{" "}
 					·{" "}
 					<a
-						href="https://codeledger.vkrishna04.me"
+						href={codeLedgerUrl}
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-slate-500 hover:text-slate-400 transition-colors duration-150"

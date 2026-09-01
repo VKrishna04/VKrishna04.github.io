@@ -1,0 +1,44 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"description": "CodeLedger DSA stats integration — shows live solve stats from a GitHub Pages DSA repo",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"default": false,
+			"description": "Show DSA stats in portfolio"
+		},
+		"repoOwner": {
+			"type": "string",
+			"description": "GitHub username owning the DSA solutions repo"
+		},
+		"repoName": {
+			"type": "string",
+			"description": "Repo name (must have code-ledger topic set by CodeLedger extension)"
+		},
+		"pagesUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "GitHub Pages URL where index.json is served"
+		},
+		"widget": {
+			"type": "object",
+			"description": "About page mini widget configuration",
+			"properties": {
+				"showInAbout": {
+					"type": "boolean",
+					"default": true
+				},
+				"defaultView": {
+					"type": "string",
+					"enum": [
+						"month",
+						"year",
+						"both"
+					],
+					"default": "both"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,145 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"description": "Website favicon configuration with dynamic options",
+	"additionalProperties": false,
+	"properties": {
+		"type": {
+			"type": "string",
+			"enum": [
+				"github",
+				"custom",
+				"icon",
+				"default"
+			],
+			"description": "Favicon source type:\n- 'github': Uses GitHub profile avatar as favicon\n- 'custom': Uses custom image from customUrl\n- 'icon': Uses React Icon as favicon (from react-icons.github.io)\n- 'default': Uses browser default favicon"
+		},
+		"customUrl": {
+			"type": "string",
+			"description": "Custom favicon URL (required when type is 'custom'). May be absolute or site-relative.",
+			"examples": [
+				"/favicon-32x32.png",
+				"https://github.com/VKrishna04.png"
+			]
+		},
+		"githubUsername": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 39,
+			"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+			"description": "GitHub username for fetching profile image (overrides projects.devUsername for favicon only)",
+			"examples": [
+				"VKrishna04",
+				"Life-Experimentalist"
+			]
+		},
+		"iconName": {
+			"type": "string",
+			"minLength": 2,
+			"maxLength": 50,
+			"pattern": "^[A-Z][a-zA-Z0-9]*$",
+			"description": "React Icon name from react-icons.github.io (e.g., FaReact, SiJavascript, MdHome). Visit https://react-icons.github.io/react-icons for available icons.",
+			"examples": [
+				"FaReact",
+				"SiJavascript",
+				"MdHome",
+				"AiFillStar",
+				"BiCodeAlt"
+			]
+		},
+		"iconColor": {
+			"type": "string",
+			"pattern": "^#[0-9A-Fa-f]{6}$",
+			"description": "Hex color for the icon (when type is 'icon')",
+			"examples": [
+				"#3b82f6",
+				"#8b5cf6",
+				"#ef4444"
+			],
+			"default": "#3b82f6"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"pattern": "^(#[0-9A-Fa-f]{6}|transparent)$",
+			"description": "Background color for the icon favicon (hex color or 'transparent')",
+			"examples": [
+				"#ffffff",
+				"#000000",
+				"transparent"
+			],
+			"default": "transparent"
+		},
+		"iconSize": {
+			"type": "integer",
+			"minimum": 16,
+			"maximum": 512,
+			"description": "Size of the generated icon favicon in pixels",
+			"default": 32,
+			"examples": [
+				32,
+				64,
+				128
+			]
+		},
+		"sizes": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "string",
+				"pattern": "^[0-9]+x[0-9]+$"
+			},
+			"description": "Array of favicon sizes to generate for different platforms and devices",
+			"examples": [
+				[
+					"16x16",
+					"32x32",
+					"96x96",
+					"192x192",
+					"512x512"
+				]
+			]
+		},
+		"appleTouchIcon": {
+			"type": "boolean",
+			"description": "Whether to generate Apple touch icons for iOS devices",
+			"default": true
+		},
+		"note": {
+			"type": "string",
+			"description": "Documentation note for favicon configuration guidance"
+		}
+	},
+	"required": [
+		"type"
+	],
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"type": {
+						"const": "custom"
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"customUrl"
+				]
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"type": {
+						"const": "icon"
+					}
+				}
+			},
+			"then": {
+				"required": [
+					"iconName"
+				]
+			}
+		}
+	]
+}

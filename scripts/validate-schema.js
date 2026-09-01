@@ -63,6 +63,35 @@ const compile = (file) => {
 	}
 };
 
+// The settings schema is split by section: public/settings.schema.json holds
+// the universal keys and $refs one file per section out of schemas/settings/.
+// Ajv resolves a relative $ref against the referring schema's id, and the root
+// declares no $id, so each part has to be registered under exactly the path the
+// root names it by. Register them before compiling the root, or every section
+// $ref is a dangling reference and the compile fails.
+const SETTINGS_PARTS_DIR = "public/schemas/settings";
+const registerSettingsParts = () => {
+	const dir = path.join(root, SETTINGS_PARTS_DIR);
+	const files = fs
+		.readdirSync(dir)
+		.filter((f) => f.endsWith(".schema.json"))
+		.sort();
+	for (const file of files) {
+		const part = read(path.posix.join(SETTINGS_PARTS_DIR, file));
+		delete part.$schema;
+		// Registered twice: under the path the root refers to it by, and under
+		// the bare filename a sibling part refers to it by. Ajv resolves a
+		// relative $ref against the referring schema's id, but the ids here are
+		// paths rather than absolute URIs, so the sibling form needs its own key.
+		ajv.addSchema(part, `schemas/settings/${file}`);
+		ajv.addSchema(part, file);
+	}
+	console.log(`✅ ${files.length} settings section schemas registered`);
+	return files.length;
+};
+
+registerSettingsParts();
+
 const validateSettings = compile(SETTINGS_SCHEMA);
 compile(MANIFEST_SCHEMA);
 

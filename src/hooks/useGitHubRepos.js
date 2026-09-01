@@ -17,6 +17,7 @@
 import { useState, useEffect } from "react"
 import { cachedFetch } from "../utils/githubCache"
 import { fetchSettings } from "../utils/settingsCache"
+import { getGitHubApiUrl, getUserAgent } from "../utils/identity"
 
 const useGitHubRepos = () => {
 	const [repositories, setRepositories] = useState([])
@@ -57,9 +58,9 @@ const useGitHubRepos = () => {
 					config = {
 						github: {
 							type: "user",
-							username: "VKrishna04",
-							apiUrl: "https://api.github.com/users/VKrishna04/repos",
-							userAgent: "VKrishna04-Portfolio",
+							username: "",
+							apiUrl: "",
+							userAgent: "Portfolio",
 						},
 						projects: {
 							mode: "github",
@@ -91,8 +92,7 @@ const useGitHubRepos = () => {
 				if (projectMode === "hybrid") {
 					try {
 						const _baseUrl =
-							config.github?.apiUrl ||
-							"https://api.github.com/users/VKrishna04/repos"
+							getGitHubApiUrl(config)
 						const _urlObj = new URL(_baseUrl)
 						if (!_urlObj.searchParams.has("sort")) _urlObj.searchParams.set("sort", "updated")
 						if (!_urlObj.searchParams.has("direction")) _urlObj.searchParams.set("direction", "desc")
@@ -102,7 +102,7 @@ const useGitHubRepos = () => {
 							headers: {
 								Accept: "application/vnd.github.v3+json",
 								"User-Agent":
-									config.github?.userAgent || "VKrishna04-Portfolio",
+									getUserAgent(config),
 							},
 						}
 
@@ -190,8 +190,7 @@ const useGitHubRepos = () => {
 
 				// Regular GitHub mode
 				const _baseUrlRegular =
-					config.github?.apiUrl ||
-					"https://api.github.com/users/VKrishna04/repos"
+					getGitHubApiUrl(config)
 				const _urlObjRegular = new URL(_baseUrlRegular)
 				if (!_urlObjRegular.searchParams.has("sort")) _urlObjRegular.searchParams.set("sort", "updated")
 				if (!_urlObjRegular.searchParams.has("direction")) _urlObjRegular.searchParams.set("direction", "desc")
@@ -200,7 +199,7 @@ const useGitHubRepos = () => {
 				const apiOptions = {
 					headers: {
 						Accept: "application/vnd.github.v3+json",
-						"User-Agent": config.github?.userAgent || "VKrishna04-Portfolio",
+						"User-Agent": getUserAgent(config),
 					},
 				}
 
@@ -274,8 +273,8 @@ const useGitHubRepos = () => {
 						name: "Portfolio Website",
 						description:
 							"Modern React portfolio with animations and dark theme",
-						html_url: "https://github.com/VKrishna04/VKrishna04.github.io",
-						homepage: "https://vkrishna04.github.io",
+						html_url: "",
+						homepage: "",
 						topics: ["react", "portfolio", "framer-motion", "tailwind"],
 						language: "JavaScript",
 						stargazers_count: 0,

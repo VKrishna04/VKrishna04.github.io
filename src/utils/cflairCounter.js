@@ -25,7 +25,10 @@
  * - GET /api/views/{projectName}/badge - Get SVG badge
  */
 
-const CFLAIR_BASE_URL = "https://counter.vkrishna04.me"
+// Resolved from settings.counterAPI.baseUrl at call time. There is no
+// default endpoint: an unconfigured portfolio simply does not count views
+// rather than reporting them to somebody else's counter.
+const CFLAIR_BASE_URL = ""
 const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000
 
 let cflairRateLimitedUntil = 0
@@ -229,7 +232,7 @@ export function getProjectBadgeUrl(
  * @returns {Promise<object|null>} - The response data or null on error
  */
 export async function trackPortfolioView(baseUrl = CFLAIR_BASE_URL) {
-	return trackProjectView("vkrishna04-portfolio", baseUrl)
+	return trackProjectView("portfolio", baseUrl)
 }
 
 /**

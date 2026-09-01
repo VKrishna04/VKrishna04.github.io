@@ -53,7 +53,7 @@ function readJson(file, fallback) {
 
 function main() {
 	const settings = readJson(path.join(PUBLIC, "settings.json"), {})
-	const base = (settings.seo?.canonical || "https://vkrishna04.me/").replace(/\/$/, "")
+	const base = (settings.seo?.canonical || settings.seo?.customDomain || "").replace(/\/$/, "")
 	// lastmod = the date of the commit being deployed, not "today". Stamping
 	// today's date on every build makes every URL look freshly changed on every
 	// deploy, which crawlers learn to ignore.

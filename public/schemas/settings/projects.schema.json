@@ -1,0 +1,1009 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"description": "Project display and data source configuration",
+	"additionalProperties": false,
+	"properties": {
+		"mode": {
+			"type": "string",
+			"enum": [
+				"api",
+				"static",
+				"hybrid"
+			],
+			"description": "Data source mode for projects:\n- 'api': Fetch projects dynamically from GitHub API\n- 'static': Use only manually configured staticProjects array\n- 'hybrid': Use API with staticProjects as fallback when API fails\n\nRecommendation: Use 'api' for active developers with public repositories, 'static' for curated project showcases, or 'hybrid' for reliability.",
+			"default": "api"
+		},
+		"useGitHubDescription": {
+			"type": "boolean",
+			"description": "Controls description source for merged projects on the Projects page:\n- true: Use GitHub's description when merging repos with static projects\n- false: Use static project's description when merging\n\nNote: The About page ALWAYS uses static descriptions from 'staticProjects', regardless of this setting.\n\nOnly applies to 'hybrid' mode when a project exists in both GitHub and staticProjects.",
+			"default": true
+		},
+		"ignore": {
+			"type": "array",
+			"uniqueItems": true,
+			"maxItems": 50,
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 100,
+				"pattern": "^[a-zA-Z0-9._-]+$"
+			},
+			"description": "Repository names to exclude from display (case-sensitive). Common excludes:\n- Portfolio websites: 'username.github.io'\n- Config repositories: '.github', 'dotfiles'\n- Private/work projects: 'company-internal', 'client-work'\n- Learning repositories: 'practice', 'tutorials', 'sandbox'\n- Archived projects: 'deprecated-*', 'old-*'",
+			"examples": [
+				[
+					"VKrishna04.github.io",
+					".github",
+					"private-config",
+					"company-internal",
+					"learning-sandbox",
+					"deprecated-app",
+					"test-repository"
+				]
+			]
+		},
+		"maxProjects": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100,
+			"description": "Maximum number of projects to display on the portfolio. Recommendations:\n- 6-12 projects: Ideal for focused showcase\n- 15-25 projects: Good for active developers\n- 25+ projects: For comprehensive portfolios\n\nConsider user experience and page load times when setting this value.",
+			"default": 15
+		},
+		"sortBy": {
+			"type": "string",
+			"enum": [
+				"updated",
+				"created",
+				"stars",
+				"name",
+				"forks"
+			],
+			"description": "Sort criteria for repositories",
+			"default": "updated"
+		},
+		"sortOrder": {
+			"type": "string",
+			"enum": [
+				"asc",
+				"desc"
+			],
+			"description": "Sort order - 'asc' for ascending, 'desc' for descending",
+			"default": "desc"
+		},
+		"showForks": {
+			"type": "boolean",
+			"description": "Whether to include forked repositories in the display",
+			"default": false
+		},
+		"showPrivate": {
+			"type": "boolean",
+			"description": "Whether to include private repositories (requires authentication)",
+			"default": false
+		},
+		"fallbackMode": {
+			"type": "boolean",
+			"description": "Enable fallback to staticProjects if GitHub API fails or is unavailable",
+			"default": true
+		},
+		"staticProjects": {
+			"type": "array",
+			"description": "Manually curated project data used when mode is 'static' or as fallback",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[0-9]+$",
+						"description": "Unique identifier for the project (GitHub repository ID or custom ID)",
+						"examples": [
+							"767672764",
+							"custom-001"
+						]
+					},
+					"name": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 100,
+						"description": "Project name (should match repository name for consistency)",
+						"examples": [
+							"ParkMeter",
+							"BreachCheck"
+						]
+					},
+					"icon": {
+						"type": "string",
+						"pattern": "^[A-Z][A-Za-z0-9]{1,39}$",
+						"description": "react-icons component name to use as the project icon, e.g. SiRust. Overrides the icon guessed from technologies, topics or language. A repo manifest can override this again."
+					},
+					"description": {
+						"type": "string",
+						"minLength": 10,
+						"maxLength": 500,
+						"description": "Detailed project description explaining purpose and functionality",
+						"examples": [
+							"A parking ticket management system with payment processing"
+						]
+					},
+					"technologies": {
+						"type": "array",
+						"uniqueItems": true,
+						"maxItems": 20,
+						"items": {
+							"$ref": "common.schema.json#/definitions/technologyTag"
+						},
+						"description": "Array of technologies, frameworks, tools, and programming languages used in the project. Use lowercase kebab-case for consistency (e.g., 'react', 'node-js', 'typescript')",
+						"examples": [
+							[
+								"django",
+								"python",
+								"postgresql",
+								"redis",
+								"docker",
+								"javascript",
+								"tailwind-css"
+							]
+						]
+					},
+					"category": {
+						"type": "string",
+						"enum": [
+							"Web App",
+							"Mobile App",
+							"Desktop App",
+							"CLI Tool",
+							"Library",
+							"Framework",
+							"API",
+							"Machine Learning",
+							"Data Science",
+							"Game",
+							"Browser Extension",
+							"VS Code Extension",
+							"Tool",
+							"Educational",
+							"Personal",
+							"Blockchain",
+							"IoT",
+							"DevOps",
+							"Security",
+							"AI/ML",
+							"Backend Service",
+							"Frontend Component",
+							"Full Stack",
+							"Microservice",
+							"Open Source",
+							"Research",
+							"Prototype",
+							"Production",
+							"Web Tool",
+							"Backend",
+							"Security Tool",
+							"Other"
+						],
+						"description": "Project category for filtering, organization, and display grouping. Choose the most appropriate category that best describes the project's primary purpose or domain.",
+						"default": "Other"
+					},
+					"featured": {
+						"type": "boolean",
+						"description": "Whether this project should be highlighted as featured",
+						"default": false
+					},
+					"showInAbout": {
+						"type": "boolean",
+						"description": "Whether this project should appear in the About page's Featured Projects section. Projects with showInAbout: true will be displayed with custom styling from featuredProjectsConfig.",
+						"default": false
+					},
+					"showInProjects": {
+						"type": "boolean",
+						"description": "Whether this project should appear in the Projects page. Set to false for items that are only achievements/certifications meant for the About page showcase.",
+						"default": true
+					},
+					"status": {
+						"type": "string",
+						"enum": [
+							"Planning",
+							"In Development",
+							"Beta",
+							"Completed",
+							"Maintenance",
+							"Deprecated",
+							"On Hold",
+							"Cancelled",
+							"Live",
+							"Under Review",
+							"Testing",
+							"Deployed",
+							"Archived",
+							"Active Development",
+							"Stable",
+							"Experimental",
+							"Ongoing"
+						],
+						"description": "Current development and Deployment status of the project. This helps visitors understand the project's maturity and availability.",
+						"default": "Completed"
+					},
+					"startDate": {
+						"$ref": "common.schema.json#/definitions/dateString",
+						"description": "Project start date in YYYY-MM-DD format for timeline tracking",
+						"examples": [
+							"2024-03-05",
+							"2025-01-15"
+						]
+					},
+					"endDate": {
+						"anyOf": [
+							{
+								"$ref": "common.schema.json#/definitions/dateString"
+							},
+							{
+								"type": "null"
+							}
+						],
+						"description": "Project completion date in YYYY-MM-DD format. Use null for ongoing projects.",
+						"examples": [
+							"2024-11-25",
+							"2025-06-30",
+							null
+						]
+					},
+					"githubUrl": {
+						"$ref": "common.schema.json#/definitions/githubUrl",
+						"description": "GitHub repository URL for the project",
+						"examples": [
+							"https://github.com/Life-Experimentalist/ParkMeter"
+						]
+					},
+					"liveUrl": {
+						"$ref": "common.schema.json#/definitions/url",
+						"description": "Live Deployment URL where the project is hosted and accessible to users (production website/app)",
+						"examples": [
+							"https://vkrishna04.github.io/ParkMeter/",
+							"https://myapp.vercel.app",
+							"https://api.myservice.com"
+						]
+					},
+					"demoUrl": {
+						"$ref": "common.schema.json#/definitions/url",
+						"description": "Demo or preview URL for testing the project (separate from live deployment)",
+						"examples": [
+							"https://demo.example.com",
+							"https://staging.myapp.com"
+						]
+					},
+					"documentationUrl": {
+						"$ref": "common.schema.json#/definitions/url",
+						"description": "Project documentation URL with setup instructions, API docs, or user guides",
+						"examples": [
+							"https://docs.example.com",
+							"https://github.com/user/repo/wiki"
+						]
+					},
+					"imageUrl": {
+						"$ref": "common.schema.json#/definitions/url",
+						"description": "Project thumbnail, screenshot, or preview image URL for visual representation",
+						"examples": [
+							"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500",
+							"https://via.placeholder.com/400x200",
+							"https://github.com/user/repo/blob/main/screenshot.png"
+						]
+					},
+					"socialImage": {
+						"$ref": "common.schema.json#/definitions/url",
+						"description": "Social preview/OpenGraph image URL for the project. If not set, the GitHub repository's OpenGraph image will be used automatically. This image is displayed at the top of the project card when showSocialImage is enabled.",
+						"examples": [
+							"https://repository-images.githubusercontent.com/123456789/abc12345-6789-abcd-ef01-234567890abc",
+							"https://opengraph.githubassets.com/1/username/repo-name",
+							"https://example.com/project-preview.png"
+						]
+					},
+					"tags": {
+						"type": "array",
+						"uniqueItems": true,
+						"maxItems": 30,
+						"items": {
+							"$ref": "common.schema.json#/definitions/technologyTag"
+						},
+						"description": "SEO and filtering tags for the project. Use descriptive keywords that help categorize and discover the project. Tags should be lowercase kebab-case for consistency.",
+						"examples": [
+							[
+								"web-development",
+								"full-stack",
+								"responsive-design",
+								"api-integration",
+								"user-authentication",
+								"data-visualization",
+								"real-time",
+								"mobile-friendly"
+							]
+						]
+					},
+					"highlights": {
+						"type": "array",
+						"maxItems": 5,
+						"items": {
+							"type": "string",
+							"minLength": 10,
+							"maxLength": 150
+						},
+						"description": "Key features, achievements, or notable aspects of the project to showcase to visitors. Focus on unique selling points, technical innovations, or impact metrics.",
+						"examples": [
+							[
+								"Real-time payment processing with 99.9% uptime",
+								"Mobile-responsive design supporting all devices",
+								"AI-powered recommendations with 85% accuracy",
+								"Supports 10,000+ concurrent users",
+								"Open source with 500+ GitHub stars"
+							]
+						]
+					},
+					"stats": {
+						"type": "object",
+						"description": "GitHub repository statistics and social proof metrics to showcase project popularity and community engagement",
+						"additionalProperties": false,
+						"properties": {
+							"stars": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 999999,
+								"description": "Number of GitHub stars indicating project popularity"
+							},
+							"forks": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 999999,
+								"description": "Number of repository forks showing community contributions"
+							},
+							"watchers": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 999999,
+								"description": "Number of repository watchers tracking project updates"
+							},
+							"issues": {
+								"type": "integer",
+								"minimum": 0,
+								"maximum": 99999,
+								"description": "Number of open GitHub issues for bug tracking and feature requests"
+							},
+							"downloads": {
+								"type": "integer",
+								"minimum": 0,
+								"description": "Total downloads for packages, releases, or apps (optional)"
+							},
+							"contributors": {
+								"type": "integer",
+								"minimum": 0,
+								"description": "Number of project contributors (optional)"
+							}
+						},
+						"required": [
+							"stars",
+							"forks",
+							"watchers",
+							"issues"
+						]
+					},
+					"statsUrls": {
+						"type": "object",
+						"description": "Direct URLs to GitHub repository statistics pages for clickable links",
+						"additionalProperties": false,
+						"properties": {
+							"starsUrl": {
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no GitHub stats URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+										"description": "A valid GitHub repository statistics page URL"
+									}
+								],
+								"description": "Direct URL to the repository's stargazers page",
+								"examples": [
+									"https://github.com/VKrishna04/VKrishna04.github.io/stargazers",
+									""
+								]
+							},
+							"forksUrl": {
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no GitHub stats URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+										"description": "A valid GitHub repository statistics page URL"
+									}
+								],
+								"description": "Direct URL to the repository's network/forks page",
+								"examples": [
+									"https://github.com/VKrishna04/VKrishna04.github.io/network/members",
+									""
+								]
+							},
+							"watchersUrl": {
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no GitHub stats URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+										"description": "A valid GitHub repository statistics page URL"
+									}
+								],
+								"description": "Direct URL to the repository's watchers page",
+								"examples": [
+									"https://github.com/VKrishna04/VKrishna04.github.io/watchers",
+									""
+								]
+							},
+							"issuesUrl": {
+								"oneOf": [
+									{
+										"type": "string",
+										"const": "",
+										"description": "Empty string for no GitHub stats URL"
+									},
+									{
+										"type": "string",
+										"format": "uri",
+										"pattern": "^https://github\\.com/[^/]+/[^/]+/(stargazers|network/members|watchers|issues)/?$",
+										"description": "A valid GitHub repository statistics page URL"
+									}
+								],
+								"description": "Direct URL to the repository's issues page",
+								"examples": [
+									"https://github.com/VKrishna04/VKrishna04.github.io/issues",
+									""
+								]
+							}
+						}
+					},
+					"styling": {
+						"type": "object",
+						"description": "Per-project optional styling overrides. Use to set per-project accent color and button styles.",
+						"additionalProperties": false,
+						"properties": {
+							"accentColor": {
+								"type": "string",
+								"description": "Per-project accent color (CSS color or Tailwind token)."
+							},
+							"buttonStyles": {
+								"type": "object",
+								"additionalProperties": false,
+								"properties": {
+									"code": {
+										"type": "object",
+										"additionalProperties": false,
+										"properties": {
+											"background": {
+												"type": "string"
+											},
+											"textColor": {
+												"type": "string"
+											}
+										}
+									},
+									"live": {
+										"type": "object",
+										"additionalProperties": false,
+										"properties": {
+											"background": {
+												"type": "string"
+											},
+											"textColor": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"staticProjectsNote": {
+				"type": "string",
+				"description": "Documentation note explaining how to configure static projects. This field serves as inline help for developers configuring the portfolio.",
+				"maxLength": 500,
+				"default": "Configure static projects when mode is set to 'static' or as fallback when GitHub API is unavailable. Each project should include comprehensive metadata including technologies, URLs, statistics, and descriptive content for optimal presentation."
+			},
+			"featuredProjectsConfig": {
+				"type": "object",
+				"description": "Styling configuration for projects displayed in the About page's Featured Projects section. Maps project names/IDs to their visual presentation settings including colors, gradients, icons, and hover effects. This allows fine-grained control over how each featured project appears on the About page.",
+				"additionalProperties": false,
+				"patternProperties": {
+					"^[a-zA-Z0-9._-]+$": {
+						"type": "object",
+						"description": "Styling configuration for a specific project. Use project name as the key (matching the 'name' field in staticProjects).",
+						"additionalProperties": false,
+						"properties": {
+							"icon": {
+								"type": "string",
+								"description": "React icon component name from react-icons library (e.g., 'SiTensorflow', 'FaReact', 'BiLogoVisualStudio'). Visit https://react-icons.github.io/ to browse available icons. Prefixes: Fa (Font Awesome), Si (Simple Icons), Bi (BoxIcons), Md (Material Design), Ai (Ant Design), etc.",
+								"pattern": "^(Fa|Si|Bi|Md|Ai|Bs|Cg|Di|Fi|Fc|Gi|Go|Gr|Hi|Im|Io|Io5|Lu|Md|Pi|Ri|Rx|Sl|Tb|Ti|Vsc|Wi)[A-Z][a-zA-Z0-9]*$",
+								"examples": [
+									"SiTensorflow",
+									"FaReact",
+									"BiLogoVisualStudio",
+									"SiOpencv",
+									"SiGoogle",
+									"FaAws",
+									"SiHiveBlockchain",
+									"MdCloud",
+									"AiFillRobot"
+								]
+							},
+							"gradient": {
+								"type": "string",
+								"description": "Tailwind CSS gradient background class for the card (e.g., 'bg-gradient-to-br from-purple-600/20 to-pink-600/20'). Use semi-transparent colors (/10, /20, /30) for subtle backgrounds that work with backdrop-blur.",
+								"pattern": "^bg-gradient-to-[a-z]{1,2}\\s+from-[a-z]+-[0-9]{3}/[0-9]{1,2}\\s+to-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+								"examples": [
+									"bg-gradient-to-br from-purple-600/20 to-pink-600/20",
+									"bg-gradient-to-br from-green-600/20 to-blue-600/20",
+									"bg-gradient-to-br from-orange-600/20 to-red-600/20",
+									"bg-gradient-to-br from-cyan-600/20 to-blue-600/20"
+								]
+							},
+							"borderColor": {
+								"type": "string",
+								"description": "Tailwind CSS border color class (e.g., 'border-purple-500/30'). Use semi-transparent colors for subtle borders.",
+								"pattern": "^border-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+								"examples": [
+									"border-purple-500/30",
+									"border-green-500/30",
+									"border-orange-500/30",
+									"border-cyan-500/30"
+								]
+							},
+							"hoverBorderColor": {
+								"type": "string",
+								"description": "Tailwind CSS hover border color class (e.g., 'hover:border-purple-400/50'). Slightly brighter/more opaque than borderColor for visual feedback.",
+								"pattern": "^hover:border-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+								"examples": [
+									"hover:border-purple-400/50",
+									"hover:border-green-400/50",
+									"hover:border-orange-400/50",
+									"hover:border-cyan-400/50"
+								]
+							},
+							"bgColor": {
+								"type": "string",
+								"description": "Tailwind CSS background color class for the icon container (e.g., 'bg-purple-500/20'). Creates a colored circle behind the icon.",
+								"pattern": "^bg-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+								"examples": [
+									"bg-purple-500/20",
+									"bg-green-500/20",
+									"bg-orange-500/20",
+									"bg-cyan-500/20"
+								]
+							},
+							"hoverBgColor": {
+								"type": "string",
+								"description": "Tailwind CSS hover background color class for the icon container (e.g., 'group-hover:bg-purple-500/30'). Brightens on hover.",
+								"pattern": "^group-hover:bg-[a-z]+-[0-9]{3}/[0-9]{1,2}$",
+								"examples": [
+									"group-hover:bg-purple-500/30",
+									"group-hover:bg-green-500/30",
+									"group-hover:bg-orange-500/30",
+									"group-hover:bg-cyan-500/30"
+								]
+							},
+							"iconColor": {
+								"type": "string",
+								"description": "Tailwind CSS text color class for the icon (e.g., 'text-purple-400'). Should complement the background gradient and border colors.",
+								"pattern": "^text-[a-z]+-[0-9]{3}$",
+								"examples": [
+									"text-purple-400",
+									"text-green-400",
+									"text-orange-400",
+									"text-cyan-400"
+								]
+							},
+							"textColor": {
+								"type": "string",
+								"description": "Tailwind CSS text color class for the project description (e.g., 'text-purple-200'). Lighter shade for readability on dark backgrounds.",
+								"pattern": "^text-[a-z]+-[0-9]{3}$",
+								"examples": [
+									"text-purple-200",
+									"text-green-200",
+									"text-orange-200",
+									"text-cyan-200"
+								]
+							}
+						},
+						"required": [
+							"icon",
+							"gradient",
+							"borderColor",
+							"hoverBorderColor",
+							"bgColor",
+							"hoverBgColor",
+							"iconColor",
+							"textColor"
+						]
+					}
+				},
+				"examples": [
+					{
+						"EquiLens": {
+							"icon": "SiTensorflow",
+							"gradient": "bg-gradient-to-br from-purple-600/20 to-pink-600/20",
+							"borderColor": "border-purple-500/30",
+							"hoverBorderColor": "hover:border-purple-400/50",
+							"bgColor": "bg-purple-500/20",
+							"hoverBgColor": "group-hover:bg-purple-500/30",
+							"iconColor": "text-purple-400",
+							"textColor": "text-purple-200"
+						},
+						"Facial-Emotion-Detection": {
+							"icon": "SiOpencv",
+							"gradient": "bg-gradient-to-br from-green-600/20 to-blue-600/20",
+							"borderColor": "border-green-500/30",
+							"hoverBorderColor": "hover:border-green-400/50",
+							"bgColor": "bg-green-500/20",
+							"hoverBgColor": "group-hover:bg-green-500/30",
+							"iconColor": "text-green-400",
+							"textColor": "text-green-200"
+						}
+					}
+				]
+			},
+			"featuredProjectsConfigNote": {
+				"type": "string",
+				"description": "Documentation for featuredProjectsConfig usage and best practices",
+				"default": "Configure visual styling for projects that appear in the About page (projects with showInAbout: true). Each project's name should match a key in featuredProjectsConfig. Use cohesive color schemes that align with your brand. Visit https://react-icons.github.io/ to find appropriate icons."
+			},
+			"showSocialImage": {
+				"type": "boolean",
+				"description": "Whether to display social preview images (GitHub OpenGraph or custom) at the top of project cards. When enabled, the card will show the project's social image if available.",
+				"default": true
+			},
+			"socialPreview": {
+				"type": "object",
+				"description": "Social preview banner source configuration for project cards. By default, GitHub projects render their OpenGraph banner automatically.",
+				"additionalProperties": false,
+				"properties": {
+					"defaultSource": {
+						"type": "string",
+						"enum": [
+							"custom",
+							"github-opengraph",
+							"none"
+						],
+						"description": "Default social preview source. 'custom' prefers custom/socialImage/imageUrl first. 'github-opengraph' prefers GitHub OpenGraph first. 'none' disables automatic fallback.",
+						"default": "github-opengraph"
+					},
+					"opengraphVariant": {
+						"type": "string",
+						"pattern": "^[0-9]+$",
+						"description": "OpenGraph cache-busting seed used in opengraph.githubassets.com URLs. This number can be 0, 1, 2, etc. It does not change repository data; it mainly affects cache behavior.",
+						"default": "2",
+						"examples": [
+							"0",
+							"1",
+							"2"
+						]
+					},
+					"allowSourceToggle": {
+						"type": "boolean",
+						"description": "When both custom and GitHub previews are available, show a switcher on the project card so users can change source manually.",
+						"default": true
+					},
+					"overrides": {
+						"type": "object",
+						"description": "Per-project social banner overrides. Keys can be repo full name (owner/repo) or project name. Values must be absolute image URLs.",
+						"additionalProperties": {
+							"$ref": "common.schema.json#/definitions/url"
+						},
+						"examples": [
+							{
+								"Life-Experimentalist/RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini",
+								"RanobeGemini": "https://opengraph.githubassets.com/2/Life-Experimentalist/RanobeGemini"
+							}
+						]
+					},
+					"note": {
+						"type": "string",
+						"description": "Optional documentation note."
+					}
+				}
+			},
+			"tagStyles": {
+				"type": "object",
+				"description": "Styling configuration for project tags (topics and technologies). Allows customization of background opacity, text colors, and border opacity separately for topics and technology tags.",
+				"additionalProperties": false,
+				"properties": {
+					"topics": {
+						"type": "object",
+						"description": "Styling for topic/category tags (uses accent color as base)",
+						"additionalProperties": false,
+						"properties": {
+							"backgroundOpacity": {
+								"type": "number",
+								"minimum": 0,
+								"maximum": 1,
+								"description": "Background opacity for topic tags (0-1). Default: 0.18",
+								"default": 0.18,
+								"examples": [
+									0.12,
+									0.18,
+									0.25
+								]
+							},
+							"textColor": {
+								"type": "string",
+								"description": "Text color for topic tags. Use bright colors for better visibility.",
+								"default": "#e9d5ff",
+								"examples": [
+									"#e9d5ff",
+									"#d8b4fe",
+									"#c084fc",
+									"rgb(233, 213, 255)"
+								]
+							},
+							"borderOpacity": {
+								"type": "number",
+								"minimum": 0,
+								"maximum": 1,
+								"description": "Border opacity for topic tags (0-1). Default: 0.3",
+								"default": 0.3,
+								"examples": [
+									0.2,
+									0.3,
+									0.4
+								]
+							}
+						}
+					},
+					"technologies": {
+						"type": "object",
+						"description": "Styling for technology/framework tags (independent colors)",
+						"additionalProperties": false,
+						"properties": {
+							"backgroundColor": {
+								"type": "string",
+								"description": "Background color for technology tags (supports rgba for transparency)",
+								"default": "rgba(96, 165, 250, 0.2)",
+								"examples": [
+									"rgba(96, 165, 250, 0.2)",
+									"rgba(59, 130, 246, 0.25)",
+									"#3b82f633"
+								]
+							},
+							"textColor": {
+								"type": "string",
+								"description": "Text color for technology tags. Use bright colors for better visibility.",
+								"default": "#93c5fd",
+								"examples": [
+									"#93c5fd",
+									"#60a5fa",
+									"#3b82f6",
+									"rgb(147, 197, 253)"
+								]
+							},
+							"borderColor": {
+								"type": "string",
+								"description": "Border color for technology tags (supports rgba for transparency)",
+								"default": "rgba(96, 165, 250, 0.35)",
+								"examples": [
+									"rgba(96, 165, 250, 0.35)",
+									"rgba(59, 130, 246, 0.4)",
+									"#3b82f659"
+								]
+							}
+						}
+					}
+				},
+				"examples": [
+					{
+						"topics": {
+							"backgroundOpacity": 0.18,
+							"textColor": "#e9d5ff",
+							"borderOpacity": 0.3
+						},
+						"technologies": {
+							"backgroundColor": "rgba(96, 165, 250, 0.2)",
+							"textColor": "#93c5fd",
+							"borderColor": "rgba(96, 165, 250, 0.35)"
+						}
+					}
+				]
+			},
+			"officialName": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 100,
+				"description": "Official display name of the portfolio owner"
+			},
+			"devUsername": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 50,
+				"description": "Developer username or handle"
+			},
+			"profileImage": {
+				"type": "string",
+				"format": "uri",
+				"description": "URL to profile image"
+			}
+		},
+		"accentColor": {
+			"type": "string",
+			"description": "Default accent color for project UI elements. Accepts any CSS color or Tailwind token.",
+			"examples": [
+				"#ec4899",
+				"purple-500",
+				"linear-gradient(90deg,#7c3aed,#ec4899)"
+			]
+		},
+		"buttonStyles": {
+			"type": "object",
+			"description": "Global default button styles for project action buttons (code/live).",
+			"additionalProperties": false,
+			"properties": {
+				"code": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"background": {
+							"type": "string",
+							"description": "CSS background for the button (color or gradient)",
+							"examples": [
+								"#111827",
+								"linear-gradient(90deg,#111827,#374151)"
+							]
+						},
+						"textColor": {
+							"type": "string",
+							"description": "Button text color",
+							"examples": [
+								"#fff",
+								"#ffffff"
+							]
+						}
+					}
+				},
+				"live": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"background": {
+							"type": "string"
+						},
+						"textColor": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"showSocialImage": {
+			"type": "boolean",
+			"description": "Show each project's social preview image on its card."
+		},
+		"socialPreview": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Where project social preview images come from, and per-repo overrides.",
+			"properties": {
+				"defaultSource": {
+					"type": "string",
+					"enum": [
+						"github-opengraph",
+						"repo-image",
+						"none"
+					],
+					"description": "Default source for a project's social preview image."
+				},
+				"opengraphVariant": {
+					"type": "string",
+					"description": "GitHub OpenGraph variant number. Mostly changes cache behaviour."
+				},
+				"allowSourceToggle": {
+					"type": "boolean",
+					"description": "Let the UI switch a project between preview sources."
+				},
+				"overrides": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "common.schema.json#/definitions/url"
+					},
+					"description": "Explicit preview image URL per repo, keyed by \"owner/repo\" or bare repo name."
+				},
+				"note": {
+					"type": "string",
+					"description": "Free-text authoring note."
+				}
+			}
+		},
+		"tagStyles": {
+			"type": "object",
+			"additionalProperties": true,
+			"description": "Colours for the topic and technology pills on a project card."
+		},
+		"staticProjectsNote": {
+			"type": "string",
+			"description": "Free-text authoring note about staticProjects. Not rendered."
+		},
+		"featuredProjectsConfig": {
+			"type": "object",
+			"description": "Per-project card styling on the About page, keyed by project name.",
+			"additionalProperties": {
+				"type": "object",
+				"additionalProperties": true,
+				"properties": {
+					"icon": {
+						"$ref": "common.schema.json#/definitions/iconName"
+					},
+					"gradient": {
+						"type": "string",
+						"description": "Tailwind gradient classes for the card background."
+					},
+					"borderColor": {
+						"type": "string",
+						"description": "Tailwind border colour class."
+					},
+					"hoverBorderColor": {
+						"type": "string",
+						"description": "Tailwind border colour class on hover."
+					},
+					"bgColor": {
+						"type": "string",
+						"description": "Tailwind background class for the icon chip."
+					},
+					"hoverBgColor": {
+						"type": "string",
+						"description": "Tailwind background class for the icon chip on hover."
+					},
+					"iconColor": {
+						"type": "string",
+						"description": "Tailwind text colour class for the icon."
+					},
+					"textColor": {
+						"type": "string",
+						"description": "Tailwind text colour class for the card text."
+					}
+				}
+			}
+		},
+		"featuredProjectsConfigNote": {
+			"type": "string",
+			"description": "Free-text authoring note about featuredProjectsConfig. Not rendered."
+		},
+		"officialName": {
+			"type": "string",
+			"description": "Display name used where a project needs an author credit."
+		},
+		"devUsername": {
+			"type": "string",
+			"description": "GitHub username projects are attributed to."
+		},
+		"profileImage": {
+			"$ref": "common.schema.json#/definitions/url",
+			"description": "Avatar shown alongside project attribution."
+		}
+	},
+	"required": [
+		"mode",
+		"ignore",
+		"maxProjects",
+		"sortBy",
+		"sortOrder",
+		"showForks",
+		"showPrivate",
+		"fallbackMode"
+	]
+}

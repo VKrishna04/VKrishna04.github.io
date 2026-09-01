@@ -49,6 +49,7 @@ import {
 import useProjectsData from "../hooks/useProjectsData"
 import { fetchSettings } from "../utils/settingsCache"
 import { ATTRIBUTION } from "../utils/attribution"
+import { getOwnerName } from "../utils/identity"
 
 const Footer = () => {
 	const [settings, setSettings] = useState({})
@@ -201,7 +202,7 @@ const Footer = () => {
 								<h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
 									{aboutConfig.title ||
 										settings.display?.officialName ||
-										"Krishna GSVV"}
+										getOwnerName(settings)}
 								</h3>
 								<p
 									className={`text-sm leading-relaxed ${
@@ -371,7 +372,7 @@ const Footer = () => {
 									<span className="font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
 										{footerConfig.madeWith?.by ||
 											settings.display?.officialName ||
-											"Krishna GSVV"}
+											getOwnerName(settings)}
 									</span>
 								</span>
 							</div>
@@ -391,7 +392,7 @@ const Footer = () => {
 										: ""}{" "}
 									{footerConfig.copyright?.name ||
 										settings.display?.officialName ||
-										"Krishna GSVV"}
+										getOwnerName(settings)}
 									. {footerConfig.copyright?.text || "All rights reserved"}.
 								</>
 							)}

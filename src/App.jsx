@@ -32,6 +32,7 @@ import PrivacyNotice from "./components/PrivacyNotice"
 import { trackPortfolioView } from "./utils/cflairCounter"
 import { fetchSettings } from "./utils/settingsCache"
 import { applyPageMeta } from "./utils/pageMeta"
+import { getSiteUrl } from "./utils/identity"
 import "./App.css"
 
 // Route-split the heavier pages; Home stays eager so first paint is instant
@@ -49,15 +50,9 @@ const RouteFallback = () => (
 )
 
 // Custom hook for managing page titles and favicon
-// Per-route descriptions. Each routed page needs its own or it competes
-// with the homepage for the same snippet in search results.
-const PAGE_DESCRIPTIONS = {
-	"/about": "Background, skills, education and achievements of Krishna GSVV — CS engineer, IEEE-published author and national hackathon winner.",
-	"/projects": "Open-source projects by Krishna GSVV — AI/ML pipelines, VS Code extensions, browser extensions, blockchain tools and developer utilities, with source and live demos.",
-	"/resume": "Resume of Krishna GSVV — experience, education, skills, awards, certifications and publications. Downloadable as PDF.",
-	"/stats": "Data structures and algorithms practice statistics for Krishna GSVV — solved counts by difficulty, streaks and activity over time.",
-	"/contact": "Get in touch with Krishna GSVV — professional profiles, email and availability.",
-}
+// Per-route descriptions live in settings.seo.pageDescriptions. Each
+// routed page needs its own or it competes with the homepage for the
+// same snippet in search results.
 
 const JSONLD_TYPES = {
 	"/about": "AboutPage",
@@ -133,9 +128,7 @@ const usePageConfiguration = (location) => {
 
 		// Per-route canonical — a single hard-coded homepage canonical makes
 		// every other route deduplicate itself out of the index
-		const canonicalBase = (
-			settings.seo?.canonical || "https://vkrishna04.me/"
-		).replace(/\/$/, "")
+		const canonicalBase = getSiteUrl(settings)
 		const canonicalUrl =
 			location.pathname === "/"
 				? `${canonicalBase}/`
@@ -145,7 +138,9 @@ const usePageConfiguration = (location) => {
 		// shares the homepage card, so a link to /projects previews as the
 		// homepage and ranks against it for the same terms.
 		const description =
-			PAGE_DESCRIPTIONS[location.pathname] || settings.seo?.description || ""
+			settings.seo?.pageDescriptions?.[location.pathname] ||
+			settings.seo?.description ||
+			""
 
 		applyPageMeta({
 			title,

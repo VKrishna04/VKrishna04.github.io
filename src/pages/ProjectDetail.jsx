@@ -39,6 +39,8 @@ import {
 import { applyPageMeta } from "../utils/pageMeta"
 import ProjectGallery from "../components/ProjectGallery"
 import UnifiedIcon from "../components/UnifiedIcon"
+import { getOwnerName, getSiteUrl } from "../utils/identity"
+import { fetchSettings } from "../utils/settingsCache"
 import {
 	normalizeAppearance,
 	normalizeIcon,
@@ -50,7 +52,11 @@ import {
 // loads on demand instead of riding in the main bundle.
 const ProjectReadme = lazy(() => import("../components/ProjectReadme"))
 
-const SITE = "https://vkrishna04.me"
+// The site's own origin, resolved from settings inside the head effect below.
+// It cannot be a module constant: a hard-coded domain points every fork at the
+// upstream author's site, and window.location.origin is the throwaway localhost
+// server during prerender, which would bake "http://localhost:PORT" into the
+// static HTML.
 
 /*
  * A manifest can pick a look for its own page, but only from these. The values
@@ -316,14 +322,24 @@ const ProjectDetail = () => {
 	// description come from the project data the router cannot see.
 	useEffect(() => {
 		if (!project) return
+		let cancelled = false
+		const applyHead = (settings) => {
+			if (cancelled) return
+			const SITE = getSiteUrl(settings)
+			const ownerName = getOwnerName(settings)
 		const url = `${SITE}/projects/${project.slug}`
 		const description =
 			project.seo?.description ||
 			project.tagline ||
 			project.summary ||
-			`${project.name} — an open-source project by Krishna GSVV.`
+			(ownerName
+				? `${project.name} — an open-source project by ${ownerName}.`
+				: `${project.name} — an open-source project.`)
 		const title =
-			project.seo?.title || `${project.name} — Project by Krishna GSVV`
+			project.seo?.title ||
+			(ownerName
+				? `${project.name} — Project by ${ownerName}`
+				: `${project.name} — Project`)
 
 		applyPageMeta({
 			title,
@@ -341,14 +357,25 @@ const ProjectDetail = () => {
 				keywords: (project.tags || []).join(", ") || undefined,
 				dateCreated: project.period?.start || undefined,
 				image: project.seo?.image || project.media?.cover || undefined,
-				author: { "@type": "Person", name: "Krishna GSVV", url: SITE },
+				author: ownerName
+					? { "@type": "Person", name: ownerName, url: SITE }
+					: undefined,
 				isPartOf: {
 					"@type": "CollectionPage",
 					name: "Projects",
 					url: `${SITE}/projects`,
 				},
 			},
-		})
+			})
+		}
+		// The owner's name comes from settings; a portfolio with none simply
+		// omits the author rather than crediting somebody else.
+		fetchSettings()
+			.then(applyHead)
+			.catch(() => applyHead({}))
+		return () => {
+			cancelled = true
+		}
 	}, [project])
 
 	if (missing) return <NotFoundProject slug={slug} />

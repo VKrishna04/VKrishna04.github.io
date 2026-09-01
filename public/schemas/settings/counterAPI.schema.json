@@ -1,0 +1,73 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"description": "Project visitor counter API configuration",
+	"additionalProperties": false,
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"description": "Whether to enable project view counters",
+			"default": false
+		},
+		"baseUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "Base URL for the counter API service",
+			"examples": [
+				"https://api.counterapi.dev/v1"
+			]
+		},
+		"timeout": {
+			"type": "integer",
+			"minimum": 1000,
+			"maximum": 30000,
+			"description": "API request timeout in milliseconds",
+			"default": 5000
+		},
+		"fallbackOnError": {
+			"type": "boolean",
+			"description": "Whether to show fallback counters if API fails",
+			"default": true
+		},
+		"trackEvents": {
+			"type": "object",
+			"description": "Which interactions increment a counter. Unlisted events are not counted.",
+			"additionalProperties": {
+				"type": "boolean"
+			}
+		},
+		"projectMapping": {
+			"type": "object",
+			"description": "Configuration for mapping projects to counter endpoints",
+			"additionalProperties": false,
+			"properties": {
+				"note": {
+					"type": "string",
+					"description": "Documentation note for project mapping configuration"
+				},
+				"autoGenerate": {
+					"type": "boolean",
+					"description": "Whether to automatically generate project mappings from repository names",
+					"default": true
+				},
+				"customMappings": {
+					"type": "object",
+					"patternProperties": {
+						"^[a-zA-Z0-9._-]+$": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 50
+						}
+					},
+					"description": "Custom mappings from repository names to CounterAPI project names",
+					"examples": [
+						{
+							"ParkMeter": "parking-system",
+							"BreachCheck": "security-tool"
+						}
+					]
+				}
+			}
+		}
+	}
+}

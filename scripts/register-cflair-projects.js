@@ -77,7 +77,7 @@ async function fetchGitHubRepos(githubConfig) {
 		const response = await fetch(apiUrl, {
 			headers: {
 				Accept: "application/vnd.github.v3+json",
-				"User-Agent": githubConfig.userAgent || "VKrishna04-Portfolio",
+				"User-Agent": githubConfig.userAgent || "Portfolio",
 			},
 		})
 

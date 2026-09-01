@@ -48,6 +48,7 @@ import {
 	parseColor,
 } from "../utils/themeUtils"
 import { fetchSettings } from "../utils/settingsCache"
+import { getGitHubUsername } from "../utils/identity"
 
 const Home = () => {
 	const [settings, setSettings] = useState({})
@@ -102,7 +103,8 @@ const Home = () => {
 				return (
 					imageConfig.customUrl ||
 					`https://github.com/${
-						settings.home?.profileImage?.devUsername || "VKrishna04"
+						settings.home?.profileImage?.devUsername ||
+						getGitHubUsername(settings)
 					}.png`
 				)
 			case "display":

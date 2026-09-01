@@ -17,6 +17,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { cachedFetch } from "../utils/githubCache"
 import { fetchSettings as fetchSharedSettings } from "../utils/settingsCache"
+import { getUserAgent } from "../utils/identity"
 
 const useProjectsData = () => {
 	const [repositories, setRepositories] = useState([])
@@ -40,17 +41,12 @@ const useProjectsData = () => {
 		const fallbackSettings = {
 			github: {
 				type: "org",
-				username: "Life-Experimentalist",
-				apiUrl: "https://api.github.com/orgs/Life-Experimentalist/repos",
-				userAgent: "VKrishna04-Portfolio",
+				username: "",
+				apiUrl: "",
+				userAgent: "Portfolio",
 			},
 			projects: {
-				ignore: [
-					"VKrishna04.github.io",
-					".github",
-					"financial_assist",
-					"VKrishna04",
-				],
+				ignore: [".github"],
 				maxProjects: 15,
 				sortBy: "updated",
 				sortOrder: "desc",
@@ -240,7 +236,7 @@ const useProjectsData = () => {
 			const apiOptions = {
 				headers: {
 					Accept: "application/vnd.github.v3+json",
-					"User-Agent": config.github?.userAgent || "VKrishna04-Portfolio",
+					"User-Agent": getUserAgent(config),
 				},
 			}
 
