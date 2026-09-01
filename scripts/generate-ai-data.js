@@ -6,6 +6,8 @@
  * Output: public/api/*.json, public/llms.txt, public/.well-known/ai-plugin.json
  */
 
+/* global process */
+
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
@@ -17,7 +19,15 @@ const settingsPath = path.join(__dirname, "..", "public", "settings.json")
 const settings = resolveDerivedValues(
 	JSON.parse(fs.readFileSync(settingsPath, "utf8"))
 )
-const { home, about, github, projects, seo } = settings
+const { home, about, github, projects, resume, seo } = settings
+
+// The whole point of these files is to be read by something that is not a
+// browser. A site owner who would rather not publish a machine-readable copy
+// of themselves turns it off here.
+if (seo?.crawling?.aiData === false) {
+  console.log("ℹ seo.crawling.aiData is false - skipping AI data generation")
+  process.exit(0)
+}
 
 // The site's own address. Everything published under public/api and llms.txt is
 // absolute, so this cannot be a fixed domain: a fork would advertise the
@@ -53,6 +63,23 @@ const portfolioProjects = (projects?.staticProjects || [])
     liveUrl: p.liveUrl || null,
   }))
 
+const experience = (resume?.experiences || []).map((e) => ({
+  title: e.title || "",
+  company: e.company || "",
+  period: e.period || "",
+  location: e.location || "",
+  description: e.description || "",
+}))
+
+const education = (resume?.education || []).map((e) => ({
+  degree: e.degree || "",
+  field: e.field || "",
+  school: e.school || "",
+  period: e.period || "",
+  gpa: e.gpa || "",
+  achievements: e.achievements || [],
+}))
+
 const portfolio = {
   generatedAt: new Date().toISOString(),
   owner: {
@@ -62,6 +89,8 @@ const portfolio = {
     bio: bioText,
   },
   skills: allSkills,
+  experience,
+  education,
   stats: about?.stats || [],
   contact: {
     github: `https://github.com/${github?.username || ""}`,
@@ -108,6 +137,8 @@ fs.writeFileSync(
       bio: bioText,
       location: home?.location || "",
       skills: allSkills,
+      experience,
+      education,
       stats: about?.stats || [],
     },
     null,
@@ -132,6 +163,29 @@ fs.writeFileSync(
 )
 
 // --- llms.txt ---
+const section = (title, body) => (body ? `\n## ${title}\n${body}\n` : "")
+
+const experienceMd = experience
+  .map((e) => {
+    const head = [e.title, e.company].filter(Boolean).join(" @ ")
+    const meta = [e.period, e.location].filter(Boolean).join(", ")
+    const detail = Array.isArray(e.description)
+      ? e.description.map((d) => `- ${d}`).join("\n")
+      : e.description
+    const body = [meta, detail].filter(Boolean).join("\n")
+    return `### ${head}${body ? `\n${body}` : ""}`
+  })
+  .join("\n\n")
+
+const educationMd = education
+  .map((e) => {
+    const head = [e.degree, e.field].filter(Boolean).join(", ")
+    const meta = [e.school, e.period].filter(Boolean).join(" — ")
+    const body = [meta, e.gpa ? `GPA: ${e.gpa}` : ""].filter(Boolean).join("\n")
+    return `### ${head}${body ? `\n${body}` : ""}`
+  })
+  .join("\n\n")
+
 const llmsTxt = `# ${home?.name || "Portfolio"} — AI Context
 
 ## About
@@ -139,7 +193,7 @@ ${bioText}
 
 ## Skills
 ${allSkills.slice(0, 20).join(", ")}
-
+${section("Experience", experienceMd)}${section("Education", educationMd)}
 ## Projects (${portfolioProjects.length} total)
 ${portfolioProjects
   .slice(0, 10)

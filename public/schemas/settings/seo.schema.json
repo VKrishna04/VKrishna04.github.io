@@ -10,7 +10,7 @@
 			"maxLength": 60,
 			"description": "Primary page title for SEO",
 			"examples": [
-				"Krishna GSVV - Developer",
+				"Your Name - Developer",
 				"John Doe - Frontend Developer Portfolio"
 			]
 		},
@@ -50,7 +50,7 @@
 			"maxLength": 50,
 			"description": "Author name for meta tags",
 			"examples": [
-				"Krishna GSVV",
+				"Your Name",
 				"John Doe"
 			]
 		},
@@ -59,9 +59,31 @@
 			"format": "uri",
 			"description": "Canonical URL of the website",
 			"examples": [
-				"https://vkrishna04.me/",
+				"https://your-domain.example/",
 				"https://johndoe.dev/"
 			]
+		},
+		"crawling": {
+			"type": "object",
+			"description": "Who is allowed to crawl the site, and whether the machine-readable copies are published at all. Drives public/robots.txt and the AI data files, both generated at build time.",
+			"additionalProperties": false,
+			"properties": {
+				"search": {
+					"type": "boolean",
+					"description": "Allow general search engines. False writes a site-wide Disallow into robots.txt.",
+					"default": true
+				},
+				"aiTraining": {
+					"type": "boolean",
+					"description": "Allow AI and LLM crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot and friends). False names each one in robots.txt with a Disallow.",
+					"default": true
+				},
+				"aiData": {
+					"type": "boolean",
+					"description": "Publish llms.txt, public/api/*.json and .well-known/ai-plugin.json. False skips generating them.",
+					"default": true
+				}
+			}
 		},
 		"pageDescriptions": {
 			"type": "object",
@@ -93,7 +115,7 @@
 					"maxLength": 60,
 					"description": "Open Graph title",
 					"examples": [
-						"Krishna GSVV - Developer"
+						"Your Name - Developer"
 					]
 				},
 				"description": {
@@ -110,7 +132,7 @@
 					"format": "uri",
 					"description": "Open Graph image URL",
 					"examples": [
-						"https://github.com/VKrishna04.png",
+						"https://github.com/your-username.png",
 						"https://example.com/og-image.jpg"
 					]
 				},
@@ -134,7 +156,7 @@
 					"maxLength": 50,
 					"description": "Website name for Open Graph",
 					"examples": [
-						"Krishna GSVV Portfolio",
+						"Your Name Portfolio",
 						"John Doe Portfolio"
 					]
 				}
@@ -156,7 +178,7 @@
 					"maxLength": 70,
 					"description": "Twitter card title",
 					"examples": [
-						"Krishna GSVV - Developer"
+						"Your Name - Developer"
 					]
 				},
 				"description": {
@@ -173,7 +195,7 @@
 					"format": "uri",
 					"description": "Twitter card image URL",
 					"examples": [
-						"https://github.com/VKrishna04.png"
+						"https://github.com/your-username.png"
 					]
 				},
 				"creator": {
@@ -181,7 +203,7 @@
 					"pattern": "^@[a-zA-Z0-9_]+$",
 					"description": "Twitter handle of the creator",
 					"examples": [
-						"@VKrishna04",
+						"@your-handle",
 						"@johndoe"
 					]
 				}
@@ -242,8 +264,8 @@
 					"description": "Array of social media URLs for structured data",
 					"examples": [
 						[
-							"https://github.com/VKrishna04",
-							"https://linkedin.com/in/vkrishna04"
+							"https://github.com/your-username",
+							"https://linkedin.com/in/your-handle"
 						]
 					]
 				},
@@ -272,7 +294,7 @@
 			"format": "hostname",
 			"description": "Custom domain for CNAME generation (without protocol)",
 			"examples": [
-				"vkrishna04.me",
+				"your-domain.example",
 				"johndoe.dev",
 				"portfolio.example.com"
 			]

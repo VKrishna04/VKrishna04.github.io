@@ -1,8 +1,8 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://vkrishna04.me/schemas/project-manifest.schema.json",
+	"$id": "https://your-domain.example/schemas/project-manifest.schema.json",
 	"title": "Portfolio Project Manifest",
-	"description": "Contents of .portfolio/project.json in a project repository. The portfolio at vkrishna04.me fetches this file at build time and renders it as https://vkrishna04.me/projects/<slug>. Every field is optional; anything omitted falls back to the entry already in the portfolio's settings.json.",
+	"description": "Contents of .portfolio/project.json in a project repository. The portfolio at your-domain.example fetches this file at build time and renders it as https://your-domain.example/projects/<slug>. Every field is optional; anything omitted falls back to the entry already in the portfolio's settings.json.",
 	"type": "object",
 	"additionalProperties": false,
 	"properties": {
@@ -109,7 +109,7 @@
 				"cover": {
 					"type": "string",
 					"format": "uri",
-					"description": "Absolute URL. Relative repo paths do not resolve — the page is served from vkrishna04.me, not from the repo."
+					"description": "Absolute URL. Relative repo paths do not resolve — the page is served from your-domain.example, not from the repo."
 				},
 				"screenshots": {
 					"type": "array",

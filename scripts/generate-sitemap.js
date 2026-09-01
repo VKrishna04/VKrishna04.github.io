@@ -15,9 +15,10 @@
  */
 
 /*
- * Regenerates public/sitemap.xml from settings.json + the generated project
- * index. The file used to be hand-maintained, which meant every new project
- * page was invisible to crawlers until someone remembered to add it.
+ * Regenerates public/sitemap.xml and public/robots.txt from settings.json + the
+ * generated project index. Both files used to be hand-maintained, which meant
+ * every new project page was invisible to crawlers until someone remembered to
+ * add it, and robots.txt pointed at the upstream author's sitemap in every fork.
  *
  * Run after scripts/fetch-project-manifests.js and before `vite build`.
  */
@@ -32,6 +33,24 @@ import { fileURLToPath } from "url"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, "..")
 const PUBLIC = path.join(ROOT, "public")
+
+// Crawlers that read the site to train or ground a model, as opposed to
+// indexing it for search. seo.crawling.aiTraining decides whether they are
+// welcome; naming them individually is the only thing robots.txt understands.
+const AI_CRAWLERS = [
+	"GPTBot",
+	"OAI-SearchBot",
+	"ChatGPT-User",
+	"ClaudeBot",
+	"Claude-Web",
+	"anthropic-ai",
+	"PerplexityBot",
+	"Google-Extended",
+	"Applebot-Extended",
+	"CCBot",
+	"Bytespider",
+	"meta-externalagent",
+]
 
 // changefreq/priority per static route. Project pages are derived below.
 const STATIC = [
@@ -103,11 +122,49 @@ function main() {
 	console.log(
 		`✅ Sitemap: ${urls.length} URLs (${STATIC.length} pages + ${projects.length} projects)`
 	)
+
+	writeRobots(settings, base)
+}
+
+/*
+ * robots.txt, from the same settings the sitemap came from. It was a static
+ * file with a hard-coded Sitemap: line, so a fork advertised the original
+ * author's sitemap as its own.
+ */
+function writeRobots(settings, base) {
+	const crawling = settings.seo?.crawling || {}
+	const allowSearch = crawling.search !== false
+	const allowAi = crawling.aiTraining !== false
+
+	const lines = ["User-agent: *", allowSearch ? "Allow: /" : "Disallow: /"]
+
+	if (!allowAi) {
+		lines.push("")
+		lines.push("# AI and LLM crawlers are not permitted (seo.crawling.aiTraining)")
+		AI_CRAWLERS.forEach((bot) => {
+			lines.push("")
+			lines.push(`User-agent: ${bot}`)
+			lines.push("Disallow: /")
+		})
+	}
+
+	if (base) {
+		lines.push("")
+		lines.push(`Sitemap: ${base}/sitemap.xml`)
+	}
+
+	fs.writeFileSync(
+		path.join(PUBLIC, "robots.txt"),
+		lines.join("\n") + "\n"
+	)
+	console.log(
+		`✅ robots.txt: search ${allowSearch ? "allowed" : "blocked"}, AI crawlers ${allowAi ? "allowed" : "blocked"}`
+	)
 }
 
 try {
 	main()
 } catch (e) {
-	console.warn("⚠️ Sitemap step failed:", e.message)
+	console.warn("⚠️ Sitemap/robots step failed:", e.message)
 	process.exitCode = 0
 }

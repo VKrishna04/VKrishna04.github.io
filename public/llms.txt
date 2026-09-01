@@ -6,6 +6,20 @@ Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 
 ## Skills
 Python, JavaScript, TypeScript, HTML5, CSS3, SQL, React, Vite, Browser Extensions, Tailwind CSS, Framer Motion, Bootstrap, Responsive Design, Git, GitHub, VS Code, Jupyter, Postman, Linux, AWS
 
+## Experience
+### Software Intern @ Fission Labs
+Jul 2026 - Dec 2026, Jubilee Hills, Hyderabad
+- Software internship on an AI and Python stack, working up from the language itself to retrieval-augmented generation.
+- Began in core Python, then moved to FastAPI to build services.
+- Backed those services with PostgreSQL and designed the REST APIs on top of them.
+- Now working on RAG: retrieval pipelines that answer from a chosen set of documents rather than from the model alone.
+- Built docs-rag, a strictly grounded RAG pipeline that answers only from the documents it is given and cites the passages it used.
+
+## Education
+### Bachelor of Technology, Computer Science
+Amrita Vishwa Vidyapeetham — 2022 - 2026
+GPA: 8.55/10
+
 ## Projects (24 total)
 - **Krishna GSVV Portfolio**: A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.
 - **RanobeGemini**: Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.

@@ -76,7 +76,7 @@
 					"maxLength": 100,
 					"description": "Alternative text for accessibility",
 					"examples": [
-						"Professional photo of Krishna GSVV"
+						"Professional photo of the site owner"
 					]
 				}
 			},

@@ -10,9 +10,16 @@ import process from "process";
 
 // Expected build script configurations
 const EXPECTED_BUILD_CONFIG = {
-	// Expected package.json build-core script (to avoid circular dependency)
-	expectedBuildScript:
-		"node scripts/pre-build-validation.js && node scripts/generate-icon-map.js && vite build && node scripts/generate-manifest.js",
+	// Steps build-core must still run. Pinning the whole script to one exact
+	// string meant any fork that added a build step failed validation, which is
+	// not what this check is for: it exists so validation and bundling cannot be
+	// dropped from the chain, not so the script can never change.
+	requiredBuildSteps: ["scripts/pre-build-validation.js", "vite build"],
+
+	// The one step the top-level `build` script must keep. verify-attribution
+	// reads dist/ after the prerenderer has run, which is the only place the
+	// credit can be checked as shipped rather than as written.
+	requiredTopLevelSteps: ["scripts/verify-attribution.js"],
 
 	// Files that must exist and be valid
 	requiredFiles: [
@@ -27,14 +34,6 @@ const EXPECTED_BUILD_CONFIG = {
 		"src/utils/attribution.js",
 		"NOTICE",
 	],
-
-	// GitHub repository details
-	github: {
-		owner: "VKrishna04",
-		repo: "VKrishna04.github.io",
-		branch: "main",
-		rawBase: "https://raw.githubusercontent.com",
-	},
 };
 
 /**
@@ -57,16 +56,28 @@ function validatePackageJsonBuildScript() {
 			return false;
 		}
 
-		if (currentBuildCoreScript !== EXPECTED_BUILD_CONFIG.expectedBuildScript) {
-			console.error("❌ Build script has been tampered with!");
-			console.error(
-				`   Expected: ${EXPECTED_BUILD_CONFIG.expectedBuildScript}`
-			);
+		const missingStep = EXPECTED_BUILD_CONFIG.requiredBuildSteps.find(
+			(step) => !currentBuildCoreScript.includes(step)
+		);
+		if (missingStep) {
+			console.error("❌ Build script no longer runs a required step!");
+			console.error(`   Missing:  ${missingStep}`);
 			console.error(`   Actual:   ${currentBuildCoreScript}`);
 			return false;
 		}
 
-		console.log("✅ Package.json build-core script validated");
+		const buildScript = packageJson.scripts?.build || "";
+		const missingTopLevel = EXPECTED_BUILD_CONFIG.requiredTopLevelSteps.find(
+			(step) => !buildScript.includes(step)
+		);
+		if (missingTopLevel) {
+			console.error("❌ Build script no longer verifies attribution!");
+			console.error(`   Missing:  ${missingTopLevel}`);
+			console.error(`   Actual:   ${buildScript}`);
+			return false;
+		}
+
+		console.log("✅ Package.json build scripts validated");
 		return true;
 	} catch (error) {
 		console.error("❌ Failed to validate package.json:", error.message);
@@ -91,7 +102,8 @@ async function validateSelfIntegrity() {
 			"validatePackageJsonBuildScript",
 			"validateSelfIntegrity",
 			"validateBuildChainIntegrity",
-			"expectedBuildScript",
+			"requiredBuildSteps",
+			"requiredTopLevelSteps",
 			"EXPECTED_BUILD_CONFIG",
 			"runComprehensiveValidation",
 			"validateAttributionIntegrity",
@@ -254,148 +266,6 @@ function validateAttributionIntegrity() {
 }
 
 /**
- * Fetches file content from GitHub repository
- * @param {string} filePath - Path to file
- * @returns {Promise<string|null>} File content or null
- */
-async function fetchFromGitHub(filePath) {
-	try {
-		const url = `${EXPECTED_BUILD_CONFIG.github.rawBase}/${EXPECTED_BUILD_CONFIG.github.owner}/${EXPECTED_BUILD_CONFIG.github.repo}/${EXPECTED_BUILD_CONFIG.github.branch}/${filePath}`;
-
-		const response = await fetch(url);
-		if (!response.ok) {
-			throw new Error(`GitHub fetch failed: ${response.status}`);
-		}
-
-		return await response.text();
-	} catch (error) {
-		console.info(`Could not fetch ${filePath} from GitHub:`, error.message);
-		return null;
-	}
-}
-
-/**
- * Validates critical files against GitHub repository
- * @returns {Promise<boolean>} True if files match repository
- */
-async function validateCriticalFilesAgainstGitHub() {
-	console.log("🔍 Validating critical files against GitHub...");
-
-	const criticalFiles = [
-		"package.json",
-		"scripts/generate-hashes.js",
-		"src/utils/integrity-guard.js",
-	];
-
-	let validationResults = {
-		validated: 0,
-		failed: 0,
-		missing: 0,
-	};
-
-	// Comprehensive CI/hosting platform detection (matches settings-guard.js)
-	const isCI =
-		process.env.CI === "true" || // Generic CI indicator
-		process.env.GITHUB_ACTIONS === "true" || // GitHub Actions
-		process.env.VERCEL === "1" || // Vercel
-		process.env.NETLIFY === "true" || // Netlify
-		process.env.CF_PAGES === "1" || // Cloudflare Pages
-		process.env.RENDER === "true" || // Render
-		process.env.RAILWAY_ENVIRONMENT_NAME || // Railway
-		process.env.HEROKU_APP_NAME || // Heroku
-		process.env.NOW_REGION || // Vercel (legacy)
-		process.env.DEPLOY_URL || // Netlify build
-		process.env.CF_PAGES_URL || // Cloudflare Pages
-		process.env.VERCEL_URL || // Vercel Deployment
-		process.env.BUILD_ID || // Generic build system
-		process.env.DRONE === "true" || // Drone CI
-		process.env.TRAVIS === "true" || // Travis CI
-		process.env.CIRCLECI === "true" || // CircleCI
-		process.env.JENKINS_URL || // Jenkins
-		process.env.GITLAB_CI === "true" || // GitLab CI
-		process.env.BUILDKITE === "true" || // Buildkite
-		process.env.AZURE_HTTP_USER_AGENT || // Azure DevOps
-		process.env.GITHUB_WORKSPACE || // GitHub Actions (alt)
-		process.env.BITBUCKET_BUILD_NUMBER; // Bitbucket Pipelines
-
-	for (const filePath of criticalFiles) {
-		try {
-			const [githubContent, localContent] = await Promise.all([
-				fetchFromGitHub(filePath),
-				fs.promises.readFile(filePath, "utf8"),
-			]);
-
-			if (!githubContent) {
-				if (isCI) {
-					// In CI, all protection files MUST exist in repository
-					console.error(
-						`❌ ${filePath} not found in GitHub repository (CI mode)`
-					);
-					validationResults.failed++;
-				} else {
-					// In development, allow missing files
-					console.warn(
-						`⚠️ Could not validate ${filePath} against GitHub (file not in repository)`
-					);
-					validationResults.missing++;
-				}
-				continue;
-			}
-
-			// Normalize content for comparison
-			const normalize = (content) => content.replace(/\r\n/g, "\n").trim();
-			const githubNormalized = normalize(githubContent);
-			const localNormalized = normalize(localContent);
-
-			if (githubNormalized !== localNormalized) {
-				// In development mode, be more lenient about file differences
-				if (!isCI) {
-					console.warn(
-						`⚠️ ${filePath} differs from GitHub (may include development changes)`
-					);
-					validationResults.validated++; // Allow differences during development
-				} else {
-					console.error(`❌ ${filePath} differs from GitHub repository`);
-					validationResults.failed++;
-				}
-			} else {
-				console.log(`✅ ${filePath} matches GitHub`);
-				validationResults.validated++;
-			}
-		} catch (error) {
-			console.error(`❌ Failed to validate ${filePath}:`, error.message);
-			validationResults.failed++;
-		}
-	}
-
-	// Strict validation in CI, lenient in development
-	if (isCI) {
-		// In CI, no failures allowed
-		if (validationResults.failed > 0) {
-			console.error(
-				`\n❌ CI Mode: ${validationResults.failed} validation failures detected`
-			);
-			return false;
-		}
-	} else {
-		// In development, allow missing files or minor differences
-		if (
-			validationResults.failed === 0 ||
-			validationResults.validated > validationResults.failed
-		) {
-			if (validationResults.missing > 0) {
-				console.log(
-					`ℹ️ Development mode: ${validationResults.missing} files not yet in repository`
-				);
-			}
-			return true;
-		}
-	}
-
-	return validationResults.failed === 0;
-}
-
-/**
  * Main validation function - validates everything before build
  */
 async function runComprehensiveValidation() {
@@ -419,15 +289,7 @@ async function runComprehensiveValidation() {
 			throw new Error("Attribution integrity check failed");
 		}
 
-		// Step 2: Validate files against GitHub (if available)
-		const githubValid = await validateCriticalFilesAgainstGitHub();
-		if (!githubValid) {
-			console.error("\n❌ GitHub validation failed!");
-			console.error("   Files do not match the repository.");
-			throw new Error("GitHub validation failed");
-		}
-
-		// Step 3: Generate/update hashes
+		// Step 2: Generate/update hashes
 		console.log("\n📋 Generating protection hashes...");
 
 		// Import and run hash generation
@@ -453,7 +315,6 @@ export {
 	validateSelfIntegrity,
 	validateBuildChainIntegrity,
 	validateAttributionIntegrity,
-	validateCriticalFilesAgainstGitHub,
 	runComprehensiveValidation,
 };
 

@@ -48,7 +48,11 @@ import {
 	parseColor,
 } from "../utils/themeUtils"
 import { fetchSettings } from "../utils/settingsCache"
-import { getGitHubUsername } from "../utils/identity"
+import {
+	getGitHubUsername,
+	getOwnerName,
+	getSiteUrl,
+} from "../utils/identity"
 
 const Home = () => {
 	const [settings, setSettings] = useState({})
@@ -144,24 +148,181 @@ const Home = () => {
 
 	const socialLinks = getSocialLinks()
 
-	const buildPortfolioDataDump = () => {
-		const payload = {
-			meta: {
-				exportedAt: new Date().toISOString(),
-				source: "settings.json",
-			},
-			data: settings,
+	const getCopyDataConfig = () => {
+		const defaults = {
+			enabled: true,
+			format: "markdown",
+			label: "Copy All Data",
+			copiedLabel: "Copied All Data",
+			tooltip: "Copy this portfolio as text an AI can read",
+			successDurationMs: 2200,
 		}
 
-		return JSON.stringify(payload, null, 2)
+		return {
+			...defaults,
+			...(settings.home?.copyData || {}),
+		}
+	}
+
+	const copyDataConfig = getCopyDataConfig()
+
+	/**
+	 * The whole portfolio as prose, in the same two formats Projects and Resume
+	 * already offer. This used to hand over JSON.stringify(settings), which made
+	 * whoever pasted it (usually a language model) guess which keys were
+	 * content and which were theming. Headings and labelled fields carry the
+	 * same facts without that guesswork.
+	 */
+	const buildPortfolioDigest = (format) => {
+		const md = format !== "plain"
+		const lines = []
+		const heading = (level, text) =>
+			lines.push(md ? `${"#".repeat(level)} ${text}` : text.toUpperCase())
+		const field = (label, value) => {
+			if (value) lines.push(md ? `**${label}**: ${value}` : `${label}: ${value}`)
+		}
+		const bullet = (text) => lines.push(md ? `- ${text}` : `  * ${text}`)
+		const gap = () => lines.push("")
+		const section = (title, entries, render) => {
+			if (!Array.isArray(entries) || entries.length === 0) return
+			heading(2, title)
+			gap()
+			entries.forEach((entry) => {
+				render(entry)
+				gap()
+			})
+		}
+
+		const about = settings.about || {}
+		const resume = settings.resume || {}
+		const site = getSiteUrl(settings)
+		const username = getGitHubUsername(settings)
+
+		heading(1, getOwnerName(settings) || "Portfolio")
+		gap()
+		if (about.title) {
+			lines.push(about.title)
+			gap()
+		}
+		field("Location", settings.home?.location)
+		field("Website", site)
+		if (username) field("GitHub", `https://github.com/${username}`)
+		gap()
+
+		const paragraphs = Array.isArray(about.paragraphs)
+			? about.paragraphs
+			: [about.paragraphs].filter(Boolean)
+		if (paragraphs.length) {
+			heading(2, "About")
+			gap()
+			paragraphs.forEach((paragraph) => {
+				lines.push(paragraph)
+				gap()
+			})
+		}
+
+		const skillGroups = resume.skills || about.skills
+		if (Array.isArray(skillGroups) && skillGroups.length) {
+			heading(2, "Skills")
+			gap()
+			skillGroups.forEach((group) => {
+				const items = (group.items || [])
+					.map((item) => (typeof item === "string" ? item : item?.name))
+					.filter(Boolean)
+				if (items.length) field(group.category, items.join(", "))
+			})
+			gap()
+		}
+
+		section("Work Experience", resume.experiences, (exp) => {
+			heading(3, [exp.title, exp.company].filter(Boolean).join(" — "))
+			field("Period", exp.period)
+			field("Location", exp.location)
+			if (exp.description) lines.push(exp.description)
+		})
+
+		section("Education", resume.education, (edu) => {
+			heading(3, [edu.degree, edu.field].filter(Boolean).join(", "))
+			field("Institution", edu.school)
+			field("Period", edu.period)
+			field("GPA", edu.gpa)
+			;(edu.achievements || []).forEach(bullet)
+		})
+
+		section("Projects", resume.personalProjects, (project) => {
+			heading(3, project.name)
+			if (project.description) lines.push(project.description)
+			field("Tech", (project.technologies || []).join(", "))
+			field("Source", project.githubUrl)
+			field("Live", project.liveUrl)
+		})
+
+		section("Awards & Honours", resume.awards, (award) => {
+			heading(3, award.name)
+			field("Organisation", award.organization)
+			field("Date", award.date)
+			field("Prize", award.rewardAmount?.displayText)
+			if (award.description) lines.push(award.description)
+		})
+
+		section("Certifications", resume.certifications, (cert) => {
+			heading(3, cert.name)
+			field("Issuer", cert.issuer)
+			field("Issued", cert.issueDate)
+			field("Credential ID", cert.credentialId)
+			field("Verify", cert.verificationUrl)
+		})
+
+		section("Publications", resume.publications, (pub) => {
+			heading(3, pub.title)
+			field("Type", pub.type)
+			field("Publisher", pub.publisher)
+			field("Date", pub.date)
+			field("URL", pub.url)
+			if (pub.description) lines.push(pub.description)
+		})
+
+		if (Array.isArray(resume.languages) && resume.languages.length) {
+			heading(2, "Languages")
+			gap()
+			resume.languages.forEach((language) => {
+				bullet(
+					[language.name, language.proficiency || language.level]
+						.filter(Boolean)
+						.join(" — ")
+				)
+			})
+			gap()
+		}
+
+		section("Volunteer Experience", resume.volunteerExperience, (vol) => {
+			heading(3, [vol.role, vol.organization].filter(Boolean).join(" — "))
+			field("Period", vol.period)
+			if (vol.description) lines.push(vol.description)
+		})
+
+		if (site) {
+			heading(2, "Machine-Readable Sources")
+			gap()
+			bullet(`${site}/llms.txt`)
+			bullet(`${site}/api/portfolio.json`)
+			bullet(`${site}/api/projects.json`)
+			gap()
+		}
+
+		return lines
+			.join("\n")
+			.replace(/\n{3,}/g, "\n\n")
+			.trim()
 	}
 
 	const copyAllDataToClipboard = async () => {
-		const text = buildPortfolioDataDump()
+		const text = buildPortfolioDigest(copyDataConfig.format)
+		const holdFor = copyDataConfig.successDurationMs
 		try {
 			await navigator.clipboard.writeText(text)
 			setCopiedAllData(true)
-			setTimeout(() => setCopiedAllData(false), 2200)
+			setTimeout(() => setCopiedAllData(false), holdFor)
 		} catch {
 			try {
 				const el = document.createElement("textarea")
@@ -171,7 +332,7 @@ const Home = () => {
 				document.execCommand("copy")
 				document.body.removeChild(el)
 				setCopiedAllData(true)
-				setTimeout(() => setCopiedAllData(false), 2200)
+				setTimeout(() => setCopiedAllData(false), holdFor)
 			} catch (error) {
 				console.warn("Could not copy portfolio data:", error)
 			}
@@ -341,6 +502,7 @@ const Home = () => {
 						}
 						return null
 					})}
+					{copyDataConfig.enabled && (
 					<motion.button
 						type="button"
 						onClick={copyAllDataToClipboard}
@@ -351,15 +513,16 @@ const Home = () => {
 						}`}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						title="Copy complete portfolio settings data"
+						title={copyDataConfig.tooltip}
 					>
 						{copiedAllData ? (
 							<CheckCircleIcon className="mr-2 w-4 h-4" />
 						) : (
 							<DocumentDuplicateIcon className="mr-2 w-4 h-4" />
 						)}
-						{copiedAllData ? "Copied All Data" : "Copy All Data"}
+						{copiedAllData ? copyDataConfig.copiedLabel : copyDataConfig.label}
 					</motion.button>
+					)}
 				</motion.div>
 
 				{/* Social Links */}

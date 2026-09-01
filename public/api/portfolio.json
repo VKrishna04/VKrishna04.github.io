@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T04:37:01.858Z",
+  "generatedAt": "2026-09-01T05:47:09.866Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
@@ -58,6 +58,31 @@
     "Hive Blockchain",
     "Web3 APIs",
     "Cryptocurrency"
+  ],
+  "experience": [
+    {
+      "title": "Software Intern",
+      "company": "Fission Labs",
+      "period": "Jul 2026 - Dec 2026",
+      "location": "Jubilee Hills, Hyderabad",
+      "description": [
+        "Software internship on an AI and Python stack, working up from the language itself to retrieval-augmented generation.",
+        "Began in core Python, then moved to FastAPI to build services.",
+        "Backed those services with PostgreSQL and designed the REST APIs on top of them.",
+        "Now working on RAG: retrieval pipelines that answer from a chosen set of documents rather than from the model alone.",
+        "Built docs-rag, a strictly grounded RAG pipeline that answers only from the documents it is given and cites the passages it used."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science",
+      "school": "Amrita Vishwa Vidyapeetham",
+      "period": "2022 - 2026",
+      "gpa": "8.55/10",
+      "achievements": []
+    }
   ],
   "stats": [
     {

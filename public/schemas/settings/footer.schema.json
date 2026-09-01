@@ -15,7 +15,7 @@
 					"maxLength": 100,
 					"description": "Name to display in copyright notice",
 					"examples": [
-						"Krishna GSVV"
+						"Your Name"
 					]
 				},
 				"showYear": {
@@ -38,7 +38,7 @@
 					"maxLength": 100,
 					"description": "Custom copyright text (overrides template if provided)",
 					"examples": [
-						"© Krishna GSVV. Built with ❤️"
+						"© Your Name. Built with ❤️"
 					]
 				}
 			},
@@ -103,7 +103,7 @@
 						"React",
 						"Vite",
 						"Next.js",
-						"VKrishna04"
+						"your-username"
 					]
 				}
 			}
@@ -138,7 +138,7 @@
 					"examples": [
 						"",
 						"About Me",
-						"Krishna GSVV"
+						"Your Name"
 					]
 				},
 				"description": {

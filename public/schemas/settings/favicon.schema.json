@@ -19,7 +19,7 @@
 			"description": "Custom favicon URL (required when type is 'custom'). May be absolute or site-relative.",
 			"examples": [
 				"/favicon-32x32.png",
-				"https://github.com/VKrishna04.png"
+				"https://github.com/your-username.png"
 			]
 		},
 		"githubUsername": {
@@ -29,7 +29,7 @@
 			"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
 			"description": "GitHub username for fetching profile image (overrides projects.devUsername for favicon only)",
 			"examples": [
-				"VKrishna04",
+				"your-username",
 				"Life-Experimentalist"
 			]
 		},

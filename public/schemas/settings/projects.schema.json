@@ -32,7 +32,7 @@
 			"description": "Repository names to exclude from display (case-sensitive). Common excludes:\n- Portfolio websites: 'username.github.io'\n- Config repositories: '.github', 'dotfiles'\n- Private/work projects: 'company-internal', 'client-work'\n- Learning repositories: 'practice', 'tutorials', 'sandbox'\n- Archived projects: 'deprecated-*', 'old-*'",
 			"examples": [
 				[
-					"VKrishna04.github.io",
+					"your-username.github.io",
 					".github",
 					"private-config",
 					"company-internal",
@@ -258,7 +258,7 @@
 						"$ref": "common.schema.json#/definitions/url",
 						"description": "Live Deployment URL where the project is hosted and accessible to users (production website/app)",
 						"examples": [
-							"https://vkrishna04.github.io/ParkMeter/",
+							"https://your-username.github.io/ParkMeter/",
 							"https://myapp.vercel.app",
 							"https://api.myservice.com"
 						]
@@ -405,7 +405,7 @@
 								],
 								"description": "Direct URL to the repository's stargazers page",
 								"examples": [
-									"https://github.com/VKrishna04/VKrishna04.github.io/stargazers",
+									"https://github.com/your-username/your-repo/stargazers",
 									""
 								]
 							},
@@ -425,7 +425,7 @@
 								],
 								"description": "Direct URL to the repository's network/forks page",
 								"examples": [
-									"https://github.com/VKrishna04/VKrishna04.github.io/network/members",
+									"https://github.com/your-username/your-repo/network/members",
 									""
 								]
 							},
@@ -445,7 +445,7 @@
 								],
 								"description": "Direct URL to the repository's watchers page",
 								"examples": [
-									"https://github.com/VKrishna04/VKrishna04.github.io/watchers",
+									"https://github.com/your-username/your-repo/watchers",
 									""
 								]
 							},
@@ -465,7 +465,7 @@
 								],
 								"description": "Direct URL to the repository's issues page",
 								"examples": [
-									"https://github.com/VKrishna04/VKrishna04.github.io/issues",
+									"https://github.com/your-username/your-repo/issues",
 									""
 								]
 							}

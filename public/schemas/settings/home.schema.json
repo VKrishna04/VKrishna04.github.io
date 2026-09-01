@@ -21,7 +21,7 @@
 			"maxLength": 100,
 			"description": "Main name displayed prominently on the home page",
 			"examples": [
-				"Krishna GSVV",
+				"Your Name",
 				"John Doe"
 			]
 		},
@@ -148,7 +148,7 @@
 					"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
 					"description": "GitHub username for profile image (used when type is 'github')",
 					"examples": [
-						"VKrishna04",
+						"your-username",
 						"Life-Experimentalist"
 					]
 				},
@@ -166,7 +166,7 @@
 					"maxLength": 100,
 					"description": "Alternative text for accessibility",
 					"examples": [
-						"Profile picture of Krishna GSVV"
+						"Profile picture of the site owner"
 					]
 				},
 				"borderColor": {
@@ -440,6 +440,46 @@
 			"type": "boolean",
 			"description": "Whether to show the scroll indicator at the bottom of the page",
 			"default": true
+		},
+		"copyData": {
+			"type": "object",
+			"description": "The 'copy this portfolio' button under the hero. The payload is prose, not a settings dump, so a language model can read it as-is.",
+			"additionalProperties": false,
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Show the copy button on the home page",
+					"default": true
+				},
+				"format": {
+					"type": "string",
+					"enum": ["markdown", "plain"],
+					"description": "markdown = headings and **labels**; plain = unformatted text",
+					"default": "markdown"
+				},
+				"label": {
+					"type": "string",
+					"description": "Button text before copying",
+					"default": "Copy All Data"
+				},
+				"copiedLabel": {
+					"type": "string",
+					"description": "Button text while the copied state is showing",
+					"default": "Copied All Data"
+				},
+				"tooltip": {
+					"type": "string",
+					"description": "Hover title for the button",
+					"default": "Copy this portfolio as text an AI can read"
+				},
+				"successDurationMs": {
+					"type": "number",
+					"minimum": 500,
+					"maximum": 10000,
+					"description": "How long the copied state remains visible",
+					"default": 2200
+				}
+			}
 		},
 		"background": {
 			"type": "object",

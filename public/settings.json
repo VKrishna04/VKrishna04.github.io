@@ -104,6 +104,11 @@
     ],
     "author": "Krishna GSVV",
     "canonical": "https://vkrishna04.me/",
+    "crawling": {
+      "search": true,
+      "aiTraining": true,
+      "aiData": true
+    },
     "pageDescriptions": {
       "/about": "Background, skills, education and achievements of Krishna GSVV — CS engineer, IEEE-published author and national hackathon winner.",
       "/projects": "Open-source projects by Krishna GSVV — AI/ML pipelines, VS Code extensions, browser extensions, blockchain tools and developer utilities, with source and live demos.",
@@ -217,6 +222,14 @@
       }
     ],
     "showScrollIndicator": true,
+    "copyData": {
+      "enabled": true,
+      "format": "markdown",
+      "label": "Copy All Data",
+      "copiedLabel": "Copied All Data",
+      "tooltip": "Copy this portfolio as text an AI can read",
+      "successDurationMs": 2200
+    },
     "background": {
       "type": "animated-network",
       "enabled": true,

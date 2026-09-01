@@ -53,7 +53,7 @@
 					"description": "GitHub username or organization name. Must follow GitHub naming conventions:\n- 1-39 characters long\n- Alphanumeric characters and hyphens only\n- Cannot start or end with hyphen\n- Cannot contain consecutive hyphens",
 					"examples": [
 						"Life-Experimentalist",
-						"VKrishna04",
+						"your-username",
 						"microsoft",
 						"facebook",
 						"your-org-name"
@@ -66,7 +66,7 @@
 					"description": "GitHub API endpoint for fetching repositories. Must be a valid GitHub API URL:\n- For organizations: https://api.github.com/orgs/{org-name}/repos\n- For users: https://api.github.com/users/{username}/repos\n\nEnsure the URL matches your account type and username.",
 					"examples": [
 						"https://api.github.com/orgs/Life-Experimentalist/repos",
-						"https://api.github.com/users/VKrishna04/repos",
+						"https://api.github.com/users/your-username/repos",
 						"https://api.github.com/orgs/microsoft/repos",
 						"https://api.github.com/orgs/Life-Experimentalist/repos"
 					]
@@ -78,7 +78,7 @@
 					"pattern": "^[a-zA-Z0-9._-]+$",
 					"description": "Custom user agent string for API requests. This helps with:\n- API rate limiting and identification\n- Analytics and usage tracking\n- Debugging and monitoring\n\nUse a descriptive name that identifies your portfolio site.",
 					"examples": [
-						"VKrishna04-Portfolio",
+						"Your-Portfolio",
 						"Portfolio-Website",
 						"MyName-Resume-Site",
 						"Developer-Showcase"

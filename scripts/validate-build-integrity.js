@@ -9,11 +9,18 @@ import process from "process";
 
 
 /**
- * Expected build script configuration - this is the source of truth
- * We check the build-core script to avoid circular dependency
+ * Steps build-core must still run - this is the source of truth.
+ * We check the build-core script to avoid circular dependency.
+ *
+ * These are substrings rather than one exact script because the point of the
+ * check is that validation and bundling cannot be dropped from the chain, not
+ * that the chain can never gain a step. Exact-matching broke every fork that
+ * added one.
  */
-const EXPECTED_BUILD_CORE_SCRIPT =
-	"node scripts/pre-build-validation.js && node scripts/generate-icon-map.js && vite build && node scripts/generate-manifest.js";
+const REQUIRED_BUILD_CORE_STEPS = [
+	"node scripts/pre-build-validation.js",
+	"vite build",
+];
 
 /**
  * Forbidden build scripts that bypass validation
@@ -46,30 +53,24 @@ function validateBuildScriptIntegrity() {
 			return false;
 		}
 
-		if (currentBuildCoreScript !== EXPECTED_BUILD_CORE_SCRIPT) {
-			console.error("🚫 BUILD CORE SCRIPT HAS BEEN TAMPERED WITH!");
+		const missingStep = REQUIRED_BUILD_CORE_STEPS.find(
+			(step) => !currentBuildCoreScript.includes(step)
+		);
+		if (missingStep) {
+			console.error("🚫 BUILD CORE SCRIPT IS MISSING A REQUIRED STEP!");
 			console.error(
 				"   This indicates an attempt to bypass the validation system."
 			);
 			console.error("");
-			console.error("   Expected build-core script:");
-			console.error(`   "${EXPECTED_BUILD_CORE_SCRIPT}"`);
-			console.error("");
-			console.error("   Current build-core script:");
-			console.error(`   "${currentBuildCoreScript}"`);
+			console.error(`   Missing step: "${missingStep}"`);
+			console.error(`   Current build-core script: "${currentBuildCoreScript}"`);
 			console.error("");
 			console.error(
-				"🔒 Security Note: The build-core script must include pre-build validation"
+				"🔒 Security Note: build-core must run pre-build validation"
 			);
 			console.error(
-				"   to ensure code integrity. Bypassing this validation could"
+				"   so the bundle cannot be produced without an integrity check."
 			);
-			console.error("   allow malicious code to be built and deployed.");
-			console.error("");
-			console.error(
-				"💡 To fix this issue, restore the correct build-core script in package.json:"
-			);
-			console.error(`   npm pkg set scripts.build-core="${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			return false;
 		}
 
@@ -81,11 +82,11 @@ function validateBuildScriptIntegrity() {
 			console.error("   Forbidden build script:");
 			console.error(`   "${currentBuildCoreScript}"`);
 			console.error("");
-			console.error("   Required build script:");
-			console.error(`   "${EXPECTED_BUILD_CORE_SCRIPT}"`);
+			console.error("   Required steps:");
+			REQUIRED_BUILD_CORE_STEPS.forEach((step) => {
+				console.error(`   - "${step}"`);
+			});
 			console.error("");
-			console.error("💡 To fix this issue, restore the correct build script:");
-			console.error(`   npm pkg set scripts.build-core="${EXPECTED_BUILD_CORE_SCRIPT}"`);
 			return false;
 		}
 
@@ -156,7 +157,7 @@ function validateCompleteIntegrity() {
 export {
 	validateBuildScriptIntegrity,
 	validateCompleteIntegrity,
-	EXPECTED_BUILD_CORE_SCRIPT,
+	REQUIRED_BUILD_CORE_STEPS,
 };
 
 // Auto-run when called directly

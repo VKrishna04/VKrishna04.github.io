@@ -36,7 +36,7 @@
 					"maxLength": 50,
 					"description": "Full name to display alongside logo",
 					"examples": [
-						"Krishna GSVV",
+						"Your Name",
 						"John Doe"
 					]
 				},
@@ -64,7 +64,7 @@
 					"description": "Custom image URL (for image type) or GitHub profile image URL (for github type)",
 					"examples": [
 						"https://example.com/logo.png",
-						"https://github.com/VKrishna04.png",
+						"https://github.com/your-username.png",
 						""
 					]
 				},
@@ -75,7 +75,7 @@
 					"pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$",
 					"description": "GitHub username for fetching profile image (overrides projects.devUsername for navbar only)",
 					"examples": [
-						"VKrishna04",
+						"your-username",
 						"Life-Experimentalist"
 					]
 				},
