@@ -25,9 +25,9 @@
 					"maxLength": 20,
 					"description": "Text to display as logo (used for text type or as fallback)",
 					"examples": [
-						"VK",
-						"KG",
-						"Krishna"
+						"JD",
+						"AB",
+						"Alex"
 					]
 				},
 				"name": {
