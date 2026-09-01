@@ -23,6 +23,12 @@ import App from "./App.jsx";
 // Initialize build-time verified protection system
 import "./utils/build-time-protection.js";
 
+// Offline support: a reload with no network should show the site, not the
+// browser's error page.
+import { registerServiceWorker } from "./registerSW.js";
+
+registerServiceWorker();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<App />

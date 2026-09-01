@@ -125,6 +125,7 @@ flowchart TD
 - **🎯 IntelliSense Support**: JSON Schema for better editing experience
 - **🔍 SEO Optimized**: Proper meta tags and structured data
 - **⚡ Fast Performance**: Optimized build with Vite for lightning-fast loading
+- **📶 Works Offline**: A build-time service worker precaches every prerendered route, so a reload with no network shows the site rather than the browser's error page — and the site is installable
 
 ## 📁 Project Structure
 

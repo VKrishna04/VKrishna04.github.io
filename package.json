@@ -1,6 +1,6 @@
 {
 	"name": "vkrishna04.me",
-	"version": "1.7.0",
+	"version": "1.8.0",
 	"type": "module",
 	"homepage": "https://vkrishna04.me",
 	"description": "Personal portfolio website showcasing skills, projects, and experiences.",
@@ -37,7 +37,7 @@
 		"validate": "npm run validate:integrity",
 		"validate:integrity": "node scripts/validate-build-integrity.js",
 		"validate:settings": "node scripts/validate-json.js public/settings.json && node scripts/validate-schema.js",
-		"build": "npm run validate:integrity && npm run prepare-data && npm run build-core && node scripts/prerender.js && node scripts/verify-attribution.js",
+		"build": "npm run validate:integrity && npm run prepare-data && npm run build-core && node scripts/prerender.js && node scripts/generate-sw.js && node scripts/verify-attribution.js",
 		"prepare-data": "node scripts/fetch-codeledger.js && node scripts/fetch-project-manifests.js && node scripts/generate-sitemap.js && node scripts/generate-ai-data.js",
 		"prerender": "node scripts/prerender.js",
 		"build-core": "node scripts/pre-build-validation.js && node scripts/generate-icon-map.js && vite build && node scripts/generate-manifest.js",

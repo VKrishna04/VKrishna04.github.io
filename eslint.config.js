@@ -21,7 +21,10 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-	globalIgnores(["dist"]),
+	// sw-template.js is not source: it carries __PLACEHOLDER__ tokens that
+	// scripts/generate-sw.js substitutes at build time, so it cannot parse as
+	// a normal module until it has been through that step.
+	globalIgnores(["dist", "scripts/sw-template.js"]),
 	{
 		files: ["**/*.{js,jsx}"],
 		extends: [

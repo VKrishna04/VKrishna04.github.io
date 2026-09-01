@@ -25,6 +25,17 @@ Files and purpose
 node scripts/generate-manifest.js
 ```
 
+- `generate-sw.js`
+  - Purpose: Write `dist/sw.js` from `scripts/sw-template.js`, filling in the version, the base path and the list of files the build produced. Runs after `prerender.js` so every route's real HTML is on disk and can be precached; that is what lets a reload with no network show the page instead of the browser's error screen.
+  - How to run (automated): invoked as part of `npm run build`; can be run manually after a build:
+
+```powershell
+node scripts/generate-sw.js
+```
+
+- `sw-template.js`
+  - Purpose: The service worker itself, before the build fills in its three `__PLACEHOLDER__` tokens. Not runnable on its own, and excluded from linting for that reason. Editing `dist/sw.js` is pointless — the next build overwrites it.
+
 - `inject-seo.js`
   - Purpose: Post-process built HTML files to inject SEO meta tags, sitemap links, or canonical tags before publishing.
   - How to run: `node scripts/inject-seo.js ./dist` (accepts the build output dir)
