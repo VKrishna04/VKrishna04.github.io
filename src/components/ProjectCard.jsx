@@ -28,6 +28,7 @@ import {
 	DocumentTextIcon,
 } from "@heroicons/react/24/outline"
 import { parseColor, applyOpacity } from "../utils/themeUtils"
+import UnifiedIcon from "./UnifiedIcon"
 import {
 	FaGithub,
 	FaReact,
@@ -290,12 +291,13 @@ const ProjectCard = ({
 					return getTechnologyIcon(techName)
 				}
 			}
-			// Return first technology if no framework found
-			const firstTech =
-				typeof project.technologies[0] === "string"
-					? project.technologies[0]
-					: project.technologies[0].name
-			return getTechnologyIcon(firstTech)
+			// Otherwise take the first technology that actually maps to an icon
+			for (const tech of project.technologies) {
+				const icon = getTechnologyIcon(
+					typeof tech === "string" ? tech : tech.name
+				)
+				if (icon !== CodeBracketIcon) return icon
+			}
 		}
 
 		// Check topics for frameworks
@@ -306,8 +308,13 @@ const ProjectCard = ({
 					return getTechnologyIcon(topicLower)
 				}
 			}
-			// Return first topic
-			return getTechnologyIcon(project.topics[0])
+			// Topics come back from GitHub alphabetically, so the first one is rarely
+			// the meaningful one - "cache" before "rust". Take the first that maps,
+			// and fall through to the language when none of them do.
+			for (const topic of project.topics) {
+				const icon = getTechnologyIcon(topic)
+				if (icon !== CodeBracketIcon) return icon
+			}
 		}
 
 		// Fallback to language
@@ -315,6 +322,13 @@ const ProjectCard = ({
 	}
 
 	const ProjectIcon = getProjectIcon()
+
+	// An explicit react-icons name from settings.json or the repo's manifest
+	// beats every guess above. Unknown names fall back to the guess rather than
+	// rendering nothing.
+	const iconName = /^[A-Z][A-Za-z0-9]{1,39}$/.test(project.icon || "")
+		? project.icon
+		: ""
 
 	// Determine effective styling: per-project styling -> global props -> defaults
 	const effectiveStyling = project?.styling || {}
@@ -663,7 +677,15 @@ const ProjectCard = ({
 									: { background: "linear-gradient(90deg,#a855f7,#ec4899)" }
 							}
 						>
+							{iconName ? (
+							<UnifiedIcon
+								name={iconName}
+								className="w-5 h-5 text-white"
+								fallback={<ProjectIcon className="w-5 h-5 text-white" />}
+							/>
+						) : (
 							<ProjectIcon className="w-5 h-5 text-white" />
+						)}
 						</div>
 						<div className="flex-1 min-w-0">
 							<h3 className="text-lg font-semibold text-white group-hover:text-purple-300 transition-colors truncate">

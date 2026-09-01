@@ -12,8 +12,8 @@
 		},
 		"manifestVersion": {
 			"type": "integer",
-			"enum": [1],
-			"description": "Manifest format version. Currently always 1."
+			"enum": [1, 2],
+			"description": "Manifest format version. Use 2. Version 1 files keep working — 2 only adds fields (icon, readme, appearance, media.video, media.layout)."
 		},
 		"slug": {
 			"type": "string",
@@ -37,6 +37,11 @@
 			"enum": ["active", "maintained", "archived", "experimental", "complete"]
 		},
 		"category": { "type": "string", "maxLength": 60 },
+		"icon": {
+			"type": "string",
+			"pattern": "^[A-Z][A-Za-z0-9]{1,39}$",
+			"description": "react-icons component name for the project, e.g. \"SiRust\", \"FaPython\", \"SiFastapi\". Used on the project card and page header. A name the icon set does not contain falls back to the language/technology guess, so it degrades rather than breaking."
+		},
 		"role": {
 			"type": "string",
 			"maxLength": 120,
@@ -108,7 +113,8 @@
 				},
 				"screenshots": {
 					"type": "array",
-					"maxItems": 8,
+					"maxItems": 12,
+					"description": "Shown as a carousel when there is more than one, unless media.layout says otherwise.",
 					"items": {
 						"type": "object",
 						"additionalProperties": false,
@@ -119,6 +125,81 @@
 							"caption": { "type": "string", "maxLength": 200 }
 						}
 					}
+				},
+				"layout": {
+					"type": "string",
+					"enum": ["auto", "carousel", "grid", "stack"],
+					"description": "How screenshots are laid out. \"auto\" (the default) means a carousel for two or more, a single figure for one."
+				},
+				"video": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": ["url"],
+					"description": "One demo video, shown above the screenshots. Only these hosts embed: youtube.com, youtu.be, vimeo.com. Any other https URL is treated as a direct video file and must end in .mp4, .webm or .ogg — anything else is dropped at build time.",
+					"properties": {
+						"url": { "type": "string", "format": "uri" },
+						"title": { "type": "string", "maxLength": 120 },
+						"poster": {
+							"type": "string",
+							"format": "uri",
+							"description": "Absolute image URL. Only used for direct video files, not for embeds."
+						},
+						"caption": { "type": "string", "maxLength": 200 }
+					}
+				}
+			}
+		},
+		"readme": {
+			"description": "Render this repository's README (or another Markdown file) below the page body. `true` is shorthand for the object with its defaults.",
+			"oneOf": [
+				{ "type": "boolean" },
+				{
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"show": { "type": "boolean", "default": true },
+						"path": {
+							"type": "string",
+							"maxLength": 200,
+							"pattern": "^[^/][A-Za-z0-9._/-]*\\.(md|markdown|MD)$",
+							"description": "Repo-relative path to the Markdown file. Defaults to README.md. Must stay inside the repo — no leading slash, no \"..\"."
+						},
+						"heading": { "type": "string", "maxLength": 80 },
+						"collapsed": {
+							"type": "boolean",
+							"description": "Render it behind a \"Read more\" toggle instead of expanded. Default false."
+						}
+					}
+				}
+			]
+		},
+		"appearance": {
+			"type": "object",
+			"additionalProperties": false,
+			"description": "Optional look of this one project page. Every key is a closed vocabulary, not CSS — omit the block entirely and the portfolio's own styling applies, which is the right default for almost every project.",
+			"properties": {
+				"theme": {
+					"type": "string",
+					"enum": [
+						"default",
+						"aurora",
+						"ember",
+						"ocean",
+						"forest",
+						"mono",
+						"midnight"
+					],
+					"description": "Page gradient. \"default\" is the portfolio's purple."
+				},
+				"background": {
+					"type": "string",
+					"enum": ["default", "plain", "grid", "dots", "glow"],
+					"description": "Texture drawn over the gradient. \"default\" means whatever the portfolio uses."
+				},
+				"accent": {
+					"type": "string",
+					"pattern": "^#[0-9a-fA-F]{6}$",
+					"description": "Six-digit hex, e.g. \"#dea584\". Tints the title rule, chips and links. Anything that is not exactly this shape is ignored."
 				}
 			}
 		},

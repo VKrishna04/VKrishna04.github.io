@@ -5,6 +5,7 @@
 	"summary": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
 	"status": "Active Development",
 	"category": "Browser Extension",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -50,9 +51,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -63,5 +68,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/ToxicGuard_AI",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/ToxicGuard_AI/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:32.977Z"
+	"generatedAt": "2026-09-01T02:21:54.610Z"
 }

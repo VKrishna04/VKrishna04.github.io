@@ -5,6 +5,7 @@
 	"summary": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
 	"status": "Live",
 	"category": "Web Tool",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -45,9 +46,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -58,5 +63,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/Eldritchify",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Eldritchify/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:33.817Z"
+	"generatedAt": "2026-09-01T02:21:55.749Z"
 }

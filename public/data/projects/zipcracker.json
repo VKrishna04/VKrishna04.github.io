@@ -5,6 +5,7 @@
 	"summary": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
 	"status": "Completed",
 	"category": "Security Tool",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -54,9 +55,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -67,5 +72,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/zipCracker",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/zipCracker/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:37.681Z"
+	"generatedAt": "2026-09-01T02:22:02.360Z"
 }

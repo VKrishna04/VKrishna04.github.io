@@ -5,6 +5,7 @@
 	"summary": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
 	"status": "Live",
 	"category": "Security",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -40,9 +41,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 2,
@@ -53,5 +58,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/BreachCheck",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/BreachCheck/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:37.143Z"
+	"generatedAt": "2026-09-01T02:22:01.627Z"
 }

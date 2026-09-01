@@ -5,6 +5,7 @@
 	"summary": "Refresh with inspirational quotes, GIFs and memes.",
 	"status": "Live",
 	"category": "Web App",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -40,9 +41,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -53,5 +58,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/Relax",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Relax/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:35.190Z"
+	"generatedAt": "2026-09-01T02:21:57.691Z"
 }

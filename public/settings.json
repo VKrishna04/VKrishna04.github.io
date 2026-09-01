@@ -267,7 +267,8 @@
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
     "paragraphs": [
       "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 8.55/10, graduating Jul 2026), based in Bengaluru and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
-      "I've competed at the national level and won: 1st runner-up at IIT Delhi CodeHive, 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000 prize), 1st at IIT Hyderabad Pathway Hackathon, and 1st at Microsoft Imagine Cup campus round — {{prizeTotal}} in prizes across 2025.",
+      "Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used.",
+      "I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — {{prizeTotal}} in prizes across 2025.",
       "On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,100+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL.",
       "My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
     ],
@@ -410,7 +411,7 @@
           },
           {
             "name": "Oracle Cloud",
-            "icon": "SiOracle",
+            "icon": "FaCloud",
             "color": "text-red-500"
           },
           {
@@ -617,6 +618,18 @@
           "textColor": "text-purple-200"
         },
         {
+          "title": "ITM Gwalior Code Kurukshetra — 1st Runner-up",
+          "subtitle": "ITM Gwalior · 2025",
+          "description": "1st runner-up at Code Kurukshetra with MomCare, an end-to-end pregnancy companion app covering the first trimester through birth and the newborn's early weeks — ₹35,000 prize.",
+          "icon": "FaMedal",
+          "gradient": "bg-gradient-to-br from-rose-600/20 to-orange-600/20",
+          "borderColor": "border-rose-500/30",
+          "hoverBorderColor": "hover:border-rose-400/50",
+          "bgColor": "bg-rose-500/20",
+          "iconColor": "text-rose-400",
+          "textColor": "text-rose-200"
+        },
+        {
           "title": "Pathway Hackathon — 1st Place",
           "subtitle": "IIT Hyderabad · Mar 2025",
           "description": "Won 1st place at IIT Hyderabad's Pathway Hackathon, earning ₹15,000 for building a high-impact AI-powered solution.",
@@ -656,7 +669,7 @@
           "title": "OCI 2025 Certified Architect Associate",
           "subtitle": "Oracle University · Jul 2025",
           "description": "Certified in Oracle Cloud Infrastructure architecture, compute, storage, networking, and security best practices.",
-          "icon": "SiOracle",
+          "icon": "FaCloud",
           "gradient": "bg-gradient-to-br from-red-600/20 to-orange-600/20",
           "borderColor": "border-red-500/30",
           "hoverBorderColor": "hover:border-red-400/50",
@@ -1868,6 +1881,201 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/zipCracker/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/zipCracker/issues"
         }
+      },
+      {
+        "id": "22",
+        "name": "dev-prune",
+        "icon": "SiRust",
+        "description": "Reclaim disk space from idle Git repositories. A Rust CLI that deletes node_modules, .venv, target and vendor only after the project's own package manager proves a lockfile can rebuild them.",
+        "technologies": [
+          "Rust",
+          "cargo",
+          "cli",
+          "npm",
+          "pip",
+          "cross-platform"
+        ],
+        "category": "CLI Tool",
+        "featured": false,
+        "showInAbout": true,
+        "showInProjects": true,
+        "status": "Active Development",
+        "startDate": "2026-08-12",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/dev-prune",
+        "liveUrl": "https://devprune.vkrishna04.me",
+        "demoUrl": "",
+        "documentationUrl": "https://github.com/Life-Experimentalist/dev-prune#readme",
+        "imageUrl": "",
+        "tags": [
+          "cache",
+          "cargo",
+          "cleanup",
+          "cli",
+          "command-line-tool",
+          "cross-platform",
+          "developer-tools",
+          "devops",
+          "disk-space",
+          "golang",
+          "lockfile",
+          "monorepo",
+          "node-modules",
+          "nodejs",
+          "npm",
+          "package-manager",
+          "productivity",
+          "prune",
+          "python",
+          "rust"
+        ],
+        "highlights": [
+          "Deletes nothing until it has verified, read-only, that a lockfile can rebuild it",
+          "There is no flag to skip that check",
+          "One Rust codebase published to crates.io, PyPI and npm",
+          "Runs on Windows, macOS and Linux, with devp as a short alias",
+          "Installs its own background schedule so idle repositories stay pruned"
+        ],
+        "stats": {
+          "stars": 3,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "statsUrls": {
+          "starsUrl": "https://github.com/Life-Experimentalist/dev-prune/stargazers",
+          "forksUrl": "https://github.com/Life-Experimentalist/dev-prune/network/members",
+          "watchersUrl": "https://github.com/Life-Experimentalist/dev-prune/watchers",
+          "issuesUrl": "https://github.com/Life-Experimentalist/dev-prune/issues"
+        }
+      },
+      {
+        "id": "23",
+        "name": "docs-rag",
+        "icon": "SiPython",
+        "description": "A strictly grounded RAG pipeline over documents you choose. It answers only from the sources you give it, cites the passages it used, and refuses when those documents do not support an answer - a constraint verified mechanically rather than merely requested in a prompt.",
+        "technologies": [
+          "Python",
+          "rag",
+          "gemini",
+          "numpy",
+          "pypdf",
+          "trafilatura",
+          "uv"
+        ],
+        "category": "AI/ML",
+        "featured": false,
+        "showInAbout": true,
+        "showInProjects": true,
+        "status": "Active Development",
+        "startDate": "2026-08-31",
+        "endDate": null,
+        "githubUrl": "https://github.com/FissionLife/docs-rag",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "https://github.com/FissionLife/docs-rag/blob/main/docs/RAG_GUIDE.md",
+        "imageUrl": "",
+        "tags": [
+          "rag",
+          "retrieval-augmented-generation",
+          "grounding",
+          "citations",
+          "python",
+          "gemini",
+          "embeddings",
+          "document-search",
+          "pdf",
+          "large-language-models",
+          "aws",
+          "uv"
+        ],
+        "highlights": [
+          "Answers only from the documents you supply, and refuses when they do not support one",
+          "Cites every passage it used, down to the page number for PDFs",
+          "Five dependencies: no LangChain, and no vector database",
+          "Indexes 244 AWS services from the Overview of Amazon Web Services whitepaper",
+          "Reads PDF, Markdown, TXT, HTML, RST and CSV, plus folders and http(s) URLs"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "statsUrls": {
+          "starsUrl": "https://github.com/FissionLife/docs-rag/stargazers",
+          "forksUrl": "https://github.com/FissionLife/docs-rag/network/members",
+          "watchersUrl": "https://github.com/FissionLife/docs-rag/watchers",
+          "issuesUrl": "https://github.com/FissionLife/docs-rag/issues"
+        }
+      },
+      {
+        "id": "24",
+        "name": "Code-Ledger",
+        "icon": "SiPreact",
+        "description": "Auto-commit every accepted LeetCode, GeeksforGeeks, Codeforces, NeetCode and takeuforward solution to your own GitHub repo - with AI code review, a live analytics dashboard, a knowledge graph, streaks and badges, bulk history import and cross-device sync. No servers, no accounts, no payments.",
+        "technologies": [
+          "JavaScript",
+          "Preact",
+          "manifest-v3",
+          "chrome-extension",
+          "firefox-addon",
+          "github-api",
+          "indexeddb"
+        ],
+        "category": "Browser Extension",
+        "featured": false,
+        "showInAbout": true,
+        "showInProjects": true,
+        "status": "Active Development",
+        "startDate": "2026-04-24",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/Code-Ledger",
+        "liveUrl": "https://codeledger.vkrishna04.me",
+        "demoUrl": "",
+        "documentationUrl": "https://github.com/Life-Experimentalist/Code-Ledger#readme",
+        "imageUrl": "",
+        "tags": [
+          "ai-code-review",
+          "analytics",
+          "browser-extension",
+          "chrome-extension",
+          "code-ledger",
+          "code-tracker",
+          "codeforces",
+          "competitive-programming",
+          "dsa",
+          "firefox-addon",
+          "geeksforgeeks",
+          "gfg",
+          "github-automation",
+          "github-extension",
+          "knowledge-graph",
+          "leetcode",
+          "manifest-v3",
+          "neetcode",
+          "preact",
+          "takeuforward"
+        ],
+        "highlights": [
+          "Commits accepted solutions from five judges to a repo you own",
+          "Commits land in under three seconds through the GitHub Trees API",
+          "AI code review across six providers, reaching over 95% of commits",
+          "Live analytics dashboard, knowledge graph, streaks and badges",
+          "No servers, no accounts, no payments - it all runs in the browser"
+        ],
+        "stats": {
+          "stars": 2,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "statsUrls": {
+          "starsUrl": "https://github.com/Life-Experimentalist/Code-Ledger/stargazers",
+          "forksUrl": "https://github.com/Life-Experimentalist/Code-Ledger/network/members",
+          "watchersUrl": "https://github.com/Life-Experimentalist/Code-Ledger/watchers",
+          "issuesUrl": "https://github.com/Life-Experimentalist/Code-Ledger/issues"
+        }
       }
     ],
     "staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), showInAbout (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
@@ -1962,7 +2170,21 @@
       "currency": "INR",
       "icon": "TrophyIcon"
     },
-    "experiences": [],
+    "experiences": [
+      {
+        "title": "Software Intern",
+        "company": "Fission Labs",
+        "period": "Jul 2026 - Dec 2026",
+        "location": "Jubilee Hills, Hyderabad",
+        "description": [
+          "Software internship on an AI and Python stack, working up from the language itself to retrieval-augmented generation.",
+          "Began in core Python, then moved to FastAPI to build services.",
+          "Backed those services with PostgreSQL and designed the REST APIs on top of them.",
+          "Now working on RAG: retrieval pipelines that answer from a chosen set of documents rather than from the model alone.",
+          "Built docs-rag, a strictly grounded RAG pipeline that answers only from the documents it is given and cites the passages it used."
+        ]
+      }
+    ],
     "experiencesNote": "Configure work experience entries - each should have title, company, period, location, and description array",
     "experiencesHeading": "Work Experience",
     "experiencesIcon": "BriefcaseIcon",
@@ -1997,6 +2219,11 @@
             "name": "TypeScript",
             "icon": "SiTypescript",
             "color": "text-blue-500"
+          },
+          {
+            "name": "Rust",
+            "icon": "SiRust",
+            "color": "text-orange-400"
           }
         ]
       },
@@ -2025,7 +2252,7 @@
           },
           {
             "name": "FastAPI",
-            "icon": "SiFirebase",
+            "icon": "SiFastapi",
             "color": "text-green-400"
           },
           {
@@ -2085,8 +2312,48 @@
           },
           {
             "name": "OCI",
-            "icon": "SiOracle",
+            "icon": "FaCloud",
             "color": "text-blue-400"
+          }
+        ]
+      },
+      {
+        "category": "AI & Machine Learning",
+        "items": [
+          {
+            "name": "RAG Pipelines",
+            "icon": "FaBrain",
+            "color": "text-pink-400"
+          },
+          {
+            "name": "TensorFlow",
+            "icon": "SiTensorflow",
+            "color": "text-orange-400"
+          },
+          {
+            "name": "scikit-learn",
+            "icon": "SiScikitlearn",
+            "color": "text-orange-300"
+          },
+          {
+            "name": "MediaPipe",
+            "icon": "SiMediapipe",
+            "color": "text-teal-400"
+          },
+          {
+            "name": "Pandas",
+            "icon": "SiPandas",
+            "color": "text-purple-400"
+          },
+          {
+            "name": "NumPy",
+            "icon": "SiNumpy",
+            "color": "text-blue-400"
+          },
+          {
+            "name": "Ollama",
+            "icon": "SiOllama",
+            "color": "text-gray-300"
           }
         ]
       }
@@ -2325,6 +2592,18 @@
     "volunteerExperienceIcon": "HeartIcon",
     "personalProjects": [
       {
+        "name": "Code-Ledger",
+        "technologies": [
+          "JavaScript",
+          "Chrome MV3",
+          "GitHub Trees API",
+          "Multi-provider AI"
+        ],
+        "description": "Browser extension that commits DSA solutions in under 3 seconds by writing atomic single-SHA commits through the GitHub Trees API, eliminating partial-commit failures. A three-handler abstraction (platform / AI / git) makes any of six AI providers swappable without touching the core; over 95% of accepted solutions ship with an AI review attached, with zero external servers — everything lands in the user's own GitHub.",
+        "githubUrl": "https://github.com/Life-Experimentalist/Code-Ledger",
+        "liveUrl": "https://codeledger.vkrishna04.me"
+      },
+      {
         "name": "EquiLens",
         "technologies": [
           "Python",
@@ -2383,6 +2662,38 @@
         "description": "Cross-browser extension (Chrome, Edge, Firefox) enhancing machine-translated web novels with Gemini AI and an extensible site-adapter architecture for rapid platform support.",
         "githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
         "liveUrl": "http://ranobe.vkrishna04.me/"
+      },
+      {
+        "name": "MomCare",
+        "technologies": [
+          "Python",
+          "REST APIs",
+          "Mobile"
+        ],
+        "description": "End-to-end pregnancy companion app covering the first trimester through birth and the newborn's early weeks. Won 1st runner-up at ITM Gwalior Code Kurukshetra (INR 35,000) and 1st place at the Microsoft Imagine Cup campus round."
+      },
+      {
+        "name": "cSpell Sync",
+        "technologies": [
+          "TypeScript",
+          "VS Code API",
+          "Node.js",
+          "GitHub Actions"
+        ],
+        "description": "VS Code extension with 2,100+ Marketplace installs that keeps cSpell dictionaries synchronised in both directions, with conflict resolution and fully automated CI/CD publishing — no manual deploy steps.",
+        "githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
+        "liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
+      },
+      {
+        "name": "CFlair-Counter",
+        "technologies": [
+          "Cloudflare Workers",
+          "REST APIs",
+          "Distributed state"
+        ],
+        "description": "Serverless edge API serving globally distributed requests with sub-10ms responses on Cloudflare's network. Handles distributed state, cache-control headers, DNS routing and SVG badge generation with zero cold-start servers.",
+        "githubUrl": "https://github.com/Life-Experimentalist/CFlair-Counter",
+        "liveUrl": "https://counter.vkrishna04.me/"
       }
     ],
     "personalProjectsNote": "Configure personal projects - each should have name, technologies array (with icon and color), period, description, githubUrl (optional), liveUrl (optional), demoUrl (optional), documentationUrl (optional)",
@@ -2760,7 +3071,7 @@
         "name": "Heroku",
         "key": "heroku",
         "audience": "professional",
-        "icon": "SiHeroku",
+        "icon": "DiHeroku",
         "url": "",
         "label": "Heroku Profile",
         "description": "My deployed applications and services",

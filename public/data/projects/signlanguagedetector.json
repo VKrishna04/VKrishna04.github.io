@@ -5,6 +5,7 @@
 	"summary": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
 	"status": "Completed",
 	"category": "AI/ML",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -49,9 +50,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -62,5 +67,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/SignLanguageDetector",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/SignLanguageDetector/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:36.265Z"
+	"generatedAt": "2026-09-01T02:21:59.028Z"
 }

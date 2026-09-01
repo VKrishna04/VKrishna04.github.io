@@ -22,7 +22,6 @@ import {
 	AcademicCapIcon,
 	BriefcaseIcon,
 	CheckBadgeIcon,
-	CodeBracketIcon,
 	EyeIcon,
 	ShieldCheckIcon,
 	TrophyIcon,
@@ -36,36 +35,9 @@ import {
 	ClipboardDocumentCheckIcon,
 	ChevronDownIcon,
 } from "@heroicons/react/24/outline"
-import {
-	FaReact,
-	FaNodeJs,
-	FaPython,
-	FaGitAlt,
-	FaDocker,
-	FaAws,
-	FaHtml5,
-	FaCss3Alt,
-	FaVuejs,
-	FaJava,
-	FaDatabase,
-	FaGithub,
-} from "react-icons/fa"
-import {
-	SiJavascript,
-	SiTypescript,
-	SiMongodb,
-	SiPostgresql,
-	SiTailwindcss,
-	SiExpress,
-	SiRedis,
-	SiGraphql,
-	SiFirebase,
-	SiVercel,
-	SiStripe,
-	SiNotion,
-	SiFigma,
-} from "react-icons/si"
+import { FaGithub } from "react-icons/fa"
 import { fetchSettings } from "../utils/settingsCache"
+import { getCachedIcon } from "../utils/iconSystemCore"
 
 const Resume = () => {
 	const [settings, setSettings] = useState({})
@@ -205,43 +177,14 @@ const Resume = () => {
 		return settings.resume?.education || []
 	}
 
-	// Icon mapping for converting string names to actual icon components
-	const iconMap = {
-		// Heroicons
-		CodeBracketIcon,
-		// React Icons - FA
-		FaReact,
-		FaNodeJs,
-		FaPython,
-		FaGitAlt,
-		FaDocker,
-		FaAws,
-		FaHtml5,
-		FaCss3Alt,
-		FaVuejs,
-		FaJava,
-		FaDatabase,
-		FaGithub,
-		// React Icons - SI
-		SiJavascript,
-		SiTypescript,
-		SiMongodb,
-		SiPostgresql,
-		SiTailwindcss,
-		SiExpress,
-		SiRedis,
-		SiGraphql,
-		SiFirebase,
-		SiVercel,
-		SiStripe,
-		SiNotion,
-		SiFigma,
-	}
-
-	// Get icon component from string name
-	const getIconComponent = (iconName) => {
-		return iconMap[iconName]
-	}
+	// Get icon component from string name.
+	//
+	// This used to be a hand-maintained map of ~25 imports, which meant any
+	// other name in settings.json silently rendered nothing — and made it easy
+	// to reach for a name that happened to be in the map rather than the right
+	// logo (FastAPI carried SiFirebase for exactly that reason). The generated
+	// map covers every name the build actually found, so it is the one source.
+	const getIconComponent = (iconName) => getCachedIcon(iconName)
 
 	// Get skills from settings
 	const getSkills = () => {

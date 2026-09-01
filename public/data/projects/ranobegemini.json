@@ -5,6 +5,7 @@
 	"summary": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
 	"status": "Active Development",
 	"category": "Browser Extension",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -37,9 +38,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 3,
@@ -50,5 +55,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/RanobeGemini",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/RanobeGemini/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:32.439Z"
+	"generatedAt": "2026-09-01T02:21:53.923Z"
 }

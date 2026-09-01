@@ -5,6 +5,7 @@
 	"summary": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
 	"status": "Completed",
 	"category": "AI/ML",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -47,9 +48,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 1,
@@ -60,5 +65,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/Facial-Emotion-Detector",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Facial-Emotion-Detector/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:35.729Z"
+	"generatedAt": "2026-09-01T02:21:58.332Z"
 }

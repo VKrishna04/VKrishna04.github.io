@@ -5,6 +5,7 @@
 	"summary": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
 	"status": "Active Development",
 	"category": "AI/ML",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -45,9 +46,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 2,
@@ -58,5 +63,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/EquiLens",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/EquiLens/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:33.268Z"
+	"generatedAt": "2026-09-01T02:28:35.142Z"
 }

@@ -27,7 +27,7 @@
  */
 
 import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import {
 	ArrowLeftIcon,
@@ -37,8 +37,43 @@ import {
 	PlayIcon,
 } from "@heroicons/react/24/outline"
 import { applyPageMeta } from "../utils/pageMeta"
+import ProjectGallery from "../components/ProjectGallery"
+import UnifiedIcon from "../components/UnifiedIcon"
+import {
+	normalizeAppearance,
+	normalizeIcon,
+	normalizeMedia,
+	normalizeSections,
+} from "../utils/projectManifest"
+
+// react-markdown is only needed by pages whose repo opted into a README, so it
+// loads on demand instead of riding in the main bundle.
+const ProjectReadme = lazy(() => import("../components/ProjectReadme"))
 
 const SITE = "https://vkrishna04.me"
+
+/*
+ * A manifest can pick a look for its own page, but only from these. The values
+ * are literal class strings so Tailwind's scanner sees them; a manifest never
+ * supplies CSS. Omitting `appearance` — which is the right default for almost
+ * every project — leaves the portfolio's own styling in charge.
+ */
+const THEME_GRADIENTS = {
+	default: "from-slate-900 via-purple-900 to-slate-900",
+	aurora: "from-slate-900 via-emerald-900 to-slate-900",
+	ember: "from-slate-900 via-orange-900 to-slate-900",
+	ocean: "from-slate-900 via-sky-900 to-slate-900",
+	forest: "from-slate-900 via-green-900 to-slate-900",
+	mono: "from-neutral-900 via-neutral-800 to-neutral-900",
+	midnight: "from-black via-slate-900 to-black",
+}
+
+const BACKGROUND_LAYERS = {
+	grid: "bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:56px_56px]",
+	dots: "bg-[radial-gradient(rgba(255,255,255,0.10)_1px,transparent_1px)] bg-[size:22px_22px]",
+	glow: "bg-[radial-gradient(60%_45%_at_50%_0%,rgba(168,85,247,0.22),transparent_70%)]",
+	plain: "",
+}
 
 const LINK_META = {
 	repo: { label: "Source code", Icon: CodeBracketIcon },
@@ -243,22 +278,31 @@ const ProjectDetail = () => {
 				if (cancelled || !manifest?.sections?.length) return
 				// Only take the fields a repo owns; never let it change the slug
 				// or links the portfolio derived, so a stale manifest can't
-				// redirect the page somewhere unexpected.
-				setProject((prev) =>
-					prev
-						? {
-								...prev,
-								summary: manifest.summary || prev.summary,
-								highlights: manifest.highlights?.length
-									? manifest.highlights
-									: prev.highlights,
-								metrics: manifest.metrics?.length
-									? manifest.metrics
-									: prev.metrics,
-								sections: manifest.sections,
-							}
-						: prev
-				)
+				// redirect the page somewhere unexpected. Everything taken here
+				// goes through the same normalizers the build step uses, so a
+				// live edit cannot slip past a check the build would have made.
+				setProject((prev) => {
+					if (!prev) return prev
+					const media = normalizeMedia(manifest.media, prev.media?.cover)
+					return {
+						...prev,
+						summary: manifest.summary || prev.summary,
+						highlights: manifest.highlights?.length
+							? manifest.highlights
+							: prev.highlights,
+						metrics: manifest.metrics?.length
+							? manifest.metrics
+							: prev.metrics,
+						sections: normalizeSections(manifest.sections),
+						icon: normalizeIcon(manifest.icon) || prev.icon,
+						appearance: normalizeAppearance(manifest.appearance),
+						// The README body is fetched at build time, so a live
+						// manifest can retitle or collapse it but not swap it
+						// for another file until the next build.
+						readme: prev.readme,
+						media: media.screenshots.length || media.video ? media : prev.media,
+					}
+				})
 			})
 			.catch(() => {
 				/* build-time content stands */
@@ -325,9 +369,22 @@ const ProjectDetail = () => {
 		.map(([key, value]) => [key, safeUrl(value)])
 		.filter(([key, value]) => value && LINK_META[key])
 
+	// Already normalized upstream — read it defensively anyway, because a
+	// cached JSON file written by an older build has no appearance key at all.
+	const appearance = project.appearance || {}
+	const gradient = THEME_GRADIENTS[appearance.theme] || THEME_GRADIENTS.default
+	const backgroundLayer = BACKGROUND_LAYERS[appearance.background] ?? null
+	const accent = appearance.accent || ""
+
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-20">
-			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+		<div className={`relative min-h-screen bg-gradient-to-br ${gradient} pt-20`}>
+			{backgroundLayer && (
+				<div
+					aria-hidden="true"
+					className={`pointer-events-none absolute inset-0 ${backgroundLayer}`}
+				/>
+			)}
+			<div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 				<Link
 					to="/projects"
 					className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-200 transition-colors mb-8"
@@ -355,9 +412,29 @@ const ProjectDetail = () => {
 						{period && <span className="text-gray-400">{period}</span>}
 					</div>
 
-					<h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-						{project.name}
-					</h1>
+					<div className="flex items-center gap-4 mb-4">
+						{project.icon && (
+							<UnifiedIcon
+								name={project.icon}
+								className="h-10 w-10 shrink-0 text-white/90 md:h-12 md:w-12"
+								style={accent ? { color: accent } : undefined}
+								fallback={<span className="hidden" />}
+							/>
+						)}
+						<h1
+							className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+							style={
+								// An accent replaces the gradient outright — clipping a
+								// gradient to text and then overriding the colour would
+								// just render nothing.
+								accent
+									? { backgroundImage: "none", color: accent }
+									: undefined
+							}
+						>
+							{project.name}
+						</h1>
+					</div>
 
 					{project.tagline && (
 						<p className="text-xl text-gray-200 mb-4">{project.tagline}</p>
@@ -449,29 +526,20 @@ const ProjectDetail = () => {
 					</div>
 				)}
 
-				{project.media?.screenshots?.length > 0 && (
-					<section className="mt-12 space-y-6">
-						<h2 className="text-2xl font-bold text-white">Screenshots</h2>
-						{project.media.screenshots.map((shot, i) => {
-							const url = safeUrl(shot.url)
-							if (!url) return null
-							return (
-								<figure key={i}>
-									<img
-										src={url}
-										alt={shot.alt || `${project.name} screenshot ${i + 1}`}
-										loading="lazy"
-										className="w-full rounded-xl border border-white/10"
-									/>
-									{shot.caption && (
-										<figcaption className="mt-2 text-sm text-gray-400">
-											{shot.caption}
-										</figcaption>
-									)}
-								</figure>
-							)
-						})}
-					</section>
+				<ProjectGallery
+					media={project.media}
+					name={project.name}
+					accent={accent}
+				/>
+
+				{project.readme?.markdown && (
+					<Suspense
+						fallback={
+							<div className="mt-16 h-4 w-1/3 animate-pulse rounded bg-white/[0.06]" />
+						}
+					>
+						<ProjectReadme readme={project.readme} accent={accent} />
+					</Suspense>
 				)}
 
 				{project.source === "settings" && project.repo && (

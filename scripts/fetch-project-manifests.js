@@ -29,11 +29,20 @@
  * The build never ships an empty project page.
  */
 
-/* global process */
+/* global process, Buffer */
 
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+// The whitelists the browser applies to a live manifest, applied here too, so
+// build-time and live content go through exactly one set of rules.
+import {
+	normalizeAppearance,
+	normalizeIcon,
+	normalizeMedia,
+	normalizeReadme,
+	normalizeSections,
+} from "../src/utils/projectManifest.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, "..")
@@ -41,9 +50,9 @@ const OUT_DIR = path.join(ROOT, "public", "data", "projects")
 const TIMEOUT_MS = 10000
 const MANIFEST_PATH = ".portfolio/project.json"
 
-// Section shapes the renderer knows about. Anything else is dropped here
-// rather than in the browser, so an unknown type can never break a page.
-const SECTION_TYPES = new Set(["prose", "list", "code", "table", "media"])
+// A README is Markdown from someone else's repo. Cap it so one enormous file
+// cannot bloat every page payload.
+const README_MAX_BYTES = 100_000
 
 // Deliberately does NOT split camelCase: the slug should be the repo name a
 // person would guess and type ("equilens", not "equi-lens"). A repo that wants
@@ -69,7 +78,9 @@ function depthScore(project) {
 		(project.sections?.length || 0) * 3 +
 		(project.highlights?.length || 0) +
 		(project.metrics?.length || 0) * 2 +
-		(project.media?.screenshots?.length || 0) * 2
+		(project.media?.screenshots?.length || 0) * 2 +
+		(project.media?.video ? 3 : 0) +
+		(project.readme?.markdown ? 4 : 0)
 	)
 }
 
@@ -82,6 +93,7 @@ function baseFromSettings(sp) {
 		summary: sp.description || "",
 		status: sp.status || "",
 		category: sp.category || "",
+		icon: normalizeIcon(sp.icon),
 		featured: !!sp.featured,
 		role: "",
 		period: { start: sp.startDate || null, end: sp.endDate || null },
@@ -95,8 +107,15 @@ function baseFromSettings(sp) {
 			demo: sp.demoUrl || "",
 			docs: sp.documentationUrl || "",
 		},
-		media: { cover: sp.imageUrl || "", screenshots: [] },
+		media: {
+			cover: sp.imageUrl || "",
+			screenshots: [],
+			layout: "auto",
+			video: null,
+		},
 		sections: [],
+		readme: null,
+		appearance: null,
 		seo: null,
 		stats: sp.stats || null,
 		source: "settings",
@@ -116,10 +135,6 @@ function merge(base, manifest) {
 			? a
 			: b
 
-	const sections = (manifest.sections || [])
-		.filter((s) => s && SECTION_TYPES.has(s.type))
-		.slice(0, 20)
-
 	return {
 		...base,
 		slug: manifest.slug ? slugify(manifest.slug) : base.slug,
@@ -128,6 +143,7 @@ function merge(base, manifest) {
 		summary: pick(base.summary, manifest.summary),
 		status: pick(base.status, manifest.status),
 		category: pick(base.category, manifest.category),
+		icon: normalizeIcon(manifest.icon) || base.icon,
 		role: manifest.role || "",
 		period: {
 			start: pick(base.period.start, manifest.period?.start),
@@ -138,11 +154,12 @@ function merge(base, manifest) {
 		highlights: pick(base.highlights, manifest.highlights),
 		metrics: (manifest.metrics || []).filter((m) => m?.label && m?.value),
 		links: { ...base.links, ...(manifest.links || {}) },
-		media: {
-			cover: pick(base.media.cover, manifest.media?.cover),
-			screenshots: (manifest.media?.screenshots || []).filter((s) => s?.url),
-		},
-		sections,
+		media: normalizeMedia(manifest.media, base.media.cover),
+		sections: normalizeSections(manifest.sections),
+		// The markdown itself is fetched separately in main(), where the repo is
+		// known; this only records that the repo asked for it and from where.
+		readme: normalizeReadme(manifest.readme),
+		appearance: normalizeAppearance(manifest.appearance),
 		seo: manifest.seo || null,
 		manifestVersion: manifest.manifestVersion || 1,
 		source: "manifest",
@@ -157,6 +174,49 @@ async function fetchManifest(url) {
 	if (res.status === 404) return null // repo simply has not opted in yet
 	if (!res.ok) throw new Error(`HTTP ${res.status}`)
 	return res.json()
+}
+
+// Fetched at build time, not in the browser, so the Markdown is in the
+// prerendered HTML and a crawler sees it. Returns null on any failure — a
+// README is a bonus, never a reason to fail a page.
+async function fetchReadme(repo, readme) {
+	const url = `https://raw.githubusercontent.com/${repo}/HEAD/${readme.path}`
+	try {
+		const res = await fetch(url, {
+			signal: AbortSignal.timeout(TIMEOUT_MS),
+			headers: { Accept: "text/plain" },
+		})
+		if (!res.ok) {
+			console.warn(`⚠️ ${repo}: ${readme.path} not fetched (HTTP ${res.status})`)
+			return null
+		}
+		let markdown = await res.text()
+		let truncated = false
+		if (Buffer.byteLength(markdown, "utf8") > README_MAX_BYTES) {
+			markdown = Buffer.from(markdown, "utf8")
+				.subarray(0, README_MAX_BYTES)
+				.toString("utf8")
+			// Drop the last line, which the byte cut almost certainly bisected.
+			markdown = markdown.slice(0, markdown.lastIndexOf("\n"))
+			truncated = true
+			console.warn(
+				`ℹ️ ${repo}: ${readme.path} truncated at ${README_MAX_BYTES} bytes`
+			)
+		}
+		return {
+			...readme,
+			markdown,
+			truncated,
+			// react-markdown resolves the repo's relative paths against these:
+			// images come from raw, links go to the rendered file on github.com.
+			imageBase: `https://raw.githubusercontent.com/${repo}/HEAD/`,
+			linkBase: `https://github.com/${repo}/blob/HEAD/`,
+			sourceUrl: url,
+		}
+	} catch (e) {
+		console.warn(`⚠️ ${repo}: ${readme.path} fetch failed (${e.message})`)
+		return null
+	}
 }
 
 // Rewrite only when something other than the timestamp changed. Otherwise every
@@ -191,6 +251,7 @@ async function main() {
 
 	const index = []
 	let withManifest = 0
+	let withReadme = 0
 	let kept = 0
 
 	for (const sp of staticProjects) {
@@ -227,6 +288,13 @@ async function main() {
 			}
 		}
 
+		// Only ask for the README once the merge says the repo opted in, and only
+		// when it does not already carry markdown from the cached-manifest path.
+		if (project.readme && !project.readme.markdown && project.repo) {
+			project.readme = await fetchReadme(project.repo, project.readme)
+			if (project.readme) withReadme++
+		}
+
 		project.generatedAt = new Date().toISOString()
 		writeIfChanged(path.join(OUT_DIR, `${project.slug}.json`), project)
 
@@ -236,6 +304,7 @@ async function main() {
 			summary: project.summary,
 			status: project.status,
 			category: project.category,
+			icon: project.icon || "",
 			featured: project.featured,
 			technologies: (project.technologies || []).slice(0, 8),
 			cover: project.media?.cover || "",
@@ -254,7 +323,7 @@ async function main() {
 
 	const settingsOnly = index.length - withManifest - kept
 	console.log(
-		`✅ Project pages: ${index.length} generated — ${withManifest} from repo manifests, ${kept} kept from cache, ${settingsOnly} settings-only`
+		`✅ Project pages: ${index.length} generated — ${withManifest} from repo manifests, ${kept} kept from cache, ${settingsOnly} settings-only, ${withReadme} with a rendered README`
 	)
 	const thin = index.filter((p) => p.depth < 6).map((p) => p.slug)
 	if (thin.length) {

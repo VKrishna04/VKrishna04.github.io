@@ -1,0 +1,79 @@
+{
+	"slug": "dev-prune",
+	"name": "dev-prune",
+	"tagline": "",
+	"summary": "Reclaim disk space from idle Git repositories. A Rust CLI that deletes node_modules, .venv, target and vendor only after the project's own package manager proves a lockfile can rebuild them.",
+	"status": "Active Development",
+	"category": "CLI Tool",
+	"icon": "SiRust",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2026-08-12",
+		"end": null
+	},
+	"technologies": [
+		"Rust",
+		"cargo",
+		"cli",
+		"npm",
+		"pip",
+		"cross-platform"
+	],
+	"tags": [
+		"cache",
+		"cargo",
+		"cleanup",
+		"cli",
+		"command-line-tool",
+		"cross-platform",
+		"developer-tools",
+		"devops",
+		"disk-space",
+		"golang",
+		"lockfile",
+		"monorepo",
+		"node-modules",
+		"nodejs",
+		"npm",
+		"package-manager",
+		"productivity",
+		"prune",
+		"python",
+		"rust"
+	],
+	"highlights": [
+		"Deletes nothing until it has verified, read-only, that a lockfile can rebuild it",
+		"There is no flag to skip that check",
+		"One Rust codebase published to crates.io, PyPI and npm",
+		"Runs on Windows, macOS and Linux, with devp as a short alias",
+		"Installs its own background schedule so idle repositories stay pruned"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/dev-prune",
+		"live": "https://devprune.vkrishna04.me",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/dev-prune#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": null,
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 3,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/dev-prune",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/dev-prune/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-09-01T03:09:58.915Z"
+}

@@ -1,0 +1,72 @@
+{
+	"slug": "docs-rag",
+	"name": "docs-rag",
+	"tagline": "",
+	"summary": "A strictly grounded RAG pipeline over documents you choose. It answers only from the sources you give it, cites the passages it used, and refuses when those documents do not support an answer - a constraint verified mechanically rather than merely requested in a prompt.",
+	"status": "Active Development",
+	"category": "AI/ML",
+	"icon": "SiPython",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2026-08-31",
+		"end": null
+	},
+	"technologies": [
+		"Python",
+		"rag",
+		"gemini",
+		"numpy",
+		"pypdf",
+		"trafilatura",
+		"uv"
+	],
+	"tags": [
+		"rag",
+		"retrieval-augmented-generation",
+		"grounding",
+		"citations",
+		"python",
+		"gemini",
+		"embeddings",
+		"document-search",
+		"pdf",
+		"large-language-models",
+		"aws",
+		"uv"
+	],
+	"highlights": [
+		"Answers only from the documents you supply, and refuses when they do not support one",
+		"Cites every passage it used, down to the page number for PDFs",
+		"Five dependencies: no LangChain, and no vector database",
+		"Indexes 244 AWS services from the Overview of Amazon Web Services whitepaper",
+		"Reads PDF, Markdown, TXT, HTML, RST and CSV, plus folders and http(s) URLs"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/FissionLife/docs-rag",
+		"live": "",
+		"demo": "",
+		"docs": "https://github.com/FissionLife/docs-rag/blob/main/docs/RAG_GUIDE.md"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": null,
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "FissionLife/docs-rag",
+	"manifestUrl": "https://raw.githubusercontent.com/FissionLife/docs-rag/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-09-01T03:09:59.283Z"
+}

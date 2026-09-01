@@ -5,6 +5,7 @@
 	"summary": "VS Code Extension to save your project at working save points.",
 	"status": "Maintenance",
 	"category": "VS Code Extension",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -43,9 +44,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 1,
@@ -56,5 +61,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/Save-Sync",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Save-Sync/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:33.544Z"
+	"generatedAt": "2026-09-01T02:21:55.386Z"
 }

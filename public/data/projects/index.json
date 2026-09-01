@@ -1,13 +1,79 @@
 {
-	"generatedAt": "2026-08-30T20:11:37.697Z",
-	"count": 21,
+	"generatedAt": "2026-09-01T03:09:59.659Z",
+	"count": 24,
 	"projects": [
+		{
+			"slug": "code-ledger",
+			"name": "Code-Ledger",
+			"summary": "Auto-commit every accepted LeetCode, GeeksforGeeks, Codeforces, NeetCode and takeuforward solution to your own GitHub repo - with AI code review, a live analytics dashboard, a knowledge graph, streaks and badges, bulk history import and cross-device sync. No servers, no accounts, no payments.",
+			"status": "Active Development",
+			"category": "Browser Extension",
+			"icon": "SiPreact",
+			"featured": false,
+			"technologies": [
+				"JavaScript",
+				"Preact",
+				"manifest-v3",
+				"chrome-extension",
+				"firefox-addon",
+				"github-api",
+				"indexeddb"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Code-Ledger",
+			"source": "settings",
+			"depth": 5
+		},
+		{
+			"slug": "dev-prune",
+			"name": "dev-prune",
+			"summary": "Reclaim disk space from idle Git repositories. A Rust CLI that deletes node_modules, .venv, target and vendor only after the project's own package manager proves a lockfile can rebuild them.",
+			"status": "Active Development",
+			"category": "CLI Tool",
+			"icon": "SiRust",
+			"featured": false,
+			"technologies": [
+				"Rust",
+				"cargo",
+				"cli",
+				"npm",
+				"pip",
+				"cross-platform"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/dev-prune",
+			"source": "settings",
+			"depth": 5
+		},
+		{
+			"slug": "docs-rag",
+			"name": "docs-rag",
+			"summary": "A strictly grounded RAG pipeline over documents you choose. It answers only from the sources you give it, cites the passages it used, and refuses when those documents do not support an answer - a constraint verified mechanically rather than merely requested in a prompt.",
+			"status": "Active Development",
+			"category": "AI/ML",
+			"icon": "SiPython",
+			"featured": false,
+			"technologies": [
+				"Python",
+				"rag",
+				"gemini",
+				"numpy",
+				"pypdf",
+				"trafilatura",
+				"uv"
+			],
+			"cover": "",
+			"repo": "FissionLife/docs-rag",
+			"source": "settings",
+			"depth": 5
+		},
 		{
 			"slug": "equilens",
 			"name": "EquiLens",
 			"summary": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
 			"status": "Active Development",
 			"category": "AI/ML",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -27,6 +93,7 @@
 			"summary": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
 			"status": "Live",
 			"category": "Full Stack",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"React",
@@ -49,6 +116,7 @@
 			"summary": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
 			"status": "Active Development",
 			"category": "DevOps",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"TypeScript",
@@ -67,6 +135,7 @@
 			"summary": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
 			"status": "Live",
 			"category": "Security",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -85,6 +154,7 @@
 			"summary": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
 			"status": "Live",
 			"category": "Backend",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"HTML",
@@ -104,6 +174,7 @@
 			"summary": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
 			"status": "Live",
 			"category": "Backend",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -123,6 +194,7 @@
 			"summary": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
 			"status": "Maintenance",
 			"category": "VS Code Extension",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"TypeScript",
@@ -141,6 +213,7 @@
 			"summary": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
 			"status": "Live",
 			"category": "Web Tool",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"HTML",
@@ -159,6 +232,7 @@
 			"summary": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
 			"status": "Live",
 			"category": "Full Stack",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"JavaScript",
@@ -177,6 +251,7 @@
 			"summary": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
 			"status": "Completed",
 			"category": "AI/ML",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -197,6 +272,7 @@
 			"summary": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
 			"status": "Live",
 			"category": "Blockchain",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -217,6 +293,7 @@
 			"summary": "Parking Ticket Management System for tracking and managing parking tickets, including payment processing, ticket history, and notifications.",
 			"status": "Completed",
 			"category": "Full Stack",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -236,6 +313,7 @@
 			"summary": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
 			"status": "Active Development",
 			"category": "Browser Extension",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"JavaScript",
@@ -255,6 +333,7 @@
 			"summary": "Refresh with inspirational quotes, GIFs and memes.",
 			"status": "Live",
 			"category": "Web App",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"JavaScript",
@@ -273,6 +352,7 @@
 			"summary": "VS Code Extension to save your project at working save points.",
 			"status": "Maintenance",
 			"category": "VS Code Extension",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"TypeScript",
@@ -290,6 +370,7 @@
 			"summary": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
 			"status": "Completed",
 			"category": "AI/ML",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -311,6 +392,7 @@
 			"summary": "Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.",
 			"status": "Active Development",
 			"category": "Full Stack",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"TypeScript",
@@ -330,6 +412,7 @@
 			"summary": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
 			"status": "Active Development",
 			"category": "Browser Extension",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"HTML",
@@ -349,6 +432,7 @@
 			"summary": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
 			"status": "Active Development",
 			"category": "Browser Extension",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"JavaScript",
@@ -366,6 +450,7 @@
 			"summary": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
 			"status": "Completed",
 			"category": "Security Tool",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"Python",
@@ -384,6 +469,7 @@
 			"summary": "Dermatology diagnosis and skin condition assessment tool using machine learning.",
 			"status": "Completed",
 			"category": "AI/ML",
+			"icon": "",
 			"featured": false,
 			"technologies": [
 				"PureBasic",

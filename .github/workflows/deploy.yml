@@ -69,6 +69,10 @@ jobs:
         run: |
           node scripts/validate-json.js public/settings.json
           node scripts/validate-json.js public/settings.schema.json
+          # Parsing is not enough: this one compiles the schemas and checks
+          # settings.json against them, so a $ref that resolves nowhere or a
+          # section schema nested where JSON Schema ignores it fails the build.
+          node scripts/validate-schema.js
 
       # No VITE_RESUME_LINK here on purpose: that env var overrides
       # settings.json in Resume.jsx, so a stale secret silently beat every

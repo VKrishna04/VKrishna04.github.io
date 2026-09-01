@@ -5,6 +5,7 @@
 	"summary": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
 	"status": "Active Development",
 	"category": "Browser Extension",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -38,9 +39,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 1,
@@ -51,5 +56,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/Youtube-Keystrokes-Blocker",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:32.707Z"
+	"generatedAt": "2026-09-01T02:21:54.248Z"
 }

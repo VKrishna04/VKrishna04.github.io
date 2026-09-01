@@ -5,6 +5,7 @@
 	"summary": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
 	"status": "Active Development",
 	"category": "DevOps",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -47,9 +48,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -60,5 +65,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/ActionsCounter",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/ActionsCounter/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:35.989Z"
+	"generatedAt": "2026-09-01T02:21:58.677Z"
 }

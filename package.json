@@ -36,7 +36,7 @@
 		"lint": "eslint .",
 		"validate": "npm run validate:integrity",
 		"validate:integrity": "node scripts/validate-build-integrity.js",
-		"validate:settings": "node scripts/validate-json.js public/settings.json",
+		"validate:settings": "node scripts/validate-json.js public/settings.json && node scripts/validate-schema.js",
 		"build": "npm run validate:integrity && npm run prepare-data && npm run build-core && node scripts/prerender.js",
 		"prepare-data": "node scripts/fetch-codeledger.js && node scripts/fetch-project-manifests.js && node scripts/generate-sitemap.js && node scripts/generate-ai-data.js",
 		"prerender": "node scripts/prerender.js",
@@ -50,7 +50,8 @@
 		"deploy:cloudflare": "npx wrangler deploy",
 		"deploy:cloudflare:preview": "npx wrangler deploy --env preview",
 		"setup-dev": "node scripts/setup-dev-env.js",
-		"test-protection": "node scripts/protection-system-demo.js"
+		"test-protection": "node scripts/protection-system-demo.js",
+		"validate:schema": "node scripts/validate-schema.js"
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.2.0",
@@ -60,13 +61,17 @@
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-icons": "^5.5.0",
+		"react-markdown": "^10.1.0",
 		"react-router-dom": "^7.18.2",
+		"remark-gfm": "^4.0.1",
 		"tailwindcss": "^3.4.17",
 		"typewriter-effect": "^2.22.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@vitejs/plugin-react": "^4.5.2",
+		"ajv": "^8.20.0",
+		"ajv-formats": "^3.0.1",
 		"eslint": "^10.8.1",
 		"eslint-plugin-react-hooks": "^7.1.1",
 		"eslint-plugin-react-refresh": "^0.5.4",

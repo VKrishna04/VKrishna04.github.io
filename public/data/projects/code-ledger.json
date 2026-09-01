@@ -1,0 +1,80 @@
+{
+	"slug": "code-ledger",
+	"name": "Code-Ledger",
+	"tagline": "",
+	"summary": "Auto-commit every accepted LeetCode, GeeksforGeeks, Codeforces, NeetCode and takeuforward solution to your own GitHub repo - with AI code review, a live analytics dashboard, a knowledge graph, streaks and badges, bulk history import and cross-device sync. No servers, no accounts, no payments.",
+	"status": "Active Development",
+	"category": "Browser Extension",
+	"icon": "SiPreact",
+	"featured": false,
+	"role": "",
+	"period": {
+		"start": "2026-04-24",
+		"end": null
+	},
+	"technologies": [
+		"JavaScript",
+		"Preact",
+		"manifest-v3",
+		"chrome-extension",
+		"firefox-addon",
+		"github-api",
+		"indexeddb"
+	],
+	"tags": [
+		"ai-code-review",
+		"analytics",
+		"browser-extension",
+		"chrome-extension",
+		"code-ledger",
+		"code-tracker",
+		"codeforces",
+		"competitive-programming",
+		"dsa",
+		"firefox-addon",
+		"geeksforgeeks",
+		"gfg",
+		"github-automation",
+		"github-extension",
+		"knowledge-graph",
+		"leetcode",
+		"manifest-v3",
+		"neetcode",
+		"preact",
+		"takeuforward"
+	],
+	"highlights": [
+		"Commits accepted solutions from five judges to a repo you own",
+		"Commits land in under three seconds through the GitHub Trees API",
+		"AI code review across six providers, reaching over 95% of commits",
+		"Live analytics dashboard, knowledge graph, streaks and badges",
+		"No servers, no accounts, no payments - it all runs in the browser"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/Code-Ledger",
+		"live": "https://codeledger.vkrishna04.me",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/Code-Ledger#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": null,
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 2,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/Code-Ledger",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Code-Ledger/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-09-01T03:09:59.649Z"
+}

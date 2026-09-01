@@ -17,7 +17,9 @@
 /*
  * Build-time icon map generator.
  *
- * Scans public/settings.json and every file under src/ (except src/generated/)
+ * Scans public/settings.json, the icon field of every public/data/projects/*.json
+ * (which is where a repo manifest's own icon choice lands), and every file under
+ * src/ (except src/generated/)
  * for icon names, validates each candidate against the real library exports,
  * and emits src/generated/icon-map.js with tree-shakeable named imports.
  *
@@ -96,6 +98,28 @@ function collectSourceText() {
 		}
 	}
 	walk(path.join(ROOT, "src"))
+
+	// A repo's manifest can name its own icon, and that name reaches the site
+	// through public/data/projects/*.json rather than settings.json. Those files
+	// are written by prepare-data, which runs before this script. Only the icon
+	// field is taken: the same files also carry README markdown, and scanning
+	// that prose would pull in every capitalised word that happens to name an
+	// icon.
+	const dataDir = path.join(ROOT, "public", "data", "projects")
+	if (fs.existsSync(dataDir)) {
+		for (const entry of fs.readdirSync(dataDir)) {
+			if (!entry.endsWith(".json")) continue
+			try {
+				const file = path.join(dataDir, entry)
+				const parsed = JSON.parse(fs.readFileSync(file, "utf8"))
+				for (const project of Array.isArray(parsed) ? parsed : [parsed]) {
+					if (typeof project?.icon === "string") chunks.push(project.icon)
+				}
+			} catch {
+				/* a malformed cache file is not a reason to fail the build */
+			}
+		}
+	}
 	return chunks.join("\n")
 }
 

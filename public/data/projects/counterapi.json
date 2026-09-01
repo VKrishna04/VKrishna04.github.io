@@ -5,6 +5,7 @@
 	"summary": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
 	"status": "Live",
 	"category": "Backend",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -47,9 +48,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -60,5 +65,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/CounterAPI",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/CounterAPI/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:36.810Z"
+	"generatedAt": "2026-09-01T02:22:01.267Z"
 }

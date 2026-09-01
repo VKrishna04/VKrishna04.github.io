@@ -5,6 +5,7 @@
 	"summary": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
 	"status": "Live",
 	"category": "Full Stack",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -50,9 +51,13 @@
 	},
 	"media": {
 		"cover": "https://opengraph.githubassets.com/2/VKrishna04/VKrishna04.github.io",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 2,
@@ -63,5 +68,5 @@
 	"source": "settings",
 	"repo": "VKrishna04/VKrishna04.github.io",
 	"manifestUrl": "https://raw.githubusercontent.com/VKrishna04/VKrishna04.github.io/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:32.116Z"
+	"generatedAt": "2026-09-01T02:21:53.486Z"
 }

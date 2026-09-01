@@ -5,6 +5,7 @@
 	"summary": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
 	"status": "Live",
 	"category": "Blockchain",
+	"icon": "",
 	"featured": false,
 	"role": "",
 	"period": {
@@ -53,9 +54,13 @@
 	},
 	"media": {
 		"cover": "",
-		"screenshots": []
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
 	},
 	"sections": [],
+	"readme": null,
+	"appearance": null,
 	"seo": null,
 	"stats": {
 		"stars": 0,
@@ -66,5 +71,5 @@
 	"source": "settings",
 	"repo": "Life-Experimentalist/HiveXplore",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/HiveXplore/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-08-30T20:11:37.415Z"
+	"generatedAt": "2026-09-01T02:22:01.986Z"
 }
