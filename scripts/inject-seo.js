@@ -18,6 +18,7 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { parse } from "jsonc-parser";
 import { resolveDerivedValues } from "../src/utils/awards.js";
+import { ATTRIBUTION } from "../src/utils/attribution.js";
 
 /**
  * Vite plugin to inject SEO meta tags from settings.json into HTML
@@ -153,6 +154,16 @@ export function injectSeoPlugin() {
 				// one here produced duplicate tags in the shipped page)
 				metaTags.push(`<meta name="robots" content="index, follow" />`);
 
+				// The project credit, where a machine will read it. The footer carries the
+				// human-visible version of the same fact; a redesign of the footer should not
+				// be able to take the credit off the page silently.
+				metaTags.push(
+					`<meta name="generator" content="${escapeHtml(ATTRIBUTION.generator)}" />`
+				);
+				metaTags.push(
+					`<meta name="attribution" content="${escapeHtml(ATTRIBUTION.credit)}" />`
+				);
+
 				// Structured Data (JSON-LD)
 				if (seo.structuredData?.enabled !== false) {
 					const structuredData = generateStructuredData(seo);
@@ -166,6 +177,30 @@ export function injectSeoPlugin() {
 						);
 					}
 				}
+
+				// A second graph node, describing the site *as a published work*. The Person
+				// node above is the site owner and changes in every fork; this one is the
+				// software they published, and its creator does not.
+				const siteNode = {
+					"@context": "https://schema.org",
+					"@type": "WebSite",
+					url: seo.canonical || undefined,
+					name: seo.openGraph?.siteName || seo.title || undefined,
+					creator: {
+						"@type": "Person",
+						name: ATTRIBUTION.author,
+						url: ATTRIBUTION.github,
+					},
+					isBasedOn: ATTRIBUTION.repository,
+					license: "https://www.apache.org/licenses/LICENSE-2.0",
+				};
+				metaTags.push(
+					`<script type="application/ld+json">${JSON.stringify(
+						siteNode,
+						null,
+						2
+					)}</script>`
+				);
 
 				// Insert meta tags into HTML head
 				const headCloseIndex = html.indexOf("</head>");

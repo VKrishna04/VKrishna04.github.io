@@ -1,6 +1,14 @@
 {
-  "generatedAt": "2026-09-01T06:15:58.163Z",
+  "generatedAt": "2026-09-01T06:54:08.683Z",
   "total": 24,
+  "_attribution": {
+    "builtBy": "Krishna GSVV",
+    "builtByUrl": "https://github.com/VKrishna04",
+    "sourceRepository": "https://github.com/VKrishna04/VKrishna04.github.io",
+    "generator": "https://github.com/Life-Experimentalist/portfolio-creator",
+    "license": "Apache-2.0",
+    "notice": "Attribution required by NOTICE under Apache License 2.0 section 4(d)."
+  },
   "projects": [
     {
       "name": "Krishna GSVV Portfolio",

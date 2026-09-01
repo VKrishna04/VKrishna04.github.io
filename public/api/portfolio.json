@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T06:15:58.162Z",
+  "generatedAt": "2026-09-01T06:54:08.681Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
@@ -497,5 +497,13 @@
       "githubUrl": "https://github.com/Life-Experimentalist/Code-Ledger",
       "liveUrl": "https://codeledger.vkrishna04.me"
     }
-  ]
+  ],
+  "_attribution": {
+    "builtBy": "Krishna GSVV",
+    "builtByUrl": "https://github.com/VKrishna04",
+    "sourceRepository": "https://github.com/VKrishna04/VKrishna04.github.io",
+    "generator": "https://github.com/Life-Experimentalist/portfolio-creator",
+    "license": "Apache-2.0",
+    "notice": "Attribution required by NOTICE under Apache License 2.0 section 4(d)."
+  }
 }

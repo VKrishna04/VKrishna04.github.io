@@ -257,6 +257,33 @@ function validateAttributionIntegrity() {
 			return false;
 		}
 
+		// 4. The generators that spread the credit across the built site must still
+		// do so. Each writes a different surface - meta tags and JSON-LD, robots.txt,
+		// humans.txt, NOTICE.txt, the JSON endpoints - and verify-attribution.js
+		// checks the output of all of them once the build has run. Spreading it is
+		// the point: no single edit takes the credit off the site quietly.
+		const generators = {
+			"scripts/inject-seo.js": ["ATTRIBUTION.generator", "ATTRIBUTION.author"],
+			"scripts/generate-ai-data.js": [
+				"_attribution: CREDIT",
+				"humans.txt",
+				"NOTICE.txt",
+			],
+			"scripts/generate-sitemap.js": ["ATTRIBUTION.credit"],
+			"scripts/verify-attribution.js": ["humans.txt", "_attribution", "NOTICE"],
+		};
+		for (const [file, markers] of Object.entries(generators)) {
+			const source = fs.readFileSync(file, "utf8");
+			for (const marker of markers) {
+				if (!source.includes(marker)) {
+					console.error(
+						`❌ ${file} no longer emits the project attribution ('${marker}')`
+					);
+					return false;
+				}
+			}
+		}
+
 		console.log("✅ Attribution integrity validated");
 		return true;
 	} catch (error) {

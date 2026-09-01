@@ -1,7 +1,15 @@
 {
-  "generatedAt": "2026-09-01T06:15:58.164Z",
+  "generatedAt": "2026-09-01T06:54:08.685Z",
   "github": "https://github.com/Life-Experimentalist",
   "website": "https://vkrishna04.me",
+  "_attribution": {
+    "builtBy": "Krishna GSVV",
+    "builtByUrl": "https://github.com/VKrishna04",
+    "sourceRepository": "https://github.com/VKrishna04/VKrishna04.github.io",
+    "generator": "https://github.com/Life-Experimentalist/portfolio-creator",
+    "license": "Apache-2.0",
+    "notice": "Attribution required by NOTICE under Apache License 2.0 section 4(d)."
+  },
   "links": [
     {
       "label": "About Me",

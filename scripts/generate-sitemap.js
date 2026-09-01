@@ -29,6 +29,7 @@ import fs from "fs"
 import path from "path"
 import { execSync } from "child_process"
 import { fileURLToPath } from "url"
+import { ATTRIBUTION } from "../src/utils/attribution.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, "..")
@@ -136,7 +137,15 @@ function writeRobots(settings, base) {
 	const allowSearch = crawling.search !== false
 	const allowAi = crawling.aiTraining !== false
 
-	const lines = ["User-agent: *", allowSearch ? "Allow: /" : "Disallow: /"]
+	// Crawlers ignore comments, but people read robots.txt, and it is one of the
+	// few files that survives being copied around without the rest of the build.
+	const lines = [
+		`# ${ATTRIBUTION.credit} - ${ATTRIBUTION.repository}`,
+		`# Build your own: ${ATTRIBUTION.generator}`,
+		"",
+		"User-agent: *",
+		allowSearch ? "Allow: /" : "Disallow: /",
+	]
 
 	if (!allowAi) {
 		lines.push("")

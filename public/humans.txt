@@ -1,0 +1,10 @@
+/* SITE */
+Owner: Krishna GSVV
+GitHub: https://github.com/Life-Experimentalist
+
+/* BUILT WITH */
+Designed & built by Krishna GSVV
+Author: https://github.com/VKrishna04
+Source: https://github.com/VKrishna04/VKrishna04.github.io
+Generator: https://github.com/Life-Experimentalist/portfolio-creator
+License: Apache-2.0

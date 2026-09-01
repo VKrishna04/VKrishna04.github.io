@@ -12,6 +12,7 @@ import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
 import { resolveDerivedValues } from "../src/utils/awards.js"
+import { ATTRIBUTION } from "../src/utils/attribution.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -20,6 +21,45 @@ const settings = resolveDerivedValues(
 	JSON.parse(fs.readFileSync(settingsPath, "utf8"))
 )
 const { home, about, github, projects, resume, seo } = settings
+
+// The project credit, in the shape each generated file wants it. Every JSON
+// endpoint carries the object; llms.txt and humans.txt carry the prose. The
+// footer is the human-visible copy — these are the ones a crawler, an agent or
+// a `curl` will read, and every build rewrites them.
+const CREDIT = {
+  builtBy: ATTRIBUTION.author,
+  builtByUrl: ATTRIBUTION.github,
+  sourceRepository: ATTRIBUTION.repository,
+  generator: ATTRIBUTION.generator,
+  license: ATTRIBUTION.license,
+  notice:
+    "Attribution required by NOTICE under Apache License 2.0 section 4(d).",
+}
+
+// NOTICE is the file Apache 2.0 section 4(d) actually names. Serving a copy
+// means the deployed site carries its own licence terms, not just the repo.
+fs.copyFileSync(
+  path.join(__dirname, "..", "NOTICE"),
+  path.join(__dirname, "..", "public", "NOTICE.txt")
+)
+
+// humans.txt is the oldest convention for exactly this, and it costs one file.
+// Written before the opt-out below: a site owner may decline to publish a
+// machine-readable copy of themselves without that also dropping the credit.
+fs.writeFileSync(
+  path.join(__dirname, "..", "public", "humans.txt"),
+  `/* SITE */
+Owner: ${home?.name || ""}
+GitHub: https://github.com/${github?.username || ""}
+
+/* BUILT WITH */
+${ATTRIBUTION.credit}
+Author: ${ATTRIBUTION.github}
+Source: ${ATTRIBUTION.repository}
+Generator: ${ATTRIBUTION.generator}
+License: ${ATTRIBUTION.license}
+`
+)
 
 // The whole point of these files is to be read by something that is not a
 // browser. A site owner who would rather not publish a machine-readable copy
@@ -97,6 +137,7 @@ const portfolio = {
     site: SITE,
   },
   projects: portfolioProjects,
+  _attribution: CREDIT,
 }
 fs.writeFileSync(
   path.join(OUT, "portfolio.json"),
@@ -107,6 +148,7 @@ fs.writeFileSync(
 const projectsOut = {
   generatedAt: new Date().toISOString(),
   total: portfolioProjects.length,
+  _attribution: CREDIT,
   projects: portfolioProjects,
   markdown: portfolioProjects
     .map(
@@ -140,6 +182,7 @@ fs.writeFileSync(
       experience,
       education,
       stats: about?.stats || [],
+      _attribution: CREDIT,
     },
     null,
     2
@@ -155,6 +198,7 @@ fs.writeFileSync(
       generatedAt: new Date().toISOString(),
       github: `https://github.com/${github?.username || ""}`,
       website: SITE,
+      _attribution: CREDIT,
       links: buttons.map((b) => ({ label: b.text || b.label || "", url: b.href || b.url || "" })),
     },
     null,
@@ -212,6 +256,12 @@ All portfolio data available as JSON at build time:
 - GET /api/projects.json — projects with markdown and plain-text formats
 - GET /api/about.json — bio, skills, stats
 - GET /api/contact.json — contact info and links
+
+## Credits
+${ATTRIBUTION.credit} — ${ATTRIBUTION.github}
+Source: ${ATTRIBUTION.repository}
+Build your own: ${ATTRIBUTION.generator}
+Licensed ${ATTRIBUTION.license}. Attribution required by NOTICE, Apache License 2.0 section 4(d).
 `
 fs.writeFileSync(path.join(__dirname, "..", "public", "llms.txt"), llmsTxt)
 
@@ -238,5 +288,5 @@ fs.writeFileSync(
 )
 
 console.log(
-  "✓ Generated: llms.txt, api/portfolio.json, api/projects.json, api/about.json, api/contact.json, .well-known/ai-plugin.json"
+  "✓ Generated: llms.txt, humans.txt, api/portfolio.json, api/projects.json, api/about.json, api/contact.json, .well-known/ai-plugin.json"
 )

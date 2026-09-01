@@ -44,3 +44,9 @@ All portfolio data available as JSON at build time:
 - GET /api/projects.json — projects with markdown and plain-text formats
 - GET /api/about.json — bio, skills, stats
 - GET /api/contact.json — contact info and links
+
+## Credits
+Designed & built by Krishna GSVV — https://github.com/VKrishna04
+Source: https://github.com/VKrishna04/VKrishna04.github.io
+Build your own: https://github.com/Life-Experimentalist/portfolio-creator
+Licensed Apache-2.0. Attribution required by NOTICE, Apache License 2.0 section 4(d).

@@ -1,3 +1,6 @@
+# Designed & built by Krishna GSVV - https://github.com/VKrishna04/VKrishna04.github.io
+# Build your own: https://github.com/Life-Experimentalist/portfolio-creator
+
 User-agent: *
 Allow: /
 
