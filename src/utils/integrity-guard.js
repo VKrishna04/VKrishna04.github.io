@@ -19,13 +19,13 @@ const ENCODED_REFS = {
 
 // Expected file hashes for integrity validation
 const PROTECTION_HASHES = {
-    'src/utils/integrity-guard.js': '3436b54f',
+    'src/utils/integrity-guard.js': '575e89d7',
     'src/utils/stealth-validator.js': '22fc983d',
     'src/utils/origin-tracker.js': '2b7a63c6',
     'src/utils/advanced-obfuscation.js': '36233349',
     'src/utils/build-time-protection.js': '3a06bbc5',
     'src/utils/settings-guard.js': '60a2dd3f',
-    'src/utils/attribution.js': '66984d76'
+    'src/utils/attribution.js': '73b9ca33'
   };
 
 /**

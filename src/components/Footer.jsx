@@ -430,6 +430,15 @@ const Footer = () => {
 						Open source
 					</a>
 					{" · "}
+					<a
+						href={ATTRIBUTION.generator}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-gray-500 hover:text-purple-400 transition-colors duration-300"
+					>
+						Build your own
+					</a>
+					{" · "}
 					{ATTRIBUTION.license}
 				</div>
 

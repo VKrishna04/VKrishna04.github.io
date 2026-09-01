@@ -24,6 +24,10 @@
  *  - the NOTICE file (Apache License §4(d)) makes retaining this credit a
  *    condition of redistributing the project
  *
+ * `generator` points at the tool that builds portfolios like this one. It is a
+ * project constant rather than a settings key on purpose: a fork's footer should
+ * advertise the generator too, which is the whole point of shipping one.
+ *
  * Removing or blanking this credit therefore breaks `npm run build`. Forks are
  * welcome to use everything here — the license only asks that this line stays.
  */
@@ -35,6 +39,7 @@ export const ATTRIBUTION = Object.freeze({
 	website: "https://vkrishna04.me",
 	license: "Apache-2.0",
 	credit: "Designed & built by Krishna GSVV",
+	generator: "https://github.com/Life-Experimentalist/portfolio-creator",
 })
 
 export function getAttribution() {
