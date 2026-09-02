@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-09-01T08:47:09.479Z",
+  "generatedAt": "2026-09-02T22:53:14.400Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
     "location": {
       "show": true,
-      "text": "📍 Bengaluru, India · open to relocation",
+      "text": "📍 India · open to relocation",
       "icon": "📍",
-      "city": "Bengaluru",
+      "city": "",
       "country": "India"
     },
-    "bio": "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 8.55/10, graduating Jul 2026), based in Bengaluru and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines. Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used. I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — ₹3.55L in prizes across 2025. On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,100+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL. My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
+    "bio": "B.Tech Computer Science graduate of Amrita Vishwa Vidyapeetham (CGPA: 8.63/10, graduated Jul 2026), based in India and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines. Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used. I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — ₹3.55L in prizes across 2025. On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,500+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL. My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
   },
   "skills": [
     "Python",
@@ -80,13 +80,13 @@
       "field": "Computer Science",
       "school": "Amrita Vishwa Vidyapeetham",
       "period": "2022 - 2026",
-      "gpa": "8.55/10",
+      "gpa": "8.63/10",
       "achievements": []
     }
   ],
   "stats": [
     {
-      "number": "25+",
+      "number": "35+",
       "label": "Open Source Projects"
     },
     {
@@ -98,7 +98,7 @@
       "label": "GitHub Contributions"
     },
     {
-      "number": "25+",
+      "number": "35+",
       "label": "Technologies Mastered"
     },
     {
@@ -116,25 +116,6 @@
   },
   "projects": [
     {
-      "name": "Krishna GSVV Portfolio",
-      "description": "A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.",
-      "technologies": [
-        "React",
-        "Vite",
-        "TailwindCSS",
-        "FramerMotion",
-        "JavaScript",
-        "ReactRouter",
-        "ReactIcons",
-        "JSONSchema"
-      ],
-      "category": "Full Stack",
-      "status": "Live",
-      "featured": false,
-      "githubUrl": "https://github.com/VKrishna04/VKrishna04.github.io",
-      "liveUrl": "https://vkrishna04.me"
-    },
-    {
       "name": "RanobeGemini",
       "description": "Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.",
       "technologies": [
@@ -149,20 +130,6 @@
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/RanobeGemini",
       "liveUrl": "http://ranobe.vkrishna04.me/"
-    },
-    {
-      "name": "Youtube-Keystrokes-Blocker",
-      "description": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
-      "technologies": [
-        "JavaScript",
-        "Userscript",
-        "Browser-API"
-      ],
-      "category": "Browser Extension",
-      "status": "Active Development",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
-      "liveUrl": "http://yt-hotkeys.vkrishna04.me/"
     },
     {
       "name": "ToxicGuard_AI",
@@ -192,7 +159,7 @@
       ],
       "category": "AI/ML",
       "status": "Active Development",
-      "featured": false,
+      "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/EquiLens",
       "liveUrl": "https://equilens.vkrishna04.me/"
     },
@@ -209,21 +176,6 @@
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/Save-Sync",
       "liveUrl": "http://save-sync.vkrishna04.me/"
-    },
-    {
-      "name": "Eldritchify",
-      "description": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
-      "technologies": [
-        "HTML",
-        "JavaScript",
-        "CSS",
-        "Unicode"
-      ],
-      "category": "Web Tool",
-      "status": "Live",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/Eldritchify",
-      "liveUrl": "https://eldritchify.vkrishna04.me/"
     },
     {
       "name": "CFlair-Counter",
@@ -258,21 +210,6 @@
       "liveUrl": "https://pensive.vkrishna04.me"
     },
     {
-      "name": "eVidya",
-      "description": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
-      "technologies": [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "REST-API"
-      ],
-      "category": "Full Stack",
-      "status": "Live",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/eVidya",
-      "liveUrl": "http://evidya.vkrishna04.me/"
-    },
-    {
       "name": "cspell-sync",
       "description": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
       "technologies": [
@@ -286,34 +223,6 @@
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
       "liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
-    },
-    {
-      "name": "Relax",
-      "description": "Refresh with inspirational quotes, GIFs and memes.",
-      "technologies": [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "REST-API"
-      ],
-      "category": "Web App",
-      "status": "Live",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/Relax",
-      "liveUrl": "https://relax-stress-bust.onrender.com/"
-    },
-    {
-      "name": "DrDerma",
-      "description": "Dermatology diagnosis and skin condition assessment tool using machine learning.",
-      "technologies": [
-        "PureBasic",
-        "Machine-Learning"
-      ],
-      "category": "AI/ML",
-      "status": "Completed",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/DrDerma",
-      "liveUrl": null
     },
     {
       "name": "Facial-Emotion-Detector",
@@ -366,38 +275,6 @@
       "liveUrl": null
     },
     {
-      "name": "ParkMeter",
-      "description": "Parking Ticket Management System for tracking and managing parking tickets, including payment processing, ticket history, and notifications.",
-      "technologies": [
-        "Python",
-        "Django",
-        "HTML",
-        "CSS",
-        "JavaScript"
-      ],
-      "category": "Full Stack",
-      "status": "Completed",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/ParkMeter",
-      "liveUrl": "https://life-experimentalist.github.io/ParkMeter/"
-    },
-    {
-      "name": "CounterAPI",
-      "description": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
-      "technologies": [
-        "Python",
-        "FastAPI",
-        "PostgreSQL",
-        "Render",
-        "REST-API"
-      ],
-      "category": "Backend",
-      "status": "Live",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/CounterAPI",
-      "liveUrl": "https://life-experimentalist.github.io/CounterAPI/"
-    },
-    {
       "name": "BreachCheck",
       "description": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
       "technologies": [
@@ -411,6 +288,18 @@
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/BreachCheck",
       "liveUrl": "https://breachcheck-sagittarius.streamlit.app/"
+    },
+    {
+      "name": "PulseWard-HMS",
+      "description": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
+      "technologies": [
+        "Proprietary"
+      ],
+      "category": "Web Application",
+      "status": "Completed",
+      "featured": false,
+      "githubUrl": null,
+      "liveUrl": null
     },
     {
       "name": "HiveXplore",
@@ -430,21 +319,6 @@
       "liveUrl": "https://hivebuzz.onrender.com/"
     },
     {
-      "name": "zipCracker",
-      "description": "A Python-based tool for recovering passwords from protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
-      "technologies": [
-        "Python",
-        "Multithreading",
-        "CLI",
-        "Archive-Processing"
-      ],
-      "category": "Security Tool",
-      "status": "Completed",
-      "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/zipCracker",
-      "liveUrl": null
-    },
-    {
       "name": "dev-prune",
       "description": "Reclaim disk space from idle Git repositories. A Rust CLI that deletes node_modules, .venv, target and vendor only after the project's own package manager proves a lockfile can rebuild them.",
       "technologies": [
@@ -457,7 +331,7 @@
       ],
       "category": "CLI Tool",
       "status": "Active Development",
-      "featured": false,
+      "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/dev-prune",
       "liveUrl": "https://devprune.vkrishna04.me"
     },
@@ -493,9 +367,57 @@
       ],
       "category": "Browser Extension",
       "status": "Active Development",
-      "featured": false,
+      "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/Code-Ledger",
       "liveUrl": "https://codeledger.vkrishna04.me"
+    },
+    {
+      "name": "LoginLens",
+      "description": "Browser extension that answers \"which account did I use here?\" — it records the provider and MFA method per site, entirely on-device. No passwords, no account, no backend, no telemetry.",
+      "technologies": [
+        "TypeScript",
+        "Plasmo",
+        "Manifest V3",
+        "React",
+        "IndexedDB"
+      ],
+      "category": "Browser Extension",
+      "status": "Active Development",
+      "featured": true,
+      "githubUrl": "https://github.com/Life-Experimentalist/LoginLens",
+      "liveUrl": null
+    },
+    {
+      "name": "Chronos-Ledger",
+      "description": "Self-hosted campus attendance and timetable platform. Geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable to a campus in one Docker command.",
+      "technologies": [
+        "FastAPI",
+        "Next.js 14",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "WebSocket"
+      ],
+      "category": "Full Stack",
+      "status": "Completed",
+      "featured": true,
+      "githubUrl": "https://github.com/Life-Experimentalist/Chronos-Ledger",
+      "liveUrl": null
+    },
+    {
+      "name": "Vectra-180",
+      "description": "Dual-fisheye dashcam and stereoscopic depth engine for the Raspberry Pi Compute Module 5 — two 180° sensors calibrated into a single depth map alongside synchronised IMU telemetry.",
+      "technologies": [
+        "Python",
+        "OpenCV",
+        "Raspberry Pi CM5",
+        "NumPy"
+      ],
+      "category": "Computer Vision",
+      "status": "Active Development",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/Vectra-180",
+      "liveUrl": null
     }
   ],
   "_attribution": {

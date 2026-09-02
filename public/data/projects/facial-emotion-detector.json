@@ -1,12 +1,14 @@
 {
 	"slug": "facial-emotion-detector",
 	"name": "Facial-Emotion-Detector",
-	"tagline": "",
-	"summary": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
-	"status": "Completed",
+	"tagline": "Facial emotion classification from landmark geometry.",
+	"summary": "A facial emotion recognition pipeline that detects faces, extracts MediaPipe landmarks, and classifies the expression from landmark geometry rather than raw pixels. It ships the full workflow — image collection, dataset preparation, training and inference — as scripted steps.",
+	"status": "complete",
 	"category": "AI/ML",
-	"icon": "",
+	"icon": "SiOpencv",
 	"featured": false,
+	"tier": "secondary",
+	"order": 3,
 	"role": "",
 	"period": {
 		"start": "2025-06-01",
@@ -14,30 +16,20 @@
 	},
 	"technologies": [
 		"Python",
-		"OpenCV",
 		"MediaPipe",
-		"scikit-learn",
-		"NumPy",
-		"Flask"
+		"OpenCV",
+		"scikit-learn"
 	],
 	"tags": [
-		"ai",
 		"computer-vision",
-		"emotion-detection",
-		"facial-landmarks",
-		"facial-recognition",
-		"human-computer-interaction",
 		"machine-learning",
 		"mediapipe",
-		"opencv",
-		"python",
-		"real-time-detection"
+		"emotion-recognition"
 	],
 	"highlights": [
-		"Real-time emotion classification from images and video",
-		"MediaPipe facial landmark extraction pipeline",
-		"Award-winning project at Tredence InfinityAI Hackathon",
-		"Custom ML model training support"
+		"Classifies from MediaPipe facial landmarks rather than raw pixels, so the model stays small and does not need a GPU.",
+		"The emotion classes are configurable rather than fixed — the set the model recognises is whatever it was trained on.",
+		"Ships the whole loop as scripts: collect images from a webcam, prepare the dataset, train, then run inference."
 	],
 	"metrics": [],
 	"links": {
@@ -53,7 +45,16 @@
 		"video": null
 	},
 	"sections": [],
-	"readme": null,
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# Facial Emotion Detection\n\n<div align=\"center\">\n\n![Facial Emotion Detection](https://img.shields.io/badge/AI-Facial%20Emotion%20Detection-blue)\n![Python](https://img.shields.io/badge/Python-3.6+-brightgreen)\n![MediaPipe](https://img.shields.io/badge/MediaPipe-Latest-green)\n![scikit-learn](https://img.shields.io/badge/scikit--learn-Latest-orange)\n\nA computer vision application that detects and classifies facial emotions in real-time using MediaPipe face landmarks and Random Forest classification.\n\n</div>\n\n![Demo](https://via.placeholder.com/800x400?text=Emotion+Detection+Demo)\n\n## 📖 Table of Contents\n\n- [Facial Emotion Detection](#facial-emotion-detection)\n\t- [📖 Table of Contents](#-table-of-contents)\n\t- [✨ Features](#-features)\n\t- [🚀 Quick Start](#-quick-start)\n\t- [📥 Installation](#-installation)\n\t\t- [Prerequisites](#prerequisites)\n\t\t- [Using the Setup Script (Windows)](#using-the-setup-script-windows)\n\t\t- [Manual Installation](#manual-installation)\n\t- [💻 Usage](#-usage)\n\t\t- [Data Preparation](#data-preparation)\n\t\t- [Training the Model](#training-the-model)\n\t\t- [Real-time Testing](#real-time-testing)\n\t- [🔍 How It Works](#-how-it-works)\n\t- [📁 Project Structure](#-project-structure)\n\t- [🛠 Technologies](#-technologies)\n\t- [📈 Development Roadmap](#-development-roadmap)\n\t- [👥 Contributing](#-contributing)\n\t\t- [Ways to Contribute](#ways-to-contribute)\n\t\t- [Contribution Process](#contribution-process)\n\t\t- [Code Style](#code-style)\n\t\t- [Recognition](#recognition)\n\t- [📄 License](#-license)\n\n## ✨ Features\n\n- **Real-time emotion detection** from webcam feed\n- Supports **7 emotions**: angry, disgust, fear, happy, neutral, sad, surprise\n- Uses **468 facial landmarks** (1,404 features in 3D space)\n- **Cross-platform** compatibility (Windows, macOS, Linux)\n- **Optimized** for real-time performance\n\n## 🚀 Quick Start\n\n```bash\n# Clone the repository\ngit clone https://github.com/yourusername/facial-emotion-detection.git\ncd facial-emotion-detection\n\n# Install dependencies\npip install -r requirements.txt\n\n# Download and prepare dataset (first-time only)\npython prepare_data.py\n\n# Train the model (first-time only)\npython train_model.py\n\n# Run real-time emotion detection\npython test_model.py\n```\n\nPress `q` to quit the application.\n\n## 📥 Installation\n\n### Prerequisites\n\n- Python 3.6+\n- pip (Python package manager)\n- Webcam\n\n### Using the Setup Script (Windows)\n\n```powershell\n# Option 1: Run with bypass for current session\npowershell -ExecutionPolicy Bypass -File install_requirements.ps1\n\n# Option 2: Run with admin privileges\npowershell -Command \"& {Start-Process PowerShell -ArgumentList '-ExecutionPolicy Bypass -File install_requirements.ps1' -Verb RunAs}\"\n```\n\n### Manual Installation\n\n```bash\n# Create and activate virtual environment (optional but recommended)\npython -m venv venv\nsource venv/bin/activate  # On Windows: venv\\Scripts\\activate\n\n# Install dependencies\npip install -r requirements.txt\n```\n\n## 💻 Usage\n\n### Data Preparation\n\nThe first time you run the project, you'll need to download and prepare the dataset:\n\n```bash\npython prepare_data.py\n```\n\nThis script:\n- Downloads a facial emotion dataset using KaggleHub\n- Organizes images into train/validation directories\n- Processes faces to extract landmarks\n- Creates a data file with features and labels\n\n### Training the Model\n\nAfter data preparation, train the emotion classification model:\n\n```bash\npython train_model.py\n```\n\nThis will:\n- Load the processed landmark features\n- Train a Random Forest classifier\n- Evaluate model performance\n- Save the trained model\n\n### Real-time Testing\n\nOnce the model is trained, run the real-time detection:\n\n```bash\npython test_model.py\n```\n\nIf you have multiple cameras, you may need to change the camera index in the script.\n\n## 🔍 How It Works\n\n```mermaid\ngraph TD\n    A[Camera Input] --> B[Face Detection]\n    B --> C[Extract Facial Landmarks]\n    C --> D[Normalize Landmark Coordinates]\n    D --> E[Random Forest Classification]\n    E --> F[Display Emotion]\n\n    style A fill:#f9d,stroke:#333,stroke-width:2px\n    style B fill:#bbf,stroke:#333,stroke-width:2px\n    style C fill:#dfd,stroke:#333,stroke-width:2px\n    style D fill:#dfd,stroke:#333,stroke-width:2px\n    style E fill:#ffd,stroke:#333,stroke-width:2px\n    style F fill:#f9d,stroke:#333,stroke-width:2px\n```\n\n1. **Face Detection**: MediaPipe detects faces in each frame\n2. **Landmark Extraction**: 468 facial landmarks are identified\n3. **Feature Engineering**: Landmarks are normalized and processed\n4. **Classification**: Random Forest model predicts the emotion\n5. **Visualization**: Emotion label is displayed on the video feed\n\n## 📁 Project Structure\n\n```\nfacial-emotion-detection/\n├── data/                       # Dataset directory\n│   ├── train/                  # Training images by emotion\n│   └── validation/             # Validation images by emotion\n├── prepare_data.py             # Dataset preparation script\n├── train_model.py              # Model training script\n├── test_model.py               # Real-time testing script\n├── utils.py                    # Utility functions\n├── face_landmarker.task        # MediaPipe face landmark model\n├── data.txt                    # Processed landmark features\n├── model                       # Trained classifier\n├── requirements.txt            # Python dependencies\n├── ARCHITECTURE.md             # Technical architecture details\n├── ROADMAP.md                  # Development roadmap\n├── TODO.md                     # Task tracking\n├── install_requirements.ps1    # Windows installation script\n└── README.md                   # Project documentation\n```\n\n## 🛠 Technologies\n\n- **MediaPipe**: Face detection and landmark extraction\n- **OpenCV**: Image and video processing\n- **scikit-learn**: Machine learning algorithms\n- **NumPy**: Numerical operations\n- **KaggleHub**: Dataset download\n\n## 📈 Development Roadmap\n\nSee the [ROADMAP.md](ROADMAP.md) file for the complete development plan.\n\n- [x] **Phase 1**: Core Implementation\n  - [x] Project setup and data preparation\n  - [x] Face landmark detection\n  - [x] Model training\n  - [x] Real-time testing\n\n- [ ] **Phase 2**: Model Enhancement\n  - [ ] Hyperparameter tuning\n  - [ ] Multi-face support\n  - [ ] Performance optimization\n\n- [ ] **Phase 3**: Feature Expansion\n  - [ ] Alternative model architectures\n  - [ ] Web application integration\n  - [ ] Video file processing\n\n## 👥 Contributing\n\nContributions to this project are welcome and appreciated! By contributing, you agree to license your work under the same license as this project.\n\n### Ways to Contribute\n\n- **Report bugs**: Create an issue describing the bug and how to reproduce it\n- **Suggest enhancements**: Open an issue with feature ideas or improvements\n- **Submit pull requests**: Implement new features or fix bugs\n- **Improve documentation**: Fix typos, add examples, or clarify explanations\n- **Share the project**: Help others discover this tool\n\n### Contribution Process\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Make your changes (and ensure they follow project style guidelines)\n4. Add tests for your changes if applicable\n5. Run existing tests to ensure nothing broke\n6. Commit your changes with a descriptive message (`git commit -m 'Add some amazing feature'`)\n7. Push to your branch (`git push origin feature/amazing-feature`)\n8. Open a Pull Request with a detailed description\n\n### Code Style\n\n- Follow the existing code style and organization\n- Add comments to explain complex logic\n- Use descriptive variable names\n- Keep functions small and focused on a single task\n\n### Recognition\n\nContributors will be acknowledged in the project documentation. Your contributions make this project better for everyone!\n\n## 📄 License\n\nThis project is licensed under the Attribution License - see the [LICENSE.md](LICENSE.md) file for details.\n\n**Important**: If you use this project, you must give appropriate credit by including the name of the creator in your documentation and user interface.\n\n---\n\n<div align=\"center\">\n  <p>Made with ❤️ by <a href=\"https://github.com/yourusername\">Your Name</a></p>\n  <p>\n    <a href=\"https://twitter.com/yourusername\">\n      <img src=\"https://img.shields.io/badge/Twitter-Follow-blue\" alt=\"Twitter\">\n    </a>\n    <a href=\"https://www.linkedin.com/in/yourusername\">\n      <img src=\"https://img.shields.io/badge/LinkedIn-Connect-blue\" alt=\"LinkedIn\">\n    </a>\n  </p>\n</div>\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/Facial-Emotion-Detector/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -62,8 +63,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/Facial-Emotion-Detector",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Facial-Emotion-Detector/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:21:58.332Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:08.654Z"
 }

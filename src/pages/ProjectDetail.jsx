@@ -26,8 +26,8 @@
  * immediately for visitors instead of waiting for the next scheduled build.
  */
 
-import { motion } from "framer-motion"
-import { lazy, Suspense, useEffect, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import {
 	ArrowLeftIcon,
@@ -41,6 +41,11 @@ import ProjectGallery from "../components/ProjectGallery"
 import UnifiedIcon from "../components/UnifiedIcon"
 import { getOwnerName, getSiteUrl } from "../utils/identity"
 import { fetchSettings } from "../utils/settingsCache"
+import {
+	configureCflair,
+	getProjectStats,
+	trackProjectView,
+} from "../utils/cflairCounter"
 import {
 	normalizeAppearance,
 	normalizeIcon,
@@ -88,6 +93,35 @@ const LINK_META = {
 	docs: { label: "Documentation", Icon: BookOpenIcon },
 	paper: { label: "Paper", Icon: BookOpenIcon },
 	package: { label: "Package", Icon: ArrowTopRightOnSquareIcon },
+}
+
+// The manifest schema's status values, in the wording the cards already use.
+// Anything outside the enum is rendered as written.
+const Reveal = ({ children, className = "", delay = 0 }) => {
+	const reduced = useReducedMotion()
+	const still =
+		reduced ||
+		(typeof window !== "undefined" && window.__PRERENDER__ === true)
+	if (still) return <div className={className}>{children}</div>
+	return (
+		<motion.div
+			className={className}
+			initial={{ opacity: 0, y: 24 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			viewport={{ once: true, amount: 0.15, margin: "0px 0px -80px 0px" }}
+			transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+		>
+			{children}
+		</motion.div>
+	)
+}
+
+const STATUS_LABELS = {
+	active: "Active Development",
+	maintained: "Maintenance",
+	archived: "Archived",
+	experimental: "Experimental",
+	complete: "Completed",
 }
 
 // Only ever render http(s) destinations that came out of the manifest.
@@ -251,6 +285,9 @@ const ProjectDetail = () => {
 	const { slug } = useParams()
 	const [project, setProject] = useState(null)
 	const [missing, setMissing] = useState(false)
+	const [views, setViews] = useState(null)
+	const [siblings, setSiblings] = useState(null)
+	const trackedSlug = useRef(null)
 
 	// 1. Build-time data — same origin, always present, captured by prerender.
 	useEffect(() => {
@@ -318,7 +355,64 @@ const ProjectDetail = () => {
 		}
 	}, [project?.manifestUrl])
 
-	// 3. Head — owned here rather than in App.jsx, because the title and
+	// 3. Page views — counted per project page rather than per card, because
+	// the grid would fire one request per project on every visit to /projects
+	// for a number that means little on a card. Entirely optional: any failure
+	// just leaves the page without the chip.
+	useEffect(() => {
+		if (!project?.slug) return
+		let cancelled = false
+		const repoName = project.repo?.split("/").pop() || project.slug
+		fetchSettings()
+			.then((settings) => {
+				const counter = settings?.counterAPI
+				configureCflair(counter)
+				if (cancelled || counter?.enabled !== true) return null
+				const key =
+					counter.projectMapping?.customMappings?.[repoName] || repoName
+				// One count per page, not one per re-render or live-manifest update.
+				const counted = trackedSlug.current === key
+				trackedSlug.current = key
+				return (
+					counted ? Promise.resolve() : trackProjectView(key, counter.baseUrl)
+				).then(() => getProjectStats(key, counter.baseUrl))
+			})
+			.then((stats) => {
+				if (cancelled || !stats?.success) return
+				if (typeof stats.totalViews === "number") setViews(stats.totalViews)
+			})
+			.catch((error) =>
+				console.warn("Could not track project view:", error)
+			)
+		return () => {
+			cancelled = true
+		}
+	}, [project?.slug])
+
+	// 4. Neighbours in the curated order, so the page can be read through
+	// instead of dead-ending on the back link. index.json is written by the
+	// same build step as the page itself and is already sorted.
+	useEffect(() => {
+		let cancelled = false
+		setSiblings(null)
+		fetch("/data/projects/index.json")
+			.then((res) => (res.ok ? res.json() : null))
+			.then((data) => {
+				if (cancelled || !data?.projects?.length) return
+				const list = data.projects
+				const at = list.findIndex((p) => p.slug === slug)
+				if (at === -1) return
+				setSiblings({ prev: list[at - 1] || null, next: list[at + 1] || null })
+			})
+			.catch(() => {
+				// Optional navigation; the back link above always works.
+			})
+		return () => {
+			cancelled = true
+		}
+	}, [slug])
+
+	// 5. Head — owned here rather than in App.jsx, because the title and
 	// description come from the project data the router cannot see.
 	useEffect(() => {
 		if (!project) return
@@ -392,6 +486,8 @@ const ProjectDetail = () => {
 	}
 
 	const period = formatPeriod(project.period)
+	const prev = siblings?.prev
+	const next = siblings?.next
 	const links = Object.entries(project.links || {})
 		.map(([key, value]) => [key, safeUrl(value)])
 		.filter(([key, value]) => value && LINK_META[key])
@@ -428,7 +524,7 @@ const ProjectDetail = () => {
 					<div className="flex flex-wrap items-center gap-3 mb-4 text-sm">
 						{project.status && (
 							<span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 rounded-full">
-								{project.status}
+								{STATUS_LABELS[project.status] || project.status}
 							</span>
 						)}
 						{project.category && (
@@ -437,6 +533,12 @@ const ProjectDetail = () => {
 							</span>
 						)}
 						{period && <span className="text-gray-400">{period}</span>}
+						{views !== null && (
+							<span className="text-gray-400">
+								{views.toLocaleString()}{" "}
+								{views === 1 ? "view" : "views"}
+							</span>
+						)}
 					</div>
 
 					<div className="flex items-center gap-4 mb-4">
@@ -500,7 +602,7 @@ const ProjectDetail = () => {
 				)}
 
 				{project.metrics?.length > 0 && (
-					<div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
+					<Reveal className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
 						{project.metrics.map((m, i) => (
 							<div
 								key={i}
@@ -510,7 +612,7 @@ const ProjectDetail = () => {
 								<div className="text-xs text-gray-400 mt-1">{m.label}</div>
 							</div>
 						))}
-					</div>
+					</Reveal>
 				)}
 
 				{project.technologies?.length > 0 && (
@@ -532,7 +634,7 @@ const ProjectDetail = () => {
 				)}
 
 				{project.highlights?.length > 0 && (
-					<section className="mt-12">
+					<Reveal className="mt-12">
 						<h2 className="text-2xl font-bold text-white mb-4">Highlights</h2>
 						<ul className="space-y-3">
 							{project.highlights.map((h, i) => (
@@ -542,13 +644,15 @@ const ProjectDetail = () => {
 								</li>
 							))}
 						</ul>
-					</section>
+					</Reveal>
 				)}
 
 				{project.sections?.length > 0 && (
 					<div className="mt-12">
 						{project.sections.map((section, i) => (
-							<Section key={i} section={section} />
+							<Reveal key={i}>
+								<Section section={section} />
+							</Reveal>
 						))}
 					</div>
 				)}
@@ -567,6 +671,54 @@ const ProjectDetail = () => {
 					>
 						<ProjectReadme readme={project.readme} accent={accent} />
 					</Suspense>
+				)}
+
+				{(prev || next) && (
+					<nav
+						aria-label="Other projects"
+						className="mt-16 grid gap-4 border-t border-white/[0.07] pt-8 sm:grid-cols-2"
+					>
+						{prev ? (
+							<Link
+								to={`/projects/${prev.slug}`}
+								className="group rounded-2xl border border-white/[0.07] bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-purple-500/30 hover:bg-white/[0.06]"
+							>
+								<span className="flex items-center gap-2 text-xs uppercase tracking-wide text-gray-500">
+									<ArrowLeftIcon className="h-3 w-3 transition-transform duration-300 group-hover:-translate-x-1" />
+									Previous
+								</span>
+								<span className="mt-2 block font-semibold text-gray-100 group-hover:text-white">
+									{prev.name}
+								</span>
+								{prev.tagline && (
+									<span className="mt-1 block text-sm text-gray-400 line-clamp-2">
+										{prev.tagline}
+									</span>
+								)}
+							</Link>
+						) : (
+							<span aria-hidden="true" />
+						)}
+						{next && (
+							<Link
+								to={`/projects/${next.slug}`}
+								className="group rounded-2xl border border-white/[0.07] bg-white/[0.03] p-5 text-right transition duration-300 hover:-translate-y-0.5 hover:border-purple-500/30 hover:bg-white/[0.06] sm:col-start-2"
+							>
+								<span className="flex items-center justify-end gap-2 text-xs uppercase tracking-wide text-gray-500">
+									Next
+									<ArrowLeftIcon className="h-3 w-3 rotate-180 transition-transform duration-300 group-hover:translate-x-1" />
+								</span>
+								<span className="mt-2 block font-semibold text-gray-100 group-hover:text-white">
+									{next.name}
+								</span>
+								{next.tagline && (
+									<span className="mt-1 block text-sm text-gray-400 line-clamp-2">
+										{next.tagline}
+									</span>
+								)}
+							</Link>
+						)}
+					</nav>
 				)}
 
 				{project.source === "settings" && project.repo && (

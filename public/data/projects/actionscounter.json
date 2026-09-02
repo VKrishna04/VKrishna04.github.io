@@ -1,12 +1,14 @@
 {
 	"slug": "actionscounter",
 	"name": "ActionsCounter",
-	"tagline": "",
-	"summary": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
-	"status": "Active Development",
+	"tagline": "Project analytics running on GitHub Actions alone.",
+	"summary": "An event counter that runs entirely inside GitHub Actions, tracking usage, downloads or API calls through webhook pings. It stores counts in GitHub Variables, a database, or a repository, so a project gets analytics without provisioning any infrastructure.",
+	"status": "maintained",
 	"category": "DevOps",
-	"icon": "",
+	"icon": "SiGithubactions",
 	"featured": false,
+	"tier": "secondary",
+	"order": 10,
 	"role": "",
 	"period": {
 		"start": "2025-04-01",
@@ -14,30 +16,20 @@
 	},
 	"technologies": [
 		"TypeScript",
-		"GitHub-Actions",
-		"GitHub-API",
-		"Webhooks"
+		"GitHub Actions",
+		"GitHub API"
 	],
 	"tags": [
 		"analytics",
-		"automation",
-		"ci-cd",
-		"dashboard",
-		"deployment-tracking",
-		"developer-tools",
-		"devops",
 		"github-actions",
-		"github-api",
-		"monitoring",
-		"typescript",
 		"webhooks",
-		"workflow-tracking"
+		"self-hosted"
 	],
 	"highlights": [
-		"GitHub Actions workflow analytics and tracking",
-		"CI/CD deployment monitoring dashboard",
-		"Webhook integration for real-time updates",
-		"TypeScript-powered with GitHub API"
+		"Runs on GitHub Actions with no server to deploy or pay for.",
+		"Three interchangeable storage backends — GitHub Variables, a database, or a repository — chosen per deployment.",
+		"Events arrive as simple webhook pings, so anything that can make an HTTP request can record one.",
+		"Admin operations are password-gated and the token is held as a repository secret rather than in config."
 	],
 	"metrics": [],
 	"links": {
@@ -53,7 +45,16 @@
 		"video": null
 	},
 	"sections": [],
-	"readme": null,
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# 🚀 ActionsCounter\n\n**Secure GitHub Actions-powered project analytics with triple storage modes.**\n\nTrack project usage, downloads, API calls, or any events through simple webhook pings. Choose from GitHub Variables, Database, or Repository storage based on your needs.\n\n## ⚡ Quick Start (5 Minutes)\n\n### 1. Fork & Clone\n```bash\n# Fork this repository on GitHub, then:\ngit clone https://github.com/YOUR_USERNAME/ActionsCounter.git\ncd ActionsCounter\n```\n\n### 2. Generate Personal Access Token\n<strong><a href=\"https://github.com/settings/tokens/new?scopes=repo,workflow,admin:repo_hook,read:org&description=ActionsCounter%20Standard%20Token&expiration=never\" alt=\"Create GitHub Token\" target=\"_blank\">📝 Create GitHub Token</a></strong>\n\nRequired scopes:\n- ✅ `repo` - Full repository access\n- ✅ `workflow` - Update workflows and trigger actions\n- ✅ `admin:repo_hook` - Repository webhook access\n- ✅ `read:org` - Read organization data\n\n### 3. Set Repository Secrets\n**[🔐 Configure Secrets](https://github.com/{YOUR_USERNAME}/ActionsCounter/settings/secrets/actions)**\n\nReplace `{YOUR_USERNAME}` with your GitHub username, then add:\n\n```\nADMIN_PASSWORD = your_secure_password\nPAT_TOKEN = your_personal_access_token_from_step_2\n```\n\n### 4. Choose Storage Mode\n**[⚙️ Set Variables](https://github.com/{YOUR_USERNAME}/ActionsCounter/settings/variables/actions)**\n\n```\nSTORAGE_MODE = 1\n```\n\n**Storage Options:**\n- `1` = **GitHub Variables** (48KB, fast, recommended)\n- `2` = **Database** (unlimited, requires PostgreSQL setup)\n- `3` = **Repository Commits** (unlimited, creates git commits)\n\n### 4. Configure Frontend\nEdit `frontend/src/main.ts`:\n```typescript\nconst REPO_OWNER = \"YOUR_USERNAME\";\nconst REPO_NAME = \"ActionsCounter\";\n```\n\n### 5. Enable GitHub Pages\n**[📄 Setup GitHub Pages](https://github.com/{YOUR_USERNAME}/ActionsCounter/settings/pages)**\n\nSet source to: **Deploy from main branch**\n\n### 6. Test Your Setup\n**[🧪 Run Test Workflow](https://github.com/{YOUR_USERNAME}/ActionsCounter/actions/workflows/handle-projects-dual.yml)**\n\n- Click \"Run workflow\"\n- Action: `stats`\n- Click \"Run workflow\" again\n\n### 7. Access Your Dashboard\n**[🌐 View Dashboard](https://{YOUR_USERNAME}.github.io/ActionsCounter)**\n\nReplace `{YOUR_USERNAME}` with your actual GitHub username in all URLs above.\n\n## 🎯 Usage\n\n### Via GitHub Actions UI\n1. **Actions** tab → **Handle Projects (Dual Mode)**\n2. Choose action (`increment`, `add`, `list`, etc.)\n3. Enter project name and password\n4. Run workflow\n\n### Via Secure Webhook (Recommended)\n```bash\ncurl -X POST \\\n  -H \"Authorization: token YOUR_PAT_TOKEN\" \\\n  -H \"Accept: application/vnd.github.v3+json\" \\\n  -H \"Content-Type: application/json\" \\\n  https://api.github.com/repos/YOUR_USERNAME/ActionsCounter/dispatches \\\n  -d '{\n    \"event_type\": \"increment\",\n    \"client_payload\": {\n      \"project_name\": \"my-project\"\n    }\n  }'\n```\n\n✅ **Secure**: No admin password in request - uses repository secrets automatically!\n\n### Available Actions\n- `increment` - Add 1 to project count\n- `decrement` - Subtract 1 from project count\n- `add` - Create new project\n- `remove` - Delete project\n- `set` - Set specific count value\n- `get` - View project details\n- `list` - Show all projects\n- `stats` - Display analytics\n\n## 📊 Storage Modes\n\n| Mode                   | Best For      | Capacity  | Speed     | Setup  |\n| ---------------------- | ------------- | --------- | --------- | ------ |\n| **GitHub Variables**   | Most projects | 48KB      | Very Fast | 5 min  |\n| **Database**           | High volume   | Unlimited | Fast      | 15 min |\n| **Repository Commits** | Demos/audit   | Unlimited | Slow      | 10 min |\n\n**Recommended**: Start with GitHub Variables (mode 1), upgrade to Database (mode 2) if you need more capacity.\n\n## 🔒 Security Features\n\n- **Password Protection**: All operations require admin password\n- **Repository Secrets**: Sensitive data stored securely in GitHub\n- **Token Validation**: GitHub token authentication\n- **No Browser Storage**: Zero sensitive data in localStorage\n\n## 📚 Documentation\n\n- **[📖 Complete Documentation](./docs/Home.md)** - Comprehensive guides and references\n- **[🚀 Fork Setup Guide](./FORK-SETUP.md)** - Fork-specific setup instructions\n- **[🎯 Usage Examples](./docs/usage.md)** - Detailed usage examples and patterns\n- **[🔑 GitHub Token Scopes](./docs/token-scopes.md)** - Required Token permissions\n- **[⚡ Quick Setup](./docs/quick-setup.md)** - Detailed setup walkthrough\n- **[🔗 API Reference](./docs/api-reference.md)** - All actions and webhook examples\n- **[🗃️ Storage Modes](./docs/storage-overview.md)** - Choose the right storage mode\n\n## 🛠️ Database Setup (Mode 2 Only)\n\nFor Database mode, add these secrets:\n```\nDB_HOST = your_postgres_host\nDB_NAME = your_database_name\nDB_PORT = 5432\nDB_USER = your_username\nDB_PASS = your_password\nDB_SCHEMA = myschema\n```\n\n**Free PostgreSQL Providers:**\n- [filess.io](https://filess.io) - 10MB free\n- [Supabase](https://supabase.com) - 500MB free\n- [Neon](https://neon.tech) - 512MB free\n\n## 🌟 Example Use Cases\n\n- **Download Tracking**: Monitor software/file downloads\n- **API Analytics**: Track API endpoint usage\n- **Website Metrics**: Count page views and interactions\n- **Project Usage**: Monitor tool/library adoption\n- **Event Tracking**: Log application events\n\n## 🔧 Support & Community\n\n### 📚 **Documentation**\n- **[📖 Complete Setup Guide](./docs/Home.md)** - Comprehensive documentation\n- **[❓ FAQ](./docs/faq.md)** - Quick answers to common questions\n- **[🛠️ Troubleshooting](./docs/troubleshooting.md)** - Step-by-step problem solving\n\n### 🤝 **Get Help**\n- **[💬 GitHub Discussions](https://github.com/Life-Experimentalist/ActionsCounter/discussions)** - Ask questions, share ideas\n- **[🐛 Report Bug](https://github.com/Life-Experimentalist/ActionsCounter/issues/new?template=bug_report.yml)** - Found an issue? Let us know\n- **[✨ Request Feature](https://github.com/Life-Experimentalist/ActionsCounter/issues/new?template=feature_request.yml)** - Suggest new features\n- **[🆘 Support Guide](./docs/support.md)** - Comprehensive support information\n\n### 🌟 **Contributing**\n- **[🤝 Contributing Guide](./docs/contributing.md)** - How to contribute to the project\n- **[👥 Contributors](https://github.com/Life-Experimentalist/ActionsCounter/graphs/contributors)** - Meet our amazing contributors\n\n**Quick Help:**\n- **\"Invalid password\" error:** Check `ADMIN_PASSWORD` secret is set correctly\n- **Analytics not showing:** Run any action to generate initial data & verify GitHub Pages is enabled\n- **Need immediate help?** Check our [FAQ](./docs/faq.md) first!\n\n## 📄 License\n\nApache 2.0 License - see [LICENSE.md](LICENSE.md)\n\n---\n\n**🚀 Ready to start tracking?** Fork this repo and follow the Quick Start guide above!\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/ActionsCounter/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/ActionsCounter/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/ActionsCounter/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -62,8 +63,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/ActionsCounter",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/ActionsCounter/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:21:58.677Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:08.942Z"
 }

@@ -1,12 +1,14 @@
 {
 	"slug": "cspell-sync",
 	"name": "cspell-sync",
-	"tagline": "",
-	"summary": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
-	"status": "Maintenance",
+	"tagline": "Your custom words. Everywhere. Automatically.",
+	"summary": "A VS Code extension that keeps cSpell custom words in sync between every project and the global dictionary, in both directions. Words added in one project reach the global list within a second, so opening a new project no longer means red squiggles under your whole technical vocabulary.",
+	"status": "active",
 	"category": "VS Code Extension",
-	"icon": "",
+	"icon": "SiTypescript",
 	"featured": false,
+	"tier": "secondary",
+	"order": 2,
 	"role": "",
 	"period": {
 		"start": "2024-06-01",
@@ -14,30 +16,33 @@
 	},
 	"technologies": [
 		"TypeScript",
-		"VS-Code-API",
-		"Node.js",
-		"JSON"
+		"VS Code API",
+		"esbuild"
 	],
 	"tags": [
-		"automation",
-		"code-spellchecker",
-		"cspell",
-		"developer-tools",
-		"extension",
-		"nodejs",
-		"open-source",
-		"typescript",
-		"visual-studio-code",
 		"vscode-extension",
-		"vscode-marketplace"
+		"spell-check",
+		"developer-tools",
+		"productivity"
 	],
 	"highlights": [
-		"2,100+ downloads on VS Code Marketplace",
-		"Bidirectional cSpell dictionary synchronization",
-		"Keyboard shortcuts and status bar integration",
-		"Supports custom dictionaries and project settings"
+		"Reads from four sources — project settings, custom dictionaries, language-specific settings and combined.txt drop files — and merges them into the global word list.",
+		"Bidirectional: global words can be pushed back into a project, workspace, existing dictionary or a new dictionary file.",
+		"A debounced watcher on .vscode/settings.json syncs a newly added word within one second.",
+		"Bundles to roughly 30 KB with zero runtime npm dependencies, and activates on onStartupFinished so it never delays editor startup."
 	],
-	"metrics": [],
+	"metrics": [
+		{
+			"label": "VS Code installs",
+			"value": "2,556",
+			"detail": "Marketplace"
+		},
+		{
+			"label": "Open VSX downloads",
+			"value": "400",
+			"detail": "v1.1.0"
+		}
+	],
 	"links": {
 		"repo": "https://github.com/Life-Experimentalist/cspell-sync",
 		"live": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
@@ -50,8 +55,27 @@
 		"layout": "auto",
 		"video": null
 	},
-	"sections": [],
-	"readme": null,
+	"sections": [
+		{
+			"type": "list",
+			"heading": "Design constraints",
+			"items": [
+				"Activation on onStartupFinished — a spell-checker helper must never be on the startup critical path.",
+				"A two-tier settings cache with a 30-second TTL, so unchanged JSON is not reparsed on every keystroke.",
+				"Incremental sync that processes only the changed settings file rather than every workspace folder."
+			]
+		}
+	],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "<div align=\"center\">\n\n<img src=\"./icon.png\" width=\"128px\" height=\"128px\" alt=\"cSpell Sync icon\" />\n\n# cSpell Sync\n\n**Your custom words. Everywhere. Automatically.**\n\n_Project → Global · Global → Project · Custom Dictionaries · File Watchers · Zero Config_\n\n<br/>\n\n[![GitHub Stars](https://img.shields.io/github/stars/Life-Experimentalist/cspell-sync?style=flat-square&color=gold&label=⭐%20Stars)](https://github.com/Life-Experimentalist/cspell-sync/stargazers)\n[![VS Marketplace](https://img.shields.io/visual-studio-marketplace/v/VKrishna04.cspell-sync?style=flat-square&color=007acc&label=VS%20Marketplace&logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync)\n[![Open VSX](https://img.shields.io/open-vsx/v/VKrishna04/cspell-sync?style=flat-square&color=a020f0&label=Open%20VSX)](https://open-vsx.org/extension/VKrishna04/cspell-sync)\n[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)\n[![Version](https://img.shields.io/badge/version-1.1.0-blueviolet?style=flat-square)](CHANGELOG.md)\n\n<br/>\n\n[![VS Code](https://img.shields.io/badge/VS%20Code-Install-007ACC?style=flat-square&logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync)\n[![Cursor](https://img.shields.io/badge/Cursor-Install-000000?style=flat-square)](https://open-vsx.org/extension/VKrishna04/cspell-sync)\n[![VSCodium](https://img.shields.io/badge/VSCodium-Install-2F80ED?style=flat-square)](https://open-vsx.org/extension/VKrishna04/cspell-sync)\n[![Windsurf](https://img.shields.io/badge/Windsurf-Install-00C4B4?style=flat-square)](https://open-vsx.org/extension/VKrishna04/cspell-sync)\n\n</div>\n\n---\n\n## The Problem\n\nYou add custom words to `.vscode/settings.json` in each project. Switch to a new project and you're back to red squiggles on your entire technical vocabulary — every framework name, every company term, every acronym you've ever typed. You add them again. And again.\n\n**cSpell Sync fixes that.** Install once, and every word you've ever added to any project flows automatically into your global dictionary. Open any project: zero red squiggles on known terms.\n\n---\n\n## STAR\n\n**Situation** — Developers working across multiple VS Code projects accumulate custom words in project-specific `.vscode/settings.json` files. These words are siloed: opening a new project means red squiggles on your entire technical vocabulary — framework names, company terms, acronyms — even though you've already accepted them dozens of times in other projects.\n\n**Task** — Build a VS Code extension that keeps `cSpell.words` in sync across all open projects and the global dictionary, automatically and bidirectionally, with zero manual effort after install.\n\n**Action** — Developed a lightweight extension that activates on startup, reads from four sources (project settings, custom dictionaries, language-specific settings, `combined.txt` drop files), and merges them into `cSpell.userWords` globally. Added a debounced file watcher on `.vscode/settings.json` so new words sync within one second of being added. Bidirectional sync pushes global words back to projects via keyboard shortcut or automatically. The entire extension bundles to a single ~30 KB JS file with zero runtime dependencies.\n\n**Result** — Open any project and your full vocabulary is instantly available. Custom words added in one project propagate globally within one second. Zero red squiggles on known terms across all projects, with a status bar indicator and optional output-channel logging for transparency.\n\n---\n\n## Google XYZ\n\n- Accomplished **zero red squiggles on first project open** by syncing all project dictionaries to the global `cSpell.userWords` on startup, as measured by deduplication and alphabetical merge of the word list, by reading from four configurable sources in parallel per workspace folder.\n- Built **bidirectional sync between global dictionary and project settings**, as measured by support for four sync targets (project `.vscode/settings.json`, workspace settings, existing custom dictionary, new dictionary file), by watching `cSpell.userWords` configuration changes and responding within one debounce cycle.\n- Engineered **sub-second incremental sync** with debounced file watchers and a two-tier settings cache (30 s TTL), as measured by processing only the changed settings file rather than all workspace folders on each keystroke.\n\n---\n\n## By the Numbers\n\n| Metric | Value |\n|--------|-------|\n| Sync sources | 4 (project settings, custom dicts, language settings, combined.txt) |\n| Sync targets | 4 (global, project, workspace, new custom dictionary) |\n| Bundle size | ~30 KB minified — zero runtime npm dependencies |\n| Startup overhead | One debounced read of `.vscode/settings.json` per folder |\n| Activation event | `onStartupFinished` — never delays editor startup |\n| Settings cache TTL | 30 s (avoids re-parsing unchanged JSON) |\n\n---\n\n## Install\n\n**VS Code:**\n\n```\next install VKrishna04.cspell-sync\n```\n\nOr search **cSpell Sync** in the Extensions panel (`Ctrl+Shift+X`).\n\n**Cursor / Windsurf / VSCodium / other Open VSX editors:**\n\nInstall from [Open VSX](https://open-vsx.org/extension/VKrishna04/cspell-sync) or search `cSpell Sync` in the editor's extensions panel.\n\n---\n\n## Commands\n\n| Command | Shortcut | Description |\n|---------|----------|-------------|\n| Sync Projects → Global | `Ctrl+Alt+S` / `Cmd+Alt+S` | Push all project words into global dictionary |\n| Sync Global → Projects | `Ctrl+Alt+G` / `Cmd+Alt+G` | Push global words back to project settings |\n| Sync Custom Dicts → Global | _(Command Palette only)_ | Push custom dictionary words to global |\n\nAll commands are also accessible via the **Command Palette** (`F1` → type `cSpell Sync`).\n\nA **status bar item** (`$(sync) cSpell Sync`) appears in the bottom-right and triggers the project→global sync on click.\n\n---\n\n## Configuration\n\n### General\n\n| Setting | Type | Default | Description |\n|---------|------|---------|-------------|\n| `cspell-sync.autoSyncOnStartup` | boolean | `true` | Auto-sync project → global when VS Code starts |\n| `cspell-sync.initialSyncDelay` | number | `5000` | Milliseconds to wait before startup sync |\n| `cspell-sync.showNotifications` | boolean | `true` | Show info notifications after sync |\n| `cspell-sync.logToOutputChannel` | boolean | `false` | Log detailed operations to Output panel |\n\n### Sources (Project → Global)\n\n| Setting | Default | Description |\n|---------|---------|-------------|\n| `cspell-sync.syncProjectSettings` | `true` | Sync from `cSpell.words` in `.vscode/settings.json` |\n| `cspell-sync.syncCustomDictionaries` | `true` | Sync from `cSpell.customDictionaries` entries |\n| `cspell-sync.syncLanguageSettings` | `true` | Sync from `cSpell.languageSettings[].words` |\n| `cspell-sync.syncCombinedTxt` | `true` | Process `combined.txt` drop files |\n| `cspell-sync.customToGlobalSync` | `false` | Include custom dicts in the main project→global sync |\n\n### Bidirectional Sync (Global → Project)\n\n| Setting | Default | Description |\n|---------|---------|-------------|\n| `cspell-sync.bidirectionalSyncMode` | `\"shortcut\"` | `shortcut` · `automatic` · `disabled` |\n| `cspell-sync.projectLevelSync.enabled` | `true` | Write to `.vscode/settings.json` |\n| `cspell-sync.projectLevelSync.target` | `\"cSpell.words\"` | Target key in settings.json |\n| `cspell-sync.workspaceSync.enabled` | `false` | Write to workspace `.code-workspace` |\n| `cspell-sync.customDictionarySync.enabled` | `false` | Write to an existing custom dictionary |\n| `cspell-sync.newDictionarySync.enabled` | `false` | Create a new dictionary file |\n\n---\n\n## Working with combined.txt\n\nDrop a `combined.txt` file anywhere in your workspace with one word per line (or comma/space separated). The extension detects it, prompts you to process-and-remove or keep it, then adds all words to your global dictionary. Useful for bulk-importing word lists without editing settings files directly.\n\nDisable auto-remove per folder:\n```json\n{ \"cspell-sync.combined-auto-remove\": false }\n```\n\n---\n\n## Workflows\n\n**Basic** — Open any project → words from `.vscode/settings.json` merge into your global dictionary automatically.\n\n**Team dictionary** — Enable `customDictionarySync`, point it at a shared `.txt` or `.json` dict in your repo, run `Ctrl+Alt+G` to push your global words into it, commit. Teammates get the words on pull.\n\n**New project bootstrap** — Enable `newDictionarySync`, set a name. Running `Ctrl+Alt+G` creates `dictionaries/project-dictionary.json` and registers it in `.vscode/settings.json` automatically.\n\n---\n\n## For More Information\n\n- [GitHub Repository](https://github.com/Life-Experimentalist/cspell-sync) — source code, issues, PRs\n- [CHANGELOG](CHANGELOG.md) — version history\n- [Issue Tracker](https://github.com/Life-Experimentalist/cspell-sync/issues) — bug reports and feature requests\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/cspell-sync/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/cspell-sync/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/cspell-sync/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -60,8 +84,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/cspell-sync",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/cspell-sync/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:21:57.338Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:08.379Z"
 }

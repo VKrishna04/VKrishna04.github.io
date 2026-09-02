@@ -25,6 +25,8 @@
  * - GET /api/views/{projectName}/badge - Get SVG badge
  */
 
+import { fetchSettings } from "./settingsCache"
+
 // Resolved from settings.counterAPI.baseUrl at call time. There is no
 // default endpoint: an unconfigured portfolio simply does not count views
 // rather than reporting them to somebody else's counter.
@@ -34,6 +36,52 @@ const RATE_LIMIT_COOLDOWN_MS = 5 * 60 * 1000
 let cflairRateLimitedUntil = 0
 
 const isInRateLimitCooldown = () => Date.now() < cflairRateLimitedUntil
+
+// The build's headless pass loads every route to capture its HTML. Those are
+// not visits, and counting them would add one hit per route per deploy to
+// numbers the site presents as real traffic. scripts/prerender.js sets this
+// flag before any page script runs; it is a JS global, so it never reaches the
+// captured markup.
+const isPrerendering = () =>
+	typeof window !== "undefined" && window.__PRERENDER__ === true
+
+let cflairBaseUrl = CFLAIR_BASE_URL
+let cflairEnabled = false
+let cflairConfigured = false
+let cflairConfiguring = null
+
+/**
+ * Point the counter at the deployment named in settings.counterAPI. Optional:
+ * callers that already hold settings save this module a fetch by passing them.
+ * @param {{enabled?: boolean, baseUrl?: string}} counterSettings
+ */
+export function configureCflair(counterSettings) {
+	cflairEnabled = counterSettings?.enabled === true
+	if (counterSettings?.baseUrl) cflairBaseUrl = counterSettings.baseUrl
+	cflairConfigured = true
+}
+
+// Settings decide both the endpoint and whether to count at all, and every
+// helper below is reached from a mount effect that may run before whoever was
+// going to call configureCflair. Resolving them here removes the ordering
+// question entirely; fetchSettings is cached, so this costs one request.
+const ensureConfigured = async () => {
+	if (cflairConfigured) return
+	cflairConfiguring ??= fetchSettings()
+		.then((settings) => configureCflair(settings?.counterAPI))
+		.catch(() => {
+			// No settings means no endpoint to count against; stay silent.
+			cflairConfigured = true
+		})
+	await cflairConfiguring
+}
+
+// Machine loads and a portfolio that has not opted in must not reach the API.
+const isDisabled = async () => {
+	if (isPrerendering()) return true
+	await ensureConfigured()
+	return !cflairEnabled
+}
 
 const markRateLimited = () => {
 	cflairRateLimitedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MS
@@ -50,12 +98,15 @@ export async function trackEvent(
 	category,
 	eventName,
 	metadata = {},
-	baseUrl = CFLAIR_BASE_URL
+	baseUrl = cflairBaseUrl
 ) {
 	if (!category || !eventName) return null
+	if (await isDisabled()) return null
 	if (isInRateLimitCooldown()) return null
+	// The default parameter above was evaluated before the settings resolved.
+	const base = baseUrl || cflairBaseUrl
 	try {
-		const res = await fetch(`${baseUrl}/api/events`, {
+		const res = await fetch(`${base}/api/events`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -80,18 +131,21 @@ export async function trackEvent(
  * @param {string} baseUrl - Optional custom base URL
  * @returns {Promise<object|null>} - The response data or null on error
  */
-export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
+export async function trackProjectView(projectName, baseUrl = cflairBaseUrl) {
 	if (!projectName) {
 		console.warn("[CFlair-Counter] Project name is required")
 		return null
 	}
+
+	if (await isDisabled()) return null
 
 	if (isInRateLimitCooldown()) {
 		return null
 	}
 
 	try {
-		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`
+		const base = baseUrl || cflairBaseUrl
+		const url = `${base}/api/views/${encodeURIComponent(projectName)}`
 		const response = await fetch(url, {
 			method: "POST",
 			headers: {
@@ -142,7 +196,8 @@ export async function trackProjectView(projectName, baseUrl = CFLAIR_BASE_URL) {
  * @param {string} baseUrl - Optional custom base URL
  * @returns {Promise<object|null>} - The stats data or null on error
  */
-export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
+export async function getProjectStats(projectName, baseUrl = cflairBaseUrl) {
+	if (await isDisabled()) return null
 	if (!projectName) {
 		console.warn("[CFlair-Counter] Project name is required")
 		return null
@@ -153,7 +208,8 @@ export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 	}
 
 	try {
-		const url = `${baseUrl}/api/views/${encodeURIComponent(projectName)}`
+		const base = baseUrl || cflairBaseUrl
+		const url = `${base}/api/views/${encodeURIComponent(projectName)}`
 		const response = await fetch(url, {
 			method: "GET",
 			headers: {
@@ -208,7 +264,7 @@ export async function getProjectStats(projectName, baseUrl = CFLAIR_BASE_URL) {
 export function getProjectBadgeUrl(
 	projectName,
 	options = {},
-	baseUrl = CFLAIR_BASE_URL
+	baseUrl = cflairBaseUrl
 ) {
 	if (!projectName) {
 		console.warn("[CFlair-Counter] Project name is required")
@@ -231,7 +287,7 @@ export function getProjectBadgeUrl(
  * @param {string} baseUrl - Optional custom base URL
  * @returns {Promise<object|null>} - The response data or null on error
  */
-export async function trackPortfolioView(baseUrl = CFLAIR_BASE_URL) {
+export async function trackPortfolioView(baseUrl = cflairBaseUrl) {
 	return trackProjectView("portfolio", baseUrl)
 }
 
@@ -245,7 +301,7 @@ export async function trackPortfolioView(baseUrl = CFLAIR_BASE_URL) {
  */
 export async function batchTrackViews(
 	projectNames,
-	baseUrl = CFLAIR_BASE_URL,
+	baseUrl = cflairBaseUrl,
 	delayMs = 200
 ) {
 	const results = []
@@ -269,7 +325,7 @@ export async function batchTrackViews(
  * @param {string} baseUrl - Optional custom base URL
  * @returns {Promise<boolean>} - True if service is available
  */
-export async function isCFlairCounterAvailable(baseUrl = CFLAIR_BASE_URL) {
+export async function isCFlairCounterAvailable(baseUrl = cflairBaseUrl) {
 	try {
 		const response = await fetch(`${baseUrl}/health`, {
 			method: "GET",

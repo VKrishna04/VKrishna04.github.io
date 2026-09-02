@@ -179,6 +179,7 @@
 							"Web Tool",
 							"Backend",
 							"Security Tool",
+							"Computer Vision",
 							"Other"
 						],
 						"description": "Project category for filtering, organization, and display grouping. Choose the most appropriate category that best describes the project's primary purpose or domain.",
@@ -193,6 +194,51 @@
 						"type": "boolean",
 						"description": "Whether this project should appear in the About page's Featured Projects section. Projects with showInAbout: true will be displayed with custom styling from featuredProjectsConfig.",
 						"default": false
+					},
+					"tier": {
+						"type": "string",
+						"enum": ["featured", "secondary", "hidden"],
+						"description": "Which group the project appears under on the Projects page. 'featured' is flagship work shown first; 'secondary' is split by status into in-development and shipped; 'hidden' keeps it out of the listing entirely.",
+						"default": "secondary"
+					},
+					"order": {
+						"type": "integer",
+						"minimum": 0,
+						"maximum": 999,
+						"description": "Position within the project's tier under the curated sort. Lower comes first; ties fall back to the project name.",
+						"default": 999
+					},
+					"packages": {
+						"type": "array",
+						"uniqueItems": true,
+						"maxItems": 10,
+						"description": "Where this project is published. scripts/fetch-project-stats.js queries each entry at build time so the page shows current install and download counts instead of numbers written by hand.",
+						"items": {
+							"type": "object",
+							"additionalProperties": false,
+							"required": ["registry", "id"],
+							"properties": {
+								"registry": {
+									"type": "string",
+									"enum": [
+										"npm",
+										"crates",
+										"pypi",
+										"openvsx",
+										"vscode",
+										"ghreleases",
+										"schemastore"
+									],
+									"description": "Which registry to query. Each has a handler in scripts/fetch-project-stats.js."
+								},
+								"id": {
+									"type": "string",
+									"minLength": 1,
+									"maxLength": 200,
+									"description": "The package identifier as that registry spells it: 'dev-prune' for npm, 'VKrishna04.cspell-sync' for the VS Code Marketplace, 'owner/repo' for GitHub releases, the filename for SchemaStore."
+								}
+							}
+						}
 					},
 					"showInProjects": {
 						"type": "boolean",

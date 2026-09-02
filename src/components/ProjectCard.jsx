@@ -19,7 +19,6 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
-	StarIcon,
 	CodeBracketIcon,
 	CalendarIcon,
 	ArrowTopRightOnSquareIcon,
@@ -702,14 +701,6 @@ const ProjectCard = ({
 						</div>
 					</div>
 
-					{typeof project.stargazers_count === "number" && (
-						<div className="flex items-center space-x-1 text-yellow-400 flex-shrink-0">
-							<StarIcon className="w-4 h-4" />
-							<span className="text-sm font-medium">
-								{project.stargazers_count}
-							</span>
-						</div>
-					)}
 				</div>
 
 				{/* Description */}
@@ -802,27 +793,6 @@ const ProjectCard = ({
 				{/* Stats */}
 				<div className="flex items-center justify-between text-sm text-gray-400 mb-4">
 					<div className="flex items-center gap-3 flex-wrap">
-						{typeof project.stargazers_count === "number" && (
-							<div className="flex items-center space-x-1 whitespace-nowrap">
-								{project.statsUrls?.starsUrl ? (
-									<a
-										href={project.statsUrls.starsUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="flex items-center space-x-1 hover:text-yellow-400 transition-colors"
-										title="View stargazers"
-									>
-										<StarIcon className="w-4 h-4" />
-										<span>{project.stargazers_count}</span>
-									</a>
-								) : (
-									<>
-										<StarIcon className="w-4 h-4" />
-										<span>{project.stargazers_count}</span>
-									</>
-								)}
-							</div>
-						)}
 						{typeof project.forks_count === "number" && (
 							<div className="flex items-center space-x-1 whitespace-nowrap">
 								{project.statsUrls?.forksUrl ? (

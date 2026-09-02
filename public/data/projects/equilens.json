@@ -1,12 +1,14 @@
 {
 	"slug": "equilens",
 	"name": "EquiLens",
-	"tagline": "",
-	"summary": "AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.",
-	"status": "Active Development",
+	"tagline": "Black-box bias detection for local language models.",
+	"summary": "A bias-auditing framework that probes any Ollama-compatible language model purely through its input/output interface, with no access to weights. It generates demographically paired prompts, runs them concurrently against a local model, and reports statistically analysed differences in the responses.",
+	"status": "active",
 	"category": "AI/ML",
-	"icon": "",
-	"featured": false,
+	"icon": "SiPython",
+	"featured": true,
+	"tier": "featured",
+	"order": 4,
 	"role": "",
 	"period": {
 		"start": "2025-07-01",
@@ -14,35 +16,33 @@
 	},
 	"technologies": [
 		"Python",
+		"FastAPI",
 		"Ollama",
-		"Rich-CLI",
-		"Statistical-Analysis",
-		"uv"
+		"Gradio",
+		"SQLite",
+		"Docker"
 	],
 	"tags": [
-		"ai-bias-detection",
-		"ai-ethics",
-		"ai-research-tools",
-		"bias-measurement",
-		"llm-auditing",
-		"ollama-integration",
-		"rich-cli",
-		"statistical-analysis",
-		"uv-python"
+		"ai-fairness",
+		"bias-detection",
+		"llm",
+		"research",
+		"local-first"
 	],
 	"highlights": [
-		"Multi-metric bias detection across demographics",
-		"Interactive CLI with rich progress tracking",
-		"Corpus generation and statistical analysis",
-		"Supports multiple LLM providers via Ollama",
-		"Resume capability for long-running audits"
+		"Audits models through prompts alone, so it works on any Ollama-compatible model without weight access or a cloud API.",
+		"Uses a prompt-pair method in which only the demographic variable changes between two otherwise identical prompts.",
+		"Runs the whole pipeline locally, so neither the prompts nor the model's responses leave the machine.",
+		"Resumable concurrent auditing with checkpointing, so a long run survives an interruption instead of restarting.",
+		"Published on Zenodo with a citable DOI and a one-command Docker deployment for reproducibility."
 	],
 	"metrics": [],
 	"links": {
 		"repo": "https://github.com/Life-Experimentalist/EquiLens",
-		"live": "https://equilens.vkrishna04.me/",
+		"live": "https://equilens.vkrishna04.me",
 		"demo": "",
-		"docs": "https://github.com/Life-Experimentalist/EquiLens#readme"
+		"docs": "https://github.com/Life-Experimentalist/EquiLens#readme",
+		"paper": "https://doi.org/10.5281/zenodo.17014103"
 	},
 	"media": {
 		"cover": "",
@@ -50,7 +50,22 @@
 		"layout": "auto",
 		"video": null
 	},
-	"sections": [],
+	"sections": [
+		{
+			"type": "prose",
+			"heading": "Why black-box",
+			"body": "Most bias tooling assumes either model weights or a cloud API, and small local models give you neither in practice — the weights are available but the tooling around them is not, and sending evaluation prompts to a third party defeats the point of running locally. Probing through the same interface an application uses means the audit measures what a deployment would actually see."
+		},
+		{
+			"type": "list",
+			"heading": "The three phases",
+			"items": [
+				"Corpus generation — a JSON specification of names, professions and trait templates expands into demographically balanced prompt pairs.",
+				"Model auditing — the corpus is run concurrently against an Ollama-hosted model, with retry and checkpoint resume.",
+				"Statistical analysis — paired responses are scored and tested, rather than eyeballed."
+			]
+		}
+	],
 	"readme": null,
 	"appearance": null,
 	"seo": null,
@@ -60,8 +75,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/EquiLens",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/EquiLens/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:28:35.142Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:07.187Z"
 }

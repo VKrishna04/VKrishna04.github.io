@@ -1,39 +1,33 @@
 {
 	"slug": "save-sync",
 	"name": "Save-Sync",
-	"tagline": "",
-	"summary": "VS Code Extension to save your project at working save points.",
-	"status": "Maintenance",
+	"tagline": "Save points for code, for when git is overkill.",
+	"summary": "A checkpoint tool for projects where full version control is more ceremony than the work deserves — experiments, tutorials and quick prototypes. It snapshots a project's state and restores it, so a risky change can be undone without a branching model.",
+	"status": "complete",
 	"category": "VS Code Extension",
-	"icon": "",
+	"icon": "SiPython",
 	"featured": false,
+	"tier": "secondary",
+	"order": 9,
 	"role": "",
 	"period": {
 		"start": "2025-08-01",
 		"end": null
 	},
 	"technologies": [
-		"TypeScript",
-		"VS-Code-API",
-		"Node.js"
+		"Python",
+		"CLI"
 	],
 	"tags": [
-		"backup",
-		"checkpoint",
 		"developer-tools",
-		"productivity",
-		"restore",
-		"save-state",
-		"timeline",
-		"typescript",
-		"vscode",
-		"vscode-extension"
+		"backup",
+		"prototyping",
+		"cli"
 	],
 	"highlights": [
-		"Save project state at meaningful working checkpoints",
-		"Restore workspace to any previous save point",
-		"Timeline view of project save history",
-		"Integrates seamlessly with VS Code workflow"
+		"Aimed at the cases git is genuinely too heavy for: tutorials, throwaway experiments and rapid prototypes.",
+		"Restores a saved checkpoint wholesale, so an experiment is abandoned by restoring rather than by reverting.",
+		"Keeps checkpoints outside the project's own history, leaving any existing repository untouched."
 	],
 	"metrics": [],
 	"links": {
@@ -49,7 +43,16 @@
 		"video": null
 	},
 	"sections": [],
-	"readme": null,
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# 🎮 Global Save State\n### *Save Points for Your Code - Just Like in Games!*\n\n<div align=\"center\">\n\n![Global Save State Logo](icon.jpg)\n\n**Create checkpoints in your code projects just like save points in video games!**\n\n*Perfect for experiments, tutorials, learning, and quick prototypes where full version control feels like overkill*\n\n[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/VKrishna04.global-save-state)](https://marketplace.visualstudio.com/items?itemName=VKrishna04.global-save-state)\n[![Downloads](https://img.shields.io/visual-studio-marketplace/d/VKrishna04.global-save-state)](https://marketplace.visualstudio.com/items?itemName=VKrishna04.global-save-state)\n[![Rating](https://img.shields.io/visual-studio-marketplace/r/VKrishna04.global-save-state)](https://marketplace.visualstudio.com/items?itemName=VKrishna04.global-save-state)\n\n</div>\n\n---\n\n## 🎯 Why Save Points for Code?\n\nRemember playing **Zelda** and hitting that checkpoint right before `Ganondorf`? Or **`Dark Souls`** where you desperately needed that bonfire before the boss? **`Global Save State`** brings that same peace of mind to coding!\n\n### 🎮 Perfect Gaming Scenarios:\n\n| 🎯 **Game Situation**           | 💻 **Code Equivalent**             |\n| ------------------------------ | --------------------------------- |\n| 🏰 **Save before boss fight**   | Save before major refactoring     |\n| 🧪 **Try different strategies** | Experiment with new approaches    |\n| 📚 **Chapter checkpoints**      | Milestone completion in tutorials |\n| 🎨 **Creative experimentation** | Art projects, creative coding     |\n| ⚡ **Speed runs**               | Rapid prototyping cycles          |\n| 🔄 **Multiple playthroughs**    | Different implementation attempts |\n\n### 🚀 When to Use Your Code Save Points:\n- **🧪 Experiments**: Try wild ideas without fear - restore if they don't work\n- **📚 Learning**: Checkpoint your progress while following tutorials\n- **🚀 Prototyping**: Quick saves for rapid iteration cycles\n- **🔧 Refactoring**: Save before major changes, restore if things break\n- **🎨 Creative Coding**: Art projects, game jams, creative experiments\n- **📝 Documentation**: Save states while writing examples or demos\n\n### 🚫 When to Use Git Instead:\n- Large production codebases\n- Team collaboration projects\n- Code that needs detailed history tracking\n- Professional development workflows\n\n## ✨ Game Mechanics for Code\n\n### 🎮 Just Like Your Favorite Games\n\n| 🎯 **Game Feature**       | 💻 **Global Save State** | 🔥 **Why It's Awesome**       |\n| ------------------------ | ----------------------- | ---------------------------- |\n| 💾 **Quick Save**         | `Ctrl+Shift+S`          | Instant checkpoint creation  |\n| 🔄 **Quick Load**         | `Ctrl+Alt+R`            | Instant project restoration  |\n| 📍 **Named Saves**        | \"Before AI Integration\" | Descriptive checkpoint names |\n| 🎯 **Save Slots**         | Up to 50 per project    | Multiple restore points      |\n| ⚡ **No Loading Screens** | Instant restore         | Zero wait time               |\n| 🎪 **Multiple Campaigns** | Multi-root workspaces   | Independent save systems     |\n\n### 🚀 Core Features\n\n- **💾 Create Named Save Points**: Capture your entire project state with custom names\n- **🔄 Instant Restore**: Quickly restore to any previous save point\n- **📁 Multi-Root Support**: Each workspace folder maintains its own save points independently\n- **⚙️ Flexible Exclusions**: Configure exclusion patterns per folder via `.vscode/settings.json`\n- **⚡ Smart Detection**: Automatically handles empty save points when no changes are detected\n- **🎯 Not a VCS**: Lightweight alternative to version control for quick state management\n\n## 📦 Installation\n\n### 🎮 From VS Code Marketplace (Recommended)\n1. Open VS Code\n2. Go to Extensions (`Ctrl+Shift+X`)\n3. Search for \"**Global Save State**\"\n4. Click **Install**\n5. Start creating save points! 🎉\n\n### 📁 From VSIX File\n1. Download the `.vsix` file from [releases](https://github.com/Life-Experimentalist/global-save-state/releases)\n2. Open VS Code\n3. Run `Extensions: Install from VSIX...` from Command Palette\n4. Select the downloaded `.vsix` file\n\n## 🎮 Quick Start Guide - Your First Save Point!\n\n### 🕹️ Tutorial Mode (5 minutes)\n\n**Step 1: Set the Scene** 🎬\n```bash\n# Open any project in VS Code\n# Make some changes to your files\n# Now you're ready for your first checkpoint!\n```\n\n**Step 2: Create Your First Save Point** 💾\n1. Press `Ctrl+Shift+S` (your \"Save Game\" button)\n2. Name it: **\"Tutorial Checkpoint 1\"**\n3. Watch the magic happen! ✨\n\n**Step 3: Make Some Changes** 🔨\n```javascript\n// Add some experimental code\nfunction experimentalFeature() {\n    // This might break everything...\n    return 'risky code here';\n}\n```\n\n**Step 4: Create Another Checkpoint** 📍\n1. Press `Ctrl+Shift+S` again\n2. Name it: **\"Added Experimental Feature\"**\n\n**Step 5: Oh No! Something Broke!** 💥\n1. Press `Ctrl+Alt+R` (your \"Load Game\" button)\n2. Select **\"Tutorial Checkpoint 1\"**\n3. **BOOM!** 🎉 You're back to safety!\n\n> 💡 **Pro Gamer Tip**: Use descriptive save names like \"Before Adding Database\", \"Working Login System\", or \"Pre-Boss-Fight-Refactor\"\n\n## 🎯 Advanced Usage\n### 💾 Creating Save Points (Quick Save)\n- **🎮 Keyboard**: `Ctrl+Shift+S` (or `Cmd+Shift+S` on Mac)\n- **📝 Command Palette**: `Global Save State: Create Save Point`\n\n**Multi-Workspace Projects:**\n1. If multiple workspace folders are open, select which folder to save\n2. Enter a descriptive name for your save point (think epic checkpoint names!)\n3. The extension captures all files (excluding configured patterns)\n\n### 🔄 Loading Save Points (Quick Load)\n- **🎮 Keyboard**: `Ctrl+Alt+R` (or `Cmd+Alt+R` on Mac)\n- **📝 Command Palette**: `Global Save State: Restore Save Point`\n\n**Restore Process:**\n1. If multiple workspace folders are open, select which folder to restore\n2. Choose from your list of save points (sorted by newest first)\n3. Your project is instantly restored to that exact state\n\n> ⚠️ **Boss Fight Warning**: Just like in games, loading a save point will overwrite your current progress! Save first if you want to keep changes.\n\n## ⚙️ Configuration\n\n### Per-Folder Settings\nCreate `.vscode/settings.json` in any workspace folder:\n\n```json\n{\n  \"globalSaveState.excludePatterns\": [\n    \"**/node_modules/**\",\n    \"**/.git/**\",\n    \"**/dist/**\",\n    \"**/build/**\",\n    \"**/.vscode/**\",\n    \"**/out/**\",\n    \"**/*.log\"\n  ]\n}\n```\n\n### Global Settings\n- **Max Save Points**: Configure maximum save points to keep (default: 50)\n- **Default Exclusions**: Set global exclusion patterns\n\n## 📋 Requirements\n\n- VS Code 1.74.0 or higher\n- Node.js 16.0.0 or higher\n\n## 🔧 Development\n\n```bash\n# Clone the repository\ngit clone https://github.com/Life-Experimentalist/global-save-state\n\n# Install dependencies\nnpm install\n\n# Compile TypeScript\nnpm run compile\n\n# Run tests\nnpm test\n\n# Build extension package\nnpm run build\n```\n\n## 📖 Documentation\n\n- [Architecture](docs/ARCHITECTURE.md): System design and diagrams\n- [Roadmap](docs/ROADMAP.md): Milestones and future plans\n- [TODO](docs/TODO.md): Tasks and bugs\n- [Changelog](docs/CHANGELOG.md): Release notes\n- [License](LICENSE.md): License information\n- [Code of Conduct](docs/CODE_OF_CONDUCT.md): Community guidelines\n\n## 🤝 Contributing\n\nSee [Contributing Guide](.github/ISSUE_TEMPLATE/CONTRIBUTING.md) for details on:\n- Code style guidelines\n- How to submit pull requests\n- Bug reporting process\n\n## 📄 License\n\nLicensed under the [Apache 2.0 License](LICENSE.md).\n\n## 🐛 Issues & Support\n\n- Report bugs: [GitHub Issues](https://github.com/Life-Experimentalist/global-save-state/issues)\n- Feature requests: [GitHub Issues](https://github.com/Life-Experimentalist/global-save-state/issues)\n- Email: krishnagsvv@gmail.com\n\n---\n\n<div align=\"center\">\n\n**🎮 Happy Coding with Save Points! 🎉**\n\n*Made with ❤️ for developers who miss game checkpoints in their code*\n\n[🌟 Star on GitHub](https://github.com/Life-Experimentalist/global-save-state) | [📦 VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Life-Experimentalist.global-save-state)\n\n</div>\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/Save-Sync/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/Save-Sync/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/Save-Sync/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -58,8 +61,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/Save-Sync",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Save-Sync/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:21:55.386Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:07.458Z"
 }

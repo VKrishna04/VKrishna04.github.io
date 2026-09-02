@@ -1,12 +1,14 @@
 {
 	"slug": "docs-rag",
 	"name": "docs-rag",
-	"tagline": "",
-	"summary": "A strictly grounded RAG pipeline over documents you choose. It answers only from the sources you give it, cites the passages it used, and refuses when those documents do not support an answer - a constraint verified mechanically rather than merely requested in a prompt.",
-	"status": "Active Development",
+	"tagline": "Retrieval-augmented QA that refuses to guess.",
+	"summary": "A retrieval-augmented question answering system over documents you choose — PDFs, Markdown, HTML, Wikipedia and GitHub files. It answers only from those documents, cites what it used, and refuses when they do not contain the answer, with that refusal verified mechanically rather than merely requested in the prompt.",
+	"status": "active",
 	"category": "AI/ML",
 	"icon": "SiPython",
 	"featured": false,
+	"tier": "secondary",
+	"order": 13,
 	"role": "",
 	"period": {
 		"start": "2026-08-31",
@@ -14,35 +16,34 @@
 	},
 	"technologies": [
 		"Python",
-		"rag",
-		"gemini",
-		"numpy",
-		"pypdf",
-		"trafilatura",
+		"Gemini API",
 		"uv"
 	],
 	"tags": [
 		"rag",
-		"retrieval-augmented-generation",
-		"grounding",
-		"citations",
-		"python",
-		"gemini",
-		"embeddings",
-		"document-search",
-		"pdf",
-		"large-language-models",
-		"aws",
-		"uv"
+		"llm",
+		"question-answering",
+		"retrieval",
+		"citations"
 	],
 	"highlights": [
-		"Answers only from the documents you supply, and refuses when they do not support one",
-		"Cites every passage it used, down to the page number for PDFs",
-		"Five dependencies: no LangChain, and no vector database",
-		"Indexes 244 AWS services from the Overview of Amazon Web Services whitepaper",
-		"Reads PDF, Markdown, TXT, HTML, RST and CSV, plus folders and http(s) URLs"
+		"Grounding is enforced mechanically rather than by asking the model nicely, so a refusal is a checked property of the answer.",
+		"Cites the passages an answer came from, making every claim traceable to a source document.",
+		"Five dependencies total — no LangChain, no vector database, no framework.",
+		"Ingests PDFs, Markdown, plain text, HTML, Wikipedia pages, GitHub files and blog articles into one corpus."
 	],
-	"metrics": [],
+	"metrics": [
+		{
+			"label": "Indexed services",
+			"value": "244",
+			"detail": "AWS services in the shipped corpus"
+		},
+		{
+			"label": "Dependencies",
+			"value": "5",
+			"detail": "no LangChain, no vector database"
+		}
+	],
 	"links": {
 		"repo": "https://github.com/FissionLife/docs-rag",
 		"live": "",
@@ -55,8 +56,23 @@
 		"layout": "auto",
 		"video": null
 	},
-	"sections": [],
-	"readme": null,
+	"sections": [
+		{
+			"type": "prose",
+			"heading": "Why the refusal has to be mechanical",
+			"body": "Telling a model to answer only from the provided context is a request, not a guarantee — it complies most of the time, which is the worst failure mode available, because the occasional confident invention looks exactly like the correct answers around it. Verifying grounding after generation turns that from a prompt-engineering hope into a property of the system."
+		}
+	],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# docs-rag\n\nA retrieval-augmented question-answering system over **documents you choose** —\nPDFs, Markdown, plain text, HTML, Wikipedia pages, GitHub files, blog articles.\nIt answers **only** from those documents, cites what it used, and refuses when\nthey do not contain the answer — and that claim is verified mechanically rather\nthan merely requested in a prompt.\n\nCurrently indexed: **244 AWS services**, built from the *Overview of Amazon Web\nServices* whitepaper and enriched from the AWS product catalogue.\n\nLearning the concepts: **[docs/RAG_GUIDE.md](docs/RAG_GUIDE.md)** — 13 sections\nfrom chunking to evaluation, including a case study of building this corpus.\n\nFive dependencies. No LangChain, no vector database, no framework. Managed with\n[uv](https://docs.astral.sh/uv/).\n\n## Setup\n\n```bash\ncp .env.example .env      # then put your Gemini key in it\n```\n\nGet a key at <https://aistudio.google.com/apikey>. There is no install step —\n`uv run` builds the environment from `uv.lock` on first use.\n\n```bash\nuv run add ./paper.pdf ./notes/ https://en.wikipedia.org/wiki/CRISPR\nuv run ingest        # chunk -> embed -> store\nuv run dev           # ask questions\n```\n\n`uv run help` prints every command at any time.\n\n## Commands\n\n### Build the corpus\n\n| Command | Does |\n|---|---|\n| `uv run add <file\\|folder\\|url>` | Parse a source and store it. **No API calls.** `--replace` overwrites. |\n| `uv run ingest` | Chunk → embed → save the index. Cheap to re-run (see below). |\n| `uv run remove <doc_id>` | Drop one document, then re-ingest. |\n| `uv run clear --corpus\\|--index\\|--all` | Delete data. Requires an explicit target. |\n\n**`add` accepts** `.pdf` `.md` `.txt` `.html` `.rst` `.csv`, any folder\n(searched recursively), and any `http(s)` URL. PDFs are split by page, so a\ncitation reads `report.pdf > Page 12`.\n\nSome URLs are special-cased, because fetching the source beats scraping the\nrendering:\n\n| URL | Handled by | Why |\n|---|---|---|\n| `en.wikipedia.org/wiki/X` | MediaWiki API | Clean plaintext with real section markers |\n| `github.com/O/R/blob/REF/path` | `raw.githubusercontent.com` | The blob page is an app — scraping it loses **every heading** |\n| `github.com/O/R` | its README on `main`/`master` | The obvious thing to paste |\n| anything else | trafilatura | Strips nav, related-post rails, cookie banners |\n\nMeasured on one README: scraping gave 12,469 chars and **0 sections**; fetching\nthe raw file gave 17,009 chars and **17 sections**. Section breadcrumbs are most\nof what makes a chunk retrievable.\n\n### See what you have\n\n| Command | Does |\n|---|---|\n| `uv run list` | Every document: id, type, size, source |\n| `uv run status` | Config, corpus/index sizes, whether they are in sync |\n| `uv run inspect \"...\"` | What retrieval returns, with scores, **no generation** |\n\n### Ask\n\n| Command | Does |\n|---|---|\n| `uv run dev` | Interactive loop. Start here. |\n| `uv run ask \"...\"` | A single answer with citations |\n| `... --chunks` | On either: also print every retrieved passage, marked **CITED** or **unused** |\n| `uv run eval` | Score accuracy and grounding (`--fresh` to re-ask) |\n\n`inspect` and `--chunks` are the debugging pair: they separate *\"the passage was\nnever retrieved\"* from *\"the model had it and answered badly\"*. The **unused**\npassages are the informative half. In `dev`, `\\chunks` toggles printing\nmid-session and `\\last` reprints the previous answer's passages.\n\n## The AWS corpus\n\nRebuild it from the whitepaper with [tools/aws_build.py](tools/aws_build.py):\n\n```bash\n# 1. PDF -> Markdown (one-off tool, isolated so it stays out of the project deps)\nuv tool run --python 3.13 --from \"markitdown[pdf]\" \\\n    markitdown aws-overview.pdf -o data/aws/aws-overview.md\n\n# 2. recover structure, enrich from the AWS portal, write one page per service\nuv run python tools/aws_build.py parse      # -> 244 services, 23 categories\nuv run python tools/aws_build.py catalog    # -> 358 products from the AWS API\nuv run python tools/aws_build.py pages      # -> data/aws/services/*.md\n\n# 3. index it\nuv run add data/aws/services/\nuv run ingest\n```\n\nThe interesting part is that **markitdown produces zero headings** — PDF is a\nlayout format, so a heading is just bold text. The document's own table of\ncontents is used as a segmentation schema instead, and services the TOC omits\n(Blockchain, Game tech, Serverless) are recovered from the body, which restates\neach service name in its opening sentence.\n\nEnrichment uses AWS's own product-directory **JSON API** — one request for all\n358 products with canonical URL, category, pricing page, launch date and\nfree-tier status — rather than scraping 350 HTML pages. 224 of 244 matched;\nthe rest keep their whitepaper description.\n\nThe full write-up is [the guide, §12](docs/RAG_GUIDE.md#12-case-study-turning-a-162-page-pdf-into-a-corpus).\n\n## Re-running ingest is nearly free\n\nEmbeddings are cached **by content**, keyed on a hash of\n`(model, dimension, chunk text)`:\n\n- re-running `ingest` unchanged embeds **0** chunks (~1 second);\n- adding one document embeds only **that document's** chunks;\n- editing a paragraph re-embeds only the chunks that changed;\n- changing chunk size or embedding model correctly invalidates everything.\n\nNot just a speed win. The free tier allows **1,000 embedding calls per day**, so\na pipeline that re-embeds everything can be run twice a day before it stops\nworking.\n\n## How it works\n\n```\nINDEXING   loaders.py ─▶ chunk.py ─▶ embed.py ─▶ store.py\n           PDF/MD/HTML   section-    Gemini      SQLite +\n           /URL parsing  aware       embeddings  vectors.npy\n\nQUERYING   overview.py ─▶ embed.py ─▶ retrieve.py ─▶ generate.py\n           route the      query       dense + BM25,   strict prompt,\n           question       vector      RRF, MMR        citation check\n              │\n              └─ corpus-level (\"summarise\", \"what topics\") bypasses search\n                 and answers from a manifest + document leads instead\n```\n\n| File | Responsibility |\n|---|---|\n| `rag/config.py` | Every tunable value, in one place |\n| `rag/loaders.py` | Parse PDF / Markdown / text / HTML / URLs into documents |\n| `rag/corpus.py` | The document collection: add, list, remove, dedupe |\n| `rag/chunk.py` | Section-aware, sentence-packing chunker with breadcrumbs |\n| `rag/embed.py` | Gemini embeddings + the content-addressed cache |\n| `rag/store.py` | Persistent store: SQLite metadata + numpy matrix |\n| `rag/retrieve.py` | Hybrid dense/BM25 retrieval, RRF fusion, MMR diversity |\n| `rag/overview.py` | Query routing; corpus-level context from metadata + leads |\n| `rag/generate.py` | Grounded answering and citation verification |\n| `rag/pipeline.py` | `ingest()` and `Rag.ask()` — the system in ~100 lines |\n| `rag/backoff.py` | Retry on transient errors; proactive quota rate limiting |\n| `rag/cli.py` | The `uv run` entry points |\n| `rag/evaluate.py` | Retrieval recall, answer accuracy, refusal rate |\n| `tools/aws_build.py` | Build the AWS corpus from the whitepaper |\n\n## Measured results\n\n`uv run eval` — 31 questions over 244 documents / 559 chunks, with\n`gemini-embedding-2` @ 1536d and `gemini-3.5-flash-lite`:\n\n| Metric | Result |\n|---|---|\n| Retrieval recall@6 | **22/22 (100%)** |\n| Answer accuracy (exact facts present) | **22/22 (100%)** |\n| Refusal on unanswerable | **9/9 (100%)** |\n| — out-of-domain | 4/4, stopped by the relevance gate |\n| — adjacent-absent | 5/5, stopped by the prompt + citation check |\n| False refusals | **0** |\n| Elapsed | 257s |\n\n`gemini-3.7-flash` reached 18/18 on the same set before hitting its daily quota,\nso this is not a Flash-Lite-specific result.\n\n**The split is the interesting part.** *Out-of-domain* questions (\"capital of\nPeru\") never reach the model — the relevance gate stops them. *Adjacent-absent*\nquestions are the honest test: the topic **is** in the corpus but the fact is\nnot, so retrieval returns confident, on-topic, useless chunks and the gate lets\nthem through. \"What is the maximum execution timeout for a Lambda function?\"\nretrieves the Lambda page, which never states a timeout. Only the prompt\ncontract and the citation check stand between that and a leak.\n\n> A score is only meaningful next to the corpus it was measured on. These\n> questions were written against **this** AWS corpus. Change the documents and\n> rewrite `eval/questions.json`, or the numbers describe nothing — `uv run eval`\n> prints a warning when scores drop below 70% for exactly this reason.\n\n## How \"only from context\" is enforced\n\nFour independent layers, because a prompt is not an enforcement mechanism:\n\n1. **Retrieval gate** — if no chunk clears `MIN_COSINE`, refuse without ever\n   calling the generator. A model that isn't invoked cannot hallucinate.\n2. **Prompt contract** — outside knowledge forbidden, a `[n]` citation required\n   on every factual sentence, and an exact sentinel for insufficient context.\n3. **`temperature = 0`** — no sampling creativity during extraction.\n4. **Citation verification** — every `[n]` is parsed and checked against what\n   was actually supplied. An answer citing nothing is rejected and converted\n   into a refusal; citations of blocks never shown are stripped.\n\nLayer 4 is what makes the guarantee mechanical. See\n[the guide, §7](docs/RAG_GUIDE.md#7-grounded-generation) for what it still does\n*not* guarantee.\n\n## Configuration\n\nDefaults live in `rag/config.py`; the useful ones are overridable from `.env`:\n\n```bash\nRAG_EMBED_MODEL=gemini-embedding-2     # or gemini-embedding-001\nRAG_EMBED_DIM=1536                     # 128-3072, MRL-truncatable\nRAG_GEN_MODEL=gemini-3.6-flash\nRAG_EMBED_RPM=95                       # free tier allows 100 texts/minute\nRAG_AWS_PAGE_URL=aws                   # AWS citations: `aws` or `local`\n```\n\nEach `(model, dimension)` pair gets its own index directory under `data/index/`,\nso you can build several and compare without re-ingesting.\n\n### Choosing the generation model\n\n| Model | Grounding behaviour | Daily quota |\n|---|---|---|\n| `gemini-3.6-flash` **(default)** | Follows the full rule set | ~20/day |\n| `gemini-3.7-flash` | Same | ~20/day |\n| `gemini-3.5-flash-lite` | **Can over-refuse** — see below | Generous |\n\nFlash-Lite was the default until it was caught refusing *\"what is the best X\"*\nwith the subject plainly in the context. It obeys the hard rules (only use the\ncontext, cite, refuse when empty) but not always the subtler ones (answer the\npart that *is* supported, say what is not). **Over-refusal is the worst failure\nmode here** — the system looks correctly grounded while being useless, and\nnothing in the output tells you it went wrong.\n\n## Free-tier quotas\n\nBoth limits are **per day** and **per model**, and both were hit building this:\n\n| | Limit | Notes |\n|---|---|---|\n| Embeddings | 1,000/day, 100/minute | Counted in *individual texts*, not requests |\n| Generation | ~20/day per flash model | Flash-Lite is far more generous |\n\nA per-day cap cannot be waited out, yet the API still replies \"please retry in\n38s\". The code detects the `PerDay` quota id and fails immediately with the fix\nrather than sleeping through useless retries. **Each model has its own\nallowance**, so switching `RAG_EMBED_MODEL` or `RAG_GEN_MODEL` is the quickest\nunblock.\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/FissionLife/docs-rag/HEAD/",
+		"linkBase": "https://github.com/FissionLife/docs-rag/blob/HEAD/",
+		"sourceUrl": "https://github.com/FissionLife/docs-rag/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -65,8 +81,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "FissionLife/docs-rag",
 	"manifestUrl": "https://raw.githubusercontent.com/FissionLife/docs-rag/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T03:09:59.283Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:10.155Z"
 }

@@ -1,0 +1,85 @@
+{
+	"slug": "loginlens",
+	"name": "LoginLens",
+	"tagline": "A local-only map of how you sign in to everything.",
+	"summary": "A browser extension that records which account, OAuth provider and MFA method you used on each site — the layer above passwords that nothing else tracks. It never asks for, reads or stores a password, and runs entirely on-device with no server and no account.",
+	"status": "active",
+	"category": "Browser Extension",
+	"icon": "SiTypescript",
+	"featured": true,
+	"tier": "featured",
+	"order": 2,
+	"role": "",
+	"period": {
+		"start": "2026-08-12",
+		"end": null
+	},
+	"technologies": [
+		"TypeScript",
+		"Manifest V3",
+		"Tailwind CSS",
+		"Vitest"
+	],
+	"tags": [
+		"browser-extension",
+		"privacy",
+		"security",
+		"local-first",
+		"oauth"
+	],
+	"highlights": [
+		"Answers the question a password manager cannot: which of your accounts, and which provider button, you used on this specific site.",
+		"Detects password reuse without ever handling a password, via HMAC-SHA256 fingerprints under a random 256-bit device key — unlike a bare hash, they cannot be attacked offline.",
+		"Captures OAuth sign-ins across nine providers by watching the redirect chain, then queues them for one-click confirmation rather than saving anything silently.",
+		"Off by default: capture must be switched on, and manual recording stops itself after 15 minutes.",
+		"Groups the popup by the domain you are actually on — that site, its parent and subdomains first, the rest of the vault behind a toggle."
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/LoginLens",
+		"live": "https://loginlens.vkrishna04.me",
+		"demo": "",
+		"docs": "https://loginlens.vkrishna04.me"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [
+		{
+			"type": "prose",
+			"heading": "The problem underneath",
+			"body": "Password managers solved storage and left identity selection unsolved. Knowing the password is no help when the question is which of three Google accounts you used, or whether you signed up with the Google button at all. That information is not written down anywhere, so it is reconstructed by trial and error at every login. LoginLens records the choice at the moment it is made."
+		},
+		{
+			"type": "prose",
+			"heading": "Why reuse detection without passwords is possible",
+			"body": "Reuse detection normally requires the passwords. Hashing them is not a fix: a plain SHA-256 of a human-chosen password falls to a wordlist in seconds. Keying the hash changes that — an HMAC under a random 256-bit key generated on the device still produces equal outputs for equal inputs, which is all reuse detection needs, but the fingerprints are worthless to anyone without the key. The comparison works and the vault stays uninteresting to steal."
+		}
+	],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "<div align=\"center\">\n\n# LoginLens 🔍\n\n**A local-only map of how you sign in to everything.**\n\nWhich account did you use on that site? Was it the Google button or a password?\nWhich authenticator guards it? LoginLens answers those questions without ever\nstoring a password and without a server to store it on.\n\n[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)\n[![Manifest V3](https://img.shields.io/badge/Manifest-V3-4285F4.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)\n[![Built with Plasmo](https://img.shields.io/badge/Built%20with-Plasmo-6B4EFF.svg)](https://www.plasmo.com/)\n\n[Website](https://loginlens.vkrishna04.me) ·\n[Documentation](./docs/README.md) ·\n[Privacy](./docs/privacy.md) ·\n[Permissions](./PERMISSIONS.md) ·\n[Contributing](./CONTRIBUTING.md)\n\n</div>\n\n---\n\n## What it is\n\nA password manager remembers your passwords. LoginLens remembers your *choices* —\nthe layer above them that nothing else keeps track of:\n\n- You signed up to Figma with **Google**, not email. Two years later you have no\n  idea which of your three Google accounts.\n- You have an authenticator entry called `Acme` and no memory of which of your\n  two Acme logins it belongs to.\n- You changed one password and want to know which other sites shared it.\n\nIt runs entirely inside your browser. There is no server, no account, and no\nsync unless you deliberately turn it on.\n\n## What it stores — and what it doesn't\n\n**Not stored:** your passwords. LoginLens never asks for one, never reads one\nout of a form, and has nothing to leak if the vault file is read. The autofill\noverlay fills the username and puts a placeholder in the password field.\n\n**Stored, locally:** which usernames you use where, which OAuth provider backs\neach login, which MFA method guards it, your notes and labels, and any API keys\nyou paste in yourself.\n\nFull detail — every storage key, every encryption boundary — is in\n[docs/privacy.md](./docs/privacy.md).\n\n## Features\n\n- **OAuth capture** — detects sign-ins with Google, GitHub, Microsoft, Apple,\n  X/Twitter, Facebook, Discord, LinkedIn and Slack by watching the redirect\n  chain, then queues them for one-click confirmation rather than saving anything\n  behind your back. It is off until you turn it on, and manual recording stops\n  itself after 15 minutes.\n- **Password reuse detection without passwords** — reuse is inferred from\n  HMAC-SHA256 fingerprints computed under a random 256-bit key generated on your\n  device. Equal passwords produce equal fingerprints; without the key a\n  fingerprint cannot be attacked offline, which a bare SHA-256 hash of a human\n  password very much can.\n- **Weak-password flagging** — the same keyed scheme flags the two dozen\n  passwords that are broken on sight.\n- **MFA registry** — track which authenticator, hardware key, or passkey covers\n  which account, and get warned about accounts with none.\n- **Mirror-domain linking** — tell it that `9anime.to` and `9anime.id` are the\n  same place, and reuse warnings between them stop being noise.\n- **Security review** — a single view of reused passwords, weak passwords, and\n  unprotected accounts, with the fixes grouped by what to do first.\n- **Local restore points** — automatic and manual snapshots of the vault,\n  capped and rotated, restorable in one click.\n- **Optional encrypted cloud sync** — off by default. When on, the vault is\n  compressed, encrypted with AES-256-GCM under a passphrase-derived key, chunked,\n  and handed to your browser's own sync. Ciphertext is all that is replicated.\n- **Import and export** — CSV import from other managers, and export as\n  encrypted `.LLBAK`, plaintext `.json`, or `.csv`. The `.LLBAK` format is\n  documented well enough to decrypt offline in Python, and the extension will\n  hand you that script.\n- **Export & Leave** — a proper exit: take a backup, wipe the local vault, and\n  clear the copy your browser already synced to your other devices.\n- **Local-only favicons by default** — site icons are drawn from the domain name\n  on your machine. Fetching real favicons from Google is available in Settings\n  and is opt-in, because the domain would travel in the request URL.\n\n## Permissions\n\n`storage`, `tabs`, `clipboardWrite`, `alarms` — and **no host permissions**.\nSee [PERMISSIONS.md](./PERMISSIONS.md).\n\n## Install\n\nStore listings are pending. Until then, load it unpacked:\n\n```bash\nnpm install\nnpm run build:chrome\n```\n\nThen open `chrome://extensions`, enable **Developer mode**, choose **Load\nunpacked**, and select `build/chrome-mv3-prod`.\n\n[docs/installation.md](./docs/installation.md) covers Firefox, Edge, Brave,\nOpera, and Safari.\n\n## Development\n\n```bash\nnpm install\nnpm run dev\n```\n\nPlasmo writes a live-reloading build to `build/edge-mv3-dev` (change the target\nin the `dev` script for another browser). Load that directory unpacked.\n\n### Build targets\n\n```bash\nnpm run build:chrome\nnpm run build:edge\nnpm run build:brave\nnpm run build:opera\nnpm run build:firefox\nnpm run build:firefox-mv2\nnpm run build:safari\n```\n\n### Quality gates\n\n```bash\nnpm test\nnpm run typecheck\nnpm run lint\n```\n\n`npm run test:coverage` produces a coverage report. Every push and pull request\nto `main` runs the same gates via GitHub Actions\n([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)).\n\n## Tech stack\n\n| Layer | Choice |\n| --- | --- |\n| Extension framework | [Plasmo](https://www.plasmo.com/) 0.90, Manifest V3 |\n| UI | React 18, TailwindCSS 3, Framer Motion 11, Lucide |\n| Storage | `@plasmohq/storage` over `chrome.storage.local` / `.sync` / `.session` |\n| Crypto | WebCrypto — AES-256-GCM, PBKDF2-HMAC-SHA256 (600k iterations), HMAC-SHA256 |\n| Language | TypeScript 5.4, strict |\n| Tests | Vitest 3 |\n\nThe injected overlay renders inside a **closed** Shadow DOM, so host-page CSS\ncannot reach it, it cannot leak styles back into the page, and page script\ncannot read the accounts it is showing you out of `host.shadowRoot`.\n\n## Contributing\n\n[CONTRIBUTING.md](./CONTRIBUTING.md) covers the setup, the architecture, and\nwhat a change needs before it can land. Security issues go to\n[SECURITY.md](./SECURITY.md), not the public issue tracker.\n\n## License\n\nApache-2.0. See [LICENSE](./LICENSE).\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/LoginLens/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/LoginLens/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/LoginLens/blob/HEAD/README.md"
+	},
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "manifest",
+	"repo": "Life-Experimentalist/LoginLens",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/LoginLens/HEAD/.portfolio/project.json",
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:10.790Z"
+}

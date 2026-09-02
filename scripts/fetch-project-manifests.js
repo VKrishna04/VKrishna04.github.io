@@ -50,6 +50,22 @@ const OUT_DIR = path.join(ROOT, "public", "data", "projects")
 const TIMEOUT_MS = 10000
 const MANIFEST_PATH = ".portfolio/project.json"
 
+// raw.githubusercontent serves public files anonymously and nothing else. The
+// Contents API serves the same bytes but honours a token, so with one set we
+// can also read private repositories and stop sharing the 60/hr anonymous
+// budget with every other build on the runner.
+const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || ""
+
+async function fetchRepoFile(repo, filePath, accept) {
+	const url = token
+		? `https://api.github.com/repos/${repo}/contents/${filePath}`
+		: `https://raw.githubusercontent.com/${repo}/HEAD/${filePath}`
+	const headers = token
+		? { Accept: "application/vnd.github.raw", Authorization: `Bearer ${token}` }
+		: { Accept: accept }
+	return fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers })
+}
+
 // A README is Markdown from someone else's repo. Cap it so one enormous file
 // cannot bloat every page payload.
 const README_MAX_BYTES = 100_000
@@ -84,6 +100,30 @@ function depthScore(project) {
 	)
 }
 
+// Written by scripts/fetch-project-stats.js earlier in `prepare-data`. Absent
+// on a first run or if every registry was unreachable; that is not an error.
+const liveStats = (() => {
+	try {
+		return JSON.parse(
+			fs.readFileSync(
+				path.join(ROOT, "public", "data", "project-stats.json"),
+				"utf8"
+			)
+		).projects
+	} catch {
+		return {}
+	}
+})()
+
+// The schema allows label/value/detail only, so the source URL is dropped here.
+function metricsFor(name) {
+	return (liveStats[name] || [])
+		.slice(0, 8)
+		.map(({ label, value, detail }) =>
+			detail ? { label, value, detail } : { label, value }
+		)
+}
+
 function baseFromSettings(sp) {
 	const repo = parseRepo(sp.githubUrl)
 	return {
@@ -95,12 +135,16 @@ function baseFromSettings(sp) {
 		category: sp.category || "",
 		icon: normalizeIcon(sp.icon),
 		featured: !!sp.featured,
+		// Curation lives in settings.json, not in the repo's own manifest — a
+		// project cannot promote itself onto the front of the portfolio.
+		tier: sp.tier || "secondary",
+		order: typeof sp.order === "number" ? sp.order : 999,
 		role: "",
 		period: { start: sp.startDate || null, end: sp.endDate || null },
 		technologies: sp.technologies || [],
 		tags: sp.tags || [],
 		highlights: sp.highlights || [],
-		metrics: [],
+		metrics: metricsFor(sp.name),
 		links: {
 			repo: sp.githubUrl || "",
 			live: sp.liveUrl || "",
@@ -152,7 +196,10 @@ function merge(base, manifest) {
 		technologies: pick(base.technologies, manifest.technologies),
 		tags: pick(base.tags, manifest.tags),
 		highlights: pick(base.highlights, manifest.highlights),
-		metrics: (manifest.metrics || []).filter((m) => m?.label && m?.value),
+		metrics: pick(
+			base.metrics,
+			(manifest.metrics || []).filter((m) => m?.label && m?.value)
+		),
 		links: { ...base.links, ...(manifest.links || {}) },
 		media: normalizeMedia(manifest.media, base.media.cover),
 		sections: normalizeSections(manifest.sections),
@@ -166,26 +213,88 @@ function merge(base, manifest) {
 	}
 }
 
-async function fetchManifest(url) {
-	const res = await fetch(url, {
-		signal: AbortSignal.timeout(TIMEOUT_MS),
-		headers: { Accept: "application/json" },
-	})
+const LOCAL_ROOT = process.env.MANIFEST_LOCAL_ROOT || ""
+
+// Local preview: MANIFEST_LOCAL_ROOT=<dir> reads .portfolio/project.json out of
+// working copies instead of raw.githubusercontent, so a manifest can be seen
+// rendered before it is pushed. Repos are matched by their git origin rather
+// than by directory name, and the comparison ignores case and separators so a
+// checkout named FacialEmotionDetection still resolves to
+// Facial-Emotion-Detector.
+const localReposByName = {}
+
+const localRepos = (() => {
+	if (!LOCAL_ROOT) return {}
+	const map = {}
+	const byName = localReposByName
+	let dirs = []
+	try {
+		dirs = fs.readdirSync(LOCAL_ROOT, { withFileTypes: true })
+	} catch {
+		console.warn("MANIFEST_LOCAL_ROOT is unreadable - ignoring it")
+		return {}
+	}
+	for (const d of dirs) {
+		if (!d.isDirectory()) continue
+		const dir = path.join(LOCAL_ROOT, d.name)
+		let cfg
+		try {
+			cfg = fs.readFileSync(path.join(dir, ".git", "config"), "utf8")
+		} catch {
+			continue
+		}
+		const m = /url\s*=\s*\S*github\.com[/:]([^/\s]+)\/(\S+?)(?:\.git)?\/?\s*$/im.exec(
+			cfg
+		)
+		if (m) {
+			map[repoKey(m[1], m[2])] = dir
+			const bare = repoKey("", m[2])
+			byName[bare] = bare in byName ? null : dir // null marks a collision
+		}
+	}
+	return map
+})()
+
+function repoKey(owner, name) {
+	return owner.toLowerCase() + "/" + name.toLowerCase().replace(/[^a-z0-9]/g, "")
+}
+
+function localManifestFor(repo) {
+	if (!repo || !LOCAL_ROOT) return null
+	const [owner, name] = repo.split("/")
+	// A checkout whose origin still points at a pre-rename URL has the old
+	// owner, so fall back to the repo name alone when it is unambiguous.
+	const dir =
+		localRepos[repoKey(owner, name)] || localReposByName[repoKey("", name)]
+	return dir ? path.join(dir, MANIFEST_PATH) : null
+}
+
+function readLocalManifest(file, name) {
+	try {
+		const m = JSON.parse(fs.readFileSync(file, 'utf8'))
+		console.log(`   (local) ${name}: ${file}`)
+		return m
+	} catch (e) {
+		if (e.code !== 'ENOENT') {
+			console.warn(`⚠️ ${name}: local manifest is not valid JSON — ${e.message}`)
+		}
+		return null
+	}
+}
+
+async function fetchManifest(repo) {
+	const res = await fetchRepoFile(repo, MANIFEST_PATH, "application/json")
 	if (res.status === 404) return null // repo simply has not opted in yet
 	if (!res.ok) throw new Error(`HTTP ${res.status}`)
-	return res.json()
+	return JSON.parse(await res.text())
 }
 
 // Fetched at build time, not in the browser, so the Markdown is in the
 // prerendered HTML and a crawler sees it. Returns null on any failure — a
 // README is a bonus, never a reason to fail a page.
 async function fetchReadme(repo, readme) {
-	const url = `https://raw.githubusercontent.com/${repo}/HEAD/${readme.path}`
 	try {
-		const res = await fetch(url, {
-			signal: AbortSignal.timeout(TIMEOUT_MS),
-			headers: { Accept: "text/plain" },
-		})
+		const res = await fetchRepoFile(repo, readme.path, "text/plain")
 		if (!res.ok) {
 			console.warn(`⚠️ ${repo}: ${readme.path} not fetched (HTTP ${res.status})`)
 			return null
@@ -211,7 +320,7 @@ async function fetchReadme(repo, readme) {
 			// images come from raw, links go to the rendered file on github.com.
 			imageBase: `https://raw.githubusercontent.com/${repo}/HEAD/`,
 			linkBase: `https://github.com/${repo}/blob/HEAD/`,
-			sourceUrl: url,
+			sourceUrl: `https://github.com/${repo}/blob/HEAD/${readme.path}`,
 		}
 	} catch (e) {
 		console.warn(`⚠️ ${repo}: ${readme.path} fetch failed (${e.message})`)
@@ -244,7 +353,9 @@ async function main() {
 		fs.readFileSync(path.join(ROOT, "public", "settings.json"), "utf8")
 	)
 	const staticProjects = (settings.projects?.staticProjects || []).filter(
-		(p) => p.showInProjects !== false && p.githubUrl
+		// A private or proprietary project has no public repository to point at,
+		// so a name is enough to earn a page; the slug falls back to it.
+		(p) => p.showInProjects !== false && (p.githubUrl || p.name)
 	)
 
 	fs.mkdirSync(OUT_DIR, { recursive: true })
@@ -264,7 +375,10 @@ async function main() {
 		let project = base
 		if (base.manifestUrl) {
 			try {
-				const manifest = await fetchManifest(base.manifestUrl)
+				const local = localManifestFor(base.repo)
+				const manifest = local
+					? readLocalManifest(local, sp.name)
+					: await fetchManifest(base.repo)
 				if (manifest) {
 					project = merge(base, manifest)
 					withManifest++
@@ -301,11 +415,14 @@ async function main() {
 		index.push({
 			slug: project.slug,
 			name: project.name,
+			tagline: project.tagline,
 			summary: project.summary,
 			status: project.status,
 			category: project.category,
 			icon: project.icon || "",
 			featured: project.featured,
+			tier: project.tier,
+			order: project.order,
 			technologies: (project.technologies || []).slice(0, 8),
 			cover: project.media?.cover || "",
 			repo: project.repo,
@@ -314,7 +431,17 @@ async function main() {
 		})
 	}
 
-	index.sort((a, b) => b.depth - a.depth || a.name.localeCompare(b.name))
+	// Curated order first: tier, then the explicit position inside it. Depth
+	// only breaks ties, so a thin page cannot outrank a featured one and a
+	// rich README cannot promote a side project past the real work.
+	const TIER_RANK = { featured: 0, secondary: 1, hidden: 2 }
+	index.sort(
+		(a, b) =>
+			(TIER_RANK[a.tier] ?? 1) - (TIER_RANK[b.tier] ?? 1) ||
+			a.order - b.order ||
+			b.depth - a.depth ||
+			a.name.localeCompare(b.name)
+	)
 	writeIfChanged(path.join(OUT_DIR, "index.json"), {
 		generatedAt: new Date().toISOString(),
 		count: index.length,

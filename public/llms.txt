@@ -1,7 +1,7 @@
 # Krishna GSVV — AI Context
 
 ## About
-Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 8.55/10, graduating Jul 2026), based in Bengaluru and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines. Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used. I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — ₹3.55L in prizes across 2025. On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,100+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL. My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping.
+B.Tech Computer Science graduate of Amrita Vishwa Vidyapeetham (CGPA: 8.63/10, graduated Jul 2026), based in India and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines. Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used. I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — ₹3.55L in prizes across 2025. On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,500+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL. My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping.
 
 ## Skills
 Python, JavaScript, TypeScript, HTML5, CSS3, SQL, React, Vite, Browser Extensions, Tailwind CSS, Framer Motion, Bootstrap, Responsive Design, Git, GitHub, VS Code, Jupyter, Postman, Linux, AWS
@@ -18,19 +18,19 @@ Jul 2026 - Dec 2026, Jubilee Hills, Hyderabad
 ## Education
 ### Bachelor of Technology, Computer Science
 Amrita Vishwa Vidyapeetham — 2022 - 2026
-GPA: 8.55/10
+GPA: 8.63/10
 
-## Projects (24 total)
-- **Krishna GSVV Portfolio**: A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features dynamic GitHub repository fetching, beautiful animations, and a comprehensive configuration system that makes it fully customizable through a single JSON file.
+## Projects (19 total)
 - **RanobeGemini**: Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.
-- **Youtube-Keystrokes-Blocker**: A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.
 - **ToxicGuard_AI**: ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.
 - **EquiLens**: AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.
 - **Save-Sync**: VS Code Extension to save your project at working save points.
-- **Eldritchify**: Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!
 - **CFlair-Counter**: Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.
 - **the-pensive-index**: Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.
-- **eVidya**: eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.
+- **cspell-sync**: cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.
+- **Facial-Emotion-Detector**: Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.
+- **ActionsCounter**: GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.
+- **SignLanguageDetector**: Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.
 
 ## Links
 - Portfolio: https://vkrishna04.me

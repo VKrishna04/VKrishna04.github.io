@@ -151,6 +151,10 @@ async function main() {
 	try {
 		const page = await browser.newPage()
 		await page.setViewport({ width: 1280, height: 900 })
+		// Marks these loads as machine traffic so view counters skip them.
+		await page.evaluateOnNewDocument(() => {
+			window.__PRERENDER__ = true
+		})
 		for (const route of routes) {
 			try {
 				await page.goto(`http://localhost:${PORT}${route}`, {

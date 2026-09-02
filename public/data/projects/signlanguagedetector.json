@@ -1,12 +1,14 @@
 {
 	"slug": "signlanguagedetector",
 	"name": "SignLanguageDetector",
-	"tagline": "",
-	"summary": "Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.",
-	"status": "Completed",
+	"tagline": "Sign language recognition, collection to browser inference.",
+	"summary": "An end-to-end sign language recognition project: collect images, build a dataset, train a classifier, and serve real-time predictions in the browser from webcam hand landmarks. It also exposes a headless REST endpoint and swaps trained models without a restart.",
+	"status": "active",
 	"category": "AI/ML",
-	"icon": "",
+	"icon": "SiScikitlearn",
 	"featured": false,
+	"tier": "secondary",
+	"order": 7,
 	"role": "",
 	"period": {
 		"start": "2025-04-01",
@@ -14,32 +16,23 @@
 	},
 	"technologies": [
 		"Python",
-		"Flask",
 		"MediaPipe",
-		"OpenCV",
 		"scikit-learn",
-		"NumPy",
-		"JavaScript"
+		"Flask",
+		"uv"
 	],
 	"tags": [
 		"computer-vision",
-		"flask",
-		"gesture-recognition",
-		"hand-tracking",
-		"indian-sign-language",
 		"machine-learning",
-		"mediapipe-hands",
-		"opencv",
-		"python",
-		"real-time-detection",
-		"sign-language",
-		"web-application"
+		"mediapipe",
+		"accessibility"
 	],
 	"highlights": [
-		"Real-time Indian Sign Language recognition system",
-		"98% accuracy with custom ML classifier",
-		"Interactive Flask web interface for live inference",
-		"MediaPipe hand tracking for precise detection"
+		"Real-time inference in the browser with no plugin: webcam to MediaPipe hand landmarks to a RandomForest prediction.",
+		"Hot model switching — a different .pkl is selected from the UI dropdown without restarting the server.",
+		"A headless REST endpoint accepts either a file upload or base64 JSON, so the model is usable outside the demo UI.",
+		"One-command setup: uv run app provisions Python, creates the virtual environment, installs dependencies and starts the server.",
+		"Reports F1 scores and the strongest and weakest classes from generated JSON model reports."
 	],
 	"metrics": [],
 	"links": {
@@ -55,7 +48,16 @@
 		"video": null
 	},
 	"sections": [],
-	"readme": null,
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# Sign Language Detector\n\n[![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab?logo=python&logoColor=white)](https://www.python.org/downloads/)\n[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)\n[![License](https://img.shields.io/badge/license-Apache%202.0-22c55e)](LICENSE.md)\n[![MediaPipe](https://img.shields.io/badge/mediapipe-0.10-ff6f00)](https://mediapipe.dev/)\n[![Flask](https://img.shields.io/badge/flask-3.1-000000?logo=flask)](https://flask.palletsprojects.com/)\n![Views](https://counter.vkrishna04.me/api/views/sign-language-detector/badge?style=flat-square&color=brightgreen&label=views)\n\nEnd-to-end sign language recognition — collect images, train a classifier, and serve real-time browser inference with model analytics, all from one project.\n\n## Features\n\n- **Real-time browser inference** — webcam → MediaPipe hand landmarks → RandomForest → prediction, no plugins\n- **Interactive training CLI** — guided flow for image collection, dataset creation, training, and reporting\n- **Model analytics sidebar** — F1 scores, top/weak classes, accuracy rendered from JSON reports\n- **Headless REST API** — `POST /api/predict` accepts file upload or base64 JSON, returns prediction\n- **Hot model switching** — swap `.pkl` files from the UI dropdown without restarting the server\n- **One-command setup** — `uv run app` provisions Python, creates venv, installs deps, and starts the server\n\n## Quick Start\n\n> Requires [uv](https://docs.astral.sh/uv/getting-started/installation/) — install once with `pip install uv` or `irm https://astral.sh/uv/install.ps1 | iex` on Windows.\n\n```powershell\ngit clone https://github.com/Life-Experimentalist/SignLanguageDetector.git\ncd SignLanguageDetector\nuv run app\n```\n\nOpen **http://localhost:5000**. `uv run app` auto-syncs the environment on first run — no manual `pip install` needed.\n\n## Commands\n\nAll commands run inside the managed uv environment — no activation needed.\n\n| Command | What it does |\n|---|---|\n| `uv run app` | Start the single-client web server |\n| `uv run train` | Interactive training CLI (collect → dataset → train → infer) |\n| `uv run convert-reports` | Regenerate JSON model reports from trained `.pkl` files |\n| `uv run python app_multi_client.py` | Multi-client server with per-session isolation |\n\n## Training a Model\n\nRun `uv run train` and follow the prompts. Each stage is optional — skip any you've already completed.\n\n| Stage | What happens |\n|---|---|\n| 1 — Collect images | Captures webcam frames per sign class into `data/<class>/`. Blurry and hand-free frames are rejected. |\n| 2 — Create dataset | Extracts normalized MediaPipe landmark coordinates and saves them as a pickle dataset. |\n| 3 — Train classifier | Trains RandomForest, writes `models/model.pkl`, `model.txt` report, and `model.json` metrics. |\n| 4 — Analyze | Converts text reports to structured JSON. Surfaces per-class F1 scores and accuracy. |\n| 5 — Infer | Runs inference against new input to verify the model before deploying. |\n\nOr run individual stages directly:\n\n```powershell\nuv run python training/collect_imgs.py\nuv run python training/create_dataset.py\nuv run python training/train_classifier.py\nuv run convert-reports\n```\n\n## Inference API\n\nStart the server (`uv run app`), then call `POST /api/predict` from any HTTP client.\n\n**Multipart file upload:**\n\n```powershell\n$form = @{\n  image          = Get-Item .\\data\\0\\sample.jpg\n  show_landmarks = \"false\"\n  include_visuals = \"false\"\n}\nInvoke-RestMethod -Uri \"http://127.0.0.1:5000/api/predict\" -Method Post -Form $form\n```\n\n**Base64 JSON:**\n\n```powershell\n$bytes   = [System.IO.File]::ReadAllBytes(\".\\data\\0\\sample.jpg\")\n$payload = @{\n  image_base64   = [System.Convert]::ToBase64String($bytes)\n  show_landmarks  = $false\n  include_visuals = $false\n} | ConvertTo-Json\n\nInvoke-RestMethod -Uri \"http://127.0.0.1:5000/api/predict\" `\n  -Method Post -ContentType \"application/json\" -Body $payload\n```\n\n**Response:**\n\n```json\n{\n  \"prediction\": \"A\",\n  \"brightness\": 142.5,\n  \"contrast\": 68.3,\n  \"low_brightness\": false,\n  \"model\": \"model.pkl\"\n}\n```\n\nOptional flags: `show_landmarks` (bool, default `false`), `include_visuals` (bool, default `false`).\n\n## Configuration\n\nCopy `.env.example` to `.env` and adjust as needed. All variables have sensible defaults.\n\n| Variable | Default | Description |\n|---|---|---|\n| `PORT` | `5000` | Server port |\n| `DEBUG` | `False` | Flask debug mode |\n| `MODELS_DIR` | `./models` | Path to trained model files |\n| `DATA_DIR` | `./data` | Path to image dataset |\n| `QUIZ_DURATION` | `30` | Seconds per quiz round |\n| `QUIZ_NUM_GUESSES` | `5` | Guesses allowed per round |\n| `DEMO_QUIZ_LETTERS` | `ABCDE` | Letters shown in the demo quiz |\n| `DISABLE_ANONYMOUS_TELEMETRY` | `false` | Set `true` to opt out of view counter ping |\n| `TELEMETRY_COUNTER_BASE_URL` | `https://counter.vkrishna04.me` | Counter service base URL |\n\n## Project Structure\n\n```\nSignLanguageDetector/\n├── app.py                   # Single-client Flask server\n├── app_multi_client.py      # Multi-client Flask server (session isolation)\n├── interactive_cli.py       # Training pipeline CLI\n├── pyproject.toml           # Dependencies + uv run scripts\n├── .env.example             # Environment variable reference\n├── training/                # collect_imgs, create_dataset, train_classifier, convert_model_reports\n├── utils/                   # config, app_utils, utils, scripts\n├── models/                  # Trained .pkl files + .txt/.json reports\n├── templates/               # Jinja2 HTML templates (layout, index, quiz, quiz_demo, sidebar)\n├── static/css/              # model-info.css\n└── docs/                    # GitHub Pages landing site\n```\n\n## GitHub Pages\n\nThe landing page at `https://sign.vkrishna04.me` is served from the `docs/` folder.\n\n- Entry: `docs/index.html`\n- Styles: `docs/styles.css`\n- Stats: `docs/landing.js`\n- SEO: `docs/robots.txt`, `docs/sitemap.xml`\n- Custom domain: `docs/CNAME` → `sign.vkrishna04.me`\n- Branding assets (optional): `docs/static/branding/` — see `docs/BRANDING_PROMPTS.md`\n\n## Documentation\n\n| Doc | Description |\n|---|---|\n| [API Reference](docs/API.md) | All endpoints with request/response examples |\n| [Architecture](docs/ARCHITECTURE.md) | System diagrams and data-flow charts |\n| [Contributing](docs/CONTRIBUTING.md) | How to open issues and submit PRs |\n| [Roadmap](docs/ROADMAP.md) | Planned features and improvements |\n| [Scripts Reference](docs/SCRIPTS.md) | Every training and utility script |\n| [Integration Guide](docs/INTEGRATION.md) | Embedding the API in external services |\n| [Telemetry](docs/TELEMETRY.md) | How the anonymous view counter works |\n| [Release Notes](docs/RELEASE_NOTES.md) | Changelog |\n\n## License\n\nApache License 2.0. See [LICENSE.md](LICENSE.md).\n\nAnonymous telemetry (a single view-counter ping per page load) is sent via [CFlair-Counter](https://github.com/Life-Experimentalist/CFlair-Counter). Set `DISABLE_ANONYMOUS_TELEMETRY=true` in `.env` to opt out. Training quality matters — better capture conditions produce better predictions. The dataset builder automatically skips frames without detectable hand landmarks and frames flagged as too blurry.\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/SignLanguageDetector/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/SignLanguageDetector/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -64,8 +66,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/SignLanguageDetector",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/SignLanguageDetector/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:21:59.028Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:09.246Z"
 }

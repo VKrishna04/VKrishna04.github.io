@@ -29,7 +29,7 @@ import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import FaviconManager from "./components/FaviconManager"
 import PrivacyNotice from "./components/PrivacyNotice"
-import { trackPortfolioView } from "./utils/cflairCounter"
+import { configureCflair, trackPortfolioView } from "./utils/cflairCounter"
 import { fetchSettings } from "./utils/settingsCache"
 import { applyPageMeta } from "./utils/pageMeta"
 import { getSiteUrl } from "./utils/identity"
@@ -88,9 +88,13 @@ const usePageConfiguration = (location) => {
 
 	// Track portfolio view only when enabled in settings (once per app load)
 	useEffect(() => {
-		if (hasTrackedPortfolioView.current) return
 		const counterSettings = settings?.counterAPI
-		if (!counterSettings || counterSettings.enabled !== true) return
+		if (!counterSettings) return
+		// Resolve the endpoint for every caller, including the resume and
+		// contact events raised from pages that never see settings themselves.
+		configureCflair(counterSettings)
+		if (hasTrackedPortfolioView.current) return
+		if (counterSettings.enabled !== true) return
 
 		hasTrackedPortfolioView.current = true
 		trackPortfolioView(counterSettings.baseUrl).catch((error) =>

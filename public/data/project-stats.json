@@ -1,0 +1,65 @@
+{
+	"generatedAt": "2026-09-02T22:53:06.112Z",
+	"projects": {
+		"cspell-sync": [
+			{
+				"registry": "vscode",
+				"label": "VS Code installs",
+				"value": "2,556",
+				"detail": "Marketplace",
+				"url": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
+			},
+			{
+				"registry": "openvsx",
+				"label": "Open VSX downloads",
+				"value": "400",
+				"detail": "v1.1.0",
+				"url": "https://open-vsx.org/extension/VKrishna04/cspell-sync"
+			}
+		],
+		"dev-prune": [
+			{
+				"registry": "schemastore",
+				"label": "SchemaStore",
+				"value": ".devprune.json",
+				"detail": "in the official catalog",
+				"url": "https://www.schemastore.org/"
+			},
+			{
+				"registry": "openvsx",
+				"label": "Open VSX downloads",
+				"value": "1,062",
+				"detail": "v0.4.0",
+				"url": "https://open-vsx.org/extension/VKrishna04/dev-prune"
+			},
+			{
+				"registry": "npm",
+				"label": "npm downloads",
+				"value": "949",
+				"detail": "last 12 months",
+				"url": "https://www.npmjs.com/package/dev-prune"
+			},
+			{
+				"registry": "ghreleases",
+				"label": "Release downloads",
+				"value": "574",
+				"detail": "22 releases",
+				"url": "https://github.com/Life-Experimentalist/dev-prune/releases"
+			},
+			{
+				"registry": "crates",
+				"label": "crates.io downloads",
+				"value": "335",
+				"detail": "v1.18.0",
+				"url": "https://crates.io/crates/dev-prune"
+			},
+			{
+				"registry": "pypi",
+				"label": "PyPI downloads",
+				"value": "6,061",
+				"url": "https://pypi.org/project/dev-prune/",
+				"detail": "last 30 days"
+			}
+		]
+	}
+}

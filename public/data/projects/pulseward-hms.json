@@ -1,0 +1,50 @@
+{
+	"slug": "pulseward-hms",
+	"name": "PulseWard-HMS",
+	"tagline": "",
+	"summary": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
+	"status": "Completed",
+	"category": "Web Application",
+	"icon": "",
+	"featured": false,
+	"tier": "secondary",
+	"order": 0,
+	"role": "",
+	"period": {
+		"start": null,
+		"end": null
+	},
+	"technologies": [
+		"Proprietary"
+	],
+	"tags": [
+		"proprietary",
+		"private-repository"
+	],
+	"highlights": [
+		"Licensed proprietary — not open source and not publicly distributable",
+		"Source kept private; walkthrough available on request"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "",
+		"live": "",
+		"demo": "",
+		"docs": ""
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": null,
+	"appearance": null,
+	"seo": null,
+	"stats": null,
+	"source": "settings",
+	"repo": null,
+	"manifestUrl": null,
+	"generatedAt": "2026-09-02T22:53:09.522Z"
+}

@@ -37,147 +37,117 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/code-ledger</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
 		<loc>https://vkrishna04.me/projects/dev-prune</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/docs-rag</loc>
+		<loc>https://vkrishna04.me/projects/loginlens</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/chronos-ledger</loc>
+		<lastmod>2026-09-01</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/equilens</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/vkrishna04-github-io</loc>
+		<loc>https://vkrishna04.me/projects/code-ledger</loc>
+		<lastmod>2026-09-01</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/pulseward-hms</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/actionscounter</loc>
+		<loc>https://vkrishna04.me/projects/vectra-180</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/breachcheck</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/cflair-counter</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/counterapi</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/cspell-sync</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/eldritchify</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/evidya</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/facial-emotion-detector</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/hivexplore</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/parkmeter</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/ranobegemini</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/relax</loc>
+		<loc>https://vkrishna04.me/projects/cflair-counter</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/save-sync</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://vkrishna04.me/projects/signlanguagedetector</loc>
-		<lastmod>2026-09-01</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/the-pensive-index</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/signlanguagedetector</loc>
+		<lastmod>2026-09-01</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/toxicguard-ai</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/youtube-keystrokes-blocker</loc>
+		<loc>https://vkrishna04.me/projects/save-sync</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/zipcracker</loc>
+		<loc>https://vkrishna04.me/projects/actionscounter</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://vkrishna04.me/projects/drderma</loc>
+		<loc>https://vkrishna04.me/projects/breachcheck</loc>
 		<lastmod>2026-09-01</lastmod>
 		<changefreq>monthly</changefreq>
-		<priority>0.5</priority>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/docs-rag</loc>
+		<lastmod>2026-09-01</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/hivexplore</loc>
+		<lastmod>2026-09-01</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
 	</url>
 </urlset>

@@ -1,12 +1,14 @@
 {
 	"slug": "breachcheck",
 	"name": "BreachCheck",
-	"tagline": "",
-	"summary": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach database aggregators to provide users with information about their potential exposure.",
-	"status": "Live",
+	"tagline": "Check credentials against known breaches, privately.",
+	"summary": "A tool for checking whether credentials appear in known data breaches without disclosing what is being checked, using k-anonymity range queries so only a short hash prefix ever leaves the machine.",
+	"status": "complete",
 	"category": "Security",
-	"icon": "",
+	"icon": "SiPython",
 	"featured": false,
+	"tier": "secondary",
+	"order": 12,
 	"role": "",
 	"period": {
 		"start": "2025-03-01",
@@ -14,23 +16,17 @@
 	},
 	"technologies": [
 		"Python",
-		"Streamlit",
-		"REST-API",
-		"HIBP-API"
+		"CLI"
 	],
 	"tags": [
-		"breach-check",
-		"email-phishing",
-		"password-safety",
-		"pure-python",
-		"streamlit",
-		"unsplash-api"
+		"security",
+		"privacy",
+		"breach-detection",
+		"cli"
 	],
 	"highlights": [
-		"Check emails and passwords against known breach databases",
-		"Leverages breach database aggregator APIs",
-		"Privacy-conscious user exposure assessment",
-		"Simple Streamlit interface for accessibility"
+		"Uses a k-anonymity range query, so the full hash of a checked secret is never transmitted.",
+		"Runs locally as a CLI rather than as a web form that would see the credential."
 	],
 	"metrics": [],
 	"links": {
@@ -46,7 +42,16 @@
 		"video": null
 	},
 	"sections": [],
-	"readme": null,
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# BreachCheck - Sagittarius\n<img src=\"https://socialify.git.ci/VKrishna04/BreachCheck/image?description=1&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Auto\" alt=\"BreachCheck\" width=\"640\" height=\"320\" style=\"align-items: center\" />\n## Introduction\n\nWe strongly advise users to only utilize BreachCheck for their own emails and passwords. Do not misuse this tool or exploit it for malicious purposes. Respect the privacy and security of others by refraining from attempting to check passwords that do not belong to you.\n\nOur aim is to promote responsible and ethical use of BreachCheck to empower individuals in securing their online presence. By adhering to these principles, we can collectively contribute to a safer digital environment for everyone.\n\nYou can experience the application [https://breachcheck-sagittarius.streamlit.app/](https://breachcheck-sagittarius.streamlit.app/) which is hosted on Streamlit Sharing Cloud.\n\n## Project Structure\n\n```yaml\nBreachCheck/\n│\n├── Interfaces/\n│   └── streamlit_app.py  # Main Streamlit application interface\n│\n├── api/\n│   └── breach_api.py  # API integration for breach checks\n│\n├── scripts/\n│   ├── run_app  # Extensionless script to detect OS and run the appropriate script\n│   ├── run_app.sh  # Shell script for Unix-based systems\n│   ├── run_app.bat  # Batch script for Windows\n│   └── run_app.ps1  # PowerShell script for Windows\n│\n├── docs/\n│   ├── faq_and_contributions.py  # Frequently Asked Questions and Contributions\n│   └── terms.md  # Terms and Conditions\n│\n├── README.md  # Project documentation\n├── conf.json  # Configuration file for API keys and settings\n├── requirements.txt  # Python dependencies\n├── app.py  # Entry point to run the Streamlit application\n└── app_complete.py  # Entry point to run the Complete Streamlit application in a single file.\n```\n\nNote: This `app_complete.py` file is not used in the project and is a little behind the main `app.py` file. For Contributions, please refer to the `app.py` file.\n\n\n## Usage\n\n### Prerequisites\n\nEnsure you have Python 3.6 or later installed on your system.\n\n### Installation\n\n1. **Clone the repository:**\n    ```bash\n    git clone https://github.com/VKrishna04/BreachCheck.git\n    cd BreachCheck\n    ```\n\n2. **Create a virtual environment (not required):**\n    On Linux\n    ```bash\n    python -m venv venv\n    source venv/bin/activate\n    ```\n\n    On Windows\n    ```ps1\n    python -m venv venv\n    source venv\\Scripts\\activate\n    ```\n\n    On MacOS\n    ```bash\n    python3 -m venv venv\n    source venv/bin/activate\n    ```\n\nThis will provide clear instructions for setting up and activating a virtual environment on both Windows and macOS.\n\n3. **Install the required packages:**\n    ```bash\n    pip install -r requirements.txt\n    ```\n\nThis is for installing the necessary packages to run the Streamlit application and tabulate package required in cli interface.\n\n### Running the Application\n\nTo run the Streamlit application there are three ways:\n1. You can visit this site [https://breachcheck-sagittarius.streamlit.app/](https://breachcheck-sagittarius.streamlit.app/) to use the Streamlit app which is hosted on Streamlit Sharing Cloud.\n\n2. Using the batch file, use the following command:\n    ```bash\n    .\\run_app.bat\n    ```\n3. Using the shortcut file named \"Sagittarius\" in the root directory of the project. It is the name of the team which made this project.\n\nNote: If you are using the batch file, make sure to run it from the root directory of the project.\n\n3. Don't run the Streamlit app python file manually, it will not work as expected since it is set to open CLI.\n\n4. To modify the user theme of the Streamlit app, you can change the necessary variables [here](.streamlit/config.toml). The theme is set to \"dark\" by default.\n\n### Running the CLI Interface\n\nTo run the CLI interface manually, use the following command:\n```bash\npython app.py --cli\n```\n\n### Complete App in single file\n\nBelow is the complete code for the application which is running directly without any support files:\n\nTo run this code as a normal Python file to use CLI, use the following command:\n\n```bash\npython app_complete.py --cli\n```\n\nTo run this code as a Streamlit app, use the following command:\n```bash\nstreamlit run app_complete.py\n```\n\n## Contributors\n\n### Team Leader\n1. [@VKrishna04](https://github.com/VKrishna04)\n\n### Frontend\n1. [@harsha4678](https://github.com/harsha4678) <- Figma Landing Page\n2. [@longhxirguy](https://github.com/longhxirguy) <- Streamlit Frontend\n\n### APIs Integration\n1. [@Karthikkkk123](https://github.com/Karthikkkk123) <- Streamlit Interface\n2. [@Saisriram-88](https://github.com/Saisriram-88) <- CLI\n\n### Support / Error Testing\n1. [@Jayanth-0703](https://github.com/Jayanth-0703)\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/BreachCheck/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/BreachCheck/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/BreachCheck/blob/HEAD/README.md"
+	},
 	"appearance": null,
 	"seo": null,
 	"stats": {
@@ -55,8 +60,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/BreachCheck",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/BreachCheck/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:22:01.627Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:09.519Z"
 }

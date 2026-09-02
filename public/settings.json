@@ -84,7 +84,7 @@
   },
   "seo": {
     "title": "Krishna GSVV — Developer & AI Researcher",
-    "description": "Award-winning full-stack developer & AI researcher. {{prizeTotal}} in hackathon wins. IEEE-published researcher. 25+ open-source projects.",
+    "description": "Award-winning full-stack developer & AI researcher. {{prizeTotal}} in hackathon wins. IEEE-published researcher. 35+ open-source projects.",
     "keywords": [
       "Full Stack Developer",
       "React",
@@ -118,7 +118,7 @@
     },
     "openGraph": {
       "title": "Krishna GSVV — Developer & AI Researcher",
-      "description": "Award-winning developer & AI researcher. IEEE publications, {{prizeTotal}} in hackathon wins, and 25+ open-source projects.",
+      "description": "Award-winning developer & AI researcher. IEEE publications, {{prizeTotal}} in hackathon wins, and 35+ open-source projects.",
       "image": "https://vkrishna04.me/social.jpg",
       "imageWidth": 1200,
       "imageHeight": 630,
@@ -175,9 +175,9 @@
     "description": "Award-winning developer and AI researcher — I build full-stack apps, train ML models, and ship open-source tools. {{prizeTotal}} in hackathon prizes and a growing library of projects that people actually use.",
     "location": {
       "show": true,
-      "text": "📍 Bengaluru, India · open to relocation",
+      "text": "📍 India · open to relocation",
       "icon": "📍",
-      "city": "Bengaluru",
+      "city": "",
       "country": "India"
     },
     "profileImage": {
@@ -286,10 +286,10 @@
     "subheading": "The story behind the code",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
     "paragraphs": [
-      "Final-year B.Tech Computer Science student at Amrita Vishwa Vidyapeetham (CGPA: 8.55/10, graduating Jul 2026), based in Bengaluru and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
+      "B.Tech Computer Science graduate of Amrita Vishwa Vidyapeetham (CGPA: 8.63/10, graduated Jul 2026), based in India and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
       "Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used.",
       "I've competed at the national level and won five times: 1st at the IIT Hyderabad Pathway Hackathon, 1st runner-up at IIT Delhi CodeHive (₹1,00,000), 2nd runner-up at Tredence InfinityAI 2025 (₹2,00,000), 1st runner-up at ITM Gwalior's Code Kurukshetra with MomCare (₹35,000), and 1st at the Microsoft Imagine Cup campus round — {{prizeTotal}} in prizes across 2025.",
-      "On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,100+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL.",
+      "On the research side, my deep learning work on diabetic retinopathy prediction is published on IEEE, and the EquiLens bias-detection corpus is released on Zenodo. I maintain open-source tools people actually use — cSpell Sync has 2,500+ VS Code Marketplace installs, and I'm LeetCode 150+ with HackerRank 5-star Python & SQL.",
       "My stack centers on React, Python, Node.js, and cloud (AWS Certified Cloud Practitioner, OCI Certified Architect Associate). Whether it's a VS Code extension, an ML pipeline, or a blockchain gateway — I care about code that's clean, fast, and worth shipping."
     ],
     "image": {
@@ -584,7 +584,7 @@
     "skillsNote": "Comprehensive skills showcase covering programming languages, frameworks, AI/ML tools, cloud platforms, and emerging technologies. Each skill includes relevant icons and color coding for better visual representation.",
     "stats": [
       {
-        "number": "25+",
+        "number": "35+",
         "label": "Open Source Projects"
       },
       {
@@ -596,7 +596,7 @@
         "label": "GitHub Contributions"
       },
       {
-        "number": "25+",
+        "number": "35+",
         "label": "Technologies Mastered"
       },
       {
@@ -711,8 +711,8 @@
         },
         {
           "title": "cSpell Sync — VS Code Extension",
-          "subtitle": "VS Code Marketplace · 2,100+ Installs",
-          "description": "Published VS Code extension for bidirectional cSpell dictionary synchronization across team environments. 2,100+ active installs.",
+          "subtitle": "VS Code Marketplace · 2,500+ Installs",
+          "description": "Published VS Code extension for bidirectional cSpell dictionary synchronization across team environments. 2,500+ active installs.",
           "icon": "BiLogoVisualStudio",
           "gradient": "bg-gradient-to-br from-cyan-600/20 to-blue-600/20",
           "borderColor": "border-cyan-500/30",
@@ -759,8 +759,8 @@
         "borderColor": "rgba(96, 165, 250, 0.35)"
       }
     },
-    "mode": "hybrid",
-    "useGitHubDescription": true,
+    "mode": "static",
+    "useGitHubDescription": false,
     "ignore": [
       ".github",
       "VKrishna04",
@@ -793,7 +793,7 @@
         "category": "Full Stack",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Live",
         "startDate": "2025-10-01",
         "endDate": null,
@@ -833,7 +833,9 @@
           "forksUrl": "https://github.com/VKrishna04/VKrishna04.github.io/network/members",
           "watchersUrl": "https://github.com/VKrishna04/VKrishna04.github.io/watchers",
           "issuesUrl": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 8
       },
       {
         "id": "2",
@@ -879,7 +881,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/RanobeGemini/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/RanobeGemini/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/RanobeGemini/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 4
       },
       {
         "id": "3",
@@ -893,7 +897,7 @@
         "category": "Browser Extension",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Active Development",
         "startDate": "2025-09-01",
         "endDate": null,
@@ -926,7 +930,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 7
       },
       {
         "id": "4",
@@ -985,7 +991,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 8
       },
       {
         "id": "5",
@@ -999,7 +1007,7 @@
           "uv"
         ],
         "category": "AI/ML",
-        "featured": false,
+        "featured": true,
         "showInAbout": true,
         "showInProjects": true,
         "status": "Active Development",
@@ -1039,7 +1047,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/EquiLens/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/EquiLens/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/EquiLens/issues"
-        }
+        },
+        "tier": "featured",
+        "order": 4
       },
       {
         "id": "6",
@@ -1091,7 +1101,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Save-Sync/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Save-Sync/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Save-Sync/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 9
       },
       {
         "id": "7",
@@ -1106,7 +1118,7 @@
         "category": "Web Tool",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Live",
         "startDate": "2025-09-01",
         "endDate": null,
@@ -1145,7 +1157,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Eldritchify/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Eldritchify/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Eldritchify/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 3
       },
       {
         "id": "8",
@@ -1196,7 +1210,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 5
       },
       {
         "id": "9",
@@ -1251,7 +1267,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/the-pensive-index/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/the-pensive-index/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/the-pensive-index/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 6
       },
       {
         "id": "10",
@@ -1266,7 +1284,7 @@
         "category": "Full Stack",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Live",
         "startDate": "2024-06-01",
         "endDate": null,
@@ -1301,7 +1319,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/eVidya/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/eVidya/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/eVidya/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 1
       },
       {
         "id": "11",
@@ -1339,7 +1359,7 @@
           "vscode-marketplace"
         ],
         "highlights": [
-          "2,100+ downloads on VS Code Marketplace",
+          "2,500+ installs on VS Code Marketplace",
           "Bidirectional cSpell dictionary synchronization",
           "Keyboard shortcuts and status bar integration",
           "Supports custom dictionaries and project settings"
@@ -1355,7 +1375,19 @@
           "forksUrl": "https://github.com/Life-Experimentalist/cspell-sync/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/cspell-sync/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/cspell-sync/issues"
-        }
+        },
+        "packages": [
+          {
+            "registry": "vscode",
+            "id": "VKrishna04.cspell-sync"
+          },
+          {
+            "registry": "openvsx",
+            "id": "VKrishna04/cspell-sync"
+          }
+        ],
+        "tier": "secondary",
+        "order": 2
       },
       {
         "id": "12",
@@ -1370,7 +1402,7 @@
         "category": "Web App",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Live",
         "startDate": "2024-01-01",
         "endDate": null,
@@ -1404,7 +1436,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Relax/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Relax/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Relax/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 4
       },
       {
         "id": "13",
@@ -1417,7 +1451,7 @@
         "category": "AI/ML",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Completed",
         "startDate": "2024-04-01",
         "endDate": "2025-09-18",
@@ -1448,7 +1482,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/DrDerma/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/DrDerma/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/DrDerma/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 5
       },
       {
         "id": "14",
@@ -1504,7 +1540,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 3
       },
       {
         "id": "15",
@@ -1560,7 +1598,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/ActionsCounter/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/ActionsCounter/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/ActionsCounter/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 10
       },
       {
         "id": "16",
@@ -1618,7 +1658,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 7
       },
       {
         "id": "17",
@@ -1634,7 +1676,7 @@
         "category": "Full Stack",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Completed",
         "startDate": "2025-04-01",
         "endDate": "2025-07-08",
@@ -1670,7 +1712,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/ParkMeter/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/ParkMeter/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/ParkMeter/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 2
       },
       {
         "id": "18",
@@ -1686,7 +1730,7 @@
         "category": "Backend",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Live",
         "startDate": "2025-04-01",
         "endDate": null,
@@ -1726,7 +1770,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/CounterAPI/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/CounterAPI/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/CounterAPI/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 6
       },
       {
         "id": "19",
@@ -1775,7 +1821,39 @@
           "forksUrl": "https://github.com/Life-Experimentalist/BreachCheck/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/BreachCheck/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/BreachCheck/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 12
+      },
+      {
+        "id": "28",
+        "name": "PulseWard-HMS",
+        "description": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
+        "technologies": [
+          "Proprietary"
+        ],
+        "category": "Web Application",
+        "featured": false,
+        "showInAbout": false,
+        "showInProjects": true,
+        "status": "Completed",
+        "startDate": null,
+        "endDate": null,
+        "githubUrl": "",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "",
+        "imageUrl": "",
+        "tags": [
+          "proprietary",
+          "private-repository"
+        ],
+        "highlights": [
+          "Licensed proprietary — not open source and not publicly distributable",
+          "Source kept private; walkthrough available on request"
+        ],
+        "tier": "secondary",
+        "order": 0
       },
       {
         "id": "20",
@@ -1837,7 +1915,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/HiveXplore/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/HiveXplore/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/HiveXplore/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 14
       },
       {
         "id": "21",
@@ -1852,7 +1932,7 @@
         "category": "Security Tool",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": true,
+        "showInProjects": false,
         "status": "Completed",
         "startDate": "2024-12-01",
         "endDate": "2025-03-12",
@@ -1900,7 +1980,9 @@
           "forksUrl": "https://github.com/Life-Experimentalist/zipCracker/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/zipCracker/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/zipCracker/issues"
-        }
+        },
+        "tier": "hidden",
+        "order": 9
       },
       {
         "id": "22",
@@ -1916,7 +1998,7 @@
           "cross-platform"
         ],
         "category": "CLI Tool",
-        "featured": false,
+        "featured": true,
         "showInAbout": true,
         "showInProjects": true,
         "status": "Active Development",
@@ -1967,7 +2049,35 @@
           "forksUrl": "https://github.com/Life-Experimentalist/dev-prune/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/dev-prune/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/dev-prune/issues"
-        }
+        },
+        "packages": [
+          {
+            "registry": "schemastore",
+            "id": ".devprune.json"
+          },
+          {
+            "registry": "openvsx",
+            "id": "VKrishna04/dev-prune"
+          },
+          {
+            "registry": "npm",
+            "id": "dev-prune"
+          },
+          {
+            "registry": "ghreleases",
+            "id": "Life-Experimentalist/dev-prune"
+          },
+          {
+            "registry": "crates",
+            "id": "dev-prune"
+          },
+          {
+            "registry": "pypi",
+            "id": "dev-prune"
+          }
+        ],
+        "tier": "featured",
+        "order": 1
       },
       {
         "id": "23",
@@ -2027,7 +2137,9 @@
           "forksUrl": "https://github.com/FissionLife/docs-rag/network/members",
           "watchersUrl": "https://github.com/FissionLife/docs-rag/watchers",
           "issuesUrl": "https://github.com/FissionLife/docs-rag/issues"
-        }
+        },
+        "tier": "secondary",
+        "order": 13
       },
       {
         "id": "24",
@@ -2044,7 +2156,7 @@
           "indexeddb"
         ],
         "category": "Browser Extension",
-        "featured": false,
+        "featured": true,
         "showInAbout": true,
         "showInProjects": true,
         "status": "Active Development",
@@ -2095,7 +2207,160 @@
           "forksUrl": "https://github.com/Life-Experimentalist/Code-Ledger/network/members",
           "watchersUrl": "https://github.com/Life-Experimentalist/Code-Ledger/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Code-Ledger/issues"
-        }
+        },
+        "tier": "featured",
+        "order": 5
+      },
+      {
+        "id": "25",
+        "name": "LoginLens",
+        "icon": "SiTypescript",
+        "description": "Browser extension that answers \"which account did I use here?\" — it records the provider and MFA method per site, entirely on-device. No passwords, no account, no backend, no telemetry.",
+        "technologies": [
+          "TypeScript",
+          "Plasmo",
+          "Manifest V3",
+          "React",
+          "IndexedDB"
+        ],
+        "category": "Browser Extension",
+        "status": "Active Development",
+        "startDate": "2026-08-12",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/LoginLens",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "https://loginlens.vkrishna04.me",
+        "imageUrl": "",
+        "tags": [
+          "browser-extension",
+          "chrome-extension",
+          "firefox-addon",
+          "local-first",
+          "manifest-v3",
+          "oauth",
+          "privacy",
+          "typescript"
+        ],
+        "highlights": [
+          "Local-first by construction: no backend exists to leak, and no credential is ever stored",
+          "Records the OAuth provider and MFA method per site so account recovery stops being guesswork",
+          "Chrome and Firefox builds from one Plasmo/Manifest V3 codebase"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "showInAbout": false,
+        "tier": "featured",
+        "order": 2,
+        "featured": true,
+        "showInProjects": true
+      },
+      {
+        "id": "26",
+        "name": "Chronos-Ledger",
+        "icon": "SiFastapi",
+        "description": "Self-hosted campus attendance and timetable platform. Geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable to a campus in one Docker command.",
+        "technologies": [
+          "FastAPI",
+          "Next.js 14",
+          "PostgreSQL",
+          "Redis",
+          "Docker",
+          "WebSocket"
+        ],
+        "category": "Full Stack",
+        "status": "Completed",
+        "startDate": "2026-05-19",
+        "endDate": "2026-05-26",
+        "githubUrl": "https://github.com/Life-Experimentalist/Chronos-Ledger",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "https://chronos.vkrishna04.me/",
+        "imageUrl": "",
+        "tags": [
+          "attendance-management-system",
+          "campus-management",
+          "docker",
+          "fastapi",
+          "geofencing",
+          "nextjs",
+          "offline-first",
+          "postgresql",
+          "pwa",
+          "redis",
+          "self-hosted",
+          "websocket"
+        ],
+        "highlights": [
+          "Geofenced attendance check-in validated server-side, so location cannot be spoofed from the client",
+          "Offline-first PWA: attendance is captured without connectivity and reconciled on reconnect",
+          "One-command Docker deployment covering FastAPI, Next.js, PostgreSQL, Redis and nginx",
+          "Bulk CSV timetable import and a guest kiosk mode for shared devices"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "showInAbout": false,
+        "tier": "featured",
+        "order": 3,
+        "featured": true,
+        "showInProjects": true
+      },
+      {
+        "id": "27",
+        "name": "Vectra-180",
+        "icon": "SiRaspberrypi",
+        "description": "Dual-fisheye dashcam and stereoscopic depth engine for the Raspberry Pi Compute Module 5 — two 180° sensors calibrated into a single depth map alongside synchronised IMU telemetry.",
+        "technologies": [
+          "Python",
+          "OpenCV",
+          "Raspberry Pi CM5",
+          "NumPy"
+        ],
+        "category": "Computer Vision",
+        "status": "Active Development",
+        "startDate": "2026-08-11",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/Vectra-180",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "https://life-experimentalist.github.io/Vectra-180/",
+        "imageUrl": "",
+        "tags": [
+          "compute-module-5",
+          "computer-vision",
+          "dashcam",
+          "depth-map",
+          "fisheye",
+          "imu",
+          "opencv",
+          "raspberry-pi",
+          "stereo-vision",
+          "telemetry"
+        ],
+        "highlights": [
+          "Stereo depth recovered from two 180° fisheye sensors on constrained Pi CM5 hardware",
+          "Continuous video capture with IMU telemetry synchronised to each frame",
+          "Runs on the Compute Module 5 rather than requiring a desktop GPU"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "showInAbout": false,
+        "tier": "secondary",
+        "order": 1,
+        "featured": false,
+        "showInProjects": true
       }
     ],
     "staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), showInAbout (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
@@ -2214,7 +2479,7 @@
         "field": "Computer Science",
         "school": "Amrita Vishwa Vidyapeetham",
         "period": "2022 - 2026",
-        "gpa": "8.55/10",
+        "gpa": "8.63/10",
         "achievements": []
       }
     ],
@@ -2448,10 +2713,10 @@
     "certificationsIcon": "ShieldCheckIcon",
     "awards": [
       {
-        "name": "cSpell Sync — VS Code Extension (2,100+ installs)",
+        "name": "cSpell Sync — VS Code Extension (2,500+ installs)",
         "organization": "VS Code Marketplace",
         "date": "2025",
-        "description": "Built bidirectional cSpell dictionary synchronization extension using TypeScript and VS Code API with 2,100+ installs.",
+        "description": "Built bidirectional cSpell dictionary synchronization extension using TypeScript and VS Code API with 2,500+ installs.",
         "verificationUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
         "certificateUrl": ""
       },
@@ -2602,7 +2867,7 @@
         "organization": "GitHub / Life-Experimentalist",
         "period": "2023 - Present",
         "description": [
-          "Maintain 25+ open-source repositories under the Life-Experimentalist GitHub organization, including tools with active community usage.",
+          "Maintain 35+ open-source repositories under the Life-Experimentalist GitHub organization, including tools with active community usage.",
           "Review pull requests, triage issues, write documentation, and mentor contributors on projects ranging from VS Code extensions to AI research tooling."
         ]
       }
@@ -2700,7 +2965,7 @@
           "Node.js",
           "GitHub Actions"
         ],
-        "description": "VS Code extension with 2,100+ Marketplace installs that keeps cSpell dictionaries synchronised in both directions, with conflict resolution and fully automated CI/CD publishing — no manual deploy steps.",
+        "description": "VS Code extension with 2,500+ Marketplace installs that keeps cSpell dictionaries synchronised in both directions, with conflict resolution and fully automated CI/CD publishing — no manual deploy steps.",
         "githubUrl": "https://github.com/Life-Experimentalist/cspell-sync",
         "liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
       },
@@ -3283,7 +3548,7 @@
     "contact": {
       "email": "me@vkrishna04.me",
       "phone": "",
-      "location": "Bengaluru, India · open to relocation"
+      "location": "India · open to relocation"
     },
     "note": "Configure all social media platforms here. Set enabled: true and provide URL to activate. Use showInHome, showInFooter, showInContact to control where each platform appears. To add new platforms, add a new object with name, key, icon, url, label, color, hoverColor, and show flags. Available icons: FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaDiscord, FaYoutube, FaTwitch, FaTiktok, FaMedium, FaDev, FaStackOverflow, FaDribbble, FaBehance, FaCodepen, ArrowUpIcon, Bars3Icon, XMarkIcon"
   },

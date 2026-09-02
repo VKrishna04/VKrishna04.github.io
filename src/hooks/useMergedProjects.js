@@ -85,13 +85,18 @@ const useMergedProjects = () => {
 
 			// Process static projects first
 			staticProjects.forEach((staticProject) => {
+				const matchingGithubRepo = findMatchingGithubRepo(staticProject);
+
 				// Skip projects that shouldn't appear in Projects page (showInProjects: false)
-				// Default to true if not specified to maintain backward compatibility
+				// Default to true if not specified to maintain backward compatibility.
+				// The match is still recorded as processed: without that, the
+				// GitHub-only pass below would add the hidden repo straight back.
 				if (staticProject.showInProjects === false) {
+					if (matchingGithubRepo) {
+						processedGithubRepos.add(matchingGithubRepo.name);
+					}
 					return;
 				}
-
-				const matchingGithubRepo = findMatchingGithubRepo(staticProject);
 
 				if (matchingGithubRepo) {
 					// Merge: static + GitHub, taking higher numeric values
@@ -106,6 +111,11 @@ const useMergedProjects = () => {
 						id: staticProject.id || matchingGithubRepo.id,
 						category: staticProject.category,
 						featured: staticProject.featured,
+						tier: staticProject.tier || "secondary",
+						order:
+							typeof staticProject.order === "number"
+								? staticProject.order
+								: 999,
 						showInAbout: staticProject.showInAbout,
 						showInProjects: staticProject.showInProjects !== false, // Default to true
 						status: staticProject.status,
@@ -204,6 +214,11 @@ const useMergedProjects = () => {
 						// Static project specific fields
 						category: staticProject.category,
 						featured: staticProject.featured,
+						tier: staticProject.tier || "secondary",
+						order:
+							typeof staticProject.order === "number"
+								? staticProject.order
+								: 999,
 						showInAbout: staticProject.showInAbout,
 						showInProjects: staticProject.showInProjects !== false, // Default to true
 						status: staticProject.status,
@@ -230,11 +245,16 @@ const useMergedProjects = () => {
 
 			// Add GitHub-only projects
 			githubRepos.forEach((repo) => {
-				if (!processedGithubRepos.has(repo.name)) {
+				if (
+					!processedGithubRepos.has(repo.name) &&
+					repo.showInProjects !== false
+				) {
 					merged.push({
 						...repo,
 						isStatic: false,
 						isMerged: false,
+						tier: repo.tier || "secondary",
+						order: typeof repo.order === "number" ? repo.order : 999,
 					});
 				}
 			});

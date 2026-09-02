@@ -15,12 +15,11 @@
  */
 import React, { useState, useMemo, useEffect } from "react"
  
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import {
 	FunnelIcon,
 	MagnifyingGlassIcon,
 	AdjustmentsHorizontalIcon,
-	StarIcon,
 	EyeIcon,
 	CodeBracketIcon,
 	ArrowTopRightOnSquareIcon,
@@ -169,6 +168,51 @@ import useMergedProjects from "../hooks/useMergedProjects"
 import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats"
 import { getOwnerName } from "../utils/identity"
 
+// Shelf headings slide in as they are scrolled to. A reader who has asked for
+// reduced motion, and the prerender pass whose captured HTML must not carry
+// opacity:0 on a heading, both get the plain element instead.
+const GroupHeading = ({ children }) => {
+	const reduced = useReducedMotion()
+	if (
+		reduced ||
+		(typeof window !== "undefined" && window.__PRERENDER__ === true)
+	)
+		return <div className="mb-8">{children}</div>
+	return (
+		<motion.div
+			className="mb-8"
+			initial={{ opacity: 0, y: 16 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			viewport={{ once: true, amount: 0.4 }}
+			transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+		>
+			{children}
+		</motion.div>
+	)
+}
+
+const TIER_RANK = { featured: 0, secondary: 1, hidden: 2 }
+
+const ACTIVE_STATUSES = new Set(["Active Development"])
+
+const PROJECT_GROUPS = [
+	{
+		id: "flagship",
+		title: "Flagship work",
+		blurb: "The projects worth judging me on - built, shipped, and in use.",
+	},
+	{
+		id: "active",
+		title: "In active development",
+		blurb: "Currently being built. Expect these to change week to week.",
+	},
+	{
+		id: "shipped",
+		title: "Shipped & maintained",
+		blurb: "Finished and still standing - smaller in scope, done in full.",
+	},
+]
+
 const Projects = () => {
 	const {
 		projects: mergedProjects,
@@ -179,7 +223,7 @@ const Projects = () => {
 	const { data: dsaData } = useCodeLedgerStats()
 	const [searchTerm, setSearchTerm] = useState("")
 	const [selectedLanguages, setSelectedLanguages] = useState([])
-	const [sortBy, setSortBy] = useState("updated")
+	const [sortBy, setSortBy] = useState("curated")
 	// Tracks first mount to prevent stagger replay on sort
 	const [hasAnimated, setHasAnimated] = useState(false)
 	useEffect(() => { setHasAnimated(true) }, [])
@@ -653,21 +697,45 @@ const Projects = () => {
 		// Sort repositories
 		filtered.sort((a, b) => {
 			switch (sortBy) {
+				case "curated":
+					return (
+						(TIER_RANK[a.tier] ?? 1) - (TIER_RANK[b.tier] ?? 1) ||
+						(a.order ?? 999) - (b.order ?? 999) ||
+						a.name.localeCompare(b.name)
+					)
 				case "name":
 					return a.name.localeCompare(b.name)
-				case "stars":
-					return (b.stargazers_count || 0) - (a.stargazers_count || 0)
 				case "updated":
 					return new Date(b.updated_at) - new Date(a.updated_at)
 				case "created":
 					return new Date(b.created_at) - new Date(a.created_at)
 				default:
-					return new Date(b.updated_at) - new Date(a.updated_at)
+					return (
+						(TIER_RANK[a.tier] ?? 1) - (TIER_RANK[b.tier] ?? 1) ||
+						(a.order ?? 999) - (b.order ?? 999)
+					)
 			}
 		})
 
 		return filtered
 	}, [projectsData, searchTerm, selectedLanguages, sortBy])
+
+	// Headings only tell the truth under the curated sort: ordering by name or
+	// date interleaves the tiers, so those fall back to one flat grid.
+	const projectGroups = useMemo(() => {
+		if (sortBy !== "curated") return null
+		const groups = PROJECT_GROUPS.map((g) => ({ ...g, items: [] }))
+		for (const project of filteredRepos) {
+			const index =
+				project.tier === "featured"
+					? 0
+					: ACTIVE_STATUSES.has(project.status)
+						? 1
+						: 2
+			groups[index].items.push(project)
+		}
+		return groups.filter((g) => g.items.length > 0)
+	}, [filteredRepos, sortBy])
 
 	// Masonry layout - calculate grid-row-end for each item based on content height
 	useEffect(() => {
@@ -777,8 +845,8 @@ const Projects = () => {
 	}
 
 	// Generate dynamic grid classes based on project count
-	const getGridClasses = () => {
-		const projectCount = filteredRepos.length
+	const getGridClasses = (count) => {
+		const projectCount = count ?? filteredRepos.length
 		if (projectCount === 0) return "grid grid-cols-1 gap-8"
 
 		// Base classes for left-to-right, top-to-bottom flow
@@ -837,7 +905,6 @@ const Projects = () => {
 				if (p.category) parts.push(`Category: ${p.category}`)
 				if (p.status) parts.push(`Status: ${p.status}`)
 				const stats = []
-				if (p.stargazers_count) stats.push(`${p.stargazers_count}\u2605`)
 				if (p.forks_count) stats.push(`${p.forks_count} forks`)
 				if (stats.length) parts.push(`Stats: ${stats.join(", ")}`)
 				if (p.highlights?.length)
@@ -882,7 +949,6 @@ const Projects = () => {
 				if (p.category) lines.push(`Category     : ${p.category}`)
 				if (p.status) lines.push(`Status       : ${p.status}`)
 				const stats = []
-				if (p.stargazers_count) stats.push(`${p.stargazers_count} stars`)
 				if (p.forks_count) stats.push(`${p.forks_count} forks`)
 				if (stats.length) lines.push(`Stats        : ${stats.join(" | ")}`)
 				if (p.highlights?.length) {
@@ -924,7 +990,6 @@ const Projects = () => {
 			if (p.category) lines.push(`**Category**: ${p.category}`)
 			if (p.status) lines.push(`**Status**: ${p.status}`)
 			const stats = []
-			if (p.stargazers_count) stats.push(`${p.stargazers_count} stars`)
 			if (p.forks_count) stats.push(`${p.forks_count} forks`)
 			if (p.watchers_count) stats.push(`${p.watchers_count} watchers`)
 			if (stats.length) lines.push(`**Stats**: ${stats.join(" | ")}`)
@@ -1137,9 +1202,9 @@ const Projects = () => {
 							onChange={(e) => setSortBy(e.target.value)}
 							className="px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm text-sm min-w-0"
 						>
+							<option value="curated">Curated Order</option>
 							<option value="updated">Recently Updated</option>
 							<option value="created">Recently Created</option>
-							<option value="stars">Most Stars</option>
 							<option value="name">Name (A-Z)</option>
 						</select>
 
@@ -1358,48 +1423,77 @@ const Projects = () => {
 
 				{/* Projects Grid/Masonry */}
 				{filteredRepos.length > 0 ? (
-					<motion.div
-						ref={masonryContainerRef}
-						key={layoutMode} // Force re-render on layout change
-						className={
-							layoutMode === "masonry"
-								? "masonry-grid-projects"
-								: getGridClasses()
-						}
-						style={layoutMode === "masonry" ? getMasonryStyles() : {}}
-						data-project-count={filteredRepos.length}
-						variants={staggerContainer}
-						initial={hasAnimated ? false : "initial"}
-						animate="animate"
-						layout
-					>
-						{filteredRepos.map((repo) => {
-							return (
+					<div ref={masonryContainerRef}>
+						{(
+							projectGroups || [{ id: "all", items: filteredRepos }]
+						).map((group) => (
+							<section key={group.id} className="mb-16 last:mb-0">
+								{group.title && (
+									<GroupHeading>
+										<h2 className="text-2xl sm:text-3xl font-bold text-white">
+											{group.title}
+											<span className="ml-3 align-middle text-sm font-normal text-gray-500">
+												{group.items.length}
+											</span>
+										</h2>
+										<p className="mt-1 text-gray-400 text-sm sm:text-base">
+											{group.blurb}
+										</p>
+										<div className="mt-4 h-px bg-gradient-to-r from-purple-500/40 via-purple-500/10 to-transparent" />
+									</GroupHeading>
+								)}
 								<motion.div
-									key={repo.id}
-									variants={hasAnimated ? undefined : staggerChild}
-									layout
-									transition={{ duration: 0.3, ease: "easeOut" }}
+									key={`${layoutMode}-${group.id}`} // Force re-render on layout change
 									className={
-										layoutMode === "masonry" ? "masonry-item-projects" : ""
+										layoutMode === "masonry"
+											? "masonry-grid-projects"
+											: getGridClasses(group.items.length)
 									}
+									style={layoutMode === "masonry" ? getMasonryStyles() : {}}
+									data-project-count={group.items.length}
+									variants={staggerContainer}
+									initial={hasAnimated ? false : "initial"}
+									animate="animate"
+									layout
 								>
-									<div className="masonry-item-content">
-										<ProjectCard
-											project={repo}
-											accentColor={settings?.projects?.accentColor}
-											globalButtonStyles={settings?.projects?.buttonStyles}
-											tagStyles={settings?.projects?.tagStyles}
-											showSocialImage={settings?.projects?.showSocialImage}
-											socialPreviewConfig={settings?.projects?.socialPreview}
-											dsaStats={repo.codeLedgerProject ? dsaData : null}
-										detailSlug={detailSlugFor(repo)}
-										/>
-									</div>
+									{group.items.map((repo) => {
+										return (
+											<motion.div
+												key={repo.id}
+												variants={hasAnimated ? undefined : staggerChild}
+												layout
+												transition={{ duration: 0.3, ease: "easeOut" }}
+												className={
+													layoutMode === "masonry"
+														? "masonry-item-projects"
+														: ""
+												}
+											>
+												<div className="masonry-item-content">
+													<ProjectCard
+														project={repo}
+														accentColor={settings?.projects?.accentColor}
+														globalButtonStyles={
+															settings?.projects?.buttonStyles
+														}
+														tagStyles={settings?.projects?.tagStyles}
+														showSocialImage={
+															settings?.projects?.showSocialImage
+														}
+														socialPreviewConfig={
+															settings?.projects?.socialPreview
+														}
+														dsaStats={repo.codeLedgerProject ? dsaData : null}
+														detailSlug={detailSlugFor(repo)}
+													/>
+												</div>
+											</motion.div>
+										)
+									})}
 								</motion.div>
-							)
-						})}
-					</motion.div>
+							</section>
+						))}
+					</div>
 				) : (
 					<motion.div
 						className="text-center py-20"

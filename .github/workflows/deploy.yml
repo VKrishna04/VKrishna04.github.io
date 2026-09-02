@@ -77,7 +77,18 @@ jobs:
       # No VITE_RESUME_LINK here on purpose: that env var overrides
       # settings.json in Resume.jsx, so a stale secret silently beat every
       # edit to the resume link. settings.json is the single source of truth.
+      # GITHUB_TOKEN lifts the release-download lookups in
+      # scripts/fetch-project-stats.js off the 60/hr anonymous limit. It is
+      # the run's own scoped token — nothing to create or rotate, and it never
+      # reaches the browser bundle.
       - name: Build project
+        env:
+          # The run's own token covers this repository and lifts the API calls
+          # off the 60/hr anonymous limit. Private repos and other orgs need a
+          # fine-grained PAT with read-only Contents + Metadata, added as the
+          # PORTFOLIO_GH_TOKEN repository secret; without it the build still
+          # works and those projects fall back to their settings.json entry.
+          GITHUB_TOKEN: ${{ secrets.PORTFOLIO_GH_TOKEN || github.token }}
         run: npm run build
 
       # The Cloudflare Workers git build cannot launch Chromium, so its

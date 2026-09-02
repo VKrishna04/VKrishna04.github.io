@@ -1,12 +1,14 @@
 {
 	"slug": "hivexplore",
 	"name": "HiveXplore",
-	"tagline": "",
-	"summary": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. Features simplified authentication, intuitive posting tools, and guided experiences as an educational gateway for blockchain beginners.",
-	"status": "Live",
+	"tagline": "A Hive blockchain social client, built in 36 hours.",
+	"summary": "A hackathon build for IIT Delhi CodeHive: a social client that reads posts, profiles and wallet history straight off the Hive blockchain and broadcasts new posts back to it. It is here as evidence of working against a chain rather than as a product.",
+	"status": "complete",
 	"category": "Blockchain",
-	"icon": "",
+	"icon": "SiHive",
 	"featured": false,
+	"tier": "secondary",
+	"order": 14,
 	"role": "",
 	"period": {
 		"start": "2025-01-01",
@@ -15,35 +17,20 @@
 	"technologies": [
 		"Python",
 		"Flask",
+		"Hive API",
 		"SQLite",
-		"Hive-Blockchain",
-		"JavaScript",
-		"REST-API"
+		"Render"
 	],
 	"tags": [
 		"blockchain",
-		"caching",
-		"content-platform",
-		"cryptocurrency",
-		"dapp",
-		"decentralized",
-		"flask",
-		"hive-blockchain",
-		"hivesigner",
-		"keychain",
-		"markdown",
-		"python",
-		"real-time",
-		"restful-api",
-		"social-media",
-		"sqlite",
-		"web-application"
+		"hive",
+		"web-app",
+		"hackathon"
 	],
 	"highlights": [
-		"Won 1st Runner-up at IIT Delhi CodeHive Hackathon (₹1L prize)",
-		"Simplified Hive blockchain authentication (Keychain, HiveSigner, HiveAuth)",
-		"Beginner-friendly guided blockchain experience",
-		"Real-time decentralized content creation and interaction"
+		"Signs users in through Hive Keychain or a HiveSigner OAuth2 redirect, so the app never sees a private key.",
+		"Reads live chain data through condenser_api and the dbuzz API — profiles, feeds, trending, wallet balances and transaction history.",
+		"Broadcasts posts and comments to the blockchain from the browser, where they persist independently of the app."
 	],
 	"metrics": [],
 	"links": {
@@ -58,7 +45,23 @@
 		"layout": "auto",
 		"video": null
 	},
-	"sections": [],
+	"sections": [
+		{
+			"type": "prose",
+			"heading": "Where the data lives",
+			"body": "Nothing a user writes is stored by this app. Posts and comments are signed in the browser by Hive Keychain and broadcast straight to the chain, so they outlive the deployment and stay readable by every other Hive client.\n\nReads go the same way round. Profiles come from condenser_api.get_accounts, the feed and trending lists from the dbuzz API, and wallet balances and transaction history from the account history call. The local SQLite database holds only session and preference data — losing it costs a user their theme, not their content."
+		},
+		{
+			"type": "list",
+			"heading": "Signing in without holding a key",
+			"items": [
+				"Hive Keychain: the browser extension signs the challenge and the app only ever sees the signature.",
+				"HiveSigner: a full OAuth2 exchange — authorise, token, refresh, revoke — for people without the extension.",
+				"HiveAuth: request and QR generation are in place, but token verification is still stubbed, so it is scaffolding rather than a third working path.",
+				"A demo account covers judges and first-time visitors who have no Hive account at all."
+			]
+		}
+	],
 	"readme": null,
 	"appearance": null,
 	"seo": null,
@@ -68,8 +71,9 @@
 		"watchers": 0,
 		"issues": 0
 	},
-	"source": "settings",
+	"source": "manifest",
 	"repo": "Life-Experimentalist/HiveXplore",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/HiveXplore/HEAD/.portfolio/project.json",
-	"generatedAt": "2026-09-01T02:22:01.986Z"
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-02T22:53:09.524Z"
 }
