@@ -18,7 +18,7 @@ This is the only setup step, and without it nothing below works.
 **Settings → Actions → General → Workflow permissions →
 check "Allow GitHub Actions to create and approve pull requests" → Save.**
 
-That box is off by default on every repository created since 2023. If it stays
+That box is off by default on new repositories. If it stays
 off, the sync runs, copies everything correctly, and then fails on the last step
 with *"GitHub Actions is not permitted to create or approve pull requests"* — so
 the update exists and you never hear about it. Thirty seconds now saves a
