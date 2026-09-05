@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-05T18:08:49.909Z",
+	"generatedAt": "2026-09-05T22:54:07.479Z",
 	"projects": {
 		"cspell-sync": [
 			{
@@ -28,7 +28,7 @@
 			{
 				"registry": "openvsx",
 				"label": "Open VSX downloads",
-				"value": "1,352",
+				"value": "1,356",
 				"detail": "v0.5.0",
 				"url": "https://open-vsx.org/extension/VKrishna04/dev-prune"
 			},

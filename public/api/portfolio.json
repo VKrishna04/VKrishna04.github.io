@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T18:09:17.647Z",
+  "generatedAt": "2026-09-05T22:54:23.713Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
@@ -231,8 +231,7 @@
         "OpenCV",
         "MediaPipe",
         "scikit-learn",
-        "NumPy",
-        "Flask"
+        "NumPy"
       ],
       "category": "AI/ML",
       "status": "Completed",
@@ -242,15 +241,14 @@
     },
     {
       "name": "ActionsCounter",
-      "description": "GitHub Actions workflow tracker and analytics dashboard for CI/CD monitoring, deployment tracking, and webhook integration.",
+      "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by CFlair-Counter.",
       "technologies": [
         "TypeScript",
         "GitHub-Actions",
-        "GitHub-API",
-        "Webhooks"
+        "GitHub-API"
       ],
       "category": "DevOps",
-      "status": "Active Development",
+      "status": "Deprecated",
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/ActionsCounter",
       "liveUrl": "https://life-experimentalist.github.io/ActionsCounter/"

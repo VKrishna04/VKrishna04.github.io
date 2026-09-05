@@ -43,7 +43,7 @@
 		},
 		{
 			"label": "Open VSX downloads",
-			"value": "1,352",
+			"value": "1,356",
 			"detail": "v0.5.0"
 		},
 		{
@@ -118,5 +118,5 @@
 	"repo": "Life-Experimentalist/dev-prune",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/dev-prune/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-05T18:08:57.905Z"
+	"generatedAt": "2026-09-05T22:54:18.515Z"
 }
