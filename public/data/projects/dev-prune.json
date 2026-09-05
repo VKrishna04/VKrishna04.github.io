@@ -43,8 +43,8 @@
 		},
 		{
 			"label": "Open VSX downloads",
-			"value": "1,062",
-			"detail": "v0.4.0"
+			"value": "1,352",
+			"detail": "v0.5.0"
 		},
 		{
 			"label": "npm downloads",
@@ -53,18 +53,17 @@
 		},
 		{
 			"label": "Release downloads",
-			"value": "574",
-			"detail": "22 releases"
+			"value": "628",
+			"detail": "25 releases"
 		},
 		{
 			"label": "crates.io downloads",
-			"value": "335",
-			"detail": "v1.18.0"
+			"value": "369",
+			"detail": "v1.20.0"
 		},
 		{
-			"label": "PyPI downloads",
-			"value": "6,061",
-			"detail": "last 30 days"
+			"label": "PyPI",
+			"value": "v1.20.0"
 		}
 	],
 	"links": {
@@ -119,5 +118,5 @@
 	"repo": "Life-Experimentalist/dev-prune",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/dev-prune/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-02T22:53:09.875Z"
+	"generatedAt": "2026-09-05T18:08:57.905Z"
 }

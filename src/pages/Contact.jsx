@@ -61,6 +61,7 @@ import {
 	SiHashnode,
 } from "react-icons/si"
 import { fetchSettings } from "../utils/settingsCache"
+import { useSectionAnchors } from "../hooks/useSectionAnchors"
 
 const Contact = () => {
 	const [settings, setSettings] = useState({})
@@ -819,8 +820,16 @@ const Contact = () => {
 	const copyConfig = getCopyConfig()
 	const contactSnapshotCopyId = "contact-snapshot"
 
+	const pageRef = useSectionAnchors(
+		settings.navigation?.sectionAnchors?.enabled === true,
+		settings
+	)
+
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
+		<div
+			ref={pageRef}
+			className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4"
+		>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -866,7 +875,11 @@ const Contact = () => {
 					)}
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				<div
+					id="connect"
+					data-section-anchor
+					className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+				>
 					{/* Current Status */}
 					{contactConfig.status?.show && (
 						<motion.div
@@ -951,6 +964,8 @@ const Contact = () => {
 				{/* FAQ Section — interactive accordion */}
 				{faqItems.length > 0 && (
 					<motion.div
+						id="faq"
+						data-section-anchor
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.2 }}

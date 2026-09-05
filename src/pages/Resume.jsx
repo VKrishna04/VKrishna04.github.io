@@ -37,6 +37,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { FaGithub } from "react-icons/fa"
 import { fetchSettings } from "../utils/settingsCache"
+import { useSectionAnchors } from "../hooks/useSectionAnchors"
 import { getCachedIcon } from "../utils/iconSystemCore"
 import { getOwnerName } from "../utils/identity"
 
@@ -779,6 +780,8 @@ const Resume = () => {
 					experiences.length > 0 && (
 						<motion.section
 							key="experiences"
+							id="experiences"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -841,6 +844,8 @@ const Resume = () => {
 					education.length > 0 && (
 						<motion.section
 							key="education"
+							id="education"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -907,7 +912,13 @@ const Resume = () => {
 			case "skills":
 				return (
 					skills.length > 0 && (
-						<motion.section key="skills" className="mb-20" variants={fadeInUp}>
+						<motion.section
+							key="skills"
+							id="skills"
+							data-section-anchor
+							className="mb-20"
+							variants={fadeInUp}
+						>
 							<h2 className="text-3xl font-bold text-white mb-8">
 								{settings.resume?.skillsHeading}
 							</h2>
@@ -954,6 +965,8 @@ const Resume = () => {
 					personalProjects.length > 0 && (
 						<motion.section
 							key="personalProjects"
+							id="personalProjects"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -1087,6 +1100,8 @@ const Resume = () => {
 					certifications.length > 0 && (
 						<motion.section
 							key="certifications"
+							id="certifications"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -1178,7 +1193,13 @@ const Resume = () => {
 			case "awards":
 				return (
 					awards.length > 0 && (
-						<motion.section key="awards" className="mb-20" variants={fadeInUp}>
+						<motion.section
+							key="awards"
+							id="awards"
+							data-section-anchor
+							className="mb-20"
+							variants={fadeInUp}
+						>
 							<h2 className="text-3xl font-bold text-white mb-8 flex items-center">
 								<TrophyIcon className="w-8 h-8 mr-3 text-purple-400" />
 								{settings.resume?.awardsHeading}
@@ -1266,6 +1287,8 @@ const Resume = () => {
 					publications.length > 0 && (
 						<motion.section
 							key="publications"
+							id="publications"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -1335,6 +1358,8 @@ const Resume = () => {
 					languages.length > 0 && (
 						<motion.section
 							key="languages"
+							id="languages"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -1377,6 +1402,8 @@ const Resume = () => {
 					volunteerExperience.length > 0 && (
 						<motion.section
 							key="volunteerExperience"
+							id="volunteerExperience"
+							data-section-anchor
 							className="mb-20"
 							variants={fadeInUp}
 						>
@@ -1451,8 +1478,13 @@ const Resume = () => {
 		},
 	}
 
+	const pageRef = useSectionAnchors(
+		settings.navigation?.sectionAnchors?.enabled === true,
+		settings
+	)
+
 	return (
-		<div className="min-h-screen py-20 px-4">
+		<div ref={pageRef} className="min-h-screen py-20 px-4">
 			<div className="max-w-6xl mx-auto">
 				<motion.div
 					variants={staggerContainer}

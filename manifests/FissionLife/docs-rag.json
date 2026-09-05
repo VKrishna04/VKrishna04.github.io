@@ -1,0 +1,49 @@
+{
+	"$schema": "https://vkrishna04.me/schemas/project-manifest.schema.json",
+	"manifestVersion": 2,
+	"tagline": "Retrieval-augmented QA that refuses to guess.",
+	"summary": "A retrieval-augmented question answering system over documents you choose — PDFs, Markdown, HTML, Wikipedia and GitHub files. It answers only from those documents, cites what it used, and refuses when they do not contain the answer, with that refusal verified mechanically rather than merely requested in the prompt.",
+	"status": "active",
+	"icon": "SiPython",
+	"readme": true,
+	"technologies": [
+		"Python",
+		"Gemini API",
+		"uv"
+	],
+	"tags": [
+		"rag",
+		"llm",
+		"question-answering",
+		"retrieval",
+		"citations"
+	],
+	"highlights": [
+		"Grounding is enforced mechanically rather than by asking the model nicely, so a refusal is a checked property of the answer.",
+		"Cites the passages an answer came from, making every claim traceable to a source document.",
+		"Five dependencies total — no LangChain, no vector database, no framework.",
+		"Ingests PDFs, Markdown, plain text, HTML, Wikipedia pages, GitHub files and blog articles into one corpus."
+	],
+	"metrics": [
+		{
+			"label": "Indexed services",
+			"value": "244",
+			"detail": "AWS services in the shipped corpus"
+		},
+		{
+			"label": "Dependencies",
+			"value": "5",
+			"detail": "no LangChain, no vector database"
+		}
+	],
+	"links": {
+		"repo": "https://github.com/FissionLife/docs-rag"
+	},
+	"sections": [
+		{
+			"type": "prose",
+			"heading": "Why the refusal has to be mechanical",
+			"body": "Telling a model to answer only from the provided context is a request, not a guarantee — it complies most of the time, which is the worst failure mode available, because the occasional confident invention looks exactly like the correct answers around it. Verifying grounding after generation turns that from a prompt-engineering hope into a property of the system."
+		}
+	]
+}

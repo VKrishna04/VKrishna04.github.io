@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-02T22:53:11.424Z",
+	"generatedAt": "2026-09-05T09:57:07.040Z",
 	"count": 19,
 	"projects": [
 		{
@@ -122,7 +122,7 @@
 			"tagline": "",
 			"summary": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
 			"status": "Completed",
-			"category": "Web Application",
+			"category": "Web App",
 			"icon": "",
 			"featured": false,
 			"tier": "secondary",

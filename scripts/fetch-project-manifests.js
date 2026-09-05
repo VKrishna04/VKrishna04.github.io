@@ -17,12 +17,18 @@
 /*
  * Builds the data behind /projects/<slug>.
  *
- * Two layers, so a project page exists whether or not its repo opts in:
+ * Three layers, so a project page exists whether or not its repo opts in:
  *
  *   1. Base     — derived from settings.json staticProjects. Always present.
- *   2. Manifest — .portfolio/project.json fetched from the project's own repo
+ *   2. Vendored — manifests/<owner>/<repo>.json, committed here. For repos that
+ *                 cannot carry their own manifest: archived ones, and ones in an
+ *                 organisation where pushing it is not mine to decide.
+ *   3. Manifest — .portfolio/project.json fetched from the project's own repo
  *                 at build time. Overrides and extends the base with content
  *                 the repo owns: long-form sections, metrics, screenshots.
+ *
+ * A repo that ships its own manifest overrides the vendored copy, so vendoring
+ * fills a hole rather than fighting the repo for control of the page.
  *
  * Fetch failures are non-fatal at every level: a repo without a manifest keeps
  * its base page, and a network failure keeps whatever was committed last time.
@@ -289,6 +295,29 @@ async function fetchManifest(repo) {
 	return JSON.parse(await res.text())
 }
 
+// Manifests this repo owns on another repo's behalf, committed as source under
+// manifests/<owner>/<repo>.json. MANIFEST_LOCAL_ROOT reads manifests out of
+// sibling working copies, which is fine for a preview but means a local build
+// can publish content CI has no way to reproduce — the page then quietly falls
+// back to its settings-only version on the next deploy. Vendoring is how that
+// content gets committed instead of merely generated.
+//
+// Only consulted when the repo itself has no manifest, so deleting the file
+// here is all it takes to hand the page back to the repo.
+function vendoredManifest(repo, name) {
+	if (!repo) return null
+	const file = path.join(ROOT, "manifests", `${repo}.json`)
+	if (!fs.existsSync(file)) return null
+	try {
+		const m = JSON.parse(fs.readFileSync(file, "utf8"))
+		console.log(`   (vendored) ${name}: manifests/${repo}.json`)
+		return m
+	} catch (e) {
+		console.warn(`⚠️ ${name}: vendored manifest is not valid JSON — ${e.message}`)
+		return null
+	}
+}
+
 // Fetched at build time, not in the browser, so the Markdown is in the
 // prerendered HTML and a crawler sees it. Returns null on any failure — a
 // README is a bonus, never a reason to fail a page.
@@ -376,9 +405,11 @@ async function main() {
 		if (base.manifestUrl) {
 			try {
 				const local = localManifestFor(base.repo)
-				const manifest = local
-					? readLocalManifest(local, sp.name)
-					: await fetchManifest(base.repo)
+				const manifest =
+					(local
+						? readLocalManifest(local, sp.name)
+						: await fetchManifest(base.repo)) ||
+					vendoredManifest(base.repo, sp.name)
 				if (manifest) {
 					project = merge(base, manifest)
 					withManifest++

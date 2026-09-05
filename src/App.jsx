@@ -167,8 +167,12 @@ const AppContent = memo(() => {
 	const location = useLocation()
 	const settings = usePageConfiguration(location) // Use the hook to manage page configuration
 
-	// SPA route changes keep the old scroll position — reset like a real navigation
+	// SPA route changes keep the old scroll position — reset like a real navigation.
+	// A fragment is the exception: it names a section further down the page, and
+	// useSectionAnchors is about to scroll there. Only reachable with section
+	// anchors on, since nothing else on the site ever puts a fragment in the URL.
 	useEffect(() => {
+		if (window.location.hash) return
 		window.scrollTo(0, 0)
 	}, [location.pathname])
 

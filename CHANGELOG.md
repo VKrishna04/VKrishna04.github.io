@@ -11,6 +11,64 @@ the notes that were kept at the time rather than from a release process.
 
 ---
 
+## [1.9.0] - 2026-09-05
+
+### ✨ Features
+
+#### Project pages are written by the projects themselves
+
+A project page used to be whatever `settings.json` could say about a repo. Now a
+repo can describe itself: a `.portfolio/project.json` committed in the project's
+own tree is fetched at build time and merged over that base — tagline, summary,
+status, technologies, highlights, metrics and long-form prose sections. The repo
+that changed owns the page that describes the change.
+
+- **Nothing is required.** A repo with no manifest keeps exactly the page it had.
+  The build reports which ones are still thin rather than failing.
+- **Shelves.** Projects carry `tier` and `order`, so the listing is curated
+  instead of sorted by whatever GitHub last touched.
+- **Published packages** are declared as `{ registry, id }` pairs, and download
+  counts are fetched per registry.
+- New `Computer Vision` project category; technology names may now contain `+`,
+  `#` and `/`, so `C++`, `C#` and `TensorFlow/Keras` are spellable.
+
+#### Per-section URLs on the long pages
+
+Reading the skills block on `/about` and copying the address bar now sends
+someone to the skills block. Sections update the URL fragment as they pass, and
+opening a page with a fragment scrolls to it.
+
+Scrolling itself is untouched — this deliberately does not snap the wheel to one
+section per gesture, which breaks trackpad momentum, Page Down and find-in-page
+with no way to opt out.
+
+**Off by default**, behind `navigation.sectionAnchors.enabled`.
+
+### 🐛 Fixes
+
+#### Curated project content reached the repo but never the deployed site
+
+`MANIFEST_LOCAL_ROOT` lets a local build read manifests out of sibling working
+copies, to preview one before it is pushed. Two projects cannot push theirs —
+BreachCheck is archived, and `docs-rag` lives in an organisation where that call
+is not mine to make. Their curated pages were generated locally and committed,
+but CI has no sibling checkouts, so every deploy fetched a 404, silently fell
+back to the settings-only base, and shipped the thin version. Production was
+serving generic text for both.
+
+Manifests for repos that cannot carry their own now live in `manifests/<owner>/<repo>.json`,
+committed as source and consulted only when the repo itself has none. A repo
+that later ships its own manifest still overrides it, and deleting the vendored
+file hands the page back.
+
+### 📝 Notes
+
+- `cflair-counter`'s README now renders as **ViewFlare** — the repo was renamed
+  upstream. Only the README changed; the recorded repo, links and counter rows
+  are deliberately left alone.
+
+---
+
 ## [1.8.0] - 2026-09-01
 
 ### ✨ Features

@@ -1,0 +1,26 @@
+{
+	"$schema": "https://vkrishna04.me/schemas/project-manifest.schema.json",
+	"manifestVersion": 2,
+	"tagline": "Check credentials against known breaches, privately.",
+	"summary": "A tool for checking whether credentials appear in known data breaches without disclosing what is being checked, using k-anonymity range queries so only a short hash prefix ever leaves the machine.",
+	"status": "complete",
+	"icon": "SiPython",
+	"readme": true,
+	"technologies": [
+		"Python",
+		"CLI"
+	],
+	"tags": [
+		"security",
+		"privacy",
+		"breach-detection",
+		"cli"
+	],
+	"highlights": [
+		"Uses a k-anonymity range query, so the full hash of a checked secret is never transmitted.",
+		"Runs locally as a CLI rather than as a web form that would see the credential."
+	],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/BreachCheck"
+	}
+}

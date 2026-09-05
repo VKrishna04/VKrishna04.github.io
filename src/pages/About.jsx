@@ -19,6 +19,7 @@ import { motion } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { useCodeLedgerStats } from "../hooks/useCodeLedgerStats"
+import { useSectionAnchors } from "../hooks/useSectionAnchors"
 
 // === MODULAR SYSTEMS: Use unified icon + color systems ===
 import { getUnifiedIcon } from "../utils/iconSystemCore"
@@ -163,8 +164,18 @@ const About = () => {
 	const showDsaWidget =
 		settings.codeLedger?.widget?.showInAbout !== false && dsaData
 
+	// Sections carry their own ids either way; this only decides whether the
+	// address bar follows the reader down them. The second argument re-scans
+	// whenever the section list can have changed: settings arriving renders
+	// most of them, and the DSA widget appears later still, once its own fetch
+	// lands.
+	const pageRef = useSectionAnchors(
+		settings.navigation?.sectionAnchors?.enabled === true,
+		showDsaWidget || settings
+	)
+
 	return (
-		<div className="min-h-screen py-20 px-4">
+		<div ref={pageRef} className="min-h-screen py-20 px-4">
 			<div className="max-w-6xl mx-auto">
 				<motion.div
 					variants={staggerContainer}
@@ -191,7 +202,11 @@ const About = () => {
 					{(settings.about?.title ||
 						settings.about?.paragraphs?.length > 0 ||
 						settings.about?.image) && (
-						<div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+						<div
+							id="overview"
+							data-section-anchor
+							className="grid lg:grid-cols-2 gap-12 items-center mb-20"
+						>
 							{/* Left Column - Text */}
 							{(settings.about?.title ||
 								settings.about?.paragraphs?.length > 0) && (
@@ -255,6 +270,8 @@ const About = () => {
 					{/* Stats Section */}
 					{stats.length > 0 && (
 						<motion.div
+							id="stats"
+							data-section-anchor
 							className={`mt-20 grid gap-6 ${
 								stats.length <= 2
 									? "grid-cols-1 md:grid-cols-2"
@@ -289,6 +306,8 @@ const About = () => {
 					{/* DSA Activity Widget */}
 					{showDsaWidget && (
 						<motion.div
+							id="dsa-activity"
+							data-section-anchor
 							initial={{ opacity: 0, y: 16 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4 }}
@@ -373,6 +392,8 @@ const About = () => {
 					{settings.about?.technicalExperience?.show !== false &&
 						settings.about?.technicalExperience?.categories?.length > 0 && (
 							<motion.div
+								id="experience"
+								data-section-anchor
 								className="mt-20"
 								initial={{ opacity: 0, y: 60 }}
 								animate={{ opacity: 1, y: 0 }}
@@ -384,7 +405,12 @@ const About = () => {
 
 					{/* Skills Section */}
 					{skills.length > 0 && (
-						<motion.div className="mt-20" variants={fadeInUp}>
+						<motion.div
+							id="skills"
+							data-section-anchor
+							className="mt-20"
+							variants={fadeInUp}
+						>
 							<h2 className="text-3xl font-bold text-center text-white mb-12">
 								{settings.about?.skillsHeading || "Technical Skills"}
 							</h2>
@@ -474,7 +500,12 @@ const About = () => {
 					{/* Achievements & Recognition Section */}
 					{settings.about?.achievements?.show !== false &&
 						settings.about?.achievements?.items?.length > 0 && (
-							<motion.div className="mt-20" variants={fadeInUp}>
+							<motion.div
+								id="achievements"
+								data-section-anchor
+								className="mt-20"
+								variants={fadeInUp}
+							>
 								<h2 className="text-3xl font-bold text-center text-white mb-12">
 									{settings.about.achievements.heading ||
 										"Achievements & Recognition"}

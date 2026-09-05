@@ -128,6 +128,9 @@
 		"navbar": {
 			"$ref": "schemas/settings/navbar.schema.json"
 		},
+		"navigation": {
+			"$ref": "schemas/settings/navigation.schema.json"
+		},
 		"footer": {
 			"$ref": "schemas/settings/footer.schema.json"
 		},
