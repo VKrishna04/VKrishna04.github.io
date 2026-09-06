@@ -99,6 +99,21 @@ export function injectSeoPlugin() {
 					metaTags.push(
 						`<meta name="twitter:url" content="${escapeHtml(seo.canonical)}" />`
 					);
+
+					// An agent that only ever parses HTML has no way to discover
+					// /api/*.json or /llms.txt otherwise -- they are announced in
+					// robots.txt and llms.txt, neither of which it necessarily reads.
+					const origin = String(seo.canonical).replace(/\/+$/, "");
+					metaTags.push(
+						`<link rel="alternate" type="application/json" href="${escapeHtml(
+							`${origin}/api/portfolio.json`
+						)}" title="Portfolio data (JSON)" />`
+					);
+					metaTags.push(
+						`<link rel="alternate" type="text/plain" href="${escapeHtml(
+							`${origin}/llms.txt`
+						)}" title="LLM context" />`
+					);
 				}
 
 				// Open Graph meta tags

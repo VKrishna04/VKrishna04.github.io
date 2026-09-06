@@ -5,3 +5,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://vkrishna04.me/sitemap.xml
+# LLMs: https://vkrishna04.me/llms.txt

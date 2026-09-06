@@ -160,6 +160,11 @@ function writeRobots(settings, base) {
 	if (base) {
 		lines.push("")
 		lines.push(`Sitemap: ${base}/sitemap.xml`)
+		// llms.txt has no registered directive, so this is a comment. Assistants
+		// that look for it check robots.txt first, and a comment costs nothing.
+		if (allowAi) {
+			lines.push(`# LLMs: ${base}/llms.txt`)
+		}
 	}
 
 	fs.writeFileSync(
