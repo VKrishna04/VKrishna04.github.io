@@ -22,7 +22,7 @@
 		"url": "https://github.com/VKrishna04/VKrishna04.github.io/issues"
 	},
 	"engines": {
-		"node": ">=16.0.0"
+		"node": "^20.19.0 || >=22.12.0"
 	},
 	"main": "dist/index.js",
 	"browser": "dist/index.js",
