@@ -1497,7 +1497,7 @@
           "NumPy"
         ],
         "category": "AI/ML",
-        "featured": false,
+        "featured": true,
         "showInAbout": true,
         "showInProjects": true,
         "status": "Completed",
@@ -1610,7 +1610,7 @@
           "JavaScript"
         ],
         "category": "AI/ML",
-        "featured": false,
+        "featured": true,
         "showInAbout": false,
         "showInProjects": true,
         "status": "Completed",
