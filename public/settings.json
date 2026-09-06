@@ -948,7 +948,7 @@
         "featured": false,
         "showInAbout": true,
         "showInProjects": true,
-        "status": "Active Development",
+        "status": "On Hold",
         "startDate": "2025-10-01",
         "endDate": null,
         "githubUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI",
@@ -1162,7 +1162,7 @@
       },
       {
         "id": "8",
-        "name": "CFlair-Counter",
+        "name": "ViewFlare",
         "description": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
         "technologies": [
           "HTML",
@@ -1178,10 +1178,10 @@
         "status": "Live",
         "startDate": "2025-09-01",
         "endDate": null,
-        "githubUrl": "https://github.com/Life-Experimentalist/CFlair-Counter",
+        "githubUrl": "https://github.com/Life-Experimentalist/ViewFlare",
         "liveUrl": "https://counter.vkrishna04.me/",
         "demoUrl": "",
-        "documentationUrl": "https://github.com/Life-Experimentalist/CFlair-Counter#readme",
+        "documentationUrl": "https://github.com/Life-Experimentalist/ViewFlare#readme",
         "imageUrl": "",
         "tags": [
           "rest-api",
@@ -1205,10 +1205,10 @@
           "issues": 0
         },
         "statsUrls": {
-          "starsUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/stargazers",
-          "forksUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/network/members",
-          "watchersUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/watchers",
-          "issuesUrl": "https://github.com/Life-Experimentalist/CFlair-Counter/issues"
+          "starsUrl": "https://github.com/Life-Experimentalist/ViewFlare/stargazers",
+          "forksUrl": "https://github.com/Life-Experimentalist/ViewFlare/network/members",
+          "watchersUrl": "https://github.com/Life-Experimentalist/ViewFlare/watchers",
+          "issuesUrl": "https://github.com/Life-Experimentalist/ViewFlare/issues"
         },
         "tier": "secondary",
         "order": 5
@@ -1539,13 +1539,13 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/issues"
         },
-        "tier": "secondary",
-        "order": 3
+        "tier": "featured",
+        "order": 6
       },
       {
         "id": "15",
         "name": "ActionsCounter",
-        "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by CFlair-Counter.",
+        "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by ViewFlare.",
         "technologies": [
           "TypeScript",
           "GitHub-Actions",
@@ -1579,7 +1579,7 @@
           "Counts update on demand, from a manual run or a repository_dispatch - there is no schedule and no server",
           "Tallies live in the repository's own GitHub Actions variables rather than a database",
           "Static dashboard published to GitHub Pages",
-          "Superseded by CFlair-Counter, which is what serves counter.vkrishna04.me today"
+          "Superseded by ViewFlare, which is what serves counter.vkrishna04.me today"
         ],
         "stats": {
           "stars": 0,
@@ -1653,7 +1653,7 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/issues"
         },
-        "tier": "secondary",
+        "tier": "featured",
         "order": 7
       },
       {
@@ -1830,7 +1830,7 @@
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
-        "status": "Completed",
+        "status": "Active Development",
         "endDate": null,
         "githubUrl": "",
         "liveUrl": "",
@@ -2962,14 +2962,14 @@
         "liveUrl": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync"
       },
       {
-        "name": "CFlair-Counter",
+        "name": "ViewFlare",
         "technologies": [
           "Cloudflare Workers",
           "REST APIs",
           "Distributed state"
         ],
-        "description": "Serverless edge API serving globally distributed requests with sub-10ms responses on Cloudflare's network. Handles distributed state, cache-control headers, DNS routing and SVG badge generation with zero cold-start servers.",
-        "githubUrl": "https://github.com/Life-Experimentalist/CFlair-Counter",
+        "description": "Serverless edge API serving globally distributed requests on Cloudflare's network. Handles distributed state, cache-control headers, DNS routing and SVG badge generation with zero cold-start servers.",
+        "githubUrl": "https://github.com/Life-Experimentalist/ViewFlare",
         "liveUrl": "https://counter.vkrishna04.me/"
       }
     ],
