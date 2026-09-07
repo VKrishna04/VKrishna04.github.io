@@ -283,7 +283,7 @@
   "about": {
     "heading": "About Me",
     "subheading": "The story behind the code",
-    "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
+    "title": "I'm Krishna GSVV, builder & hackathon champion",
     "paragraphs": [
       "B.Tech Computer Science graduate of Amrita Vishwa Vidyapeetham (CGPA: 8.63/10, graduated Jul 2026), based in India and open to relocation. I build full-stack applications and AI systems that solve real problems — from browser extensions to deep learning pipelines.",
       "Right now I'm a software intern at Fission Labs, working an AI and Python stack. I started in core Python, moved to FastAPI to build services, backed those with PostgreSQL and designed the REST APIs on top of them, and I'm now on retrieval-augmented generation — including docs-rag, a pipeline that answers strictly from the documents it is given and cites the passages it used.",
@@ -762,6 +762,7 @@
     "useGitHubDescription": false,
     "ignore": [
       ".github",
+      "DrDerma",
       "VKrishna04",
       "Tredence",
       "Life-Experimentalist.github.io",
@@ -1440,52 +1441,6 @@
         },
         "tier": "hidden",
         "order": 4
-      },
-      {
-        "id": "13",
-        "name": "DrDerma",
-        "description": "Dermatology diagnosis and skin condition assessment tool using machine learning.",
-        "technologies": [
-          "PureBasic",
-          "Machine-Learning"
-        ],
-        "category": "AI/ML",
-        "featured": false,
-        "showInAbout": false,
-        "showInProjects": false,
-        "status": "Completed",
-        "startDate": "2024-04-01",
-        "endDate": "2025-09-18",
-        "githubUrl": "https://github.com/Life-Experimentalist/DrDerma",
-        "liveUrl": "",
-        "demoUrl": "",
-        "documentationUrl": "https://github.com/Life-Experimentalist/DrDerma#readme",
-        "imageUrl": "",
-        "tags": [
-          "dermatology",
-          "medical-ai",
-          "diagnosis",
-          "skin-condition"
-        ],
-        "highlights": [
-          "AI-assisted dermatology diagnosis",
-          "Skin condition pattern recognition",
-          "Medical imaging analysis"
-        ],
-        "stats": {
-          "stars": 0,
-          "forks": 1,
-          "watchers": 0,
-          "issues": 0
-        },
-        "statsUrls": {
-          "starsUrl": "https://github.com/Life-Experimentalist/DrDerma/stargazers",
-          "forksUrl": "https://github.com/Life-Experimentalist/DrDerma/network/members",
-          "watchersUrl": "https://github.com/Life-Experimentalist/DrDerma/watchers",
-          "issuesUrl": "https://github.com/Life-Experimentalist/DrDerma/issues"
-        },
-        "tier": "hidden",
-        "order": 5
       },
       {
         "id": "14",
@@ -2882,10 +2837,10 @@
       {
         "role": "Class Advisor",
         "organization": "Amrita Vishwa Vidyapeetham",
-        "period": "2022 - Present",
+        "period": "2022 - 2026",
         "description": [
-          "Serve as the elected class advisor for the B.Tech CS batch, acting as the primary liaison between students and faculty.",
-          "Coordinate academic schedules and extracurricular activities, address student concerns, and help maintain a healthy, collaborative class environment."
+          "Served as the elected class advisor for the B.Tech CS batch, acting as the primary liaison between students and faculty.",
+          "Coordinated academic schedules and extracurricular activities, addressed student concerns, and helped maintain a healthy, collaborative class environment."
         ]
       },
       {
