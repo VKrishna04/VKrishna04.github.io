@@ -32,6 +32,9 @@ const useMergedProjects = () => {
 	} = useGitHubRepos();
 	const [mergedProjects, setMergedProjects] = useState([]);
 	const [staticProjects, setStaticProjects] = useState([]);
+	// Private repos that opted in via their manifest exist only in the
+	// generated index; the public GitHub listing never returns them.
+	const [privatePages, setPrivatePages] = useState([]);
 	const [settings, setSettings] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -50,6 +53,20 @@ const useMergedProjects = () => {
 		};
 
 		fetchData();
+	}, []);
+
+	useEffect(() => {
+		fetch("/data/projects/index.json")
+			.then((res) => (res.ok ? res.json() : null))
+			.then((data) => {
+				const entries = (data?.projects || []).filter(
+					(p) => p.visibility === "private"
+				);
+				if (entries.length) setPrivatePages(entries);
+			})
+			.catch(() => {
+				/* private pages are a bonus, never a blocker */
+			});
 	}, []);
 
 	// Merge projects when both GitHub and static are ready
@@ -118,6 +135,7 @@ const useMergedProjects = () => {
 								: 999,
 						showInAbout: staticProject.showInAbout,
 						showInProjects: staticProject.showInProjects !== false, // Default to true
+						visibility: staticProject.visibility,
 						status: staticProject.status,
 						startDate: staticProject.startDate,
 						endDate: staticProject.endDate,
@@ -221,6 +239,7 @@ const useMergedProjects = () => {
 								: 999,
 						showInAbout: staticProject.showInAbout,
 						showInProjects: staticProject.showInProjects !== false, // Default to true
+						visibility: staticProject.visibility,
 						status: staticProject.status,
 						startDate: staticProject.startDate,
 						endDate: staticProject.endDate,
@@ -259,6 +278,41 @@ const useMergedProjects = () => {
 				}
 			});
 
+			// Add private repos that opted in through their manifest. Their
+			// card is built from the generated index entry alone: no repo
+			// URL, no GitHub stats.
+			privatePages.forEach((p) => {
+				const exists = merged.some(
+					(m) => (m.name || "").toLowerCase() === p.name.toLowerCase()
+				);
+				if (exists) return;
+				merged.push({
+					id: `private-${p.slug}`,
+					name: p.name,
+					description: p.summary || p.tagline || "",
+					html_url: null,
+					homepage: null,
+					topics: (p.technologies || []).slice(0, 6),
+					language: p.technologies?.[0] || p.category || "Private",
+					stargazers_count: 0,
+					forks_count: 0,
+					watchers_count: 0,
+					open_issues_count: 0,
+					created_at: null,
+					updated_at: null,
+					category: p.category,
+					featured: !!p.featured,
+					tier: p.tier || "secondary",
+					order: typeof p.order === "number" ? p.order : 999,
+					status: p.status,
+					technologies: p.technologies || [],
+					visibility: "private",
+					isStatic: true,
+					isMerged: false,
+					statsUrls: null,
+				});
+			});
+
 			setMergedProjects(merged);
 			// Only set loading to false after merge is complete
 			setLoading(false);
@@ -268,7 +322,7 @@ const useMergedProjects = () => {
 		if (Object.keys(settings).length > 0) {
 			mergeProjects();
 		}
-	}, [githubRepos, staticProjects, githubLoading, settings]);
+	}, [githubRepos, staticProjects, privatePages, githubLoading, settings]);
 
 	return {
 		projects: mergedProjects,

@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-07T18:31:03.773Z",
+	"generatedAt": "2026-09-07T20:13:33.707Z",
 	"count": 26,
 	"projects": [
 		{
@@ -199,6 +199,7 @@
 			"cover": "",
 			"repo": null,
 			"source": "settings",
+			"visibility": "private",
 			"depth": 2
 		},
 		{

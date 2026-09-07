@@ -923,6 +923,15 @@ const ProjectCard = ({
 					</span>
 				</div>
 			)}
+
+			{/* Private Badge */}
+			{project.visibility === "private" && (
+				<div className="absolute top-4 left-4">
+					<span className="px-2 py-1 bg-slate-800/90 border border-slate-500/40 text-slate-200 text-xs font-bold rounded-full">
+						Private
+					</span>
+				</div>
+			)}
 		</motion.div>
 	)
 }

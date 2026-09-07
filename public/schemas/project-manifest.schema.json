@@ -50,6 +50,10 @@
 			"type": "boolean",
 			"description": "Marks the project featured. Same precedence as tier."
 		},
+		"listPrivate": {
+			"type": "boolean",
+			"description": "Private repos only: set true to publish a portfolio page built from this manifest and the repo README. Nothing else about the repo is exposed, and the page is labelled Private. Without it a private repo is never listed. Ignored on public repos."
+		},
 		"icon": {
 			"type": "string",
 			"pattern": "^[A-Z][A-Za-z0-9]{1,39}$",

@@ -1787,6 +1787,7 @@
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
+        "visibility": "private",
         "status": "Active Development",
         "endDate": null,
         "githubUrl": "",

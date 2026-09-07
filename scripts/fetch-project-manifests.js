@@ -168,6 +168,7 @@ function baseFromSettings(sp) {
 		appearance: null,
 		seo: null,
 		stats: sp.stats || null,
+		visibility: sp.visibility === "private" ? "private" : undefined,
 		source: "settings",
 		repo: repo ? `${repo.owner}/${repo.repo}` : null,
 		manifestUrl: repo
@@ -470,6 +471,7 @@ function indexEntry(project) {
 		cover: project.media?.cover || "",
 		repo: project.repo,
 		source: project.source,
+		visibility: project.visibility || undefined,
 		depth: depthScore(project),
 	}
 }
@@ -569,11 +571,76 @@ async function main() {
 		for (const r of repos) {
 			if (
 				r.fork ||
-				r.private ||
 				ignored.has(r.name.toLowerCase()) ||
 				covered.has(r.full_name.toLowerCase()) ||
 				covered.has(slugify(r.name))
 			) {
+				continue
+			}
+			// A private repo is invisible by default. Its manifest must opt in
+			// with listPrivate: true, and even then only the manifest and README
+			// are published: everything GitHub itself knows about the repo
+			// (description, topics, homepage, dates, URLs) is dropped, and the
+			// page carries no link back to the repository.
+			if (r.private) {
+				const base = baseFromRepo(r)
+				if (!base.slug || index.some((p) => p.slug === base.slug)) continue
+				base.summary = ""
+				base.tags = []
+				base.period.start = null
+				base.links = { repo: "", live: "", demo: "", docs: "" }
+				let manifest
+				try {
+					const local = localManifestFor(base.repo)
+					manifest =
+						(local
+							? readLocalManifest(local, r.name)
+							: await fetchManifest(base.repo)) ||
+						vendoredManifest(base.repo, r.name)
+				} catch (e) {
+					// Keep a previously published private page through a blip
+					// rather than unpublishing it for a week.
+					console.warn(`⚠️ ${base.repo}: manifest fetch failed (${e.message})`)
+					const prev = path.join(OUT_DIR, `${base.slug}.json`)
+					if (!fs.existsSync(prev)) continue
+					try {
+						const cached = JSON.parse(fs.readFileSync(prev, "utf8"))
+						if (cached.visibility === "private") {
+							index.push(indexEntry(cached))
+							discovered++
+						}
+					} catch {
+						/* unreadable cache — drop the page */
+					}
+					continue
+				}
+				if (manifest?.listPrivate !== true) continue
+				const project = merge(base, manifest, {
+					tier: true,
+					order: true,
+					featured: true,
+				})
+				if (project.tier === "hidden") continue
+				project.source = "discovered"
+				project.visibility = "private"
+				// README first, while project.repo still says where to read it
+				// from; the token that listed the repo can also read its files.
+				if (project.readme && !project.readme.markdown && project.repo) {
+					project.readme = await fetchReadme(project.repo, project.readme)
+					if (project.readme) withReadme++
+				}
+				if (project.readme) {
+					project.readme.imageBase = null
+					project.readme.linkBase = null
+					project.readme.sourceUrl = null
+				}
+				project.repo = null
+				project.manifestUrl = null
+				project.links.repo = ""
+				project.generatedAt = new Date().toISOString()
+				writeIfChanged(path.join(OUT_DIR, `${project.slug}.json`), project)
+				index.push(indexEntry(project))
+				discovered++
 				continue
 			}
 			const base = baseFromRepo(r)

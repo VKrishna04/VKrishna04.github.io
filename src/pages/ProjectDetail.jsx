@@ -422,13 +422,15 @@ const ProjectDetail = () => {
 			const SITE = getSiteUrl(settings)
 			const ownerName = getOwnerName(settings)
 		const url = `${SITE}/projects/${project.slug}`
+		const kind =
+			project.visibility === "private" ? "a private project" : "an open-source project"
 		const description =
 			project.seo?.description ||
 			project.tagline ||
 			project.summary ||
 			(ownerName
-				? `${project.name} — an open-source project by ${ownerName}.`
-				: `${project.name} — an open-source project.`)
+				? `${project.name} — ${kind} by ${ownerName}.`
+				: `${project.name} — ${kind}.`)
 		const title =
 			project.seo?.title ||
 			(ownerName
@@ -522,6 +524,11 @@ const ProjectDetail = () => {
 					transition={{ duration: 0.4 }}
 				>
 					<div className="flex flex-wrap items-center gap-3 mb-4 text-sm">
+						{project.visibility === "private" && (
+							<span className="px-3 py-1 bg-slate-500/10 border border-slate-500/30 text-slate-300 rounded-full">
+								Private
+							</span>
+						)}
 						{project.status && (
 							<span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 rounded-full">
 								{STATUS_LABELS[project.status] || project.status}
