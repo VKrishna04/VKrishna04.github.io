@@ -92,6 +92,12 @@
 				"type": "object",
 				"additionalProperties": false,
 				"properties": {
+					"visibility": {
+						"type": "string",
+						"enum": ["public", "private"],
+						"default": "public",
+						"description": "Set to 'private' for a repo the site cannot read from the GitHub API. The entry renders from this static data only, with a Private badge and no GitHub links."
+					},
 					"id": {
 						"type": "string",
 						"pattern": "^[0-9]+$",
