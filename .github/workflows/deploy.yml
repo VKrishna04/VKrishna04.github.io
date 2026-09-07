@@ -6,10 +6,10 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-  # Data sources (GitHub API, CodeLedger) refresh at most daily, so a nightly
-  # rebuild keeps the prerendered HTML current without a server.
+  # Every push already redeploys, so the schedule only refreshes baked data
+  # (repo listing, stats) between pushes; weekly is enough for that.
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 3 * * 1"
 
 permissions:
   contents: write # auto-heal commits (audit fix, lint --fix, lockfile sync)
