@@ -16,6 +16,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { cachedFetch } from "../utils/githubCache"
+import { fetchBakedRepos } from "../utils/bakedRepos"
 import { fetchSettings as fetchSharedSettings } from "../utils/settingsCache"
 import { getUserAgent } from "../utils/identity"
 
@@ -240,13 +241,16 @@ const useProjectsData = () => {
 				},
 			}
 
-			const response = await cachedFetch(apiUrl, apiOptions)
+			let repos = await fetchBakedRepos()
+			if (!repos) {
+				const response = await cachedFetch(apiUrl, apiOptions)
 
-			if (!response.ok) {
-				throw await buildGitHubApiError(response)
+				if (!response.ok) {
+					throw await buildGitHubApiError(response)
+				}
+
+				repos = await response.json()
 			}
-
-			const repos = await response.json()
 			const ignoreList = config.projects?.ignore || []
 			const projectSettings = config.projects || {}
 
@@ -269,11 +273,13 @@ const useProjectsData = () => {
 			// Fetch languages for each repository
 			const reposWithLanguages = await Promise.all(
 				filteredRepos.map(async (repo) => {
-					const languages = await fetchRepositoryLanguages(
-						repo.owner.login,
-						repo.name,
-						apiOptions.headers
-					)
+					const languages =
+						repo.languages ||
+						(await fetchRepositoryLanguages(
+							repo.owner.login,
+							repo.name,
+							apiOptions.headers
+						))
 
 					// Fetch counter value for this specific repository from CFlair-Counter
 					let counterValue = null

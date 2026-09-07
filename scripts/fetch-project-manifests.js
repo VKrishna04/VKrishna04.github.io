@@ -366,6 +366,80 @@ async function listAccountRepos(github) {
 	return repos
 }
 
+// Top three languages in the exact shape the client hooks build for a card,
+// so a baked repo drops straight into the same rendering path.
+async function fetchRepoLanguages(repo) {
+	try {
+		const headers = { Accept: "application/vnd.github+json" }
+		if (token) headers.Authorization = `Bearer ${token}`
+		const res = await fetch(`https://api.github.com/repos/${repo}/languages`, {
+			signal: AbortSignal.timeout(TIMEOUT_MS),
+			headers,
+		})
+		if (!res.ok) return []
+		const languages = await res.json()
+		const total = Object.values(languages).reduce((sum, b) => sum + b, 0)
+		if (!total) return []
+		return Object.entries(languages)
+			.sort(([, a], [, b]) => b - a)
+			.slice(0, 3)
+			.map(([lang, bytes]) => ({
+				name: lang,
+				percentage: ((bytes / total) * 100).toFixed(1),
+			}))
+	} catch {
+		return []
+	}
+}
+
+// Bake the public repo listing so visitors read a static file instead of each
+// asking api.github.com for the same listing (plus one languages call per
+// repo) from their own rate limit. Private, forked and ignored repos never
+// enter the file (the client would filter them out anyway); the client hooks
+// fall back to the live API when it is missing.
+async function bakeGithubRepos(repos, ignored) {
+	try {
+		const out = []
+		for (const r of repos) {
+			if (r.private || r.fork || ignored.has(r.name.toLowerCase())) continue
+			out.push({
+				id: r.id,
+				name: r.name,
+				full_name: r.full_name,
+				owner: { login: r.owner?.login || "" },
+				private: false,
+				fork: false,
+				archived: !!r.archived,
+				description: r.description,
+				html_url: r.html_url,
+				homepage: r.homepage,
+				topics: r.topics || [],
+				language: r.language,
+				languages: await fetchRepoLanguages(r.full_name),
+				stargazers_count: r.stargazers_count,
+				forks_count: r.forks_count,
+				watchers_count: r.watchers_count,
+				open_issues_count: r.open_issues_count,
+				size: r.size,
+				default_branch: r.default_branch,
+				created_at: r.created_at,
+				updated_at: r.updated_at,
+				pushed_at: r.pushed_at,
+			})
+		}
+		const dir = path.join(ROOT, "public", "data", "github")
+		fs.mkdirSync(dir, { recursive: true })
+		writeIfChanged(path.join(dir, "repos.json"), {
+			generatedAt: new Date().toISOString(),
+			count: out.length,
+			repos: out,
+		})
+		console.log(`\u2705 Baked GitHub listing: ${out.length} public repos`)
+	} catch (e) {
+		console.warn(`\u26a0\ufe0f Baking GitHub listing failed (${e.message})`)
+	}
+}
+
 async function fetchManifest(repo) {
 	const res = await fetchRepoFile(repo, MANIFEST_PATH, "application/json")
 	if (res.status === 404) return null // repo simply has not opted in yet
@@ -568,6 +642,7 @@ async function main() {
 	let discovered = 0
 	try {
 		const repos = await listAccountRepos(settings.github)
+		await bakeGithubRepos(repos, ignored)
 		for (const r of repos) {
 			if (
 				r.fork ||

@@ -1,0 +1,1395 @@
+{
+	"generatedAt": "2026-09-07T20:23:51.504Z",
+	"count": 28,
+	"repos": [
+		{
+			"id": 767672764,
+			"name": "ParkMeter",
+			"full_name": "Life-Experimentalist/ParkMeter",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Parking Ticket Management System: Develop a system for tracking and managing parking tickets, including features for payment processing, ticket history, and notifications.",
+			"html_url": "https://github.com/Life-Experimentalist/ParkMeter",
+			"homepage": "https://life-experimentalist.github.io/ParkMeter/",
+			"topics": [
+				"access-control",
+				"django",
+				"login-system",
+				"parking-management",
+				"role-based-access-control",
+				"ticket-management",
+				"user-interface",
+				"user-management"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "97.0"
+				},
+				{
+					"name": "HTML",
+					"percentage": "1.2"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "0.8"
+				}
+			],
+			"stargazers_count": 1,
+			"forks_count": 2,
+			"watchers_count": 1,
+			"open_issues_count": 0,
+			"size": 52873,
+			"default_branch": "main",
+			"created_at": "2024-03-05T17:45:15Z",
+			"updated_at": "2025-07-08T09:19:33Z",
+			"pushed_at": "2024-11-25T20:19:22Z"
+		},
+		{
+			"id": 893461325,
+			"name": "BreachCheck",
+			"full_name": "Life-Experimentalist/BreachCheck",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "BreachCheck is a tool designed to help users check if their email addresses or passwords have been involved in known data breaches. It leverages APIs from various breach databases aggregators to provide users with information about their potential exposure.",
+			"html_url": "https://github.com/Life-Experimentalist/BreachCheck",
+			"homepage": "https://breachcheck-sagittarius.streamlit.app/",
+			"topics": [
+				"breach-check",
+				"email-phishing",
+				"password-safety",
+				"pure-python",
+				"streamlit",
+				"unsplash-api"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "93.8"
+				},
+				{
+					"name": "Shell",
+					"percentage": "3.2"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "1.6"
+				}
+			],
+			"stargazers_count": 2,
+			"forks_count": 1,
+			"watchers_count": 2,
+			"open_issues_count": 0,
+			"size": 74,
+			"default_branch": "main",
+			"created_at": "2024-11-24T14:08:24Z",
+			"updated_at": "2026-09-06T11:47:19Z",
+			"pushed_at": "2026-09-06T11:47:15Z"
+		},
+		{
+			"id": 939606364,
+			"name": "SignLanguageDetector",
+			"full_name": "Life-Experimentalist/SignLanguageDetector",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Real-time sign language detection — webcam → MediaPipe → RandomForest → browser inference. One-command setup with uv. Includes training CLI, model analytics, and REST API.",
+			"html_url": "https://github.com/Life-Experimentalist/SignLanguageDetector",
+			"homepage": "http://sign.vkrishna04.me/",
+			"topics": [
+				"accessibility",
+				"api",
+				"asl",
+				"computer-vision",
+				"flask",
+				"gesture-recognition",
+				"hand-tracking",
+				"indian-sign-language",
+				"machine-learning",
+				"mediapipe",
+				"mediapipe-hands",
+				"opencv",
+				"python",
+				"random-forest",
+				"real-time-detection",
+				"sign-language",
+				"web-application"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "62.5"
+				},
+				{
+					"name": "HTML",
+					"percentage": "34.1"
+				},
+				{
+					"name": "CSS",
+					"percentage": "2.3"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 888964,
+			"default_branch": "main",
+			"created_at": "2025-02-26T20:11:41Z",
+			"updated_at": "2026-09-06T11:47:32Z",
+			"pushed_at": "2026-09-06T11:47:29Z"
+		},
+		{
+			"id": 945109137,
+			"name": "HiveXplore",
+			"full_name": "Life-Experimentalist/HiveXplore",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "HiveXplore is a beginner-friendly app built on Hive blockchain that introduces newcomers to decentralized social media without technical barriers. With simplified authentication, intuitive posting tools, and guided experiences, it serves as an educational gateway for blockchain beginners while making participation in the ecosystem accessible.",
+			"html_url": "https://github.com/Life-Experimentalist/HiveXplore",
+			"homepage": "https://hivebuzz.onrender.com/",
+			"topics": [
+				"blockchain",
+				"caching",
+				"content-platform",
+				"cryptocurrency",
+				"dapp",
+				"decentralized",
+				"flask",
+				"hive-blockchain",
+				"hivesigner",
+				"keychain",
+				"markdown",
+				"python",
+				"real-time",
+				"restful-api",
+				"social-media",
+				"sqlite",
+				"web-application"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "46.4"
+				},
+				{
+					"name": "HTML",
+					"percentage": "29.1"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "16.1"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 589,
+			"default_branch": "main",
+			"created_at": "2025-03-08T17:20:27Z",
+			"updated_at": "2026-09-06T11:48:01Z",
+			"pushed_at": "2026-09-06T11:47:57Z"
+		},
+		{
+			"id": 946823206,
+			"name": "zipCracker",
+			"full_name": "Life-Experimentalist/zipCracker",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "A Python-based tool for cracking protected ZIP, RAR, 7Z, and TAR archives using dictionary attacks, brute force methods, and concurrent processing.",
+			"html_url": "https://github.com/Life-Experimentalist/zipCracker",
+			"homepage": "",
+			"topics": [
+				"archive-extraction",
+				"archive-password-recovery",
+				"brute-force",
+				"command-line-tool",
+				"cross-platform",
+				"cybersecurity-education",
+				"data-recovery",
+				"dictionary-attack",
+				"ethical-hacking",
+				"file-processing",
+				"file-security",
+				"memory-efficient",
+				"multi-format-support",
+				"multithreading",
+				"password-analysis",
+				"password-cracking",
+				"password-dictionary",
+				"performance-optimization",
+				"python",
+				"zip-cracker"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "89.6"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "5.7"
+				},
+				{
+					"name": "Shell",
+					"percentage": "4.7"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 39,
+			"default_branch": "main",
+			"created_at": "2025-03-11T18:21:36Z",
+			"updated_at": "2026-09-07T18:27:40Z",
+			"pushed_at": "2026-09-07T18:27:03Z"
+		},
+		{
+			"id": 947691990,
+			"name": "cspell-sync",
+			"full_name": "Life-Experimentalist/cspell-sync",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.",
+			"html_url": "https://github.com/Life-Experimentalist/cspell-sync",
+			"homepage": "https://marketplace.visualstudio.com/items?itemName=VKrishna04.cspell-sync",
+			"topics": [
+				"automation",
+				"code-spellchecker",
+				"cspell",
+				"developer-tools",
+				"extension",
+				"nodejs",
+				"open-source",
+				"typescript",
+				"visual-studio-code",
+				"vscode-extension",
+				"vscode-marketplace"
+			],
+			"language": "TypeScript",
+			"languages": [
+				{
+					"name": "TypeScript",
+					"percentage": "85.8"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "14.2"
+				}
+			],
+			"stargazers_count": 3,
+			"forks_count": 0,
+			"watchers_count": 3,
+			"open_issues_count": 0,
+			"size": 2485,
+			"default_branch": "main",
+			"created_at": "2025-03-13T05:06:40Z",
+			"updated_at": "2026-09-06T11:47:14Z",
+			"pushed_at": "2026-09-06T11:47:10Z"
+		},
+		{
+			"id": 950862006,
+			"name": "Facial-Emotion-Detector",
+			"full_name": "Life-Experimentalist/Facial-Emotion-Detector",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.",
+			"html_url": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector",
+			"homepage": "",
+			"topics": [
+				"ai",
+				"computer-vision",
+				"emotion-detection",
+				"facial-landmarks",
+				"facial-recognition",
+				"human-computer-interaction",
+				"machine-learning",
+				"mediapipe",
+				"opencv",
+				"python",
+				"real-time-detection"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "88.5"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "11.5"
+				}
+			],
+			"stargazers_count": 3,
+			"forks_count": 2,
+			"watchers_count": 3,
+			"open_issues_count": 0,
+			"size": 3450,
+			"default_branch": "main",
+			"created_at": "2025-03-18T19:48:39Z",
+			"updated_at": "2026-09-06T11:47:22Z",
+			"pushed_at": "2026-09-06T11:47:18Z"
+		},
+		{
+			"id": 960053038,
+			"name": "RanobeGemini",
+			"full_name": "Life-Experimentalist/RanobeGemini",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Local-first browser extension that enhances web novel and fanfiction reading with the AI provider of your choice",
+			"html_url": "https://github.com/Life-Experimentalist/RanobeGemini",
+			"homepage": "http://ranobe.vkrishna04.me/",
+			"topics": [
+				"ao3",
+				"browser-extension",
+				"chrome-extension",
+				"edge-extension",
+				"fanfiction",
+				"firefox-addon",
+				"gemini",
+				"grammar-correction",
+				"javascript",
+				"local-first",
+				"manifest-v3",
+				"novel-library",
+				"ollama",
+				"openai-compatible",
+				"ranobes",
+				"reading-tracker",
+				"scribblehub",
+				"summarization",
+				"web-novels"
+			],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "45.7"
+				},
+				{
+					"name": "HTML",
+					"percentage": "45.0"
+				},
+				{
+					"name": "CSS",
+					"percentage": "9.2"
+				}
+			],
+			"stargazers_count": 3,
+			"forks_count": 0,
+			"watchers_count": 3,
+			"open_issues_count": 1,
+			"size": 103996,
+			"default_branch": "main",
+			"created_at": "2025-04-03T19:30:50Z",
+			"updated_at": "2026-09-06T17:46:40Z",
+			"pushed_at": "2026-09-06T17:46:35Z"
+		},
+		{
+			"id": 961510517,
+			"name": "eVidya",
+			"full_name": "Life-Experimentalist/eVidya",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
+			"html_url": "https://github.com/Life-Experimentalist/eVidya",
+			"homepage": "http://evidya.vkrishna04.me/",
+			"topics": [],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "50.3"
+				},
+				{
+					"name": "HTML",
+					"percentage": "35.9"
+				},
+				{
+					"name": "CSS",
+					"percentage": "13.7"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 290,
+			"default_branch": "main",
+			"created_at": "2025-04-06T17:08:22Z",
+			"updated_at": "2026-09-07T18:27:56Z",
+			"pushed_at": "2026-09-07T18:27:19Z"
+		},
+		{
+			"id": 991336813,
+			"name": "Save-Sync",
+			"full_name": "Life-Experimentalist/Save-Sync",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "VS Code Extension to save your project at working save points like game saves for non version controlled projects",
+			"html_url": "https://github.com/Life-Experimentalist/Save-Sync",
+			"homepage": "http://save-sync.vkrishna04.me/",
+			"topics": [
+				"backup",
+				"checkpoint",
+				"developer-tools",
+				"productivity",
+				"restore",
+				"save-state",
+				"timeline",
+				"typescript",
+				"vscode",
+				"vscode-extension"
+			],
+			"language": "CSS",
+			"languages": [
+				{
+					"name": "CSS",
+					"percentage": "38.0"
+				},
+				{
+					"name": "HTML",
+					"percentage": "35.8"
+				},
+				{
+					"name": "TypeScript",
+					"percentage": "15.6"
+				}
+			],
+			"stargazers_count": 1,
+			"forks_count": 0,
+			"watchers_count": 1,
+			"open_issues_count": 2,
+			"size": 25446,
+			"default_branch": "main",
+			"created_at": "2025-05-27T13:25:22Z",
+			"updated_at": "2026-09-07T18:29:07Z",
+			"pushed_at": "2026-09-06T11:47:46Z"
+		},
+		{
+			"id": 1009677674,
+			"name": "CounterAPI",
+			"full_name": "Life-Experimentalist/CounterAPI",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "A self-hostable, free-forever ping counter with FastAPI and Postgres. Deploy to Render and track project usage via simple API pings.",
+			"html_url": "https://github.com/Life-Experimentalist/CounterAPI",
+			"homepage": "https://life-experimentalist.github.io/CounterAPI/",
+			"topics": [
+				"api",
+				"backend",
+				"counter",
+				"developer-tools",
+				"fastapi",
+				"free-tier",
+				"open-source",
+				"postgresql",
+				"project-stats",
+				"render",
+				"self-hosted",
+				"usage-tracking"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "78.6"
+				},
+				{
+					"name": "Python",
+					"percentage": "21.4"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 1,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 2702,
+			"default_branch": "main",
+			"created_at": "2025-06-27T14:23:26Z",
+			"updated_at": "2026-09-07T18:27:34Z",
+			"pushed_at": "2026-09-07T18:27:11Z"
+		},
+		{
+			"id": 1016924653,
+			"name": "ToxicGuard_AI",
+			"full_name": "Life-Experimentalist/ToxicGuard_AI",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
+			"html_url": "https://github.com/Life-Experimentalist/ToxicGuard_AI",
+			"homepage": "http://toxic.vkrishna04.me/",
+			"topics": [
+				"ai",
+				"browser-extension",
+				"censorship",
+				"chrome-extension",
+				"content-moderation",
+				"firefox-extension",
+				"javascript",
+				"machine-learning",
+				"nlp",
+				"privacy",
+				"real-time",
+				"tensorflowjs",
+				"toxicity-detection",
+				"user-safety",
+				"web-extension"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "58.3"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "39.4"
+				},
+				{
+					"name": "CSS",
+					"percentage": "2.2"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 1,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 16793,
+			"default_branch": "main",
+			"created_at": "2025-07-09T18:32:59Z",
+			"updated_at": "2026-09-06T11:47:35Z",
+			"pushed_at": "2026-09-06T11:47:32Z"
+		},
+		{
+			"id": 1022219246,
+			"name": "ActionsCounter",
+			"full_name": "Life-Experimentalist/ActionsCounter",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Life-Experimentalist",
+			"html_url": "https://github.com/Life-Experimentalist/ActionsCounter",
+			"homepage": "https://life-experimentalist.github.io/ActionsCounter/",
+			"topics": [
+				"analytics",
+				"automation",
+				"ci-cd",
+				"dashboard",
+				"deployment-tracking",
+				"developer-tools",
+				"devops",
+				"github-actions",
+				"github-api",
+				"monitoring",
+				"typescript",
+				"webhooks",
+				"workflow-tracking"
+			],
+			"language": "TypeScript",
+			"languages": [
+				{
+					"name": "TypeScript",
+					"percentage": "49.2"
+				},
+				{
+					"name": "HTML",
+					"percentage": "36.3"
+				},
+				{
+					"name": "CSS",
+					"percentage": "14.5"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 1624,
+			"default_branch": "main",
+			"created_at": "2025-07-18T16:53:28Z",
+			"updated_at": "2026-09-06T11:47:16Z",
+			"pushed_at": "2026-09-06T11:47:12Z"
+		},
+		{
+			"id": 1033993763,
+			"name": "EquiLens",
+			"full_name": "Life-Experimentalist/EquiLens",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "🎯 EquiLens - AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking. Alt Links: https://equilens.pages.dev/ ,  https://life-experimentalist.github.io/EquiLens/",
+			"html_url": "https://github.com/Life-Experimentalist/EquiLens",
+			"homepage": "https://equilens.vkrishna04.me/",
+			"topics": [
+				"ai-bias-detection",
+				"ai-ethics",
+				"ai-research-tools",
+				"bias-measurement",
+				"llm-auditing",
+				"ollama-integration",
+				"rich-cli",
+				"statistical-analysis",
+				"uv-python"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "48.8"
+				},
+				{
+					"name": "Python",
+					"percentage": "43.2"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "4.8"
+				}
+			],
+			"stargazers_count": 2,
+			"forks_count": 0,
+			"watchers_count": 2,
+			"open_issues_count": 9,
+			"size": 5981,
+			"default_branch": "main",
+			"created_at": "2025-08-07T17:04:32Z",
+			"updated_at": "2026-09-06T13:03:06Z",
+			"pushed_at": "2026-09-06T13:02:59Z"
+		},
+		{
+			"id": 1046269279,
+			"name": "ViewFlare",
+			"full_name": "Life-Experimentalist/ViewFlare",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "⚡ Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
+			"html_url": "https://github.com/Life-Experimentalist/ViewFlare",
+			"homepage": "https://counter.vkrishna04.me/",
+			"topics": [
+				"rest-api"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "59.0"
+				},
+				{
+					"name": "TypeScript",
+					"percentage": "29.4"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "6.5"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 2,
+			"size": 2924,
+			"default_branch": "main",
+			"created_at": "2025-08-28T12:45:05Z",
+			"updated_at": "2026-09-06T11:48:14Z",
+			"pushed_at": "2026-09-06T11:48:10Z"
+		},
+		{
+			"id": 1058966409,
+			"name": "the-pensive-index",
+			"full_name": "Life-Experimentalist/the-pensive-index",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.",
+			"html_url": "https://github.com/Life-Experimentalist/the-pensive-index",
+			"homepage": "https://pensive.vkrishna04.me",
+			"topics": [
+				"admin-dashboard",
+				"api",
+				"cloudflare",
+				"cloudflare-d1",
+				"drizzle-orm",
+				"fanfiction",
+				"next-js",
+				"spec-driven-development",
+				"story-discovery",
+				"typescript",
+				"validation-engine"
+			],
+			"language": "TypeScript",
+			"languages": [
+				{
+					"name": "TypeScript",
+					"percentage": "98.5"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "0.6"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "0.6"
+				}
+			],
+			"stargazers_count": 1,
+			"forks_count": 0,
+			"watchers_count": 1,
+			"open_issues_count": 0,
+			"size": 5006,
+			"default_branch": "main",
+			"created_at": "2025-09-17T19:50:13Z",
+			"updated_at": "2026-09-06T11:48:05Z",
+			"pushed_at": "2026-09-06T11:48:01Z"
+		},
+		{
+			"id": 1071765482,
+			"name": "Relax",
+			"full_name": "Life-Experimentalist/Relax",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Refresh with inspirational quotes gifs and memes",
+			"html_url": "https://github.com/Life-Experimentalist/Relax",
+			"homepage": "https://relax-stress-bust.onrender.com/",
+			"topics": [],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "30.9"
+				},
+				{
+					"name": "CSS",
+					"percentage": "27.6"
+				},
+				{
+					"name": "HTML",
+					"percentage": "26.5"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 1,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 58,
+			"default_branch": "main",
+			"created_at": "2025-10-07T19:30:24Z",
+			"updated_at": "2026-09-07T18:27:05Z",
+			"pushed_at": "2026-09-07T18:26:55Z"
+		},
+		{
+			"id": 1091112537,
+			"name": "Eldritchify",
+			"full_name": "Life-Experimentalist/Eldritchify",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
+			"html_url": "https://github.com/Life-Experimentalist/Eldritchify",
+			"homepage": "https://eldritchify.vkrishna04.me/",
+			"topics": [
+				"cosmic-horror",
+				"cthulhu",
+				"eldritch",
+				"horror",
+				"javascript",
+				"lovecraft",
+				"text-corruption",
+				"text-generator",
+				"unicode",
+				"web-tools",
+				"zalgo"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "65.3"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "34.7"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 3363,
+			"default_branch": "main",
+			"created_at": "2025-11-06T15:16:20Z",
+			"updated_at": "2026-09-07T18:27:49Z",
+			"pushed_at": "2026-09-07T18:27:27Z"
+		},
+		{
+			"id": 1137675085,
+			"name": "Youtube-Keystrokes-Blocker",
+			"full_name": "Life-Experimentalist/Youtube-Keystrokes-Blocker",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
+			"html_url": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
+			"homepage": "http://yt-hotkeys.vkrishna04.me/",
+			"topics": [],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "59.5"
+				},
+				{
+					"name": "HTML",
+					"percentage": "26.2"
+				},
+				{
+					"name": "PowerShell",
+					"percentage": "10.8"
+				}
+			],
+			"stargazers_count": 4,
+			"forks_count": 0,
+			"watchers_count": 4,
+			"open_issues_count": 0,
+			"size": 547,
+			"default_branch": "main",
+			"created_at": "2026-01-19T17:21:28Z",
+			"updated_at": "2026-09-07T18:27:38Z",
+			"pushed_at": "2026-09-07T18:27:34Z"
+		},
+		{
+			"id": 1220292225,
+			"name": "Code-Ledger",
+			"full_name": "Life-Experimentalist/Code-Ledger",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Auto-commit every accepted LeetCode, GeeksforGeeks, Codeforces, NeetCode and takeuforward solution to your own GitHub repo — with AI code review, a live analytics dashboard, a knowledge graph, streaks and badges, bulk history import and cross-device sync. No servers, no accounts, no payments.",
+			"html_url": "https://github.com/Life-Experimentalist/Code-Ledger",
+			"homepage": "https://codeledger.vkrishna04.me",
+			"topics": [
+				"ai-code-review",
+				"analytics",
+				"browser-extension",
+				"chrome-extension",
+				"code-ledger",
+				"code-tracker",
+				"codeforces",
+				"competitive-programming",
+				"dsa",
+				"firefox-addon",
+				"geeksforgeeks",
+				"gfg",
+				"github-automation",
+				"github-extension",
+				"knowledge-graph",
+				"leetcode",
+				"manifest-v3",
+				"neetcode",
+				"preact",
+				"takeuforward"
+			],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "74.8"
+				},
+				{
+					"name": "HTML",
+					"percentage": "24.6"
+				},
+				{
+					"name": "CSS",
+					"percentage": "0.6"
+				}
+			],
+			"stargazers_count": 3,
+			"forks_count": 0,
+			"watchers_count": 3,
+			"open_issues_count": 0,
+			"size": 199201,
+			"default_branch": "main",
+			"created_at": "2026-04-24T18:43:27Z",
+			"updated_at": "2026-09-07T17:05:57Z",
+			"pushed_at": "2026-09-07T17:05:18Z"
+		},
+		{
+			"id": 1243285051,
+			"name": "Chronos-Ledger",
+			"full_name": "Life-Experimentalist/Chronos-Ledger",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Self-hosted campus schedule & attendance management PWA. 3D geofenced attendance, real-time WebSocket hub,   offline-first, bulk CSV timetable import, guest kiosk, and one-command Docker setup. FastAPI · Next.js 14 · PostgreSQL · Redis.",
+			"html_url": "https://github.com/Life-Experimentalist/Chronos-Ledger",
+			"homepage": "http://chronos.vkrishna04.me/",
+			"topics": [
+				"apache-license-2",
+				"attendance-management-system",
+				"campus-management",
+				"docker",
+				"fastapi",
+				"geofencing",
+				"github-actions",
+				"nextjs",
+				"nginx",
+				"offline-first",
+				"open-source",
+				"postgresql",
+				"pwa",
+				"python",
+				"redis",
+				"self-hosted",
+				"tailwindcss",
+				"timetable",
+				"typescript",
+				"websocket"
+			],
+			"language": "TypeScript",
+			"languages": [
+				{
+					"name": "TypeScript",
+					"percentage": "50.4"
+				},
+				{
+					"name": "Python",
+					"percentage": "42.0"
+				},
+				{
+					"name": "Shell",
+					"percentage": "3.4"
+				}
+			],
+			"stargazers_count": 1,
+			"forks_count": 0,
+			"watchers_count": 1,
+			"open_issues_count": 9,
+			"size": 3042,
+			"default_branch": "main",
+			"created_at": "2026-05-19T07:50:44Z",
+			"updated_at": "2026-09-07T18:28:43Z",
+			"pushed_at": "2026-09-07T18:28:28Z"
+		},
+		{
+			"id": 1266931074,
+			"name": "CareReach",
+			"full_name": "Life-Experimentalist/CareReach",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "AI telemedicine demo: Gemini symptom checker, Google Maps hospital finder, and appointment booking in a Streamlit app",
+			"html_url": "https://github.com/Life-Experimentalist/CareReach",
+			"homepage": "https://carereach.streamlit.app/",
+			"topics": [
+				"gemini",
+				"healthcare",
+				"python",
+				"streamlit",
+				"telemedicine"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "100.0"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 118,
+			"default_branch": "main",
+			"created_at": "2026-06-12T04:37:37Z",
+			"updated_at": "2026-09-07T18:29:04Z",
+			"pushed_at": "2026-09-07T18:27:45Z"
+		},
+		{
+			"id": 1275978379,
+			"name": "EchoSight",
+			"full_name": "Life-Experimentalist/EchoSight",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Contact-center call QA: auditable rule-based moment detection, Gemini transcript simulation, and live agent chat behind one REST API",
+			"html_url": "https://github.com/Life-Experimentalist/EchoSight",
+			"homepage": null,
+			"topics": [
+				"call-center",
+				"express",
+				"gemini",
+				"hackathon",
+				"nodejs",
+				"quality-assurance"
+			],
+			"language": "HTML",
+			"languages": [
+				{
+					"name": "HTML",
+					"percentage": "62.4"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "37.6"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 55,
+			"default_branch": "main",
+			"created_at": "2026-06-21T11:42:11Z",
+			"updated_at": "2026-09-07T18:29:01Z",
+			"pushed_at": "2026-09-07T18:28:17Z"
+		},
+		{
+			"id": 1330371973,
+			"name": "Vectra-180",
+			"full_name": "Life-Experimentalist/Vectra-180",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Dual-fisheye dashcam and stereoscopic depth engine for the Raspberry Pi Compute Module 5",
+			"html_url": "https://github.com/Life-Experimentalist/Vectra-180",
+			"homepage": "https://life-experimentalist.github.io/Vectra-180/",
+			"topics": [
+				"compute-module-5",
+				"computer-vision",
+				"dashcam",
+				"depth-map",
+				"fisheye",
+				"imu",
+				"opencv",
+				"python",
+				"raspberry-pi",
+				"stereo-vision",
+				"telemetry",
+				"video-recording"
+			],
+			"language": "Python",
+			"languages": [
+				{
+					"name": "Python",
+					"percentage": "78.9"
+				},
+				{
+					"name": "HTML",
+					"percentage": "9.3"
+				},
+				{
+					"name": "CSS",
+					"percentage": "6.0"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 1,
+			"size": 750,
+			"default_branch": "main",
+			"created_at": "2026-08-11T01:05:18Z",
+			"updated_at": "2026-09-06T11:47:57Z",
+			"pushed_at": "2026-09-06T11:47:53Z"
+		},
+		{
+			"id": 1332071214,
+			"name": "dev-prune",
+			"full_name": "Life-Experimentalist/dev-prune",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Reclaim disk space from idle Git repositories. A Rust CLI that deletes node_modules, .venv, target and vendor only after the project's own package manager proves a lockfile can rebuild them.",
+			"html_url": "https://github.com/Life-Experimentalist/dev-prune",
+			"homepage": "https://devprune.vkrishna04.me",
+			"topics": [
+				"cache",
+				"cargo",
+				"cleanup",
+				"cli",
+				"command-line-tool",
+				"cross-platform",
+				"developer-tools",
+				"devops",
+				"disk-space",
+				"golang",
+				"lockfile",
+				"monorepo",
+				"node-modules",
+				"nodejs",
+				"npm",
+				"package-manager",
+				"productivity",
+				"prune",
+				"python",
+				"rust"
+			],
+			"language": "Rust",
+			"languages": [
+				{
+					"name": "Rust",
+					"percentage": "81.3"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "9.8"
+				},
+				{
+					"name": "Shell",
+					"percentage": "2.9"
+				}
+			],
+			"stargazers_count": 7,
+			"forks_count": 0,
+			"watchers_count": 7,
+			"open_issues_count": 0,
+			"size": 29561,
+			"default_branch": "main",
+			"created_at": "2026-08-12T13:39:50Z",
+			"updated_at": "2026-09-07T06:22:20Z",
+			"pushed_at": "2026-09-06T19:13:11Z"
+		},
+		{
+			"id": 1332089868,
+			"name": "LoginLens",
+			"full_name": "Life-Experimentalist/LoginLens",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "See which account, OAuth provider, and MFA method you used on every site. Local-first: no passwords stored, no account, no backend, no telemetry.",
+			"html_url": "https://github.com/Life-Experimentalist/LoginLens",
+			"homepage": "https://loginlens.vkrishna04.me",
+			"topics": [
+				"browser-extension",
+				"chrome-extension",
+				"firefox-addon",
+				"local-first",
+				"manifest-v3",
+				"oauth",
+				"password-manager",
+				"plasmo",
+				"privacy",
+				"typescript"
+			],
+			"language": "TypeScript",
+			"languages": [
+				{
+					"name": "TypeScript",
+					"percentage": "97.9"
+				},
+				{
+					"name": "JavaScript",
+					"percentage": "1.1"
+				},
+				{
+					"name": "CSS",
+					"percentage": "0.5"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 2,
+			"size": 38046,
+			"default_branch": "main",
+			"created_at": "2026-08-12T13:58:35Z",
+			"updated_at": "2026-09-07T17:00:44Z",
+			"pushed_at": "2026-09-07T17:05:24Z"
+		},
+		{
+			"id": 1353283684,
+			"name": "portfolio-creator",
+			"full_name": "Life-Experimentalist/portfolio-creator",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Fill in a form, get a portfolio. Browser-only generator for the VKrishna04.github.io portfolio template.",
+			"html_url": "https://github.com/Life-Experimentalist/portfolio-creator",
+			"homepage": null,
+			"topics": [],
+			"language": "JavaScript",
+			"languages": [
+				{
+					"name": "JavaScript",
+					"percentage": "92.3"
+				},
+				{
+					"name": "HTML",
+					"percentage": "6.1"
+				},
+				{
+					"name": "CSS",
+					"percentage": "1.5"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 647,
+			"default_branch": "main",
+			"created_at": "2026-09-01T07:46:30Z",
+			"updated_at": "2026-09-06T13:04:12Z",
+			"pushed_at": "2026-09-06T13:04:06Z"
+		},
+		{
+			"id": 1355413000,
+			"name": "CogniGate",
+			"full_name": "Life-Experimentalist/CogniGate",
+			"owner": {
+				"login": "Life-Experimentalist"
+			},
+			"private": false,
+			"fork": false,
+			"archived": false,
+			"description": "Self-hosted, multi-tenant LLM gateway. One key, the OpenAI API, and your provider credentials never leave your deployment.",
+			"html_url": "https://github.com/Life-Experimentalist/CogniGate",
+			"homepage": "https://cognigate.vkrishna04.me",
+			"topics": [
+				"ai-agents",
+				"ai-infrastructure",
+				"api-gateway",
+				"docker",
+				"fallback",
+				"go",
+				"llm",
+				"llm-gateway",
+				"llmops",
+				"multi-tenant",
+				"openai-api",
+				"openai-compatible",
+				"postgresql",
+				"proxy",
+				"rate-limiting",
+				"self-hosted",
+				"spring-boot"
+			],
+			"language": "Go",
+			"languages": [
+				{
+					"name": "Go",
+					"percentage": "86.9"
+				},
+				{
+					"name": "Python",
+					"percentage": "6.1"
+				},
+				{
+					"name": "Java",
+					"percentage": "5.1"
+				}
+			],
+			"stargazers_count": 0,
+			"forks_count": 0,
+			"watchers_count": 0,
+			"open_issues_count": 0,
+			"size": 2648,
+			"default_branch": "main",
+			"created_at": "2026-09-03T02:01:31Z",
+			"updated_at": "2026-09-07T18:28:26Z",
+			"pushed_at": "2026-09-07T18:27:51Z"
+		}
+	]
+}
