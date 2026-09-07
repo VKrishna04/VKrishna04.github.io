@@ -1,0 +1,67 @@
+{
+	"slug": "carereach",
+	"name": "CareReach",
+	"tagline": "Telemedicine demo: symptom checks, hospital search, appointments.",
+	"summary": "An AI-powered telemedicine platform for remote healthcare consultations, built as a Streamlit app. Users chat with Gemini 1.5 Flash about their symptoms, search nearby hospitals by specialist type through the Google Maps Places API, book appointments, and review their health history, with bcrypt-hashed logins stored in SQLite.",
+	"status": "complete",
+	"category": "",
+	"icon": "SiStreamlit",
+	"featured": false,
+	"tier": "secondary",
+	"order": 999,
+	"role": "",
+	"period": {
+		"start": "2026-06-12",
+		"end": null
+	},
+	"technologies": [
+		"Python",
+		"Streamlit",
+		"Gemini API",
+		"Google Maps API",
+		"SQLite"
+	],
+	"tags": [
+		"telemedicine",
+		"healthcare",
+		"gemini",
+		"streamlit"
+	],
+	"highlights": [
+		"Symptom checker chats with Gemini 1.5 Flash, and every past conversation stays reviewable as health history.",
+		"Hospital finder searches nearby hospitals by specialist type via the Google Maps Places API.",
+		"Signup and login use bcrypt-hashed passwords stored in SQLite."
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/CareReach",
+		"live": "https://carereach.streamlit.app/",
+		"demo": "",
+		"docs": ""
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# CareReach\n\nAI-powered telemedicine platform for remote healthcare consultations.\n\n[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)\n[![Python](https://img.shields.io/badge/python-3.12%2B-blue)](https://python.org)\n[![Streamlit](https://img.shields.io/badge/Streamlit-1.40%2B-red)](https://streamlit.io)\n\n## Features\n\n| Feature | Description |\n|---|---|\n| **Symptom Checker** | Chat with Google Gemini 1.5 Flash about your symptoms and get instant analysis |\n| **Hospital Finder** | Search nearby hospitals by specialist type using Google Maps Places API |\n| **Appointment Booking** | Select a date, time, specialist, and hospital — saved to your account |\n| **Health History** | Review all past symptom conversations |\n| **Secure Auth** | Signup and login with bcrypt-hashed passwords stored in SQLite |\n\n## Setup\n\n### Prerequisites\n\n- Python 3.12+\n- [uv](https://docs.astral.sh/uv/) — `winget install astral-sh.uv` (Windows) or `curl -LsSf https://astral.sh/uv/install.sh | sh` (macOS/Linux)\n- [Google Gemini API key](https://aistudio.google.com/) — free tier available\n- [Google Maps Platform API key](https://console.cloud.google.com/) — enable the **Places API**\n\n### Install\n\n```bash\ngit clone <repo-url>\ncd CareReach\nuv sync\n```\n\n### Configure\n\nCopy `.env.example` to `.env` and fill in your API keys:\n\n```bash\ncp .env.example .env\n```\n\n```env\n# Backend secret — only the Maps key is needed here\nGOOGLE_MAPS_API_KEY=your_maps_api_key\n\n# Optional — enables appointment confirmation emails:\nSENDER_EMAIL=your_gmail@gmail.com\nSENDER_PASSWORD=your_gmail_app_password\n\n# Note: Gemini API key is NOT set here — each user enters their own in the app UI.\n```\n\n### Run\n\n```bash\nuv run streamlit run app.py\n```\n\nOpen `http://localhost:8501`.\n\n## Deploy to Streamlit Community Cloud\n\n1. Push this repo to GitHub\n2. Go to [share.streamlit.io](https://share.streamlit.io) and connect your repo\n3. Set **Main file path** to `app.py`\n4. Under **Advanced settings → Secrets**, add:\n\n```toml\nGOOGLE_MAPS_API_KEY = \"your_maps_api_key\"\n```\n\n5. Click **Deploy** — done.\n\n## Project Structure\n\n```\n.\n├── app.py                  # Streamlit entrypoint — routing and sidebar\n├── src/\n│   ├── auth.py             # Login and signup UI\n│   ├── db.py               # SQLite helpers (users, history, appointments)\n│   ├── hospital.py         # Google Maps hospital search + optional email\n│   └── pages/\n│       ├── chatbot.py      # Gemini 1.5 Flash symptom checker\n│       ├── appointment.py  # Hospital finder and booking\n│       └── history.py      # Health history viewer\n├── .streamlit/\n│   └── config.toml         # Dark theme, monospace font\n├── .env.example            # Secrets template — copy to .env\n├── pyproject.toml          # uv project config and dependencies\n└── uv.lock                 # Locked dependency tree\n```\n\n## Secrets Reference\n\n### Backend secrets (set by you — in `.env` locally, in Streamlit Cloud app secrets for deployment)\n\n| Key | Required | Where to get it |\n|---|---|---|\n| `GOOGLE_MAPS_API_KEY` | Yes | [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Enable Places API → Credentials |\n| `SENDER_EMAIL` | No | Your Gmail address |\n| `SENDER_PASSWORD` | No | [Gmail App Password](https://myaccount.google.com/apppasswords) — requires 2FA enabled |\n\n> **Note on email:** If `SENDER_EMAIL` / `SENDER_PASSWORD` are not set, appointments are still saved to the database — the confirmation email is simply skipped.\n\n### User-provided (entered in the app UI — never stored on the server)\n\n| Key | Required | Where to get it |\n|---|---|---|\n| Gemini API Key | Yes, per user | [Google AI Studio](https://aistudio.google.com/) → Get API key (free tier available) |\n\nEach user enters their own Gemini API key via the **⚙️ AI Settings** panel in the sidebar after logging in. The app fetches their available models dynamically and lets them choose which one to use. The key lives only in their browser session and is never persisted.\n\n## Tech Stack\n\n- **UI:** [Streamlit](https://streamlit.io/) 1.58+\n- **AI:** Google Gemini 1.5 Flash via `google-generativeai`\n- **Maps:** Google Maps Places API via `googlemaps` + `geopy`\n- **Database:** SQLite (local file `users.db`)\n- **Auth:** `bcrypt` password hashing\n- **Package manager:** [uv](https://docs.astral.sh/uv/)\n\n## License\n\nApache 2.0 — see [LICENSE](LICENSE).\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/CareReach/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/CareReach/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/CareReach/blob/HEAD/README.md"
+	},
+	"appearance": null,
+	"seo": null,
+	"stats": null,
+	"source": "discovered",
+	"repo": "Life-Experimentalist/CareReach",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/CareReach/HEAD/.portfolio/project.json",
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-07T18:31:02.192Z"
+}

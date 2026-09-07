@@ -238,17 +238,30 @@ const Projects = () => {
 	// build-time index (rather than guessing) means a card only ever links to a
 	// page that actually exists, and repo-chosen custom slugs are honoured.
 	const [detailSlugs, setDetailSlugs] = useState({})
+	// Curation for repos settings.json never mentions: their manifest's
+	// tier/order/featured land in the index, and this maps them back onto the
+	// GitHub-only cards, which otherwise all sit at secondary/999.
+	const [manifestCuration, setManifestCuration] = useState({})
 	useEffect(() => {
 		fetch("/data/projects/index.json")
 			.then((res) => (res.ok ? res.json() : null))
 			.then((data) => {
 				if (!data?.projects) return
 				const map = {}
+				const curation = {}
 				for (const p of data.projects) {
 					if (p.repo) map[p.repo.toLowerCase()] = p.slug
 					map[p.slug] = p.slug
+					if (p.source === "discovered" && p.repo) {
+						curation[p.repo.toLowerCase()] = {
+							tier: p.tier,
+							order: p.order,
+							featured: p.featured,
+						}
+					}
 				}
 				setDetailSlugs(map)
+				setManifestCuration(curation)
 			})
 			.catch(() => {
 				/* no detail links is a fine degradation */
@@ -666,7 +679,14 @@ const Projects = () => {
 
 	// Filter and sort repositories
 	const filteredRepos = useMemo(() => {
-		let filtered = projectsData.filter((project) => {
+		const curated = projectsData.map((project) => {
+			// Only pure GitHub cards take manifest curation; anything touched by
+			// settings.json already carries the curated values.
+			if (project.isStatic || project.isMerged) return project
+			const meta = manifestCuration[(project.full_name || "").toLowerCase()]
+			return meta ? { ...project, ...meta } : project
+		})
+		let filtered = curated.filter((project) => {
 			// Search filter
 			const matchesSearch =
 				project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -718,7 +738,7 @@ const Projects = () => {
 		})
 
 		return filtered
-	}, [projectsData, searchTerm, selectedLanguages, sortBy])
+	}, [projectsData, manifestCuration, searchTerm, selectedLanguages, sortBy])
 
 	// Headings only tell the truth under the curated sort: ordering by name or
 	// date interleaves the tiers, so those fall back to one flat grid.

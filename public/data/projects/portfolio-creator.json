@@ -1,0 +1,91 @@
+{
+	"slug": "portfolio-creator",
+	"name": "portfolio-creator",
+	"tagline": "Fill in a form, get a portfolio.",
+	"summary": "A guided form that writes the one file a portfolio is configured by. It runs entirely in the browser with no backend and no account, validates every answer against the portfolio's own JSON Schema, and can create the repository and turn on Pages at the end.",
+	"status": "maintained",
+	"category": "Web",
+	"icon": "SiReact",
+	"featured": false,
+	"tier": "secondary",
+	"order": 999,
+	"role": "",
+	"period": {
+		"start": "2026-09-01",
+		"end": null
+	},
+	"technologies": [
+		"React",
+		"Vite",
+		"Tailwind CSS",
+		"Ajv",
+		"JSON Schema",
+		"GitHub API"
+	],
+	"tags": [
+		"portfolio",
+		"json-schema",
+		"static-site",
+		"offline-first",
+		"no-backend"
+	],
+	"highlights": [
+		"Validates against the same split JSON Schema the portfolio builds from, so a file this form accepts is a file the portfolio will build.",
+		"Works with the network gone, reloads included — a service worker precaches the app, and only publishing needs a connection.",
+		"Three ways out: download the file, paste a scoped token and let it create the repository and enable Pages, or take the file to another host.",
+		"No hardcoded identity anywhere. The blank starter is derived from a real portfolio with the owner stripped, and the derivation fails if one trace survives."
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/portfolio-creator",
+		"live": "https://life-experimentalist.github.io/portfolio-creator/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/portfolio-creator/blob/main/docs/hosting.md"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [
+			{
+				"url": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/main/docs/screenshots/01-start.png",
+				"alt": "The form, with the questions in the middle and the remaining problems on the right",
+				"caption": "The questions in the middle, the schema's opinion of the answers on the right."
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/main/docs/screenshots/02-github.png",
+				"alt": "The GitHub section of the form",
+				"caption": "Every question is one key in settings.json."
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/main/docs/screenshots/03-seo.png",
+				"alt": "The SEO and AI section of the form",
+				"caption": "Three switches decide who may read the site: search engines, AI training crawlers, and the machine-readable copies."
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/main/docs/screenshots/04-publish.png",
+				"alt": "The publish step",
+				"caption": "Download it, let a token do it, or take the file somewhere else entirely."
+			}
+		],
+		"layout": "carousel",
+		"video": null
+	},
+	"sections": [],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# Portfolio Creator\n\nFill in a form, get a portfolio.\n\n**→ [Open the app](https://life-experimentalist.github.io/portfolio-creator/)**\n\nThis is a guided form that writes one file — `settings.json` — and that file is\nthe entire portfolio. Everything else is already built: pages, routing, dark\nmode, animations, an SEO head, a sitemap, and a project list that reads itself\nout of your GitHub account so the site keeps up with your work without you\ntouching it again.\n\nIt runs entirely in your browser. There is no backend, no account, and no\ndatabase. The only network calls it makes are to `api.github.com`, and only\nwhen you ask for them.\n\nWhich also means it works offline. Open it once and it keeps working with the\nnetwork gone, reloads included — the only thing that needs a connection is\npublishing, at the end.\n\n![The form, with the questions in the middle and everything still to fix on the right](docs/screenshots/01-start.png)\n\n<details>\n<summary>More of it</summary>\n\n**Answering a section.** Every question is one key in `settings.json`; the panel\non the right is the schema's opinion of your answers, updating as you type.\n\n![The GitHub section](docs/screenshots/02-github.png)\n\n**SEO and AI.** Three switches decide who may read the site: search engines, AI\ntraining crawlers, and the machine-readable copies of your data.\n\n![The SEO and AI section](docs/screenshots/03-seo.png)\n\n**Publishing.** Download it, let a token do it, or take the file somewhere else\nentirely.\n\n![The publish step](docs/screenshots/04-publish.png)\n\n</details>\n\n---\n\n## Why a form and not a template to edit\n\nA template you edit by hand goes stale. You change a colour, the upstream adds\na page, and now merging is a chore you will not do — so you do not, and the\nsite quietly rots.\n\nHere your answers live in one file that nothing else touches. Pulling in new\npages, new sections and new schema fields is a merge of the template rather\nthan a rewrite of your site. Come back to this form later and it will show you\nthe new questions.\n\nThe form is checked against the **same JSON Schema the portfolio itself uses**,\nsplit across `public/schemas/settings/`. There is no second set of rules to\ndrift out of sync: if this page accepts your answers, the portfolio will build.\n\nThose files are a copy, so keeping them a *faithful* copy is a command rather\nthan a habit — see [syncing the schema](#syncing-the-schema).\n\n---\n\n## What you get\n\n- **Projects that update themselves.** The portfolio reads your public\n  repositories at build time. Push something new and it appears.\n- **A résumé an AI can read.** The build publishes `llms.txt`, `humans.txt` and\n  `/api/portfolio.json`, `/api/projects.json`, `/api/about.json`,\n  `/api/contact.json`. Hand someone your URL, ask a model to write your résumé\n  from it, and there is something real for it to read — not scraped HTML.\n- **Crawling you control.** Three switches: search engines, AI training\n  crawlers, and the machine-readable data above. Off means off, written into\n  `robots.txt`.\n- **A copy-this-page button**, so a visitor can take your whole portfolio as\n  Markdown in one click.\n- **No hardcoded anybody.** Every piece of identity on the site comes from\n  `settings.json`. The starter this form begins from is derived from a real\n  portfolio with the owner stripped out — and the derivation script *fails* if\n  a single trace survives.\n\n---\n\n## Three ways to publish\n\n1. **Download and do it yourself.** Fork the template, drop `settings.json`\n   into `public/`, push. No token, works everywhere.\n2. **Let it publish for you.** Paste a fine-grained personal access token; it\n   creates the repository, commits your settings and turns on Pages. The token\n   lives in the page for as long as the tab is open — never stored, never\n   logged, never sent anywhere but `api.github.com`.\n3. **Somewhere other than GitHub.** See **[docs/hosting.md](docs/hosting.md)**\n   for GitHub Pages, Cloudflare Pages, Cloudflare Workers, Netlify, Vercel and\n   Render, with the trade-offs that actually matter.\n\n### Why there is no \"Sign in with GitHub\" button\n\nA browser-only OAuth flow cannot complete against github.com — the token\nendpoint sends no CORS headers, and no amount of client-side code gets around\nthat. The honest options are a token you paste, or a small server doing the\nexchange. A Cloudflare Worker is about thirty lines and is written up in the\nhosting doc; until that exists, a scoped token you revoke afterwards is\nstrictly safer than a long-lived OAuth grant anyway.\n\n---\n\n## Running it locally\n\n```bash\nnpm install\nnpm run dev\n```\n\n| Script | What it does |\n|---|---|\n| `npm run dev` | Vite dev server |\n| `npm run build` | Builds to `dist/`, then writes `robots.txt`, `sitemap.xml`, `humans.txt`, the web app manifest and the service worker |\n| `npm run preview` | Serves the built output |\n| `npm run lint` | ESLint |\n| `npm run sync:schema` | Copies the portfolio's JSON Schema into `public/` |\n| `npm run derive:starter` | Regenerates `src/data/starter.json` from a real `settings.json` |\n\nTwo environment variables matter at build time: `BASE_PATH` (for a project-page\nsubpath, e.g. `/portfolio-creator/`) and `SITE_URL` (what the sitemap\nadvertises). The Pages workflow sets both.\n\n---\n\n## How it is put together\n\n```\nsrc/data/steps.js       the form, as data: steps → fields → dotted paths\nsrc/data/starter.json   a blank, schema-valid settings.json (generated)\nsrc/lib/schema.js       Ajv over the portfolio's own split schema\nsrc/lib/settings.js     get/set by dotted path, export formats\nsrc/lib/github.js       api.github.com, client-side only\nsrc/lib/derive.js       fields worked out rather than asked about twice\nsrc/components/         generic renderers — nothing knows what a field means\nscripts/sync-schema.js     copies the portfolio's schema into public/\nscripts/derive-starter.js  regenerates the starter from a real settings.json\nscripts/generate-seo.js    post-build crawlable files and the web app manifest\nscripts/generate-sw.js     post-build service worker, from sw-template.js\n```\n\nAdding a question to the form is adding an entry to `steps.js`. The renderers\nare generic and the schema is the validator, so there is nothing else to\nchange.\n\n### Syncing the schema\n\n```bash\nnpm run sync:schema            # assumes ../VKrishna04.github.io\nnpm run sync:schema -- <path>  # or point it at the checkout\n```\n\nThe schema lives in the portfolio; this repository holds a copy so the form can\nvalidate offline. Copying it across by hand is how three drifts got in — a\nmissing `navigation.schema.json`, a technology-name pattern that rejected\n`C++`, and a projects section without `tier`, `order` or `packages`. Each made\nthis form disagree with the portfolio about a file the portfolio would happily\nbuild. Run this whenever the schema upstream moves, then regenerate the starter\nand commit both.\n\n### Regenerating the starter\n\n```bash\nnpm run derive:starter\n```\n\nIt keeps the structure and every styling default, empties what carries a\nperson, **deletes** keys that cannot legally be blank (rather than inventing a\nplaceholder), and then sweeps the result for any trace of the source\nportfolio's owner. It exits non-zero if it finds one, or if a remaining gap is\nnot a question the form actually asks.\n\n### Regenerating the share card\n\n`public/og.png` is the 1200×630 card that appears when the link is pasted into\nSlack, Discord or X. Its source is `scripts/og.html` — edit the words there and\nscreenshot it at exactly 1200×630. The screenshots above are the app itself at\n1440×900, taken with a headless browser; nothing about either is load-bearing,\nso a stale one costs you nothing but a slightly old picture.\n\n---\n\n## Credits\n\nDesigned & built by **[Krishna GSVV](https://github.com/VKrishna04)**.\n\nBuilt on the [portfolio template](https://github.com/VKrishna04/VKrishna04.github.io)\n— [see one live](https://vkrishna04.me).\n\nLicensed under Apache 2.0. Attribution is required by the template's `NOTICE`\nunder Apache License 2.0 section 4(d): keep the credit, and the rest is yours\nto change.\n\nSister projects worth switching on:\n[CodeLedger](https://github.com/Life-Experimentalist/CodeLedger) for DSA\npractice statistics, and [CounterAPI](https://counterapi.dev) for a visitor\ncount that does not track anyone.\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/portfolio-creator/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/portfolio-creator/blob/HEAD/README.md"
+	},
+	"appearance": null,
+	"seo": null,
+	"stats": null,
+	"source": "discovered",
+	"repo": "Life-Experimentalist/portfolio-creator",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/portfolio-creator/HEAD/.portfolio/project.json",
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-07T18:21:03.487Z"
+}

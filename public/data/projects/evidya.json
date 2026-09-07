@@ -1,0 +1,70 @@
+{
+	"slug": "evidya",
+	"name": "eVidya",
+	"tagline": "A JSON-defined learning platform that runs entirely in the browser.",
+	"summary": "An interactive tech learning platform with course content, YouTube video lessons, quizzes and progress tracking, built in vanilla JavaScript with no server and no database: courses are static data definitions and progress lives in localStorage. Adding a course means writing data, not code, and that JSON-first approach later shaped this portfolio's own settings-driven design.",
+	"status": "complete",
+	"category": "Full Stack",
+	"icon": "FaGraduationCap",
+	"featured": false,
+	"tier": "secondary",
+	"order": 1,
+	"role": "",
+	"period": {
+		"start": "2024-06-01",
+		"end": null
+	},
+	"technologies": [
+		"JavaScript",
+		"Bootstrap",
+		"YouTube IFrame API"
+	],
+	"tags": [
+		"education",
+		"learning-platform",
+		"client-side",
+		"json"
+	],
+	"highlights": [
+		"Runs with no server and no database: course data is static files, progress is localStorage.",
+		"Courses, videos and quizzes are all defined as data, so new content needs no code changes.",
+		"Tracks progress across courses and resumes where the learner left off."
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/eVidya",
+		"live": "http://evidya.vkrishna04.me/",
+		"demo": "",
+		"docs": "https://github.com/Life-Experimentalist/eVidya#readme"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": {
+		"path": "README.md",
+		"heading": "From the README",
+		"collapsed": false,
+		"markdown": "# eVidya Learning Platform\n\nA client-side web application for interactive tech learning with course content, progress tracking, and video-based education.\n\n## Project Overview\n\neVidya is a browser-based learning platform that allows users to:\n- View and select from a variety of tech courses\n- Watch course videos embedded from YouTube\n- Take quizzes to test knowledge\n- Track learning progress locally\n- Resume courses where they left off\n\n## Key Features\n\n- **Course Library**: A collection of technology courses organized by topic\n- **Video Lessons**: Embedded YouTube videos with tracking\n- **Progress Tracking**: Client-side storage of user progress across courses\n- **Interactive Quizzes**: Knowledge assessment with feedback\n- **Responsive Design**: Works on desktop and mobile devices\n\n## Technical Details\n\nThis application is built with vanilla JavaScript, HTML, and CSS with the following technical characteristics:\n\n- **No Server Required**: All data is stored in the browser's localStorage\n- **No Database**: Course data is defined in static JS files\n- **YouTube Integration**: Videos are embedded from YouTube using the iframe API\n- **Bootstrap UI**: UI components are built with Bootstrap 5\n- **Modular Design**: Code is organized into modular components\n\n## Project Structure\n\n```\neVidya/\n├── css/                  # Stylesheets\n├── data/                 # Data files\n│   └── course-data.js    # Course content definitions\n├── images/               # Image assets\n├── js/                   # JavaScript modules\n│   ├── progress-tracker.js  # Progress tracking\n│   ├── course-navigation.js # Course navigation\n│   └── home.js           # Homepage functionality\n├── .github/              # GitHub related files\n├── index.html            # Homepage\n├── courses.html          # Course listing page\n├── course-details.html   # Individual course page\n└── ARCHITECTURE.md       # Technical architecture documentation\n```\n\n## Local Development\n\nTo work on this project locally:\n\n1. Clone the repository\n2. Open the project in your preferred editor\n3. Use a local development server to view the site\n   - You can use extensions like Live Server for VS Code\n   - Or run `npx http-server` from the project root\n\n## Recent Changes\n\n- Removed automatic YouTube video duration scraping\n- Consolidated course data in the data directory\n- Created comprehensive architecture documentation\n- Simplified the client-side code for better maintainability\n",
+		"truncated": false,
+		"imageBase": "https://raw.githubusercontent.com/Life-Experimentalist/eVidya/HEAD/",
+		"linkBase": "https://github.com/Life-Experimentalist/eVidya/blob/HEAD/",
+		"sourceUrl": "https://github.com/Life-Experimentalist/eVidya/blob/HEAD/README.md"
+	},
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "manifest",
+	"repo": "Life-Experimentalist/eVidya",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/eVidya/HEAD/.portfolio/project.json",
+	"manifestVersion": 2,
+	"generatedAt": "2026-09-07T18:30:52.291Z"
+}

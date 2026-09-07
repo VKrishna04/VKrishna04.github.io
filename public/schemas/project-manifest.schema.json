@@ -37,6 +37,19 @@
 			"enum": ["active", "maintained", "archived", "experimental", "complete"]
 		},
 		"category": { "type": "string", "maxLength": 60 },
+		"tier": {
+			"type": "string",
+			"enum": ["featured", "secondary", "hidden"],
+			"description": "Where the card sits on the Projects grid. Honoured in full for repos discovered outside settings.json; a settings.json entry that sets its own tier always wins. \"hidden\" opts the repo out of a generated page."
+		},
+		"order": {
+			"type": "number",
+			"description": "Position within the tier, lower first. Same precedence as tier."
+		},
+		"featured": {
+			"type": "boolean",
+			"description": "Marks the project featured. Same precedence as tier."
+		},
 		"icon": {
 			"type": "string",
 			"pattern": "^[A-Z][A-Za-z0-9]{1,39}$",

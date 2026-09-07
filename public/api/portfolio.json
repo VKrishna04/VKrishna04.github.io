@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T16:57:32.060Z",
+  "generatedAt": "2026-09-07T18:32:57.591Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
@@ -131,6 +131,20 @@
       "liveUrl": "http://ranobe.vkrishna04.me/"
     },
     {
+      "name": "Youtube-Keystrokes-Blocker",
+      "description": "A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.",
+      "technologies": [
+        "JavaScript",
+        "Userscript",
+        "Browser-API"
+      ],
+      "category": "Browser Extension",
+      "status": "Active Development",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
+      "liveUrl": "http://yt-hotkeys.vkrishna04.me/"
+    },
+    {
       "name": "ToxicGuard_AI",
       "description": "ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.",
       "technologies": [
@@ -177,6 +191,21 @@
       "liveUrl": "http://save-sync.vkrishna04.me/"
     },
     {
+      "name": "Eldritchify",
+      "description": "Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!",
+      "technologies": [
+        "HTML",
+        "JavaScript",
+        "CSS",
+        "Unicode"
+      ],
+      "category": "Web Tool",
+      "status": "Live",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/Eldritchify",
+      "liveUrl": "https://eldritchify.vkrishna04.me/"
+    },
+    {
       "name": "ViewFlare",
       "description": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
       "technologies": [
@@ -207,6 +236,21 @@
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/the-pensive-index",
       "liveUrl": "https://pensive.vkrishna04.me"
+    },
+    {
+      "name": "eVidya",
+      "description": "eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.",
+      "technologies": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "REST-API"
+      ],
+      "category": "Full Stack",
+      "status": "Live",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/eVidya",
+      "liveUrl": "http://evidya.vkrishna04.me/"
     },
     {
       "name": "cspell-sync",
@@ -428,6 +472,54 @@
       "status": "Active Development",
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/Vectra-180",
+      "liveUrl": null
+    },
+    {
+      "name": "portfolio-creator",
+      "description": "A guided form that writes the one file a portfolio is configured by. It runs entirely in the browser with no backend and no account, validates every answer against the portfolio's own JSON Schema, and can create the repository and turn on Pages at the end.",
+      "technologies": [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Ajv",
+        "JSON Schema",
+        "GitHub API"
+      ],
+      "category": "Web",
+      "status": "maintained",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/portfolio-creator",
+      "liveUrl": null
+    },
+    {
+      "name": "CareReach",
+      "description": "An AI-powered telemedicine platform for remote healthcare consultations, built as a Streamlit app. Users chat with Gemini 1.5 Flash about their symptoms, search nearby hospitals by specialist type through the Google Maps Places API, book appointments, and review their health history, with bcrypt-hashed logins stored in SQLite.",
+      "technologies": [
+        "Python",
+        "Streamlit",
+        "Gemini API",
+        "Google Maps API",
+        "SQLite"
+      ],
+      "category": "",
+      "status": "complete",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/CareReach",
+      "liveUrl": null
+    },
+    {
+      "name": "EchoSight",
+      "description": "A contact-center call quality review tool that turns a raw transcript into an annotated coaching report in a single API call. Deterministic, rule-based moment detection keeps every flag auditable, Gemini powers transcript simulation and a live interactive agent chat, and the in-memory store sits behind a small adapter so it can swap to any database without touching business logic. Built for a hackathon and complete as delivered.",
+      "technologies": [
+        "Node.js",
+        "Express",
+        "Gemini API",
+        "Server-Sent Events"
+      ],
+      "category": "",
+      "status": "complete",
+      "featured": false,
+      "githubUrl": "https://github.com/Life-Experimentalist/EchoSight",
       "liveUrl": null
     }
   ],

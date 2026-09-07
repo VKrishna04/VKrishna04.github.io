@@ -97,7 +97,19 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
+		<loc>https://vkrishna04.me/projects/evidya</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
 		<loc>https://vkrishna04.me/projects/cspell-sync</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/eldritchify</loc>
 		<lastmod>2026-09-07</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
@@ -116,6 +128,12 @@
 	</url>
 	<url>
 		<loc>https://vkrishna04.me/projects/the-pensive-index</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/youtube-keystrokes-blocker</loc>
 		<lastmod>2026-09-07</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
@@ -155,5 +173,23 @@
 		<lastmod>2026-09-07</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/portfolio-creator</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/carereach</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://vkrishna04.me/projects/echosight</loc>
+		<lastmod>2026-09-07</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>
 </urlset>

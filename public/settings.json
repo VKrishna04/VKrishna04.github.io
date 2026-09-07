@@ -898,7 +898,7 @@
         "category": "Browser Extension",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": false,
+        "showInProjects": true,
         "status": "Active Development",
         "startDate": "2025-09-01",
         "endDate": null,
@@ -932,7 +932,7 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
         },
-        "tier": "hidden",
+        "tier": "secondary",
         "order": 7
       },
       {
@@ -1119,7 +1119,7 @@
         "category": "Web Tool",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": false,
+        "showInProjects": true,
         "status": "Live",
         "startDate": "2025-09-01",
         "endDate": null,
@@ -1159,7 +1159,7 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/Eldritchify/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/Eldritchify/issues"
         },
-        "tier": "hidden",
+        "tier": "secondary",
         "order": 3
       },
       {
@@ -1285,7 +1285,7 @@
         "category": "Full Stack",
         "featured": false,
         "showInAbout": false,
-        "showInProjects": false,
+        "showInProjects": true,
         "status": "Live",
         "startDate": "2024-06-01",
         "endDate": null,
@@ -1321,7 +1321,7 @@
           "watchersUrl": "https://github.com/Life-Experimentalist/eVidya/watchers",
           "issuesUrl": "https://github.com/Life-Experimentalist/eVidya/issues"
         },
-        "tier": "hidden",
+        "tier": "secondary",
         "order": 1
       },
       {

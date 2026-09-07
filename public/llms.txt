@@ -20,17 +20,17 @@ Jul 2026 - Dec 2026, Jubilee Hills, Hyderabad
 Amrita Vishwa Vidyapeetham — 2022 - 2026
 GPA: 8.63/10
 
-## Projects (20 total)
+## Projects (26 total)
 - **RanobeGemini**: Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.
+- **Youtube-Keystrokes-Blocker**: A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.
 - **ToxicGuard_AI**: ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.
 - **EquiLens**: AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.
 - **Save-Sync**: VS Code Extension to save your project at working save points.
+- **Eldritchify**: Eldritchify is a cosmic horror-themed Zalgo text generator that corrupts and purifies text using Unicode combining characters. Invoke the whispers of Azathoth, channel the chaos of Nyarlathotep, or cleanse your text from the madness with this Lovecraftian-inspired web tool!
 - **ViewFlare**: Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.
 - **the-pensive-index**: Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.
+- **eVidya**: eVidya: Interactive tech learning platform with progress tracking, video lessons, quizzes, and responsive design for self-paced education in programming languages and web development.
 - **cspell-sync**: cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.
-- **Facial-Emotion-Detector**: Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.
-- **ActionsCounter**: An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by ViewFlare.
-- **SignLanguageDetector**: Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.
 
 ## Links
 - Portfolio: https://vkrishna04.me

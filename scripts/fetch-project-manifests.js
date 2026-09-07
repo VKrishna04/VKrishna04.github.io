@@ -141,8 +141,8 @@ function baseFromSettings(sp) {
 		category: sp.category || "",
 		icon: normalizeIcon(sp.icon),
 		featured: !!sp.featured,
-		// Curation lives in settings.json, not in the repo's own manifest — a
-		// project cannot promote itself onto the front of the portfolio.
+		// Settings-level curation outranks the repo's own manifest: merge() only
+		// lets a manifest place itself where settings stayed silent.
 		tier: sp.tier || "secondary",
 		order: typeof sp.order === "number" ? sp.order : 999,
 		role: "",
@@ -176,9 +176,16 @@ function baseFromSettings(sp) {
 	}
 }
 
+const TIERS = new Set(["featured", "secondary", "hidden"])
+
 // Manifest wins field by field, but only where it actually said something — a
 // repo that ships a partial manifest keeps the settings-derived rest.
-function merge(base, manifest) {
+//
+// Curation (tier/order/featured) is different: settings.json outranks the
+// manifest, but only where it actually spoke. `allowCuration` marks which of
+// the three settings left unset, and only those may come from the manifest —
+// so a repo can place itself, but never past an explicit settings decision.
+function merge(base, manifest, allowCuration = {}) {
 	if (!manifest || typeof manifest !== "object") return base
 	const pick = (a, b) =>
 		b === undefined || b === null || b === "" || (Array.isArray(b) && !b.length)
@@ -187,6 +194,16 @@ function merge(base, manifest) {
 
 	return {
 		...base,
+		tier:
+			allowCuration.tier && TIERS.has(manifest.tier) ? manifest.tier : base.tier,
+		order:
+			allowCuration.order && typeof manifest.order === "number"
+				? manifest.order
+				: base.order,
+		featured:
+			allowCuration.featured && typeof manifest.featured === "boolean"
+				? manifest.featured
+				: base.featured,
 		slug: manifest.slug ? slugify(manifest.slug) : base.slug,
 		name: pick(base.name, manifest.name),
 		tagline: pick(base.tagline, manifest.tagline),
@@ -288,6 +305,66 @@ function readLocalManifest(file, name) {
 	}
 }
 
+// A discovered repo starts from what GitHub already publishes about it. The
+// manifest then fills the rest; without one the repo stays card-only.
+function baseFromRepo(r) {
+	return {
+		slug: slugify(r.name),
+		name: r.name,
+		tagline: "",
+		summary: r.description || "",
+		status: "",
+		category: "",
+		icon: "",
+		featured: false,
+		tier: "secondary",
+		order: 999,
+		role: "",
+		period: { start: r.created_at ? r.created_at.slice(0, 10) : null, end: null },
+		technologies: [],
+		tags: r.topics || [],
+		highlights: [],
+		metrics: metricsFor(r.name),
+		links: {
+			repo: r.html_url || `https://github.com/${r.full_name}`,
+			live: r.homepage || "",
+			demo: "",
+			docs: "",
+		},
+		media: { cover: "", screenshots: [], layout: "auto", video: null },
+		sections: [],
+		readme: null,
+		appearance: null,
+		seo: null,
+		stats: null,
+		source: "discovered",
+		repo: r.full_name,
+		manifestUrl: `https://raw.githubusercontent.com/${r.full_name}/HEAD/${MANIFEST_PATH}`,
+	}
+}
+
+// The same account the Projects grid pulls its cards from. Paginated because
+// the org is past 30 repos; capped at 300 because it is nowhere near that.
+async function listAccountRepos(github) {
+	const owner = github?.username
+	if (!owner) return []
+	const kind = github?.type === "org" ? "orgs" : "users"
+	const headers = { Accept: "application/vnd.github+json" }
+	if (token) headers.Authorization = `Bearer ${token}`
+	const repos = []
+	for (let page = 1; page <= 3; page++) {
+		const res = await fetch(
+			`https://api.github.com/${kind}/${owner}/repos?per_page=100&page=${page}`,
+			{ signal: AbortSignal.timeout(TIMEOUT_MS), headers }
+		)
+		if (!res.ok) throw new Error(`HTTP ${res.status}`)
+		const batch = await res.json()
+		repos.push(...batch)
+		if (batch.length < 100) break
+	}
+	return repos
+}
+
 async function fetchManifest(repo) {
 	const res = await fetchRepoFile(repo, MANIFEST_PATH, "application/json")
 	if (res.status === 404) return null // repo simply has not opted in yet
@@ -377,6 +454,26 @@ function writeIfChanged(file, payload) {
 	return true
 }
 
+function indexEntry(project) {
+	return {
+		slug: project.slug,
+		name: project.name,
+		tagline: project.tagline,
+		summary: project.summary,
+		status: project.status,
+		category: project.category,
+		icon: project.icon || "",
+		featured: project.featured,
+		tier: project.tier,
+		order: project.order,
+		technologies: (project.technologies || []).slice(0, 8),
+		cover: project.media?.cover || "",
+		repo: project.repo,
+		source: project.source,
+		depth: depthScore(project),
+	}
+}
+
 async function main() {
 	const settings = JSON.parse(
 		fs.readFileSync(path.join(ROOT, "public", "settings.json"), "utf8")
@@ -411,7 +508,11 @@ async function main() {
 						: await fetchManifest(base.repo)) ||
 					vendoredManifest(base.repo, sp.name)
 				if (manifest) {
-					project = merge(base, manifest)
+					project = merge(base, manifest, {
+						tier: !sp.tier,
+						order: typeof sp.order !== "number",
+						featured: sp.featured === undefined,
+					})
 					withManifest++
 				}
 			} catch (e) {
@@ -443,23 +544,97 @@ async function main() {
 		project.generatedAt = new Date().toISOString()
 		writeIfChanged(path.join(OUT_DIR, `${project.slug}.json`), project)
 
-		index.push({
-			slug: project.slug,
-			name: project.name,
-			tagline: project.tagline,
-			summary: project.summary,
-			status: project.status,
-			category: project.category,
-			icon: project.icon || "",
-			featured: project.featured,
-			tier: project.tier,
-			order: project.order,
-			technologies: (project.technologies || []).slice(0, 8),
-			cover: project.media?.cover || "",
-			repo: project.repo,
-			source: project.source,
-			depth: depthScore(project),
-		})
+		index.push(indexEntry(project))
+	}
+
+	// Discovery pass: every public, non-fork, non-ignored repo of the account
+	// that settings.json does not already cover (hidden entries included — a
+	// manifest must not resurrect a deliberately hidden project) gets a page IF
+	// it ships .portfolio/project.json. No manifest keeps it card-only, exactly
+	// as before. Because there is no settings entry, the manifest's own
+	// tier/order/featured are honoured in full.
+	const allStatic = settings.projects?.staticProjects || []
+	const covered = new Set()
+	for (const sp of allStatic) {
+		const r = parseRepo(sp.githubUrl)
+		if (r) covered.add(`${r.owner}/${r.repo}`.toLowerCase())
+		if (sp.name) covered.add(slugify(sp.name))
+	}
+	const ignored = new Set(
+		(settings.projects?.ignore || []).map((n) => String(n).toLowerCase())
+	)
+	let discovered = 0
+	try {
+		const repos = await listAccountRepos(settings.github)
+		for (const r of repos) {
+			if (
+				r.fork ||
+				r.private ||
+				ignored.has(r.name.toLowerCase()) ||
+				covered.has(r.full_name.toLowerCase()) ||
+				covered.has(slugify(r.name))
+			) {
+				continue
+			}
+			const base = baseFromRepo(r)
+			if (!base.slug || index.some((p) => p.slug === base.slug)) continue
+			let project
+			try {
+				const local = localManifestFor(base.repo)
+				const manifest =
+					(local
+						? readLocalManifest(local, r.name)
+						: await fetchManifest(base.repo)) ||
+					vendoredManifest(base.repo, r.name)
+				if (!manifest) continue
+				project = merge(base, manifest, {
+					tier: true,
+					order: true,
+					featured: true,
+				})
+				project.source = "discovered"
+			} catch (e) {
+				console.warn(`⚠️ ${base.repo}: manifest fetch failed (${e.message})`)
+				const prev = path.join(OUT_DIR, `${base.slug}.json`)
+				if (!fs.existsSync(prev)) continue
+				try {
+					project = JSON.parse(fs.readFileSync(prev, "utf8"))
+				} catch {
+					continue
+				}
+			}
+			// A repo may declare itself hidden; honour it by simply not paging it.
+			if (project.tier === "hidden") continue
+			if (project.readme && !project.readme.markdown && project.repo) {
+				project.readme = await fetchReadme(project.repo, project.readme)
+				if (project.readme) withReadme++
+			}
+			project.generatedAt = new Date().toISOString()
+			writeIfChanged(path.join(OUT_DIR, `${project.slug}.json`), project)
+			index.push(indexEntry(project))
+			discovered++
+		}
+	} catch (e) {
+		// The repo listing itself failed. Re-seat previously discovered pages
+		// from the last committed index so a network blip cannot unpublish them.
+		console.warn(`⚠️ Repo discovery failed (${e.message}) — keeping last run`)
+		try {
+			const prev = JSON.parse(
+				fs.readFileSync(path.join(OUT_DIR, "index.json"), "utf8")
+			)
+			for (const p of prev.projects || []) {
+				if (
+					!index.some((q) => q.slug === p.slug) &&
+					!covered.has((p.repo || "").toLowerCase()) &&
+					fs.existsSync(path.join(OUT_DIR, `${p.slug}.json`))
+				) {
+					index.push(p)
+					discovered++
+				}
+			}
+		} catch {
+			/* no previous index — nothing to keep */
+		}
 	}
 
 	// Curated order first: tier, then the explicit position inside it. Depth
@@ -479,9 +654,9 @@ async function main() {
 		projects: index,
 	})
 
-	const settingsOnly = index.length - withManifest - kept
+	const settingsOnly = index.length - withManifest - kept - discovered
 	console.log(
-		`✅ Project pages: ${index.length} generated — ${withManifest} from repo manifests, ${kept} kept from cache, ${settingsOnly} settings-only, ${withReadme} with a rendered README`
+		`✅ Project pages: ${index.length} generated — ${withManifest} from repo manifests, ${discovered} discovered via org repos, ${kept} kept from cache, ${settingsOnly} settings-only, ${withReadme} with a rendered README`
 	)
 	const thin = index.filter((p) => p.depth < 6).map((p) => p.slug)
 	if (thin.length) {

@@ -1,8 +1,8 @@
 {
 	"slug": "chronos-ledger",
 	"name": "Chronos-Ledger",
-	"tagline": "Organization scheduling and attendance, self-hosted and offline-first.",
-	"summary": "A self-hosted organization timetable and attendance stack that replaces paper registers and spreadsheet timetables. It runs entirely on an organization intranet with Docker as its only runtime dependency, and keeps working read-only — queueing writes — when the network drops.",
+	"tagline": "A multi-dimensional timetable engine, self-hosted and offline-first.",
+	"summary": "A multi-dimensional timetable engine, built campus-first for organization scheduling and attendance and generalizing to anything that needs to slice and query such a timetable efficiently. It replaces paper registers and spreadsheet timetables, runs entirely on an organization intranet with Docker as its only runtime dependency, and keeps working read-only, queueing writes, when the network drops.",
 	"status": "active",
 	"category": "Full Stack",
 	"icon": "SiDocker",
@@ -94,5 +94,5 @@
 	"repo": "Life-Experimentalist/Chronos-Ledger",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/Chronos-Ledger/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-07T16:57:28.065Z"
+	"generatedAt": "2026-09-07T18:30:59.432Z"
 }

@@ -103,6 +103,33 @@ const portfolioProjects = (projects?.staticProjects || [])
     liveUrl: p.liveUrl || null,
   }))
 
+// Projects with no settings entry that were discovered through their repo's
+// own .portfolio/project.json exist only in the generated index. Fold them in
+// so llms.txt and portfolio.json describe the same set the site renders.
+try {
+  const indexed = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, "..", "public", "data", "projects", "index.json"),
+      "utf8"
+    )
+  ).projects || []
+  for (const p of indexed) {
+    if (p.source !== "discovered" || !p.repo) continue
+    portfolioProjects.push({
+      name: p.name,
+      description: p.summary || p.tagline || "",
+      technologies: p.technologies || [],
+      category: p.category || "",
+      status: p.status || "",
+      featured: !!p.featured,
+      githubUrl: `https://github.com/${p.repo}`,
+      liveUrl: null,
+    })
+  }
+} catch {
+  /* index not generated yet — settings projects alone is still correct */
+}
+
 const experience = (resume?.experiences || []).map((e) => ({
   title: e.title || "",
   company: e.company || "",
