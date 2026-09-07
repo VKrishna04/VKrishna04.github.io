@@ -758,7 +758,7 @@
         "borderColor": "rgba(96, 165, 250, 0.35)"
       }
     },
-    "mode": "static",
+    "mode": "hybrid",
     "useGitHubDescription": false,
     "ignore": [
       ".github",
@@ -766,9 +766,11 @@
       "Tredence",
       "Life-Experimentalist.github.io",
       "Template",
-      "VKrishna04.github.io"
+      "VKrishna04.github.io",
+      "homebrew-tap",
+      "scoop-bucket"
     ],
-    "maxProjects": 25,
+    "maxProjects": 60,
     "sortBy": "updated",
     "sortOrder": "desc",
     "showForks": false,
@@ -1048,7 +1050,7 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/EquiLens/issues"
         },
         "tier": "featured",
-        "order": 4
+        "order": 5
       },
       {
         "id": "6",
@@ -1540,7 +1542,7 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector/issues"
         },
         "tier": "featured",
-        "order": 6
+        "order": 7
       },
       {
         "id": "15",
@@ -1654,7 +1656,7 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector/issues"
         },
         "tier": "featured",
-        "order": 7
+        "order": 8
       },
       {
         "id": "17",
@@ -2202,7 +2204,7 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/Code-Ledger/issues"
         },
         "tier": "featured",
-        "order": 5
+        "order": 6
       },
       {
         "id": "25",
@@ -2248,7 +2250,7 @@
         },
         "showInAbout": false,
         "tier": "featured",
-        "order": 2,
+        "order": 3,
         "featured": true,
         "showInProjects": true
       },
@@ -2256,7 +2258,7 @@
         "id": "26",
         "name": "Chronos-Ledger",
         "icon": "SiFastapi",
-        "description": "Self-hosted campus attendance and timetable platform. Geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable to a campus in one Docker command.",
+        "description": "Multi-dimensional timetable engine, campus-first: geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable in one Docker command. Generalizing to any system that needs to query and slice complex schedules.",
         "technologies": [
           "FastAPI",
           "Next.js 14",
@@ -2302,7 +2304,56 @@
         },
         "showInAbout": false,
         "tier": "featured",
-        "order": 3,
+        "order": 4,
+        "featured": true,
+        "showInProjects": true
+      },
+      {
+        "id": "29",
+        "name": "CogniGate",
+        "icon": "SiGo",
+        "description": "Self-hosted, multi-tenant LLM gateway written in Go. One key and an OpenAI-compatible API in front of your providers, with rate limiting and fallback, and provider credentials that never leave your deployment.",
+        "technologies": [
+          "Go",
+          "PostgreSQL",
+          "Docker"
+        ],
+        "category": "Backend",
+        "status": "Active Development",
+        "startDate": "2026-09-03",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/CogniGate",
+        "liveUrl": "",
+        "demoUrl": "",
+        "documentationUrl": "https://cognigate.vkrishna04.me",
+        "imageUrl": "",
+        "tags": [
+          "llm-gateway",
+          "openai-compatible",
+          "multi-tenant",
+          "self-hosted",
+          "rate-limiting",
+          "fallback",
+          "api-gateway",
+          "go",
+          "postgresql",
+          "docker"
+        ],
+        "highlights": [
+          "Multi-tenant deployment behind a single gateway",
+          "OpenAI-compatible API surface, so existing clients point at it unchanged",
+          "Provider credentials stay inside your own deployment",
+          "Rate limiting and provider fallback built in"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "showInAbout": false,
+        "tier": "featured",
+        "order": 2,
         "featured": true,
         "showInProjects": true
       },

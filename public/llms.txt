@@ -20,16 +20,16 @@ Jul 2026 - Dec 2026, Jubilee Hills, Hyderabad
 Amrita Vishwa Vidyapeetham — 2022 - 2026
 GPA: 8.63/10
 
-## Projects (19 total)
+## Projects (20 total)
 - **RanobeGemini**: Browser extension enhancing web novel translations using Google's Gemini AI. Transforms poorly translated content on popular novel sites with one click.
 - **ToxicGuard_AI**: ToxiGuard AI is a browser extension that detects and censors toxic language in real-time using TensorFlow.js. It offers fine-grained controls, visual feedback, auto-censor, adjustable sensitivity, and respects user privacy.
 - **EquiLens**: AI Bias Detection Platform for LLMs via Ollama. Interactive CLI with corpus generation, multi-metric auditing, statistical analysis & visualization. Features enhanced auditors, dynamic concurrency, resume capability & rich progress tracking.
 - **Save-Sync**: VS Code Extension to save your project at working save points.
-- **CFlair-Counter**: Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.
+- **ViewFlare**: Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.
 - **the-pensive-index**: Library-first fanfiction discovery platform with hierarchical tagging and intelligent prompt generation. Built with Next.js, TypeScript, and Spec-Driven Development.
 - **cspell-sync**: cspell-sync: VS Code extension syncing project spelling dictionaries with global settings for consistent spell checking across workspaces.
 - **Facial-Emotion-Detector**: Facial emotion detection using MediaPipe and machine learning. Extract facial landmarks, train models, and classify emotions in real-time from images and videos.
-- **ActionsCounter**: An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by CFlair-Counter.
+- **ActionsCounter**: An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by ViewFlare.
 - **SignLanguageDetector**: Sign Language Detector is a real-time ISL recognition system. It uses OpenCV and MediaPipe for hand tracking, a machine learning classifier for gesture recognition, and a Flask web interface for live inference.
 
 ## Links

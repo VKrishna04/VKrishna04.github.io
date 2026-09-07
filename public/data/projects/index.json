@@ -1,6 +1,6 @@
 {
-	"generatedAt": "2026-09-05T09:57:07.040Z",
-	"count": 19,
+	"generatedAt": "2026-09-07T16:57:29.064Z",
+	"count": 20,
 	"projects": [
 		{
 			"slug": "dev-prune",
@@ -25,6 +25,27 @@
 			"depth": 28
 		},
 		{
+			"slug": "cognigate",
+			"name": "CogniGate",
+			"tagline": "",
+			"summary": "Self-hosted, multi-tenant LLM gateway written in Go. One key and an OpenAI-compatible API in front of your providers, with rate limiting and fallback, and provider credentials that never leave your deployment.",
+			"status": "Active Development",
+			"category": "Backend",
+			"icon": "SiGo",
+			"featured": true,
+			"tier": "featured",
+			"order": 2,
+			"technologies": [
+				"Go",
+				"PostgreSQL",
+				"Docker"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/CogniGate",
+			"source": "settings",
+			"depth": 4
+		},
+		{
 			"slug": "loginlens",
 			"name": "LoginLens",
 			"tagline": "A local-only map of how you sign in to everything.",
@@ -34,7 +55,7 @@
 			"icon": "SiTypescript",
 			"featured": true,
 			"tier": "featured",
-			"order": 2,
+			"order": 3,
 			"technologies": [
 				"TypeScript",
 				"Manifest V3",
@@ -49,14 +70,14 @@
 		{
 			"slug": "chronos-ledger",
 			"name": "Chronos-Ledger",
-			"tagline": "Campus scheduling and attendance, self-hosted and offline-first.",
-			"summary": "A self-hosted campus timetable and attendance stack that replaces paper registers and spreadsheet timetables. It runs entirely on a campus intranet with Docker as its only runtime dependency, and keeps working read-only — queueing writes — when the network drops.",
+			"tagline": "Organization scheduling and attendance, self-hosted and offline-first.",
+			"summary": "A self-hosted organization timetable and attendance stack that replaces paper registers and spreadsheet timetables. It runs entirely on an organization intranet with Docker as its only runtime dependency, and keeps working read-only — queueing writes — when the network drops.",
 			"status": "active",
 			"category": "Full Stack",
 			"icon": "SiDocker",
 			"featured": true,
 			"tier": "featured",
-			"order": 3,
+			"order": 4,
 			"technologies": [
 				"FastAPI",
 				"Docker",
@@ -79,7 +100,7 @@
 			"icon": "SiPython",
 			"featured": true,
 			"tier": "featured",
-			"order": 4,
+			"order": 5,
 			"technologies": [
 				"Python",
 				"FastAPI",
@@ -103,7 +124,7 @@
 			"icon": "SiTypescript",
 			"featured": true,
 			"tier": "featured",
-			"order": 5,
+			"order": 6,
 			"technologies": [
 				"TypeScript",
 				"Manifest V3",
@@ -117,11 +138,56 @@
 			"depth": 12
 		},
 		{
+			"slug": "facial-emotion-detector",
+			"name": "Facial-Emotion-Detector",
+			"tagline": "Facial emotion classification from landmark geometry.",
+			"summary": "A facial emotion recognition pipeline that detects faces, extracts MediaPipe landmarks, and classifies the expression from landmark geometry rather than raw pixels. It ships the full workflow — image collection, dataset preparation, training and inference — as scripted steps.",
+			"status": "complete",
+			"category": "AI/ML",
+			"icon": "SiOpencv",
+			"featured": true,
+			"tier": "featured",
+			"order": 7,
+			"technologies": [
+				"Python",
+				"MediaPipe",
+				"OpenCV",
+				"scikit-learn"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/Facial-Emotion-Detector",
+			"source": "manifest",
+			"depth": 8
+		},
+		{
+			"slug": "signlanguagedetector",
+			"name": "SignLanguageDetector",
+			"tagline": "Sign language recognition, collection to browser inference.",
+			"summary": "An end-to-end sign language recognition project: collect images, build a dataset, train a classifier, and serve real-time predictions in the browser from webcam hand landmarks. It also exposes a headless REST endpoint and swaps trained models without a restart.",
+			"status": "active",
+			"category": "AI/ML",
+			"icon": "SiScikitlearn",
+			"featured": true,
+			"tier": "featured",
+			"order": 8,
+			"technologies": [
+				"Python",
+				"MediaPipe",
+				"scikit-learn",
+				"Flask",
+				"uv"
+			],
+			"cover": "",
+			"repo": "Life-Experimentalist/SignLanguageDetector",
+			"source": "manifest",
+			"depth": 9
+		},
+		{
 			"slug": "pulseward-hms",
 			"name": "PulseWard-HMS",
 			"tagline": "",
 			"summary": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
-			"status": "Completed",
+			"status": "Active Development",
 			"category": "Web App",
 			"icon": "",
 			"featured": false,
@@ -162,7 +228,7 @@
 			"slug": "cspell-sync",
 			"name": "cspell-sync",
 			"tagline": "Your custom words. Everywhere. Automatically.",
-			"summary": "A VS Code extension that keeps cSpell custom words in sync between every project and the global dictionary, in both directions. Words added in one project reach the global list within a second, so opening a new project no longer means red squiggles under your whole technical vocabulary.",
+			"summary": "A VS Code extension that keeps cSpell custom words in sync between every project and the global dictionary, in both directions. Words added in one project reach the global list a second after the settings file is saved, so opening a new project no longer means red squiggles under your whole technical vocabulary.",
 			"status": "active",
 			"category": "VS Code Extension",
 			"icon": "SiTypescript",
@@ -178,28 +244,6 @@
 			"repo": "Life-Experimentalist/cspell-sync",
 			"source": "manifest",
 			"depth": 15
-		},
-		{
-			"slug": "facial-emotion-detector",
-			"name": "Facial-Emotion-Detector",
-			"tagline": "Facial emotion classification from landmark geometry.",
-			"summary": "A facial emotion recognition pipeline that detects faces, extracts MediaPipe landmarks, and classifies the expression from landmark geometry rather than raw pixels. It ships the full workflow — image collection, dataset preparation, training and inference — as scripted steps.",
-			"status": "complete",
-			"category": "AI/ML",
-			"icon": "SiOpencv",
-			"featured": false,
-			"tier": "secondary",
-			"order": 3,
-			"technologies": [
-				"Python",
-				"MediaPipe",
-				"OpenCV",
-				"scikit-learn"
-			],
-			"cover": "",
-			"repo": "Life-Experimentalist/Facial-Emotion-Detector",
-			"source": "manifest",
-			"depth": 7
 		},
 		{
 			"slug": "ranobegemini",
@@ -224,7 +268,7 @@
 			"depth": 8
 		},
 		{
-			"slug": "cflair-counter",
+			"slug": "viewflare",
 			"name": "ViewFlare",
 			"tagline": "Serverless view counter and SVG badges on Cloudflare.",
 			"summary": "A serverless telemetry counter for projects and documentation, built on Cloudflare Workers and D1 with a Hono API. One POST increments a project's views and one image URL renders a live SVG badge, so a repository gets usage counts without anyone running a backend. Formerly published as CFlair-Counter.",
@@ -241,7 +285,7 @@
 				"TypeScript"
 			],
 			"cover": "",
-			"repo": "Life-Experimentalist/CFlair-Counter",
+			"repo": "Life-Experimentalist/ViewFlare",
 			"source": "manifest",
 			"depth": 9
 		},
@@ -249,7 +293,7 @@
 			"slug": "the-pensive-index",
 			"name": "the-pensive-index",
 			"tagline": "Discovery-first fanfiction search with prompt generation.",
-			"summary": "A fanfiction discovery platform that searches existing tagged stories against complex, nuanced criteria before offering to generate a prompt. Tags are hierarchical with conditional branching rather than flat, so a search can express a specific premise instead of a keyword.",
+			"summary": "A fanfiction discovery platform designed to search existing tagged stories against complex, nuanced criteria before offering to generate a prompt. Tags are hierarchical with conditional branching rather than flat, so a search can express a specific premise instead of a keyword. In progress: the data and admin layers are built, the discovery search is not yet wired up.",
 			"status": "active",
 			"category": "Full Stack",
 			"icon": "SiNextdotjs",
@@ -264,36 +308,13 @@
 			"cover": "",
 			"repo": "Life-Experimentalist/the-pensive-index",
 			"source": "manifest",
-			"depth": 8
-		},
-		{
-			"slug": "signlanguagedetector",
-			"name": "SignLanguageDetector",
-			"tagline": "Sign language recognition, collection to browser inference.",
-			"summary": "An end-to-end sign language recognition project: collect images, build a dataset, train a classifier, and serve real-time predictions in the browser from webcam hand landmarks. It also exposes a headless REST endpoint and swaps trained models without a restart.",
-			"status": "active",
-			"category": "AI/ML",
-			"icon": "SiScikitlearn",
-			"featured": false,
-			"tier": "secondary",
-			"order": 7,
-			"technologies": [
-				"Python",
-				"MediaPipe",
-				"scikit-learn",
-				"Flask",
-				"uv"
-			],
-			"cover": "",
-			"repo": "Life-Experimentalist/SignLanguageDetector",
-			"source": "manifest",
 			"depth": 9
 		},
 		{
 			"slug": "toxicguard-ai",
 			"name": "ToxicGuard_AI",
 			"tagline": "On-device toxic language detection in the browser.",
-			"summary": "A cross-browser Manifest V3 extension that flags or censors toxic language as it is typed, using TensorFlow.js and the toxicity model loaded inside the content script. Classification happens on the device, so the text being checked never leaves the browser.",
+			"summary": "Toxic Shield is a cross-browser Manifest V3 extension that flags or censors toxic language as it is typed, using TensorFlow.js and the toxicity model. The content script forwards text to the extension's background service worker, which runs the classifier; the text being checked never leaves the browser.",
 			"status": "complete",
 			"category": "Browser Extension",
 			"icon": "SiTensorflow",
@@ -314,16 +335,18 @@
 			"slug": "save-sync",
 			"name": "Save-Sync",
 			"tagline": "Save points for code, for when git is overkill.",
-			"summary": "A checkpoint tool for projects where full version control is more ceremony than the work deserves — experiments, tutorials and quick prototypes. It snapshots a project's state and restores it, so a risky change can be undone without a branching model.",
+			"summary": "A checkpoint tool for projects where full version control is more ceremony than the work deserves — experiments, tutorials and quick prototypes. A VS Code extension that snapshots the text of a workspace folder and writes it back on demand, so a risky change can be walked back without a branching model.",
 			"status": "complete",
 			"category": "VS Code Extension",
-			"icon": "SiPython",
+			"icon": "SiTypescript",
 			"featured": false,
 			"tier": "secondary",
 			"order": 9,
 			"technologies": [
-				"Python",
-				"CLI"
+				"TypeScript",
+				"VS Code Extension API",
+				"Node.js",
+				"webpack"
 			],
 			"cover": "",
 			"repo": "Life-Experimentalist/Save-Sync",
@@ -333,9 +356,9 @@
 		{
 			"slug": "actionscounter",
 			"name": "ActionsCounter",
-			"tagline": "Project analytics running on GitHub Actions alone.",
-			"summary": "An event counter that runs entirely inside GitHub Actions, tracking usage, downloads or API calls through webhook pings. It stores counts in GitHub Variables, a database, or a repository, so a project gets analytics without provisioning any infrastructure.",
-			"status": "maintained",
+			"tagline": "Project analytics on GitHub Actions alone — superseded by CFlair-Counter / ViewFlare.",
+			"summary": "An event counter with no server: a single GitHub Actions workflow, run on demand from the Actions tab or by a repository_dispatch webhook, keeps per-project counts in the repository's own Actions variables as base64-encoded JSON, and a Vite dashboard published to GitHub Pages reads them back. A PostgreSQL storage mode is also implemented. This is the earlier approach to the problem; the current counter is CFlair-Counter (being renamed ViewFlare), which runs on Cloudflare Pages/Workers with D1 and serves counter.vkrishna04.me. ActionsCounter stays online as a working record of the Actions-based design.",
+			"status": "archived",
 			"category": "DevOps",
 			"icon": "SiGithubactions",
 			"featured": false,
@@ -349,14 +372,14 @@
 			"cover": "",
 			"repo": "Life-Experimentalist/ActionsCounter",
 			"source": "manifest",
-			"depth": 8
+			"depth": 9
 		},
 		{
 			"slug": "breachcheck",
 			"name": "BreachCheck",
-			"tagline": "Check credentials against known breaches, privately.",
-			"summary": "A tool for checking whether credentials appear in known data breaches without disclosing what is being checked, using k-anonymity range queries so only a short hash prefix ever leaves the machine.",
-			"status": "complete",
+			"tagline": "Email and password breach lookup — Streamlit app and CLI",
+			"summary": "Checks whether an email address or password appears in known data breaches, from either a Streamlit web interface or a command-line interface. Password checks use Have I Been Pwned's k-anonymity range endpoint, so only a five-character SHA-1 prefix is sent and the suffix is matched locally. The two email lookups send the full address to the upstream service.",
+			"status": "archived",
 			"category": "Security",
 			"icon": "SiPython",
 			"featured": false,
@@ -364,12 +387,13 @@
 			"order": 12,
 			"technologies": [
 				"Python",
+				"Streamlit",
 				"CLI"
 			],
 			"cover": "",
 			"repo": "Life-Experimentalist/BreachCheck",
 			"source": "manifest",
-			"depth": 6
+			"depth": 7
 		},
 		{
 			"slug": "docs-rag",

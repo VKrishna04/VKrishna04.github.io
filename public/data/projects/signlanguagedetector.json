@@ -6,9 +6,9 @@
 	"status": "active",
 	"category": "AI/ML",
 	"icon": "SiScikitlearn",
-	"featured": false,
-	"tier": "secondary",
-	"order": 7,
+	"featured": true,
+	"tier": "featured",
+	"order": 8,
 	"role": "",
 	"period": {
 		"start": "2025-04-01",
@@ -70,5 +70,5 @@
 	"repo": "Life-Experimentalist/SignLanguageDetector",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/SignLanguageDetector/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-02T22:53:09.246Z"
+	"generatedAt": "2026-09-07T16:57:23.063Z"
 }

@@ -1,0 +1,67 @@
+{
+	"slug": "cognigate",
+	"name": "CogniGate",
+	"tagline": "",
+	"summary": "Self-hosted, multi-tenant LLM gateway written in Go. One key and an OpenAI-compatible API in front of your providers, with rate limiting and fallback, and provider credentials that never leave your deployment.",
+	"status": "Active Development",
+	"category": "Backend",
+	"icon": "SiGo",
+	"featured": true,
+	"tier": "featured",
+	"order": 2,
+	"role": "",
+	"period": {
+		"start": "2026-09-03",
+		"end": null
+	},
+	"technologies": [
+		"Go",
+		"PostgreSQL",
+		"Docker"
+	],
+	"tags": [
+		"llm-gateway",
+		"openai-compatible",
+		"multi-tenant",
+		"self-hosted",
+		"rate-limiting",
+		"fallback",
+		"api-gateway",
+		"go",
+		"postgresql",
+		"docker"
+	],
+	"highlights": [
+		"Multi-tenant deployment behind a single gateway",
+		"OpenAI-compatible API surface, so existing clients point at it unchanged",
+		"Provider credentials stay inside your own deployment",
+		"Rate limiting and provider fallback built in"
+	],
+	"metrics": [],
+	"links": {
+		"repo": "https://github.com/Life-Experimentalist/CogniGate",
+		"live": "",
+		"demo": "",
+		"docs": "https://cognigate.vkrishna04.me"
+	},
+	"media": {
+		"cover": "",
+		"screenshots": [],
+		"layout": "auto",
+		"video": null
+	},
+	"sections": [],
+	"readme": null,
+	"appearance": null,
+	"seo": null,
+	"stats": {
+		"stars": 0,
+		"forks": 0,
+		"watchers": 0,
+		"issues": 0
+	},
+	"source": "settings",
+	"repo": "Life-Experimentalist/CogniGate",
+	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/CogniGate/HEAD/.portfolio/project.json",
+	"generatedAt": "2026-09-07T16:57:28.385Z"
+}

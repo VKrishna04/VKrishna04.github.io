@@ -3,7 +3,7 @@
 	"name": "PulseWard-HMS",
 	"tagline": "",
 	"summary": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
-	"status": "Completed",
+	"status": "Active Development",
 	"category": "Web App",
 	"icon": "",
 	"featured": false,
@@ -46,5 +46,5 @@
 	"source": "settings",
 	"repo": null,
 	"manifestUrl": null,
-	"generatedAt": "2026-09-03T03:44:25.995Z"
+	"generatedAt": "2026-09-07T16:57:23.750Z"
 }

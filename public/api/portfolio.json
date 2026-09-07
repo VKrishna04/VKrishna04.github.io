@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T22:54:23.713Z",
+  "generatedAt": "2026-09-07T16:57:32.060Z",
   "owner": {
     "name": "Krishna GSVV",
     "title": "I'm Krishna GSVV — CS student, builder & hackathon champion",
@@ -141,7 +141,7 @@
         "NLP"
       ],
       "category": "Browser Extension",
-      "status": "Active Development",
+      "status": "On Hold",
       "featured": false,
       "githubUrl": "https://github.com/Life-Experimentalist/ToxicGuard_AI",
       "liveUrl": "http://toxic.vkrishna04.me/"
@@ -177,7 +177,7 @@
       "liveUrl": "http://save-sync.vkrishna04.me/"
     },
     {
-      "name": "CFlair-Counter",
+      "name": "ViewFlare",
       "description": "Ultra-efficient serverless view counter with admin panel and SVG badges. Optimized for Cloudflare's free tier with headless telemetry tracking.",
       "technologies": [
         "HTML",
@@ -189,7 +189,7 @@
       "category": "Backend",
       "status": "Live",
       "featured": false,
-      "githubUrl": "https://github.com/Life-Experimentalist/CFlair-Counter",
+      "githubUrl": "https://github.com/Life-Experimentalist/ViewFlare",
       "liveUrl": "https://counter.vkrishna04.me/"
     },
     {
@@ -235,13 +235,13 @@
       ],
       "category": "AI/ML",
       "status": "Completed",
-      "featured": false,
+      "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/Facial-Emotion-Detector",
       "liveUrl": null
     },
     {
       "name": "ActionsCounter",
-      "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by CFlair-Counter.",
+      "description": "An event counter built out of nothing but GitHub itself. A workflow run on demand updates tallies kept in the repository's own Actions variables, and a static Pages dashboard reads them back. Superseded by ViewFlare.",
       "technologies": [
         "TypeScript",
         "GitHub-Actions",
@@ -267,7 +267,7 @@
       ],
       "category": "AI/ML",
       "status": "Completed",
-      "featured": false,
+      "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/SignLanguageDetector",
       "liveUrl": null
     },
@@ -293,7 +293,7 @@
         "Proprietary"
       ],
       "category": "Web App",
-      "status": "Completed",
+      "status": "Active Development",
       "featured": false,
       "githubUrl": null,
       "liveUrl": null
@@ -386,7 +386,7 @@
     },
     {
       "name": "Chronos-Ledger",
-      "description": "Self-hosted campus attendance and timetable platform. Geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable to a campus in one Docker command.",
+      "description": "Multi-dimensional timetable engine, campus-first: geofenced check-in, a real-time WebSocket hub and offline-first PWA behaviour, deployable in one Docker command. Generalizing to any system that needs to query and slice complex schedules.",
       "technologies": [
         "FastAPI",
         "Next.js 14",
@@ -399,6 +399,20 @@
       "status": "Completed",
       "featured": true,
       "githubUrl": "https://github.com/Life-Experimentalist/Chronos-Ledger",
+      "liveUrl": null
+    },
+    {
+      "name": "CogniGate",
+      "description": "Self-hosted, multi-tenant LLM gateway written in Go. One key and an OpenAI-compatible API in front of your providers, with rate limiting and fallback, and provider credentials that never leave your deployment.",
+      "technologies": [
+        "Go",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "category": "Backend",
+      "status": "Active Development",
+      "featured": true,
+      "githubUrl": "https://github.com/Life-Experimentalist/CogniGate",
       "liveUrl": null
     },
     {

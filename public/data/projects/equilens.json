@@ -8,7 +8,7 @@
 	"icon": "SiPython",
 	"featured": true,
 	"tier": "featured",
-	"order": 4,
+	"order": 5,
 	"role": "",
 	"period": {
 		"start": "2025-07-01",
@@ -79,5 +79,5 @@
 	"repo": "Life-Experimentalist/EquiLens",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/EquiLens/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-02T22:53:07.187Z"
+	"generatedAt": "2026-09-07T16:57:15.767Z"
 }
