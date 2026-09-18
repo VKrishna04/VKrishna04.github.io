@@ -24,12 +24,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "22"
+          node-version: "24"
           cache: "npm"
 
       # Auto-heal: a stale lockfile downgrades npm ci to npm install so the
@@ -81,6 +81,46 @@ jobs:
       # scripts/fetch-project-stats.js off the 60/hr anonymous limit. It is
       # the run's own scoped token — nothing to create or rotate, and it never
       # reaches the browser bundle.
+      # Every manifest fetch falls back to cache, so a token that cannot read
+      # anything still produces a green build serving last week's data. This
+      # step is the only thing standing between a broken PAT and a silent
+      # month of stale project pages, so it fails the run instead.
+      - name: Check the build token can read what it needs
+        env:
+          GITHUB_TOKEN: ${{ secrets.PORTFOLIO_GH_TOKEN || github.token }}
+          HAS_PAT: ${{ secrets.PORTFOLIO_GH_TOKEN != '' && 'yes' || 'no' }}
+        run: |
+          if [ "$HAS_PAT" = "yes" ]; then
+            echo "Token source: PORTFOLIO_GH_TOKEN secret"
+          else
+            echo "Token source: the run's own github.token"
+          fi
+          fail=0
+          probe() {
+            body=$(curl -sS -w '\n%{http_code}' \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/$1")
+            code=$(printf '%s' "$body" | tail -n1)
+            msg=$(printf '%s' "$body" | sed '$d' | sed -n 's/.*"message": *"\([^"]*\)".*/\1/p' | head -n1)
+            echo "  $1 -> $code${msg:+ ($msg)}"
+            case "$code" in 2*) ;; *) fail=1 ;; esac
+          }
+          probe "rate_limit"
+          probe "repos/Life-Experimentalist/dev-prune/contents/README.md"
+          probe "orgs/Life-Experimentalist/repos?per_page=1"
+          if [ "$fail" = "0" ]; then
+            exit 0
+          fi
+          if [ "$HAS_PAT" = "yes" ]; then
+            echo "::error::PORTFOLIO_GH_TOKEN cannot read the repositories the build needs."
+            echo "Regenerate it as a fine-grained PAT with read-only Contents + Metadata"
+            echo "on the Life-Experimentalist org, or remove the secret to fall back to"
+            echo "the run's own token. Refusing to publish a build of stale cached data."
+            exit 1
+          fi
+          echo "::warning::The run's own token cannot read everything; some pages will fall back to cache."
+
       - name: Build project
         env:
           # The run's own token covers this repository and lifts the API calls

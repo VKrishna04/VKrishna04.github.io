@@ -34,12 +34,12 @@
 	"metrics": [
 		{
 			"label": "VS Code installs",
-			"value": "2,565",
+			"value": "2,604",
 			"detail": "Marketplace"
 		},
 		{
 			"label": "Open VSX downloads",
-			"value": "418",
+			"value": "466",
 			"detail": "v1.1.0"
 		}
 	],
@@ -88,5 +88,5 @@
 	"repo": "Life-Experimentalist/cspell-sync",
 	"manifestUrl": "https://raw.githubusercontent.com/Life-Experimentalist/cspell-sync/HEAD/.portfolio/project.json",
 	"manifestVersion": 2,
-	"generatedAt": "2026-09-07T20:14:21.679Z"
+	"generatedAt": "2026-09-18T22:35:24.739Z"
 }

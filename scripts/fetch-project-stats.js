@@ -49,7 +49,18 @@ async function get(url, init = {}) {
 			...(init.headers || {}),
 		},
 	})
-	if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+	if (!res.ok) {
+		// GitHub distinguishes a missing scope from a spent rate limit only in
+		// the body, and both arrive as a bare 403. Worth the extra read.
+		let detail = ""
+		try {
+			const msg = JSON.parse(await res.text())?.message
+			if (msg) detail = `: ${msg}`
+		} catch {
+			/* registries that answer in HTML have nothing to add */
+		}
+		throw new Error(`${res.status} ${res.statusText}${detail}`)
+	}
 	return res.json()
 }
 

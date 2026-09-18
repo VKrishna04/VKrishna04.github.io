@@ -11,6 +11,55 @@ the notes that were kept at the time rather than from a release process.
 
 ---
 
+## [Unreleased]
+
+### 🐛 Fixed
+
+#### A build token that can read nothing no longer passes for a healthy build
+
+Every GitHub fetch in the build falls back to cached data, which is the right
+behaviour for a network blip and the wrong behaviour for a token that will never
+work again. Run 35399859502 published a green build in which 21 of 23 project
+pages came from cache and only 1 manifest was actually fetched, and nothing in
+the logs said so louder than a warning.
+
+- A new preflight step probes `rate_limit`, a repo's contents and the org repo
+  listing before the build runs. When `PORTFOLIO_GH_TOKEN` is set and any probe
+  fails, the run fails instead of publishing stale pages. Without that secret it
+  warns and carries on, since the run's own token is expected to be limited.
+- Both fetch scripts now print GitHub's own `message` alongside the status code.
+  A 403 is returned for a missing Contents scope, the wrong resource owner and a
+  spent rate limit alike, and the body is the only place the three are
+  distinguishable.
+- A failed manifest fetch now falls through to the vendored copy under
+  `manifests/`. It never did before: the fetch threw, so the `|| vendored` on the
+  next line was unreachable, and a 403 silently cost a page its content.
+
+#### PulseWard-HMS renders its real page
+
+A private project had no way to reach its own manifest. `githubUrl` is empty by
+design, because the link would 404 for every visitor, and that same emptiness was
+what stopped the build from ever looking for `.portfolio/project.json`.
+
+- `staticProjects` entries take an optional `repo` (`owner/name`), used for
+  fetching only and never rendered as a link.
+- Entries marked `visibility: private` get the same stripping the discovery pass
+  already applied: no repo name, no manifest URL, no repo link, and no README
+  image or link bases pointing into a repository nobody can open.
+
+### 🔧 Build
+
+- Node 22 to Node 24, the current Active LTS. `package.json` `engines` is
+  unchanged, since it declares the range this project supports rather than the
+  one CI happens to run.
+- `actions/checkout` v4 to v7.0.1 and `actions/setup-node` v4 to v7.0.0. Both v7
+  releases are ESM migrations. checkout v7 blocks fork-PR checkout under
+  `pull_request_target` and `workflow_run`, neither of which this repo uses.
+- `upstream-sync.yml` deliberately does not copy `.github/workflows/` downstream,
+  so template users update these action versions in their own fork.
+
+---
+
 ## [1.9.0] - 2026-09-05
 
 ### ✨ Features

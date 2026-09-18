@@ -131,7 +131,12 @@ function metricsFor(name) {
 }
 
 function baseFromSettings(sp) {
-	const repo = parseRepo(sp.githubUrl)
+	// A private entry has no githubUrl on purpose: the link would 404 for every
+	// visitor. `repo` names the repository for fetching only, so a private
+	// project can still be described by its own .portfolio/project.json.
+	const repo =
+		parseRepo(sp.githubUrl) ||
+		(sp.repo ? parseRepo(`https://github.com/${sp.repo}`) : null)
 	return {
 		slug: slugify(repo?.repo || sp.name),
 		name: sp.name,
@@ -358,7 +363,7 @@ async function listAccountRepos(github) {
 			`https://api.github.com/${kind}/${owner}/repos?per_page=100&page=${page}`,
 			{ signal: AbortSignal.timeout(TIMEOUT_MS), headers }
 		)
-		if (!res.ok) throw new Error(`HTTP ${res.status}`)
+		if (!res.ok) throw new Error(await describeFailure(res))
 		const batch = await res.json()
 		repos.push(...batch)
 		if (batch.length < 100) break
@@ -440,11 +445,48 @@ async function bakeGithubRepos(repos, ignored) {
 	}
 }
 
+// GitHub explains a 403 in the JSON body and nowhere else: a missing Contents
+// scope, the wrong resource owner and a spent rate limit all share the status
+// code. Discarding the body is what made the last broken token look like a
+// generic network wobble.
+async function describeFailure(res) {
+	let detail = ""
+	try {
+		const body = await res.text()
+		const msg = JSON.parse(body)?.message
+		if (msg) detail = `: ${msg}`
+	} catch {
+		/* a non-JSON error body tells us nothing worth printing */
+	}
+	return `HTTP ${res.status}${detail}`
+}
+
 async function fetchManifest(repo) {
 	const res = await fetchRepoFile(repo, MANIFEST_PATH, "application/json")
 	if (res.status === 404) return null // repo simply has not opted in yet
-	if (!res.ok) throw new Error(`HTTP ${res.status}`)
+	if (!res.ok) throw new Error(await describeFailure(res))
 	return JSON.parse(await res.text())
+}
+
+// One place that answers "what manifest describes this repo", so a fetch
+// failure falls through to the vendored copy instead of skipping it. The old
+// `await fetchManifest(...) || vendoredManifest(...)` expression never reached
+// the right-hand side on a 403, because the throw escaped first.
+async function resolveManifest(repo, name) {
+	const local = localManifestFor(repo)
+	if (local) return readLocalManifest(local, name) || vendoredManifest(repo, name)
+	try {
+		const remote = await fetchManifest(repo)
+		if (remote) return remote
+	} catch (e) {
+		const vendored = vendoredManifest(repo, name)
+		if (vendored) {
+			console.warn(`⚠️ ${repo}: manifest fetch failed (${e.message}), using vendored copy`)
+			return vendored
+		}
+		throw e
+	}
+	return vendoredManifest(repo, name)
 }
 
 // Manifests this repo owns on another repo's behalf, committed as source under
@@ -454,8 +496,9 @@ async function fetchManifest(repo) {
 // back to its settings-only version on the next deploy. Vendoring is how that
 // content gets committed instead of merely generated.
 //
-// Only consulted when the repo itself has no manifest, so deleting the file
-// here is all it takes to hand the page back to the repo.
+// Only consulted when the repo has no manifest of its own, or when the build
+// cannot reach it. Once the repo is readable again, deleting the file here is
+// all it takes to hand the page back to the repo.
 function vendoredManifest(repo, name) {
 	if (!repo) return null
 	const file = path.join(ROOT, "manifests", `${repo}.json`)
@@ -577,12 +620,7 @@ async function main() {
 		let project = base
 		if (base.manifestUrl) {
 			try {
-				const local = localManifestFor(base.repo)
-				const manifest =
-					(local
-						? readLocalManifest(local, sp.name)
-						: await fetchManifest(base.repo)) ||
-					vendoredManifest(base.repo, sp.name)
+				const manifest = await resolveManifest(base.repo, sp.name)
 				if (manifest) {
 					project = merge(base, manifest, {
 						tier: !sp.tier,
@@ -617,6 +655,21 @@ async function main() {
 			if (project.readme) withReadme++
 		}
 
+		// Same treatment the discovery pass gives a private repo: the manifest
+		// and the README are published, the repository behind them is not. Done
+		// after the README fetch because the fetch needs the repo name.
+		if (sp.visibility === "private") {
+			if (project.readme) {
+				project.readme.imageBase = null
+				project.readme.linkBase = null
+				project.readme.sourceUrl = null
+			}
+			project.repo = null
+			project.manifestUrl = null
+			project.links.repo = ""
+			project.visibility = "private"
+		}
+
 		project.generatedAt = new Date().toISOString()
 		writeIfChanged(path.join(OUT_DIR, `${project.slug}.json`), project)
 
@@ -632,7 +685,12 @@ async function main() {
 	const allStatic = settings.projects?.staticProjects || []
 	const covered = new Set()
 	for (const sp of allStatic) {
-		const r = parseRepo(sp.githubUrl)
+		// Same fallback baseFromSettings uses, so a private entry named
+		// differently from its repo cannot be discovered a second time under a
+		// second slug.
+		const r =
+			parseRepo(sp.githubUrl) ||
+			(sp.repo ? parseRepo(`https://github.com/${sp.repo}`) : null)
 		if (r) covered.add(`${r.owner}/${r.repo}`.toLowerCase())
 		if (sp.name) covered.add(slugify(sp.name))
 	}
@@ -666,12 +724,7 @@ async function main() {
 				base.links = { repo: "", live: "", demo: "", docs: "" }
 				let manifest
 				try {
-					const local = localManifestFor(base.repo)
-					manifest =
-						(local
-							? readLocalManifest(local, r.name)
-							: await fetchManifest(base.repo)) ||
-						vendoredManifest(base.repo, r.name)
+					manifest = await resolveManifest(base.repo, r.name)
 				} catch (e) {
 					// Keep a previously published private page through a blip
 					// rather than unpublishing it for a week.
@@ -722,12 +775,7 @@ async function main() {
 			if (!base.slug || index.some((p) => p.slug === base.slug)) continue
 			let project
 			try {
-				const local = localManifestFor(base.repo)
-				const manifest =
-					(local
-						? readLocalManifest(local, r.name)
-						: await fetchManifest(base.repo)) ||
-					vendoredManifest(base.repo, r.name)
+				const manifest = await resolveManifest(base.repo, r.name)
 				if (!manifest) continue
 				project = merge(base, manifest, {
 					tier: true,

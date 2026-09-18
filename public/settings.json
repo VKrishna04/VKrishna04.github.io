@@ -1779,6 +1779,7 @@
       {
         "id": "28",
         "name": "PulseWard-HMS",
+        "repo": "Life-Experimentalist/PulseWard-HMS",
         "description": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
         "technologies": [
           "Proprietary"

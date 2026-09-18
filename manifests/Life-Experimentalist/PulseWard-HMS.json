@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vkrishna04.me/schemas/project-manifest.schema.json",
+  "manifestVersion": 2,
+  "name": "PulseWard",
+  "tagline": "A multi-tenant hospital management system, offline on the ward or hosted.",
+  "summary": "A hospital management system for clinics, hospitals and groups: appointments, charts, orders, results, prescriptions, pharmacy stock, beds, emergency, billing and insurance, across three role-specific portals backed by one API. Every row carries a tenant, so one deployment runs many hospitals without their data meeting, and any hospital can export what it owns and leave.",
+  "status": "active",
+  "listPrivate": true,
+  "tier": "featured",
+  "icon": "FaHeartbeat",
+  "readme": true,
+  "technologies": ["Node.js", "Hono", "SQLite", "React", "Vite", "Jest", "OpenAPI", "Docker"],
+  "tags": ["healthcare", "multi-tenant", "hms", "self-hosted", "offline-first", "abdm"],
+  "highlights": [
+    "One API gateway serves three portals (patient, staff, platform operations) and every route is gated by role, by tenant and by whether the hospital has that module switched on.",
+    "Multi-tenancy is a row, not a deployment: a doctor practising at two hospitals has one login and two memberships, and nothing clinical crosses between them.",
+    "Fourteen modules can each be switched off per hospital, and each one states in plain language what stops working, what is kept, and how many records it holds.",
+    "A hospital can export every row it owns as one file, listing every table it contains, so leaving is a supported action rather than a negotiation.",
+    "Runs on a Mac mini on the hospital's own LAN with no internet, and moves to a hosted instance without a migration, because storage and scheduling sit behind interfaces."
+  ],
+  "metrics": [
+    {
+      "label": "REST API operations",
+      "value": "311",
+      "detail": "OpenAPI and runtime checked for parity on every commit"
+    },
+    {
+      "label": "Database tables",
+      "value": "97"
+    },
+    {
+      "label": "Toggleable modules",
+      "value": "14",
+      "detail": "per hospital, with a stated blast radius each"
+    },
+    {
+      "label": "Permissions",
+      "value": "48",
+      "detail": "distinct checks behind the role model"
+    },
+    {
+      "label": "Test files",
+      "value": "170",
+      "detail": "route surface, RBAC, cross-tenant and clinical safety"
+    },
+    {
+      "label": "Portals",
+      "value": "3"
+    }
+  ],
+  "sections": [
+    {
+      "type": "prose",
+      "heading": "Why one process instead of a service per concern",
+      "body": "The first version of this was a set of services: auth, notifications, clinical, billing. It was harder to run than it was to write, and the hospital it was for has one Mac mini.\n\nSo it collapsed into a single Hono app on Node 24 with SQLite in WAL mode. That is not a shortcut. A hospital with forty staff generates a workload a single process handles with room to spare, and the thing that actually fails in a small hospital is not throughput, it is somebody having to keep five containers alive. One process with one database file can be backed up by copying it, restored by putting it back, and understood by one person.\n\nThe parts that would genuinely be someone else's problem are the ones kept outside: scheduling goes to Chronos Ledger, any AI call leaves through CogniGate on the hospital's own account, diagnostics go to ViewFlare. Each of those sits behind an interface, so a hospital that does not want one gets a version without it rather than a broken page."
+    },
+    {
+      "type": "prose",
+      "heading": "Leaving has to work, or the promise is empty",
+      "body": "Telling a hospital its data is its own only counts if there is a route out that does not go through us.\n\nSo the export is a file: every record the tenant owns, streamed out as one archive that declares every table inside it. Retention is the hospital's own setting rather than a policy of ours, and an account that has ended keeps a retrieval window measured from the day it ended.\n\nBilling was built to the same rule. An account that stops paying walks down a ladder rather than falling off a cliff: a notice, then read-only, then the narrow set of routes needed to pay the bill and take the data out. There is no state in which a hospital can be locked away from its own records."
+    },
+    {
+      "type": "prose",
+      "heading": "Built for the hospital it runs in",
+      "body": "The design constraints came from a real small hospital, not from a market study. Its network drops. Its doctors want to see the ward from home. Its budget is a hardware purchase, not a per-seat subscription.\n\nThat produced an offline-first deployment on hardware the hospital owns, remote access over a private tunnel rather than an exposed port, printouts for everything a patient walks out with, a prescription slip carrying a verification code that stays answerable for as long as the record exists, and Indian health-network (ABDM) identity wired in from the start rather than bolted on.\n\nIt also produced a rule about pricing: modules are priced separately, so a clinic that will never admit a patient does not pay for an inpatient ward."
+    }
+  ]
+}

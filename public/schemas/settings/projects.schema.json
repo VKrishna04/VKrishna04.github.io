@@ -96,7 +96,15 @@
 						"type": "string",
 						"enum": ["public", "private"],
 						"default": "public",
-						"description": "Set to 'private' for a repo the site cannot read from the GitHub API. The entry renders from this static data only, with a Private badge and no GitHub links."
+						"description": "Set to 'private' for a repo the public cannot browse. The page renders with a Private badge and no GitHub links, from this static data plus the repo's own manifest when 'repo' is set and the build token can read it."
+					},
+					"repo": {
+						"type": "string",
+						"pattern": "^[^/\\s]+/[^/\\s]+$",
+						"description": "owner/name of the repository to read .portfolio/project.json and the README from, for a private project that has no public githubUrl to link to. Never rendered as a link.",
+						"examples": [
+							"Life-Experimentalist/PulseWard-HMS"
+						]
 					},
 					"id": {
 						"type": "string",

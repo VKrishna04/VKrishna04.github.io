@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-07T20:13:33.707Z",
+	"generatedAt": "2026-09-18T22:32:19.747Z",
 	"count": 26,
 	"projects": [
 		{
@@ -71,7 +71,7 @@
 			"slug": "chronos-ledger",
 			"name": "Chronos-Ledger",
 			"tagline": "A multi-dimensional timetable engine, self-hosted and offline-first.",
-			"summary": "A multi-dimensional timetable engine, built campus-first for organization scheduling and attendance and generalizing to anything that needs to slice and query such a timetable efficiently. It replaces paper registers and spreadsheet timetables, runs entirely on an organization intranet with Docker as its only runtime dependency, and keeps working read-only, queueing writes, when the network drops.",
+			"summary": "A multi-dimensional timetable engine for scheduling and attendance, generalizing to anything that needs to slice and query such a timetable efficiently. It replaces paper registers and spreadsheet timetables, runs entirely on an organization intranet with Docker as its only runtime dependency, and keeps working read-only, queueing writes, when the network drops.",
 			"status": "active",
 			"category": "Full Stack",
 			"icon": "SiDocker",
@@ -82,7 +82,8 @@
 				"FastAPI",
 				"Docker",
 				"PostgreSQL",
-				"React",
+				"Redis",
+				"Next.js",
 				"Nginx"
 			],
 			"cover": "",
@@ -184,23 +185,30 @@
 		},
 		{
 			"slug": "pulseward-hms",
-			"name": "PulseWard-HMS",
-			"tagline": "",
-			"summary": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
-			"status": "Active Development",
+			"name": "PulseWard",
+			"tagline": "A multi-tenant hospital management system, offline on the ward or hosted.",
+			"summary": "A hospital management system for clinics, hospitals and groups: appointments, charts, orders, results, prescriptions, pharmacy stock, beds, emergency, billing and insurance, across three role-specific portals backed by one API. Every row carries a tenant, so one deployment runs many hospitals without their data meeting, and any hospital can export what it owns and leave.",
+			"status": "active",
 			"category": "Web App",
-			"icon": "",
+			"icon": "FaHeartbeat",
 			"featured": false,
 			"tier": "secondary",
 			"order": 0,
 			"technologies": [
-				"Proprietary"
+				"Node.js",
+				"Hono",
+				"SQLite",
+				"React",
+				"Vite",
+				"Jest",
+				"OpenAPI",
+				"Docker"
 			],
 			"cover": "",
 			"repo": null,
-			"source": "settings",
+			"source": "manifest",
 			"visibility": "private",
-			"depth": 2
+			"depth": 26
 		},
 		{
 			"slug": "vectra-180",
