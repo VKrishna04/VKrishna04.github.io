@@ -27,6 +27,9 @@ the logs said so louder than a warning.
   listing before the build runs. When `PORTFOLIO_GH_TOKEN` is set and any probe
   fails, the run fails instead of publishing stale pages. Without that secret it
   warns and carries on, since the run's own token is expected to be limited.
+  Its first run named the cause the old logs never showed: the org "forbids
+  access via a fine-grained personal access tokens if the token's lifetime is
+  greater than 366 days".
 - Both fetch scripts now print GitHub's own `message` alongside the status code.
   A 403 is returned for a missing Contents scope, the wrong resource owner and a
   spent rate limit alike, and the body is the only place the three are

@@ -114,9 +114,11 @@ jobs:
           fi
           if [ "$HAS_PAT" = "yes" ]; then
             echo "::error::PORTFOLIO_GH_TOKEN cannot read the repositories the build needs."
-            echo "Regenerate it as a fine-grained PAT with read-only Contents + Metadata"
-            echo "on the Life-Experimentalist org, or remove the secret to fall back to"
-            echo "the run's own token. Refusing to publish a build of stale cached data."
+            echo "Read the message above first; it says which rule the token broke."
+            echo "The token wants read-only Contents + Metadata on the Life-Experimentalist"
+            echo "org, and a lifetime the org allows, which is at most 366 days. Or remove"
+            echo "the secret to fall back to the run's own token. Refusing to publish a"
+            echo "build of stale cached data."
             exit 1
           fi
           echo "::warning::The run's own token cannot read everything; some pages will fall back to cache."
