@@ -69,14 +69,16 @@ const ProjectReadme = lazy(() => import("../components/ProjectReadme"))
  * supplies CSS. Omitting `appearance` — which is the right default for almost
  * every project — leaves the portfolio's own styling in charge.
  */
-const THEME_GRADIENTS = {
-	default: "from-slate-900 via-purple-900 to-slate-900",
-	aurora: "from-slate-900 via-emerald-900 to-slate-900",
-	ember: "from-slate-900 via-orange-900 to-slate-900",
-	ocean: "from-slate-900 via-sky-900 to-slate-900",
-	forest: "from-slate-900 via-green-900 to-slate-900",
-	mono: "from-neutral-900 via-neutral-800 to-neutral-900",
-	midnight: "from-black via-slate-900 to-black",
+const THEME_BACKGROUNDS = {
+	// Plain black: a project page is mostly long-form README text, and the old
+	// purple mid-stop sat directly behind the body copy.
+	default: "bg-black",
+	aurora: "bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900",
+	ember: "bg-gradient-to-br from-slate-900 via-orange-900 to-slate-900",
+	ocean: "bg-gradient-to-br from-slate-900 via-sky-900 to-slate-900",
+	forest: "bg-gradient-to-br from-slate-900 via-green-900 to-slate-900",
+	mono: "bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900",
+	midnight: "bg-gradient-to-br from-black via-slate-900 to-black",
 }
 
 const BACKGROUND_LAYERS = {
@@ -261,7 +263,7 @@ function Section({ section }) {
 
 function NotFoundProject({ slug }) {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-20">
+		<div className="min-h-screen bg-black pt-20">
 			<div className="max-w-3xl mx-auto px-4 py-24 text-center">
 				<h1 className="text-3xl font-bold text-white mb-4">
 					No project called &ldquo;{slug}&rdquo;
@@ -477,7 +479,7 @@ const ProjectDetail = () => {
 	if (missing) return <NotFoundProject slug={slug} />
 	if (!project) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pt-20">
+			<div className="min-h-screen bg-black pt-20">
 				<div className="max-w-4xl mx-auto px-4 py-24">
 					<div className="h-10 w-2/3 bg-white/[0.06] rounded-xl animate-pulse mb-6" />
 					<div className="h-4 w-full bg-white/[0.04] rounded-lg animate-pulse mb-3" />
@@ -497,12 +499,13 @@ const ProjectDetail = () => {
 	// Already normalized upstream — read it defensively anyway, because a
 	// cached JSON file written by an older build has no appearance key at all.
 	const appearance = project.appearance || {}
-	const gradient = THEME_GRADIENTS[appearance.theme] || THEME_GRADIENTS.default
+	const background =
+		THEME_BACKGROUNDS[appearance.theme] || THEME_BACKGROUNDS.default
 	const backgroundLayer = BACKGROUND_LAYERS[appearance.background] ?? null
 	const accent = appearance.accent || ""
 
 	return (
-		<div className={`relative min-h-screen bg-gradient-to-br ${gradient} pt-20`}>
+		<div className={`relative min-h-screen ${background} pt-20`}>
 			{backgroundLayer && (
 				<div
 					aria-hidden="true"

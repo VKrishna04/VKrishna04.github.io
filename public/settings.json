@@ -1785,7 +1785,7 @@
           "Proprietary"
         ],
         "category": "Web App",
-        "featured": false,
+        "featured": true,
         "showInAbout": false,
         "showInProjects": true,
         "visibility": "private",
@@ -1804,7 +1804,7 @@
           "Licensed proprietary — not open source and not publicly distributable",
           "Source kept private; walkthrough available on request"
         ],
-        "tier": "secondary",
+        "tier": "featured",
         "order": 0
       },
       {

@@ -50,6 +50,14 @@ what stopped the build from ever looking for `.portfolio/project.json`.
   already applied: no repo name, no manifest URL, no repo link, and no README
   image or link bases pointing into a repository nobody can open.
 
+### 🎨 Changed
+
+- Project pages are black instead of the slate-to-purple gradient. The purple
+  mid-stop sat behind the body copy, which is most of the page on any project
+  that ships a README. The named themes a manifest can opt into are unchanged.
+- PulseWard-HMS is filed under flagship work rather than secondary, and its card
+  carries the Featured badge. Its `order` of 0 puts it first on the shelf.
+
 ### 🔧 Build
 
 - Node 22 to Node 24, the current Active LTS. `package.json` `engines` is
