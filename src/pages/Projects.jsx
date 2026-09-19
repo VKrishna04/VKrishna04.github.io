@@ -269,6 +269,10 @@ const Projects = () => {
 	}, [])
 
 	const detailSlugFor = (repo) => {
+		// A card the merge already matched to an index entry carries its slug.
+		// Guessing from the name would miss whenever the manifest renames the
+		// project away from its repository.
+		if (repo.slug && detailSlugs[repo.slug]) return repo.slug
 		const match = /github\.com\/([^/]+)\/([^/#?]+)/.exec(
 			repo.html_url || repo.githubUrl || ""
 		)

@@ -589,6 +589,9 @@ function indexEntry(project) {
 		repo: project.repo,
 		source: project.source,
 		visibility: project.visibility || undefined,
+		// A private project has no repo link, so the live site is the only
+		// button its card can carry, and the card is built from this entry.
+		live: project.links?.live || "",
 		depth: depthScore(project),
 	}
 }

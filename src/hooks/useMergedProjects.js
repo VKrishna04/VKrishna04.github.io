@@ -18,6 +18,14 @@ import { useState, useEffect } from "react";
 import useGitHubRepos from "./useGitHubRepos";
 import { fetchSettings } from "../utils/settingsCache";
 
+// Same spelling the generated project pages use for their slugs, so a card can
+// be matched against an index entry without either side carrying the other's id.
+const slugifyName = (name) =>
+	String(name || "")
+		.replace(/[_\s.]+/g, "-")
+		.toLowerCase()
+		.replace(/[^a-z0-9-]/g, "");
+
 /**
  * Hook to merge static projects with GitHub repos
  * - If project exists in both, merge them taking higher numeric values
@@ -282,16 +290,36 @@ const useMergedProjects = () => {
 			// card is built from the generated index entry alone: no repo
 			// URL, no GitHub stats.
 			privatePages.forEach((p) => {
-				const exists = merged.some(
-					(m) => (m.name || "").toLowerCase() === p.name.toLowerCase()
+				// Match on the slug as well as the name. A settings entry named
+				// after the repo ("PulseWard-HMS") and a manifest naming the
+				// product ("PulseWard") are the same project, and matching on
+				// the name alone put both on the page.
+				const existing = merged.find(
+					(m) =>
+						(m.name || "").toLowerCase() === p.name.toLowerCase() ||
+						slugifyName(m.name) === p.slug
 				);
-				if (exists) return;
+				if (existing) {
+					// The manifest owns how the project presents itself; the
+					// settings entry owns where it sits on the page. Keep the
+					// curation, take the wording.
+					existing.name = p.name;
+					existing.description = p.summary || p.tagline || existing.description;
+					existing.slug = p.slug;
+					if (p.technologies?.length) {
+						existing.technologies = p.technologies;
+						existing.language = p.technologies[0];
+					}
+					if (!existing.homepage && p.live) existing.homepage = p.live;
+					return;
+				}
 				merged.push({
 					id: `private-${p.slug}`,
+					slug: p.slug,
 					name: p.name,
 					description: p.summary || p.tagline || "",
 					html_url: null,
-					homepage: null,
+					homepage: p.live || null,
 					topics: (p.technologies || []).slice(0, 6),
 					language: p.technologies?.[0] || p.category || "Private",
 					stargazers_count: 0,
