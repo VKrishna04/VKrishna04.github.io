@@ -1780,7 +1780,7 @@
         "id": "28",
         "name": "PulseWard-HMS",
         "repo": "Life-Experimentalist/PulseWard-HMS",
-        "description": "Licensed proprietary software developed under a commercial licence. The repository is private, so this entry records the work rather than linking to public source — details available on request.",
+        "description": "Licensed proprietary software developed under a commercial licence. The source stays private, so the product site is its public face; a walkthrough is available on request.",
         "technologies": [
           "Proprietary"
         ],
@@ -1797,8 +1797,12 @@
         "documentationUrl": "",
         "imageUrl": "",
         "tags": [
-          "proprietary",
-          "private-repository"
+          "healthcare",
+          "multi-tenant",
+          "hms",
+          "self-hosted",
+          "offline-first",
+          "abdm"
         ],
         "highlights": [
           "Licensed proprietary — not open source and not publicly distributable",

@@ -56,6 +56,10 @@ what stopped the build from ever looking for `.portfolio/project.json`.
 
 ### 🎨 Changed
 
+- PulseWard-HMS's card describes the project rather than its licence. The
+  tags now read the way its manifest does, and the description no longer
+  says the entry records the work instead of linking anywhere: it links to
+  the product site.
 - Project READMEs render their HTML instead of printing it. `<div align="center">`,
   badge images and `<details>` blocks used to appear on the page as literal tags.
   The HTML is now parsed and then filtered against an allow-list, so scripts,
