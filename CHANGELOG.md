@@ -57,6 +57,9 @@ what stopped the build from ever looking for `.portfolio/project.json`.
   that ships a README. The named themes a manifest can opt into are unchanged.
 - PulseWard-HMS is filed under flagship work rather than secondary, and its card
   carries the Featured badge. Its `order` of 0 puts it first on the shelf.
+- PulseWard-HMS links to <https://pulseward.vkrishna04.me>. A private project
+  has no repository to point at, so the product site is the only public face it
+  has.
 
 ### 🔧 Build
 
