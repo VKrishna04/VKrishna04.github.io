@@ -63,6 +63,11 @@ const keep = (rel) => {
 	if (SKIP_EXACT.has(rel)) return false
 	if (SKIP_DIRS.some((dir) => rel.startsWith(dir))) return false
 	if (rel.endsWith(".html")) return true
+	// Mermaid is megabytes and only a handful of project READMEs draw a
+	// diagram. It is left to the runtime cache: /assets/ is served cache
+	// first, so a page read once online keeps its diagrams offline, and a
+	// page never opened shows the diagram source instead of the picture.
+	if (rel.startsWith("assets/mermaid")) return false
 	if (rel.startsWith("assets/")) return true
 	if (rel === "settings.json" || rel === "manifest.json") return true
 	// The two lists the app reads before it can draw anything. Individual

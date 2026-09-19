@@ -15,6 +15,10 @@ the notes that were kept at the time rather than from a release process.
 
 ### 🐛 Fixed
 
+- Every link and image in a private project's README was being dropped. The
+  private path clears the URL bases, and resolving against an explicit `null`
+  base throws rather than leaving an absolute URL alone.
+
 #### A build token that can read nothing no longer passes for a healthy build
 
 Every GitHub fetch in the build falls back to cached data, which is the right
@@ -52,6 +56,17 @@ what stopped the build from ever looking for `.portfolio/project.json`.
 
 ### 🎨 Changed
 
+- Project READMEs render their HTML instead of printing it. `<div align="center">`,
+  badge images and `<details>` blocks used to appear on the page as literal tags.
+  The HTML is now parsed and then filtered against an allow-list, so scripts,
+  event handlers and `javascript:` URLs still never reach the page.
+- A fenced `mermaid` block in a README renders as a diagram. Mermaid loads only
+  on a page that contains one, and a diagram that will not parse keeps showing
+  its source.
+- PulseWard appeared twice on the projects page, once under its repository name
+  from settings.json and once under its product name from its manifest. The two
+  are matched by slug now and collapse into one card, which carries the
+  manifest's wording and the settings entry's placement.
 - Project pages are black instead of the slate-to-purple gradient. The purple
   mid-stop sat behind the body copy, which is most of the page on any project
   that ships a README. The named themes a manifest can opt into are unchanged.

@@ -20,21 +20,29 @@
  * The Markdown is fetched at build time by scripts/fetch-project-manifests.js,
  * so it is in the prerendered HTML and a crawler reads it.
  *
- * This is third-party content, so two rules hold:
+ * This is third-party content, so three rules hold:
  *
- *  1. No rehype-raw. react-markdown skips raw HTML by default, which is exactly
- *     what we want — a README containing <script> or an onerror attribute
- *     renders as nothing, not as markup. `disallowedElements` below is a second
- *     line for the elements Markdown itself can produce.
+ *  1. Raw HTML is parsed by rehype-raw and then filtered by rehype-sanitize
+ *     against its allow-list. READMEs are full of <div align="center">, badge
+ *     images and <details> blocks; skipping the HTML printed the tags as text,
+ *     and rendering it unfiltered would run whatever the file contained. The
+ *     allow-list drops <script>, event handlers and javascript: URLs and keeps
+ *     the layout. `disallowedElements` below is a second line behind it.
  *  2. Every URL goes through urlTransform. READMEs are full of repo-relative
  *     paths that would 404 here, so images resolve against raw.githubusercontent
  *     and links against the repo's GitHub blob view, and only http(s) survives.
+ *  3. ```mermaid fences become diagrams. Mermaid is loaded on demand the first
+ *     time a page actually contains one, so the library stays off every other
+ *     route, and a diagram that fails to parse falls back to its source text.
  *
  * Lazy-loaded from ProjectDetail so react-markdown stays out of the main bundle.
  */
 
+import { useEffect, useId, useState } from "react"
 import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import rehypeRaw from "rehype-raw"
+import rehypeSanitize from "rehype-sanitize"
 
 // Anchors that only make sense inside GitHub's own rendering, plus the two
 // elements Markdown can emit that we would rather not style around.
@@ -49,13 +57,84 @@ const makeUrlTransform = (imageBase, linkBase) => (url, key) => {
 	if (typeof url !== "string" || !url) return ""
 	if (url.startsWith("#")) return url // in-document anchor, leave alone
 	try {
-		const resolved = new URL(url, key === "src" ? imageBase : linkBase)
+		// A private project has no bases: stripping the repo clears them. An
+		// explicit null is not the same as no base to URL, it throws, so every
+		// link and badge on those pages was being dropped. undefined lets the
+		// absolute ones through while relative paths still resolve to nothing.
+		const base = (key === "src" ? imageBase : linkBase) || undefined
+		const resolved = new URL(url, base)
 		return resolved.protocol === "https:" || resolved.protocol === "http:"
 			? resolved.href
 			: ""
 	} catch {
 		return ""
 	}
+}
+
+// One loader for the whole page: several diagrams in one README share the
+// import and the single initialize() call mermaid requires.
+let mermaidPromise = null
+const loadMermaid = () => {
+	if (!mermaidPromise) {
+		mermaidPromise = import("mermaid").then(({ default: mermaid }) => {
+			mermaid.initialize({
+				startOnLoad: false,
+				// Mermaid runs the rendered SVG through DOMPurify at this level,
+				// which matters because the diagram source is someone's README.
+				securityLevel: "strict",
+				theme: "dark",
+				fontFamily: "inherit",
+			})
+			return mermaid
+		})
+	}
+	return mermaidPromise
+}
+
+const Mermaid = ({ source }) => {
+	// useId spells ids with colons, which mermaid feeds straight into a CSS
+	// selector and then fails on. Keep the uniqueness, drop the punctuation.
+	const id = `mermaid-${useId().replace(/[^a-zA-Z0-9]/g, "")}`
+	const [svg, setSvg] = useState("")
+
+	useEffect(() => {
+		let live = true
+		loadMermaid()
+			.then((mermaid) => mermaid.render(id, source))
+			.then(({ svg }) => {
+				if (live) setSvg(svg)
+			})
+			.catch(() => {
+				// A diagram that will not parse is not worth an error state:
+				// the source stays on screen as the code block it came from.
+			})
+		return () => {
+			live = false
+		}
+	}, [id, source])
+
+	if (!svg) {
+		return (
+			<pre className="overflow-x-auto p-4 bg-black/40 border border-white/10 rounded-xl text-sm text-gray-200 mb-4">
+				<code>{source}</code>
+			</pre>
+		)
+	}
+	return (
+		<div
+			className="overflow-x-auto p-4 bg-black/40 border border-white/10 rounded-xl mb-4 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+			// mermaid sanitized this with DOMPurify before handing it back.
+			dangerouslySetInnerHTML={{ __html: svg }}
+		/>
+	)
+}
+
+// The text inside a fenced code block, whatever depth react-markdown nests it.
+const codeText = (node) => {
+	if (typeof node === "string") return node
+	if (Array.isArray(node)) return node.map(codeText).join("")
+	if (node?.props?.children) return codeText(node.props.children)
+	return ""
 }
 
 // README headings are shifted down one level: the page already owns the h1, and
@@ -121,11 +200,21 @@ const COMPONENTS = {
 			{children}
 		</code>
 	),
-	pre: ({ children }) => (
-		<pre className="overflow-x-auto p-4 bg-black/40 border border-white/10 rounded-xl text-sm text-gray-200 mb-4 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
-			{children}
-		</pre>
-	),
+	pre: ({ children }) => {
+		// The language lives on the <code> inside, so the swap to a diagram
+		// happens here rather than in the code component: a mermaid block
+		// replaces the whole <pre>, it does not sit inside one.
+		const inner = Array.isArray(children) ? children[0] : children
+		const language = inner?.props?.className || ""
+		if (/\blanguage-mermaid\b/.test(language)) {
+			return <Mermaid source={codeText(inner.props.children).trim()} />
+		}
+		return (
+			<pre className="overflow-x-auto p-4 bg-black/40 border border-white/10 rounded-xl text-sm text-gray-200 mb-4 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
+				{children}
+			</pre>
+		)
+	},
 	// GitHub-flavoured tables can be much wider than the column; scroll them
 	// inside their own box rather than letting the page scroll sideways.
 	table: ({ children }) => (
@@ -153,6 +242,9 @@ const ProjectReadme = ({ readme, accent }) => {
 		<>
 			<Markdown
 				remarkPlugins={[remarkGfm]}
+				// Order matters: raw parses the HTML, sanitize then throws out
+				// everything outside the allow-list.
+				rehypePlugins={[rehypeRaw, rehypeSanitize]}
 				disallowedElements={DISALLOWED}
 				unwrapDisallowed
 				urlTransform={makeUrlTransform(readme.imageBase, readme.linkBase)}

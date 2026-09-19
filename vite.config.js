@@ -84,6 +84,11 @@ export default defineConfig({
 				// entry itself depended on it synchronously.
 				manualChunks(id) {
 					if (!id.includes("node_modules")) return
+					// Mermaid splits itself into a chunk per diagram type. One
+					// named file instead means generate-sw.js can keep the
+					// whole thing out of the offline precache, where it would
+					// be the largest single thing in it.
+					if (id.includes("node_modules/mermaid")) return "mermaid"
 					if (id.includes("react-router")) return "router"
 					if (id.includes("framer-motion")) return "motion"
 					if (id.includes("react-icons") || id.includes("@heroicons")) {
