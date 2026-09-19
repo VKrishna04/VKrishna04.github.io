@@ -107,4 +107,14 @@ const sw = template
 
 fs.writeFileSync(path.join(DIST, "sw.js"), sw)
 
+// The precache is downloaded in full before the worker activates, so its size
+// is the cost of a first visit. Print it, and name the biggest file: a chunk
+// that leaks in past the rules above shows up here rather than silently.
+const bytes = files.reduce((sum, rel) => sum + fs.statSync(path.join(DIST, rel)).size, 0)
+const biggest = files.reduce((a, b) =>
+	fs.statSync(path.join(DIST, a)).size >= fs.statSync(path.join(DIST, b)).size ? a : b
+)
+const kb = (n) => `${Math.round(n / 1024)} kB`
+
 console.log(`✓ dist/sw.js written — ${precache.length} URLs precached, cache v${pkg.version}-${stamp}`)
+console.log(`  ${kb(bytes)} total, largest ${biggest} at ${kb(fs.statSync(path.join(DIST, biggest)).size)}`)

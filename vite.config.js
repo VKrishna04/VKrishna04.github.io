@@ -26,6 +26,11 @@ import { spawn } from "child_process"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Everything mermaid drags in. `npm ls` puts mermaid as the only dependant of
+// each of these, so folding them into its chunk costs no other route anything.
+const MERMAID_ONLY =
+	/node_modules[/\\](mermaid|@mermaid-js|katex|dompurify|cytoscape|cytoscape-.*|dagre-d3-es|elkjs|roughjs|khroma|d3|d3-.*|@upsetjs|chevrotain|@iconify)[/\\]/
+
 export default defineConfig({
 	plugins: [
 		react(),
@@ -84,11 +89,13 @@ export default defineConfig({
 				// entry itself depended on it synchronously.
 				manualChunks(id) {
 					if (!id.includes("node_modules")) return
-					// Mermaid splits itself into a chunk per diagram type. One
+					// Mermaid splits itself into a chunk per diagram type and
+					// lazily imports katex, d3, cytoscape and the rest. One
 					// named file instead means generate-sw.js can keep the
 					// whole thing out of the offline precache, where it would
-					// be the largest single thing in it.
-					if (id.includes("node_modules/mermaid")) return "mermaid"
+					// be the largest single thing in it. Every package listed
+					// here reaches the build through mermaid and nothing else.
+					if (MERMAID_ONLY.test(id)) return "mermaid"
 					if (id.includes("react-router")) return "router"
 					if (id.includes("framer-motion")) return "motion"
 					if (id.includes("react-icons") || id.includes("@heroicons")) {
