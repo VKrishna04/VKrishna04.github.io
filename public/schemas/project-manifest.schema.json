@@ -206,7 +206,7 @@
 						"mono",
 						"midnight"
 					],
-					"description": "Page gradient. \"default\" is the portfolio's purple."
+					"description": "Page background. \"default\" is the portfolio's black; the rest are gradients."
 				},
 				"background": {
 					"type": "string",
