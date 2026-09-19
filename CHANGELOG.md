@@ -79,9 +79,17 @@ what stopped the build from ever looking for `.portfolio/project.json`.
 - PulseWard-HMS links to <https://pulseward.vkrishna04.me>. A private project
   has no repository to point at, so the product site is the only public face it
   has.
+- GitHub's `> [!NOTE]` alerts render as coloured callouts. Markdown has no rule
+  for them, so the marker used to print on the page as text above the quote.
+  Note, Tip, Important, Warning and Caution each get their own colour.
 
 ### 🔧 Build
 
+- Mermaid's lazily imported dependencies join its chunk instead of getting their
+  own. katex alone was 255 kB and had been landing in the offline precache,
+  which the mermaid chunk is deliberately kept out of. `generate-sw.js` now
+  prints the precache total and its largest file, so the next leak is visible
+  rather than silent.
 - Node 22 to Node 24, the current Active LTS. `package.json` `engines` is
   unchanged, since it declares the range this project supports rather than the
   one CI happens to run.

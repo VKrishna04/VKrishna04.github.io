@@ -34,6 +34,8 @@
  *  3. ```mermaid fences become diagrams. Mermaid is loaded on demand the first
  *     time a page actually contains one, so the library stays off every other
  *     route, and a diagram that fails to parse falls back to its source text.
+ *     GitHub's > [!NOTE] alerts are picked out of their blockquote the same
+ *     way, since nothing in Markdown makes them special.
  *
  * Lazy-loaded from ProjectDetail so react-markdown stays out of the main bundle.
  */
@@ -129,6 +131,42 @@ const Mermaid = ({ source }) => {
 	)
 }
 
+// GitHub renders a blockquote whose first line is [!NOTE] as a coloured
+// callout. Markdown has no such rule, so without this the marker printed on
+// the page as text. The border colour and the label for each kind:
+const ALERTS = {
+	note: ["border-sky-400/70", "text-sky-300", "Note"],
+	tip: ["border-emerald-400/70", "text-emerald-300", "Tip"],
+	important: ["border-purple-400/70", "text-purple-300", "Important"],
+	warning: ["border-amber-400/70", "text-amber-300", "Warning"],
+	caution: ["border-red-400/70", "text-red-300", "Caution"],
+}
+const ALERT_MARKER = new RegExp(`^\\[!(${Object.keys(ALERTS).join("|")})\\]\\s*`, "i")
+
+/*
+ * Runs after rehype-sanitize rather than before it, because the class it sets
+ * is one of the five keys above and nothing else: there is no README-supplied
+ * value here for the allow-list to filter, and the allow-list does not permit
+ * a class on a blockquote anyway.
+ */
+const rehypeAlerts = () => (tree) => {
+	const walk = (node) => {
+		node.children?.forEach(walk)
+		if (node.tagName !== "blockquote") return
+		const para = node.children.find((c) => c.tagName === "p")
+		const first = para?.children?.[0]
+		const marker = first?.type === "text" && ALERT_MARKER.exec(first.value)
+		if (!marker) return
+		first.value = first.value.slice(marker[0].length)
+		// "> [!NOTE]" with its body in the next paragraph leaves this one empty.
+		if (!first.value && para.children.length === 1) {
+			node.children = node.children.filter((c) => c !== para)
+		}
+		node.properties = { ...node.properties, className: ["alert", marker[1].toLowerCase()] }
+	}
+	walk(tree)
+}
+
 // The text inside a fenced code block, whatever depth react-markdown nests it.
 const codeText = (node) => {
 	if (typeof node === "string") return node
@@ -177,11 +215,24 @@ const COMPONENTS = {
 		</ol>
 	),
 	li: ({ children }) => <li className="leading-relaxed">{children}</li>,
-	blockquote: ({ children }) => (
-		<blockquote className="border-l-2 border-purple-400/60 pl-4 italic text-gray-400 mb-4">
-			{children}
-		</blockquote>
-	),
+	blockquote: ({ children, className }) => {
+		// rehypeAlerts spells it "alert note"; anything else is a plain quote.
+		const alert = ALERTS[String(className || "").split(" ")[1]]
+		if (!alert) {
+			return (
+				<blockquote className="border-l-2 border-purple-400/60 pl-4 italic text-gray-400 mb-4">
+					{children}
+				</blockquote>
+			)
+		}
+		const [border, label, title] = alert
+		return (
+			<blockquote className={`border-l-2 ${border} pl-4 mb-4`}>
+				<p className={`font-semibold mb-1 ${label}`}>{title}</p>
+				{children}
+			</blockquote>
+		)
+	},
 	hr: () => <hr className="my-8 border-white/10" />,
 	img: ({ src, alt }) =>
 		src ? (
@@ -243,8 +294,9 @@ const ProjectReadme = ({ readme, accent }) => {
 			<Markdown
 				remarkPlugins={[remarkGfm]}
 				// Order matters: raw parses the HTML, sanitize then throws out
-				// everything outside the allow-list.
-				rehypePlugins={[rehypeRaw, rehypeSanitize]}
+				// everything outside the allow-list, and only then does anything
+				// of ours run on what survived.
+				rehypePlugins={[rehypeRaw, rehypeSanitize, rehypeAlerts]}
 				disallowedElements={DISALLOWED}
 				unwrapDisallowed
 				urlTransform={makeUrlTransform(readme.imageBase, readme.linkBase)}
