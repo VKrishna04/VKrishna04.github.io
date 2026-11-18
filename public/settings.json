@@ -896,7 +896,7 @@
           "Userscript",
           "Browser-API"
         ],
-        "category": "Browser Extension",
+        "category": "Quality of Life",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -2366,6 +2366,62 @@
         "order": 1,
         "featured": false,
         "showInProjects": true
+      },
+      {
+        "id": "30",
+        "name": "ZeroMB",
+        "icon": "SiAndroid",
+        "description": "Recharge a data pack when you have 0 MB left. An offline Android app that opens the dialer with the NPCI UPI 123PAY number and the menu keys already typed in, so you only press call and enter your UPI PIN. No permissions, no account, nothing leaves the phone.",
+        "technologies": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Android",
+          "PWA"
+        ],
+        "category": "Quality of Life",
+        "featured": false,
+        "showInAbout": false,
+        "showInProjects": true,
+        "status": "Live",
+        "startDate": "2026-11-17",
+        "endDate": null,
+        "githubUrl": "https://github.com/Life-Experimentalist/ZeroMB",
+        "liveUrl": "https://zeromb.vkrishna04.me",
+        "demoUrl": "https://zeromb.vkrishna04.me/app/",
+        "documentationUrl": "https://github.com/Life-Experimentalist/ZeroMB#readme",
+        "imageUrl": "",
+        "tags": [
+          "android",
+          "expo",
+          "react-native",
+          "upi",
+          "123pay",
+          "offline",
+          "india",
+          "recharge",
+          "quality-of-life"
+        ],
+        "highlights": [
+          "Works with zero data: it dials NPCI 123PAY with the keys pre-typed",
+          "Asks for no permissions and stores nothing off the device",
+          "Detects the operator from the SIM (Jio, Airtel, Vi, BSNL)",
+          "Installable web app and Android APKs for every CPU type"
+        ],
+        "stats": {
+          "stars": 0,
+          "forks": 0,
+          "watchers": 0,
+          "issues": 0
+        },
+        "statsUrls": {
+          "starsUrl": "https://github.com/Life-Experimentalist/ZeroMB/stargazers",
+          "forksUrl": "https://github.com/Life-Experimentalist/ZeroMB/network/members",
+          "watchersUrl": "https://github.com/Life-Experimentalist/ZeroMB/watchers",
+          "issuesUrl": "https://github.com/Life-Experimentalist/ZeroMB/issues"
+        },
+        "tier": "secondary",
+        "order": 15
       }
     ],
     "staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), showInAbout (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",
