@@ -1062,7 +1062,7 @@
           "VS-Code-API",
           "Node.js"
         ],
-        "category": "VS Code Extension",
+        "category": "Quality of Life",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -1335,7 +1335,7 @@
           "Node.js",
           "JSON"
         ],
-        "category": "VS Code Extension",
+        "category": "Quality of Life",
         "featured": false,
         "showInAbout": true,
         "showInProjects": true,
@@ -1735,7 +1735,7 @@
           "REST-API",
           "HIBP-API"
         ],
-        "category": "Security",
+        "category": "Quality of Life",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -1953,7 +1953,7 @@
           "pip",
           "cross-platform"
         ],
-        "category": "CLI Tool",
+        "category": "Quality of Life",
         "featured": true,
         "showInAbout": true,
         "showInProjects": true,
@@ -2111,7 +2111,7 @@
           "github-api",
           "indexeddb"
         ],
-        "category": "Browser Extension",
+        "category": "Quality of Life",
         "featured": true,
         "showInAbout": true,
         "showInProjects": true,
@@ -2179,7 +2179,7 @@
           "React",
           "IndexedDB"
         ],
-        "category": "Browser Extension",
+        "category": "Quality of Life",
         "status": "Active Development",
         "startDate": "2026-08-12",
         "endDate": null,
