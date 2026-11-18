@@ -135,6 +135,7 @@ const useMergedProjects = () => {
 						// Override with static project fields
 						id: staticProject.id || matchingGithubRepo.id,
 						category: staticProject.category,
+						groups: staticProject.groups || [],
 						featured: staticProject.featured,
 						tier: staticProject.tier || "secondary",
 						order:
@@ -239,6 +240,7 @@ const useMergedProjects = () => {
 							new Date().toISOString(),
 						// Static project specific fields
 						category: staticProject.category,
+						groups: staticProject.groups || [],
 						featured: staticProject.featured,
 						tier: staticProject.tier || "secondary",
 						order:

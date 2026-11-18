@@ -885,7 +885,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/RanobeGemini/issues"
         },
         "tier": "secondary",
-        "order": 4
+        "order": 4,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "3",
@@ -896,7 +899,7 @@
           "Userscript",
           "Browser-API"
         ],
-        "category": "Quality of Life",
+        "category": "Browser Extension",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -934,7 +937,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
         },
         "tier": "secondary",
-        "order": 7
+        "order": 7,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "4",
@@ -1062,7 +1068,7 @@
           "VS-Code-API",
           "Node.js"
         ],
-        "category": "Quality of Life",
+        "category": "VS Code Extension",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -1105,7 +1111,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/Save-Sync/issues"
         },
         "tier": "secondary",
-        "order": 9
+        "order": 9,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "7",
@@ -1335,7 +1344,7 @@
           "Node.js",
           "JSON"
         ],
-        "category": "Quality of Life",
+        "category": "VS Code Extension",
         "featured": false,
         "showInAbout": true,
         "showInProjects": true,
@@ -1389,7 +1398,10 @@
           }
         ],
         "tier": "secondary",
-        "order": 2
+        "order": 2,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "12",
@@ -1735,7 +1747,7 @@
           "REST-API",
           "HIBP-API"
         ],
-        "category": "Quality of Life",
+        "category": "Security",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -1774,7 +1786,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/BreachCheck/issues"
         },
         "tier": "secondary",
-        "order": 12
+        "order": 12,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "28",
@@ -1953,7 +1968,7 @@
           "pip",
           "cross-platform"
         ],
-        "category": "Quality of Life",
+        "category": "CLI Tool",
         "featured": true,
         "showInAbout": true,
         "showInProjects": true,
@@ -2033,7 +2048,10 @@
           }
         ],
         "tier": "featured",
-        "order": 1
+        "order": 1,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "23",
@@ -2111,7 +2129,7 @@
           "github-api",
           "indexeddb"
         ],
-        "category": "Quality of Life",
+        "category": "Browser Extension",
         "featured": true,
         "showInAbout": true,
         "showInProjects": true,
@@ -2165,7 +2183,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/Code-Ledger/issues"
         },
         "tier": "featured",
-        "order": 6
+        "order": 6,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "25",
@@ -2179,7 +2200,7 @@
           "React",
           "IndexedDB"
         ],
-        "category": "Quality of Life",
+        "category": "Browser Extension",
         "status": "Active Development",
         "startDate": "2026-08-12",
         "endDate": null,
@@ -2213,7 +2234,10 @@
         "tier": "featured",
         "order": 3,
         "featured": true,
-        "showInProjects": true
+        "showInProjects": true,
+        "groups": [
+          "quality-of-life"
+        ]
       },
       {
         "id": "26",
@@ -2379,7 +2403,7 @@
           "Android",
           "PWA"
         ],
-        "category": "Quality of Life",
+        "category": "Mobile App",
         "featured": false,
         "showInAbout": false,
         "showInProjects": true,
@@ -2421,7 +2445,10 @@
           "issuesUrl": "https://github.com/Life-Experimentalist/ZeroMB/issues"
         },
         "tier": "secondary",
-        "order": 15
+        "order": 15,
+        "groups": [
+          "quality-of-life"
+        ]
       }
     ],
     "staticProjectsNote": "Configure static projects when mode is set to 'static'. Each project should have: id, name, description, technologies array, category, featured (boolean), showInAbout (boolean), status, startDate, endDate (null for ongoing), githubUrl, liveUrl, demoUrl, documentationUrl, imageUrl, tags array, highlights array, and stats object with stars/forks/watchers/issues",

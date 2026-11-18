@@ -207,6 +207,11 @@ const PROJECT_GROUPS = [
 		blurb: "Currently being built. Expect these to change week to week.",
 	},
 	{
+		id: "quality-of-life",
+		title: "Quality of life",
+		blurb: "Small tools that remove a daily annoyance. Some also sit in the shelves above.",
+	},
+	{
 		id: "shipped",
 		title: "Shipped & maintained",
 		blurb: "Finished and still standing - smaller in scope, done in full.",
@@ -750,13 +755,19 @@ const Projects = () => {
 		if (sortBy !== "curated") return null
 		const groups = PROJECT_GROUPS.map((g) => ({ ...g, items: [] }))
 		for (const project of filteredRepos) {
-			const index =
-				project.tier === "featured"
-					? 0
+			const qol = (project.groups || []).includes("quality-of-life")
+			const featured = project.tier === "featured"
+			// Featured work keeps its flagship slot and is listed under quality
+			// of life as well; everything else sits in one shelf only.
+			const index = featured
+				? 0
+				: qol
+					? 2
 					: ACTIVE_STATUSES.has(project.status)
 						? 1
-						: 2
+						: 3
 			groups[index].items.push(project)
+			if (featured && qol) groups[2].items.push(project)
 		}
 		return groups.filter((g) => g.items.length > 0)
 	}, [filteredRepos, sortBy])
